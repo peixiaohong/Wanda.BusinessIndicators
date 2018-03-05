@@ -1,0 +1,60 @@
+﻿<script id="TargetList" type="text/x-jquery-tmpl">
+    <tr>
+        <td class="Td_Right"><a href="javascript:void(0);" onclick="Change('${ID}')">${TargetName}</a> </td>
+        <td class="Td_Right">{{if NeedReport==1}}是 {{else}}否{{/if}}</td>
+        <td class="Td_Right">{{if NeedEvaluation==1}}是 {{else}}否{{/if}}</td>
+        <td class="Td_Right">{{if HaveDetail==1}}是 {{else}}否{{/if}}</td>
+        <td class="Td_Right">${TargetTypeValue}</td>
+        <td class="Td_Right">${SetTime(BaseLine,true)}</td>
+        <td class="Td_Right">${Unit}</td>
+        <td class="Td_Right">${Sequence}</td>
+        <td class="Td_Center"><a href="javascript:void(0);" onclick="Delete('${ID}')">删除</a>&nbsp;&nbsp; <a href="javascript:void(0);" onclick="Change('${ID}')">操作</a></td>
+    </tr>
+</script>
+
+<script id="TargetTypeEnums" type="text/x-jquery-tmpl">
+    {{if IfSelect==true}}
+     <option value="${TargetType}" selected="selected">${TargetTypeValue}</option>
+    {{else}}
+       <option value="${TargetType}">${TargetTypeValue}</option>
+    {{/if}}
+    
+</script>
+
+<script id="TargetPlanHistory" type="text/x-jquery-tmpl">
+    <tr>
+        <td class="Td_Right">${ProcessOwn}</td>
+        <td class="Td_Right">${FormatTime(CreateTime)}</td>
+        <td class="Td_Center"><a href="#" onclick="DownLoad('${ID}')">下载 </a></td>
+        {{if IfCurrentTarget==true}}
+        <td class="Td_Center" style="color: red">已激活</td>
+        <td class="Td_Center"></td>
+        {{else}}
+        <td class="Td_Center" style="color: gray">未激活</td>
+        <td class="Td_Center"><a href="#" onclick="ActTarget('${ID}')">激活</a></td>
+        {{/if}}
+        <td class="Td_Right">${FormatTime(ModifyTime)}</td>
+         <td class="Td_Center"><a href="#" onclick="CheckAction('${ID}')">点击查看</a></td>
+    </tr>
+</script>
+
+<script id="TargetPlanHistoryHead" type="text/x-jquery-tmpl">
+    <tr>
+        <th style="width: 20%">上报人</th>
+        <th style="width: 20%">上报日期</th>
+        <th style="width: 10%">文档下载</th>
+        <th style="width: 10%">指标状态</th>
+        <th style="width: 20%">操作</th>
+         <th style="width: 20%">审批日期</th>
+        <th style="width: 20%">查看日志</th>
+    </tr>
+</script>
+<script id="TargetAction" type="text/x-jquery-tmpl">
+    <tr>
+        <td class="Td_Center">${Operator}</td>
+        <td class="Td_Center">${Action}</td>
+        <td class="Td_Center">${FormatTime(OperatorTime)}</td>
+        <td class="Td_Center">${Description}</td>
+    </tr>
+
+</script>

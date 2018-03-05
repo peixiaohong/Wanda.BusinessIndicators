@@ -1,0 +1,15 @@
+﻿<Roots>
+  <ListCompanyProperty>
+    <CompanyProperty PropertyName="门店属性" PropertyValue="门店属性" SearchGroup="false" Senquence="0"  ListDisplay="true">
+      <ItemProperty ItemPropertyName="第三代综合体" ItemPropertyValue="第三代综合体" Sequence="0"></ItemProperty>
+      <ItemProperty ItemPropertyName="一代店" ItemPropertyValue="一代店" Sequence="1"></ItemProperty>
+      <ItemProperty ItemPropertyName="独立物业" ItemPropertyValue="独立物业" Sequence="2"></ItemProperty>
+      <ItemProperty ItemPropertyName="区域公司" ItemPropertyValue="区域公司" Sequence="3"></ItemProperty>
+    </CompanyProperty>
+    <CompanyProperty PropertyName="区域" PropertyValue="区域" SearchGroup="true" Senquence="0" ListDisplay="false">
+      <ItemProperty ItemPropertyName="南区" ItemPropertyValue="南区" Sequence="0"></ItemProperty>
+      <ItemProperty ItemPropertyName="中区" ItemPropertyValue="中区" Sequence="1"></ItemProperty>
+      <ItemProperty ItemPropertyName="北区" ItemPropertyValue="北区" Sequence="2"></ItemProperty>
+    </CompanyProperty>
+  </ListCompanyProperty>
+</Roots>

@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FCCAD333-B48E-4A04-AD3C-8CB4CA17EF28}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Wanda.Lib.AuthCenter</RootNamespace>
+    <AssemblyName>Wanda.Lib.AuthCenter</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\UserDataAuthorization.cs" />
+    <Compile Include="BLL\PrivilegeGroupOperator.cs" />
+    <Compile Include="BLL\PrivilegeOperator.cs" />
+    <Compile Include="BLL\RoleinfoOperator.cs" />
+    <Compile Include="BLL\UserinfoOperator.cs" />
+    <Compile Include="BLL\WdOrgOperator.cs" />
+    <Compile Include="BLL\WD_UserOperator.cs" />
+    <Compile Include="BLL\AUserRoleOperator.cs" />
+    <Compile Include="DAL\AUserPositionaAdapter.cs" />
+    <Compile Include="DAL\BasicAdapter.cs" />
+    <Compile Include="DAL\VRoleAdapter.cs" />
+    <Compile Include="DAL\VSimleWdUserInfoAdapter.cs" />
+    <Compile Include="DAL\PrivilegeAdapter.cs" />
+    <Compile Include="DAL\PrivilegeGroupAdapter.cs" />
+    <Compile Include="DAL\RoleinfoAdapter.cs" />
+    <Compile Include="DAL\UserinfoAdapter.cs" />
+    <Compile Include="DAL\VDataAuthorizationAdapter.cs" />
+    <Compile Include="DAL\VUserDefaultUrlAdapter.cs" />
+    <Compile Include="DAL\VUserInfoAdapter.cs" />
+    <Compile Include="DAL\VUserPrivilegeAdapter.cs" />
+    <Compile Include="DAL\WdOrgAdapter.cs" />
+    <Compile Include="DAL\WD_UserAdapter.cs" />
+    <Compile Include="DAL\AUserRoleAdapter.cs" />
+    <Compile Include="Filter\PrivilegeFilter.cs" />
+    <Compile Include="Filter\RoleFilter.cs" />
+    <Compile Include="Filter\UserInfoFilter.cs" />
+    <Compile Include="Filter\WdSimpleUserDataFilter.cs" />
+    <Compile Include="Model\ARolePrivilege.cs" />
+    <Compile Include="Model\AUserPrivilege.cs" />
+    <Compile Include="Model\AUserRole.cs" />
+    <Compile Include="Model\BDataAuthorization.cs" />
+    <Compile Include="Model\BOrganization.cs" />
+    <Compile Include="Model\BPrivilege.cs" />
+    <Compile Include="Model\BPrivilegeGroup.cs" />
+    <Compile Include="Model\BRoleInfo.cs" />
+    <Compile Include="Model\BUserinfo.cs" />
+    <Compile Include="Model\VRoleInfo.cs" />
+    <Compile Include="Model\VDataAuthorization.cs" />
+    <Compile Include="Model\VUserDefaultUrl.cs" />
+    <Compile Include="Model\VUserInfo.cs" />
+    <Compile Include="Model\VUserPrivilege.cs" />
+    <Compile Include="Model\VWdSimpleUserInfo.cs" />
+    <Compile Include="Model\WdOrg.cs" />
+    <Compile Include="Model\WD_User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\LoginUser.cs" />
+    <Compile Include="ViewModel\UserViewModel.cs" />
+    <Compile Include="WebHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lib.Core\Wanda.Lib.Core.csproj">
+      <Project>{65839f36-193a-41d1-9e79-38bc84984de6}</Project>
+      <Name>Wanda.Lib.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lib.Data\Wanda.Lib.Data.csproj">
+      <Project>{442c318f-9d99-4a3f-972e-33e8a8c8be51}</Project>
+      <Name>Wanda.Lib.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

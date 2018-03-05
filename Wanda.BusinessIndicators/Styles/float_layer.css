@@ -1,0 +1,184 @@
+﻿/*浮层多选框*/
+div.qregtabels
+{
+    padding:20px;
+    margin:2px;
+
+
+    }
+    
+ #divRole
+ {
+     
+     
+     }
+ #divRole ul
+ {
+     margin:0;
+     padding:0;
+     padding:10px;
+     padding-top:0;
+     height:auto;
+     clear:both;
+  border:#ccc solid 1px;
+  border-top:none;
+  overflow:hidden;
+  /*zoom:1;*/
+    
+
+     }
+  h5
+  {
+      padding:0;
+      margin:0;
+ 
+      padding:3px 10px;
+      height:25px;
+      line-height:25px;
+      margin-top:10px;
+     
+      border:#ccc solid 1px;
+      border-bottom:none;
+      background-color:#E9ECF2;
+   
+     
+      
+      
+      
+      }
+  #divRole ul li
+  {
+      margin:0;
+      padding:0;
+      height:20px;
+      line-height:20px;
+      margin:5px;
+      float:left;
+      padding:0 10px;
+     
+      
+      } 
+ #divRole ul li label
+{
+    font-size:12px;
+    color:Black;
+      font-weight:normal;
+      margin:5px;
+    }
+#divData
+{
+    clear:both;
+    }
+    
+ #ContentPlaceHolder1_treevPMOrg
+ {
+     border:#ccc solid 1px;
+     padding:5px;
+     }   
+
+#ContentPlaceHolder1_treevPMOrg a
+{
+    font-size:12px;
+    margin-left:5px;
+    letter-spacing:0.05em;
+   
+    }
+/*部分弹出页面调整*/
+ .popup_table_build_2
+ {
+     table-layout:fixed;
+     border:none;
+     margin-top:10px;
+     }
+.popup_table_build_2 td,.popup_table_build_2 th
+{
+    padding:5px;
+    border:none;
+    }
+ .select200
+ {
+     width:200px;
+     }
+     
+ .table_500_build
+ {
+     margin-top:10px;
+ }
+.table_500_build td,.table_500_build th
+{
+    padding:5px;
+    border:none;
+    }
+ /*添加button样式*/
+ .input_button
+{
+    color:#3d6b9e;
+    background-color:#e2ebf2;
+	border:#8eb8f4 solid 1px;
+	
+	background-image:url(../Images/botton_ma.jpg);
+	background-repeat:repeat-x;
+	background-position: left top;
+
+	/*margin-top:5px;*/
+	margin-bottom:5px;
+	padding:0;
+	line-height:normal;
+	vertical-align:middle;
+	
+
+     }
+ .input_hover
+ {
+     color:Black;
+    /* background-color:#f0d329;
+     color:#fff;
+     border:#f0d329 solid 1px;
+     background-position: left bottom;*/
+          }	
+  .defaults
+  {
+      background-image:none;
+      background-color:Gray;
+      color:White;
+       }
+.iframe_build
+{
+    overflow-x:hidden;
+    overflow-y:auto;
+    }
+.tabelbg
+{
+    border:#e6e6ff solid 1px;
+    background-color:rgb(206, 223, 222);
+    }
+/*各行换色*/
+.table_1
+{
+ background-image:url(../Images/botton_ma.jpg);
+ background-repeat:repeat-x;
+ background-position; left top;
+    
+    }
+.table_3
+{
+    background-color:#d9e6f5;
+    }
+div.treeListStyle
+{
+    padding:0;
+    overflow:hidden;
+    }
+.tabel_opp
+{
+    background-color:#F2F2F2;
+    
+    
+    }
+
+ /*单击换色*/
+ .treeView
+ {
+     background-color:#a5a5a5;
+     }
+ /*popup_table间距*/

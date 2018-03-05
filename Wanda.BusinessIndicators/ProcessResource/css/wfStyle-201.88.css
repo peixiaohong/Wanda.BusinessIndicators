@@ -1,0 +1,237 @@
+﻿/*body {
+    font-size: 12px;
+    background-color: transparent;
+    font-family: 微软雅黑;
+    /*font-weight: 600;*/
+}*/
+
+.filed {
+    font-weight: 600;
+}
+
+.td {
+    text-align: left;
+    height: 50px;
+    padding-left: 5px;
+    padding-right: 5px;
+    min-height: 100px;
+    vertical-align: top;
+    padding-top: 10px;
+    border: 1px solid #cccccc;
+}
+
+.table {
+    width: 100%;
+    border: 1px solid #C7EBFF;
+    border-collapse: collapse;
+    border-spacing: initial;
+}
+
+.table_td {
+    height: 23px;
+    border-bottom: 1px solid #C7EBFF;
+    border-right: 1px solid #C7EBFF;
+    text-align: left;
+}
+
+.table_td_div {
+    color: gray;
+    font-size: 12px;
+    background-color: transparent;
+    font-weight: normal;
+}
+
+.table_title_tr {
+    background-image: url('http://wfuat.wanda-dev.cn/WebApp/Wanda.Platform.WorkFlow.Controls.Handler/Images/Table_Title_Bg.png');
+    background-repeat: repeat-x;
+    height: 35px;
+}
+
+.table_title_td {
+    border-right: 1px solid #C7EBFF;
+    text-align: center;
+    color: black;
+}
+
+.workflow_span {
+    color: black;
+    text-align: center;
+    height: 28px;
+    font-size: 14px;
+    font-weight: 100;
+}
+
+.wanda-wf-float {
+    float: left;
+}
+
+.workflow_button_div {
+    background-image: url('http://wfuat.wanda-dev.cn/WebApp/Wanda.Platform.WorkFlow.Controls.Handler/Images/workflow_button_bg.png');
+    height: 40px;
+    width: 91px;
+    line-height: 40px;
+    color: white;
+    cursor: pointer;
+}
+
+.wanda-wf-header {
+    background-image: url('http://wfuat.wanda-dev.cn/WebApp/Wanda.Platform.WorkFlow.Controls.Handler/Images/Approval_Top_Bg.png');
+    background-repeat: repeat-x;
+}
+
+.wanda-wf-header-span {
+}
+
+.loader {
+    font-size: 90px;
+    text-indent: -9999em;
+    overflow: hidden;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    margin: 33% auto;
+    position: relative;
+    -webkit-animation: load6 1.7s infinite ease;
+    animation: load6 1.7s infinite ease;
+}
+
+.mask-div {
+    background-color: gray;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3f000000',endColorstr='#3f000000');
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    /*opacity: 0.5;*/
+    position: absolute;
+    top: 0;
+    z-index: 99998;
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    -khtml-opacity: 0.5;
+    overflow: hidden;
+    padding-top: -300px;
+}
+
+@-webkit-keyframes load6 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        box-shadow: -0.11em -0.83em 0 -0.4em #ffffff, -0.11em -0.83em 0 -0.42em #ffffff, -0.11em -0.83em 0 -0.44em #ffffff, -0.11em -0.83em 0 -0.46em #ffffff, -0.11em -0.83em 0 -0.477em #ffffff;
+    }
+
+    5%, 95% {
+        box-shadow: -0.11em -0.83em 0 -0.4em #ffffff, -0.11em -0.83em 0 -0.42em #ffffff, -0.11em -0.83em 0 -0.44em #ffffff, -0.11em -0.83em 0 -0.46em #ffffff, -0.11em -0.83em 0 -0.477em #ffffff;
+    }
+
+    30% {
+        box-shadow: -0.11em -0.83em 0 -0.4em #ffffff, -0.51em -0.66em 0 -0.42em #ffffff, -0.75em -0.36em 0 -0.44em #ffffff, -0.83em -0.03em 0 -0.46em #ffffff, -0.81em 0.21em 0 -0.477em #ffffff;
+    }
+
+    55% {
+        box-shadow: -0.11em -0.83em 0 -0.4em #ffffff, -0.29em -0.78em 0 -0.42em #ffffff, -0.43em -0.72em 0 -0.44em #ffffff, -0.52em -0.65em 0 -0.46em #ffffff, -0.57em -0.61em 0 -0.477em #ffffff;
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+        box-shadow: -0.11em -0.83em 0 -0.4em #ffffff, -0.11em -0.83em 0 -0.42em #ffffff, -0.11em -0.83em 0 -0.44em #ffffff, -0.11em -0.83em 0 -0.46em #ffffff, -0.11em -0.83em 0 -0.477em #ffffff;
+    }
+}
+
+@keyframes load6 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        box-shadow: -0.11em -0.83em 0 -0.4em #ffffff, -0.11em -0.83em 0 -0.42em #ffffff, -0.11em -0.83em 0 -0.44em #ffffff, -0.11em -0.83em 0 -0.46em #ffffff, -0.11em -0.83em 0 -0.477em #ffffff;
+    }
+
+    5%, 95% {
+        box-shadow: -0.11em -0.83em 0 -0.4em #ffffff, -0.11em -0.83em 0 -0.42em #ffffff, -0.11em -0.83em 0 -0.44em #ffffff, -0.11em -0.83em 0 -0.46em #ffffff, -0.11em -0.83em 0 -0.477em #ffffff;
+    }
+
+    30% {
+        box-shadow: -0.11em -0.83em 0 -0.4em #ffffff, -0.51em -0.66em 0 -0.42em #ffffff, -0.75em -0.36em 0 -0.44em #ffffff, -0.83em -0.03em 0 -0.46em #ffffff, -0.81em 0.21em 0 -0.477em #ffffff;
+    }
+
+    55% {
+        box-shadow: -0.11em -0.83em 0 -0.4em #ffffff, -0.29em -0.78em 0 -0.42em #ffffff, -0.43em -0.72em 0 -0.44em #ffffff, -0.52em -0.65em 0 -0.46em #ffffff, -0.57em -0.61em 0 -0.477em #ffffff;
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+        box-shadow: -0.11em -0.83em 0 -0.4em #ffffff, -0.11em -0.83em 0 -0.42em #ffffff, -0.11em -0.83em 0 -0.44em #ffffff, -0.11em -0.83em 0 -0.46em #ffffff, -0.11em -0.83em 0 -0.477em #ffffff;
+    }
+}
+
+.nav-item {
+    display: block;
+    float: left;
+}
+
+@charset "utf-8";
+
+.main_bd_tab {
+    width: 100%;
+    z-index: 5;
+}
+
+.tree {
+}
+
+    .tree table {
+        width: auto;
+    }
+
+    .tree tr, .tree td {
+        padding: 0px;
+    }
+
+.main_bd_tab li {
+    float: left;
+    height: 22px;
+    line-height: 22px;
+    /*border: solid 1px #93a6b4;*/
+    background-color: rgb(255, 255, 255);
+    width: 80px;
+    text-align: center;
+    cursor: pointer;
+    margin-right: 3px;
+    border-bottom-width: 0px;
+}
+
+
+.main_bd_tab_content {
+    width: 100%;
+    border: solid 1px #93a6b4;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 4;
+    position: relative;
+}
+
+.main_bd_tab_active {
+    /*background-position-x: left;
+        background-position-y: bottom;
+        border-bottom-width: 0px;*/
+    background-image: url("../Images/btn/btn_t1_f5.png");
+}
+
+.list_btn {
+    width: 26px;
+    border-color: currentColor;
+    border-width: medium;
+    border-style: none;
+    margin: 5px;
+    display: block;
+    cursor: pointer;
+    background: white;
+    background-position-x: center;
+    background-position-y: top;
+    background-repeat: no-repeat;
+}
+
+.readonly {
+    border: none;
+    background-color: white;
+    overflow: hidden;
+}

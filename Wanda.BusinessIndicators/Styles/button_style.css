@@ -1,0 +1,240 @@
+﻿/*button样式*/
+
+ .btn4{ width:76px;}
+ .btn6{ width:95px;} 
+ .btn10{ width:130px;}
+ .btn_ll{ width:46px;}
+
+  
+  .btn4 ,.btn6,.btn10,.btn_ll,.btn_search_2,.btn_search_6,.Button_Style,.form_name_build .btn4,.public_botton
+ {
+     border:none;
+     background-image:url(../Images/botton_ma.jpg);
+     text-align:center; 
+     font-size:12px; 
+    background-color:#e2ebf2;
+	border:#8eb8f4 solid 1px;
+	cursor:pointer; 
+	color:#3d6b9e;
+	background-repeat:repeat-x;
+	background-position: left top;
+
+	vertical-align:middle;
+	padding:2px 0;
+	*padding:1px 0;
+
+     }
+       .public_botton
+  {
+      padding-left:10px;
+      padding-right:10px;
+      
+      }
+ .form_name_build .btn4
+ {
+     width:60px;
+     }
+ 
+ .tab_table_blue
+ {
+      font-size:12px; 
+      	color:#0f5eff;
+      	cursor:pointer;
+     }
+   .btn4:hover,.btn6:hover,.btn10:hover,.btn_ll:hover,.btn_search_2:hover,.btn_search_6:hover,.tab_table_blue:hover,.Button_Style:hover,.public_botton:hover
+   {
+       
+       color:Black;
+       background-position:left bottom;
+       text-decoration:none;
+       }
+ 
+
+.btn_search_2  
+{
+    width:73px;
+     }
+.btn_search_6 { 
+                width:110px;
+             
+                 }
+                 
+/*.tab_table_blue  
+{
+    color:#0f5eff; 
+    text-decoration:underline;
+    }*/
+ /*链接样式*/
+
+
+a:hover
+{
+    
+    text-decoration:none;
+    }
+ .title_link a, .title_link a:visited  
+{
+    color:#343434;
+    text-decoration:none; 
+    }
+.title_link a:hover
+{
+    text-decoration:none;
+    }
+a.exit_button
+{
+   
+    background-image:url(../Images/sjx.gif);
+    background-repeat:no-repeat;
+    background-position:6px 0;
+    display:block;
+    width:65px;
+    height:20px;
+    line-height:20px;
+    text-indent:28px;
+    margin:20px;
+    background-color:White;
+    border:#ccc solid 1px;
+    color: #6E6E6E;
+   
+}
+a.exit_button:hover
+{
+    color:#6baed9;
+   
+    
+    }
+/*go*/
+
+.go_btn  
+{
+    width:29px;
+ 
+    text-align:center; 
+    font-size:12px;
+    padding:1px 0;
+      cursor:pointer; 
+     /* background:url(../Images/go_btn.gif) left 3px no-repeat;*/
+     color:#3d6b9e;
+    background-color:#e2ebf2;
+	border:#8eb8f4 solid 1px;
+	background-image:url(../Images/botton_ma.jpg);
+	background-repeat:repeat-x;
+	background-position: left top;
+	vertical-align:middle;
+     
+      }
+.go_btn:hover
+{
+    color:#d6994b;
+    }
+/*hover换色*/
+.tabel_tr_color
+{
+    background-color:rgb(241, 246, 247);
+    }
+.tabel_hovercolor tr:hover
+{
+    /*记录*/ background-color:rgb(241, 246, 247);
+    
+    }
+ /*input*/
+ .form_name h2 input
+{
+    width: 500px; 
+    padding:1px 0px; 
+    text-indent: 3px; 
+    font-size: 18px; 
+    font-weight: bold;  
+    border: #e2e3ea 1px solid; 
+
+    }
+ .form_name_build h2 input
+ {
+
+     
+     }
+/* input e2e3ea*/
+
+.input105,.input115,.input205 ,.input60,.input90,.input80,.input305,.select105,.select_border{height:18px; line-height:18px;border:#c1c2c9 solid 1px; /*border-top:#abadb3 solid 1px;*/}
+.input105 { width:103px;  }
+.input115 { width:103px;}
+.input205 { width:203px; }
+.input60 { width:58px;}
+.input90 { width:88px;}
+.input80 { width:78px; text-indent:5px;}
+.input305 {width:99%; height:22px;}
+.select105{ height:23px; line-height:20px;}
+ /*paint*/
+ .paint
+ {
+  float:right; 
+  margin:0 20px 0 5px; 
+  display:block; 
+  padding:0 0 0 20px;
+  height:35px; 
+  line-height:35px; 
+  font-size:12px;
+  font-weight:normal;
+ 
+  color:White;
+  background-image:url(../Images/paint.gif);
+  background-repeat:no-repeat;
+  background-position:left center;
+     }
+ #cancel_paint
+ {
+     background-image:url(../Images/closepaint.gif);
+      background-repeat:no-repeat;
+  background-position:left center;
+     }
+     
+     
+ input.cmdup{width: 21px; height: 21px; border: none; line-height: 21px; text-align: center;font-size: 12px; color: #fff; cursor: pointer; background: url(../Images/arrow_up.png) left top no-repeat;}
+input.cmddown{width: 21px; height: 21px; border: none; line-height: 21px; text-align: center;font-size: 12px; color: #fff; cursor: pointer; background: url(../Images/arrow_down.png) left top no-repeat;}
+/*select*/
+select option
+{
+    font-size:12px;
+    
+    }
+    .paneRequestApproval
+{
+    width:950px;
+    margin-top:10px;
+    }
+/*左右选中*/
+.list_btn{ display:block; width:26px; background-repeat:no-repeat; background-position:left top; border:none; cursor:pointer; background-color:White; /*margin:20px 15px;*/margin:13px 15px;+margin:10px 15px;}
+.list_btn:hover{ background-position:left bottom}
+.btn_chk,.btn_lab{ float:left; margin-right:3px;}
+.btn_chk{ margin-top:3px; margin-top:6px\0;}
+.btn_lab{ margin-right:20px;}
+/*table*/
+.table_oop{background-image:url(../Images/table_bg.jpg); background-repeat:repeat-x; background-position:left top; background-color:#f4f9fc}
+.caption{ margin:10px 0; position:relative; top:0; left:0;}
+.TextBox{ border:#CCC solid 1px; width:98%}
+h1#cap_h1{ line-height:normal; font-size:14px; color:Black;}
+.dottedtable td{ height:30px; padding:5px;; vertical-align:bottom;border-bottom-color: #ccc; border-bottom-width: 1px; border-bottom-style: dotted;}
+.LinkButton{ display:block;border:none; background-color:transparent; background-image:url(../Images/exel.png); background-repeat:no-repeat; background-position:left top; width:75px; height:25px; text-align:right; color:White; font-size:12px; font-weight:bold; cursor:pointer}
+.LinkButton:hover{ /*记录*/color:#f9fbfb}
+.LinkButton:visited{ color:White}
+.tr_txtLeft td{ text-align:left}
+/*考核期间点下划线样式*/
+.fnetcolor td{ border-bottom:#ccc dotted 1px;}
+.fnetcolor td[align='left'] a{ font-size:12px;}
+/*弹出层table*/
+.search_dk td label{ font-size:12px; margin-left:3px; margin-right:20px;}
+
+/*添加table控件样式*/
+table.table_control{ width:99%; border-collapse:collapse; margin-top:10px; margin-bottom:20px; display:none;}
+table.table_control td,table.table_control th{ border:#cadaf1 solid 1px; text-align: center}
+table.parent_table{ width:99%;}
+table.parent_table th{ text-align:center; font-weight:bold;}
+tr.parent_tr { background-color:rgb(230, 237, 253);}
+tr.parent_tr td,tr.parent_tr th{  border:#a5c4e0 solid 1px; }
+.dbclickbuuton:hover{ background-color:#e6fdfd}
+/*添加同意垫高高度*/
+.bedheight{ height:5px;}
+.a_color,.a_color:hover,.a_color:link,.a_color:visited { color:#000}
+
+ 

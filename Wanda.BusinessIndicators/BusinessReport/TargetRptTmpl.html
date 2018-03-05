@@ -1,0 +1,1884 @@
+﻿<!------------------------------------------月度经营报告 Title start------------------------------------------------------------------------->
+<script id="MonthReportSummaryHeadTemplate" type="text/x-jquery-tmpl">
+    <tr class='tab_5_row_alt'>
+        <th rowspan='2' style='width: 4%'>序号</th>
+        <th rowspan='2' style="width: 275px;">项目</th>
+
+        <th colspan='4' style='width: 30%'>本月发生(万元)</th>
+        <th colspan='4' style='width: 30%'>本年累计(万元)</th>
+        <th colspan='2' style='width: 20%'>全年(万元)</th>
+    </tr>
+    <tr>
+        <th class='th_Sub'>计划</th>
+        <th class='th_Sub'>实际</th>
+        <th class='th_Sub'>实际与<br />
+            计划差额</th>
+        <th class='th_Sub2'>实际占<br />
+            计划比</th>
+        <th class='th_Sub1'>计划</th>
+        <th class='th_Sub'>实际</th>
+        <th class='th_Sub'>实际与<br />
+            计划差额</th>
+        <th class='th_Sub2'>实际占<br />
+            计划比</th>
+        <th class='th_Sub1'>计划</th>
+        <th class='th_Sub'>完成<br />
+            年度计划比</th>
+    </tr>
+</script>
+
+
+<!--商管通用模版-->
+<script id="MonthReportSummaryHeadTemplate_SG" type="text/x-jquery-tmpl">
+    <tr class='tab_5_row_alt'>
+        <th rowspan='2' style='width: 4%'>序号</th>
+        <th rowspan='2' style='width: 275px;'>项目</th>
+        <th rowspan='2' style='width: 10%'>年度指标</th>
+        <th colspan='3' style='width: 35%'>本月发生(万元)</th>
+        <th colspan='3' style='width: 35%'>本年累计(万元)</th>
+    </tr>
+    <tr>
+        <th class='th_Sub'>计划</th>
+        <th class='th_Sub'>实际</th>
+        <th class='th_Sub2'>完成率</th>
+        <th class='th_Sub1'>计划</th>
+        <th class='th_Sub'>实际</th>
+        <th class='th_Sub'>完成率</th>
+    </tr>
+</script>
+<!------------------------------------------月度经营报告 Title end------------------------------------------------------------------------->
+
+<!------------------------------------------完成情况明细 通用模版 Title start------------------------------------------------------------------------->
+<script id="CompleteDetailHeadTemplate" type="text/x-jquery-tmpl">
+    <tr class='tab_5_row_alt'>
+        <th colspan='2' rowspan='2' style='width: 275px;'>名称</th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;DetailMonthly&quot;)' style='text-decoration: none; color: #ffffff'>本月发生(万元)
+            <img id='imgDetailMonthly' class="DetailMonthly" src='../Images/btn_down02_w.png' />
+        </a></th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;Detail&quot;)' style='text-decoration: none; color: #ffffff'>本年累计(万元)
+            <img id='imgDetail' class="Detail" src='../Images/btn_down03_w.png' />
+        </a></th>
+        <th rowspan='2' style='width: 10%'>警示灯</th>
+    </tr>
+    <tr class='tab_5_row_alt'>
+        <th class='th_Sub'>计划</th>
+        <th class='th_Sub'>实际</th>
+        <th class='th_Sub'>差额</th>
+        <th class='th_Sub2'>完成率</th>
+        <th class='th_Sub1'>计划</th>
+        <th class='th_Sub'>实际</th>
+        <th class='th_Sub'>差额</th>
+        <th class='th_Sub'>完成率</th>
+    </tr>
+</script>
+
+<!-------------------------------------------商管系统 Title------------------------------------------------------------------------>
+
+<script id="ComplateTargetDetailTemplate_SG_JLL" type="text/x-jquery-tmpl">
+    <!--商管净利润Title-->
+    <tr class='tab_5_row_alt'>
+        <th colspan='3' rowspan='2' style="width: 275px;">项目</th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;DetailMonthly&quot;)' style='text-decoration: none; color: #ffffff'>本月发生(万元)
+            <img id='img3' class="DetailMonthly" src='../Images/btn_down02_w.png' /></a></th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;Detail&quot;)' style='text-decoration: none; color: #ffffff'>本年累计(万元)
+            <img id='img4' class="Detail" src='../Images/btn_down03_w.png' /></a></th>
+        <th rowspan='2' style='width: 10%'>警示灯</th>
+    </tr>
+    <tr class='tab_5_row_alt'>
+        <th class='th_Sub'>本月应收</th>
+        <th class='th_Sub'>本月实收</th>
+        <th class='th_Sub'>欠收</th>
+        <th class='th_Sub2'>收缴率</th>
+        <th class='th_Sub1'>累计应收</th>
+        <th class='th_Sub'>累计实收</th>
+        <th class='th_Sub'>欠收</th>
+        <th class='th_Sub'>收缴率</th>
+    </tr>
+</script>
+
+<script id="ComplateTargetDetailTemplate_SG" type="text/x-jquery-tmpl">
+    <!--商管其它指标Title-->
+    <tr class='tab_5_row_alt'>
+        <th colspan='3' rowspan='2' style="width: 275px;">项目</th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;DetailMonthly&quot;)' style='text-decoration: none; color: #ffffff'>本月发生(万元)
+            <img id='img7' class="DetailMonthly" src='../Images/btn_down02_w.png' /></a></th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;Detail&quot;)' style='text-decoration: none; color: #ffffff'>本年累计(万元)
+            <img id='img8' class="Detail" src='../Images/btn_down03_w.png' /></a></th>
+        <th rowspan='2' style='width: 10%'>警示灯</th>
+    </tr>
+    <tr class='tab_5_row_alt'>
+        <th class='th_Sub'>指标</th>
+        <th class='th_Sub'>实际完成</th>
+        <th class='th_Sub'>差额</th>
+        <th class='th_Sub2'>完成率</th>
+        <th class='th_Sub1'>指标</th>
+        <th class='th_Sub'>实际完成</th>
+        <th class='th_Sub'>差额</th>
+        <th class='th_Sub'>完成率</th>
+    </tr>
+</script>
+
+<!-------------------------------------------物管系统 Title------------------------------------------------------------------------>
+
+<script id="ComplateTargetDetailHeadTemplate_WG_XSWYWGSL" type="text/x-jquery-tmpl">
+    <tr class='tab_5_row_alt'>
+        <th colspan='2' rowspan='2' style="width: 275px;">项目</th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;DetailMonthly&quot;)' style='text-decoration: none; color: #ffffff'>本月发生(万元)
+            <img id='img13' class="DetailMonthly" src='../Images/btn_down02_w.png' /></a></th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;Detail&quot;)' style='text-decoration: none; color: #ffffff'>本年累计(万元)
+            <img id='img14' class="Detail" src='../Images/btn_down03_w.png' /></a></th>
+        <th rowspan='2' style='width: 10%'>警示灯</th>
+    </tr>
+    <tr class='tab_5_row_alt'>
+        <th class='th_Sub'>本月应收</th>
+        <th class='th_Sub'>本月实收</th>
+        <th class='th_Sub'>欠收</th>
+        <th class='th_Sub2'>收缴率</th>
+        <th class='th_Sub1'>累计应收</th>
+        <th class='th_Sub'>累计实收</th>
+        <th class='th_Sub'>欠收</th>
+        <th class='th_Sub'>收缴率</th>
+    </tr>
+</script>
+
+<script id="ComplateTargetDetailHeadTemplate_WG_JLL" type="text/x-jquery-tmpl">
+    <tr class='tab_5_row_alt'>
+        <th colspan='2' rowspan='2' style='width: 20%'>项目</th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;DetailMonthly&quot;)' style='text-decoration: none; color: #ffffff'>本月发生(万元)
+            <img id='img15' class="DetailMonthly" src='../Images/btn_down02_w.png' /></a></th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;Detail&quot;)' style='text-decoration: none; color: #ffffff'>本年累计(万元)
+            <img id='img16' class="Detail" src='../Images/btn_down03_w.png' /></a></th>
+        <th rowspan='2' style='width: 10%'>警示灯</th>
+    </tr>
+    <tr class='tab_5_row_alt'>
+        <th class='th_Sub'>指标</th>
+        <th class='th_Sub'>实际完成</th>
+        <th class='th_Sub'>差额</th>
+        <th class='th_Sub2'>完成率</th>
+        <th class='th_Sub1'>指标</th>
+        <th class='th_Sub'>实际完成</th>
+        <th class='th_Sub'>差额</th>
+        <th class='th_Sub'>完成率</th>
+    </tr>
+</script>
+
+
+<!-------------------------------------------万达旅业 Title------------------------------------------------------------------------>
+<script id="ComplateTargetDetailHeadTemplate_WDLY_KLL" type="text/x-jquery-tmpl">
+    <tr class='tab_5_row_alt'>
+        <th colspan='2' rowspan='2' style="width: 275px;">名称</th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;DetailMonthly&quot;)' style='text-decoration: none; color: #ffffff'>本月发生(万人次)
+            <img id='img1' class="DetailMonthly" src='../Images/btn_down02_w.png' /></a></th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;Detail&quot;)' style='text-decoration: none; color: #ffffff'>本年累计(万人次)
+            <img id='img2' class="Detail" src='../Images/btn_down03_w.png' /></a></th>
+        <th rowspan='2' style='width: 10%'>警示灯</th>
+    </tr>
+    <tr class='tab_5_row_alt'>
+        <th class='th_Sub'>计划</th>
+        <th class='th_Sub'>实际</th>
+        <th class='th_Sub'>差额</th>
+        <th class='th_Sub2'>完成率</th>
+        <th class='th_Sub1'>计划</th>
+        <th class='th_Sub'>实际</th>
+        <th class='th_Sub'>差额</th>
+        <th class='th_Sub'>完成率</th>
+    </tr>
+</script>
+
+<script id="ComplateTargetDetailHeadTemplate_WDLY_JLR" type="text/x-jquery-tmpl">
+    <tr class='tab_5_row_alt'>
+        <th colspan='3' rowspan='2' style="width: 275px;">名称</th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;DetailMonthly&quot;)' style='text-decoration: none; color: #ffffff'>本月发生(万元)
+            <img id='img11' class="DetailMonthly" src='../Images/btn_down02_w.png' />
+        </a></th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;Detail&quot;)' style='text-decoration: none; color: #ffffff'>本年累计(万元)
+            <img id='img12' class="Detail" src='../Images/btn_down03_w.png' />
+        </a></th>
+        <th rowspan='2' style='width: 10%'>警示灯</th>
+    </tr>
+    <tr class='tab_5_row_alt'>
+        <th class='th_Sub'>计划</th>
+        <th class='th_Sub'>实际</th>
+        <th class='th_Sub'>差额</th>
+        <th class='th_Sub2'>完成率</th>
+        <th class='th_Sub1'>计划</th>
+        <th class='th_Sub'>实际</th>
+        <th class='th_Sub'>差额</th>
+        <th class='th_Sub'>完成率</th>
+    </tr>
+</script>
+
+
+<!-------------------------------------------院线系统 Title------------------------------------------------------------------------>
+<script id="CompleteDetailHeadTemplate_YX" type="text/x-jquery-tmpl">
+    <tr class='tab_5_row_alt'>
+        <th colspan='2' rowspan='2' style="width: 275px;">影城名称</th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;DetailMonthly&quot;)' style='text-decoration: none; color: #ffffff'>本月发生(万元)
+            <img id='img5' class="DetailMonthly" src='../Images/btn_down02_w.png' />
+        </a></th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;Detail&quot;)' style='text-decoration: none; color: #ffffff'>本年累计(万元)
+            <img id='img6' class="Detail" src='../Images/btn_down03_w.png' />
+        </a></th>
+        <th rowspan='2' style='width: 10%'>警示灯</th>
+    </tr>
+    <tr class='tab_5_row_alt'>
+        <th class='th_Sub'>计划</th>
+        <th class='th_Sub'>实际</th>
+        <th class='th_Sub'>差额</th>
+        <th class='th_Sub2'>完成率</th>
+        <th class='th_Sub1'>计划</th>
+        <th class='th_Sub'>实际</th>
+        <th class='th_Sub'>差额</th>
+        <th class='th_Sub'>完成率</th>
+    </tr>
+</script>
+
+<!-------------------------------------------大歌星系统 Title------------------------------------------------------------------------>
+<script id="CompleteDetailHeadTemplate_DGX" type="text/x-jquery-tmpl">
+    <tr class='tab_5_row_alt'>
+        <th colspan='2' rowspan='2' style="width: 275px;">公司</th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;DetailMonthly&quot;)' style='text-decoration: none; color: #ffffff'>本月发生(万元)
+            <img id='img9' class="DetailMonthly" src='../Images/btn_down02_w.png' />
+        </a></th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;Detail&quot;)' style='text-decoration: none; color: #ffffff'>本年累计(万元)
+            <img id='img10' class="Detail" src='../Images/btn_down03_w.png' />
+        </a></th>
+        <th rowspan='2' style='width: 10%'>警示灯</th>
+    </tr>
+    <tr class='tab_5_row_alt'>
+        <th class='th_Sub'>计划</th>
+        <th class='th_Sub'>实际</th>
+        <th class='th_Sub'>差额</th>
+        <th class='th_Sub2'>完成率</th>
+        <th class='th_Sub1'>计划</th>
+        <th class='th_Sub'>实际</th>
+        <th class='th_Sub'>差额</th>
+        <th class='th_Sub'>完成率</th>
+    </tr>
+</script>
+
+<!------------------------------------------万达学院线下培训量 Title start------------------------------------------------------------------------->
+<script id="CompleteDetailHeadTemplate_WDXU_XXPXL" type="text/x-jquery-tmpl">
+    <tr class='tab_5_row_alt'>
+        <th colspan='2' rowspan='2' style='width: 275px;'>名称</th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;DetailMonthly&quot;)' style='text-decoration: none; color: #ffffff'>本月发生(人)
+            <img id='img17' class="DetailMonthly" src='../Images/btn_down02_w.png' />
+        </a></th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;Detail&quot;)' style='text-decoration: none; color: #ffffff'>本年累计(人)
+            <img id='img18' class="Detail" src='../Images/btn_down03_w.png' />
+        </a></th>
+        <th rowspan='2' style='width: 10%'>警示灯</th>
+    </tr>
+    <tr class='tab_5_row_alt'>
+        <th class='th_Sub'>计划</th>
+        <th class='th_Sub'>实际</th>
+        <th class='th_Sub'>差额</th>
+        <th class='th_Sub2'>完成率</th>
+        <th class='th_Sub1'>计划</th>
+        <th class='th_Sub'>实际</th>
+        <th class='th_Sub'>差额</th>
+        <th class='th_Sub'>完成率</th>
+    </tr>
+</script>
+
+<!------------------------------------------电子商务注册用户 Title start------------------------------------------------------------------------->
+<script id="CompleteDetailHeadTemplate_DZSW_ZCYH" type="text/x-jquery-tmpl">
+    <tr class='tab_5_row_alt'>
+        <th colspan='2' rowspan='2' style='width: 275px;'>名称</th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;DetailMonthly&quot;)' style='text-decoration: none; color: #ffffff'>本月发生(万人)
+            <img id='img19' class="DetailMonthly" src='../Images/btn_down02_w.png' />
+        </a></th>
+        <th colspan='4' style='width: 35%'><a href='javascript:MonthReportOrder(&quot;Detail&quot;)' style='text-decoration: none; color: #ffffff'>本年累计(万人)
+            <img id='img20' class="Detail" src='../Images/btn_down03_w.png' />
+        </a></th>
+        <th rowspan='2' style='width: 10%'>警示灯</th>
+    </tr>
+    <tr class='tab_5_row_alt'>
+        <th class='th_Sub'>计划</th>
+        <th class='th_Sub'>实际</th>
+        <th class='th_Sub'>差额</th>
+        <th class='th_Sub2'>完成率</th>
+        <th class='th_Sub1'>计划</th>
+        <th class='th_Sub'>实际</th>
+        <th class='th_Sub'>差额</th>
+        <th class='th_Sub'>完成率</th>
+    </tr>
+</script>
+
+
+
+
+<!------------------------------------------完成情况明细 Title end------------------------------------------------------------------------->
+<!--月度经营报告start--->
+<script id="MonthReportSummaryTemplate_SG" type="text/x-jquery-tmpl">
+    <tr>
+        <td class="Td_Left" style="text-align: center!important">${ID}</td>
+        <td class="Td_Left" style="text-align: left !important;">${TargetName}</td>
+        <td class="Td_Left" title="${MeasureRate}">{{if isNaN(MeasureRate)}}${MeasureRate}{{else}}${(MeasureRate*1).thousandize0OrEmpty(0)}{{/if}}</td>
+        <td class="Td_Left" title="${NPlanAmmount}">${(NPlanAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NActualRate}">${NActualRate}</td>
+        <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NAccumulativeActualRate}">${NAccumulativeActualRate}</td>
+    </tr>
+</script>
+<!--月度经营报告End--->
+<!--月度经营报告start--->
+<script id="MonthReportSummaryTemplate" type="text/x-jquery-tmpl">
+    {{if SystemID == '15ee2c18-5c7a-402e-92b8-277cff78e210' && TargetID=='a79a8351-89e0-4f1a-b05e-70ff12209bcb'}}
+    <tr>
+        <td class="Td_Left" style="text-align: center!important">${ID}</td>
+        <td class="Td_Left" style="text-align: left !important;">${TargetName}</td>
+        <td class="Td_Left" title="${NPlanAmmount}">${NPlanStr}</td>
+        <td class="Td_TopAndBottom" title="${NActualAmmount}">${NActualStr}</td>
+        {{if NDifference == 0 }}
+        <td class="Td_TopAndBottom" title="${NDifference}">${(NDifference*1).thousandize0OrEmpty(0)}<br />(无欠收)</td>
+        {{else}}
+        <td class="Td_TopAndBottom" title="${NDifference}">${(NDifference*1).thousandize0OrEmpty(0)}<br />(当月欠收)</td>
+        {{/if}}
+        <td class="Td_TopAndBottom" title="${NActualRate}">${NActualRate}</td>
+        <td class="Td_Left" title="${NAccumulativePlanAmmount}">${NAccumulativePlanStr}</td>
+        <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${NAccumulativeActualStr}</td>
+        {{if NAccumulativeDifference == 0 }}
+        <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${(NAccumulativeDifference*1).thousandize0OrEmpty(0)}<br />(无欠收)</td>
+        {{else}}
+        <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${(NAccumulativeDifference*1).thousandize0OrEmpty(0)}<br />(累计欠收)</td>
+        {{/if}}
+        <td class="Td_TopAndBottom" title="${NAccumulativeActualRate}">${NAccumulativeActualRate}</td>
+        {{if MeasureRate== '99%'}}
+        <td class="Td_Left" title="${MeasureRate}">${MeasureRate}</td>
+        {{else}}
+        <td class="Td_Left" title="${MeasureRate}">${(MeasureRate*1).thousandize0OrEmpty(0)}</td>
+        {{/if}}
+        <td class="Td_TopAndBottom" title="${NAnnualCompletionRate}">${NAnnualCompletionRate}</td>
+    </tr>
+    {{else}}
+    <tr>
+        <td class="Td_Left" style="text-align: center!important">${ID}</td>
+        <td class="Td_Left" style="text-align: left !important;">${TargetName}</td>
+        <td class="Td_Left" title="${NPlanAmmount}">${(NPlanAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NDifference}">${(NDifference*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NActualRate}">${NActualRate}</td>
+        <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${(NAccumulativeDifference*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NAccumulativeActualRate}">${NAccumulativeActualRate}</td>
+        <td class="Td_Left" title="${MeasureRate}">${(MeasureRate*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NAnnualCompletionRate}">${NAnnualCompletionRate}</td>
+    </tr>
+    {{/if}}
+</script>
+<!--月度经营报告End--->
+
+
+
+<!--附件Start-->
+<script id="listAtt" type="text/x-jquery-tmpl">
+    <a style="padding-left: 10px" href="/AjaxHander/DownLoadFile.ashx?path=${Url}&&FileName=${FileName}">${FileName}</a><span style="padding-left: 10px; font-weight: 700; color: #ccc">|</span>
+</script>
+<!--附件End-->
+
+<!--查询界面 完成情况明细start--->
+<script id="ComplateTargetDetailHeadTemplate" type="text/x-jquery-tmpl">
+    <li class="sd">
+        <a class="active2 " onclick="ComplateDetailLiaddCss(this);">${Name}</a>
+    </li>
+</script>
+
+
+<script id="BHHeadTemplate" type="text/x-jquery-tmpl">
+    <li class="sd">
+        <a class="active3 " onclick="BHLiaddCss(this);">${Name}</a>
+    </li>
+</script>
+
+
+
+<script id="ComplateTargetDetailTemplate" type="text/x-jquery-tmpl">
+    {{each ObjValue}}
+        {{if Name=='HaveDetail'}}
+            {{each ObjValue}}
+               <tr>
+                   <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                   <td class="Td_Left" colspan="1" style="text-align: left !important;">${CompanyName}</td>
+                   <td class="Td_Left align_right num" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NDisplayRate}">${NDisplayRate}</td>
+                   <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+                   {{if Counter==0}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                   {{else}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                        <img src="../Images/images1/image${Counter}.png" /></td>
+                   {{/if}}
+               </tr>
+    {{/each}}
+        {{else Name=='SummaryData'}}
+             {{each ObjValue}}
+             <tr class="item1 Td_Merge" style="line-height: 25px!important; height: 35px!important; cursor: default!important">
+                 <td class="Td_Left" colspan="2" style="font-weight: bold; text-align: center !important;">合计</td>
+                 <td class="Td_Left align_right num" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                 <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                 <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+             </tr>
+    {{/each}}
+        {{else}}
+            ${SetDataRowsCount(ObjValue)}
+            {{each ObjValue}}
+                {{if Mark=='DetailHide'}}
+                     <tr class="item1 DetailShow" style="line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                         {{else}}
+                     <tr class="item1" style="line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                         {{/if}}
+                       {{if Value!=null}} 
+                            <td class="${VcounterRowID} Td_TopAndBottom" rowspan="${RowSpanCount}" style="width: 2%; text-align: center; font-size: 14px; background-color: white; word-wrap: break-word; letter-spacing: 5px">${setColumnAmount(Value)}  
+                            </td>
+                         {{/if}}
+                           <td colspan="${upateColumnAmount(2)}" class="Td_Left Td_Merge" style="font-weight: bold; text-align: center !important; width: 18%!important">${Name}</td>
+                         <td class="Td_Left Td_Merge">${(BMonthReportDetail.NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NActualAmmount).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NDifference).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_right Td_Merge" style="text-align: center !important; padding: 5px">${BMonthReportDetail.NDisplayRate}</td>
+                         <td class="Td_Left Td_Merge">${(BMonthReportDetail.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_TopAndBottom align_right Td_Merge">${BMonthReportDetail.NAccumulativeDisplayRate}</td>
+                         <td class="Td_Left Td_Merge" style="text-align: center !important; padding: 5px"></td>
+
+                     </tr>
+                         {{if Mark!="DetailDelete"}}
+                    {{if Mark=='DetailHide'}}
+                         {{each ObjValue}}
+                                <tr style="display: none">
+                                    <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                    <td class="Td_Left" colspan="1" style="text-align: left !important;">${CompanyName}</td>
+                                    <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                    <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                                    {{if Counter==0}}
+                                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                    {{else}}
+                                    <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                        <img src="../Images/images1/image${Counter}.png" /></td>
+                                    {{/if}}
+                                </tr>
+                         {{/each}}
+                   {{else}}
+                        {{each ObjValue}}
+                                <tr>
+                                    <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                    <td class="Td_Left" colspan="1" style="text-align: left !important;">${CompanyName}</td>
+                                    <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                    <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                                    {{if Counter==0}}
+                                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                    {{else}}
+                                    <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                        <img src="../Images/images1/image${Counter}.png" /></td>
+                                    {{/if}}
+                                </tr>
+    {{/each}}
+                    {{/if}}
+                {{/if}}
+                        {{if DataRowsCount==($index+1) }}
+                          ${setMargeCount()}
+                       {{/if}}
+            {{/each}}
+        {{/if}}
+    {{/each}}
+</script>
+
+<script id="ComplateTargetDetailTemplate_SGXT" type="text/x-jquery-tmpl">
+    {{each ObjValue}}
+        {{if Name=='HaveDetail'}}
+            {{each ObjValue}}
+               <tr>
+                   <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                   <td class="Td_Left" colspan="2" style="text-align: left !important;">${CompanyName}</td>
+                   <td class="Td_Left align_right num" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NDisplayRate}">${NDisplayRate}</td>
+                   <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+                   {{if Counter==0}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                   {{else}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                        <img src="../Images/images1/image${Counter}.png" /></td>
+                   {{/if}}
+               </tr>
+    {{/each}}
+        {{else Name=='SummaryData'}}
+             {{each ObjValue}}
+             <tr class="item1 Td_Merge" style="line-height: 25px!important; height: 35px!important; cursor: default!important">
+                 <td class="Td_Left" colspan="3" style="font-weight: bold; text-align: center !important;">合计</td>
+                 <td class="Td_Left align_right num" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                 <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                 <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+             </tr>
+    {{/each}}
+        {{else}}
+            ${SetDataRowsCount(ObjValue)}
+            {{each ObjValue}}
+                {{if Mark=='DetailHide'}}
+                     <tr class="item1 DetailShow" style="line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                         {{else}}
+                     <tr class="item1" style="line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                         {{/if}}
+                       {{if Value!=null}} 
+                            <td class="${VcounterRowID} Td_TopAndBottom" rowspan="${RowSpanCount}" style="width: 2%; text-align: center; font-size: 14px; background-color: white; word-wrap: break-word; letter-spacing: 5px">${setColumnAmount(Value)}  
+                            </td>
+                         {{/if}}
+                           <td colspan="${upateColumnAmount(3)}" class="Td_Left Td_Merge" style="font-weight: bold; text-align: center !important; width: 18%!important">${Name}</td>
+                         <td class="Td_Left Td_Merge">${(BMonthReportDetail.NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NActualAmmount).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NDifference).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_right Td_Merge" style="text-align: center !important; padding: 5px">${BMonthReportDetail.NDisplayRate}</td>
+                         <td class="Td_Left Td_Merge">${(BMonthReportDetail.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_TopAndBottom align_right Td_Merge">${BMonthReportDetail.NAccumulativeDisplayRate}</td>
+                         <td class="Td_Left Td_Merge" style="text-align: center !important; padding: 5px"></td>
+
+                     </tr>
+                         {{if Mark!="DetailDelete"}}
+                    {{if Mark=='DetailHide'}}
+                         {{each ObjValue}}
+                                <tr style="display: none">
+                                    <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                    <td class="Td_Left" style="text-align: left !important;">${CompanyName}</td>
+                                    <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                    <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                                    {{if Counter==0}}
+                                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                    {{else}}
+                                    <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                        <img src="../Images/images1/image${Counter}.png" /></td>
+                                    {{/if}}
+                                </tr>
+                         {{/each}}
+                   {{else}}
+                        {{each ObjValue}}
+                                <tr>
+                                    <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                    <td class="Td_Left" style="text-align: left !important;">${CompanyName}</td>
+                                    <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                    <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                                    {{if Counter==0}}
+                                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                    {{else}}
+                                    <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                        <img src="../Images/images1/image${Counter}.png" /></td>
+                                    {{/if}}
+                                </tr>
+    {{/each}}
+                    {{/if}}
+                {{/if}}
+                        {{if DataRowsCount==($index+1) }}
+                          ${setMargeCount()}
+                       {{/if}}
+            {{/each}}
+        {{/if}}
+    {{/each}}
+</script>
+
+
+<!--商管月报查看页面--->
+<script id="ComplateTargetDetailTemplate_SGXT_Difference" type="text/x-jquery-tmpl">
+    <!--该模版特殊：差额显示成绝对值--->
+    {{each ObjValue}}
+        {{if Name=='HaveDetail'}}
+            {{each ObjValue}}
+               <tr>
+                   <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                   <td class="Td_Left" colspan="2" style="text-align: left !important;">${CompanyName}</td>
+                   <td class="Td_Left align_right num" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NDisplayRate}">${NDisplayRate}</td>
+                   <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+                   {{if Counter==0}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                   {{else}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                        <img src="../Images/images1/image${Counter}.png" /></td>
+                   {{/if}}
+               </tr>
+    {{/each}}
+        {{else Name=='SummaryData'}}
+             {{each ObjValue}}
+             <tr class="item1 Td_Merge" style="line-height: 25px!important; height: 35px!important; cursor: default!important">
+                 <td class="Td_Left" colspan="3" style="font-weight: bold; text-align: center !important;">合计</td>
+                 <td class="Td_Left align_right num" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NDifference}">${NDifference>0?0:(Math.abs(NDifference)).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                 <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${NAccumulativeDifference>0?0:(Math.abs(NAccumulativeDifference)).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                 <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+             </tr>
+    {{/each}}
+        {{else}}
+            ${SetDataRowsCount(ObjValue)}
+    <!--完成未完成标题--->
+    {{each ObjValue}}
+                {{if Mark=='DetailHide'}}
+                     <tr class="item1 DetailShow" style="line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                         {{else}}
+                     <tr class="item1" style="line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                         {{/if}}
+                       {{if Value!=null}} 
+                            <td class="${VcounterRowID} Td_TopAndBottom" rowspan="${RowSpanCount}" style="width: 2%; text-align: center; font-size: 14px; background-color: white; word-wrap: break-word; letter-spacing: 5px">${setColumnAmount(Value)}  
+                            </td>
+                         {{/if}}
+                           <td colspan="${upateColumnAmount(3)}" class="Td_Left Td_Merge" style="font-weight: bold; text-align: center !important; width: 18%!important">${Name}</td>
+                         <td class="Td_Left Td_Merge">${(BMonthReportDetail.NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NActualAmmount).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_TopAndBottom Td_Merge">${BMonthReportDetail.NDifference >0?0:(Math.abs(BMonthReportDetail.NDifference)).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_right Td_Merge" style="text-align: center !important; padding: 5px">${BMonthReportDetail.NDisplayRate}</td>
+                         <td class="Td_Left Td_Merge">${(BMonthReportDetail.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_TopAndBottom Td_Merge">${BMonthReportDetail.NAccumulativeDifference>0?0:(Math.abs(BMonthReportDetail.NAccumulativeDifference)).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_TopAndBottom align_right Td_Merge">${BMonthReportDetail.NAccumulativeDisplayRate}</td>
+                         <td class="Td_Left Td_Merge" style="text-align: center !important; padding: 5px"></td>
+
+                     </tr>
+                         {{if Mark!="DetailDelete"}}
+                    {{if Mark=='DetailHide'}} 
+                         <!--完成未完成的明细影藏--->
+                         {{each ObjValue}}
+                                <tr style="display: none">
+                                    <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                    <td class="Td_Left" style="text-align: left !important;">${CompanyName}</td>
+                                    <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${ NDifference >0?0:(Math.abs(NDifference)).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                    <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${NAccumulativeDifference >0?0:(Math.abs(NAccumulativeDifference)).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                                    {{if Counter==0}}
+                                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                    {{else}}
+                                    <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                        <img src="../Images/images1/image${Counter}.png" /></td>
+                                    {{/if}}
+                                </tr>
+                         {{/each}}
+                   {{else}} 
+                         <!--完成未完成的明细显示--->
+                         {{each ObjValue}}
+                                <tr>
+                                    <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                    <td class="Td_Left" style="text-align: left !important;">${CompanyName}</td>
+                                    <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${NDifference>0?0:(Math.abs(NDifference)).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                    <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${NAccumulativeDifference>0?0:(Math.abs(NAccumulativeDifference)).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                                    {{if Counter==0}}
+                                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                    {{else}}
+                                    <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                        <img src="../Images/images1/image${Counter}.png" /></td>
+                                    {{/if}}
+                                </tr>
+    {{/each}}
+                    {{/if}}
+                {{/if}}
+                        {{if DataRowsCount==($index+1) }}
+                          ${setMargeCount()}
+                       {{/if}}
+            {{/each}}
+        {{/if}}
+    {{/each}}
+</script>
+
+
+<!--万达旅业Start-->
+<script id="ComplateTargetDetailTemplate_WDLY" type="text/x-jquery-tmpl">
+    {{each ObjValue}}
+        {{if Name=='HaveDetail'}}
+            {{each ObjValue}}
+               <tr>
+                   <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                   <td class="Td_Left" colspan="1" style="text-align: left !important;">${CompanyName}</td>
+                   <td class="Td_Left align_right num" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                   <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                   <td class="Td_TopAndBottom" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                   {{if Counter==0}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                   {{else}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                        <img src="../Images/images1/image${Counter}.png" /></td>
+                   {{/if}}
+               </tr>
+    {{/each}}
+        {{else Name=='SummaryData'}}
+             {{each ObjValue}}
+             <tr class="item1 Td_Merge" style="line-height: 25px!important; height: 35px!important; cursor: default!important">
+                 <td class="Td_Left" colspan="2" style="font-weight: bold; text-align: center !important;">旅业合计</td>
+                 <td class="Td_Left align_right num" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NDisplayRate}">${NDisplayRate}</td>
+                 <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                 <td class="Td_TopAndBottom" title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+
+                 <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+
+             </tr>
+    {{/each}}
+        {{else}}
+            ${SetDataRowsCount(ObjValue)}
+            {{each ObjValue}}
+                {{if Mark=='DetailHide'}}
+                     <tr class="item1 DetailShow" style="line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                         {{else}}
+                     <tr class="item1" style="line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                         {{/if}}
+                       {{if Value!=null}} 
+                            <td class="${VcounterRowID} Td_TopAndBottom" rowspan="${RowSpanCount}" style="width: 2%; text-align: center; font-size: 14px; background-color: white; word-wrap: break-word; letter-spacing: 5px">${setColumnAmount(Value)}  
+                            </td>
+                         {{/if}}
+                           <td colspan="${upateColumnAmount(2)}" class="Td_Left Td_Merge" style="font-weight: bold; text-align: center !important; width: 18%!important">${Name}</td>
+                         <td class="Td_Left Td_Merge">${(BMonthReportDetail.NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NActualAmmount).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NDifference).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_right Td_Merge" style="text-align: center !important; padding: 5px">${BMonthReportDetail.NDisplayRate}</td>
+                         <td class="Td_Left Td_Merge">${(BMonthReportDetail.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                         <td class="Td_TopAndBottom align_right Td_Merge">${BMonthReportDetail.NAccumulativeDisplayRate}</td>
+                         <td class="Td_Left Td_Merge" style="text-align: center !important; padding: 5px"></td>
+                     </tr>
+                         {{if Mark!="DetailDelete"}}
+                    {{if Mark=='DetailHide'}}
+                         {{each ObjValue}}
+                                <tr style="display: none">
+                                    <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                    <td class="Td_Left" style="text-align: left !important;">${CompanyName}</td>
+                                    <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                    <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                                    {{if Counter==0}}
+                                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                    {{else}}
+                                    <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                        <img src="../Images/images1/image${Counter}.png" /></td>
+                                    {{/if}}
+                                </tr>
+                         {{/each}}
+                   {{else}}
+                        {{each ObjValue}}
+                                <tr>
+                                    <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                    <td class="Td_Left" style="text-align: left !important;">${CompanyName}</td>
+                                    <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                    <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                                    {{if Counter==0}}
+                                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                    {{else}}
+                                    <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                        <img src="../Images/images1/image${Counter}.png" /></td>
+                                    {{/if}}
+                                </tr>
+    {{/each}}
+                    {{/if}}
+                {{/if}}
+                    {{if DataRowsCount==($index+1) }}
+                    ${setMargeCount()}
+                    {{/if}}
+            {{/each}}
+        {{/if}}
+    {{/each}}
+</script>
+
+<script id="ComplateTargetDetailTemplate_WDLY_KLL" type="text/x-jquery-tmpl">
+    {{each ObjValue}}
+        {{if Name=='HaveDetail'}}
+            {{each ObjValue}}
+               <tr>
+                   <td class="Td_Left" style="text-align: center!important">${$index+1}---</td>
+                   <td class="Td_Left" colspan="2" style="text-align: left !important;">${CompanyName}</td>
+                   <td class="Td_Left align_right num" title="${NPlanAmmount}">${(NPlanAmmount).thousandize(2)}</td>
+                   <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount).thousandize(2)}</td>
+                   <td class="Td_TopAndBottom" title="${NDifference}">${(NDifference).thousandize(2)}</td>
+                   <td class="Td_TopAndBottom" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                   <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize(2)}</td>
+                   <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize(2)}</td>
+                   <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize(2)}</td>
+                   <td class="Td_TopAndBottom" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                   {{if Counter==0}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                   {{else}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                        <img src="../Images/images1/image${Counter}.png" /></td>
+                   {{/if}}
+               </tr>
+    {{/each}}
+        {{else Name=='SummaryData'}}
+             {{each ObjValue}}
+             <tr class="item1 Td_Merge" style="line-height: 25px!important; height: 35px!important; cursor: default!important">
+                 <td class="Td_Left" colspan="2" style="font-weight: bold; text-align: center !important;">旅业合计</td>
+                 <td class="Td_Left align_right num" title="${NPlanAmmount}">${(NPlanAmmount).thousandize(2)}</td>
+                 <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount).thousandize(2)}</td>
+                 <td class="Td_TopAndBottom" title="${NDifference}">${(NDifference).thousandize(2)}</td>
+                 <td class="Td_TopAndBottom" title="${NDisplayRate}">${NDisplayRate}</td>
+                 <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize(2)}</td>
+                 <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize(2)}</td>
+                 <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize(2)}</td>
+                 <td class="Td_TopAndBottom" title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+
+                 <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+
+             </tr>
+    {{/each}}
+        {{else}}
+            ${SetDataRowsCount(ObjValue)}
+            {{each ObjValue}}
+                {{if Mark=='DetailHide'}}
+                     <tr class="item1 DetailShow" style="line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                         {{else}}
+                     <tr class="item1" style="line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                         {{/if}}
+                       {{if Value!=null}} 
+                            <td class="${VcounterRowID} Td_TopAndBottom" rowspan="${RowSpanCount}" style="width: 2%; text-align: center; font-size: 14px; background-color: white; word-wrap: break-word; letter-spacing: 5px">${setColumnAmount(Value)}  
+                            </td>
+                         {{/if}}
+                           <td colspan="${upateColumnAmount(2)}" class="Td_Left Td_Merge" style="font-weight: bold; text-align: center !important; width: 18%!important">${Name}</td>
+                         <td class="Td_Left Td_Merge" title="${BMonthReportDetail.NPlanAmmount}">${(BMonthReportDetail.NPlanAmmount).thousandize(2)}</td>
+                         <td class="Td_TopAndBottom Td_Merge" title="${BMonthReportDetail.NActualAmmount}">${(BMonthReportDetail.NActualAmmount).thousandize(2)}</td>
+                         <td class="Td_TopAndBottom Td_Merge" title="${BMonthReportDetail.NDifference}">${(BMonthReportDetail.NDifference).thousandize(2)}</td>
+                         <td class="Td_right Td_Merge" style="text-align: center !important; padding: 5px" title="${BMonthReportDetail.NDisplayRate}">${BMonthReportDetail.NDisplayRate}</td>
+                         <td class="Td_Left Td_Merge" title="${BMonthReportDetail.NAccumulativePlanAmmount}">${(BMonthReportDetail.NAccumulativePlanAmmount).thousandize(2)}</td>
+                         <td class="Td_TopAndBottom Td_Merge" title="${BMonthReportDetail.NAccumulativeActualAmmount}">${(BMonthReportDetail.NAccumulativeActualAmmount).thousandize(2)}</td>
+                         <td class="Td_TopAndBottom Td_Merge" title="${BMonthReportDetail.NAccumulativeDifference}">${(BMonthReportDetail.NAccumulativeDifference).thousandize(2)}</td>
+                         <td class="Td_TopAndBottom align_right Td_Merge" title="${BMonthReportDetail.NAccumulativeDisplayRate}">${BMonthReportDetail.NAccumulativeDisplayRate}</td>
+                         <td class="Td_Left Td_Merge" style="text-align: center !important; padding: 5px"></td>
+                     </tr>
+                         {{if Mark!="DetailDelete"}}
+                    {{if Mark=='DetailHide'}}
+                         {{each ObjValue}}
+                                <tr style="display: none">
+                                    <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                    <td class="Td_Left" style="text-align: left !important;">${CompanyName}</td>
+                                    <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize(2)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize(2)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize(2)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                    <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize(2)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize(2)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize(2)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                                    {{if Counter==0}}
+                                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                    {{else}}
+                                    <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                        <img src="../Images/images1/image${Counter}.png" /></td>
+                                    {{/if}}
+                                </tr>
+                         {{/each}}
+                   {{else}}
+                        {{each ObjValue}}
+                                <tr>
+                                    <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                    <td class="Td_Left" style="text-align: left !important;">${CompanyName}</td>
+                                    <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize(2)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize(2)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize(2)}</td>
+                                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                    <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize(2)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize(2)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize(2)}</td>
+                                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                                    {{if Counter==0}}
+                                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                    {{else}}
+                                    <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                        <img src="../Images/images1/image${Counter}.png" /></td>
+                                    {{/if}}
+                                </tr>
+    {{/each}}
+                    {{/if}}
+                {{/if}}
+                        {{if DataRowsCount==($index+1) }}
+                          ${setMargeCount()}
+                       {{/if}}
+            {{/each}}
+        {{/if}}
+    {{/each}}
+</script>
+
+<!--万达旅业End-->
+
+<!--查询界面  完成情况明细End--->
+
+<!-- TargetReported完成情况明细start--->
+<script id="TargetReportedComplateTargetDetailHeadTemplate" type="text/x-jquery-tmpl">
+    <li class="sd">
+        <a class="active2 " onclick="ComplateDetailLiaddCss(this);">${Name}</a>
+    </li>
+</script>
+<script id="TargetReportedComplateTargetDetailTemplate" type="text/x-jquery-tmpl">
+    {{each ObjValue}}
+        {{if Name=='HaveDetail'}}
+            {{each ObjValue}}
+                <tr>
+                    <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                    <td class="Td_Left" style="text-align: left !important;">
+                        <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','single')">${CompanyName}</a>
+                        <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                        <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                        {{if Counter==0}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                        {{else}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                        <img src="../Images/images1/image${Counter}.png" /></td>
+                    {{/if}}
+                </tr>
+    {{/each}}
+         {{else Name=='SummaryData'}}
+             {{each ObjValue}}
+                <tr class="item1 Td_Merge" style="line-height: 25px!important; height: 35px!important; cursor: default!important">
+                    <td class="Td_Left" colspan="2" style="font-weight: bold; text-align: center !important;">合计</td>
+                    <td class="Td_Left align_right num" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NDisplayRate}">${NDisplayRate}</td>
+                    <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                </tr>
+    {{/each}}
+        {{else}}
+             ${SetDataRowsCount(ObjValue)}
+            {{each ObjValue}}
+                {{if Mark=='DetailHide'}}
+                    <tr class="item1 DetailShow" style="background-color: #ececec; line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                        {{else}}
+                    <tr class="item1" style="background-color: #ececec; line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                        {{/if}}
+                {{if Value!=null}} 
+                    <td class="${VcounterRowID} Td_TopAndBottom" rowspan="${RowSpanCount}" style="width: 2%; text-align: center; font-size: 14px; background-color: white; word-wrap: break-word; letter-spacing: 5px">${setColumnAmount(Value)}  
+                    </td>
+                        {{/if}}
+                    <td colspan="${upateColumnAmount(2)}" class="Td_Left Td_Merge" style="font-weight: bold; text-align: center !important; width: 18%!important">${Name}</td>
+                        <td class="Td_Left Td_Merge">${(BMonthReportDetail.NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NActualAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NDifference).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_right Td_Merge" style="text-align: center !important; padding: 5px">${BMonthReportDetail.NDisplayRate}</td>
+                        <td class="Td_Left Td_Merge">${(BMonthReportDetail.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom align_right Td_Merge">${BMonthReportDetail.NAccumulativeDisplayRate}</td>
+                        <td class="Td_Left Td_Merge" style="text-align: center !important; padding: 5px"></td>
+                        <!-- {{if DataRowsCount==($index+1) }}
+                          ${setMargeCount()}
+                       {{/if}}-->
+                    </tr>
+                        {{if Mark!="DetailDelete"}}
+                    {{if Mark=='DetailHide'}}
+                        {{each ObjValue}}
+                            <tr style="display: none">
+                                <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                <td class="Td_Left" style="text-align: left !important;">{{if SystemID=='15ee2c18-5c7a-402e-92b8-277cff78e210'&&(TargetID=='a79a8351-89e0-4f1a-b05e-70ff12209bcb'||TargetID=='d45f147a-0bd5-4ca7-85b1-13a954fc38b2') }}
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','all')">${CompanyName}</a>
+                                    {{else}}
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','single')">${CompanyName}</a>
+                                    {{/if}}
+                                </td>
+                                <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                                {{if Counter==0}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                {{else}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                    <img src="../Images/images1/image${Counter}.png" /></td>
+                                {{/if}}
+                            </tr>
+                        {{/each}}                           
+                    {{else}}
+                        {{each ObjValue}}
+                            <tr>
+                                <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                <td class="Td_Left" style="text-align: left !important;">{{if SystemID=='15ee2c18-5c7a-402e-92b8-277cff78e210'&&(TargetID=='a79a8351-89e0-4f1a-b05e-70ff12209bcb'||TargetID=='d45f147a-0bd5-4ca7-85b1-13a954fc38b2') }}
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','all')">${CompanyName}</a>
+                                    {{else}}
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','single')">${CompanyName}</a>
+                                    {{/if}}
+                                </td>
+                                <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+                                {{if Counter==0}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                {{else}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                    <img src="../Images/images1/image${Counter}.png" /></td>
+                                {{/if}}
+                            </tr>
+    {{/each}}
+                    {{/if}}
+                {{/if}}
+                        {{if DataRowsCount==($index+1) }}
+                          ${setMargeCount()}
+                       {{/if}}
+        {{/each}}
+    {{/if}}
+    {{/each}}
+</script>
+
+<!--商管通用上报页面(公司分组需要显示在页面的用此模版)---->
+<script id="TargetReportedComplateTargetDetailTemplate_SGXT" type="text/x-jquery-tmpl">
+    {{each ObjValue}}
+        {{if Name=='HaveDetail'}}
+            {{each ObjValue}}
+                <tr>
+                    <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                    <td class="Td_Left" colspan="2" style="text-align: left !important;">{{if SystemID=='15ee2c18-5c7a-402e-92b8-277cff78e210'&&(TargetID=='a79a8351-89e0-4f1a-b05e-70ff12209bcb'||TargetID=='d45f147a-0bd5-4ca7-85b1-13a954fc38b2') }}
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','all')">${CompanyName}</a>
+                        {{else}}
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','single')">${CompanyName}</a>
+                        {{/if}}</td>
+                    <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                    <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                    {{if Counter==0}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                    {{else}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                        <img src="../Images/images1/image${Counter}.png" /></td>
+                    {{/if}}
+                </tr>
+    {{/each}}
+         {{else Name=='SummaryData'}}
+             {{each ObjValue}}
+                <tr class="item1 Td_Merge" style="line-height: 25px!important; height: 35px!important; cursor: default!important">
+                    <td class="Td_Left" colspan="3" style="font-weight: bold; text-align: center !important;">合计</td>
+                    <td class="Td_Left align_right num" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NDisplayRate}">${NDisplayRate}</td>
+                    <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                </tr>
+    {{/each}}
+        {{else}}
+             ${SetDataRowsCount(ObjValue)}
+            {{each ObjValue}}
+                {{if Mark=='DetailHide'}}
+                    <tr class="item1 DetailShow" style="background-color: #ececec; line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                        {{else}}
+                    <tr class="item1" style="background-color: #ececec; line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                        {{/if}}
+                {{if Value!=null}} 
+                    <td class="${VcounterRowID} Td_TopAndBottom" rowspan="${RowSpanCount}" style="width: 2%; text-align: center; font-size: 14px; background-color: white; word-wrap: break-word; letter-spacing: 5px">${setColumnAmount(Value)}  
+                    </td>
+                        {{/if}}
+                    <td colspan="${upateColumnAmount(3)}" class="Td_Left Td_Merge" style="font-weight: bold; text-align: center !important; width: 18%!important">${Name}</td>
+                        <td class="Td_Left Td_Merge">${(BMonthReportDetail.NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NActualAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NDifference).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_right Td_Merge" style="text-align: center !important; padding: 5px">${BMonthReportDetail.NDisplayRate}</td>
+                        <td class="Td_Left Td_Merge">${(BMonthReportDetail.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom align_right Td_Merge">${BMonthReportDetail.NAccumulativeDisplayRate}</td>
+                        <td class="Td_Left Td_Merge" style="text-align: center !important; padding: 5px"></td>
+                    </tr>
+                        {{if Mark!="DetailDelete"}}
+                    {{if Mark=='DetailHide'}}
+                        {{each ObjValue}}
+                            <tr style="display: none">
+                                <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                <td class="Td_Left" style="text-align: left !important;">{{if SystemID=='15ee2c18-5c7a-402e-92b8-277cff78e210'&&(TargetID=='a79a8351-89e0-4f1a-b05e-70ff12209bcb'||TargetID=='d45f147a-0bd5-4ca7-85b1-13a954fc38b2') }}
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','all')">${CompanyName}</a>
+                                    {{else}}
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','single')">${CompanyName}</a>
+                                    {{/if}}
+                                </td>
+                                <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                                {{if Counter==0}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                {{else}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                    <img src="../Images/images1/image${Counter}.png" /></td>
+                                {{/if}}
+                            </tr>
+                        {{/each}}                           
+                    {{else}}
+                        {{each ObjValue}}
+                            <tr>
+                                <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                <td class="Td_Left" style="text-align: left !important;">{{if SystemID=='15ee2c18-5c7a-402e-92b8-277cff78e210'&&(TargetID=='a79a8351-89e0-4f1a-b05e-70ff12209bcb'||TargetID=='d45f147a-0bd5-4ca7-85b1-13a954fc38b2') }}
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','all')">${CompanyName}</a>
+                                    {{else}}
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','single')">${CompanyName}</a>
+                                    {{/if}}
+                                </td>
+                                <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+                                {{if Counter==0}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                {{else}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                    <img src="../Images/images1/image${Counter}.png" /></td>
+                                {{/if}}
+                            </tr>
+    {{/each}}
+                    {{/if}}
+                {{/if}}
+                        {{if DataRowsCount==($index+1) }}
+                          ${setMargeCount()}
+                       {{/if}}
+        {{/each}}
+    {{/if}}
+    {{/each}}
+</script>
+
+
+<!--商管系统上报页面---->
+<!------------------------------------------------------------------------------------------------------------>
+<script id="TargetReportedComplateTargetDetailTemplate_SGXT_Difference" type="text/x-jquery-tmpl">
+    {{each ObjValue}}
+        {{if Name=='HaveDetail'}}
+            {{each ObjValue}}
+                <tr>
+                    <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                    <td class="Td_Left" colspan="2" style="text-align: left !important;">{{if SystemID=='15ee2c18-5c7a-402e-92b8-277cff78e210'&&(TargetID=='a79a8351-89e0-4f1a-b05e-70ff12209bcb'||TargetID=='d45f147a-0bd5-4ca7-85b1-13a954fc38b2') }}
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','all')">${CompanyName}</a>
+                        {{else}}
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','single')">${CompanyName}</a>
+                        {{/if}}</td>
+                    <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                    <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                    {{if Counter==0}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                    {{else}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                        <img src="../Images/images1/image${Counter}.png" /></td>
+                    {{/if}}
+                </tr>
+    {{/each}}
+         {{else Name=='SummaryData'}}
+             {{each ObjValue}}
+                <tr class="item1 Td_Merge" style="line-height: 25px!important; height: 35px!important; cursor: default!important">
+                    <td class="Td_Left" colspan="3" style="font-weight: bold; text-align: center !important;">合计</td>
+                    <td class="Td_Left align_right num" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NDifference}">${NDifference>0?0:(Math.abs(NDifference)).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NDisplayRate}">${NDisplayRate}</td>
+                    <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${NAccumulativeDifference>0?0:(Math.abs(NAccumulativeDifference)).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                </tr>
+    {{/each}}
+        {{else}}
+             ${SetDataRowsCount(ObjValue)}
+            {{each ObjValue}}
+                {{if Mark=='DetailHide'}}
+                    <tr class="item1 DetailShow" style="background-color: #ececec; line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                        {{else}}
+                    <tr class="item1" style="background-color: #ececec; line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                        {{/if}}
+                {{if Value!=null}} 
+                    <td class="${VcounterRowID} Td_TopAndBottom" rowspan="${RowSpanCount}" style="width: 2%; text-align: center; font-size: 14px; background-color: white; word-wrap: break-word; letter-spacing: 5px">${setColumnAmount(Value)}  
+                    </td>
+                        {{/if}}
+                    <td colspan="${upateColumnAmount(3)}" class="Td_Left Td_Merge" style="font-weight: bold; text-align: center !important; width: 18%!important">${Name}</td>
+                        <td class="Td_Left Td_Merge">${(BMonthReportDetail.NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NActualAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom Td_Merge">${BMonthReportDetail.NDifference >0?0:(Math.abs(BMonthReportDetail.NDifference)).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_right Td_Merge" style="text-align: center !important; padding: 5px">${BMonthReportDetail.NDisplayRate}</td>
+                        <td class="Td_Left Td_Merge">${(BMonthReportDetail.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom Td_Merge">${BMonthReportDetail.NAccumulativeDifference >0?0:(Math.abs(BMonthReportDetail.NAccumulativeDifference)).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom align_right Td_Merge">${BMonthReportDetail.NAccumulativeDisplayRate}</td>
+                        <td class="Td_Left Td_Merge" style="text-align: center !important; padding: 5px"></td>
+                    </tr>
+                        {{if Mark!="DetailDelete"}}
+                    {{if Mark=='DetailHide'}}
+                        {{each ObjValue}}
+                            <tr style="display: none">
+                                <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                <td class="Td_Left" style="text-align: left !important;">{{if SystemID=='15ee2c18-5c7a-402e-92b8-277cff78e210'&&(TargetID=='a79a8351-89e0-4f1a-b05e-70ff12209bcb'||TargetID=='d45f147a-0bd5-4ca7-85b1-13a954fc38b2') }}
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','all')">${CompanyName}</a>
+                                    {{else}}
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','single')">${CompanyName}</a>
+                                    {{/if}}
+                                </td>
+                                <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${NDifference>0?0:(Math.abs(NDifference)).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${NAccumulativeDifference>0?0:(Math.abs(NAccumulativeDifference)).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                                {{if Counter==0}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                {{else}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                    <img src="../Images/images1/image${Counter}.png" /></td>
+                                {{/if}}
+                            </tr>
+                        {{/each}}                           
+                    {{else}}
+                        {{each ObjValue}}
+                            <tr>
+                                <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                <td class="Td_Left" style="text-align: left !important;">{{if SystemID=='15ee2c18-5c7a-402e-92b8-277cff78e210'&&(TargetID=='a79a8351-89e0-4f1a-b05e-70ff12209bcb'||TargetID=='d45f147a-0bd5-4ca7-85b1-13a954fc38b2') }}
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','all')">${CompanyName}</a>
+                                    {{else}}
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','single')">${CompanyName}</a>
+                                    {{/if}}
+                                </td>
+                                <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${NDifference>0?0:(Math.abs(NDifference)).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${NAccumulativeDifference>0?0:(Math.abs(NAccumulativeDifference)).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+                                {{if Counter==0}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                {{else}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                    <img src="../Images/images1/image${Counter}.png" /></td>
+                                {{/if}}
+                            </tr>
+    {{/each}}
+                    {{/if}}
+                {{/if}}
+                        {{if DataRowsCount==($index+1) }}
+                          ${setMargeCount()}
+                       {{/if}}
+        {{/each}}
+    {{/if}}
+    {{/each}}
+</script>
+
+
+
+
+<script id="TargetReportedComplateTargetDetailTemplate_WG" type="text/x-jquery-tmpl">
+    {{each ObjValue}}
+        {{if Name=='HaveDetail'}}
+            {{each ObjValue}}
+                <tr>
+                    <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                    <td class="Td_Left" style="text-align: left !important;">
+
+                        <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','single')">${CompanyName}</a>
+                    </td>
+                    <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                    <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                    {{if Counter==0}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                    {{else}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                        <img src="../Images/images1/image${Counter}.png" /></td>
+                    {{/if}}
+                </tr>
+    {{/each}}
+         {{else Name=='SummaryData'}}
+             {{each ObjValue}}
+                <tr class="item1 Td_Merge" style="line-height: 25px!important; height: 35px!important; cursor: default!important">
+                    <td class="Td_Left" colspan="2" style="font-weight: bold; text-align: center !important;">合计</td>
+                    <td class="Td_Left align_right num" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NDisplayRate}">${NDisplayRate}</td>
+                    <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                </tr>
+    {{/each}}
+        {{else}}
+             ${SetDataRowsCount(ObjValue)}
+            {{each ObjValue}}
+                {{if Mark=='DetailHide'}}
+                    <tr class="item1 DetailShow" style="background-color: #ececec; line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                        {{else}}
+                    <tr class="item1" style="background-color: #ececec; line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                        {{/if}}
+                {{if Value!=null}} 
+                    <td class="${VcounterRowID} Td_TopAndBottom" rowspan="${RowSpanCount}" style="width: 2%; text-align: center; font-size: 14px; background-color: white; word-wrap: break-word; letter-spacing: 5px">${setColumnAmount(Value)}  
+                    </td>
+                        {{/if}}
+                    <td colspan="${upateColumnAmount(2)}" class="Td_Left Td_Merge" style="font-weight: bold; text-align: center !important; width: 18%!important">${Name}</td>
+                        <td class="Td_Left Td_Merge">${(BMonthReportDetail.NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NActualAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NDifference).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_right Td_Merge" style="text-align: center !important; padding: 5px">${BMonthReportDetail.NDisplayRate}</td>
+                        <td class="Td_Left Td_Merge">${(BMonthReportDetail.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom align_right Td_Merge">${BMonthReportDetail.NAccumulativeDisplayRate}</td>
+                        <td class="Td_Left Td_Merge" style="text-align: center !important; padding: 5px"></td>
+                    </tr>
+                        {{if Mark!="DetailDelete"}}
+                    {{if Mark=='DetailHide'}}
+                        {{each ObjValue}}
+                            <tr style="display: none">
+                                <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                <td class="Td_Left" style="text-align: left !important;">
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','OnlyPlan')">${CompanyName}</a>
+                                </td>
+                                <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                                {{if Counter==0}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                {{else}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                    <img src="../Images/images1/image${Counter}.png" /></td>
+                                {{/if}}
+                            </tr>
+                        {{/each}}                           
+                    {{else}}
+                        {{each ObjValue}}
+                            <tr>
+                                <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                <td class="Td_Left" style="text-align: left !important;">
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','OnlyPlan')">${CompanyName}</a>
+                                </td>
+                                <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+                                {{if Counter==0}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                {{else}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                    <img src="../Images/images1/image${Counter}.png" /></td>
+                                {{/if}}
+                            </tr>
+    {{/each}}
+                    {{/if}}
+                {{/if}}
+                        {{if DataRowsCount==($index+1) }}
+                          ${setMargeCount()}
+                       {{/if}}
+        {{/each}}
+    {{/if}}
+    {{/each}}
+</script>
+
+<!--万达旅业 上报页面 Start-->
+<script id="TargetReportedComplateTargetDetailTemplate_WDLY" type="text/x-jquery-tmpl">
+    {{each ObjValue}}
+        {{if Name=='HaveDetail'}}
+            {{each ObjValue}}
+                <tr>
+                    <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                    <td class="Td_Left" colspan="1" style="text-align: left !important;"><a href="#" onclick="EditMonthReportDetail('${ID}')">${CompanyName}</a></td>
+                    <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                    <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                    {{if Counter==0}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                    {{else}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                        <img src="../Images/images1/image${Counter}.png" /></td>
+                    {{/if}}
+                </tr>
+    {{/each}}
+         {{else Name=='SummaryData'}}
+             {{each ObjValue}}
+                <tr class="item1 Td_Merge" style="line-height: 25px!important; height: 35px!important; cursor: default!important">
+                    <td class="Td_Left" colspan="2" style="font-weight: bold; text-align: center !important;">旅业合计</td>
+                    <td class="Td_Left align_right num" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NDisplayRate}">${NDisplayRate}</td>
+                    <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                </tr>
+    {{/each}}
+        {{else}}
+             ${SetDataRowsCount(ObjValue)}
+            {{each ObjValue}}
+                {{if Mark=='DetailHide'}}
+                    <tr class="item1 DetailShow" style="background-color: #ececec; line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                        {{else}}
+                    <tr class="item1" style="background-color: #ececec; line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                        {{/if}}
+                {{if Value!=null}} 
+                    <td class="${VcounterRowID} Td_TopAndBottom" rowspan="${RowSpanCount}" style="width: 2%; text-align: center; font-size: 14px; background-color: white; word-wrap: break-word; letter-spacing: 5px">${setColumnAmount(Value)}  
+                    </td>
+                        {{/if}}
+                    <td colspan="${upateColumnAmount(2)}" class="Td_Left Td_Merge" style="font-weight: bold; text-align: center !important; width: 18%!important">${Name}</td>
+                        <td class="Td_Left Td_Merge">${(BMonthReportDetail.NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NActualAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NDifference).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_right Td_Merge" style="text-align: center !important; padding: 5px">${BMonthReportDetail.NDisplayRate}</td>
+                        <td class="Td_Left Td_Merge">${(BMonthReportDetail.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom Td_Merge">${(BMonthReportDetail.NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom align_right Td_Merge">${BMonthReportDetail.NAccumulativeDisplayRate}</td>
+                        <td class="Td_Left Td_Merge" style="text-align: center !important; padding: 5px"></td>
+                        <!--{{if DataRowsCount==($index+1) }}
+                          ${setMargeCount()}
+                       {{/if}}-->
+                    </tr>
+                        {{if Mark!="DetailDelete"}}
+                    {{if Mark=='DetailHide'}}
+                        {{each ObjValue}}
+                            <tr style="display: none">
+                                <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                <td class="Td_Left" style="text-align: left !important;">
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','single')">${CompanyName}</a>
+                                </td>
+                                <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                                {{if Counter==0}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                {{else}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                    <img src="../Images/images1/image${Counter}.png" /></td>
+                                {{/if}}
+                            </tr>
+                        {{/each}}                           
+                    {{else}}
+                        {{each ObjValue}}
+                            <tr>
+                                <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                <td class="Td_Left" style="text-align: left !important;">
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','single')">${CompanyName}</a>
+                                </td>
+                                <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                                {{if Counter==0}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                {{else}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                    <img src="../Images/images1/image${Counter}.png" /></td>
+                                {{/if}}
+                            </tr>
+    {{/each}}
+                    {{/if}}
+                {{/if}}
+                        {{if DataRowsCount==($index+1) }}
+                          ${setMargeCount()}
+                       {{/if}}
+        {{/each}}
+    {{/if}}
+    {{/each}}
+</script>
+
+<script id="TargetReportedComplateTargetDetailTemplate_WDLY_KLL" type="text/x-jquery-tmpl">
+    {{each ObjValue}}
+        {{if Name=='HaveDetail'}}
+            {{each ObjValue}}
+                <tr>
+                    <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                    <td class="Td_Left" colspan="2" style="text-align: left !important;"><a href="#" onclick="EditMonthReportDetail('${ID}')">${CompanyName}</a></td>
+                    <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize()}</td>
+                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize()}</td>
+                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize()}</td>
+                    <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                    <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize()}</td>
+                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize()}</td>
+                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize()}</td>
+                    <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                    {{if Counter==0}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                    {{else}}
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                        <img src="../Images/images1/image${Counter}.png" /></td>
+                    {{/if}}
+                </tr>
+    {{/each}}
+         {{else Name=='SummaryData'}}
+             {{each ObjValue}}
+                <tr class="item1 Td_Merge" style="line-height: 25px!important; height: 35px!important; cursor: default!important">
+                    <td class="Td_Left" colspan="2" style="font-weight: bold; text-align: center !important;">旅业合计</td>
+                    <td class="Td_Left align_right num" title="${NPlanAmmount}">${(NPlanAmmount).thousandize()}</td>
+                    <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount).thousandize()}</td>
+                    <td class="Td_TopAndBottom" title="${NDifference}">${(NDifference).thousandize()}</td>
+                    <td class="Td_TopAndBottom" title="${NDisplayRate}">${NDisplayRate}</td>
+                    <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize()}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize()}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize()}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                </tr>
+    {{/each}}
+        {{else}}
+             ${SetDataRowsCount(ObjValue)}
+            {{each ObjValue}}
+                {{if Mark=='DetailHide'}}
+                    <tr class="item1 DetailShow" style="background-color: #ececec; line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                        {{else}}
+                    <tr class="item1" style="background-color: #ececec; line-height: 25px!important;" onclick="ClickCounter(this,'${VcounterRowID}')">
+                        {{/if}}
+                {{if Value!=null}} 
+                    <td class="${VcounterRowID} Td_TopAndBottom" rowspan="${RowSpanCount}" style="width: 2%; text-align: center; font-size: 14px; background-color: white; word-wrap: break-word; letter-spacing: 5px">${setColumnAmount(Value)}  
+                    </td>
+                        {{/if}}
+                        <td colspan="${upateColumnAmount(2)}" class="Td_Left Td_Merge" style="font-weight: bold; text-align: center !important; width: 18%!important">${Name}</td>
+                        <td class="Td_Left Td_Merge" title="${BMonthReportDetail.NPlanAmmount}">${(BMonthReportDetail.NPlanAmmount).thousandize()}</td>
+                        <td class="Td_TopAndBottom Td_Merge" title="${BMonthReportDetail.NActualAmmount}">${(BMonthReportDetail.NActualAmmount).thousandize()}</td>
+                        <td class="Td_TopAndBottom Td_Merge" title="${BMonthReportDetail.NDifference}">${(BMonthReportDetail.NDifference).thousandize()}</td>
+                        <td class="Td_right Td_Merge" style="text-align: center !important; padding: 5px" title="${BMonthReportDetail.NDisplayRate}">${BMonthReportDetail.NDisplayRate}</td>
+                        <td class="Td_Left Td_Merge" title="${BMonthReportDetail.NAccumulativePlanAmmount}">${(BMonthReportDetail.NAccumulativePlanAmmount).thousandize()}</td>
+                        <td class="Td_TopAndBottom Td_Merge" title="${BMonthReportDetail.NAccumulativeActualAmmount}">${(BMonthReportDetail.NAccumulativeActualAmmount).thousandize()}</td>
+                        <td class="Td_TopAndBottom Td_Merge" title="${BMonthReportDetail.NAccumulativeDifference}">${(BMonthReportDetail.NAccumulativeDifference).thousandize()}</td>
+                        <td class="Td_TopAndBottom align_right Td_Merge" title="${BMonthReportDetail.NAccumulativeDisplayRate}">${BMonthReportDetail.NAccumulativeDisplayRate}</td>
+                        <td class="Td_Left Td_Merge" style="text-align: center !important; padding: 5px"></td>
+                    </tr>
+                        {{if Mark!="DetailDelete"}}
+                    {{if Mark=='DetailHide'}}
+                        {{each ObjValue}}
+                            <tr style="display: none">
+                                <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                <td class="Td_Left" style="text-align: left !important;">
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','single')">${CompanyName}</a>
+                                </td>
+                                <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize()}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize()}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize()}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize(0)}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize()}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize()}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+                                {{if Counter==0}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                {{else}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                    <img src="../Images/images1/image${Counter}.png" /></td>
+                                {{/if}}
+                            </tr>
+                        {{/each}}                           
+                    {{else}}
+                        {{each ObjValue}}
+                            <tr>
+                                <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+                                <td class="Td_Left" style="text-align: left !important;">
+                                    <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','single')">${CompanyName}</a>
+                                </td>
+                                <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize()}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize()}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize()}</td>
+                                <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDisplayRate}">${NPlanAmmount==0&&NActualAmmount==0?'--':NDisplayRate}</td>
+                                <td class="Td_Left DetailCss" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount).thousandize()}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize()}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize()}</td>
+                                <td class="Td_TopAndBottom DetailCss" title="${NAccumulativeDisplayRate}">${NAccumulativePlanAmmount==0&&NAccumulativeActualAmmount==0?'--':NAccumulativeDisplayRate}</td>
+                                {{if Counter==0}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                                {{else}}
+                                <td class="Td_Left" title="${Counter}" style="text-align: center !important">
+                                    <img src="../Images/images1/image${Counter}.png" /></td>
+                                {{/if}}
+                            </tr>
+    {{/each}}
+                    {{/if}}
+                {{/if}}
+                        {{if DataRowsCount==($index+1) }}
+                          ${setMargeCount()}
+                       {{/if}}
+        {{/each}}
+    {{/if}}
+    {{/each}}
+</script>
+<!--万达旅业End-->
+<!--TargetReported完成情况明细End--->
+
+
+
+
+
+<script id="MonthlyReportDetailSearhTemplate" type="text/x-jquery-tmpl">
+    <div id='${ColumnName}' style='height: 25px'>
+        <span style='margin-left: 20px; float: left'>${CompanyPropertyName}:&nbsp;&nbsp; </span>
+        {{if listCP.length<=5}}
+            
+            {{each listCP}}
+                <input type='checkbox' onclick='ClickCompanyProperty()' style="vertical-align: text-bottom; margin-bottom: 2px;" checked="checked" class='SearchCheckBox' value='${ItemCompanyPropertyName}' />
+        <span>${ItemCompanyPropertyValue}</span>
+        {{/each}}
+              
+        {{else}}
+                <input type="text" id="txt${ColumnName}" style="width: 216px;" />
+        <input id="hid_${ColumnName}" type="hidden" value="" />
+        <select id="select${ColumnName}" style="width: 220px; height: 100px;">
+            {{each listCP}}
+                        <option value="${ItemCompanyPropertyName}">${ItemCompanyPropertyValue}</option>
+            {{/each}}
+        </select>
+        {{/if}}
+           
+    </div>
+</script>
+<!--TargetReported完成情况明细编辑 Start--->
+<script type="text/x-jquery-tmpl" id="MonthReportDetil_info_tmpl">
+    <input type="hidden" id="hide_info_id" value="${ID}" />
+    <table style="width: 600px;" class="tab02">
+        <tr>
+            <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">公&nbsp;&nbsp;&nbsp;&nbsp;司</th>
+            <td style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">${CompanyName}
+            </td>
+        </tr>
+
+        <tr>
+            <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">计划</th>
+            <td style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">${NPlanAmmount}
+            </td>
+        </tr>
+        <tr>
+            <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">实际</th>
+            <td style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                <input type="text" id="MonthReportNActualAmmount" style="width: 90%" value="${NActualAmmount}" />
+            </td>
+        </tr>
+    </table>
+    <div id="ssss" class="pop_operate">
+        <input type="button" class="pop_btn btn_gray" value="取消" onclick="art.dialog({ id: 'divMonthReportDetail' }).close();" />
+        <input type="button" class="pop_btn btn_blue" value="确定" onclick=" SaveMonthReportDetail();" />
+    </div>
+</script>
+<script type="text/x-jquery-tmpl" id="MonthReportDetil_info_tmpl_SG">
+    <input type="hidden" id="Hidden1" value="${ID}" />
+    <table style="width: 600px;" class="tab02">
+        <tr>
+            <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">公&nbsp;&nbsp;&nbsp;&nbsp;司</th>
+            <td style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">${CompanyName}
+            </td>
+        </tr>
+        <tr>
+            <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">本月应收</th>
+            <td style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                <input type="text" id="SGMonthReportNPlanAmmount" style="width: 90%" value="${NPlanAmmount}" />
+            </td>
+        </tr>
+        <tr>
+            <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">本月实收</th>
+            <td style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                <input type="text" id="SGMonthReportNActualAmmount" style="width: 90%" value="${NActualAmmount}" />
+            </td>
+        </tr>
+        <tr>
+            <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">累计应收</th>
+            <td style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                <input type="text" id="SGMonthReportNAccumulativePlanAmmount" style="width: 90%" value="${NAccumulativePlanAmmount}" />
+            </td>
+        </tr>
+        <tr>
+            <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">累计实收</th>
+            <td style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                <input type="text" id="SGMonthReportNAccumulativeActualAmmount" style="width: 90%" value="${NAccumulativeActualAmmount}" />
+            </td>
+        </tr>
+    </table>
+    <div id="Div1" class="pop_operate">
+        <input type="button" class="pop_btn btn_gray" value="取消" onclick="art.dialog({ id: 'divMonthReportDetail' }).close();" />
+        <input type="button" class="pop_btn btn_blue" value="确定" onclick=" SaveMonthReportDetail();" />
+    </div>
+</script>
+<script type="text/x-jquery-tmpl" id="MonthReportDetil_info_tmpl_WG">
+    <input type="hidden" id="Hidden2" value="${ID}" />
+    <table style="width: 600px;" class="tab02">
+        <tr>
+            <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">公&nbsp;&nbsp;&nbsp;&nbsp;司</th>
+            <td style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">${CompanyName}
+            </td>
+        </tr>
+        <tr>
+            <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">本月应收</th>
+            <td style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">${NPlanAmmount}
+            </td>
+        </tr>
+        <tr>
+            <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">本月实收</th>
+            <td style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                <input type="text" id="WGMonthReportNActualAmmount" style="width: 90%" value="${NActualAmmount}" />
+            </td>
+        </tr>
+        <tr>
+            <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">累计应收</th>
+            <td style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">${NAccumulativePlanAmmount}
+            </td>
+        </tr>
+        <tr>
+            <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">累计实收</th>
+            <td style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                <input type="text" id="WGMonthReportNAccumulativeActualAmmount" style="width: 90%" value="${NAccumulativeActualAmmount}" />
+            </td>
+        </tr>
+    </table>
+    <div id="Div2" class="pop_operate">
+        <input type="button" class="pop_btn btn_gray" value="取消" onclick="art.dialog({ id: 'divMonthReportDetail' }).close();" />
+        <input type="button" class="pop_btn btn_blue" value="确定" onclick=" SaveMonthReportDetail();" />
+    </div>
+</script>
+<!--TargetReported完成情况明细编辑 End--->
+
+
+
+
+
+
+
+
+

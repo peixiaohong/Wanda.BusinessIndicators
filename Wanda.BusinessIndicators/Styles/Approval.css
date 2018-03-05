@@ -1,0 +1,300 @@
+﻿ul.approval
+{
+    list-style-type: none;
+}
+
+    ul.approval li
+    {
+        display: inline-block;
+        margin: 2px 0px 0 0;
+        background: #fff;
+    }
+
+        ul.approval li.arrow
+        {
+            width: 28px;
+            background: url(../images/arrowRight.png) center center;
+            margin: 2px 0 0 0;
+            zoom: 1;
+            background-repeat: no-repeat;
+        }
+
+        ul.approval li.current
+        {
+            background: #fff;
+            color: #014594;
+        }
+
+            ul.approval li.current span
+            {
+                background: url(../images/confrim.png) right no-repeat;
+                padding-right: 20px;
+            }
+
+        ul.approval li.passed
+        {
+            background-image: url(/images/flowpassed.png);
+            background-repeat: repeat-x;
+            color: #000;
+        }
+
+        ul.approval li.end
+        {
+            background-image: url(/images/icon/icon21.png);
+            background-repeat: no-repeat;
+            background-position-y: center;
+        }
+
+
+
+.launchProcess_cont
+{
+    margin-top: 15px;
+}
+
+.propose_cont_title li
+{
+    float: left;
+    margin: 0;
+}
+
+    .propose_cont_title li a
+    {
+        background: url(/images/report/2222.png) left no-repeat;
+        height: 27px;
+        line-height: 27px;
+        display: block;
+        color: #014594;
+        margin-bottom: -1px;
+    }
+
+        .propose_cont_title li a span
+        {
+            height: 24px;
+            margin-left: 10px;
+            line-height: 24px;
+            display: block;
+            padding: 0 0px 0 15px;
+            width: 210px;
+            font-weight: bold;
+        }
+
+.propose_content
+{
+    border: 1px solid #ccc;
+    clear: left;
+}
+
+
+.list ul, .list li, ul li
+{
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    font-family: 微软雅黑, Arial, Helvetica, sans-serif;
+}
+
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+
+/* 2014-05-06*/
+
+.content2
+{
+    margin-top: 5px;
+}
+
+
+.method_div .method_head
+{
+    font-weight: bold;
+    font-size: 16px;
+    padding-left: 20px;
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+    border: 0;
+    border-bottom: 1px dotted #808080;
+}
+
+.method_div
+{
+    margin: 10px 20px 15px 20px;
+}
+
+
+/*tab_*/
+.tab_1, .tab_2, .tab_3, .tab_4, .tab_2in
+{
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+    .tab_1 caption, .tab_2 caption, .tab_4 caption
+    {
+        height: 25px;
+        line-height: 25px;
+        font-weight: bold;
+        border: 1px solid #b3cde0;
+        border-bottom: 0;
+        background: url(../../images/thead4.png) repeat-x;
+    }
+
+        .tab_2 caption span
+        {
+            background: url(../../images/icon07.png) 5px 3px no-repeat;
+            padding-left: 18px;
+        }
+
+        .tab_2 caption span, .tab_4 caption span
+        {
+            background: url(../../images/icon07.png) 5px 3px no-repeat;
+            padding-left: 18px;
+        }
+
+    .tab_1 td, .tab_1 th, .tab_2 td, .tab_2 th, .tab_3 td, .tab_3 th, .tab_4 td, .tab_4 th
+    {
+        border: 1px solid #b3cde0;
+        padding: 1px 5px;
+        height: 23px;
+        line-height: 23px;
+        white-space: nowrap;
+    }
+
+    .tab_1 th, .tab_2 th, .tab_3 th, .tab_4 th
+    {
+        background: #f9fafb repeat-x;
+    }
+
+    .tab_1 th
+    {
+        text-align: right;
+        width: 250px;
+    }
+
+    .tab_2.Opdiv
+    {
+        background-image: none;
+        padding-right: 20px;
+    }
+
+    .tab_2 caption
+    {
+        text-align: left;
+    }
+
+    .tab_2 th
+    {
+        width: 15%;
+    }
+
+    .tab_2 input[type=text], .tab_2 select
+    {
+        width: 150px;
+        font-size: 12px;
+        line-height: 20px;
+        height: 20px;
+    }
+
+    .tab_2 select
+    {
+        padding: 2px;
+        height: 22px;
+        line-height: 22px;
+    }
+
+    .tab_2 .th_center
+    {
+        background: #f9fafb;
+    }
+
+    .tab_2in td, .tab_2in th
+    {
+        border-bottom: 1px dotted #b3cde0;
+        padding: 1px 5px;
+        height: 23px;
+        line-height: 23px;
+        background: #fff;
+    }
+
+table.tab_5 tr.tab_5_row_alt th, table.tab_2 tr.tab_2_row_alt td
+{
+    background: url("./../images/tab_bg2.png") bottom repeat-x;
+    border: 1px solid #ccc;
+    font-weight: bold;
+    text-align: center;
+}
+
+.FormTable
+{
+    width: 100%;
+    line-height: 11px;
+    border: solid 0px #CCC;
+    margin-left: 0px;
+}
+
+    .FormTable .fcolortr td
+    {
+        line-height: 11px;
+        border: solid 0px #CCC;
+        margin-left: 0px;
+        background-color: #a8a8a8;
+        color: #000;
+    }
+
+    .FormTable th
+    {
+        background-position: top top;
+        text-align: left;
+        font-weight: bold;
+        padding: 2px 0px;
+        height: 20px;
+    }
+
+    .FormTable td ul li
+    {
+        line-height: 35px;
+        height: 35px;
+        display: block;
+        float: left;
+    }
+
+td.red
+{
+    color: red;
+}
+
+span.red
+{
+    padding: 0px 5px;
+    color: red;
+}
+
+
+
+input.issuebtn
+{
+    display: inline-block;
+    text-decoration: none;
+    background: url(../../images/btn_bg.png) no-repeat  ;
+    font-weight:bold;
+    width: 84px;
+    height: 27px;
+    line-height: 27px;
+    text-align: center;
+    border: 0;
+    color:black;
+    margin-top:0px;
+    cursor:pointer
+}
+
+    input.issuebtn:hover
+    {
+        background: url(../../images/btn_bg.png) no-repeat;
+        text-decoration: none;
+        color:black
+    }

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Roots>
+  <!--商管-->
+
+  <ComplateTargetDetail Name="完成情况明细">
+    <Target TargetName="租金收缴" TargetValue="A79A8351-89E0-4F1A-B05E-70FF12209BCB">
+      <Counter Title="完成部分" Senquence="1" DetailMonthlyExpression="GetValue(&quot;租金收缴.NPlanAmmount&quot;)&lt;=GetValue(&quot;租金收缴.NActualAmmount&quot;)" 
+               DetailExpression="GetValue(&quot;租金收缴.NAccumulativePlanAmmount&quot;)&lt;=GetValue(&quot;租金收缴.NAccumulativeActualAmmount&quot;)" />
+      <Counter Title="未完成部分" Senquence="2" DetailMonthlyExpression="GetValue(&quot;租金收缴.NPlanAmmount&quot;)&gt;GetValue(&quot;租金收缴.NActualAmmount&quot;)"
+               DetailExpression="GetValue(&quot;租金收缴.NAccumulativePlanAmmount&quot;)&gt;GetValue(&quot;租金收缴.NAccumulativeActualAmmount&quot;)"/>
+      <Counter Title="小计" Senquence="3" Expression="1&lt;&gt;1" />
+    </Target>
+    <Target TargetName="大商业物业费收缴" TargetValue="D45F147A-0BD5-4CA7-85B1-13A954FC38B2">
+      <Counter Title="完成部分" Senquence="1" DetailMonthlyExpression="GetValue(&quot;租金收缴.NPlanAmmount&quot;)&lt;=GetValue(&quot;租金收缴.NActualAmmount&quot;)"
+               DetailExpression="GetValue(&quot;租金收缴.NAccumulativePlanAmmount&quot;)&lt;=GetValue(&quot;租金收缴.NAccumulativeActualAmmount&quot;)" />
+      <Counter Title="未完成部分" Senquence="2" DetailMonthlyExpression="GetValue(&quot;租金收缴.NPlanAmmount&quot;)&gt;GetValue(&quot;租金收缴.NActualAmmount&quot;)"
+               DetailExpression="GetValue(&quot;租金收缴.NAccumulativePlanAmmount&quot;)&gt;GetValue(&quot;租金收缴.NAccumulativeActualAmmount&quot;)"/>
+      <Counter Title="小计" Senquence="3" Expression="1&lt;&gt;1" />
+    </Target>
+    <Target TargetName="净利润" TargetValue="B5F6C780-AE68-4124-8B85-77E6C0B058D3">
+      <Counter Title="完成部分" Senquence="1" DetailMonthlyExpression="GetValue(&quot;租金收缴.NPlanAmmount&quot;)&lt;=GetValue(&quot;租金收缴.NActualAmmount&quot;)"
+               DetailExpression="GetValue(&quot;租金收缴.NAccumulativePlanAmmount&quot;)&lt;=GetValue(&quot;租金收缴.NAccumulativeActualAmmount&quot;)" />
+      <Counter Title="未完成部分" Senquence="2" DetailMonthlyExpression="GetValue(&quot;租金收缴.NPlanAmmount&quot;)&gt;GetValue(&quot;租金收缴.NActualAmmount&quot;)"
+               DetailExpression="GetValue(&quot;租金收缴.NAccumulativePlanAmmount&quot;)&gt;GetValue(&quot;租金收缴.NAccumulativeActualAmmount&quot;)"/>
+      <Counter Title="小计" Senquence="3" Expression="1&lt;&gt;1" />
+    </Target>
+  </ComplateTargetDetail>
+  
+  <ComplateTargetDetail  Name="完成情况明细">
+    <Target  TargetName="租金收缴"  TargetValue="A79A8351-89E0-4F1A-B05E-70FF12209BCB">
+      <Counter Title="完成部分"   Senquence="1" Expression="GetValue(&quot;OPlanAmmount&quot;)&gt;=GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="未完成部分" Senquence="2" Expression="GetValue(&quot;OPlanAmmount&quot;)&lt;GetValue(&quot;OActualAmmount&quot;)" ></Counter>
+      <Counter Title="小计" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Target>
+    <Target TargetName="大商业物业费收缴" TargetValue="D45F147A-0BD5-4CA7-85B1-13A954FC38B2">
+      <Counter Title="完成部分"   Senquence="1" Expression="GetValue(&quot;OPlanAmmount&quot;)&lt;=GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="未完成部分" Senquence="2" Expression="GetValue(&quot;OPlanAmmount&quot;)&gt;GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="小计" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Target>
+      <Target TargetName="净利润" TargetValue="B5F6C780-AE68-4124-8B85-77E6C0B058D3">
+        <Counter Title="完成部分"   Senquence="1" Expression="GetValue(&quot;OPlanAmmount&quot;)&lt;=GetValue(&quot;OActualAmmount&quot;)"></Counter>
+        <Counter Title="未完成部分" Senquence="2" Expression="GetValue(&quot;OPlanAmmount&quot;)&gt;GetValue(&quot;OActualAmmount&quot;)"></Counter>
+        <Counter Title="小计" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Target>
+  </ComplateTargetDetail>
+<!--酒店--><!--
+  <ComplateTargetDetail  Name="完成情况明细">
+    <Target  TargetName="总收入"  TargetValue="1738811D-0CFC-47AE-AB93-214024B0D42C">
+      <Counter Title="完成部分"   Senquence="1" Expression="GetValue(&quot;OPlanAmmount&quot;)&gt;=GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="未完成部分" Senquence="2" Expression="GetValue(&quot;OPlanAmmount&quot;)&lt;GetValue(&quot;OActualAmmount&quot;)" ></Counter>
+      <Counter Title="小计" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Target>
+    <Target TargetName="业主利润" TargetValue="5AB367E5-5994-447C-8AFB-0D7C23C93DD5">
+      <Counter Title="完成部分"   Senquence="1" Expression="GetValue(&quot;OPlanAmmount&quot;)&lt;=GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="未完成部分" Senquence="2" Expression="GetValue(&quot;OPlanAmmount&quot;)&gt;GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="小计" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Target>
+  </ComplateTargetDetail>
+--><!--院线--><!--
+  <ComplateTargetDetail  Name="完成情况明细">
+    <Target  TargetName="业主利润"  TargetValue="5AB367E5-5994-447C-8AFB-0D7C23C93DD5">
+      <Counter Title="完成部分"   Senquence="1" Expression="GetValue(&quot;OPlanAmmount&quot;)&gt;=GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="未完成部分" Senquence="2" Expression="GetValue(&quot;OPlanAmmount&quot;)&lt;GetValue(&quot;OActualAmmount&quot;)" ></Counter>
+      <Counter Title="小计" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Target>
+    <Target TargetName="总收入" TargetValue="1738811D-0CFC-47AE-AB93-214024B0D42C">
+      <Counter Title="完成部分"   Senquence="1" Expression="GetValue(&quot;OPlanAmmount&quot;)&lt;=GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="未完成部分" Senquence="2" Expression="GetValue(&quot;OPlanAmmount&quot;)&gt;GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="小计" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Target>
+  </ComplateTargetDetail>
+--><!--大歌星--><!--
+  <ComplateTargetDetail  Name="完成情况明细">
+    <Target TargetName="净利润" TargetValue="1E63D792-F88E-4B8F-AE7D-2674C18C7084">
+      <Counter Title="完成部分"   Senquence="1" Expression="GetValue(&quot;OPlanAmmount&quot;)&gt;=GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="未完成部分" Senquence="2" Expression="GetValue(&quot;OPlanAmmount&quot;)&lt;GetValue(&quot;OActualAmmount&quot;)" ></Counter>
+      <Counter Title="小计" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Target>
+    <Target TargetName="总收入" TargetValue="D989987D-A74F-4F2D-BFA4-00B2E40CBDC4">
+      <Counter Title="完成部分"   Senquence="1" Expression="GetValue(&quot;OPlanAmmount&quot;)&lt;=GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="未完成部分" Senquence="2" Expression="GetValue(&quot;OPlanAmmount&quot;)&gt;GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="小计" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Target>
+  </ComplateTargetDetail>
+  --><!--万达--><!--
+  <ComplateTargetDetail  Name="完成情况明细">
+    <Target  TargetName="净利润"  TargetValue="1E63D792-F88E-4B8F-AE7D-2674C18C7084>
+      <Counter Title="完成部分"   Senquence="1" Expression="GetValue(&quot;OPlanAmmount&quot;)&gt;=GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="未完成部分" Senquence="2" Expression="GetValue(&quot;OPlanAmmount&quot;)&lt;GetValue(&quot;OActualAmmount&quot;)" ></Counter>
+      <Counter Title="小计" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Target>
+    <Target TargetName="总收入" TargetValue="D989987D-A74F-4F2D-BFA4-00B2E40CBDC4">
+      <Counter Title="完成部分"   Senquence="1" Expression="GetValue(&quot;OPlanAmmount&quot;)&lt;=GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="未完成部分" Senquence="2" Expression="GetValue(&quot;OPlanAmmount&quot;)&gt;GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="小计" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Target>
+  </ComplateTargetDetail>
+  --><!--百货--><!--
+  <ComplateTargetDetail  Name="完成情况明细">
+    <Target  TargetName="净收入"  TargetValue="98625DE5-F17F-47F4-B419-7EE739FD4D69">
+      <Counter Title="完成部分"   Senquence="1" Expression="GetValue(&quot;OPlanAmmount&quot;)&gt;=GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="未完成部分" Senquence="2" Expression="GetValue(&quot;OPlanAmmount&quot;)&lt;GetValue(&quot;OActualAmmount&quot;)" ></Counter>
+      <Counter Title="小计" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Target>
+    <Target TargetName="净利润" TargetValue="A65EEA27-2631-4B56-B062-675780473AF3">
+      <Counter Title="完成部分"   Senquence="1" Expression="GetValue(&quot;OPlanAmmount&quot;)&lt;=GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="未完成部分" Senquence="2" Expression="GetValue(&quot;OPlanAmmount&quot;)&gt;GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="小计" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Target>
+    <Target TargetName="综合收入" TargetValue="7B8862F5-03BB-4019-AA3B-8BD83845EF7E">
+      <Counter Title="完成部分"   Senquence="1" Expression="GetValue(&quot;OPlanAmmount&quot;)&lt;=GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="未完成部分" Senquence="2" Expression="GetValue(&quot;OPlanAmmount&quot;)&gt;GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="小计" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Target>
+  </ComplateTargetDetail>
+  --><!--儿童--><!--
+  <ComplateTargetDetail  Name="完成情况明细">
+    <Target  TargetName="经营收入"  TargetValue="97C08F35-2A5E-4F16-A668-5CF4838F6962">
+      <Counter Title="完成部分"   Senquence="1" Expression="GetValue(&quot;OPlanAmmount&quot;)&gt;=GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="未完成部分" Senquence="2" Expression="GetValue(&quot;OPlanAmmount&quot;)&lt;GetValue(&quot;OActualAmmount&quot;)" ></Counter>
+      <Counter Title="小计" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Target>
+    <Target TargetName="净利润" TargetValue="5B93DD47-0090-47AB-8FD1-E4A87A2AFF6B">
+      <Counter Title="完成部分"   Senquence="1" Expression="GetValue(&quot;OPlanAmmount&quot;)&lt;=GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="未完成部分" Senquence="2" Expression="GetValue(&quot;OPlanAmmount&quot;)&gt;GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="小计" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Target>
+    <Target TargetName="总部管理费用" TargetValue="D228B7E6-B839-4B06-A3A1-2CEC2E159BDB">
+      <Counter Title="完成部分"   Senquence="1" Expression="GetValue(&quot;OPlanAmmount&quot;)&lt;=GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="未完成部分" Senquence="2" Expression="GetValue(&quot;OPlanAmmount&quot;)&gt;GetValue(&quot;OActualAmmount&quot;)"></Counter>
+      <Counter Title="小计" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Target>
+  </ComplateTargetDetail>-->
+</Roots>

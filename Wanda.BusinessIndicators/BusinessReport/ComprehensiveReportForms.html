@@ -1,0 +1,53 @@
+﻿<html>
+<head>
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+
+
+    <!--公司选择的指标--->
+    <script type="text/x-jquery-tmpl" id="Tmpl_ddlTargetInfo">
+        <option value="${$data}">${$data}</option>
+    </script>
+
+    <script type="text/x-jquery-tmpl" id="Tmpl_ddlYearInfo">
+        <option value="${$data}">${$data}</option>
+    </script>
+
+
+
+
+    <script type="text/x-jquery-tmpl" id="Tmpl_ComprehensiveReportInfo">
+        <tr>
+            {{if SrowSpan_str!=undefined &&SrowSpan_str!=null && SrowSpan_str>0 }}
+            <td class="Td_Center"   rowspan="${SrowSpan_str}" >${SystemName} </td>
+            {{/if}}
+
+            {{if TrowSpan_str!=undefined &&TrowSpan_str!=null && TrowSpan_str>0 }}
+            <td class="Td_Center" rowspan="${TrowSpan_str}" >${TargetName}</td>
+            {{/if}}
+
+            <td class="Td_Center" >${FinYear}年 {{if TType ==0}}实际{{else}}指标{{/if}}  </td>
+            <td class="Td_Center"  title="${_1}">${_1.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center"  title="${_2}">${_2.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center"  title="${_3}">${_3.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center"  title="${_4}"> ${_4.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center"  title="${_5}">${_5.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center"  title="${_6}">${_6.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center"  title="${_7}">${_7.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center"  title="${_8}">${_8.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center"  title="${_9}">${_9.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center"  title="${_10}">${_10.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center"  title="${_11}">${_11.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center"  title="${_12}">${_12.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center" title="${(_1 + _2 + _3 + _4 + _5 + _6 + _7 + _8 + _9 + _10 + _11 + _12)}" >${(_1 + _2 + _3 + _4 + _5 + _6 + _7 + _8 + _9 + _10 + _11 + _12).thousandize0OrEmpty(0)}</td>
+        </tr>
+
+    </script>
+
+
+</head>
+<body>
+</body>
+</html>

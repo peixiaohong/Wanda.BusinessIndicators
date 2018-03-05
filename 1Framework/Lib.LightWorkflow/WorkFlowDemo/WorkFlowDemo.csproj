@@ -1,0 +1,540 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4CE0B62C-7736-4FCF-BAE6-05A8FF4D5BCA}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WorkFlowDemo</RootNamespace>
+    <AssemblyName>WorkFlowDemo</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Lib.Core">
+      <HintPath>..\bin\Debug\Lib.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Lib.Data">
+      <HintPath>..\bin\Debug\Lib.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Lib.Web">
+      <HintPath>..\bin\Debug\Lib.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Wanda.DataAccess">
+      <HintPath>..\..\..\..\..\..\Wanda.LightWorkflow\Wanda.LightWorkflow\bin\Debug\Wanda.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Wanda.LightWorkflow">
+      <HintPath>..\bin\Debug\Wanda.LightWorkflow.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Approval.aspx" />
+    <Content Include="Edit.aspx" />
+    <Content Include="Images2\bg.png" />
+    <Content Include="Images2\bianzhi.png" />
+    <Content Include="Images2\genzong.png" />
+    <Content Include="Images2\guanli.png" />
+    <Content Include="Images2\home.gif" />
+    <Content Include="Images2\icon.png" />
+    <Content Include="Images2\icon13.png" />
+    <Content Include="Images2\logo.png" />
+    <Content Include="Images2\map.png" />
+    <Content Include="Images2\nav_bg.png" />
+    <Content Include="Images2\popup_box_title.png" />
+    <Content Include="Images2\shrink.png" />
+    <Content Include="Images2\shuju.png" />
+    <Content Include="Images2\spread.png" />
+    <Content Include="Images2\tabs2_current_l.png" />
+    <Content Include="Images2\tabs2_current_r.png" />
+    <Content Include="Images2\tabs2_l.png" />
+    <Content Include="Images2\tabs2_r.png" />
+    <Content Include="Images2\tabs3_l.png" />
+    <Content Include="Images2\tabs3_r.png" />
+    <Content Include="Images2\yusuanzhibiao.png" />
+    <Content Include="Images2\zhixing.png" />
+    <Content Include="Images\1.jpg" />
+    <Content Include="Images\2.jpg" />
+    <Content Include="Images\add.png" />
+    <Content Include="Images\add1.png" />
+    <Content Include="Images\add3.png" />
+    <Content Include="Images\AddIcon.png" />
+    <Content Include="Images\ajax-loader.gif" />
+    <Content Include="Images\ajax-loader2.gif" />
+    <Content Include="Images\arrowRight.png" />
+    <Content Include="Images\bg.png" />
+    <Content Include="Images\btn.png" />
+    <Content Include="Images\btn01.png" />
+    <Content Include="Images\btn02.png" />
+    <Content Include="Images\btn03%28old%29.png" />
+    <Content Include="Images\btn03.png" />
+    <Content Include="Images\btn04.png" />
+    <Content Include="Images\btn05.png" />
+    <Content Include="Images\btn06.png" />
+    <Content Include="Images\btn07.png" />
+    <Content Include="Images\btn08.png" />
+    <Content Include="Images\btn\btn_t1.png" />
+    <Content Include="Images\btn\btn_t1_f4.png" />
+    <Content Include="Images\btn\btn_t1_f4_hover.png" />
+    <Content Include="Images\btn\btn_t1_f5.png" />
+    <Content Include="Images\btn\btn_t1_f5_hover.png" />
+    <Content Include="Images\btn\btn_t1_f6.png" />
+    <Content Include="Images\btn\btn_t1_f6_hover.png" />
+    <Content Include="Images\btn\btn_t1_hover.png" />
+    <Content Include="Images\btn\btn_t2_f4.png" />
+    <Content Include="Images\btn\btn_t2_f6.png" />
+    <Content Include="Images\btn\button_bg.png" />
+    <Content Include="Images\btn\button_bg_hover.png" />
+    <Content Include="Images\btn_down01.png" />
+    <Content Include="Images\btn_down02.png" />
+    <Content Include="Images\btn_down03.png" />
+    <Content Include="Images\btn_down04.png" />
+    <Content Include="Images\btn_left01.png" />
+    <Content Include="Images\btn_left02.png" />
+    <Content Include="Images\btn_right01.png" />
+    <Content Include="Images\btn_search_bg.png" />
+    <Content Include="Images\btn_up01.png" />
+    <Content Include="Images\btn_up02.png" />
+    <Content Include="Images\b_l.png" />
+    <Content Include="Images\b_m.png" />
+    <Content Include="Images\b_r.png" />
+    <Content Include="Images\calendar.gif" />
+    <Content Include="Images\Charts\dangqishouru.png" />
+    <Content Include="Images\Charts\dangqizhichu.png" />
+    <Content Include="Images\Charts\xiangmshouru.png" />
+    <Content Include="Images\Charts\yue.png" />
+    <Content Include="Images\Charts\yusuanzhixing.png" />
+    <Content Include="Images\collectTab_thead_bg.png" />
+    <Content Include="Images\collectTitle_bg.png" />
+    <Content Include="Images\collectTitle_down.png" />
+    <Content Include="Images\collectTitle_icon.png" />
+    <Content Include="Images\collectTitle_up.png" />
+    <Content Include="Images\confrim.png" />
+    <Content Include="Images\content_bg.png" />
+    <Content Include="Images\date.png" />
+    <Content Include="Images\date_bg.png" />
+    <Content Include="Images\date_header.png" />
+    <Content Include="Images\del.png" />
+    <Content Include="Images\department.png" />
+    <Content Include="Images\detailtoggle.png" />
+    <Content Include="Images\diy_b.png" />
+    <Content Include="Images\diy_line.png" />
+    <Content Include="Images\diy_nav_l.png" />
+    <Content Include="Images\diy_nav_r.png" />
+    <Content Include="Images\doc.gif" />
+    <Content Include="Images\down.png" />
+    <Content Include="Images\down01.png" />
+    <Content Include="Images\down02.png" />
+    <Content Include="Images\down03.png" />
+    <Content Include="Images\down_btn.png" />
+    <Content Include="Images\duty_down .png" />
+    <Content Include="Images\duty_title.png" />
+    <Content Include="Images\duty_up.png" />
+    <Content Include="Images\exit.png" />
+    <Content Include="Images\exit02.png" />
+    <Content Include="Images\eye.png" />
+    <Content Include="Images\Female_Light.png" />
+    <Content Include="Images\flowCurrent.png" />
+    <Content Include="Images\flowNode.png" />
+    <Content Include="Images\flowPassed.jpg" />
+    <Content Include="Images\footer_bg.png" />
+    <Content Include="Images\footer_bg02.png" />
+    <Content Include="Images\go01.png" />
+    <Content Include="Images\go02.png" />
+    <Content Include="Images\header_bg.png" />
+    <Content Include="Images\header_bg02.png" />
+    <Content Include="Images\help.png" />
+    <Content Include="Images\help\专项审计流程.png" />
+    <Content Include="Images\help\举报投诉流程.png" />
+    <Content Include="Images\help\例行审计流程.png" />
+    <Content Include="Images\home.png" />
+    <Content Include="Images\icon01.png" />
+    <Content Include="Images\icon02.png" />
+    <Content Include="Images\icon03.png" />
+    <Content Include="Images\icon04.png" />
+    <Content Include="Images\icon05.png" />
+    <Content Include="Images\icon06.png" />
+    <Content Include="Images\icon07.png" />
+    <Content Include="Images\icon08.png" />
+    <Content Include="Images\icon09.png" />
+    <Content Include="Images\icon10.png" />
+    <Content Include="Images\icon11.png" />
+    <Content Include="Images\icon12.png" />
+    <Content Include="Images\icon13.png" />
+    <Content Include="Images\icon\due.png" />
+    <Content Include="Images\icon\icon01.png" />
+    <Content Include="Images\icon\icon02.png" />
+    <Content Include="Images\icon\icon03.png" />
+    <Content Include="Images\icon\icon04.png" />
+    <Content Include="Images\icon\icon05.png" />
+    <Content Include="Images\icon\icon06_hiden.png" />
+    <Content Include="Images\icon\icon06_hiden_backup.png" />
+    <Content Include="Images\icon\icon06_show.png" />
+    <Content Include="Images\icon\icon06_show_backup.png" />
+    <Content Include="Images\icon\icon09_down.png" />
+    <Content Include="Images\icon\icon09_up.png" />
+    <Content Include="Images\icon\icon10_down_t2.png" />
+    <Content Include="Images\icon\icon10_up_t2.png" />
+    <Content Include="Images\icon\icon11.png" />
+    <Content Include="Images\icon\icon12.png" />
+    <Content Include="Images\icon\icon13.png" />
+    <Content Include="Images\icon\icon14.png" />
+    <Content Include="Images\icon\icon15.png" />
+    <Content Include="Images\icon\icon16.png" />
+    <Content Include="Images\icon\icon17.png" />
+    <Content Include="Images\icon\icon18.png" />
+    <Content Include="Images\icon\icon19.png" />
+    <Content Include="Images\icon\icon20.png" />
+    <Content Include="Images\icon\icon21.png" />
+    <Content Include="Images\icon\icon22.png" />
+    <Content Include="Images\icon\icon24.png" />
+    <Content Include="Images\icon\icon25.png" />
+    <Content Include="Images\icon\icon26.png" />
+    <Content Include="Images\icon\icon27.png" />
+    <Content Include="Images\icon\icon28.png" />
+    <Content Include="Images\icon\icon29.png" />
+    <Content Include="Images\icon\icon30.png" />
+    <Content Include="Images\icon\icon31.png" />
+    <Content Include="Images\icon\icon32.png" />
+    <Content Include="Images\icon\icon33.png" />
+    <Content Include="Images\icon\icon34.png" />
+    <Content Include="Images\icon\icon35.png" />
+    <Content Include="Images\icon\icon36.png" />
+    <Content Include="Images\icon\icon37.png" />
+    <Content Include="Images\icon\icon38.png" />
+    <Content Include="Images\icon\icon39.png" />
+    <Content Include="Images\icon\icon40.png" />
+    <Content Include="Images\icon\icon41.png" />
+    <Content Include="Images\icon\icon42.png" />
+    <Content Include="Images\icon\icon43.png" />
+    <Content Include="Images\icon\month_task.png" />
+    <Content Include="Images\icon_begin.png" />
+    <Content Include="Images\icon_hot.gif" />
+    <Content Include="Images\icon_over.png" />
+    <Content Include="Images\images\b_l.png" />
+    <Content Include="Images\images\b_m.png" />
+    <Content Include="Images\images\b_r.png" />
+    <Content Include="Images\images\logo1.png" />
+    <Content Include="Images\images\m_l.png" />
+    <Content Include="Images\images\m_r.png" />
+    <Content Include="Images\images\nav_l.png" />
+    <Content Include="Images\images\nav_r.png" />
+    <Content Include="Images\images\tab_bg.png" />
+    <Content Include="Images\images\title_l.png" />
+    <Content Include="Images\images\title_r.png" />
+    <Content Include="Images\images\t_l.png" />
+    <Content Include="Images\images\t_m.png" />
+    <Content Include="Images\images\t_r.png" />
+    <Content Include="Images\import.png" />
+    <Content Include="Images\light_green_12.png" />
+    <Content Include="Images\light_red_12.png" />
+    <Content Include="Images\light_yellow_12.png" />
+    <Content Include="Images\line.png" />
+    <Content Include="Images\line2.png" />
+    <Content Include="Images\line_down.png" />
+    <Content Include="Images\line_up.png" />
+    <Content Include="Images\linkblue.png" />
+    <Content Include="Images\login.gif" />
+    <Content Include="Images\login.jpg" />
+    <Content Include="Images\login2.jpg" />
+    <Content Include="Images\Male_Light.png" />
+    <Content Include="Images\map.png" />
+    <Content Include="Images\Map\map_bg.png" />
+    <Content Include="Images\modify.png" />
+    <Content Include="Images\month_bg.png" />
+    <Content Include="Images\m_l.png" />
+    <Content Include="Images\m_r.png" />
+    <Content Include="Images\nav_l.png" />
+    <Content Include="Images\nav_l01.png" />
+    <Content Include="Images\nav_r.png" />
+    <Content Include="Images\nav_r02 - 副本.png" />
+    <Content Include="Images\nav_r02.png" />
+    <Content Include="Images\oringe.png" />
+    <Content Include="Images\over.png" />
+    <Content Include="Images\people.png" />
+    <Content Include="Images\picture.png" />
+    <Content Include="Images\reject.png" />
+    <Content Include="Images\remove.png" />
+    <Content Include="Images\return.png" />
+    <Content Include="Images\revoke.png" />
+    <Content Include="Images\save.png" />
+    <Content Include="Images\scroll\1.png" />
+    <Content Include="Images\scroll\2.png" />
+    <Content Include="Images\scroll\3.png" />
+    <Content Include="Images\scroll\4.png" />
+    <Content Include="Images\scroll\fscroll_bg.png" />
+    <Content Include="Images\scroll\fscroll_bg2.png" />
+    <Content Include="Images\scroll\fscroll_middle.png" />
+    <Content Include="Images\scroll\fscroll_middle2.png" />
+    <Content Include="Images\scroll\left.png" />
+    <Content Include="Images\scroll\right.png" />
+    <Content Include="Images\scroll\scroll_bg.png" />
+    <Content Include="Images\search.gif" />
+    <Content Include="Images\search.png" />
+    <Content Include="Images\search_22.png" />
+    <Content Include="Images\search_32.png" />
+    <Content Include="Images\select_l .png" />
+    <Content Include="Images\select_r.png" />
+    <Content Include="Images\setting.png" />
+    <Content Include="Images\sidebar_cerrent.png" />
+    <Content Include="Images\sidebar_hover.png" />
+    <Content Include="Images\sigema.png" />
+    <Content Include="Images\slither_bg.png" />
+    <Content Include="Images\slither_current.png" />
+    <Content Include="Images\slither_current2.png" />
+    <Content Include="Images\tab01_title_l.png" />
+    <Content Include="Images\tab01_title_r.png" />
+    <Content Include="Images\tab_bg.png" />
+    <Content Include="Images\tab_bg2.png" />
+    <Content Include="Images\tab_l.png" />
+    <Content Include="Images\tab_l01.png" />
+    <Content Include="Images\tab_r.png" />
+    <Content Include="Images\tab_r02.png" />
+    <Content Include="Images\task.png" />
+    <Content Include="Images\thead.jpg" />
+    <Content Include="Images\thead2.jpg" />
+    <Content Include="Images\thead3.png" />
+    <Content Include="Images\thead4.png" />
+    <Content Include="Images\title2_bg.png" />
+    <Content Include="Images\title2_r.png" />
+    <Content Include="Images\title_bg.png" />
+    <Content Include="Images\title_l.png" />
+    <Content Include="Images\title_r.png" />
+    <Content Include="Images\t_l.png" />
+    <Content Include="Images\t_m.png" />
+    <Content Include="Images\t_r.png" />
+    <Content Include="Images\up.png" />
+    <Content Include="Images\up01.png" />
+    <Content Include="Images\up02.png" />
+    <Content Include="Images\up03.png" />
+    <Content Include="Images\user.png" />
+    <Content Include="Images\WebResource.gif" />
+    <Content Include="Images\xls.gif" />
+    <Content Include="Images\year_bg.png" />
+    <Content Include="Images\zxx_dotted.gif" />
+    <Content Include="Images\基坑监测.png" />
+    <Content Include="Images\建筑物沉降图.png" />
+    <Content Include="Images\建筑物沉降图2.png" />
+    <Content Include="Images\建筑物沉降图3.png" />
+    <Content Include="Images\建筑物沉降图4.png" />
+    <Content Include="Images\建筑物沉降图5.png" />
+    <Content Include="Images\建筑物沉降图6.png" />
+    <Content Include="Images\本周到期.png" />
+    <Content Include="Images\本周开始时间.png" />
+    <Content Include="Scripts\admin.js" />
+    <Content Include="Scripts\base.js" />
+    <Content Include="Scripts\chart\adapters\mootools-adapter.js" />
+    <Content Include="Scripts\chart\adapters\mootools-adapter.src.js" />
+    <Content Include="Scripts\chart\adapters\prototype-adapter.js" />
+    <Content Include="Scripts\chart\adapters\prototype-adapter.src.js" />
+    <Content Include="Scripts\chart\highcharts-more.js" />
+    <Content Include="Scripts\chart\highcharts.js" />
+    <Content Include="Scripts\chart\highcharts.src.js" />
+    <Content Include="Scripts\chart\modules\canvas-tools.js" />
+    <Content Include="Scripts\chart\modules\canvas-tools.src.js" />
+    <Content Include="Scripts\chart\modules\data.js" />
+    <Content Include="Scripts\chart\modules\data.src.js" />
+    <Content Include="Scripts\chart\modules\exporting.js" />
+    <Content Include="Scripts\chart\modules\exporting.src.js" />
+    <Content Include="Scripts\chart\modules\funnel.js" />
+    <Content Include="Scripts\chart\modules\funnel.src.js" />
+    <Content Include="Scripts\chart\themes\dark-blue.js" />
+    <Content Include="Scripts\chart\themes\dark-green.js" />
+    <Content Include="Scripts\chart\themes\gray.js" />
+    <Content Include="Scripts\chart\themes\grid.js" />
+    <Content Include="Scripts\chart\themes\skies.js" />
+    <Content Include="Scripts\jquery-1.4.3.js" />
+    <Content Include="Scripts\jquery.autocomplete.js" />
+    <Content Include="Scripts\jquery.colorbox.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.zxxbox.3.0-min.js" />
+    <Content Include="Scripts\jquery.zxxbox.3.0.js" />
+    <Content Include="Scripts\json\budgetitems.js" />
+    <Content Include="Scripts\menu.js" />
+    <Content Include="Scripts\scrollbar\aplweb.scrollbars.js" />
+    <Content Include="Scripts\scrollbar\jquery.ba-resize.min.js" />
+    <Content Include="Scripts\scrollbar\jquery.event.drag-2.0.min.js" />
+    <Content Include="Scripts\scrollbar\jquery.min.js" />
+    <Content Include="Scripts\scrollbar\jquery.mousewheel.js" />
+    <Content Include="Scripts\scrollbar\mousehold.js" />
+    <Content Include="Scripts\tab-switch.js" />
+    <Content Include="Scripts\tab.js" />
+    <Content Include="Scripts\treeMenu.js" />
+    <Content Include="Scripts\Url.js" />
+    <Content Include="Scripts\ztree\jquery-1.4.4.min.js" />
+    <Content Include="Scripts\ztree\jquery.ztree.all-3.5.js" />
+    <Content Include="Scripts\ztree\jquery.ztree.all-3.5.min.js" />
+    <Content Include="Scripts\ztree\jquery.ztree.core-3.5.js" />
+    <Content Include="Scripts\ztree\jquery.ztree.core-3.5.min.js" />
+    <Content Include="Scripts\ztree\jquery.ztree.excheck-3.5.js" />
+    <Content Include="Scripts\ztree\jquery.ztree.excheck-3.5.min.js" />
+    <Content Include="Scripts\ztree\jquery.ztree.exedit-3.5.js" />
+    <Content Include="Scripts\ztree\jquery.ztree.exedit-3.5.min.js" />
+    <Content Include="Scripts\ztree\jquery.ztree.exhide-3.5.js" />
+    <Content Include="Scripts\ztree\jquery.ztree.exhide-3.5.min.js" />
+    <Content Include="Styles\colorbox.css" />
+    <Content Include="Styles\home.css" />
+    <Content Include="Styles\images\border.png" />
+    <Content Include="Styles\images\controls.png" />
+    <Content Include="Styles\images\loading.gif" />
+    <Content Include="Styles\images\loading_background.png" />
+    <Content Include="Styles\images\overlay.png" />
+    <Content Include="Styles\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Styles\images\ui-bg_flat_0_eeeeee_40x100.png" />
+    <Content Include="Styles\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Styles\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Styles\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Styles\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Styles\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Styles\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Styles\images\ui-components.png" />
+    <Content Include="Styles\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Styles\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Styles\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Styles\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Styles\images\ui-icons_8d78a5_256x240.png" />
+    <Content Include="Styles\images\ui-icons_a8a3ae_256x240.png" />
+    <Content Include="Styles\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Styles\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Styles\jquery.autocomplete.css" />
+    <Content Include="Styles\jquery.zxxbox.style.css" />
+    <Content Include="Styles\map.css" />
+    <Content Include="Styles\popup.css" />
+    <Content Include="Styles\scrollbar\scrollbars-black.css" />
+    <Content Include="Styles\scrollbar\scrollbars.css" />
+    <Content Include="Styles\Site.css" />
+    <Content Include="Styles\style.css" />
+    <Content Include="Styles\style01.css" />
+    <Content Include="Styles\style02.css" />
+    <Content Include="Styles\ztree\demo.css" />
+    <Content Include="Styles\ztree\img\diy\1_close.png" />
+    <Content Include="Styles\ztree\img\diy\1_open.png" />
+    <Content Include="Styles\ztree\img\diy\2.png" />
+    <Content Include="Styles\ztree\img\diy\3.png" />
+    <Content Include="Styles\ztree\img\diy\4.png" />
+    <Content Include="Styles\ztree\img\diy\5.png" />
+    <Content Include="Styles\ztree\img\diy\6.png" />
+    <Content Include="Styles\ztree\img\diy\7.png" />
+    <Content Include="Styles\ztree\img\diy\8.png" />
+    <Content Include="Styles\ztree\img\diy\9.png" />
+    <Content Include="Styles\ztree\img\line_conn.gif" />
+    <Content Include="Styles\ztree\img\loading.gif" />
+    <Content Include="Styles\ztree\img\zTreeStandard.gif" />
+    <Content Include="Styles\ztree\img\zTreeStandard.png" />
+    <Content Include="Styles\ztree\zTreeStyle.css" />
+    <Content Include="TodoWorkList.aspx" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Approval.aspx.cs">
+      <DependentUpon>Approval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval.aspx.designer.cs">
+      <DependentUpon>Approval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TodoWorkList.aspx.cs">
+      <DependentUpon>TodoWorkList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TodoWorkList.aspx.designer.cs">
+      <DependentUpon>TodoWorkList.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1650/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

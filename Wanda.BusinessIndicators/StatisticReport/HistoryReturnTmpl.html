@@ -1,0 +1,24 @@
+﻿<script id="HistoryReturnHead" type="text/x-jquery-tmpl">
+</script>
+
+
+<script id="HistoryReturnInfo" type="text/x-jquery-tmpl">
+    {{each RData}}
+    <tr>
+        <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+        <td class="Td_Left" style="text-align: left !important;">${CompanyName}</td>
+        <td class="Td_Left" style="text-align: left !important;">${TargetName}</td>
+        <td class="Td_Left" style="text-align: center!important"  title="${January_CommitDate}">${FormatDate(January_CommitDate,false,"CN")}</td>
+        <td class="Td_Left" style="text-align: center!important"  title="${February_CommitDate}">${FormatDate(February_CommitDate,false,"CN")}</td>
+        <td class="Td_Left" style="text-align: center!important" title="${March_CommitDate}">${FormatDate(March_CommitDate,false,"CN")}</td>
+        <td class="Td_Left" style="text-align: center!important" title="${April_CommitDate}">${FormatDate(April_CommitDate,false,"CN")}</td>
+        <td class="Td_Left" style="text-align: center!important" title="${May_CommitDate}">${FormatDate(May_CommitDate,false,"CN")}</td>
+        <td class="Td_Left" style="text-align: center!important" title="${June_CommitDate}">${FormatDate(June_CommitDate,false,"CN")}</td>
+        <td class="Td_Left" style="text-align: center!important" title="${July_CommitDate}">${FormatDate(July_CommitDate,false,"CN")}</td>
+        <td class="Td_Left" style="text-align: center!important" title="${August_CommitDate}">${FormatDate(August_CommitDate,false,"CN")}</td>
+        <td class="Td_Left" style="text-align: center!important" title="${September_CommitDate}">${FormatDate(September_CommitDate,false,"CN")}</td>
+        <td class="Td_Left" style="text-align: center!important" title="${October_CommitDate}">${FormatDate(October_CommitDate,false,"CN")}</td>
+        <td class="Td_Left" style="text-align: center!important" title="${November_CommitDate}">${FormatDate(November_CommitDate,false,"CN")}</td>
+    </tr>
+    {{/each}}
+</script>

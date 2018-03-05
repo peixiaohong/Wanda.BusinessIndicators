@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EFA26EF0-4BA9-4563-8D63-554E884F56B7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Wanda.BusinessIndicators.Model</RootNamespace>
+    <AssemblyName>Wanda.BusinessIndicators.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BizModel\A_MissTargetActualRpt.cs" />
+    <Compile Include="BizModel\A_MonthlyReport.cs" />
+    <Compile Include="BizModel\A_MonthlyReportDetail.cs" />
+    <Compile Include="BizModel\A_SystemBatch.cs" />
+    <Compile Include="BizModel\A_TargetPlan.cs" />
+    <Compile Include="BizModel\A_TargetPlanDetail.cs" />
+    <Compile Include="BizModel\B_Attachment.cs" />
+    <Compile Include="BizModel\B_BusinessBase.cs" />
+    <Compile Include="BizModel\B_DocumentAttachments.cs" />
+    <Compile Include="BizModel\B_MonthlyReportAction.cs" />
+    <Compile Include="BizModel\B_MonthlyReportDetail.cs" />
+    <Compile Include="BizModel\B_MonthlyReportJsonData.cs" />
+    <Compile Include="BizModel\B_MonthlyTargetReport.cs" />
+    <Compile Include="BizModel\B_Subscription.cs" />
+    <Compile Include="BizModel\B_SystemBatch.cs" />
+    <Compile Include="BizModel\B_TargetPlan.cs" />
+    <Compile Include="BizModel\B_TargetPlanAction.cs" />
+    <Compile Include="BizModel\B_TargetPlanDetail.cs" />
+    <Compile Include="BizModel\C_Company.cs" />
+    <Compile Include="BizModel\C_ContrastDetail.cs" />
+    <Compile Include="BizModel\C_DocumentTree.cs" />
+    <Compile Include="BizModel\C_ExceptionTarget.cs" />
+    <Compile Include="BizModel\C_MissTargetCategory.cs" />
+    <Compile Include="BizModel\C_ReportTime.cs" />
+    <Compile Include="BizModel\C_System.cs" />
+    <Compile Include="BizModel\C_SystemTree.cs" />
+    <Compile Include="BizModel\C_Target.cs" />
+    <Compile Include="BizModel\C_Targetkpi.cs" />
+    <Compile Include="BizModel\C_TargetMapping.cs" />
+    <Compile Include="BizModel\Interface.cs" />
+    <Compile Include="BizModel\R_MissTargetEvaluationScope.cs" />
+    <Compile Include="BizModel\SysConfig.cs" />
+    <Compile Include="BizModel\S_Interface.cs" />
+    <Compile Include="BizModel\S_InterfaceInstance.cs" />
+    <Compile Include="BizModel\B_MonthlyReport.cs" />
+    <Compile Include="BizModel\TSM_Messages.cs" />
+    <Compile Include="Filter\AttachmentFilter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\1Framework\Lib.AuthCenter\Wanda.Lib.AuthCenter.csproj">
+      <Project>{fccad333-b48e-4a04-ad3c-8cb4ca17ef28}</Project>
+      <Name>Wanda.Lib.AuthCenter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\1Framework\Lib.Core\Wanda.Lib.Core.csproj">
+      <Project>{65839f36-193a-41d1-9e79-38bc84984de6}</Project>
+      <Name>Wanda.Lib.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\1Framework\Lib.Data\Wanda.Lib.Data.csproj">
+      <Project>{442c318f-9d99-4a3f-972e-33e8a8c8be51}</Project>
+      <Name>Wanda.Lib.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Misc\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

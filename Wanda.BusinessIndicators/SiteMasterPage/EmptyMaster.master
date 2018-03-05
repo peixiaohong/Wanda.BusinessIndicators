@@ -1,0 +1,53 @@
+﻿<%@ Master Language="C#"  AutoEventWireup="true" CodeBehind="EmptyMaster.master.cs" Inherits="Wanda.BusinessIndicators.Web.EmptyMaster" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>经营指标管控系统</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="/Scripts/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery.blockUI.js"></script>
+    <script type="text/javascript" src="/Scripts/base.js"></script>
+    <script type="text/javascript" src="/Scripts/BusinessReport/FloatTable.js"></script>
+    <script type="text/javascript" src="/Scripts/nav.js"></script>
+    <script type="text/javascript" src="/Scripts/artDialog/artDialog.js?skin=default"></script>
+    <script type="text/javascript" src="/Scripts/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/Scripts/jqueryControl.js"></script>
+    <script src="/Scripts/My97DatePicker/WdatePicker.js"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link rel="shortcut icon" href="/Images/images1/favicon.ico" type="image/x-icon" />
+    <link href="/Styles/css/Styles.css" rel="stylesheet" />
+    <link href="/Styles/css/layout.css" rel="stylesheet" />
+
+    <%--以下是生产环境的wf工具条
+    <script type="text/javascript" src="http://wf.wanda.cn/WebApp/Wanda.Platform.WorkFlow.Controls.Handler/script/wanda-wf-js.js"></script>
+    <link href="http://wf.wanda.cn/WebApp/Wanda.Platform.WorkFlow.Controls.Handler/css/wanda-wf-style.css" rel="Stylesheet" type="text/css" />
+    --%>
+
+    <%--以下是测试环境的wf工具条--%>
+<%--    <link href="http://wfuat.wanda-dev.cn/WebApp/Wanda.Platform.WorkFlow.Controls.Handler/css/css.css" rel="Stylesheet" type="text/css" /> 
+    <script type="text/javascript" src="http://wfuat.wanda-dev.cn/WebApp/Wanda.Platform.WorkFlow.Controls.Handler/script/wanda-wf-js.js"></script>--%>
+    <link href="/Styles/mini.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/Scripts/UpLoad/uploadify.css" />
+
+</head>
+<body style="background:#fff;">
+    <div class="Pagebox">
+        <form id="form1" runat="server">
+            <div id="main" style="margin-left: 3px; margin-right: 3px;">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </form>
+    </div>
+
+    <div class="footer" style="position: fixed; bottom: 0; width:100%; ">
+        <b>版权所有©2014 大连万达集团股份有限公司 </b>
+    </div>
+</body>
+</html>

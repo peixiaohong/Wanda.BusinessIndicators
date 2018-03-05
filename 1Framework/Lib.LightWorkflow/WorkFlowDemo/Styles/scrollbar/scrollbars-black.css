@@ -1,0 +1,92 @@
+
+
+.scrollable .vscroller .scrollarea {
+	left: 2px;
+	right: 2px;
+}
+
+.scrollable .hscroller .scrollarea {
+	top: 0px;
+	bottom: 0px;
+}
+
+.scrollable .scrollarea {
+	background:#fff url(../../images/scroll/scroll_bg.png) repeat-x;
+    /*-moz-box-shadow:1px 1px 3px #292929;
+    box-shadow:1px 1px 3px #292929;*/
+}
+
+
+.scrollable .scrollblock {
+	border: 1px solid #939594;
+    background:#fff url(../../images/scroll/fscroll_bg.png) repeat-x;
+}
+
+.scrollable .scrollblock:active {
+	border: 1px solid #335267;
+    background:#fff url(../../images/scroll/fscroll_bg2.png) repeat-x;
+}
+
+
+.scrollable .vscroller .scrollblock {
+	left: 0px;
+	right: 0px;
+	
+	background: -webkit-gradient(
+		linear,
+		left top,
+		right top,
+		color-stop(0.0, #3C3C3C),
+		color-stop(1.0, #000)
+	);
+	
+	background: -moz-linear-gradient(
+		left center,
+		#3C3C3C 0%,
+		#000 100%
+	);
+}
+
+.scrollable .hscroller .scrollblock {
+	top: 0px;
+	bottom: 0px;
+	
+	background: -webkit-gradient(
+		linear,
+		left top,
+		left bottom,
+		color-stop(0.0, #3C3C3C),
+		color-stop(1.0, #000)
+	);
+	
+	background: -moz-linear-gradient(
+		top center,
+		#3C3C3C 0%,
+		#000 100%
+	);
+}
+
+.scrollable .scrollbtn {
+	color: #666;
+	text-shadow: -1px -1px 0px black;
+}
+
+.scrollable .scrollbtn:hover {
+	color: #888;
+}
+
+.scrollable .filler {
+	background: -webkit-gradient(
+		linear,
+		left top,
+		right bottom,
+		color-stop(0.0, #333333),
+		color-stop(0.5, #222)
+	);
+	
+	background: -moz-linear-gradient(
+		-45deg,
+		#333333 0%,
+		#222 50%
+	);
+}

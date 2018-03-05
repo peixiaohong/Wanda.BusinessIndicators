@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Demos</title>
+    <!--<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" />-->
+    <link rel="stylesheet" href="../multiple-select.css" />
+</head>
+<body>
+<div class="container">
+    <div class="form-group">
+        <label>Email address</label>
+        <input type="email" class="form-control"  placeholder="Enter email">
+    </div>
+
+    <div class="form-group">
+        <label>Month</label>
+        <select id="ms" multiple="multiple">
+            <option value="1">哈尔滨区域</option>
+            <option value="2">沈阳区域</option>
+            <option value="3">大连区域</option>
+            <option value="4">贵州丹寨县</option>
+            <option value="5">呼和浩特区域</option>
+            <option value="6">济南区域</option>
+            <option value="7">青岛区域</option>
+            <option value="8">郑州区域</option>
+            <option value="9">合肥区域</option>
+            <option value="10">南昌区域</option>
+            <option value="11">长沙区域</option>
+            <option value="12">乌鲁木齐区域</option>
+        </select>
+    </div>
+
+    <input id="btn11" type="button" value="按钮" onclick="aa();" />
+</div>
+
+   
+
+<script src="assets/jquery.min.js"></script>
+<script src="../multiple-select.js" charset="gbk"></script>
+<script>
+
+
+    $('#ms').change(function() {
+            //console.log($(this).val());
+        }).multipleSelect({
+          
+            single: true,          
+  	    filter: true
+        });
+
+    function aa(){
+
+    alert( $('#ms').multipleSelect('getSelects', 'text'));
+}
+
+
+</script>
+</body>
+</html>

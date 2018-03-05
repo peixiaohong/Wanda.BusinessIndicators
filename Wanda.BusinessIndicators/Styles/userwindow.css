@@ -1,0 +1,65 @@
+﻿@charset "utf-8";
+
+.main_bd_tab {
+    width: 100%;
+    z-index: 5;
+}
+
+.tree {
+}
+
+    .tree table {
+        width: auto;
+    }
+
+    .tree tr, .tree td {
+        padding: 0px;
+    }
+
+.main_bd_tab li {
+    float: left;
+    height: 22px;
+    line-height: 22px;
+    /*border: solid 1px #93a6b4;*/
+    background-color: rgb(255, 255, 255);
+    width: 80px;
+    text-align: center;
+    cursor: pointer;
+    margin-right: 3px;
+    border-bottom-width: 0px;
+}
+
+
+.main_bd_tab_content {
+    width: 100%;
+    border: solid 1px #93a6b4;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 4;
+    position: relative;
+}
+
+.main_bd_tab_active {
+    /*background-position-x: left;
+        background-position-y: bottom;
+        border-bottom-width: 0px;*/
+    background-image: url("../Images/btn/btn_t1_f5.png");
+}
+
+.list_btn {
+    width: 26px;
+    border-color: currentColor;
+    border-width: medium;
+    border-style: none;
+    margin: 5px;
+    display: block;
+    cursor: pointer;
+    background: white;
+    background-position-x: center;
+    background-position-y: top;
+    background-repeat: no-repeat;
+}
+
+#paneplan .line {
+    border-top: solid 0 #fff;
+}

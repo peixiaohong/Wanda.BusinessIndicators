@@ -1,0 +1,63 @@
+﻿<Root>
+  <MisstargetReturn  Name="补回情况">
+    <Group  TargetName="租金收缴" Senquence="1"  TargetValue="A79A8351-89E0-4F1A-B05E-70FF12209BCB">
+      <Counter Title="到期未补回公司" Senquence="2"  Expression="DateDiff(dateinterval.second,GetDateValue(&quot;ReportDate&quot;),GetDateValue(&quot;CommitDate&quot;))&lt;=0 " />
+      <Counter Title="未到期公司" Senquence="1" Expression="DateDiff(dateinterval.second,GetDateValue(&quot;ReportDate&quot;),GetDateValue(&quot;CommitDate&quot;))&gt;0" /> 
+      <Counter Title="已补回公司" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Group>
+    
+    <Group TargetName="大商业物业费收缴" Senquence="2"  TargetValue="D45F147A-0BD5-4CA7-85B1-13A954FC38B2">
+      <Counter Title="到期未补回公司" Senquence="1" Expression="1&lt;&gt;1" ></Counter>
+      <Counter Title="未到期公司,未全额收缴物管费公司" Senquence="2" Expression="DateDiff(dateinterval.second,GetDateValue(&quot;ReportDate&quot;),GetDateValue(&quot;CommitDate&quot;))&gt;0" />
+      <Counter Title="已补回公司" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Group>
+    
+    <Group TargetName="净利润" Senquence="3"  TargetValue="B5F6C780-AE68-4124-8B85-77E6C0B058D3">
+      <Counter Title="到期未补回公司,净利润未完成公司" Senquence="1" Expression="1&lt;&gt;1" ></Counter>
+      <Counter Title="未到期公司,净利润未完成公司" Senquence="2" Expression="DateDiff(dateinterval.second,GetDateValue(&quot;ReportDate&quot;),GetDateValue(&quot;CommitDate&quot;))&gt;0" />
+      <Counter Title="已补回公司" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Group>
+  </MisstargetReturn>
+
+
+  <Misstarget  Name="未完成">
+    <Group  TargetName="租金收缴" Senquence="1"  TargetValue="A79A8351-89E0-4F1A-B05E-70FF12209BCB">
+      <Counter Title="一、未全额收缴租金公司,本月累计欠收" Senquence="1" Expression="GetValue(&quot;NAccumulativeActualRate&quot;)&lt; 1 "></Counter>
+    </Group>
+    <Group  TargetName="大商业物业费收缴" Senquence="2"  TargetValue="D45F147A-0BD5-4CA7-85B1-13A954FC38B2">
+      <Counter Title="一、未全额收缴物管费公司,本月累计欠收" Senquence="2" Expression="GetValue(&quot;NAccumulativeActualRate&quot;)&lt;1 "></Counter>
+    </Group>
+    <Group  TargetName="净利润"  Senquence="3" TargetValue="B5F6C780-AE68-4124-8B85-77E6C0B058D3">
+      <Counter Title="一、净利润未完成公司,本月净利润指标累计未完成共" Senquence="3" Expression="GetValue(&quot;NAccumulativeActualRate&quot;)&lt; 1 "></Counter>
+    </Group>
+  </Misstarget>
+
+  <!--<MisstargetReturn  Name="补回情况">
+    <Group  TargetName="总收入" Senquence="1"  TargetValue="1738811D-0CFC-47AE-AB93-214024B0D42C">
+      <Counter Title="到期未补回公司" Senquence="2"  Expression="DateDiff(dateinterval.second,GetDateValue(&quot;ReportDate&quot;),GetDateValue(&quot;CommitDate&quot;))&lt;=0 " />
+      <Counter Title="未到期公司" Senquence="1" Expression="DateDiff(dateinterval.second,GetDateValue(&quot;ReportDate&quot;),GetDateValue(&quot;CommitDate&quot;))&gt;0" />
+      <Counter Title="已补回公司" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Group>
+
+    <Group TargetName="业主利润" Senquence="2"  TargetValue="5AB367E5-5994-447C-8AFB-0D7C23C93DD5">
+      <Counter Title="到期未补回公司" Senquence="2"  Expression="DateDiff(dateinterval.second,GetDateValue(&quot;ReportDate&quot;),GetDateValue(&quot;CommitDate&quot;))&lt;=0 " />
+      <Counter Title="未到期公司" Senquence="1" Expression="DateDiff(dateinterval.second,GetDateValue(&quot;ReportDate&quot;),GetDateValue(&quot;CommitDate&quot;))&gt;0" />
+      <Counter Title="已补回公司" Senquence="3" Expression="1&lt;&gt;1" ></Counter>
+    </Group>
+  </MisstargetReturn>
+
+
+  <Misstarget  Name="未完成">
+    <Group  TargetName="总收入" Senquence="1"  TargetValue="1738811D-0CFC-47AE-AB93-214024B0D42C">
+      <Counter Title="一、总收入未完成酒店,本月总收入指标累计未完成共" Senquence="1" Expression="GetValue(&quot;NAccumulativeActualRate&quot;)&lt; 1 "></Counter>
+    </Group>
+    <Group  TargetName="业主利润" Senquence="2"  TargetValue="5AB367E5-5994-447C-8AFB-0D7C23C93DD5">
+      <Counter Title="一、业主利润未完成酒店,本月业主利润指标累计未完成共" Senquence="2" Expression="GetValue(&quot;NAccumulativeActualRate&quot;)&lt;1 "></Counter>
+    </Group>  
+  </Misstarget>-->
+
+
+
+
+
+</Root>

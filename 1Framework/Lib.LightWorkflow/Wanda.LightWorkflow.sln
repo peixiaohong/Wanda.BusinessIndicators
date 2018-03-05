@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wanda.LightWorkflow", "Wanda.LightWorkflow.csproj", "{824A3D67-D1B4-4166-B1D6-C960534E398C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowTest", "Test\UnitTestProject1\WorkflowTest.csproj", "{AD0EB8F6-221C-4240-B5BD-3135F9AA748F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkFlowDemo", "WorkFlowDemo\WorkFlowDemo.csproj", "{4CE0B62C-7736-4FCF-BAE6-05A8FF4D5BCA}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://huwzh.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Wanda.LightWorkflow.csproj
+		SccLocalPath1 = .
+		SccProjectUniqueName2 = Test\\UnitTestProject1\\WorkflowTest.csproj
+		SccProjectName2 = Test/UnitTestProject1
+		SccLocalPath2 = Test\\UnitTestProject1
+		SccProjectUniqueName3 = WorkFlowDemo\\WorkFlowDemo.csproj
+		SccProjectName3 = WorkFlowDemo
+		SccLocalPath3 = WorkFlowDemo
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{824A3D67-D1B4-4166-B1D6-C960534E398C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{824A3D67-D1B4-4166-B1D6-C960534E398C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{824A3D67-D1B4-4166-B1D6-C960534E398C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{824A3D67-D1B4-4166-B1D6-C960534E398C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD0EB8F6-221C-4240-B5BD-3135F9AA748F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD0EB8F6-221C-4240-B5BD-3135F9AA748F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD0EB8F6-221C-4240-B5BD-3135F9AA748F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD0EB8F6-221C-4240-B5BD-3135F9AA748F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CE0B62C-7736-4FCF-BAE6-05A8FF4D5BCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CE0B62C-7736-4FCF-BAE6-05A8FF4D5BCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CE0B62C-7736-4FCF-BAE6-05A8FF4D5BCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CE0B62C-7736-4FCF-BAE6-05A8FF4D5BCA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

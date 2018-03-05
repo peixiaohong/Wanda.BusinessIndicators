@@ -1,0 +1,1898 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{889E4F76-5EE8-49B4-AC1A-0C3029FBC080}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Wanda.BusinessIndicators.Web</RootNamespace>
+    <AssemblyName>Wanda.BusinessIndicators.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aspose.Cells">
+      <HintPath>..\..\..\..\Aspose.Cells.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Documents.Client, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.DocumentDB.1.1.0\lib\net40\Microsoft.Azure.Documents.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.JScript" />
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DllReference\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Wanda.Platform.Permission.ClientComponent">
+      <HintPath>..\..\WFSDK\Wanda.Platform.Permission.ClientComponent.dll</HintPath>
+    </Reference>
+    <Reference Include="Wanda.Platform.Permission.Contract">
+      <HintPath>..\..\WFSDK\Wanda.Platform.Permission.Contract.dll</HintPath>
+    </Reference>
+    <Reference Include="Wanda.Platform.WorkFlow.ClientComponent, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\SourceCode-2015-10-15流程服务迁移\JYZB\Wanda.BusinessIndicators\Wanda.BusinessIndicators\DllReference\Wanda.Platform.WorkFlow.ClientComponent.dll</HintPath>
+    </Reference>
+    <Reference Include="Wanda.SDK.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DllReference\Wanda.SDK.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Wanda.UserSource.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DllReference\Wanda.UserSource.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Wanda.Workflow.Client">
+      <HintPath>DllReference\Wanda.Workflow.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Wanda.Workflow.Object">
+      <HintPath>DllReference\Wanda.Workflow.Object.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BusinessReport\ChildrenCompanyRpt.aspx" />
+    <Content Include="BusinessReport\ComprehensiveReportForms.aspx" />
+    <Content Include="BusinessReport\ComprehensiveReportForms.html" />
+    <Content Include="BusinessReport\FilmCompanyRpt.aspx" />
+    <Content Include="BusinessReport\WandaBusinessRpt.aspx" />
+    <Content Include="BusinessReport\WandaCultureRpt.aspx" />
+    <Content Include="DepartmentStoreReport\PlayVideo.aspx" />
+    <Content Include="DllReference\Wanda.SDK.Common.dll" />
+    <Content Include="DllReference\Wanda.UserSource.Client.dll" />
+    <Content Include="Excel\Help\最新月报上报视频.mp4" />
+    <Content Include="Images\defaultLeaf.gif" />
+    <Content Include="Images\folderClose.png" />
+    <Content Include="Images\folderOpen.png" />
+    <Content Include="Images\images1\u.jpg" />
+    <Content Include="Scripts\BusinessReport\ComprehensiveReportForms.js" />
+    <Content Include="Scripts\BusinessReport\FixedRpt.js" />
+    <Content Include="Scripts\BusinessReport\TargetPlanReported.js" />
+    <Content Include="Scripts\jquery.base64.js" />
+    <Content Include="Scripts\multiple-select-master\demos\assets\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Scripts\multiple-select-master\demos\assets\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Scripts\multiple-select-master\demos\assets\bootstrap\css\bootstrap.css" />
+    <Content Include="Scripts\multiple-select-master\demos\assets\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Scripts\multiple-select-master\demos\assets\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\multiple-select-master\demos\assets\bootstrap\js\bootstrap.js" />
+    <Content Include="Scripts\multiple-select-master\demos\assets\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Scripts\multiple-select-master\demos\assets\jquery.min.js" />
+    <Content Include="Scripts\multiple-select-master\demos\index.html" />
+    <Content Include="Scripts\multiple-select-master\demos\index1.html" />
+    <Content Include="Scripts\multiple-select-master\docs\assets\es5-shim.min.js" />
+    <Content Include="Scripts\multiple-select-master\docs\assets\flatdoc\flatdoc.js" />
+    <Content Include="Scripts\multiple-select-master\docs\assets\flatdoc\legacy.js" />
+    <Content Include="Scripts\multiple-select-master\docs\assets\flatdoc\theme-white\script.js" />
+    <Content Include="Scripts\multiple-select-master\docs\assets\flatdoc\theme-white\style.css" />
+    <Content Include="Scripts\multiple-select-master\docs\assets\html5shiv.js" />
+    <Content Include="Scripts\multiple-select-master\docs\assets\jquery.min.js" />
+    <Content Include="Scripts\multiple-select-master\docs\assets\respond.min.js" />
+    <Content Include="Scripts\multiple-select-master\docs\css\base.css" />
+    <Content Include="Scripts\multiple-select-master\docs\index.html" />
+    <Content Include="Scripts\multiple-select-master\docs\js\index.js" />
+    <Content Include="Scripts\multiple-select-master\index.html" />
+    <Content Include="Scripts\multiple-select-master\multiple-select.css" />
+    <Content Include="Scripts\multiple-select-master\multiple-select.js" />
+    <Content Include="Scripts\multiple-select-master\multiple-select.png" />
+    <Content Include="Scripts\TreeGrid\1.html" />
+    <Content Include="Scripts\TreeGrid\application.js" />
+    <Content Include="Scripts\TreeGrid\images\defaultLeaf.gif" />
+    <Content Include="Scripts\TreeGrid\images\folderClose.png" />
+    <Content Include="Scripts\TreeGrid\images\folderOpen.png" />
+    <Content Include="Scripts\TreeGrid\jquery-1.7.1.js" />
+    <Content Include="Scripts\TreeGrid\TreeGrid.css" />
+    <Content Include="Scripts\TreeGrid\TreeGrid.js" />
+    <Content Include="Styles\TreeGrid.css" />
+    <Content Include="SystemConfiguration\TargetPlanDetailReported.aspx" />
+    <Content Include="WebService\MobileCommonWebService.asmx" />
+    <Content Include="WebService\MobileCommon\BaseWebService.asmx" />
+    <Content Include="AjaxHander\DownLoadDSExcel.aspx" />
+    <Content Include="App_Data\modelFile\CompanyProperty.xml" />
+    <Content Include="App_Data\modelFile\ComplateTargetDetail.xml" />
+    <Content Include="App_Data\modelFile\Misstarget.xml" />
+    <Content Include="BusinessReport\CompanyTmpl.html" />
+    <Content Include="BusinessReport\GroupTargetApprove.aspx" />
+    <Content Include="BusinessReport\MissTargerDirectlyRpt.html" />
+    <Content Include="BusinessReport\DirectlyTargetApprove.aspx" />
+    <Content Include="BusinessReport\ModifiedErrorData.aspx" />
+    <Content Include="BusinessReport\MonthlyReportActionTmpl.html" />
+    <Content Include="BusinessReport\TargetDirectlyMissTargetReportTmpl.html" />
+    <Content Include="BusinessReport\TargetDirectlyRpt.aspx" />
+    <Content Include="BusinessReport\TargetDirectlyRpt.html" />
+    <Content Include="BusinessReport\TargetApprove.aspx" />
+    <Content Include="BusinessReport\TargetDirectlyReportedTmpl.html" />
+    <Content Include="BusinessReport\TargetDirectlyReported.aspx" />
+    <Content Include="BusinessReport\TargetGroupReported.aspx" />
+    <Content Include="BusinessReport\TargetGroupRpt.aspx" />
+    <Content Include="BusinessReport\TargetGroupReported.html" />
+    <Content Include="BusinessReport\TargetGroupRptTmpl.html" />
+    <Content Include="BusinessReport\TargetPlanDetailApprove.aspx" />
+    <Content Include="BusinessReport\TargetPlanDetailRpt.aspx" />
+    <Content Include="BusinessReport\TargetPlanDetailRpt_B.aspx" />
+    <Content Include="BusinessReport\TargetProRpt.html" />
+    <Content Include="BusinessReport\TargetReportApproveTime.aspx" />
+    <Content Include="BusinessReport\TargetReported.aspx" />
+    <Content Include="BusinessReport\TargetRpt.aspx" />
+    <Content Include="BusinessReport\TargetProReported.aspx" />
+    <Content Include="BusinessReport\ProMonthReport.aspx" />
+    <Content Include="BusinessReport\ProTargetReturnTmpl.html" />
+    <Content Include="BusinessReport\ProTargetApprove.aspx" />
+    <Content Include="BusinessReport\TargetSimpleReport.aspx" />
+    <Content Include="BusinessReport\TargetPlanDetailReported.aspx" />
+    <Content Include="BusinessReport\TargetPlanDetailReportedTmpl.html" />
+    <Content Include="ContrastMisstargetDetail.aspx" />
+    <Content Include="Demo\TargetCollectDetail.aspx" />
+    <Content Include="Demo\TargetTotalDetail.aspx" />
+    <Content Include="DepartmentStoreReport\DSTargetAddDataReport.aspx" />
+    <Content Include="DepartmentStoreReport\DSTargetCompletedReport.aspx" />
+    <Content Include="DepartmentStoreReport\DSTargetReport.aspx" />
+    <Content Include="DepartmentStoreReport\DSTargetReturnDataReport.aspx" />
+    <Content Include="DepartmentStoreReport\DSTargetSumReport.aspx" />
+    <Content Include="DllReference\Newtonsoft.Json.dll" />
+    <Content Include="DllReference\Wanda.Platform.Permission.ClientComponent.dll" />
+    <Content Include="DllReference\Wanda.Platform.Permission.ClientComponent.pdb" />
+    <Content Include="DllReference\Wanda.Platform.Permission.Common.dll" />
+    <Content Include="DllReference\Wanda.Platform.Permission.Common.pdb" />
+    <Content Include="DllReference\Wanda.Platform.Permission.Contract.dll" />
+    <Content Include="DllReference\Wanda.Platform.Permission.Contract.pdb" />
+    <Content Include="DllReference\Wanda.Platform.WorkFlow.ClientComponent.dll" />
+    <Content Include="DllReference\Wanda.Platform.WorkFlow.ClientComponent.pdb" />
+    <Content Include="DllReference\Wanda.Workflow.Client.dll" />
+    <Content Include="DllReference\Wanda.Workflow.Object.dll" />
+    <Content Include="Error.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\1.jpg" />
+    <Content Include="Images\2.jpg" />
+    <Content Include="Images\403_01.gif" />
+    <Content Include="Images\404_03.gif" />
+    <Content Include="Images\add.png" />
+    <Content Include="Images\add1.png" />
+    <Content Include="Images\add3.png" />
+    <Content Include="Images\AddIcon.png" />
+    <Content Include="Images\ajax-loader.gif" />
+    <Content Include="Images\ajax-loader2.gif" />
+    <Content Include="Images\alarm.png" />
+    <Content Include="Images\alarmicon.png" />
+    <Content Include="Images\arrow.png" />
+    <Content Include="Images\arrowRight.png" />
+    <Content Include="Images\assesment.gif" />
+    <Content Include="Images\bd_title_1.gif" />
+    <Content Include="Images\bd_title_c.gif" />
+    <Content Include="Images\bg.gif" />
+    <Content Include="Images\bg.png" />
+    <Content Include="Images\bianzhi.png" />
+    <Content Include="Images\biaodan_title.gif" />
+    <Content Include="Images\biaodan_title_c.gif" />
+    <Content Include="Images\biaodan_title_l.gif" />
+    <Content Include="Images\biaodan_title_r.gif" />
+    <Content Include="Images\blue_bg.png" />
+    <Content Include="Images\btn.png" />
+    <Content Include="Images\btn01.png" />
+    <Content Include="Images\btn02.png" />
+    <Content Include="Images\btn03%28old%29.png" />
+    <Content Include="Images\btn03.png" />
+    <Content Include="Images\btn04.png" />
+    <Content Include="Images\btn05.png" />
+    <Content Include="Images\btn06.png" />
+    <Content Include="Images\btn07.png" />
+    <Content Include="Images\btn08.png" />
+    <Content Include="Images\btn\btn_t1.png" />
+    <Content Include="Images\btn\btn_t1_f4.png" />
+    <Content Include="Images\btn\btn_t1_f4_hover.png" />
+    <Content Include="Images\btn\btn_t1_f5.png" />
+    <Content Include="Images\btn\btn_t1_f5_hover.png" />
+    <Content Include="Images\btn\btn_t1_f6.png" />
+    <Content Include="Images\btn\btn_t1_f6_hover.png" />
+    <Content Include="Images\btn\btn_t1_hover.png" />
+    <Content Include="Images\btn\btn_t2_f4.png" />
+    <Content Include="Images\btn\btn_t2_f6.png" />
+    <Content Include="Images\btn\button_bg.png" />
+    <Content Include="Images\btn\button_bg_hover.png" />
+    <Content Include="Images\btn\listbutton_down.png" />
+    <Content Include="Images\btn\listbutton_left.png" />
+    <Content Include="Images\btn\listbutton_oneleft.png" />
+    <Content Include="Images\btn\listbutton_oneright.png" />
+    <Content Include="Images\btn\listbutton_right.png" />
+    <Content Include="Images\btn\listbutton_up.png" />
+    <Content Include="Images\btn_bg.png" />
+    <Content Include="Images\btn_blue.png" />
+    <Content Include="Images\btn_blue_l.png" />
+    <Content Include="Images\btn_blue_r.png" />
+    <Content Include="Images\btn_down01.png" />
+    <Content Include="Images\btn_down02.png" />
+    <Content Include="Images\btn_down02_w.png" />
+    <Content Include="Images\btn_down03_w.png" />
+    <Content Include="Images\btn_down03.png" />
+    <Content Include="Images\btn_down04.png" />
+    <Content Include="Images\btn_gray_l.png" />
+    <Content Include="Images\btn_gray_r.png" />
+    <Content Include="Images\btn_left01.png" />
+    <Content Include="Images\btn_left02.png" />
+    <Content Include="Images\btn_right01.png" />
+    <Content Include="Images\btn_search_bg.png" />
+    <Content Include="Images\btn_up01.png" />
+    <Content Include="Images\btn_up02.png" />
+    <Content Include="Images\b_l.png" />
+    <Content Include="Images\b_m.png" />
+    <Content Include="Images\b_r.png" />
+    <Content Include="Images\calendar.gif" />
+    <Content Include="Images\caption_bg.png" />
+    <Content Include="Images\collectTab_thead_bg.png" />
+    <Content Include="Images\collectTitle_bg.png" />
+    <Content Include="Images\collectTitle_down.png" />
+    <Content Include="Images\collectTitle_icon.png" />
+    <Content Include="Images\collectTitle_up.png" />
+    <Content Include="Images\confrim.png" />
+    <Content Include="Images\content_bg.png" />
+    <Content Include="Images\date.png" />
+    <Content Include="Images\date_bg.png" />
+    <Content Include="Images\date_header.png" />
+    <Content Include="Images\del.png" />
+    <Content Include="Images\department.png" />
+    <Content Include="Images\detailtoggle.png" />
+    <Content Include="Images\diy_b.png" />
+    <Content Include="Images\diy_line.png" />
+    <Content Include="Images\diy_nav_l.png" />
+    <Content Include="Images\diy_nav_r.png" />
+    <Content Include="Images\doc.gif" />
+    <Content Include="Images\down.png" />
+    <Content Include="Images\down01.png" />
+    <Content Include="Images\down02.png" />
+    <Content Include="Images\down03.png" />
+    <Content Include="Images\down_btn.png" />
+    <Content Include="Images\dqyj.png" />
+    <Content Include="Images\duty_down .png" />
+    <Content Include="Images\duty_title.png" />
+    <Content Include="Images\duty_up.png" />
+    <Content Include="Images\Errorgb.jpg" />
+    <Content Include="Images\exit.png" />
+    <Content Include="Images\exit02.png" />
+    <Content Include="Images\eye.png" />
+    <Content Include="Images\Female_Light.png" />
+    <Content Include="Images\flowCurrent.png" />
+    <Content Include="Images\flowNode.png" />
+    <Content Include="Images\flowPassed.jpg" />
+    <Content Include="Images\footer_bg.png" />
+    <Content Include="Images\footer_bg02.png" />
+    <Content Include="Images\form_title_new.jpg" />
+    <Content Include="Images\form_title_new1.jpg" />
+    <Content Include="Images\genzong.png" />
+    <Content Include="Images\glyphicons-halflings.png" />
+    <Content Include="Images\go01.png" />
+    <Content Include="Images\go02.png" />
+    <Content Include="Images\gray_bg.png" />
+    <Content Include="Images\greenlight.png" />
+    <Content Include="Images\guanli.png" />
+    <Content Include="Images\header_bg.png" />
+    <Content Include="Images\header_bg02.png" />
+    <Content Include="Images\help.png" />
+    <Content Include="Images\home.gif" />
+    <Content Include="Images\home.png" />
+    <Content Include="Images\icon.png" />
+    <Content Include="Images\icon01.png" />
+    <Content Include="Images\icon02.png" />
+    <Content Include="Images\icon03.png" />
+    <Content Include="Images\icon04.png" />
+    <Content Include="Images\icon05.png" />
+    <Content Include="Images\icon06.png" />
+    <Content Include="Images\icon07.png" />
+    <Content Include="Images\icon08.png" />
+    <Content Include="Images\icon09.png" />
+    <Content Include="Images\icon10.png" />
+    <Content Include="Images\icon11.png" />
+    <Content Include="Images\icon12.png" />
+    <Content Include="Images\icon13.png" />
+    <Content Include="Images\icon\01-14.png" />
+    <Content Include="Images\icon\02-14.png" />
+    <Content Include="Images\icon\03-14.png" />
+    <Content Include="Images\icon\add.png" />
+    <Content Include="Images\icon\due.png" />
+    <Content Include="Images\icon\icon01.png" />
+    <Content Include="Images\icon\icon02.png" />
+    <Content Include="Images\icon\icon03.png" />
+    <Content Include="Images\icon\icon04.png" />
+    <Content Include="Images\icon\icon05.png" />
+    <Content Include="Images\icon\icon06_hiden.png" />
+    <Content Include="Images\icon\icon06_hiden_backup.png" />
+    <Content Include="Images\icon\icon06_show.png" />
+    <Content Include="Images\icon\icon06_show_backup.png" />
+    <Content Include="Images\icon\icon09_down.png" />
+    <Content Include="Images\icon\icon09_up.png" />
+    <Content Include="Images\icon\icon10_down_t2.png" />
+    <Content Include="Images\icon\icon10_up_t2.png" />
+    <Content Include="Images\icon\icon11.png" />
+    <Content Include="Images\icon\icon12.png" />
+    <Content Include="Images\icon\icon13.png" />
+    <Content Include="Images\icon\icon14.png" />
+    <Content Include="Images\icon\icon15.png" />
+    <Content Include="Images\icon\icon16.png" />
+    <Content Include="Images\icon\icon17.png" />
+    <Content Include="Images\icon\icon18.png" />
+    <Content Include="Images\icon\icon19.png" />
+    <Content Include="Images\icon\icon20.png" />
+    <Content Include="Images\icon\icon21.png" />
+    <Content Include="Images\icon\icon22.png" />
+    <Content Include="Images\icon\icon24.png" />
+    <Content Include="Images\icon\icon25.png" />
+    <Content Include="Images\icon\icon26.png" />
+    <Content Include="Images\icon\icon27.png" />
+    <Content Include="Images\icon\icon28.png" />
+    <Content Include="Images\icon\icon29.png" />
+    <Content Include="Images\icon\icon30.png" />
+    <Content Include="Images\icon\icon31.png" />
+    <Content Include="Images\icon\icon32.png" />
+    <Content Include="Images\icon\icon33.png" />
+    <Content Include="Images\icon\icon34.png" />
+    <Content Include="Images\icon\icon35.png" />
+    <Content Include="Images\icon\icon36.png" />
+    <Content Include="Images\icon\icon37.png" />
+    <Content Include="Images\icon\icon38.png" />
+    <Content Include="Images\icon\icon39.png" />
+    <Content Include="Images\icon\icon40.png" />
+    <Content Include="Images\icon\icon41.png" />
+    <Content Include="Images\icon\icon42.png" />
+    <Content Include="Images\icon\icon43.png" />
+    <Content Include="Images\icon\month_task.png" />
+    <Content Include="Images\icon\warning.png" />
+    <Content Include="Images\icon_05.gif" />
+    <Content Include="Images\icon_begin.png" />
+    <Content Include="Images\icon_hot.gif" />
+    <Content Include="Images\icon_over.png" />
+    <Content Include="Images\ico\61.png" />
+    <Content Include="Images\ico\62.png" />
+    <Content Include="Images\ico\63.png" />
+    <Content Include="Images\ico\64.png" />
+    <Content Include="Images\ico\71.png" />
+    <Content Include="Images\ico\72.png" />
+    <Content Include="Images\ico\77.png" />
+    <Content Include="Images\ico\78.png" />
+    <Content Include="Images\ico\ad.png" />
+    <Content Include="Images\ico\ar.png" />
+    <Content Include="Images\ico\coin_gold.png" />
+    <Content Include="Images\ico\green_flag.png" />
+    <Content Include="Images\ico\home3.gif" />
+    <Content Include="Images\ico\L0.gif" />
+    <Content Include="Images\ico\L1.gif" />
+    <Content Include="Images\ico\L2.gif" />
+    <Content Include="Images\ico\L3.gif" />
+    <Content Include="Images\ico\light_red.png" />
+    <Content Include="Images\ico\money-bag-yen.png" />
+    <Content Include="Images\ico\red_flag.png" />
+    <Content Include="Images\ico\ruler_pencil.png" />
+    <Content Include="Images\ico\todo.gif" />
+    <Content Include="Images\identifying.png" />
+    <Content Include="Images\images1\arrow.png" />
+    <Content Include="Images\images1\btn_current_l.png" />
+    <Content Include="Images\images1\btn_current_r.png" />
+    <Content Include="Images\images1\btn_l.png" />
+    <Content Include="Images\images1\btn_r.png" />
+    <Content Include="Images\images1\Down.png" />
+    <Content Include="Images\images1\favicon.ico" />
+    <Content Include="Images\images1\gray_bg.png" />
+    <Content Include="Images\images1\image1.png" />
+    <Content Include="Images\images1\image10.png" />
+    <Content Include="Images\images1\image11.png" />
+    <Content Include="Images\images1\image12.png" />
+    <Content Include="Images\images1\image2.png" />
+    <Content Include="Images\images1\image3.png" />
+    <Content Include="Images\images1\image4.png" />
+    <Content Include="Images\images1\image5.png" />
+    <Content Include="Images\images1\image6.png" />
+    <Content Include="Images\images1\image7.png" />
+    <Content Include="Images\images1\image8.png" />
+    <Content Include="Images\images1\image9.png" />
+    <Content Include="Images\images1\Left.png" />
+    <Content Include="Images\images1\menu_bg.png" />
+    <Content Include="Images\images1\paixue.gif" />
+    <Content Include="Images\images1\Right.png" />
+    <Content Include="Images\images1\sort_hx.png" />
+    <Content Include="Images\images1\sort_yx.png" />
+    <Content Include="Images\images1\sort_yx2.png" />
+    <Content Include="Images\images1\tip_b_l.png" />
+    <Content Include="Images\images1\tip_b_r.png" />
+    <Content Include="Images\images1\tip_t_l.png" />
+    <Content Include="Images\images1\tip_t_r.png" />
+    <Content Include="Images\images1\Up.png" />
+    <Content Include="Images\images\content_b_l.png" />
+    <Content Include="Images\images\content_b_r.png" />
+    <Content Include="Images\images\content_t_l.png" />
+    <Content Include="Images\images\content_t_r.png" />
+    <Content Include="Images\images\footer_bg.png" />
+    <Content Include="Images\images\nav_bg.png" />
+    <Content Include="Images\images\nav_l.png" />
+    <Content Include="Images\images\nav_r.png" />
+    <Content Include="Images\import.png" />
+    <Content Include="Images\inbnt64x23.png" />
+    <Content Include="Images\info_icon.png" />
+    <Content Include="Images\jinshi.png" />
+    <Content Include="Images\light_green_12.png" />
+    <Content Include="Images\light_red_12.png" />
+    <Content Include="Images\light_yellow_12.png" />
+    <Content Include="Images\line.gif" />
+    <Content Include="Images\line.png" />
+    <Content Include="Images\line2.png" />
+    <Content Include="Images\line_down.png" />
+    <Content Include="Images\line_up.png" />
+    <Content Include="Images\linkblue.png" />
+    <Content Include="Images\listbutton_down.png" />
+    <Content Include="Images\listbutton_left.png" />
+    <Content Include="Images\listbutton_oneleft.png" />
+    <Content Include="Images\listbutton_oneright.png" />
+    <Content Include="Images\listbutton_right.png" />
+    <Content Include="Images\listbutton_up.png" />
+    <Content Include="Images\login_bg.png" />
+    <Content Include="Images\login_btn.png" />
+    <Content Include="Images\login_logn.png" />
+    <Content Include="Images\login_user.png" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\logo1.png" />
+    <Content Include="Images\logo2.png" />
+    <Content Include="Images\Male_Light.png" />
+    <Content Include="Images\map.png" />
+    <Content Include="Images\Map\map_bg.png" />
+    <Content Include="Images\men.png" />
+    <Content Include="Images\modify.png" />
+    <Content Include="Images\month_bg.png" />
+    <Content Include="Images\m_l.png" />
+    <Content Include="Images\m_r.png" />
+    <Content Include="Images\nav_bg.png" />
+    <Content Include="Images\nav_l.png" />
+    <Content Include="Images\nav_l01.png" />
+    <Content Include="Images\nav_r.png" />
+    <Content Include="Images\nav_r02.png" />
+    <Content Include="Images\ok.png" />
+    <Content Include="Images\oringe.png" />
+    <Content Include="Images\over.png" />
+    <Content Include="Images\peoexit.png" />
+    <Content Include="Images\people.png" />
+    <Content Include="Images\picture.png" />
+    <Content Include="Images\popup\btn05_l.png" />
+    <Content Include="Images\popup\btn05_r.png" />
+    <Content Include="Images\popup\b_l.png" />
+    <Content Include="Images\popup\b_m.png" />
+    <Content Include="Images\popup\b_r.png" />
+    <Content Include="Images\popup\exit.png" />
+    <Content Include="Images\popup\help.png" />
+    <Content Include="Images\popup\m_l.png" />
+    <Content Include="Images\popup\m_r.png" />
+    <Content Include="Images\popup\pop_icon01.png" />
+    <Content Include="Images\popup\pop_icon02.png" />
+    <Content Include="Images\popup\pop_icon03.png" />
+    <Content Include="Images\popup\pop_icon_view.png" />
+    <Content Include="Images\popup\pop_icon_warn.png" />
+    <Content Include="Images\popup\title_bg.png" />
+    <Content Include="Images\popup\t_l.png" />
+    <Content Include="Images\popup\t_m.png" />
+    <Content Include="Images\popup\t_r.png" />
+    <Content Include="Images\popup_box_title.png" />
+    <Content Include="Images\pop_title_l.png" />
+    <Content Include="Images\pop_title_r.png" />
+    <Content Include="Images\process.png" />
+    <Content Include="Images\reject.png" />
+    <Content Include="Images\remove.png" />
+    <Content Include="Images\report\2222.png" />
+    <Content Include="Images\report\add.gif" />
+    <Content Include="Images\report\btn03.png" />
+    <Content Include="Images\report\btn04.png" />
+    <Content Include="Images\report\delete1.png" />
+    <Content Include="Images\report\delete2.gif" />
+    <Content Include="Images\report\e.png" />
+    <Content Include="Images\report\edit.png" />
+    <Content Include="Images\report\gantan.gif" />
+    <Content Include="Images\report\revoke.png" />
+    <Content Include="Images\report\save.gif" />
+    <Content Include="Images\reset_bg.png" />
+    <Content Include="Images\return.png" />
+    <Content Include="Images\revoke.png" />
+    <Content Include="Images\save.png" />
+    <Content Include="Images\scroll\1.png" />
+    <Content Include="Images\scroll\2.png" />
+    <Content Include="Images\scroll\3.png" />
+    <Content Include="Images\scroll\4.png" />
+    <Content Include="Images\scroll\fscroll_bg.png" />
+    <Content Include="Images\scroll\fscroll_bg2.png" />
+    <Content Include="Images\scroll\fscroll_middle.png" />
+    <Content Include="Images\scroll\fscroll_middle2.png" />
+    <Content Include="Images\scroll\left.png" />
+    <Content Include="Images\scroll\right.png" />
+    <Content Include="Images\scroll\scroll_bg.png" />
+    <Content Include="Images\search.gif" />
+    <Content Include="Images\search.png" />
+    <Content Include="Images\search_22.png" />
+    <Content Include="Images\search_32.png" />
+    <Content Include="Images\select_l .png" />
+    <Content Include="Images\select_r.png" />
+    <Content Include="Images\setting.png" />
+    <Content Include="Images\shrink.png" />
+    <Content Include="Images\shuju.png" />
+    <Content Include="Images\sidebar_cerrent.png" />
+    <Content Include="Images\sidebar_hover.png" />
+    <Content Include="Images\sigema.png" />
+    <Content Include="Images\slither_bg.png" />
+    <Content Include="Images\slither_current.png" />
+    <Content Include="Images\slither_current1.png" />
+    <Content Include="Images\slither_current2.png" />
+    <Content Include="Images\spread.png" />
+    <Content Include="Images\tab01_title_l.png" />
+    <Content Include="Images\tab01_title_r.png" />
+    <Content Include="Images\tabs2_current_l.png" />
+    <Content Include="Images\tabs2_current_r.png" />
+    <Content Include="Images\tabs2_l.png" />
+    <Content Include="Images\tabs2_r.png" />
+    <Content Include="Images\tabs3_l.png" />
+    <Content Include="Images\tabs3_r.png" />
+    <Content Include="Images\tab_bg.png" />
+    <Content Include="Images\tab_bg2.png" />
+    <Content Include="Images\tab_bg_2.png" />
+    <Content Include="Images\tab_l.png" />
+    <Content Include="Images\tab_l01.png" />
+    <Content Include="Images\tab_r.png" />
+    <Content Include="Images\tab_r02.png" />
+    <Content Include="Images\task.png" />
+    <Content Include="Images\thead.jpg" />
+    <Content Include="Images\thead2.jpg" />
+    <Content Include="Images\thead3.png" />
+    <Content Include="Images\thead4.png" />
+    <Content Include="Images\title2_bg.png" />
+    <Content Include="Images\title2_r.png" />
+    <Content Include="Images\title_bg.png" />
+    <Content Include="Images\title_l.png" />
+    <Content Include="Images\title_r.png" />
+    <Content Include="Images\t_l.png" />
+    <Content Include="Images\t_m.png" />
+    <Content Include="Images\t_r.png" />
+    <Content Include="Images\up.png" />
+    <Content Include="Images\up01.png" />
+    <Content Include="Images\up02.png" />
+    <Content Include="Images\up03.png" />
+    <Content Include="Images\user.png" />
+    <Content Include="Images\WebResource.gif" />
+    <Content Include="Images\WebResource.png" />
+    <Content Include="Images\women.png" />
+    <Content Include="Images\wrap_bg.png" />
+    <Content Include="Images\xls.gif" />
+    <Content Include="Images\year_bg.png" />
+    <Content Include="Images\yusuanzhibiao.png" />
+    <Content Include="Images\zhixing.png" />
+    <Content Include="Images\zqyj.png" />
+    <Content Include="Images\zxx_dotted.gif" />
+    <Content Include="BusinessReport\TargetReturnTmpl.html" />
+    <Content Include="BusinessReport\TargetRptTmpl.html" />
+    <Content Include="Default.aspx" />
+    <Content Include="index.html" />
+    <Content Include="NoPermission.aspx" />
+    <Content Include="ProcessResource\css\wfStyle-201.88.css" />
+    <Content Include="ProcessResource\js\wanda-wf-client-201.88.js" />
+    <Content Include="Scripts\BusinessReport\CompanyList.js" />
+    <Content Include="Scripts\BusinessReport\ContrastCompany.js" />
+    <Content Include="Scripts\BusinessReport\ContrastComplete.js" />
+    <Content Include="Scripts\BusinessReport\ContrastDetail.js" />
+    <Content Include="Scripts\BusinessReport\ContrastMisstarget.js" />
+    <Content Include="Scripts\BusinessReport\DirectlyMonthReport.js" />
+    <Content Include="Scripts\BusinessReport\DirectlyTargetApprove.js" />
+    <Content Include="Scripts\BusinessReport\DocumentTree.js" />
+    <Content Include="Scripts\BusinessReport\ExceptionTarget.js" />
+    <Content Include="Scripts\BusinessReport\FloatTable.js" />
+    <Content Include="Scripts\BusinessReport\GroupMonthReport.js" />
+    <Content Include="Scripts\BusinessReport\GroupTargetApprove.js" />
+    <Content Include="Scripts\BusinessReport\HistoryReturn.js" />
+    <Content Include="Scripts\BusinessReport\MonthRptConfig.js" />
+    <Content Include="Scripts\BusinessReport\ReportApprove.js" />
+    <Content Include="Scripts\BusinessReport\Scrolltable.js" />
+    <Content Include="Scripts\BusinessReport\TargetApprove.js" />
+    <Content Include="Scripts\BusinessReport\TargetCollect.js" />
+    <Content Include="Scripts\BusinessReport\TargetCollect_B.js" />
+    <Content Include="Scripts\BusinessReport\TargetConfiguration.js" />
+    <Content Include="Scripts\BusinessReport\TargetDirectlyReported.js" />
+    <Content Include="Scripts\BusinessReport\TargetGroupReported.js" />
+    <Content Include="Scripts\BusinessReport\TargetHistory.js" />
+    <Content Include="Scripts\BusinessReport\TargetPlanDetailApprove.js" />
+    <Content Include="Scripts\BusinessReport\TargetPlanDetailRpt.js" />
+    <Content Include="Scripts\BusinessReport\TargetPlanDetailRpt_B.js" />
+    <Content Include="Scripts\BusinessReport\TargetReported.js" />
+    <Content Include="Scripts\BusinessReport\TargetReported1.js" />
+    <Content Include="Scripts\BusinessReport\TargetPlanDetailReported.js" />
+    <Content Include="Scripts\BusinessReport\TimeConfiguration.js" />
+    <Content Include="Scripts\BusinessReport\UpLoadDocumentManager.js" />
+    <Content Include="Scripts\BusinessReport\UserControl.js" />
+    <Content Include="Scripts\BusinessReport\TargetProReported.js" />
+    <Content Include="Scripts\BusinessReport\ProMonthReport.js" />
+    <Content Include="Scripts\BusinessReport\ProTargetApprove.js" />
+    <Content Include="Scripts\BusinessReport\TargetProReported1.js" />
+    <Content Include="Scripts\CloneTableHeader.js" />
+    <Content Include="Scripts\DepartmentStoreReportjs\DSTargetAddDataReportjs.js" />
+    <Content Include="Scripts\DepartmentStoreReportjs\DSTargetCompletedReportjs.js" />
+    <Content Include="Scripts\DepartmentStoreReportjs\DSTargetReportjs.js" />
+    <Content Include="Scripts\DepartmentStoreReportjs\DSTargetReturnDataReportjs.js" />
+    <Content Include="Scripts\DepartmentStoreReportjs\DSTargetSumReportjs.js" />
+    <Content Include="Scripts\jMenu.jquery.min.js" />
+    <Content Include="Scripts\admin.js" />
+    <Content Include="Scripts\artDialog\artDialog.js" />
+    <Content Include="Scripts\artDialog\artDialog.source.js" />
+    <Content Include="Scripts\artDialog\jquery.artDialog.js" />
+    <Content Include="Scripts\artDialog\jquery.artDialog.source.js" />
+    <Content Include="Scripts\artDialog\plugins\iframeTools.js" />
+    <Content Include="Scripts\artDialog\plugins\iframeTools.source.js" />
+    <Content Include="Scripts\artDialog\skins\aero.css" />
+    <Content Include="Scripts\artDialog\skins\aero\aero_s.png" />
+    <Content Include="Scripts\artDialog\skins\aero\aero_s2.png" />
+    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_close.hover.png" />
+    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_close.png" />
+    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_e.png" />
+    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_n.png" />
+    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_ne.png" />
+    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_nw.png" />
+    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_s.png" />
+    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_se.png" />
+    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_sw.png" />
+    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_title_icon.png" />
+    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_w.png" />
+    <Content Include="Scripts\artDialog\skins\black.css" />
+    <Content Include="Scripts\artDialog\skins\black\bg.png" />
+    <Content Include="Scripts\artDialog\skins\black\bg2.png" />
+    <Content Include="Scripts\artDialog\skins\black\bg_css3.png" />
+    <Content Include="Scripts\artDialog\skins\black\bg_css3_2.png" />
+    <Content Include="Scripts\artDialog\skins\black\ie6\close.hover.png" />
+    <Content Include="Scripts\artDialog\skins\black\ie6\close.png" />
+    <Content Include="Scripts\artDialog\skins\black\ie6\e.png" />
+    <Content Include="Scripts\artDialog\skins\black\ie6\n.png" />
+    <Content Include="Scripts\artDialog\skins\black\ie6\ne.png" />
+    <Content Include="Scripts\artDialog\skins\black\ie6\nw.png" />
+    <Content Include="Scripts\artDialog\skins\black\ie6\s.png" />
+    <Content Include="Scripts\artDialog\skins\black\ie6\se.png" />
+    <Content Include="Scripts\artDialog\skins\black\ie6\sw.png" />
+    <Content Include="Scripts\artDialog\skins\black\ie6\w.png" />
+    <Content Include="Scripts\artDialog\skins\blue.css" />
+    <Content Include="Scripts\artDialog\skins\blue\bg.png" />
+    <Content Include="Scripts\artDialog\skins\blue\bg2.png" />
+    <Content Include="Scripts\artDialog\skins\blue\bg_css3.png" />
+    <Content Include="Scripts\artDialog\skins\blue\bg_css3_2.png" />
+    <Content Include="Scripts\artDialog\skins\blue\ie6\close.hover.png" />
+    <Content Include="Scripts\artDialog\skins\blue\ie6\close.png" />
+    <Content Include="Scripts\artDialog\skins\blue\ie6\e.png" />
+    <Content Include="Scripts\artDialog\skins\blue\ie6\n.png" />
+    <Content Include="Scripts\artDialog\skins\blue\ie6\ne.png" />
+    <Content Include="Scripts\artDialog\skins\blue\ie6\nw.png" />
+    <Content Include="Scripts\artDialog\skins\blue\ie6\s.png" />
+    <Content Include="Scripts\artDialog\skins\blue\ie6\se.png" />
+    <Content Include="Scripts\artDialog\skins\blue\ie6\sw.png" />
+    <Content Include="Scripts\artDialog\skins\blue\ie6\w.png" />
+    <Content Include="Scripts\artDialog\skins\chrome.css" />
+    <Content Include="Scripts\artDialog\skins\chrome\border.png" />
+    <Content Include="Scripts\artDialog\skins\chrome\chrome_s.png" />
+    <Content Include="Scripts\artDialog\skins\default.css" />
+    <Content Include="Scripts\artDialog\skins\green.css" />
+    <Content Include="Scripts\artDialog\skins\green\bg.png" />
+    <Content Include="Scripts\artDialog\skins\green\bg2.png" />
+    <Content Include="Scripts\artDialog\skins\green\bg_css3.png" />
+    <Content Include="Scripts\artDialog\skins\green\bg_css3_2.png" />
+    <Content Include="Scripts\artDialog\skins\green\color_bg.png" />
+    <Content Include="Scripts\artDialog\skins\green\ie6\close.hover.png" />
+    <Content Include="Scripts\artDialog\skins\green\ie6\close.png" />
+    <Content Include="Scripts\artDialog\skins\green\ie6\e.png" />
+    <Content Include="Scripts\artDialog\skins\green\ie6\n.png" />
+    <Content Include="Scripts\artDialog\skins\green\ie6\ne.png" />
+    <Content Include="Scripts\artDialog\skins\green\ie6\nw.png" />
+    <Content Include="Scripts\artDialog\skins\green\ie6\s.png" />
+    <Content Include="Scripts\artDialog\skins\green\ie6\se.png" />
+    <Content Include="Scripts\artDialog\skins\green\ie6\sw.png" />
+    <Content Include="Scripts\artDialog\skins\green\ie6\w.png" />
+    <Content Include="Scripts\artDialog\skins\icons\error.png" />
+    <Content Include="Scripts\artDialog\skins\icons\face-sad.png" />
+    <Content Include="Scripts\artDialog\skins\icons\face-smile.png" />
+    <Content Include="Scripts\artDialog\skins\icons\loading.gif" />
+    <Content Include="Scripts\artDialog\skins\icons\question.png" />
+    <Content Include="Scripts\artDialog\skins\icons\succeed.png" />
+    <Content Include="Scripts\artDialog\skins\icons\warning.png" />
+    <Content Include="Scripts\artDialog\skins\idialog.css" />
+    <Content Include="Scripts\artDialog\skins\idialog\idialog_s.png" />
+    <Content Include="Scripts\artDialog\skins\idialog\idialog_s2.png" />
+    <Content Include="Scripts\artDialog\skins\idialog\ie6\aui_close.hover.png" />
+    <Content Include="Scripts\artDialog\skins\idialog\ie6\aui_close.png" />
+    <Content Include="Scripts\artDialog\skins\idialog\ie6\aui_e.png" />
+    <Content Include="Scripts\artDialog\skins\idialog\ie6\aui_n.png" />
+    <Content Include="Scripts\artDialog\skins\idialog\ie6\aui_ne.png" />
+    <Content Include="Scripts\artDialog\skins\idialog\ie6\aui_nw.png" />
+    <Content Include="Scripts\artDialog\skins\idialog\ie6\aui_s.png" />
+    <Content Include="Scripts\artDialog\skins\idialog\ie6\aui_se.png" />
+    <Content Include="Scripts\artDialog\skins\idialog\ie6\aui_sw.png" />
+    <Content Include="Scripts\artDialog\skins\idialog\ie6\aui_w.png" />
+    <Content Include="Scripts\artDialog\skins\opera.css" />
+    <Content Include="Scripts\artDialog\skins\opera\ie6\aui_close.hover.png" />
+    <Content Include="Scripts\artDialog\skins\opera\ie6\aui_close.png" />
+    <Content Include="Scripts\artDialog\skins\opera\ie6\aui_e.png" />
+    <Content Include="Scripts\artDialog\skins\opera\ie6\aui_n.png" />
+    <Content Include="Scripts\artDialog\skins\opera\ie6\aui_ne.png" />
+    <Content Include="Scripts\artDialog\skins\opera\ie6\aui_nw.png" />
+    <Content Include="Scripts\artDialog\skins\opera\ie6\aui_s.png" />
+    <Content Include="Scripts\artDialog\skins\opera\ie6\aui_se.png" />
+    <Content Include="Scripts\artDialog\skins\opera\ie6\aui_sw.png" />
+    <Content Include="Scripts\artDialog\skins\opera\ie6\aui_w.png" />
+    <Content Include="Scripts\artDialog\skins\opera\s1.png" />
+    <Content Include="Scripts\artDialog\skins\opera\s2.png" />
+    <Content Include="Scripts\artDialog\skins\simple.css" />
+    <Content Include="Scripts\artDialog\skins\twitter.css" />
+    <Content Include="Scripts\artDialog\_doc\ajaxContent\content.html" />
+    <Content Include="Scripts\artDialog\_doc\ajaxContent\googleMaps.html" />
+    <Content Include="Scripts\artDialog\_doc\ajaxContent\login.html" />
+    <Content Include="Scripts\artDialog\_doc\API.html" />
+    <Content Include="Scripts\artDialog\_doc\demo.css" />
+    <Content Include="Scripts\artDialog\_doc\demo.js" />
+    <Content Include="Scripts\artDialog\_doc\down.html" />
+    <Content Include="Scripts\artDialog\_doc\frameset.html" />
+    <Content Include="Scripts\artDialog\_doc\googleMaps.html" />
+    <Content Include="Scripts\artDialog\_doc\helloWorld.html" />
+    <Content Include="Scripts\artDialog\_doc\highlight\AUTHORS.en.txt" />
+    <Content Include="Scripts\artDialog\_doc\highlight\export.html" />
+    <Content Include="Scripts\artDialog\_doc\highlight\highlight.js" />
+    <Content Include="Scripts\artDialog\_doc\highlight\highlight.pack.js" />
+    <Content Include="Scripts\artDialog\_doc\highlight\languages\javascript.js" />
+    <Content Include="Scripts\artDialog\_doc\highlight\readme.eng.txt" />
+    <Content Include="Scripts\artDialog\_doc\highlight\styles\magula.css" />
+    <Content Include="Scripts\artDialog\_doc\highlight\test.html" />
+    <Content Include="Scripts\artDialog\_doc\iframe.html" />
+    <Content Include="Scripts\artDialog\_doc\iframeA.html" />
+    <Content Include="Scripts\artDialog\_doc\iframeB.html" />
+    <Content Include="Scripts\artDialog\_doc\iframeTop.html" />
+    <Content Include="Scripts\artDialog\_doc\iframe_frameset.html" />
+    <Content Include="Scripts\artDialog\_doc\images\alipay.jpg" />
+    <Content Include="Scripts\artDialog\_doc\images\bg.png" />
+    <Content Include="Scripts\artDialog\_doc\images\bottom.png" />
+    <Content Include="Scripts\artDialog\_doc\images\doc.png" />
+    <Content Include="Scripts\artDialog\_doc\images\lixiaolong.png" />
+    <Content Include="Scripts\artDialog\_doc\images\logo.png" />
+    <Content Include="Scripts\artDialog\_doc\images\opensource.gif" />
+    <Content Include="Scripts\artDialog\_doc\images\photo.jpg" />
+    <Content Include="Scripts\artDialog\_doc\images\text.png" />
+    <Content Include="Scripts\artDialog\_doc\labs.html" />
+    <Content Include="Scripts\artDialog\_doc\license.html" />
+    <Content Include="Scripts\artDialog\_doc\log.html" />
+    <Content Include="Scripts\artDialog\_doc\login_iframe.html" />
+    <Content Include="Scripts\artDialog\_doc\login_iframe_2.html" />
+    <Content Include="Scripts\artDialog\_doc\new.html" />
+    <Content Include="Scripts\artDialog\_doc\plugin.iframe.html" />
+    <Content Include="Scripts\artDialog\_doc\topFrame.html" />
+    <Content Include="Scripts\artDialog\_doc\upd.txt" />
+    <Content Include="Scripts\autocomplete\jquery-1.9.0.js" />
+    <Content Include="Scripts\autocomplete\jquery-ui.js" />
+    <Content Include="Scripts\autocomplete\jquery.autocomplete.js" />
+    <Content Include="Scripts\AutoMultiDropList.js" />
+    <Content Include="Scripts\base.js" />
+    <Content Include="Scripts\ChartTemplate\column.js" />
+    <Content Include="Scripts\chart\adapters\mootools-adapter.js" />
+    <Content Include="Scripts\chart\adapters\mootools-adapter.src.js" />
+    <Content Include="Scripts\chart\adapters\prototype-adapter.js" />
+    <Content Include="Scripts\chart\adapters\prototype-adapter.src.js" />
+    <Content Include="Scripts\chart\highcharts-more.js" />
+    <Content Include="Scripts\chart\highcharts.js" />
+    <Content Include="Scripts\chart\highcharts.src.js" />
+    <Content Include="Scripts\chart\modules\canvas-tools.js" />
+    <Content Include="Scripts\chart\modules\canvas-tools.src.js" />
+    <Content Include="Scripts\chart\modules\data.js" />
+    <Content Include="Scripts\chart\modules\data.src.js" />
+    <Content Include="Scripts\chart\modules\exporting.js" />
+    <Content Include="Scripts\chart\modules\exporting.src.js" />
+    <Content Include="Scripts\chart\modules\funnel.js" />
+    <Content Include="Scripts\chart\modules\funnel.src.js" />
+    <Content Include="Scripts\chart\themes\dark-blue.js" />
+    <Content Include="Scripts\chart\themes\dark-green.js" />
+    <Content Include="Scripts\chart\themes\gray.js" />
+    <Content Include="Scripts\chart\themes\grid.js" />
+    <Content Include="Scripts\chart\themes\skies.js" />
+    <Content Include="Scripts\jMenu.jquery.js" />
+    <Content Include="Scripts\jquery-1.4.3.js" />
+    <Content Include="Scripts\jquery-1.7.1.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.autocomplete.js" />
+    <Content Include="Scripts\jquery.blockUI.js" />
+    <Content Include="Scripts\jquery.boxy.js" />
+    <Content Include="Scripts\jquery.colorbox.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.easytabs.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.tmpl.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.massage.js" />
+    <Content Include="Scripts\jquery.zxxbox.3.0-min.js" />
+    <Content Include="Scripts\jquery.zxxbox.3.0.js" />
+    <Content Include="Scripts\JQueryControl.js" />
+    <Content Include="Scripts\menu.js" />
+    <Content Include="Scripts\BusinessReport\MonthReport.js" />
+    <Content Include="Scripts\My97DatePicker\calendar.js" />
+    <Content Include="Scripts\My97DatePicker\config.js" />
+    <Content Include="Scripts\My97DatePicker\lang\en.js" />
+    <Content Include="Scripts\My97DatePicker\lang\zh-cn.js" />
+    <Content Include="Scripts\My97DatePicker\lang\zh-tw.js" />
+    <Content Include="Scripts\My97DatePicker\My97DatePicker.htm" />
+    <Content Include="Scripts\My97DatePicker\skin\datePicker.gif" />
+    <Content Include="Scripts\My97DatePicker\skin\default\datepicker.css" />
+    <Content Include="Scripts\My97DatePicker\skin\default\img.gif" />
+    <Content Include="Scripts\My97DatePicker\skin\WdatePicker.css" />
+    <Content Include="Scripts\My97DatePicker\skin\whyGreen\bg.jpg" />
+    <Content Include="Scripts\My97DatePicker\skin\whyGreen\datepicker.css" />
+    <Content Include="Scripts\My97DatePicker\skin\whyGreen\img.gif" />
+    <Content Include="Scripts\My97DatePicker\WdatePicker.js" />
+    <Content Include="Scripts\My97DatePicker\开发包\lang\en.js" />
+    <Content Include="Scripts\My97DatePicker\开发包\lang\zh-cn.js" />
+    <Content Include="Scripts\My97DatePicker\开发包\lang\zh-tw.js" />
+    <Content Include="Scripts\My97DatePicker\开发包\readme.txt" />
+    <Content Include="Scripts\My97DatePicker\开发包\skin\datePicker.gif" />
+    <Content Include="Scripts\My97DatePicker\开发包\skin\default\datepicker.css" />
+    <Content Include="Scripts\My97DatePicker\开发包\skin\default\img.gif" />
+    <Content Include="Scripts\My97DatePicker\开发包\skin\WdatePicker.css" />
+    <Content Include="Scripts\My97DatePicker\开发包\skin\whyGreen\bg.jpg" />
+    <Content Include="Scripts\My97DatePicker\开发包\skin\whyGreen\datepicker.css" />
+    <Content Include="Scripts\My97DatePicker\开发包\skin\whyGreen\img.gif" />
+    <Content Include="Scripts\nav.js" />
+    <Content Include="Scripts\openUser.js" />
+    <Content Include="Scripts\BusinessReport\ApproveTime.js" />
+    <Content Include="Scripts\posfixed.js" />
+    <Content Include="Scripts\scrollbar\aplweb.scrollbars.js" />
+    <Content Include="Scripts\scrollbar\jquery.ba-resize.min.js" />
+    <Content Include="Scripts\scrollbar\jquery.event.drag-2.0.min.js" />
+    <Content Include="Scripts\scrollbar\jquery.min.js" />
+    <Content Include="Scripts\scrollbar\jquery.mousewheel.js" />
+    <Content Include="Scripts\scrollbar\mousehold.js" />
+    <Content Include="Scripts\tab-switch.js" />
+    <Content Include="Scripts\tab.js" />
+    <Content Include="Scripts\treeMenu.js" />
+    <Content Include="Scripts\ueditor\dialogs\internal.js" />
+    <Content Include="Scripts\ueditor\dialogs\preview\preview.html" />
+    <Content Include="Scripts\ueditor\dialogs\spechars\spechars.html" />
+    <Content Include="Scripts\ueditor\dialogs\spechars\spechars.js" />
+    <Content Include="Scripts\ueditor\index.html" />
+    <Content Include="Scripts\ueditor\lang\zh-cn\images\copy.png" />
+    <Content Include="Scripts\ueditor\lang\zh-cn\images\localimage.png" />
+    <Content Include="Scripts\ueditor\lang\zh-cn\images\music.png" />
+    <Content Include="Scripts\ueditor\lang\zh-cn\images\upload.png" />
+    <Content Include="Scripts\ueditor\lang\zh-cn\zh-cn.js" />
+    <Content Include="Scripts\ueditor\net\Bin\Newtonsoft.Json.dll" />
+    <Content Include="Scripts\ueditor\net\Bin\Newtonsoft.Json.pdb" />
+    <Content Include="Scripts\ueditor\net\Bin\Newtonsoft.Json.xml" />
+    <Content Include="Scripts\ueditor\net\net.sln" />
+    <Content Include="Scripts\ueditor\themes\default\css\ueditor.css" />
+    <Content Include="Scripts\ueditor\themes\default\css\ueditor.min.css" />
+    <Content Include="Scripts\ueditor\themes\default\dialogbase.css" />
+    <Content Include="Scripts\ueditor\themes\default\images\anchor.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\arrow.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\arrow_down.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\arrow_up.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\button-bg.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\cancelbutton.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\charts.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\cursor_h.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\cursor_h.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\cursor_v.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\cursor_v.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\dialog-title-bg.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\filescan.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\highlighted.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\icons-all.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\icons.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\icons.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\loaderror.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\loading.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\lock.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\neweditor-tab-bg.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\pagebreak.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\scale.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\sortable.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\spacer.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\sparator_v.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\table-cell-align.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\tangram-colorpicker.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\toolbar_bg.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\unhighlighted.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\upload.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\videologo.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\word.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\wordpaste.png" />
+    <Content Include="Scripts\ueditor\themes\iframe.css" />
+    <Content Include="Scripts\ueditor\third-party\SyntaxHighlighter\shCore.js" />
+    <Content Include="Scripts\ueditor\third-party\SyntaxHighlighter\shCoreDefault.css" />
+    <Content Include="Scripts\ueditor\ueditor.all.js" />
+    <Content Include="Scripts\ueditor\ueditor.all.min.js" />
+    <Content Include="Scripts\ueditor\ueditor.config.js" />
+    <Content Include="Scripts\ueditor\ueditor.parse.js" />
+    <Content Include="Scripts\ueditor\ueditor.parse.min.js" />
+    <Content Include="Scripts\UpLoad\jquery.uploadify.min.js" />
+    <Content Include="Scripts\UpLoad\UploadCtrl.js" />
+    <Content Include="Scripts\UpLoad\uploadify-cancel.png" />
+    <Content Include="Scripts\UpLoad\uploadify.css" />
+    <Content Include="Scripts\UpLoad\uploadify.swf" />
+    <Content Include="Scripts\Url.js" />
+    <Content Include="Scripts\UserControl.js" />
+    <Content Include="Scripts\userInput.js" />
+    <Content Include="Scripts\userWindow.js" />
+    <Content Include="Scripts\ztree\jquery-1.4.4.min.js" />
+    <Content Include="Scripts\ztree\jquery.ztree.all-3.5.js" />
+    <Content Include="Scripts\ztree\jquery.ztree.all-3.5.min.js" />
+    <Content Include="Scripts\ztree\jquery.ztree.core-3.5.js" />
+    <Content Include="Scripts\ztree\jquery.ztree.core-3.5.min.js" />
+    <Content Include="Scripts\ztree\jquery.ztree.excheck-3.5.js" />
+    <Content Include="Scripts\ztree\jquery.ztree.excheck-3.5.min.js" />
+    <Content Include="Scripts\ztree\jquery.ztree.exedit-3.5.js" />
+    <Content Include="Scripts\ztree\jquery.ztree.exedit-3.5.min.js" />
+    <Content Include="Scripts\ztree\jquery.ztree.exedit.js" />
+    <Content Include="Scripts\ztree\jquery.ztree.exhide-3.5.js" />
+    <Content Include="Scripts\ztree\jquery.ztree.exhide-3.5.min.js" />
+    <Content Include="StatisticReport\HistoryReturnReport.aspx" />
+    <Content Include="StatisticReport\HistoryReturnTmpl.html" />
+    <Content Include="Styles\Approval.css" />
+    <Content Include="Styles\button_style.css" />
+    <Content Include="Styles\colorbox.css" />
+    <Content Include="Styles\css.css" />
+    <Content Include="Styles\css\layout.css" />
+    <Content Include="Styles\css\NavStlye.css" />
+    <Content Include="Styles\css\Styles.css" />
+    <Content Include="Styles\float_layer.css" />
+    <Content Include="Styles\home.css" />
+    <Content Include="Styles\images\border.png" />
+    <Content Include="Styles\images\controls.png" />
+    <Content Include="Styles\images\loading.gif" />
+    <Content Include="Styles\images\loading_background.png" />
+    <Content Include="Styles\images\overlay.png" />
+    <Content Include="Styles\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Styles\images\ui-bg_flat_0_eeeeee_40x100.png" />
+    <Content Include="Styles\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Styles\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Styles\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Styles\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Styles\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Styles\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Styles\images\ui-components.png" />
+    <Content Include="Styles\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Styles\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Styles\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Styles\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Styles\images\ui-icons_8d78a5_256x240.png" />
+    <Content Include="Styles\images\ui-icons_a8a3ae_256x240.png" />
+    <Content Include="Styles\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Styles\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Styles\jmenu.css" />
+    <Content Include="Styles\jquery-ui.css" />
+    <Content Include="Styles\jquery.autocomplete.css" />
+    <Content Include="Styles\jquery.zxxbox.style.css" />
+    <Content Include="Styles\map.css" />
+    <Content Include="Styles\menu.css" />
+    <Content Include="Styles\mini.css" />
+    <Content Include="Styles\new_nav.css" />
+    <Content Include="Styles\OpenDivPopup.css" />
+    <Content Include="Styles\Person.css" />
+    <Content Include="Styles\popup.css" />
+    <Content Include="Styles\projectlist.css" />
+    <Content Include="Styles\public.css" />
+    <Content Include="Styles\scrollbar\scrollbars-black.css" />
+    <Content Include="Styles\scrollbar\scrollbars.css" />
+    <Content Include="Styles\simplereport.css" />
+    <Content Include="Styles\Site.css" />
+    <Content Include="Styles\style.css" />
+    <Content Include="Styles\style01.css" />
+    <Content Include="Styles\style02.css" />
+    <Content Include="Styles\StyleSheet1.css" />
+    <Content Include="Styles\userwindow.css" />
+    <Content Include="Styles\ztree\demo.css" />
+    <Content Include="Styles\ztree\img\diy\1_close.png" />
+    <Content Include="Styles\ztree\img\diy\1_open.png" />
+    <Content Include="Styles\ztree\img\diy\2.png" />
+    <Content Include="Styles\ztree\img\diy\3.png" />
+    <Content Include="Styles\ztree\img\diy\4.png" />
+    <Content Include="Styles\ztree\img\diy\5.png" />
+    <Content Include="Styles\ztree\img\diy\6.png" />
+    <Content Include="Styles\ztree\img\diy\7.png" />
+    <Content Include="Styles\ztree\img\diy\8.png" />
+    <Content Include="Styles\ztree\img\diy\9.png" />
+    <Content Include="Styles\ztree\img\line_conn.gif" />
+    <Content Include="Styles\ztree\img\loading.gif" />
+    <Content Include="Styles\ztree\img\zTreeStandard.gif" />
+    <Content Include="Styles\ztree\img\zTreeStandard.png" />
+    <Content Include="Styles\ztree\metroStyle\img\line_conn.png" />
+    <Content Include="Styles\ztree\metroStyle\img\loading.gif" />
+    <Content Include="Styles\ztree\metroStyle\img\metro.gif" />
+    <Content Include="Styles\ztree\metroStyle\img\metro.png" />
+    <Content Include="Styles\ztree\metroStyle\metroStyle.css" />
+    <Content Include="Styles\ztree\zTreeStyle.css" />
+    <Content Include="SystemConfiguration\CompanyList.aspx" />
+    <Content Include="SystemConfiguration\ContrastCompleteDetail.aspx" />
+    <Content Include="SystemConfiguration\ContrastDetail.aspx" />
+    <Content Include="SystemConfiguration\ContrastMisstargetDetail.aspx" />
+    <Content Include="SystemConfiguration\DocumentManager.aspx" />
+    <Content Include="SystemConfiguration\ExceptionTarget.aspx" />
+    <Content Include="SystemConfiguration\IfContrastCompany.aspx" />
+    <Content Include="SystemConfiguration\MonthReportConfig.aspx" />
+    <Content Include="SystemConfiguration\MonthReportConfig.html" />
+    <Content Include="SystemConfiguration\MXLTest.aspx" />
+    <Content Include="SystemConfiguration\ReportApproveStatistical.aspx" />
+    <Content Include="SystemConfiguration\TargetCollectDisplay.aspx" />
+    <Content Include="SystemConfiguration\TargetCollectDisplayTmpl.html" />
+    <Content Include="SystemConfiguration\TargetCollectDisplay_B.aspx" />
+    <Content Include="SystemConfiguration\TargetConfiguration.aspx" />
+    <Content Include="SystemConfiguration\TargetConfiguration.html" />
+    <Content Include="SystemConfiguration\TargetHistory.aspx" />
+    <Content Include="SystemConfiguration\UpdateTimeConfiguration.aspx" />
+    <Content Include="SystemConfiguration\UpLoadDocumentManager.aspx" />
+    <Content Include="TargetConfiguration\Demo.aspx" />
+    <Content Include="TargetConfiguration\TargetList.aspx" />
+    <Content Include="UserControl\DocMutipleUpload.ascx" />
+    <Content Include="UserControl\MonthReportedAction.ascx" />
+    <Content Include="UserControl\MutipleUpload.ascx" />
+    <Content Include="UserControl\TargetReportUserControl.ascx">
+      <BrowseToURL>~/UserControl/TargetReportUserControl.ascx</BrowseToURL>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AjaxHander\DownFileList.ashx.cs">
+      <DependentUpon>DownFileList.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\DownLoadComprehensiveReportForms.ashx.cs">
+      <DependentUpon>DownLoadComprehensiveReportForms.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\DownMonthRptFileList.ashx.cs">
+      <DependentUpon>DownMonthRptFileList.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\TargetReportLog.ashx.cs">
+      <DependentUpon>TargetReportLog.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\ChildrenCompanyRpt.aspx.cs">
+      <DependentUpon>ChildrenCompanyRpt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\ChildrenCompanyRpt.aspx.designer.cs">
+      <DependentUpon>ChildrenCompanyRpt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\ComprehensiveReportForms.aspx.cs">
+      <DependentUpon>ComprehensiveReportForms.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\ComprehensiveReportForms.aspx.designer.cs">
+      <DependentUpon>ComprehensiveReportForms.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\FilmCompanyRpt.aspx.cs">
+      <DependentUpon>FilmCompanyRpt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\FilmCompanyRpt.aspx.designer.cs">
+      <DependentUpon>FilmCompanyRpt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\WandaBusinessRpt.aspx.cs">
+      <DependentUpon>WandaBusinessRpt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\WandaBusinessRpt.aspx.designer.cs">
+      <DependentUpon>WandaBusinessRpt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\WandaCultureRpt.aspx.cs">
+      <DependentUpon>WandaCultureRpt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\WandaCultureRpt.aspx.designer.cs">
+      <DependentUpon>WandaCultureRpt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DepartmentStoreReport\PlayVideo.aspx.cs">
+      <DependentUpon>PlayVideo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DepartmentStoreReport\PlayVideo.aspx.designer.cs">
+      <DependentUpon>PlayVideo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SiteMasterPage\MainMasterPage_Help.Master.cs">
+      <DependentUpon>MainMasterPage_Help.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SiteMasterPage\MainMasterPage_Help.Master.designer.cs">
+      <DependentUpon>MainMasterPage_Help.Master</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfiguration\TargetPlanDetailReported.aspx.cs">
+      <DependentUpon>TargetPlanDetailReported.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguration\TargetPlanDetailReported.aspx.designer.cs">
+      <DependentUpon>TargetPlanDetailReported.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebService\MobileCommonWebService.asmx.cs">
+      <DependentUpon>MobileCommonWebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebService\MobileCommon\AttachmentDownLoad.ashx.cs">
+      <DependentUpon>AttachmentDownLoad.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="WebService\MobileCommon\BaseWebService.asmx.cs">
+      <DependentUpon>BaseWebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebService\MobileCommon\ConstantFlowCode.cs" />
+    <Compile Include="WebService\MobileCommon\CredentialSoapHeader.cs" />
+    <Compile Include="WebService\MobileCommon\MobileCommonModel.cs" />
+    <Compile Include="WebService\MobileCommon\MobileServiceBase.cs" />
+    <Compile Include="WebService\MonthlyApprovalService.cs" />
+    <Compile Include="WebService\TargetApprovalService.cs" />
+    <Compile Include="AjaxHander\DownExcelCommitDate.ashx.cs">
+      <DependentUpon>DownExcelCommitDate.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\DownExcelCompany.ashx.cs">
+      <DependentUpon>DownExcelCompany.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\DownExcelContrastComplete.ashx.cs">
+      <DependentUpon>DownExcelContrastComplete.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\DownExcelContrastDetail.ashx.cs">
+      <DependentUpon>DownExcelContrastDetail.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\DownExcelContrastMisstarget.ashx.cs">
+      <DependentUpon>DownExcelContrastMisstarget.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\DownExcelMonthReportSummary.cs" />
+    <Compile Include="AjaxHander\DownExcelTargetCollect.ashx.cs">
+      <DependentUpon>DownExcelTargetCollect.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\DownExcelTargetHistory.ashx.cs">
+      <DependentUpon>DownExcelTargetHistory.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\DownExcelTargetPlan.ashx.cs">
+      <DependentUpon>DownExcelTargetPlan.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\DownExcelTemplete.ashx.cs">
+      <DependentUpon>DownExcelTemplete.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\DownLoadDSExcel.aspx.cs">
+      <DependentUpon>DownLoadDSExcel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AjaxHander\DownLoadDSExcel.aspx.designer.cs">
+      <DependentUpon>DownLoadDSExcel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\DownLoadFile.ashx.cs">
+      <DependentUpon>DownLoadFile.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\DownLoadTargetTemplate.ashx.cs">
+      <DependentUpon>DownLoadTargetTemplate.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\DownLoadView.ashx.cs">
+      <DependentUpon>DownLoadView.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\ExcelReport.ashx.cs">
+      <DependentUpon>ExcelReport.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\MonthlyReportLog.ashx.cs">
+      <DependentUpon>MonthlyReportLog.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\ProcessController.ashx.cs">
+      <DependentUpon>ProcessController.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\TargetPlanProcessController.ashx.cs">
+      <DependentUpon>TargetPlanProcessController.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\UpLoadCompany.ashx.cs">
+      <DependentUpon>UpLoadCompany.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\UpLoadExcelCommitDate.ashx.cs">
+      <DependentUpon>UpLoadExcelCommitDate.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\UpLoadMonthTargetDetail.ashx.cs">
+      <DependentUpon>UpLoadMonthTargetDetail.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\ProProcessController.ashx.cs">
+      <DependentUpon>ProProcessController.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AjaxHander\WF.cs" />
+    <Compile Include="AppCode\BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppCode\DSJsonHelper.cs" />
+    <Compile Include="BusinessReport\GroupTargetApprove.aspx.cs">
+      <DependentUpon>GroupTargetApprove.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\GroupTargetApprove.aspx.designer.cs">
+      <DependentUpon>GroupTargetApprove.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\ModifiedErrorData.aspx.cs">
+      <DependentUpon>ModifiedErrorData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\ModifiedErrorData.aspx.designer.cs">
+      <DependentUpon>ModifiedErrorData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\TargetDirectlyRpt.aspx.cs">
+      <DependentUpon>TargetDirectlyRpt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\TargetDirectlyRpt.aspx.designer.cs">
+      <DependentUpon>TargetDirectlyRpt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\DirectlyTargetApprove.aspx.cs">
+      <DependentUpon>DirectlyTargetApprove.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\DirectlyTargetApprove.aspx.designer.cs">
+      <DependentUpon>DirectlyTargetApprove.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\TargetApprove.aspx.cs">
+      <DependentUpon>TargetApprove.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\TargetApprove.aspx.designer.cs">
+      <DependentUpon>TargetApprove.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\TargetDirectlyReported.aspx.cs">
+      <DependentUpon>TargetDirectlyReported.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\TargetDirectlyReported.aspx.designer.cs">
+      <DependentUpon>TargetDirectlyReported.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\TargetGroupReported.aspx.cs">
+      <DependentUpon>TargetGroupReported.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\TargetGroupReported.aspx.designer.cs">
+      <DependentUpon>TargetGroupReported.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\TargetGroupRpt.aspx.cs">
+      <DependentUpon>TargetGroupRpt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\TargetGroupRpt.aspx.designer.cs">
+      <DependentUpon>TargetGroupRpt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\TargetPlanDetailApprove.aspx.cs">
+      <DependentUpon>TargetPlanDetailApprove.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\TargetPlanDetailApprove.aspx.designer.cs">
+      <DependentUpon>TargetPlanDetailApprove.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\TargetPlanDetailRpt.aspx.cs">
+      <DependentUpon>TargetPlanDetailRpt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\TargetPlanDetailRpt.aspx.designer.cs">
+      <DependentUpon>TargetPlanDetailRpt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\TargetPlanDetailRpt_B.aspx.cs">
+      <DependentUpon>TargetPlanDetailRpt_B.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\TargetPlanDetailRpt_B.aspx.designer.cs">
+      <DependentUpon>TargetPlanDetailRpt_B.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\TargetReportApproveTime.aspx.cs">
+      <DependentUpon>TargetReportApproveTime.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\TargetReportApproveTime.aspx.designer.cs">
+      <DependentUpon>TargetReportApproveTime.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\TargetReported.aspx.cs">
+      <DependentUpon>TargetReported.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\TargetReported.aspx.designer.cs">
+      <DependentUpon>TargetReported.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\TargetRpt.aspx.cs">
+      <DependentUpon>TargetRpt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\TargetRpt.aspx.designer.cs">
+      <DependentUpon>TargetRpt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\TargetProReported.aspx.cs">
+      <DependentUpon>TargetProReported.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\TargetProReported.aspx.designer.cs">
+      <DependentUpon>TargetProReported.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\ProMonthReport.aspx.cs">
+      <DependentUpon>ProMonthReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\ProMonthReport.aspx.designer.cs">
+      <DependentUpon>ProMonthReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\ProTargetApprove.aspx.cs">
+      <DependentUpon>ProTargetApprove.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\ProTargetApprove.aspx.designer.cs">
+      <DependentUpon>ProTargetApprove.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\TargetSimpleReport.aspx.cs">
+      <DependentUpon>TargetSimpleReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\TargetSimpleReport.aspx.designer.cs">
+      <DependentUpon>TargetSimpleReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessReport\TargetPlanDetailReported.aspx.cs">
+      <DependentUpon>TargetPlanDetailReported.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessReport\TargetPlanDetailReported.aspx.designer.cs">
+      <DependentUpon>TargetPlanDetailReported.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Control\UpLoad1.ashx.cs">
+      <DependentUpon>UpLoad1.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Demo\TargetCollectDetail.aspx.cs">
+      <DependentUpon>TargetCollectDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Demo\TargetCollectDetail.aspx.designer.cs">
+      <DependentUpon>TargetCollectDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Demo\TargetTotalDetail.aspx.cs">
+      <DependentUpon>TargetTotalDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Demo\TargetTotalDetail.aspx.designer.cs">
+      <DependentUpon>TargetTotalDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DepartmentStoreReport\DSTargetAddDataReport.aspx.cs">
+      <DependentUpon>DSTargetAddDataReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DepartmentStoreReport\DSTargetAddDataReport.aspx.designer.cs">
+      <DependentUpon>DSTargetAddDataReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DepartmentStoreReport\DSTargetCompletedReport.aspx.cs">
+      <DependentUpon>DSTargetCompletedReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DepartmentStoreReport\DSTargetCompletedReport.aspx.designer.cs">
+      <DependentUpon>DSTargetCompletedReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DepartmentStoreReport\DSTargetReport.aspx.cs">
+      <DependentUpon>DSTargetReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DepartmentStoreReport\DSTargetReport.aspx.designer.cs">
+      <DependentUpon>DSTargetReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DepartmentStoreReport\DSTargetReturnDataReport.aspx.cs">
+      <DependentUpon>DSTargetReturnDataReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DepartmentStoreReport\DSTargetReturnDataReport.aspx.designer.cs">
+      <DependentUpon>DSTargetReturnDataReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DepartmentStoreReport\DSTargetSumReport.aspx.cs">
+      <DependentUpon>DSTargetSumReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DepartmentStoreReport\DSTargetSumReport.aspx.designer.cs">
+      <DependentUpon>DSTargetSumReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="NoPermission.aspx.cs">
+      <DependentUpon>NoPermission.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NoPermission.aspx.designer.cs">
+      <DependentUpon>NoPermission.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripts\ueditor\net\App_Code\Config.cs" />
+    <Compile Include="Scripts\ueditor\net\App_Code\ConfigHandler.cs" />
+    <Compile Include="Scripts\ueditor\net\App_Code\CrawlerHandler.cs" />
+    <Compile Include="Scripts\ueditor\net\App_Code\Handler.cs" />
+    <Compile Include="Scripts\ueditor\net\App_Code\ListFileHandler.cs" />
+    <Compile Include="Scripts\ueditor\net\App_Code\NotSupportedHandler.cs" />
+    <Compile Include="Scripts\ueditor\net\App_Code\PathFormater.cs" />
+    <Compile Include="Scripts\ueditor\net\App_Code\UploadHandler.cs" />
+    <Compile Include="SiteMasterPage\EmptyMaster.master.cs">
+      <DependentUpon>EmptyMaster.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SiteMasterPage\EmptyMaster.master.designer.cs">
+      <DependentUpon>EmptyMaster.master</DependentUpon>
+    </Compile>
+    <Compile Include="SiteMasterPage\MainMasterPage.Master.cs">
+      <DependentUpon>MainMasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SiteMasterPage\MainMasterPage.Master.designer.cs">
+      <DependentUpon>MainMasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="SiteMasterPage\Workflow.master.cs">
+      <DependentUpon>Workflow.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SiteMasterPage\Workflow.master.designer.cs">
+      <DependentUpon>Workflow.master</DependentUpon>
+    </Compile>
+    <Compile Include="SiteMasterPage\MonthReportMasterPage.Master.cs">
+      <DependentUpon>MonthReportMasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SiteMasterPage\MonthReportMasterPage.Master.designer.cs">
+      <DependentUpon>MonthReportMasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="StatisticReport\HistoryReturnReport.aspx.cs">
+      <DependentUpon>HistoryReturnReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StatisticReport\HistoryReturnReport.aspx.designer.cs">
+      <DependentUpon>HistoryReturnReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfiguration\CompanyList.aspx.cs">
+      <DependentUpon>CompanyList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguration\CompanyList.aspx.designer.cs">
+      <DependentUpon>CompanyList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfiguration\ContrastCompleteDetail.aspx.cs">
+      <DependentUpon>ContrastCompleteDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguration\ContrastCompleteDetail.aspx.designer.cs">
+      <DependentUpon>ContrastCompleteDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfiguration\ContrastDetail.aspx.cs">
+      <DependentUpon>ContrastDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguration\ContrastDetail.aspx.designer.cs">
+      <DependentUpon>ContrastDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfiguration\ContrastMisstargetDetail.aspx.cs">
+      <DependentUpon>ContrastMisstargetDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguration\ContrastMisstargetDetail.aspx.designer.cs">
+      <DependentUpon>ContrastMisstargetDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfiguration\DocumentManager.aspx.cs">
+      <DependentUpon>DocumentManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguration\DocumentManager.aspx.designer.cs">
+      <DependentUpon>DocumentManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfiguration\ExceptionTarget.aspx.cs">
+      <DependentUpon>ExceptionTarget.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguration\ExceptionTarget.aspx.designer.cs">
+      <DependentUpon>ExceptionTarget.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfiguration\IfContrastCompany.aspx.cs">
+      <DependentUpon>IfContrastCompany.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguration\IfContrastCompany.aspx.designer.cs">
+      <DependentUpon>IfContrastCompany.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfiguration\MonthReportConfig.aspx.cs">
+      <DependentUpon>MonthReportConfig.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguration\MonthReportConfig.aspx.designer.cs">
+      <DependentUpon>MonthReportConfig.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfiguration\MXLTest.aspx.cs">
+      <DependentUpon>MXLTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguration\MXLTest.aspx.designer.cs">
+      <DependentUpon>MXLTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfiguration\ReportApproveStatistical.aspx.cs">
+      <DependentUpon>ReportApproveStatistical.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguration\ReportApproveStatistical.aspx.designer.cs">
+      <DependentUpon>ReportApproveStatistical.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfiguration\TargetCollectDisplay.aspx.cs">
+      <DependentUpon>TargetCollectDisplay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguration\TargetCollectDisplay.aspx.designer.cs">
+      <DependentUpon>TargetCollectDisplay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfiguration\TargetCollectDisplay_B.aspx.cs">
+      <DependentUpon>TargetCollectDisplay_B.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguration\TargetCollectDisplay_B.aspx.designer.cs">
+      <DependentUpon>TargetCollectDisplay_B.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfiguration\TargetConfiguration.aspx.cs">
+      <DependentUpon>TargetConfiguration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguration\TargetConfiguration.aspx.designer.cs">
+      <DependentUpon>TargetConfiguration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfiguration\TargetHistory.aspx.cs">
+      <DependentUpon>TargetHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguration\TargetHistory.aspx.designer.cs">
+      <DependentUpon>TargetHistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfiguration\UpdateTimeConfiguration.aspx.cs">
+      <DependentUpon>UpdateTimeConfiguration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguration\UpdateTimeConfiguration.aspx.designer.cs">
+      <DependentUpon>UpdateTimeConfiguration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfiguration\UpLoadDocumentManager.aspx.cs">
+      <DependentUpon>UpLoadDocumentManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguration\UpLoadDocumentManager.aspx.designer.cs">
+      <DependentUpon>UpLoadDocumentManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TargetConfiguration\Demo.aspx.cs">
+      <DependentUpon>Demo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TargetConfiguration\Demo.aspx.designer.cs">
+      <DependentUpon>Demo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TargetConfiguration\TargetList.aspx.cs">
+      <DependentUpon>TargetList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TargetConfiguration\TargetList.aspx.designer.cs">
+      <DependentUpon>TargetList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\DocMutipleUpload.ascx.cs">
+      <DependentUpon>DocMutipleUpload.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\DocMutipleUpload.ascx.designer.cs">
+      <DependentUpon>DocMutipleUpload.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\DocUpLoad1.ashx.cs">
+      <DependentUpon>DocUpLoad1.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\MonthReportedAction.ascx.cs">
+      <DependentUpon>MonthReportedAction.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\MonthReportedAction.ascx.designer.cs">
+      <DependentUpon>MonthReportedAction.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\MutipleUpload.ascx.cs">
+      <DependentUpon>MutipleUpload.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\MutipleUpload.ascx.designer.cs">
+      <DependentUpon>MutipleUpload.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\TargetReportUserControl.ascx.cs">
+      <DependentUpon>TargetReportUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\TargetReportUserControl.ascx.designer.cs">
+      <DependentUpon>TargetReportUserControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\UpLoad1.ashx.cs">
+      <DependentUpon>UpLoad1.ashx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SiteMasterPage\EmptyMaster.master" />
+    <Content Include="SiteMasterPage\Workflow.master" />
+    <Content Include="SiteMasterPage\Navigator.sitemap" />
+    <Content Include="Scripts\artDialog\_doc\ajaxContent\content.json" />
+    <Content Include="Scripts\artDialog\_doc\commercial_license.doc" />
+    <Content Include="Scripts\artDialog\_doc\highlight\LICENSE" />
+    <Content Include="SiteMasterPage\MainMasterPage.Master" />
+    <Content Include="Control\UpLoad1.ashx" />
+    <Content Include="Styles\jmenu.less" />
+    <Content Include="Scripts\ueditor\net\config.json" />
+    <Content Include="Scripts\ueditor\net\controller.ashx" />
+    <Content Include="Scripts\ueditor\net\README.md" />
+    <Content Include="Scripts\ueditor\net\Web.config" />
+    <Content Include="AjaxHander\DownExcelTemplete.ashx" />
+    <Content Include="Aspose.Total.lic" />
+    <Content Include="Excel\补回情况数据模版V1.xlsx" />
+    <Content Include="Excel\月度经营报告V1.xlsx" />
+    <Content Include="Excel\未完成说明数据模版V1.xlsx" />
+    <Content Include="Excel\完成情况明细模板V1.xlsx" />
+    <Content Include="AjaxHander\DownLoadView.ashx" />
+    <Content Include="AjaxHander\DownLoadTargetTemplate.ashx" />
+    <Content Include="AjaxHander\ExcelReport.ashx" />
+    <Content Include="Excel\未完成说明数据上报模版V1.xls" />
+    <Content Include="Excel\指标上报模版V1.xlsx" />
+    <Content Include="Excel\百货系统经营指标完成情况对比.xls" />
+    <Content Include="Excel\百货系统经营指标完成门店数量情况.xls" />
+    <Content Include="Excel\百货系统补回一季度经营指标缺口情况.xls" />
+    <Content Include="Excel\百货系统补回一季度经营指标新增情况.xls" />
+    <Content Include="Excel\百货系统补回一季度经营指标缺口情况%281月%29.xls" />
+    <Content Include="Excel\百货系统补回一季度经营指标新增情况%281月%29.xls" />
+    <Content Include="Excel\百货系统经营指标完成门店数量情况%281月%29.xls" />
+    <Content Include="Excel\百货系统经营指标完成情况对比%281月%29.xls" />
+    <Content Include="AjaxHander\ProcessController.ashx" />
+    <Content Include="UserControl\UpLoad1.ashx" />
+    <Content Include="AjaxHander\DownLoadFile.ashx" />
+    <Content Include="AjaxHander\UpLoadMonthTargetDetail.ashx" />
+    <Content Include="Excel\月度经营报告-商管系统V1.xlsx" />
+    <Content Include="Excel\月度经营简报模版.xlsx" />
+    <Content Include="Excel\未完成说明数据上报模版V2.xls" />
+    <Content Include="Excel\完成情况明细模板-商管系统V1.xlsx" />
+    <Content Include="Excel\完成情况明细模板-万达旅业V1.xlsx" />
+    <Content Include="Excel\完成情况明细模板-大歌星系统V1.xlsx" />
+    <Content Include="Excel\完成情况明细模板-院线系统V1.xlsx" />
+    <Content Include="Excel\指标上报模版V1-商管系统.xlsx" />
+    <Content Include="Excel\项目公司完成明细模版V1.xlsx" />
+    <Content Include="Excel\项目公司指标上报模版V1.xlsx" />
+    <Content Include="Excel\完成情况明细模板-集团总部V1.xlsx" />
+    <Content Include="Excel\月度报告_集团总部V1.xlsx" />
+    <Content Include="Excel\项目公司指标上报模版V2.xlsx" />
+    <Content Include="AjaxHander\DownExcelCommitDate.ashx" />
+    <Content Include="AjaxHander\UpLoadExcelCommitDate.ashx" />
+    <Content Include="Excel\补回期限管理模板V1.xls" />
+    <Content Include="Excel\月度经营报告_酒店建设V1.xlsx" />
+    <Content Include="Excel\月度经营报告-酒店设计院V1.xlsx" />
+    <Content Include="Excel\月度经营报告-商业规划院V1.xlsx" />
+    <Content Include="Excel\月度经营报告-万达学院V1.xlsx" />
+    <Content Include="Excel\月度经营报告-电子商务V1.xlsx" />
+    <Content Include="Excel\月度经营报告_游艇公司V1.xlsx" />
+    <Content Include="Excel\月度经营报告_有机农业V1.xlsx" />
+    <Content Include="Excel\月度经营报告_文旅规划院V1.xlsx" />
+    <Content Include="Excel\月度经营报告_昆明高尔夫V1.xlsx" />
+    <Content Include="Excel\月度经营报告_影视传媒V1.xlsx" />
+    <Content Include="Excel\月度经营报告_长白山管理公司V1.xlsx" />
+    <Content Include="Excel\月度经营报告_华夏时报V1.xlsx" />
+    <Content Include="Excel\月度经营报告_大众电影V1.xlsx" />
+    <Content Include="Excel\完成情况明细模板-商业地产总部V1.xlsx" />
+    <Content Include="Excel\完成情况明细模板-文化集团总部V1.xlsx" />
+    <Content Include="AjaxHander\ProProcessController.ashx" />
+    <Content Include="AjaxHander\MonthlyReportLog.ashx" />
+    <Content Include="Excel\经管计划指标上报模板V1.xlsx" />
+    <Content Include="Excel\指标上报模版_集团总部V1.xlsx" />
+    <Content Include="AjaxHander\DownExcelTargetPlan.ashx" />
+    <Content Include="Excel\计划指标上传模板V1.xlsx" />
+    <Content Include="AjaxHander\DownExcelCompany.ashx" />
+    <Content Include="Excel\公司属性管理V1.xls" />
+    <Content Include="AjaxHander\UpLoadCompany.ashx" />
+    <Content Include="AjaxHander\TargetPlanProcessController.ashx" />
+    <Content Include="Excel\计划指标上传模板_年度指标V1.xlsx" />
+    <Content Include="Excel\指标上报模版V1-物管系统.xlsx" />
+    <Content Include="Excel\完成情况明细模板-物管公司V1.xlsx" />
+    <Content Include="Excel\历史要求期限统计汇总报表V1.xlsx" />
+    <Content Include="AjaxHander\DownExcelTargetCollect.ashx" />
+    <Content Include="Excel\指标汇总V1.xls" />
+    <Content Include="AjaxHander\DownExcelTargetHistory.ashx" />
+    <Content Include="AjaxHander\DownExcelContrastMisstarget.ashx" />
+    <Content Include="Excel\未完成家数统计表.xlsx" />
+    <Content Include="AjaxHander\DownExcelContrastDetail.ashx" />
+    <Content Include="AjaxHander\DownExcelContrastComplete.ashx" />
+    <Content Include="Excel\年度完成情况对比表V1.xls" />
+    <Content Include="Excel\年度完成情况对比表-汇总V1.xls" />
+    <Content Include="Excel\完成情况明细模板-主题娱乐公司总部V1.xlsx" />
+    <Content Include="Excel\完成情况明细模板-体育控股（中国区）V1.xlsx" />
+    <Content Include="Excel\月度报告_主题娱乐公司总部V1.xlsx" />
+    <Content Include="Excel\月度报告_体育控股（中国区）V1.xlsx" />
+    <Content Include="Excel\完成情况明细模板-影视控股V1.xlsx" />
+    <Content Include="Excel\月度报告_影视控股V1.xlsx" />
+    <Content Include="Excel\完成情况明细模板-金融集团总部V1.xlsx" />
+    <Content Include="Excel\月度报告_金融集团总部V1.xlsx" />
+    <Content Include="Excel\指标上报模版V1-商管系统2016版.xlsx" />
+    <Content Include="Excel\指标上报模版V1-物管系统2016版.xlsx" />
+    <Content Include="Excel\完成情况明细模板-商管系统2016版V1.xlsx" />
+    <Content Include="Excel\指标上报模版V1-西双版纳管理公司2016版.xlsx" />
+    <Content Include="Excel\完成情况明细模板-西双版纳管理公司2016版V1.xlsx" />
+    <Content Include="Excel\月度经营报告_征信公司V1.xlsx" />
+    <Content Include="Excel\月度经营报告_网络信贷公司V1.xlsx" />
+    <Content Include="Excel\月度经营报告_财务共享中心V1.xlsx" />
+    <Content Include="Excel\月度报告_文化集团总部V1.xlsx" />
+    <Content Include="Excel\指标历史下载模板V1.xlsx" />
+    <Content Include="Excel\完成情况明细模板-长白山2016版V1.xlsx" />
+    <Content Include="Excel\指标上报模版V1-长白山2016版.xlsx" />
+    <Content Include="WebService\MobileCommon\AttachmentDownLoad.ashx" />
+    <Content Include="packages.config" />
+    <Fakes Include="Fakes\Newtonsoft.Json.fakes" />
+    <Content Include="Excel\月度经营报告_商管系统查询V1.xlsx" />
+    <Content Include="Excel\Help\经营指标管控系统月报上报操作手册V1.pptx" />
+    <Content Include="AjaxHander\TargetReportLog.ashx" />
+    <Content Include="AjaxHander\DownFileList.ashx" />
+    <Content Include="AjaxHander\DownMonthRptFileList.ashx" />
+    <Content Include="Excel\当月未完成说明数据模版V1.xlsx" />
+    <Content Include="Excel\当月未完成说明数据上报模版V1.xlsx" />
+    <Content Include="AjaxHander\DownLoadComprehensiveReportForms.ashx" />
+    <Content Include="Excel\综合报表查询模版V1.xlsx" />
+    <Content Include="Excel\万达电影固定报表V1.xlsx" />
+    <Content Include="Excel\儿童娱乐固定报表V1.xlsx" />
+    <Content Include="Excel\万达商业固定报表V1.xlsx" />
+    <Content Include="Excel\文化集团固定报表V1.xlsx" />
+    <None Include="Properties\PublishProfiles\fd.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\tian.pubxml" />
+    <Content Include="SiteMasterPage\MonthReportMasterPage.Master" />
+    <Content Include="UserControl\DocUpLoad1.ashx" />
+    <Content Include="Scripts\multiple-select-master\demos\assets\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\multiple-select-master\demos\assets\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Scripts\multiple-select-master\demos\assets\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Scripts\multiple-select-master\docs\README-ZH-CN.md" />
+    <Content Include="Scripts\multiple-select-master\docs\README.md" />
+    <Content Include="Scripts\multiple-select-master\multiple-select.jquery.json" />
+    <Content Include="SiteMasterPage\MainMasterPage_Help.Master" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\1Framework\Lib.AuthCenter\Wanda.Lib.AuthCenter.csproj">
+      <Project>{fccad333-b48e-4a04-ad3c-8cb4ca17ef28}</Project>
+      <Name>Wanda.Lib.AuthCenter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\1Framework\Lib.Core\Wanda.Lib.Core.csproj">
+      <Project>{65839f36-193a-41d1-9e79-38bc84984de6}</Project>
+      <Name>Wanda.Lib.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\1Framework\Lib.Data\Wanda.Lib.Data.csproj">
+      <Project>{442c318f-9d99-4a3f-972e-33e8a8c8be51}</Project>
+      <Name>Wanda.Lib.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\1Framework\Lib.Web\Wanda.Lib.Web.csproj">
+      <Project>{9e21a44d-17eb-44f4-a936-27b41ca565fe}</Project>
+      <Name>Wanda.Lib.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\2Lib\AjaxHandler\5AjaxHandler.csproj">
+      <Project>{87fb1aca-96a4-4419-93b5-4b078873e8fb}</Project>
+      <Name>5AjaxHandler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\2Lib\BLL\2BLL.csproj">
+      <Project>{06ab4a03-00ca-4f1e-9873-bb3738118324}</Project>
+      <Name>2BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\2Lib\Common\9Common.csproj">
+      <Project>{1d81e774-65e8-43ff-8f8e-486d28a56275}</Project>
+      <Name>9Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\2Lib\Engine\10Engine.csproj">
+      <Project>{8f011280-24e7-4ee5-8f81-737b7b887e3d}</Project>
+      <Name>10Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\2Lib\Model\3Model.csproj">
+      <Project>{efa26ef0-4ba9-4563-8d63-554e884f56b7}</Project>
+      <Name>3Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\2Lib\ViewModel\4ViewModel.csproj">
+      <Project>{ab142c57-a632-4958-9814-4f7c3ea9083a}</Project>
+      <Name>4ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\Charts\" />
+    <Folder Include="Images\help\" />
+    <Folder Include="Scripts\json\" />
+    <Folder Include="Scripts\ProtoType\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>10700</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:9226/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

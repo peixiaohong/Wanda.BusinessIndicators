@@ -1,0 +1,106 @@
+﻿<!------------------------------------------月度报告 Title start------------------------------------------------------------------------->
+<script id="GroupMonthReportSummaryHeadTemplate" type="text/x-jquery-tmpl">
+   <tr class='tab_5_row_alt'>
+       <th style='width: 30%'>项    目</th>
+       <th style='width: 23%'>本年累计</th>
+       <th style='width: 23%'>全年预算</th>
+       <th style='width: 23%'>占全年<br/>计划比</th>
+   </tr>
+</script>
+<!------------------------------------------明细 Title start------------------------------------------------------------------------->
+<script id="GroupMonthReportDetailHeadTmpl" type="text/x-jquery-tmpl">
+   <tr class='tab_5_row_alt'>
+       <th rowspan='2' style='width: 15%'>费用项目/部门</th>
+       <th colspan='3' style='width: 17%'>国内差旅费</th>
+       <th colspan='3' style='width: 17%'>国际差旅费</th>
+       <th colspan='3' style='width: 17%'>业务招待费</th>
+       <th colspan='3' style='width: 17%'>办公费</th>
+       <th colspan='3' style='width: 17%'>专属费用</th>
+       <th colspan='3' style='width: 17%'>合计</th>
+   </tr>
+   <tr>
+       <th class='th_Sub'>累计数</th>
+       <th class='th_Sub'>预算数</th>
+       <th class='th_Sub2'>占全年<br/>计划比</th>
+       <th class='th_Sub1'>累计数</th>
+       <th class='th_Sub'>预算数</th>
+       <th class='th_Sub2'>占全年<br/>计划比</th>
+       <th class='th_Sub1'>累计数</th>
+       <th class='th_Sub'>预算数</th>
+       <th class='th_Sub2'>占全年<br/>计划比</th>
+       <th class='th_Sub1'>累计数</th>
+       <th class='th_Sub'>预算数</th>
+       <th class='th_Sub2'>占全年<br/>计划比</th>
+        <th class='th_Sub1'>累计数</th>
+       <th class='th_Sub'>预算数</th>
+       <th class='th_Sub2'>占全年<br/>计划比</th>
+        <th class='th_Sub1'>累计数</th>
+       <th class='th_Sub'>预算数</th>
+       <th class='th_Sub2'>占全年<br/>计划比</th>
+   </tr>
+</script>
+<!------------------------------------------月度报告 Title end------------------------------------------------------------------------->
+
+<!------------------------------------------月度报告 DataTmpl Start------------------------------------------------------------------------->
+
+<script id="GroupMonthReportSummaryTemplate" type="text/x-jquery-tmpl">
+    {{if TargetName!="合计"}}
+    <tr>
+        <td class="Td_Left" style="text-align:left !important;" >${TargetName}</td>
+        <td class="Td_Left" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Left" title="${NAccumulativeActualRate}">${NAccumulativeActualRate}</td>
+    </tr>
+    {{else}}
+    <tr class="Td_Merge" style="cursor:default">
+        <td class="Td_Left" style="text-align:left !important; font-weight:bold">合计</td>
+        <td class="Td_Left" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Left" title="${NAccumulativeActualRate}">${NAccumulativeActualRate}</td>
+    </tr>
+    {{/if}}
+</script>
+
+<!------------------------------------------明细 DataTmpl Start------------------------------------------------------------------------->
+<script id="GroupComplateTargetDetailTemplate" type="text/x-jquery-tmpl">
+   ${SetDataRowsCount(ObjValue)}
+    {{each ObjValue}}
+        {{if DataRowsCount!=($index+1) }}
+            <tr>
+                    <td class="Td_Left" style="text-align:left !important; font-weight:bold">${Name}</td>
+                {{each Value}}
+                    <td class="Td_Left" title="${NAccumulativeActualAmmount}" >${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativePlanAmmount}" >${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+                {{/each}}
+            </tr>
+            {{each ObjValue}}
+                <tr>
+                        <td class="Td_Left" style="text-align:left !important; ">&nbsp;&nbsp;${$index+1}、${CompanyName}</td>
+                   {{each ListGroupTargetDetail}}
+                        <td class="Td_Left" title="${NAccumulativeActualAmmount}" >${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom" title="${NAccumulativePlanAmmount}" >${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                        <td class="Td_TopAndBottom" title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+                    {{/each}}
+                </tr>
+            {{/each}}
+      {{else}}
+             <tr class="Td_Merge" style="cursor:default">
+                    <td class="Td_Left" style="text-align:left !important; font-weight:bold">合计</td>
+                {{each Value}}
+                    <td class="Td_Left" title="${NAccumulativeActualAmmount}" >${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativePlanAmmount}" >${(NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+                    <td class="Td_TopAndBottom" title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+                {{/each}}
+            </tr>
+      {{/if}}
+    {{/each}}
+</script>
+<!------------------------------------------明细 Title end------------------------------------------------------------------------->
+
+
+<!--附件Start-->
+<script id="listAtt" type="text/x-jquery-tmpl">
+    <a style="padding-left: 10px" href="/AjaxHander/DownLoadFile.ashx?path=${Url}&&FileName=${FileName}">${FileName}</a><span style="padding-left: 10px; font-weight:700; color: #ccc">|</span>
+</script>
+<!--附件End-->

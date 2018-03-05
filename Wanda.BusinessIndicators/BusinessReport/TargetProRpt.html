@@ -1,0 +1,607 @@
+﻿
+<!-------------------------------------------项目公司（南区） Title---------------------------------------------->
+
+<!-- 项目公司上报页面  表头--->
+<script id="TmplProCompany_South_Head" type="text/x-jquery-tmpl">
+    <tr>
+        <th colspan='1' rowspan='3' style="width: 5%">序号</th>
+        <th colspan='1' rowspan='3' style="width: 10%">项目</th>
+        <th colspan='6' rowspan='1' style="">${GetMonthStr()}月情况</th>
+        <th colspan='6' rowspan='1' style="">1-${GetMonthStr()}月情况</th>
+        
+        <th colspan='2' rowspan='2' style="width: 10%;cursor:pointer;" onclick="unfoldTitle();">警示灯 &nbsp;&nbsp;>></th>
+    </tr>
+    <tr>
+        
+        <!--当月-->
+        <th  colspan="2">${GetMonthStr()}月指标（金额）</th>
+        <th  colspan="2">${GetMonthStr()}月完成(金额）</th>
+        <th  colspan="2">${GetMonthStr()}月指标完成比例</th>
+
+        <!--月累计-->
+        <th  colspan="2">1-${GetMonthStr()}月指标（金额）</th>
+        <th  colspan="2">1-${GetMonthStr()}月完成(金额）</th>
+        <th  colspan="2">1-${GetMonthStr()}月指标完成比例</th>
+    </tr>
+    <tr>
+        <th class ="th_Sub"  >合同</th>
+        <th class ="th_Sub2"  >回款</th>
+
+        <th class ="th_Sub1"  >合同</th>
+        <th class ="th_Sub2"  >回款</th>
+
+        <th class ="th_Sub1"  >合同</th>
+        <th class ="th_Sub2"  >回款</th>
+
+        <th class ="th_Sub1"  >合同</th>
+        <th class ="th_Sub2"  >回款</th>
+
+        <th class ="th_Sub1"  >合同</th>
+        <th class ="th_Sub2"  >回款</th>
+        
+        <th class ="th_Sub1"  >合同</th>
+        <th class ="th_Sub2"  >回款</th>
+
+        <th class ="th_Sub1"  >合同</th>
+        <th class ="th_Sub"  >回款</th>
+    </tr>
+</script>
+
+
+<!--------------项目公司上报页面  《展开》 表头全部信息 (表头和月度经营报告 用的是同一个 )----------------------->
+<script id="TmplProCompany_Head_All" type="text/x-jquery-tmpl">
+    <tr class='tab_5_row_alt'>
+        <th colspan='1' rowspan='3' style='width:5%'>序号</th>
+        <th colspan='1' rowspan='3' style='width:10%'>项目</th>
+        <th colspan='4' rowspan='1' style='width:20%'>年度情况</th>
+        <th colspan='6' rowspan='1' style='width:30%'>${GetMonthStr()}月份情况</th>
+        <th colspan='6' rowspan='1' style='width:30%'>1-${GetMonthStr()}月累计情况</th>
+        <th colspan='2' rowspan='2' style='width:5%;cursor:pointer;' onclick="shrinkageTitle();" >警示灯<< </th>
+    </tr>
+    <tr class='tab_5_row_alt'>
+        <th  colspan="2" >年度指标(金额)</th>
+        <th  colspan="2">年度指标完成比例</th>
+
+           <th colspan="2">${GetMonthStr()}月份指标（金额）</th>
+        <th  colspan="2">${GetMonthStr()}月份完成（金额）</th>
+        <th  colspan="2" >${GetMonthStr()}月份指标完成比例</th>
+
+        <th  colspan="2">1-${GetMonthStr()}月指标（金额）</th>
+        <th  colspan="2">1-${GetMonthStr()}月完成（金额）</th>
+        <th colspan="2">1-${GetMonthStr()}月指标完成比例</th>
+       
+     
+    </tr>
+    <tr class='tab_5_row_alt'>
+        <th class='th_Sub' >合同</th>
+        <th class='th_Sub' >回款</th>
+        
+        <th class='th_Sub1' >合同</th>
+        <th class='th_Sub2' >回款</th>
+        
+        <th class='th_Sub1' >合同</th>
+        <th class='th_Sub' >回款</th>
+        
+        <th class='th_Sub1' >合同</th>
+        <th class='th_Sub' >回款</th>
+        
+        <th class='th_Sub1' >合同</th>
+        <th class='th_Sub2' >回款</th>
+        
+        <th class='th_Sub1' >合同</th>
+        <th class='th_Sub' >回款</th>
+        
+        <th class='th_Sub1' >合同</th>
+        <th class='th_Sub' >回款</th>
+        
+        <th class='th_Sub1' >合同</th>
+        <th class='th_Sub2' >回款</th>
+        
+        <th class='th_Sub1' >合同</th>
+        <th class='th_Sub' >回款</th>
+    </tr>
+</script>
+
+
+
+<!--------------项目公司上报保存页面  表头全部信息----------------------->
+<script id="TmplProSystemSave" type="text/x-jquery-tmpl">
+    <tr>
+        <th>序号</th>
+        <th>系统名称</th>
+        <th>年份</th>
+        <th>月份</th>
+        <th>是否保存</th>
+    </tr>
+</script>
+
+
+<!--------------项目公司上报保存页面  数据信息----------------------->
+<script id="TmplProSystemSaveData" type="text/x-jquery-tmpl">
+  {{each ObjValue}}
+     <tr>
+        <td class="Td_Right" style="text-align:center!important;" >${$index+1}</td>
+        <td class="Td_Right" style="text-align:center!important;" >${SystemName}</td>
+        <td class="Td_Right" style="text-align:center!important;">${proYear}</td>
+        <td class="Td_Right" style="text-align:center!important;">${proMonth}</td>
+        <td class="Td_Right" style="text-align:center!important;">{{if IsReady==true}}已上报保存{{else}}未上报保存{{/if}} </td>
+    </tr>
+  {{/each}}
+</script>
+
+
+
+<!--------------项目公司上报页面  数据全部----------------------->
+<script id="ProCompanyDetail_Data_All" type="text/x-jquery-tmpl">
+{{each ObjValue}}
+ <tr>
+        {{if ProRowSpan>0 }}
+        <td class="Td_Right" style="text-align:center!important;" rowspan="${ProRowSpan}" >${ProCompanyNumber}</td>
+        {{/if}}
+
+        {{if ProCompanySequence <0 }}
+        <td class="Td_Right"  colspan="2" style="text-align:center!important;font-weight:900!important;"  > 
+          ${ProCompayName}
+        </td>
+        {{else}}
+         <td class="Td_Right" style="text-align:center!important;"  > 
+             {{if ProCompayID =="88888888-8888-8888-8888-888888888888"}}
+             ${ProCompayName}
+             {{else}}
+            <a href="javascript:void(0);"  onclick="EditMonthReportDetail('${ProCompayID}','all')">${ProCompayName}</a>
+             {{/if}}
+        </td>
+        {{/if}}
+
+        <!-- 年度计划指标--->
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NPlanAmmountByYear}"  >${ProjectTargets[0].NPlanAmmountByYear.thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right" title="${ProjectTargets[1].NPlanAmmountByYear}" >${ProjectTargets[1].NPlanAmmountByYear.thousandize0OrEmpty(0)}</td>
+        
+
+        <!-- 年度计划指标完成比例--->
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NDisplayRateByYear}" >${ProjectTargets[0].NDisplayRateByYear}</td>
+        <td class="Td_Right" title="${ProjectTargets[1].NDisplayRateByYear}" >${ProjectTargets[1].NDisplayRateByYear}</td>
+       
+        <!-- 年度当月指标--->
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NPlanAmmount}" >${ProjectTargets[0].NPlanAmmount.thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right" title="${ProjectTargets[1].NPlanAmmount}" >${ProjectTargets[1].NPlanAmmount.thousandize0OrEmpty(0)}</td>
+       
+        <!-- 年度当月实际--->
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NActualAmmount}" >${ProjectTargets[0].NActualAmmount.thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right" title="${ProjectTargets[1].NActualAmmount}" >${ProjectTargets[1].NActualAmmount.thousandize0OrEmpty(0)}</td>
+       
+        <!-- 年度当月完成率--->
+        {{if ProCompanySequence > 0 && ProjectTargets[0].NActualRate!="" &&JSON.parse(ProjectTargets[0].NActualRate).Rate < 1&& ProjectTargets[0].NDisplayRate!="/" }}
+        <td class="Td_TopAndBottom" style="background-color:#FABF8F" title="${ProjectTargets[0].NDisplayRate}" >${ProjectTargets[0].NDisplayRate}</td>
+        {{else}}
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NDisplayRate}" >${ProjectTargets[0].NDisplayRate}</td>
+        {{/if}}
+
+        {{if ProCompanySequence > 0 && ProjectTargets[1].NActualRate!="" &&JSON.parse(ProjectTargets[1].NActualRate).Rate < 1&& ProjectTargets[1].NDisplayRate!="/" }}
+        <td class="Td_Right" style="background-color:#FABF8F" title="${ProjectTargets[1].NDisplayRate}" >${ProjectTargets[1].NDisplayRate}</td>
+        {{else}}
+        <td class="Td_Right" title="${ProjectTargets[1].NDisplayRate}" >${ProjectTargets[1].NDisplayRate}</td>
+        {{/if}}
+
+
+        <!-- 年度累计指标--->
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NAccumulativePlanAmmount}" >${ProjectTargets[0].NAccumulativePlanAmmount.thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right" title="${ProjectTargets[1].NAccumulativePlanAmmount}" >${ProjectTargets[1].NAccumulativePlanAmmount.thousandize0OrEmpty(0)}</td>
+       
+        
+        <!-- 年度累计实际--->
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NAccumulativeActualAmmount}" >${ProjectTargets[0].NAccumulativeActualAmmount.thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right" title="${ProjectTargets[1].NAccumulativeActualAmmount}" >${ProjectTargets[1].NAccumulativeActualAmmount.thousandize0OrEmpty(0)}</td>
+       
+
+        <!-- 年度累计完成比例--->
+        {{if ProCompanySequence > 0 && ProjectTargets[0].NAccumulativeActualRate!="" &&JSON.parse(ProjectTargets[0].NAccumulativeActualRate).Rate < 1&& ProjectTargets[0].NAccumulativeDisplayRate!="/" }}
+        <td class="Td_TopAndBottom" style="background-color:#FABF8F" title="${ProjectTargets[0].NAccumulativeDisplayRate}"  >${ProjectTargets[0].NAccumulativeDisplayRate}</td>
+        {{else}}
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NAccumulativeDisplayRate}"  >${ProjectTargets[0].NAccumulativeDisplayRate}</td>
+        {{/if}}
+
+        {{if ProCompanySequence > 0 && ProjectTargets[1].NAccumulativeActualRate!="" &&JSON.parse(ProjectTargets[1].NAccumulativeActualRate).Rate < 1&& ProjectTargets[1].NAccumulativeDisplayRate!="/" }}
+        <td class="Td_Right" style="background-color:#FABF8F" title="${ProjectTargets[1].NAccumulativeDisplayRate"  >${ProjectTargets[1].NAccumulativeDisplayRate}</td>
+        {{else}}
+        <td class="Td_Right" title="${ProjectTargets[1].NAccumulativeDisplayRate}"  >${ProjectTargets[1].NAccumulativeDisplayRate}</td>
+        {{/if}}
+
+     
+        <!-- 警示灯--->
+      <td class="Td_Right">
+        {{if ProjectTargets[0].Counter==0}}<div class="ebtn"></div>{{else}}<img src="../Images/images1/image${ProjectTargets[0].Counter}.png" />{{/if}}</td>
+         
+        <td class="Td_TopAndBottom">
+        {{if ProjectTargets[1].Counter==0}}<div class="ebtn"></div>{{else}}<img src="../Images/images1/image${ProjectTargets[1].Counter}.png" />{{/if}}</td>
+    </tr>
+ {{/each}}
+</script>
+
+
+
+
+
+
+  <!-- 项目公司上报页面  数据--->
+<script id="TmplProCompanyDetail_South_Data" type="text/x-jquery-tmpl">
+    {{each ObjValue}}
+    <tr>
+        {{if ProRowSpan>0 }}
+        <td class="Td_Right" style="text-align:center!important;" rowspan="${ProRowSpan}" >${ProCompanyNumber}</td>
+        {{/if}}
+
+
+        {{if ProCompanySequence <0 }}
+        <td class="Td_Right"  colspan="2" style="text-align:center!important;font-weight:900!important;"  > 
+          ${ProCompayName}
+        </td>
+        {{else}}
+         <td class="Td_Right" style="text-align:center!important;"  > 
+             {{if ProCompayID =="88888888-8888-8888-8888-888888888888"}}
+             ${ProCompayName}
+             {{else}}
+            <a href="javascript:void(0);"  onclick="EditMonthReportDetail('${ProCompayID}','all')">${ProCompayName}</a>
+             {{/if}}
+        </td>
+        {{/if}}
+
+
+        <!-- 年度当月指标--->
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NPlanAmmount}" >${ProjectTargets[0].NPlanAmmount.thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right" title="${ProjectTargets[1].NPlanAmmount}" >${ProjectTargets[1].NPlanAmmount.thousandize0OrEmpty(0)}</td>
+        
+        <!-- 年度当月实际--->
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NActualAmmount}" >${ProjectTargets[0].NActualAmmount.thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right" title="${ProjectTargets[1].NActualAmmount}" >${ProjectTargets[1].NActualAmmount.thousandize0OrEmpty(0)}</td>
+
+        <!-- 年度当月完成率--->
+        {{if ProCompanySequence > 0 && ProjectTargets[0].NActualRate!="" &&JSON.parse(ProjectTargets[0].NActualRate).Rate < 1&& ProjectTargets[0].NDisplayRate!="/" }}
+        <td class="Td_TopAndBottom" style="background-color:#FABF8F" title="${ProjectTargets[0].NDisplayRate}" >${ProjectTargets[0].NDisplayRate}</td>
+        {{else}}
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NDisplayRate}" >${ProjectTargets[0].NDisplayRate}</td>
+        {{/if}}
+
+        {{if ProCompanySequence > 0 && ProjectTargets[1].NActualRate!="" &&JSON.parse(ProjectTargets[1].NActualRate).Rate < 1&& ProjectTargets[1].NDisplayRate!="/" }}
+        <td class="Td_Right" style="background-color:#FABF8F" title="${ProjectTargets[1].NDisplayRate}" >${ProjectTargets[1].NDisplayRate}</td>
+        {{else}}
+        <td class="Td_Right" title="${ProjectTargets[1].NDisplayRate}"> ${ProjectTargets[1].NDisplayRate}</td>
+        {{/if}}
+        
+        <!-- 年度累计指标--->
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NAccumulativePlanAmmount}" >${ProjectTargets[0].NAccumulativePlanAmmount.thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right" title="${ProjectTargets[1].NAccumulativePlanAmmount}"  >${ProjectTargets[1].NAccumulativePlanAmmount.thousandize0OrEmpty(0)}</td>
+        
+        <!-- 年度累计实际--->
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NAccumulativeActualAmmount}"  >${ProjectTargets[0].NAccumulativeActualAmmount.thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right" title="${ProjectTargets[1].NAccumulativeActualAmmount}" >${ProjectTargets[1].NAccumulativeActualAmmount.thousandize0OrEmpty(0)}</td>
+        
+        <!-- 年度累计完成比例--->
+        {{if ProCompanySequence > 0 && ProjectTargets[0].NAccumulativeActualRate!="" &&JSON.parse(ProjectTargets[0].NAccumulativeActualRate).Rate < 1&& ProjectTargets[0].NAccumulativeDisplayRate!="/" }}
+        <td class="Td_TopAndBottom" style="background-color:#FABF8F" title="${ProjectTargets[1].NAccumulativeDisplayRate}" >${ProjectTargets[0].NAccumulativeDisplayRate}</td>
+        {{else}}
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NAccumulativeDisplayRate}" >${ProjectTargets[0].NAccumulativeDisplayRate}</td>
+        {{/if}}
+
+        {{if ProCompanySequence > 0 && ProjectTargets[1].NAccumulativeActualRate!="" && JSON.parse(ProjectTargets[1].NAccumulativeActualRate).Rate < 1 && ProjectTargets[1].NAccumulativeDisplayRate!="/" }}
+        <td class="Td_Right" style="background-color:#FABF8F" title="${ProjectTargets[0].NAccumulativeDisplayRate}"  >${ProjectTargets[1].NAccumulativeDisplayRate}</td>
+        {{else}}
+         <td class="Td_Right" title="${ProjectTargets[1].NAccumulativeDisplayRate}" >${ProjectTargets[1].NAccumulativeDisplayRate}</td>
+        {{/if}}
+        
+        
+
+        <!--预警累计次数--> 
+        <td class="Td_Right">
+        {{if ProjectTargets[0].Counter==0}}<div class="ebtn"></div>{{else}}<img src="../Images/images1/image${ProjectTargets[0].Counter}.png" />{{/if}}</td>
+         
+        <td class="Td_TopAndBottom">
+        {{if ProjectTargets[1].Counter==0}}<div class="ebtn"></div>{{else}}<img src="../Images/images1/image${ProjectTargets[1].Counter}.png" />{{/if}}</td>
+        
+
+    </tr>
+    {{/each}}
+</script>
+
+
+<!-------------------------------------------项目公司 上报编辑页面----------------------------------------------->
+<script type="text/x-jquery-tmpl" id="MonthReportDetil_info_tmpl_Pro">
+       
+        <table style="width: 700px;" class="tab02">
+            <tr>
+                <th colspan="2" style="width: 5%; padding: 5px; padding-right: 10px; text-align:center;">公&nbsp;&nbsp;&nbsp;&nbsp;司</th>
+                <td style="width: 20%; padding: 5px; padding-left: 20px; text-align: left;">${ProCompayName} </td>
+                <td style="width: 15%; padding: 5px; padding-left: 60px; text-align: left;"></td>
+                <td style="width: 30%; padding: 5px; padding-left: 20px; text-align: left;"></td>
+            </tr>
+            {{each ProjectTargets}}
+            <tr>
+                <th rowspan="2" style="width: 8%; padding: 5px; padding-right: 10px; text-align: center;">${ProTargetName}</th>
+                <th style="width: 12%; padding: 5px; padding-right: 10px; text-align: right;">本月计划</th>
+                <td style="width: 20%; padding: 5px; padding-left: 20px; text-align: left;">
+                    <label class="width: 70%" >${NPlanAmmount}</label>
+                </td>
+                  <th style="width: 15%; padding: 5px; padding-right: 10px; text-align: right;">本月实际</th>
+                <td style="width: 30%; padding: 5px; padding-left: 20px; text-align: left;">
+                   <input type="text" id="CurrentAmmount${ProTargetID}" style="width: 90%" value="${NActualAmmount}" /> 
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 12%; padding: 5px; padding-right: 10px; text-align: right;">累计计划</th>
+                <td style="width: 20%; padding: 5px; padding-left: 20px; text-align: left;">
+                      <label class="width: 70%" >${NAccumulativePlanAmmount}</label>
+                </td>
+                 <th style="width: 15%; padding: 5px; padding-right: 10px; text-align: right;">累计实际</th>
+                <td style="width: 30%; padding: 5px; padding-left: 20px; text-align: left;">
+                   <input type="text" id="Accumulative${ProTargetID}" style="width: 90%" value="${NAccumulativeActualAmmount}" /> 
+                </td>
+            </tr>
+           {{/each}}
+
+        </table>
+    <div id="Div1" class="pop_operate">
+            <input type="button" class="pop_btn btn_gray" value="取消" onclick="art.dialog({ id: 'divMonthReportDetail' }).close();" />
+            <input type="button" class="pop_btn btn_blue" value="确定" onclick=" SaveMonthReportDetail();" />
+        </div>
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<!------------------------------------------项目公司 月度经营报告-------------------------------------------------------------------->
+
+<!--附件Start-->
+<script id="listAtt" type="text/x-jquery-tmpl">
+    <a style="padding-left: 10px" href="/AjaxHander/DownLoadFile.ashx?path=${Url}&&FileName=${FileName}">${FileName}</a><span style="padding-left: 10px; font-weight:700; color: #ccc">|</span>
+</script>
+<!--附件End-->
+
+
+
+<!-- 项目公司月度经营报告明细页面  《收缩》  表头--->
+<script id="TmplProCompany_Head" type="text/x-jquery-tmpl">
+    <tr>
+        
+        <th colspan='1' rowspan='3' style="width: 5%">序号</th>
+        <th colspan='1' rowspan='3' style="width: 10%">项目</th>
+        <th colspan='6' rowspan='1' style="">${GetMonthStr()}月情况</th>
+        <th colspan='6' rowspan='1' style="">1-${GetMonthStr()}月情况</th>
+
+        <th colspan='2' rowspan='2' style="width: 10%;cursor:pointer;" onclick="unfoldTitle();" >警示灯&nbsp;&nbsp;>></th>
+    </tr>
+    <tr>
+        
+        <!--当月-->
+        <th  colspan="2">${GetMonthStr()}月指标（金额）</th>
+        <th  colspan="2">${GetMonthStr()}月完成(金额）</th>
+        <th  colspan="2">${GetMonthStr()}月指标完成比例</th>
+
+        <!--月累计-->
+        <th  colspan="2">1-${GetMonthStr()}月指标（金额）</th>
+        <th  colspan="2">1-${GetMonthStr()}月完成(金额）</th>
+        <th  colspan="2">1-${GetMonthStr()}月指标完成比例</th>
+    </tr>
+    <tr>
+        <th class ="th_Sub"  >合同</th>
+        <th class ="th_Sub2"  >回款</th>
+
+        <th class ="th_Sub1"  >合同</th>
+        <th class ="th_Sub2"  >回款</th>
+
+        <th class ="th_Sub1"  >合同</th>
+        <th class ="th_Sub2"  >回款</th>
+
+        <th class ="th_Sub1"  >合同</th>
+        <th class ="th_Sub2"  >回款</th>
+
+        <th class ="th_Sub1"  >合同</th>
+        <th class ="th_Sub2"  >回款</th>
+        
+        <th class ="th_Sub1"  >合同</th>
+        <th class ="th_Sub2"  >回款</th>
+
+        <th class ="th_Sub1"  >合同</th>
+        <th class ="th_Sub"  >回款</th>
+    </tr>
+</script>
+
+
+<!-- 项目公司月度经营报告明细页面 《展开》 表头--->
+
+
+
+
+
+<!-- 项目公司月度经营报告明细页面  数据--->
+<script id="TmplProCompanyDetail_Data" type="text/x-jquery-tmpl">
+    {{each ObjValue}}
+    <tr>
+        {{if ProRowSpan>0 }}
+        <td class="Td_Right" style="text-align:center!important;" rowspan="${ProRowSpan}" >${ProCompanyNumber}</td>
+        {{/if}}
+
+        {{if ProCompanySequence <0 }}
+        <td class="Td_Right"  colspan="2" style="text-align:center!important;font-weight:900!important;"  >${ProCompayName}</td>
+        {{else}}
+         <td class="Td_Right" style="text-align:center!important;"  >${ProCompayName}</td>
+        {{/if}}
+       
+
+          <!-- 年度当月指标--->
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NPlanAmmount}" >${ProjectTargets[0].NPlanAmmount.thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right" title="${ProjectTargets[1].NPlanAmmount}" >${ProjectTargets[1].NPlanAmmount.thousandize0OrEmpty(0)}</td>
+        
+        <!-- 年度当月实际--->
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NActualAmmount}" >${ProjectTargets[0].NActualAmmount.thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right" title="${ProjectTargets[1].NActualAmmount}" >${ProjectTargets[1].NActualAmmount.thousandize0OrEmpty(0)}</td>
+
+        <!-- 年度当月完成率--->
+        {{if ProCompanySequence > 0 && ProjectTargets[0].NActualRate!="" &&JSON.parse(ProjectTargets[0].NActualRate).Rate < 1&& ProjectTargets[0].NDisplayRate!="/" }}
+        <td class="Td_TopAndBottom" style="background-color:#FABF8F" title="${ProjectTargets[0].NDisplayRate}" >${ProjectTargets[0].NDisplayRate}</td>
+        {{else}}
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NDisplayRate}" >${ProjectTargets[0].NDisplayRate}</td>
+        {{/if}}
+
+        {{if ProCompanySequence > 0 && ProjectTargets[1].NActualRate!="" &&JSON.parse(ProjectTargets[1].NActualRate).Rate < 1&& ProjectTargets[1].NDisplayRate!="/" }}
+        <td class="Td_Right" style="background-color:#FABF8F" title="${ProjectTargets[1].NDisplayRate}" >${ProjectTargets[1].NDisplayRate}</td>
+        {{else}}
+        <td class="Td_Right" title="${ProjectTargets[1].NDisplayRate}"> ${ProjectTargets[1].NDisplayRate}</td>
+        {{/if}}
+
+
+
+        <!-- 年度累计指标--->
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NAccumulativePlanAmmount}"  >${ProjectTargets[0].NAccumulativePlanAmmount.thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right" title="${ProjectTargets[1].NAccumulativePlanAmmount}" >${ProjectTargets[1].NAccumulativePlanAmmount.thousandize0OrEmpty(0)}</td>
+        
+        <!-- 年度累计实际--->
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NAccumulativeActualAmmount}" >${ProjectTargets[0].NAccumulativeActualAmmount.thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right" title="${ProjectTargets[1].NAccumulativeActualAmmount}" >${ProjectTargets[1].NAccumulativeActualAmmount.thousandize0OrEmpty(0)}</td>
+        
+        <!-- 年度累计完成比例--->
+        {{if ProCompanySequence > 0 && ProjectTargets[0].NAccumulativeActualRate!="" && JSON.parse(ProjectTargets[0].NAccumulativeActualRate).Rate < 1 && ProjectTargets[0].NAccumulativeDisplayRate!="/" }}
+        <td class="Td_TopAndBottom" style="background-color:#FABF8F" title="${ProjectTargets[0].NAccumulativeDisplayRate}"  >${ProjectTargets[0].NAccumulativeDisplayRate}</td>
+        {{else}}
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NAccumulativeDisplayRate}" >${ProjectTargets[0].NAccumulativeDisplayRate}</td>
+        {{/if}}
+
+         {{if ProCompanySequence > 0 && ProjectTargets[1].NAccumulativeActualRate!="" &&JSON.parse(ProjectTargets[1].NAccumulativeActualRate).Rate < 1&& ProjectTargets[1].NAccumulativeDisplayRate!="/" }}
+        <td class="Td_Right" style="background-color:#FABF8F" title="${ProjectTargets[1].NAccumulativeDisplayRate}"  >${ProjectTargets[1].NAccumulativeDisplayRate}</td>
+        {{else}}
+         <td class="Td_Right" title="${ProjectTargets[1].NAccumulativeDisplayRate}"  >${ProjectTargets[1].NAccumulativeDisplayRate}</td>
+        {{/if}}
+        
+        <!--预警累计次数--> 
+        <td class="Td_Right">
+        {{if ProjectTargets[0].Counter==0}}<div class="ebtn"></div>{{else}}<img src="../Images/images1/image${ProjectTargets[0].Counter}.png" />{{/if}}</td>
+         
+        <td class="Td_TopAndBottom">
+        {{if ProjectTargets[1].Counter==0}}<div class="ebtn"></div>{{else}}<img src="../Images/images1/image${ProjectTargets[1].Counter}.png" />{{/if}}</td>
+        
+
+    </tr>
+    {{/each}}
+</script>
+
+<!--------------项目公司上报页面  数据全部----------------------->
+<script id="TmplProCompanyDetail_Data_All" type="text/x-jquery-tmpl">
+{{each ObjValue}}
+ <tr>
+        {{if ProRowSpan>0 }}
+        <td class="Td_Right" style="text-align:center!important;" rowspan="${ProRowSpan}" >${ProCompanyNumber}</td>
+        {{/if}}
+
+        {{if ProCompanySequence <0 }}
+        <td class="Td_Right"  colspan="2" style="text-align:center!important;font-weight:900!important;"  > 
+          ${ProCompayName}
+        </td>
+        {{else}}
+         <td class="Td_Right" style="text-align:center!important;"  > 
+             ${ProCompayName}
+        </td>
+        {{/if}}
+
+        <!-- 年度计划指标--->
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NPlanAmmountByYear}"   >${ProjectTargets[0].NPlanAmmountByYear.thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right" title="${ProjectTargets[1].NPlanAmmountByYear}" >${ProjectTargets[1].NPlanAmmountByYear.thousandize0OrEmpty(0)}</td>
+       
+
+        <!-- 年度计划指标完成比例--->
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NDisplayRateByYear}" >${ProjectTargets[0].NDisplayRateByYear}</td>
+        <td class="Td_Right" title="${ProjectTargets[1].NDisplayRateByYear}" >${ProjectTargets[1].NDisplayRateByYear}</td>
+       
+
+
+        <!-- 年度当月指标--->
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NPlanAmmount}" >${ProjectTargets[0].NPlanAmmount.thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right" title="${ProjectTargets[1].NPlanAmmount}" >${ProjectTargets[1].NPlanAmmount.thousandize0OrEmpty(0)}</td>
+        
+
+        <!-- 年度当月实际--->
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NActualAmmount}"  >${ProjectTargets[0].NActualAmmount.thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right" title="${ProjectTargets[1].NActualAmmount}" >${ProjectTargets[1].NActualAmmount.thousandize0OrEmpty(0)}</td>
+       
+
+        <!-- 年度当月完成率--->
+        {{if ProCompanySequence > 0 && ProjectTargets[0].NActualRate!="" &&JSON.parse(ProjectTargets[0].NActualRate).Rate < 1&& ProjectTargets[0].NDisplayRate!="/" }}
+        <td class="Td_TopAndBottom" style="background-color:#FABF8F" title="ProjectTargets[0].NDisplayRate" >${ProjectTargets[0].NDisplayRate}</td>
+        {{else}}
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NDisplayRate}" >${ProjectTargets[0].NDisplayRate}</td>
+        {{/if}}
+
+        {{if ProCompanySequence > 0 && ProjectTargets[1].NActualRate!="" &&JSON.parse(ProjectTargets[1].NActualRate).Rate < 1&& ProjectTargets[1].NDisplayRate!="/" }}
+        <td class="Td_Right" style="background-color:#FABF8F" title="${ProjectTargets[1].NDisplayRate}" >${ProjectTargets[1].NDisplayRate}</td>
+        {{else}}
+        <td class="Td_Right" title="${ProjectTargets[1].NDisplayRate}" >${ProjectTargets[1].NDisplayRate}</td>
+        {{/if}}
+
+     
+
+        <!-- 年度累计指标--->
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NAccumulativePlanAmmount}" >${ProjectTargets[0].NAccumulativePlanAmmount.thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right" title="${ProjectTargets[1].NAccumulativePlanAmmount}" >${ProjectTargets[1].NAccumulativePlanAmmount.thousandize0OrEmpty(0)}</td>
+       
+        
+        <!-- 年度累计实际--->
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NAccumulativeActualAmmount}" >${ProjectTargets[0].NAccumulativeActualAmmount.thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right" title="${ProjectTargets[1].NAccumulativeActualAmmount}" >${ProjectTargets[1].NAccumulativeActualAmmount.thousandize0OrEmpty(0)}</td>
+       
+
+        <!-- 年度累计完成比例--->
+        {{if ProCompanySequence > 0 && ProjectTargets[0].NAccumulativeActualRate!="" &&JSON.parse(ProjectTargets[0].NAccumulativeActualRate).Rate < 1&& ProjectTargets[0].NAccumulativeDisplayRate!="/" }}
+        <td class="Td_TopAndBottom" style="background-color:#FABF8F" title="ProjectTargets[0].NAccumulativeDisplayRate}" >${ProjectTargets[0].NAccumulativeDisplayRate}</td>
+        {{else}}
+        <td class="Td_TopAndBottom" title="${ProjectTargets[0].NAccumulativeDisplayRate}">${ProjectTargets[0].NAccumulativeDisplayRate}</td>
+        {{/if}}
+
+        {{if ProCompanySequence > 0 && ProjectTargets[1].NAccumulativeActualRate!="" &&JSON.parse(ProjectTargets[1].NAccumulativeActualRate).Rate < 1&& ProjectTargets[1].NAccumulativeDisplayRate!="/" }}
+        <td class="Td_Right" style="background-color:#FABF8F" title="${ProjectTargets[1].NAccumulativeDisplayRate}" >${ProjectTargets[1].NAccumulativeDisplayRate}</td>
+        {{else}}
+        <td class="Td_Right" title="${ProjectTargets[1].NAccumulativeDisplayRate}" >${ProjectTargets[1].NAccumulativeDisplayRate}</td>
+        {{/if}}
+
+        <!-- 警示灯--->
+      <td class="Td_Right">
+        {{if ProjectTargets[0].Counter==0}}<div class="ebtn"></div>{{else}}<img src="../Images/images1/image${ProjectTargets[0].Counter}.png" />{{/if}}</td>
+         
+        <td class="Td_TopAndBottom">
+        {{if ProjectTargets[1].Counter==0}}<div class="ebtn"></div>{{else}}<img src="../Images/images1/image${ProjectTargets[1].Counter}.png" />{{/if}}</td>
+    </tr>
+ {{/each}}
+</script>
+
+
+
+
+
+<!--完成情况明细 查询条件--->
+<script id="MonthlyReportDetailSearhTemplate" type="text/x-jquery-tmpl">
+    <div id='${ColumnName}' style='height:25px'>
+        <span style='margin-left: 20px; float:left'>${CompanyPropertyName}:&nbsp;&nbsp; </span>
+        {{if listCP.length<=5}}
+            
+            {{each listCP}}
+                <input type='checkbox' onclick='ClickCompanyProperty(this)' style="vertical-align: text-bottom; margin-bottom:2px;" checked="checked" class='SearchCheckBox' value='${ItemCompanyPropertyName}' />
+                <span>${ItemCompanyPropertyValue}</span>
+            {{/each}}
+              
+        {{else}}
+                <input type="text" id="txt${ColumnName}" style="width: 216px;" />
+                <input id="hid_${ColumnName}" type="hidden" value="" />
+                <select id="select${ColumnName}" style="width: 220px; height: 100px;" >
+        {{each listCP}}
+                        <option value="${ItemCompanyPropertyName}"> ${ItemCompanyPropertyValue}</option>
+        {{/each}}
+                 </select>
+        {{/if}}
+           
+    </div>
+</script>

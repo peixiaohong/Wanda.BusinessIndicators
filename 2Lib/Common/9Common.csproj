@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1D81E774-65E8-43FF-8F8E-486D28A56275}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Wanda.BusinessIndicators.Common</RootNamespace>
+    <AssemblyName>Wanda.BusinessIndicators.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aspose.Cells">
+      <HintPath>..\..\1Framework\MSEntLib\Aspose.Cells.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\1Framework\MSEntLib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\1Framework\MSEntLib\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.PolicyInjection">
+      <HintPath>..\..\1Framework\MSEntLib\Microsoft.Practices.EnterpriseLibrary.PolicyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\1Framework\MSEntLib\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\..\1Framework\MSEntLib\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception">
+      <HintPath>..\..\1Framework\MSEntLib\Microsoft.Practices.Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AnonymousType.cs" />
+    <Compile Include="EnumUtil.cs" />
+    <Compile Include="Excel\ExcelDemo.cs" />
+    <Compile Include="ExtentionMethod.cs" />
+    <Compile Include="ValueDisplayHelper.cs" />
+    <Compile Include="Aspect\AuthCallHandler.cs" />
+    <Compile Include="Aspect\AutoLogCallHandler.cs" />
+    <Compile Include="ConstSet.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="Excel\ExcelEngine.cs" />
+    <Compile Include="Log\LogAdapter.cs" />
+    <Compile Include="Log\LogHelper.cs" />
+    <Compile Include="Log\LogWrite.cs" />
+    <Compile Include="Log\SqlLogTraceListener.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\FileServerConnection.cs" />
+    <Compile Include="Web\SiteMapParser.cs" />
+    <Compile Include="Web\WebHelper.cs" />
+    <Compile Include="Zip\BZip2\BitWriter.cs" />
+    <Compile Include="Zip\BZip2\BZip2Compressor.cs" />
+    <Compile Include="Zip\BZip2\BZip2InputStream.cs" />
+    <Compile Include="Zip\BZip2\BZip2OutputStream.cs" />
+    <Compile Include="Zip\BZip2\ParallelBZip2OutputStream.cs" />
+    <Compile Include="Zip\BZip2\Rand.cs" />
+    <Compile Include="Zip\CompressionMethod.cs" />
+    <Compile Include="Zip\CompressManager.Common.cs" />
+    <Compile Include="Zip\CompressManager.Compress.cs" />
+    <Compile Include="Zip\CompressManager.Extract.cs" />
+    <Compile Include="Zip\ZipFileInfo.cs" />
+    <Compile Include="Zip\Zip\ComHelper.cs" />
+    <Compile Include="Zip\Zip\CRC32.cs" />
+    <Compile Include="Zip\Zip\EncryptionAlgorithm.cs" />
+    <Compile Include="Zip\Zip\Events.cs" />
+    <Compile Include="Zip\Zip\Exceptions.cs" />
+    <Compile Include="Zip\Zip\ExtractExistingFileAction.cs" />
+    <Compile Include="Zip\Zip\FileSelector.cs" />
+    <Compile Include="Zip\Zip\OffsetStream.cs" />
+    <Compile Include="Zip\Zip\Shared.cs" />
+    <Compile Include="Zip\Zip\WinZipAes.cs" />
+    <Compile Include="Zip\Zip\ZipConstants.cs" />
+    <Compile Include="Zip\Zip\ZipCrypto.cs" />
+    <Compile Include="Zip\Zip\ZipDirEntry.cs" />
+    <Compile Include="Zip\Zip\ZipEntry.cs" />
+    <Compile Include="Zip\Zip\ZipEntry.Extract.cs" />
+    <Compile Include="Zip\Zip\ZipEntry.Read.cs" />
+    <Compile Include="Zip\Zip\ZipEntry.Write.cs" />
+    <Compile Include="Zip\Zip\ZipEntrySource.cs" />
+    <Compile Include="Zip\Zip\ZipErrorAction.cs" />
+    <Compile Include="Zip\Zip\ZipFile.AddUpdate.cs" />
+    <Compile Include="Zip\Zip\ZipFile.Check.cs" />
+    <Compile Include="Zip\Zip\ZipFile.cs" />
+    <Compile Include="Zip\Zip\ZipFile.Events.cs" />
+    <Compile Include="Zip\Zip\ZipFile.Extract.cs" />
+    <Compile Include="Zip\Zip\ZipFile.Read.cs" />
+    <Compile Include="Zip\Zip\ZipFile.Save.cs" />
+    <Compile Include="Zip\Zip\ZipFile.SaveSelfExtractor.cs" />
+    <Compile Include="Zip\Zip\ZipFile.Selector.cs" />
+    <Compile Include="Zip\Zip\ZipFile.x-IEnumerable.cs" />
+    <Compile Include="Zip\Zip\ZipInputStream.cs" />
+    <Compile Include="Zip\Zip\ZipOutputStream.cs" />
+    <Compile Include="Zip\Zip\ZipSegmentedStream.cs" />
+    <Compile Include="Zip\Zlib\Deflate.cs" />
+    <Compile Include="Zip\Zlib\DeflateStream.cs" />
+    <Compile Include="Zip\Zlib\GZipStream.cs" />
+    <Compile Include="Zip\Zlib\Inflate.cs" />
+    <Compile Include="Zip\Zlib\InfTree.cs" />
+    <Compile Include="Zip\Zlib\ParallelDeflateOutputStream.cs" />
+    <Compile Include="Zip\Zlib\Tree.cs" />
+    <Compile Include="Zip\Zlib\Zlib.cs" />
+    <Compile Include="Zip\Zlib\ZlibBaseStream.cs" />
+    <Compile Include="Zip\Zlib\ZlibCodec.cs" />
+    <Compile Include="Zip\Zlib\ZlibConstants.cs" />
+    <Compile Include="Zip\Zlib\ZlibStream.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Zip\BZip2\NOTICE.txt" />
+    <Content Include="Zip\Zlib\LICENSE.jzlib.txt" />
+    <Content Include="Zip\Zlib\License.zlib.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\1Framework\Lib.AuthCenter\Wanda.Lib.AuthCenter.csproj">
+      <Project>{fccad333-b48e-4a04-ad3c-8cb4ca17ef28}</Project>
+      <Name>Wanda.Lib.AuthCenter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\1Framework\Lib.Core\Wanda.Lib.Core.csproj">
+      <Project>{65839f36-193a-41d1-9e79-38bc84984de6}</Project>
+      <Name>Wanda.Lib.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\1Framework\Lib.Data\Wanda.Lib.Data.csproj">
+      <Project>{442c318f-9d99-4a3f-972e-33e8a8c8be51}</Project>
+      <Name>Wanda.Lib.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\1Framework\Lib.Web\Wanda.Lib.Web.csproj">
+      <Project>{9e21a44d-17eb-44f4-a936-27b41ca565fe}</Project>
+      <Name>Wanda.Lib.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Char\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

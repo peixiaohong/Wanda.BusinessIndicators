@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AB142C57-A632-4958-9814-4F7C3EA9083A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Wanda.BusinessIndicators.ViewModel</RootNamespace>
+    <AssemblyName>Wanda.BusinessIndicators.ViewModel</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Wanda.Platform.WorkFlow.ClientComponent">
+      <HintPath>..\..\Wanda.BusinessIndicators\DllReference\Wanda.Platform.WorkFlow.ClientComponent.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\BindPair.cs" />
+    <Compile Include="Demo\DemoModels.cs" />
+    <Compile Include="Base\ICascadeObject.cs" />
+    <Compile Include="Group\V_GroupCompany.cs" />
+    <Compile Include="Group\V_GroupMonthlyReportDetail.cs" />
+    <Compile Include="MonthReport\CompanyVModel.cs" />
+    <Compile Include="MonthReport\CompleteTargetDetailViewModel.cs" />
+    <Compile Include="MonthReport\ComprehensiveReportForm.cs" />
+    <Compile Include="MonthReport\DSTargetCompleted.cs" />
+    <Compile Include="MonthReport\ExceptionTargetVModel.cs" />
+    <Compile Include="MonthReport\HistoryReturnDateVModel.cs" />
+    <Compile Include="MonthReport\MissTargetConfigurationViewModel.cs" />
+    <Compile Include="MonthReport\MissTargetReturnVModel.cs" />
+    <Compile Include="MonthReport\MonthRptConfigVModel.cs" />
+    <Compile Include="MonthReport\TargetPlanDetailVModel.cs" />
+    <Compile Include="Project\V_ProjectCompany.cs" />
+    <Compile Include="Project\V_ProjectTarget.cs" />
+    <Compile Include="MonthReport\SimpleReportVModel.cs" />
+    <Compile Include="MonthReport\MonthlyReport.cs" />
+    <Compile Include="MonthReport\MonthlyReportDetail.cs" />
+    <Compile Include="MonthReport\MonthReportCheckViewModel.cs" />
+    <Compile Include="MonthReport\TargetPlanViewModel.cs" />
+    <Compile Include="Project\V_SubReport.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\1Framework\Lib.Core\Wanda.Lib.Core.csproj">
+      <Project>{65839f36-193a-41d1-9e79-38bc84984de6}</Project>
+      <Name>Wanda.Lib.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\1Framework\Lib.Data\Wanda.Lib.Data.csproj">
+      <Project>{442c318f-9d99-4a3f-972e-33e8a8c8be51}</Project>
+      <Name>Wanda.Lib.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\9Common.csproj">
+      <Project>{1d81e774-65e8-43ff-8f8e-486d28a56275}</Project>
+      <Name>9Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\3Model.csproj">
+      <Project>{efa26ef0-4ba9-4563-8d63-554e884f56b7}</Project>
+      <Name>3Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Excel\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

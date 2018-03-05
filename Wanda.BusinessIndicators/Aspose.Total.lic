@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<License>
+  <Data>
+    <LicensedTo>Beyondsoft Corporation</LicensedTo>
+    <LicenseType>Developer Enterprise Subscription</LicenseType>
+    <LicenseNote>Limited to 1 developer.</LicenseNote>
+    <OrderID>110228025531</OrderID>
+    <OEM>This is not a non-redistributable license</OEM>
+    <Products>
+      <Product>Aspose.Total</Product>
+    </Products>
+    <EditionType>Enterprise</EditionType>
+    <SerialNumber>32690aa5-6e84-4483-bfa6-43b3a198aca3</SerialNumber>
+    <SubscriptionExpiry>20120228</SubscriptionExpiry>
+    <LicenseVersion>2.2</LicenseVersion>
+  </Data>
+  <Signature>OyU8ghCe8E7y0K0mrWrziOMjN/bSwzkIIJX8qhrpUYCUeS06c1p4o4klaAuiVCaU7aPg/q+tmLqO1hofwc1jt+3jOaUpb7l0kdVA5Dja3YwGVRUvchP+xDoL++hD3S7d24SOzxpxcDb5F4C+NrnPms2ATX+rtpHewDDeyftYr7E=</Signature>
+</License>

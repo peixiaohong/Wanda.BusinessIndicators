@@ -1,0 +1,93 @@
+﻿/*查询条件*/
+.searchDiv {
+    border: 0;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+    .searchDiv ul {
+        border: 1px solid #CCC;
+        border-bottom: 0;
+        height: 25px;
+        padding-left: 0px;
+        margin: 0;
+        /*background: url(../images/title_bg.png);*/
+        background-color: rgb(72, 147, 249);
+    }
+
+        .searchDiv ul li {
+            height: 25px;
+            padding: 0 10px;
+            display: block;
+            line-height: 25px;
+            color: #fff;
+            float: left;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+    .searchDiv table {
+        width: 100%;
+        border: 1px solid #ccc;
+        border-collapse: collapse;
+    }
+
+        .searchDiv table th {
+            text-align: right;
+            width: 10%;
+            padding: 5px 5px 5px 0;
+        }
+
+        .searchDiv table td {
+            text-align: left;
+            padding: 5px 0px 5px 5px;
+        }
+
+        .searchDiv table input {
+            text-align: left;
+            padding-left: 2px;
+            border: 1px solid #aaa;
+            height: 20px;
+            width: 170px;
+        }
+
+        .searchDiv table select {
+            height: 22px;
+            width: 174px;
+        }
+
+        .searchDiv table span {
+            background: url(../images/search.png) 0 3px no-repeat scroll;
+            padding-left: 20px;
+            display: block;
+        }
+
+        .searchDiv table input[type=text] {
+            line-height: 20px;
+        }
+
+        .searchDiv table input[type=checkbox] {
+            padding: 0px;
+            height: 13px;
+            width: 13px;
+        }
+.breadpathContent {
+    font-size: 12px;
+    color: #808080;
+    line-height: 25px;
+    /*font-weight: bold;*/
+    background: #fcfcfc;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #dcdcdc;
+    margin-top: 0px;
+}
+
+    .breadpathContent a, .breadpathContent a:visited {
+        text-decoration: none;
+        color: #808080;
+    }
+
+        .breadpathContent a:hover {
+            text-decoration: underline;
+            color: #fd9002;
+        }

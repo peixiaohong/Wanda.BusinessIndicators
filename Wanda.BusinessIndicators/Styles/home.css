@@ -1,0 +1,167 @@
+﻿body
+{
+	background-repeat: repeat;
+}
+.pc-metro-blocks
+{
+	list-style: none none outter;
+	list-style-type: none;
+	list-style-image: none;
+	list-style-position: outside;
+	width: 600px;
+	margin: auto;
+}
+
+.pc-metro-blocks li
+{
+	display: block;
+	float: left;
+	margin: 10px 0 0 10px;
+	height: 100px;
+	width: 150px;
+	text-align: left;
+	cursor: pointer;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+	zoom:1;
+}
+
+.pc-metro-blocks li:hover
+{
+	border: 1px solid #000000;
+	margin: 9px -1px -1px 9px;
+}
+.pc-metro-blocks li.pc-dw
+{
+	width: 310px;
+}
+
+.pc-metro-blocks h1
+{
+	display: block;
+	line-height: 20px;
+	font-size: 2em;
+	color: #ffffff;
+	padding: 5px;
+	text-align: left;
+}
+
+.pc-metro-block-member
+{
+	background: #00A7EB;
+}
+
+.pc-metro-block-group
+{
+	background: #00A7EB;
+}
+
+.pc-metro-block-org
+{
+	background: #00A7EB;
+}
+
+.pc-metro-block-app
+{
+	background: #00A7EB;
+}
+
+.pc-metro-block-log
+{
+	background: #00A7EB;
+}
+
+.pc-metro-block-content
+{
+	margin: 10px;
+	color: #ffffff;
+	display: block;
+}
+
+.pc-metro-block-content a
+{
+	color: #ffffff;
+}
+
+.pc-metro-block-content .pc-metro-title
+{
+	float: left;
+}
+
+.pc-metro-block-content .pc-metro-detail
+{
+	float: right;
+}
+
+.pc-metro-blocks .pc-metro-icon
+{
+	display: block;
+	width: 48px;
+	height: 48px;
+	margin-top: 10px;
+	margin-left: 10px;
+	text-align: left;
+}
+
+.pc-metro-block-member .pc-metro-icon
+{
+	background-image: url("../images/artwork/Login.png");
+}
+
+.pc-metro-block-group .pc-metro-icon
+{
+	background-image: url("../images/artwork/Group.png");
+}
+
+.pc-metro-block-org .pc-metro-icon
+{
+	background-image: url("../images/artwork/Folder.png");
+}
+
+.pc-metro-block-app .pc-metro-icon
+{
+	background-image: url("../images/artwork/Cube.png");
+}
+
+.pc-metro-block-log .pc-metro-icon
+{
+	background-image: url("../images/artwork/History.png");
+}
+
+.pc-metro-logs-container
+{
+	overflow: hidden;
+	height: 100%;
+}
+
+.pc-metro-logs
+{
+	height: 100%;
+	overflow:visible;
+}
+
+.pc-metro-log
+{
+	height:100%;
+	font-family: "Segoe UI",helvetica,arial,sans-serif, "微软雅黑";
+	font-size:15px;
+	float:left;
+	width:100%;
+	background:transparent;
+}
+
+.pc-metro-log-title, .pc-metro-log-at
+{
+	color:#ffffff;
+	display: block;
+	margin: 0 5px 0 5px;
+	padding: 2px;
+	line-height:10px;
+}
+.pc-metro-log-title
+{
+	margin-top: 2px;
+	padding: 2px;
+	font-weight:bold;
+	line-height:15px;
+	margin-bottom:5px;
+}

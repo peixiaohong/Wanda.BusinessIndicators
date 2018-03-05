@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode>
+
+
+    <siteMapNode id="1" url="/BusinessReport/TargetRpt.aspx" title="月度经营报告"  description="月度经营报告" resourceKey="MonthReport"/>
+
+
+    <siteMapNode id="2" url="/BusinessReport/TargetReported.aspx" title="月度经营报告上报"  description="月度经营报告上报(经营)" resourceKey="UpLoadMonthReport"/>
+    <siteMapNode id="21" url="/BusinessReport/TargetProReported.aspx" title="月度经营报告上报"  description="月度经营报告上报(项目)" resourceKey="UpLoadProMonthReport"/>
+    <siteMapNode id="22" url="/BusinessReport/TargetGroupReported.aspx" title="月度经营报告上报"  description="月度经营报告上报(集团)" resourceKey="UpLoadGroupMonthReport"/>
+    <siteMapNode id="23" url="/BusinessReport/TargetDirectlyReported.aspx" title="月度经营报告上报"  description="月度经营报告上报(直管)" resourceKey="UpLoadDirectlyMonthReport"/>
+ 
+    <siteMapNode id="3" url="/SystemConfiguration/TargetCollectDisplay.aspx" title="分解指标查询"  description="分解指标查询" resourceKey="TargetSelect"/>
+    <siteMapNode id="3" url="/SystemConfiguration/TargetCollectDisplay_B.aspx" title="分解指标查询B"  description="分解指标查询" resourceKey="TargetSelectB"/>
+    <siteMapNode id="4" url="/BusinessReport/TargetPlanDetailReported.aspx" title="分解指标上报"  description="计划指标上报" resourceKey="UpLoadTargetPlanDetail"/>
+
+    <siteMapNode id="113" url="#" title="系统报表"  description="系统报表" resourceKey="SystemReportForm">
+      <siteMapNode id="1314" url="/BusinessReport/ComprehensiveReportForms.aspx" title="综合报表" description="综合报表" resourceKey="ReportApprovalTime"/>
+      <siteMapNode id="1314" url="/BusinessReport/ChildrenCompanyRpt.aspx" title="万达宝贝王报表" description="万达宝贝王报表" resourceKey="ReportApprovalTime"/>
+      <siteMapNode id="1314" url="/BusinessReport/FilmCompanyRpt.aspx" title="万达电影报表" description="万达电影报表" resourceKey="ReportApprovalTime"/>
+      <siteMapNode id="1314" url="/BusinessReport/WandaBusinessRpt.aspx" title="万达商业整体报表" description="万达商业整体报表" resourceKey="ReportApprovalTime"/>
+      <siteMapNode id="1314" url="/BusinessReport/WandaCultureRpt.aspx" title="万达文化集团整体报表 " description="万达文化集团整体报表" resourceKey="ReportApprovalTime"/>
+      
+      <siteMapNode id="1312" url="/SystemConfiguration/ContrastMisstargetDetail.aspx" title="未完成家数统计表"  description="未完成家数统计表" resourceKey="ContrastMisstargetDetail"/>
+      <siteMapNode id="1313" url="/SystemConfiguration/ContrastCompleteDetail.aspx" title="年度完成情况对比表"  description="年度完成情况对比表" resourceKey="ContrastCompleteDetail"/>
+      <siteMapNode id="1314" url="/StatisticReport/HistoryReturnReport.aspx" title="要求补回期限统计表" description="要求补回期限统计表" resourceKey="ReportApprovalTime"/>
+    </siteMapNode>
+
+    <siteMapNode id="4" url="/SystemConfiguration/DocumentManager.aspx" title="档案管理"  description="档案管理" resourceKey="DocumentManager">
+      <siteMapNode id="412" url="/SystemConfiguration/UpLoadDocumentManager.aspx" title="档案上传"  description="档案上传" resourceKey="DocumentUpload"/>
+      <siteMapNode id="413" url="/SystemConfiguration/DocumentManager.aspx" title="档案下载"  description="档案下载" resourceKey="DocumentDownload"/>
+
+    </siteMapNode>
+    <siteMapNode id="18" url="#" title="系统管理"  description="系统管理" resourceKey="SystemConfiguration">
+      <siteMapNode id="17" url="/SystemConfiguration/TargetConfiguration.aspx" title="指标基本信息管理" description="指标基本信息管理" resourceKey="TargetConfiguration"></siteMapNode>
+      <siteMapNode id="13" url="#" title="公司属性管理"  description="公司属性管理" resourceKey="CompanyConfiguration">
+        <siteMapNode id="131" url="/SystemConfiguration/CompanyList.aspx" title="公司属性管理"  description="公司属性管理" resourceKey="CompanyValueConfiguration"/>
+        <siteMapNode id="132" url="/SystemConfiguration/IfContrastCompany.aspx" title="可比属性管理"  description="可比属性管理" resourceKey="CompanyContrastValue"/>
+      </siteMapNode>
+      <siteMapNode id="16" url="/BusinessReport/TargetReportApproveTime.aspx" title="要求补回期限管理"  description="要求补回期限管理" resourceKey="TargetReportApprovalTime"/>
+
+      <siteMapNode id="15" url="/SystemConfiguration/UpdateTimeConfiguration.aspx" title="系统开放时间管理"  description="系统开放时间管理" resourceKey="SystemTimeManager"/>
+      <siteMapNode id="16" url="/SystemConfiguration/ReportApproveStatistical.aspx" title="月报上报审批情况"  description="月报上报审批情况" resourceKey="ReportStatManager"/>
+      <siteMapNode id="19" url="/SystemConfiguration/TargetPlanDetailReported.aspx" title="指标上报审批情况"  description="指标上报审批情况" resourceKey="TargetStatManager"/>
+
+    </siteMapNode>
+
+
+    <siteMapNode id="20" url="#" title="系统帮助"  description="系统帮助" resourceKey="SystemHelp">
+      
+      <siteMapNode id="2001" url="/DepartmentStoreReport/PlayVideo.aspx"  target="_blank"   title="上报月报操作视频"  description="上报月报操作视频" resourceKey="HelpVideo"/>
+      <siteMapNode id="2002" url="/Excel/Help/经营指标管控系统月报上报操作手册V1.pptx" title="经营指标操作手册"  description="经营指标操作手册" resourceKey="HelpDoc"/>
+    </siteMapNode>
+
+
+
+ 
+
+    <!--<siteMapNode id="8" url="#" title="系统管理"  description="background: url(../images/ico/77.png) no-repeat;"  resourceKey="SystemManager" >
+      <siteMapNode id="43" url="http://auth.wanda.cn/" title="角色管理"  description="角色管理"  resourceKey="RoleManager" />
+      <siteMapNode id="46" url="http://wf.wanda.cn/" title="流程管理"  description="流程管理" resourceKey="ProcessManager" />
+    </siteMapNode>-->
+  </siteMapNode>
+</siteMap>

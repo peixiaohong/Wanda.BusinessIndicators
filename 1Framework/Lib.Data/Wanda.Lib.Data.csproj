@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{442C318F-9D99-4A3F-972E-33E8A8C8BE51}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lib.Data</RootNamespace>
+    <AssemblyName>Lib.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppBase\BllBase\BizOperatorBase.cs" />
+    <Compile Include="AppBase\BllBase\CascadeObjectBuilder.cs" />
+    <Compile Include="AppBase\BllBase\ICascadeObject.cs" />
+    <Compile Include="AppBase\DalBase\AdapterFactory.cs" />
+    <Compile Include="AppBase\DalBase\BaseAdapterT.cs" />
+    <Compile Include="AppBase\DalBase\BaseCompositionAdapterT.cs" />
+    <Compile Include="AppBase\DalBase\BasicDataAccessInterfaces.cs" />
+    <Compile Include="AppBase\DalBase\CommonAdapter.cs" />
+    <Compile Include="AppBase\DalBase\PartlyCollection.cs" />
+    <Compile Include="AppBase\ModelBase\BaseModel.cs" />
+    <Compile Include="AppBase\ModelBase\IIdentifiable.cs" />
+    <Compile Include="AppBase\ModelBase\IBaseComposedModel.cs" />
+    <Compile Include="AppBase\ModelBase\PagenationFilter.cs" />
+    <Compile Include="Config\DbConfigurationSectionGroup.cs" />
+    <Compile Include="DbContext\AutoEnlistDbContext.cs" />
+    <Compile Include="Config\BuilderConfigurationElement.cs" />
+    <Compile Include="Config\ConnectionManagerConfigurationSection.cs" />
+    <Compile Include="Config\ConnectionStringBuilderBase.cs" />
+    <Compile Include="Config\ConnectionStringConfigurationElement.cs" />
+    <Compile Include="Config\ConnectionStringConfigurationElementBase.cs" />
+    <Compile Include="Config\ConnectionStringElement.cs" />
+    <Compile Include="DataBase\Database.cs" />
+    <Compile Include="DataBase\DatabaseFactory.cs" />
+    <Compile Include="Config\DataProviderConfigurationElement.cs" />
+    <Compile Include="Config\DbConnectionManager.cs" />
+    <Compile Include="DbContext\DbConnectionMappingContext.cs" />
+    <Compile Include="DbContext\Cache\DbConnectionMappingContextCache.cs" />
+    <Compile Include="DbContext\DbContext.cs" />
+    <Compile Include="DbContext\DbEventArgs.cs" />
+    <Compile Include="Config\DbEventArgsConfigurationElement.cs" />
+    <Compile Include="DbContext\DbEventType.cs" />
+    <Compile Include="DataBase\DbHelper.cs" />
+    <Compile Include="DbContext\Cache\DbParameterCache.cs" />
+    <Compile Include="DbContext\DeluxeDbContextBase.cs" />
+    <Compile Include="Config\MetaConnectionStringConfigurationElement.cs" />
+    <Compile Include="DbContext\NotEnlistDbContext.cs" />
+    <Compile Include="ObjectBase\DataFilterHelper.cs" />
+    <Compile Include="ObjectBase\FilterFieldAttribute.cs" />
+    <Compile Include="ObjectBase\IDataFilter.cs" />
+    <Compile Include="ObjectBase\QueryCondition.cs" />
+    <Compile Include="ObjectBase\SqlTextHelper.cs" />
+    <Compile Include="ObjectBase\ValueText.cs" />
+    <Compile Include="ORMapping\Attributes\ORViewMappingAttribute.cs" />
+    <Compile Include="SqlBuilder\InSqlClauseBuilder.cs" />
+    <Compile Include="SqlBuilder\OrderBySqlClauseBuilder.cs" />
+    <Compile Include="ORMapping\Attributes\NoMappingAttribute.cs" />
+    <Compile Include="ORMapping\ORMappingExt.cs" />
+    <Compile Include="SqlBuilder\SelectSqlClauseBuilder.cs" />
+    <Compile Include="SqlBuilder\SelectSqlClauseBuilderItem.cs" />
+    <Compile Include="SqlBuilder\SqlBuilderBase.cs" />
+    <Compile Include="SqlBuilder\IConnectiveSqlClause.cs" />
+    <Compile Include="SqlBuilder\InsertSqlClauseBuilder.cs" />
+    <Compile Include="SqlBuilder\ISqlBuilder.cs" />
+    <Compile Include="SqlBuilder\LogicOperatorDefine.cs" />
+    <Compile Include="ObjectBase\DataAdapterBase.cs" />
+    <Compile Include="ORMapping\Attributes\ORFieldMappingAttribute.cs" />
+    <Compile Include="ORMapping\Cache\ORMappingContextCache.cs" />
+    <Compile Include="ORMapping\Cache\ORMappingsCache.cs" />
+    <Compile Include="ORMapping\ClauseBindingFlags.cs" />
+    <Compile Include="ORMapping\ORMapping.cs" />
+    <Compile Include="ORMapping\ORMappingItem.cs" />
+    <Compile Include="ORMapping\ORMappingItemCollection.cs" />
+    <Compile Include="ORMapping\Attributes\ORTableMappingAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ObjectBase\ReadOnlyDataObjectCollection.cs" />
+    <Compile Include="ORMapping\Attributes\SqlBehaviorAttribute.cs" />
+    <Compile Include="ORMapping\Attributes\SubClassORFieldMappingAttribute.cs" />
+    <Compile Include="ORMapping\Attributes\SubClassSqlBehaviorAttribute.cs" />
+    <Compile Include="ORMapping\Attributes\SubClassTypeAttribute.cs" />
+    <Compile Include="Properties\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SqlBuilder\SqlCaluseBuilderItemWithData.cs" />
+    <Compile Include="SqlBuilder\SqlClauseBuilderBase.cs" />
+    <Compile Include="SqlBuilder\SqlClauseBuilderItemBase.cs" />
+    <Compile Include="SqlBuilder\SqlClauseBuilderItemIUW.cs" />
+    <Compile Include="SqlBuilder\SqlClauseBuilderIUW.cs" />
+    <Compile Include="SqlBuilder\UpdateSqlClauseBuilder.cs" />
+    <Compile Include="SqlBuilder\WhereSqlClauseBuilder.cs" />
+    <Compile Include="Config\TransactionConfigurationSection.cs" />
+    <Compile Include="DataBase\Instance\SqlDatabase.cs" />
+    <Compile Include="Transaction\TransactionScopeFactory.cs" />
+    <Compile Include="DataBase\UpdateBehavior.cs" />
+    <Compile Include="SqlBuilder\TSqlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lib.Core\Wanda.Lib.Core.csproj">
+      <Project>{65839F36-193A-41D1-9E79-38BC84984DE6}</Project>
+      <Name>Wanda.Lib.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

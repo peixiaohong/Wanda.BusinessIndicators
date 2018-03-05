@@ -1,0 +1,372 @@
+﻿<!------------------------------------------月度经营报告 Title start------------------------------------------------------------------------->
+<script id="MonthReportSummaryHeadTemplate" type="text/x-jquery-tmpl">
+    <tr class='tab_5_row_alt'>
+        <th rowspan='2' style='width: 4%'>序号</th>
+        <th rowspan='2' style="width: 275px;">项目</th>
+
+        <th colspan='4' style='width: 30%'>本月发生(万元)</th>
+        <th colspan='4' style='width: 30%'>本年累计(万元)</th>
+        <th colspan='2' style='width: 20%'>全年(万元)</th>
+    </tr>
+    <tr>
+        <th class='th_Sub'>计划</th>
+        <th class='th_Sub'>实际</th>
+        <th class='th_Sub'>
+            实际与<br />
+            计划差额
+        </th>
+        <th class='th_Sub2'>
+            实际占<br />
+            计划比
+        </th>
+        <th class='th_Sub1'>计划</th>
+        <th class='th_Sub'>实际</th>
+        <th class='th_Sub'>
+            实际与<br />
+            计划差额
+        </th>
+        <th class='th_Sub2'>
+            实际占<br />
+            计划比
+        </th>
+        <th class='th_Sub1'>计划</th>
+        <th class='th_Sub'>
+            完成<br />
+            年度计划比
+        </th>
+    </tr>
+</script>
+<!-----酒店建设----->
+<!-----酒店设计院----->
+<!-----游艇公司----->
+<!-----农业公司----->
+<script id="MonthReportSummaryHeadTemplate_JDJS" type="text/x-jquery-tmpl">
+   <tr class='tab_5_row_alt'>
+       <th rowspan='2' style='width: 4%'>序号</th>
+       <th rowspan='2'>项目</th>
+       <th colspan='4' style='width: 40%'>当　　月(万元)</th>
+       <th colspan='4' style='width: 40%'>累　　计(万元)</th>
+   </tr>
+   <tr>
+       <th class='th_Sub'>指标数</th>
+       <th class='th_Sub'>实际完成</th>
+       <th class='th_Sub'>差额</th>
+       <th class='th_Sub2'>完成率</th>
+       <th class='th_Sub1'>指标数</th>
+       <th class='th_Sub'>实际完成</th>
+       <th class='th_Sub'>差额</th>
+       <th class='th_Sub2'>完成率</th>
+   </tr>
+</script>
+<!-----电子商务----->
+<!-----商业规划院----->
+<script id="MonthReportSummaryHeadTemplate_SYGHY" type="text/x-jquery-tmpl">
+   <tr class='tab_5_row_alt'>
+       <th rowspan='2' style='width: 4%'>序号</th>
+       <th rowspan='2'>项目</th>
+       
+       <th colspan='4' style='width: 30%'>本月发生(万元)</th>
+       <th colspan='4' style='width: 30%'>本年累计(万元)</th>
+       <th colspan='2' style='width: 20%'>全年(万元)</th>
+       <th rowspan='2' style='width: 5%'>警示灯</th>
+   </tr>
+   <tr>
+       <th class='th_Sub'>计划</th>
+       <th class='th_Sub'>实际</th>
+       <th class='th_Sub'>实际与<br/>计划差额</th>
+       <th class='th_Sub2'>实际占<br/>计划比</th>
+       <th class='th_Sub1'>计划</th>
+       <th class='th_Sub'>实际</th>
+       <th class='th_Sub'>实际与<br/>计划差额</th>
+       <th class='th_Sub2'>实际占<br/>计划比</th>
+       <th class='th_Sub1'>计划</th>
+       <th class='th_Sub'>完成<br/>年度计划比</th>
+   </tr>
+</script>
+
+<!-------万达学院---------->
+<script id="MonthReportSummaryHeadTemplate_WDXY" type="text/x-jquery-tmpl">
+   <tr class='tab_5_row_alt'>
+       <th rowspan='2' style='width: 4%'>序号</th>
+       <th rowspan='2'>项目</th>
+       
+       <th colspan='4' style='width: 30%'>当    月(万元)</th>
+       <th colspan='4' style='width: 30%'>累     计(万元)</th>
+       <th colspan='2' style='width: 20%'>全年(万元)</th>
+   </tr>
+   <tr>
+       <th class='th_Sub'>指标数</th>
+       <th class='th_Sub'>实际完成</th>
+       <th class='th_Sub'>差额</th>
+       <th class='th_Sub2'>完成率</th>
+       <th class='th_Sub1'>指标数</th>
+       <th class='th_Sub'>实际完成</th>
+       <th class='th_Sub'>差额</th>
+       <th class='th_Sub2'>完成率</th>
+       <th class='th_Sub1'>指标数</th>
+       <th class='th_Sub'>完成率</th>
+   </tr>
+</script>
+
+
+<!-----华夏时报----->
+<!-----长白山管理公司----->
+<!-----大众电影----->
+<script id="MonthReportSummaryHeadTemplate_DZSW" type="text/x-jquery-tmpl">
+   <tr class='tab_5_row_alt'>
+       <th rowspan='2' style='width: 4%'>序号</th>
+       <th rowspan='2'>项目</th>
+       
+       <th colspan='4' style='width: 30%'>本　　月(万元)</th>
+       <th colspan='4' style='width: 30%'>累　　计(万元)</th>
+       <th colspan='2' style='width: 20%'>全年(万元)</th>
+   </tr>
+   <tr>
+       <th class='th_Sub'>计划</th>
+       <th class='th_Sub'>实际</th>
+       <th class='th_Sub'>实际与<br/>计划差额</th>
+       <th class='th_Sub2'>实际占<br/>计划比</th>
+       <th class='th_Sub1'>计划</th>
+       <th class='th_Sub'>实际</th>
+       <th class='th_Sub'>实际与<br/>计划差额</th>
+       <th class='th_Sub2'>实际占<br/>计划比</th>
+       <th class='th_Sub1'>年度计划</th>
+       <th class='th_Sub'>完成<br/>年度计划比</th>
+   </tr>
+</script>
+
+<!-------文旅规划院---------->
+<script id="MonthReportSummaryHeadTemplate_WLGHY" type="text/x-jquery-tmpl">
+   <tr class='tab_5_row_alt'>
+       <th rowspan='2' style='width: 4%'>序号</th>
+       <th rowspan='2'>项目</th>
+       
+       <th colspan='4' style='width: 30%'>当    月(万元)</th>
+       <th colspan='4' style='width: 30%'>累     计(万元)</th>
+       <th colspan='2' style='width: 20%'>全年(万元)</th>
+   </tr>
+   <tr>
+       <th class='th_Sub'>指标数</th>
+       <th class='th_Sub'>实际完成</th>
+       <th class='th_Sub'>差额</th>
+       <th class='th_Sub2'>完成率</th>
+       <th class='th_Sub1'>指标数</th>
+       <th class='th_Sub'>实际完成</th>
+       <th class='th_Sub'>差额</th>
+       <th class='th_Sub2'>完成率</th>
+       <th class='th_Sub1'>年计划</th>
+       <th class='th_Sub'>累计实际占全<br/>年计划比</th>
+   </tr>
+</script>
+
+<!-----影视传媒----->
+<script id="MonthReportSummaryHeadTemplate_YSCM" type="text/x-jquery-tmpl">
+   <tr class='tab_5_row_alt'>
+       <th rowspan='2' style='width: 4%'>序号</th>
+       <th rowspan='2'>项目</th>
+       
+       <th colspan='4' style='width: 30%'>本月发生(万元)</th>
+       <th colspan='4' style='width: 30%'>本年累计(万元)</th>
+       <th colspan='2' style='width: 20%'>全年(万元)</th>
+   </tr>
+   <tr>
+       <th class='th_Sub'>计划</th>
+       <th class='th_Sub'>实际</th>
+       <th class='th_Sub'>实际与<br/>计划差额</th>
+       <th class='th_Sub2'>实际占计划比<BR/>/减亏数</th>
+       <th class='th_Sub1'>计划</th>
+       <th class='th_Sub'>实际</th>
+       <th class='th_Sub'>实际与<br/>计划差额</th>
+       <th class='th_Sub2'>实际占计划比<BR/>/减亏数</th>
+       <th class='th_Sub1'>年度计划</th>
+       <th class='th_Sub'>完成<br/>年度计划比</th>
+   </tr>
+</script>
+
+<!-------昆明高尔夫---------->
+<script id="MonthReportSummaryHeadTemplate_KMGEF" type="text/x-jquery-tmpl">
+   <tr class='tab_5_row_alt'>
+       <th rowspan='2' style='width: 4%'>序号</th>
+       <th rowspan='2'>项目</th>
+       
+       <th colspan='4' style='width: 30%'>当    月(万元)</th>
+       <th colspan='4' style='width: 30%'>累     计(万元)</th>
+       <th colspan='2' style='width: 20%'>全年(万元)</th>
+   </tr>
+   <tr>
+       <th class='th_Sub'>计划</th>
+       <th class='th_Sub'>实际</th>
+       <th class='th_Sub'>实际与<BR/>计划差额</th>
+       <th class='th_Sub2'>实际占计划比<BR/>/减亏数</th>
+       <th class='th_Sub1'>计划</th>
+       <th class='th_Sub'>实际</th>
+       <th class='th_Sub'>实际与<BR/>计划差额</th>
+       <th class='th_Sub2'>实际占计划比<BR/>/减亏数</th>
+       <th class='th_Sub1'>年计划</th>
+       <th class='th_Sub'>累计实际占全<br/>年计划比</th>
+   </tr>
+</script>
+
+
+<!------------------------------------------月度经营报告  Title end------------------------------------------------------------------------->
+
+<script id="MonthReportSummaryTemplate_0" type="text/x-jquery-tmpl">
+    <tr>
+        <td class="Td_Left" style="text-align:center!important">${ID}</td>
+        <td class="Td_Left" style="text-align:left !important;" >${TargetName}</td>
+        <td class="Td_Left" title="${NPlanAmmount}">${(NPlanAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NDifference}">${(NDifference*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NActualRate}">${NActualRate}</td>
+        <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${(NAccumulativeDifference*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NAccumulativeActualRate}">${NAccumulativeActualRate}</td>
+        <td class="Td_Left" title="${MeasureRate}">${(MeasureRate*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NAnnualCompletionRate}">${NAnnualCompletionRate}</td>
+    </tr>
+</script>
+<script id="MonthReportSummaryTemplate_1" type="text/x-jquery-tmpl">
+    <tr>
+        <td class="Td_Left" style="text-align:center!important">${ID}</td>
+        <td class="Td_Left" style="text-align:left !important;" >${TargetName}</td>
+        <td class="Td_Left" title="${NPlanAmmount}">${(NPlanAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NDifference}">${(NDifference*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NActualRate}">${NActualRate}</td>
+        <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${(NAccumulativeDifference*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NAccumulativeActualRate}">${NAccumulativeActualRate}</td>
+    </tr>
+</script>
+
+<script id="MonthReportSummaryTemplate_2" type="text/x-jquery-tmpl">
+    <tr>
+        <td class="Td_Left" style="text-align:center!important">${ID}</td>
+        <td class="Td_Left" style="text-align:left !important;" >${TargetName}</td>
+        <td class="Td_Left" title="${NPlanAmmount}">${(NPlanAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NDifference}">${(NDifference*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NActualRate}">${NActualRate}</td>
+        <td class="Td_Left" title="${NAccumulativePlanAmmount}">${(NAccumulativePlanAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NAccumulativeDifference}">${(NAccumulativeDifference*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NAccumulativeActualRate}">${NAccumulativeActualRate}</td>
+        <td class="Td_Left" title="${MeasureRate}">${(MeasureRate*1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom" title="${NAnnualCompletionRate}">${NAnnualCompletionRate}</td>
+         {{if Counter==0}}
+        <td class="Td_Left" title="${Counter}" style="text-align:center !important"></td>
+        {{else}}
+        <td class="Td_Left" title="${Counter}" style="text-align:center !important"><img src="../Images/images1/image${Counter}.png" /></td>
+        {{/if}}
+    </tr>
+</script>
+
+
+
+
+<!--附件Start-->
+<script id="listAtt" type="text/x-jquery-tmpl">
+    <a style="padding-left: 10px" href="/AjaxHander/DownLoadFile.ashx?path=${Url}&&FileName=${FileName}">${FileName}</a><span style="padding-left: 10px; font-weight:700; color: #ccc">|</span>
+</script>
+<!--附件End-->
+
+<script id="MonthlyReportDetailSearhTemplate" type="text/x-jquery-tmpl">
+    <div id='${ColumnName}' style='height:25px'>
+        <span style='margin-left: 20px; float:left'>${CompanyPropertyName}:&nbsp;&nbsp; </span>
+        {{if listCP.length<=5}}
+            
+            {{each listCP}}
+                <input type='checkbox' onclick='ClickCompanyProperty()' style="vertical-align: text-bottom; margin-bottom:2px;" checked="checked" class='SearchCheckBox' value='${ItemCompanyPropertyName}' />
+                <span>${ItemCompanyPropertyValue}</span>
+            {{/each}}
+              
+        {{else}}
+                <input type="text" id="txt${ColumnName}" style="width: 216px;" />
+                <input id="hid_${ColumnName}" type="hidden" value="" />
+                <select id="select${ColumnName}" style="width: 220px; height: 100px;" >
+        {{each listCP}}
+                        <option value="${ItemCompanyPropertyName}"> ${ItemCompanyPropertyValue}</option>
+        {{/each}}
+                 </select>
+        {{/if}}
+           
+    </div>
+</script>
+<!--TargetReported完成情况明细编辑 Start--->
+<script type="text/x-jquery-tmpl" id="MonthReportDetil_info_tmpl">
+        <input type="hidden" id="hide_info_id" value="${ID}" />
+        <table style="width: 600px;" class="tab02">
+            <tr>
+                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">公&nbsp;&nbsp;&nbsp;&nbsp;司</th>
+                <td style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">${CompanyName}
+                </td>
+            </tr>
+
+            <tr>
+                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">计划</th>
+                <td style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">${NPlanAmmount}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">实际</th>
+                <td style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                   <input type="text" id="MonthReportNActualAmmount" style="width: 90%" value="${NActualAmmount}" /> 
+                </td>
+            </tr>
+        </table>
+    <div id="ssss" class="pop_operate">
+            <input type="button" class="pop_btn btn_gray" value="取消" onclick="art.dialog({ id: 'divMonthReportDetail' }).close();" />
+            <input type="button" class="pop_btn btn_blue" value="确定" onclick=" SaveMonthReportDetail();" />
+        </div>
+    </script>
+<script type="text/x-jquery-tmpl" id="MonthReportDetil_info_tmpl_SG">
+        <input type="hidden" id="Hidden1" value="${ID}" />
+        <table style="width: 600px;" class="tab02">
+            <tr>
+                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">公&nbsp;&nbsp;&nbsp;&nbsp;司</th>
+                <td style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">${CompanyName}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">本月应收</th>
+                <td style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                    <input type="text" id="SGMonthReportNPlanAmmount" style="width: 90%" value="${NPlanAmmount}" />
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">本月实收</th>
+                <td style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                   <input type="text" id="SGMonthReportNActualAmmount" style="width: 90%" value="${NActualAmmount}" /> 
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">累计应收</th>
+                <td style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                    <input type="text" id="SGMonthReportNAccumulativePlanAmmount" style="width: 90%" value="${NAccumulativePlanAmmount}" />
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">累计实收</th>
+                <td style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                   <input type="text" id="SGMonthReportNAccumulativeActualAmmount" style="width: 90%" value="${NAccumulativeActualAmmount}" /> 
+                </td>
+            </tr>
+        </table>
+    <div id="Div1" class="pop_operate">
+            <input type="button" class="pop_btn btn_gray" value="取消" onclick="art.dialog({ id: 'divMonthReportDetail' }).close();" />
+            <input type="button" class="pop_btn btn_blue" value="确定" onclick=" SaveMonthReportDetail();" />
+        </div>
+    </script>
+<!--TargetReported完成情况明细编辑 End--->
+
+
+
+
+
+
+
+
+
+

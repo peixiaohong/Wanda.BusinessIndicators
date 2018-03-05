@@ -1,0 +1,154 @@
+﻿<script id="TargetPlanDetailReportTableHeadTemplate" type="text/x-jquery-tmpl">
+    <tr class='tab_5_row_alt'>
+        <th rowspan='2' style='width: 4%'>序号</th>
+        <th rowspan='2'>门店</th>
+        <th rowspan='2' style='width: 7%'>开业日期</th>
+        <th rowspan='2' style='width: 7%'>年度指标</th>
+        <th colspan='12' style='width: 70%'>当月数</th>
+    </tr>
+    <tr>
+        <th class='th_Sub'>1月</th>
+        <th class='th_Sub'>2月</th>
+        <th class='th_Sub'>3月</th>
+        <th class='th_Sub'>4月</th>
+        <th class='th_Sub'>5月</th>
+        <th class='th_Sub'>6月</th>
+        <th class='th_Sub'>7月</th>
+        <th class='th_Sub'>8月</th>
+        <th class='th_Sub'>9月</th>
+        <th class='th_Sub'>10月</th>
+        <th class='th_Sub'>11月</th>
+        <th class='th_Sub'>12月</th>
+    </tr>
+</script>
+
+<script id="TargetHistory" type="text/x-jquery-tmpl">
+    <tr>
+        <th style="width: 30%">上报人</th>
+        <th style="width: 30%">上报日期</th>
+        <th style="width: 10%">文档下载</th>
+        <th style="width: 10%">指标状态</th>
+        <th style="width: 10%">操作</th>
+        <th style="width: 10%">查看日志</th>
+    </tr>
+</script>
+
+<script id="TargetPlanDetailReportTableHeadTemplate_ToYear" type="text/x-jquery-tmpl">
+    <tr class='tab_5_row_alt' style="width: 200px;">
+        <th style='width: 5%'>序号</th>
+        <th>门店</th>
+        <th style='width: 30%'>年度指标</th>
+    </tr>
+</script>
+
+
+<script id="TargetPlanDetailReportHeadTemplate" type="text/x-jquery-tmpl">
+    <li class="sd">
+        <a class="active2 " onclick="TargetPlanDetailLiaddCss(this);">${Name}</a>
+    </li>
+</script>
+
+<script id="TargetPlanDetailReportTemplate" type="text/x-jquery-tmpl">
+    {{each ObjValue}}
+       <tr>
+           <td class="Td_Left">${$index+1}</td>
+           <td class="Td_Left" style="text-align: left !important;" title="${_Company.CompanyName}">${_Company.CompanyName}</td>
+           <td class="Td_Left" title="${_Company.OpeningTime}">${FormatDate(_Company.OpeningTime,false)}</td>
+           <td class="Td_Left" title="${Mark}">${(Mark*1).thousandize0OrEmpty(0)}</td>
+           {{each ObjValue}}
+            <td class="Td_Left" title="${Target}">${(Target).thousandize0OrEmpty(0)}</td>
+           {{/each}}
+       </tr>
+    {{/each}}
+</script>
+
+
+<script id="TargetPlanDetailReportTemplate_ToYear" type="text/x-jquery-tmpl">
+    {{each ObjValue}}
+       <tr>
+           <td class="Td_Left">${$index+1}</td>
+           <td class="Td_Left" style="text-align: left !important;" title="${_Company.CompanyName}">${_Company.CompanyName}</td>
+           <td class="Td_Left" title="${Mark}">${(Mark*1).thousandize0OrEmpty(0)}</td>
+       </tr>
+    {{/each}}
+</script>
+
+
+
+
+
+
+
+
+
+
+<script id="TrTarget" type="text/x-jquery-tmpl">
+    <th>${TargetName}</th>
+</script>
+
+<script id="TabsTarget" type="text/x-jquery-tmpl">
+    <li class="sd" style="DISPLAY: list-item">
+        <a class="active3 " onclick="Change('','${ID}')" id="tab${ID}">${TargetName}</a>
+    </li>
+</script>
+
+
+<script id="ExceptionTarget" type="text/x-jquery-tmpl">
+    <li class="sd" style="DISPLAY: list-item">
+        <a class="active3 " onclick="Change('${ID}')" id="tab${ID}">${TargetName}</a>
+    </li>
+</script>
+
+<script id="TrSumTargetPlan" type="text/x-jquery-tmpl">
+    <tr>
+        <td class="Td_Center">${seq}</td>
+        <td class="Td_Right">${CompanyName}</td>
+        <td class="Td_Center" title="${OpenTime}">{{if OpenTime =='--'}}${OpenTime}{{else}}${FormatDate(OpenTime,false)}{{/if}}</td>
+        <td class="Td_Right" title="${TargetSum12}">${MathTarget(TargetSum12)}</td>
+    
+        <td class="Td_Right dan"  title="${Target1}">${MathTarget(Target1)}</td>
+        <td class="Td_Right dan"  title="${Target2}">${MathTarget(Target2)}</td>
+        <td class="Td_Right dan"  title="${Target3}">${MathTarget(Target3)}</td>
+        <td class="Td_Right dan"  title="${Target4}">${MathTarget(Target4)}</td>
+        <td class="Td_Right dan"  title="${Target5}">${MathTarget(Target5)}</td>
+        <td class="Td_Right dan"  title="${Target6}">${MathTarget(Target6)}</td>
+        <td class="Td_Right dan"  title="${Target7}">${MathTarget(Target7)}</td>
+        <td class="Td_Right dan"  title="${Target8}">${MathTarget(Target8)}</td>
+        <td class="Td_Right dan"  title="${Target9}">${MathTarget(Target9)}</td>
+        <td class="Td_Right dan"  title="${Target10}">${MathTarget(Target10)}</td>
+        <td class="Td_Right dan"  title="${Target11}">${MathTarget(Target11)}</td>
+        <td class="Td_Right dan"  title="${Target12}">${MathTarget(Target12)}</td>
+
+    </tr>
+</script>
+<script id="TrSumTargetSum" type="text/x-jquery-tmpl">
+    <!-- 累计合计-->
+    <th class="th_Sub" colspan="2" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all">合计</th>
+    <th class="th_Sub" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all" title="${SumTargetSum12}">${MathTarget(SumTargetSum12)}</th>
+    <th class="th_Sub sum" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all" title="${SumTargetSum1}">${MathTarget(SumTargetSum1)}</th>
+    <th class="th_Sub sum" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all" title="${SumTargetSum2}">${MathTarget(SumTargetSum2)}</th>
+    <th class="th_Sub sum" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all" title="${SumTargetSum3}">${MathTarget(SumTargetSum3)}</th>
+    <th class="th_Sub sum" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all" title="${SumTargetSum4}">${MathTarget(SumTargetSum4)}</th>
+    <th class="th_Sub sum" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all" title="${SumTargetSum5}">${MathTarget(SumTargetSum5)}</th>
+    <th class="th_Sub sum" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all" title="${SumTargetSum6}">${MathTarget(SumTargetSum6)}</th>
+    <th class="th_Sub sum" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all" title="${SumTargetSum7}">${MathTarget(SumTargetSum7)}</th>
+    <th class="th_Sub sum" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all" title="${SumTargetSum8}">${MathTarget(SumTargetSum8)}</th>
+    <th class="th_Sub sum" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all" title="${SumTargetSum9}">${MathTarget(SumTargetSum9)}</th>
+    <th class="th_Sub sum" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all" title="${SumTargetSum10}">${MathTarget(SumTargetSum10)}</th>
+    <th class="th_Sub sum" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all" title="${SumTargetSum11}">${MathTarget(SumTargetSum11)}</th>
+    <th class="th_Sub sum" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all" title="${SumTargetSum12}">${MathTarget(SumTargetSum12)}</th>
+    <!-- 当月合计-->
+
+    <th class="th_Sub dan" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all;display:none" title="${SumTarget1}">${MathTarget(SumTarget1)}</th>
+    <th class="th_Sub dan" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all;display:none" title="${SumTarget2}">${MathTarget(SumTarget2)}</th>
+    <th class="th_Sub dan" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all;display:none" title="${SumTarget3}">${MathTarget(SumTarget3)}</th>
+    <th class="th_Sub dan" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all;display:none" title="${SumTarget4}">${MathTarget(SumTarget4)}</th>
+    <th class="th_Sub dan" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all;display:none" title="${SumTarget5}">${MathTarget(SumTarget5)}</th>
+    <th class="th_Sub dan" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all;display:none" title="${SumTarget6}">${MathTarget(SumTarget6)}</th>
+    <th class="th_Sub dan" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all;display:none" title="${SumTarget7}">${MathTarget(SumTarget7)}</th>
+    <th class="th_Sub dan" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all;display:none" title="${SumTarget8}">${MathTarget(SumTarget8)}</th>
+    <th class="th_Sub dan" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all;display:none" title="${SumTarget9}">${MathTarget(SumTarget9)}</th>
+    <th class="th_Sub dan" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all;display:none" title="${SumTarget10}">${MathTarget(SumTarget10)}</th>
+    <th class="th_Sub dan" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all;display:none" title="${SumTarget11}">${MathTarget(SumTarget11)}</th>
+    <th class="th_Sub dan" style="border-right: 1px solid #cde1fb !important; border-top: 1px solid #cde1fb !important; word-break: break-all;display:none" title="${SumTarget12}">${MathTarget(SumTarget12)}</th>
+</script>

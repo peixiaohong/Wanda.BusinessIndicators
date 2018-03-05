@@ -1,0 +1,19 @@
+﻿
+.popup_peo{width:373px;height:216px;border:1px solid #ccc;font-size:12px;padding:5px 5px 5px 5px;background:#fff;}
+.peo_exit{height:9px;cursor:pointer; text-align:right;}
+.peo_l{float:left;width:150px;text-align:center;}
+.peo_l ul li{padding:1px 0;}
+.peo_l ul li img{position:relative;top:4px;right:5px;}
+.peo_r{float:left}
+.peo_r ul li{padding:7px 0;}
+.popup_peo ul{list-style:none;margin:0;padding:0;}
+
+#person td
+{
+    height:25px;
+}
+#person span
+{
+    height:25px;
+    line-height:25px;
+}

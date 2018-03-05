@@ -1,0 +1,45 @@
+﻿<script id="CompanyTargetHead" type="text/x-jquery-tmpl">
+    <li class="sd">
+        <a class="active3" id="tab${ID}" onclick="CheckCompanyTmpl('${ID}');">${TargetName}</a>
+    </li>
+
+</script>
+<script id="CompanyTarget" type="text/x-jquery-tmpl">
+    <tr>
+    </tr>
+</script>
+<script id="CheckBoxTarget" type="text/x-jquery-tmpl">
+    {{if IsCheck ==true}}
+    <input type="checkbox" id="CB${ID}" checked="checked" value="${ID}" name="TargetBox" />${TargetName}<br />
+    {{else}}
+    <input type="checkbox" id="CB${ID}" value="${ID}" name="TargetBox" />${TargetName}<br />
+    {{/if}}
+</script>
+
+<script id="TargetReportTab" type="text/x-jquery-tmpl">
+    <li class="sd">
+        <a class="active3" id="Ta${ID}" onclick="ChangeTab('${ID}')">${TargetName}</a>
+    </li>
+</script>
+<script id="TargetReportBody" type="text/x-jquery-tmpl">
+    <tr class="list_tr">
+        <td class="Td_Left" style="text-align: center !important; vertical-align: middle">${TargetType}</td>
+        <td class="Td_Left"><a style="text-decoration: underline; color: blue; font-size: 13px; cursor: pointer"
+            onclick="change('${ID}')">${CompanyName}</a></td>
+       <td class="Td_Left">   
+           {{if PromissDate==null}}--
+           {{else}} ${FormatTime(PromissDate)}
+           {{/if}}
+       </td>
+          <td class="Td_Left">   
+           {{if CurrentMonthCommitDate==null}}--
+           {{else}} ${FormatTime(CurrentMonthCommitDate)}
+           {{/if}}
+       </td>
+
+        <td class="Td_Left" style="text-align: left !important">${CurrentMonthCommitReason}</td>
+        <td class="Td_Left" style="text-align: center !important; vertical-align: middle">
+            <img class="none${Counter}" src="../Images/images1/image${Counter}.png" /></td>
+
+    </tr>
+</script>

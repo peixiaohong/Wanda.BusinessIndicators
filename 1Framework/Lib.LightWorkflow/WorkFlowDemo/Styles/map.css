@@ -1,0 +1,438 @@
+﻿/*右侧列02表*/
+.title_02
+{
+    height: 30px;
+    line-height: 30px;
+    background: url(../images/map/title_l02.png) left no-repeat;
+    position: relative;
+}
+.title_02 span
+{
+    background: url(../images/map/title_r02.png) right no-repeat;
+    margin-left: 4px;
+    display: block;
+}
+.title_02 span h1
+{
+    height: 30px;
+    line-height: 37px;
+    padding-left: 42px;
+    font-size: 12px;
+    color: #333;
+}
+.title_02 span .icon01
+{
+    background: url(../images/icon01.png) 5px 6px no-repeat;
+}
+.title_02 span .icon02
+{
+    background: url(../images/icon02.png) 5px 6px no-repeat;
+}
+.title_02 span .icon03
+{
+    background: url(../images/icon03.png) 5px 6px no-repeat;
+}
+.title_02 img
+{
+    position: absolute;
+    right: 5px;
+    top: 0px;
+    border: 0;
+    cursor: pointer;
+}
+.list_1, .list_02
+{
+    border: 1px solid #ccc;
+    border-top: 0;
+    background: #fff;
+    padding: 8px 8px;
+    margin-bottom: 8px;
+}
+.list_1 h2, .list_02 h2
+{
+    height: 25px;
+    line-height: 25px;
+    border-bottom: 1px dashed #ccc;
+    padding-left: 5px;
+    margin-bottom: 8px;
+}
+.list_1 h2 .orange
+{
+    color: #fd9002;
+}
+.more
+{
+    float: right;
+    background: url(../images/btn01.png) 28px 5px no-repeat;
+    padding-right: 15px;
+}
+.more a, .right a:visited
+{
+    color: #666;
+    text-decoration: none;
+}
+.more a:hover
+{
+    color: #fd9002;
+    text-decoration: underline;
+}
+.more2
+{
+    float: right;
+    position: relative;
+    top: -25px;
+    background: url(../images/btn02.png) 28px 0px no-repeat;
+    padding-right: 15px;
+    right: 10px;
+}
+.more2 a
+{
+    color: #fff;
+    font-weight: bold;
+}
+.more2 a:visited
+{
+    color: #fff;
+    text-decoration: none;
+}
+.more2 a:hover
+{
+    color: #fff;
+    text-decoration: underline;
+}
+
+.title_02 span .icon06
+{
+    background: url(../images/map/icon06.png) 15px 10px no-repeat;
+}
+list_02
+{
+    position: relative;
+}
+.list_left
+{
+    float: left;
+    width: 545px;
+}
+.list_right
+{
+    margin-left: 553px;
+}
+.sub_title_02
+{
+    height: 25px;
+    color: #fff;
+    background: #2791c5;
+    display: block;
+    line-height: 25px;
+    padding-left: 10px;
+}
+.sub_map
+{
+    border: 1px solid #ccc;
+    margin-top: 8px;
+}
+
+.detial
+{
+    margin-top: 8px;
+}
+
+.detial_tab
+{
+    width: 100%;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+}
+.detial_tab td, .detial_tab th
+{
+    height: 25px;
+    line-height: 25px;
+    border: 1px solid #ccc;
+}
+.detial_tab th
+{
+    background: #f7f8f8;
+    text-align: right;
+    padding-right: 5px;
+    font-weight: normal;
+}
+.detial_tab td
+{
+    padding-left: 5px;
+}
+
+.list_tab
+{
+    width: 100%;
+    border: 0;
+    margin: 0px 0 8px;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+.list_tab td, .list_tab th
+{
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+}
+.list_tab th
+{
+    background: url(../images/tab_bg.png) repeat-x;
+}
+th.th_left, td.th_left
+{
+    text-align: left;
+    padding-left: 10px;
+}
+
+.indent01
+{
+    text-indent: -999px;
+}
+
+.map_btn
+{
+    position: absolute;
+    margin-top: -29px;
+}
+.map_btn a
+{
+    margin: 0 5px;
+    padding: 2px 3px;
+}
+.map_btn a:hover
+{
+    border: 1px solid #ccc;
+    padding: 2px 3px;
+    text-decoration: none;
+}
+.map_btn a span
+{
+    color: #fd9002;
+}
+
+.map_btn img
+{
+    position: relative;
+    top: 2px;
+    margin: 0 3px;
+}
+.projectarea
+{
+    position: absolute;
+    cursor: pointer;
+}
+.projectarea ul
+{
+    background-color: White;
+    border: 1px solid gray;
+    text-indent: 20px;
+    position: absolute;
+    padding: 10px 0px 10px 0px;
+    display: none;
+    width: 180px;
+}
+/*
+.projectarea:hover
+{
+    z-index: 10;
+}
+.projectarea:hover ul
+{
+    display: block;
+}
+*/
+.projectarea ul li
+{
+    line-height: 24px;
+}
+.projectarea.bottom ul
+{
+    position: absolute;
+    top: 14px;
+}
+.projectarea.center ul
+{
+    position: absolute;
+    left: -90px;
+}
+.projectarea.right ul
+{
+    position: absolute;
+    top: 0px;
+    right: 30px;
+}
+.icon
+{
+    width: 8px;
+    height: 10px;
+    background: url(../images/map/icon.png) no-repeat;
+}
+.project
+{
+    position: absolute;
+}
+
+.project .areaname
+{
+    position: absolute;
+    width: 60px;
+    text-align: center;
+    cursor: pointer;
+    color: Black;
+}
+.project .areaname.top
+{
+    bottom: 10px;
+    left: -26px;
+}
+.project .areaname.bottom
+{
+    top: 10px;
+    left: -26px;
+}
+.project .areaname.left
+{
+    top: -2px;
+    left: -60px;
+    text-align: right;
+}
+.project .areaname.right
+{
+    top: -2px;
+    right: -60px;
+    text-align: left;
+}
+.project .msg
+{
+    position: absolute;
+    width: 200px;
+    left: -76px;
+    color: White;
+    display: none;
+}
+.project .msg.bottom
+{
+    top: 10px;
+}
+.project .msg.top
+{
+    bottom: 10px;
+}
+.porcjec .hovermsg
+{
+    display: block;
+}
+
+.project:hover
+{
+    z-index: 10;
+}
+
+.project:hover .msg
+{
+    display: block;
+}
+.project:hover .msg a
+{
+    z-index: 10;
+}
+
+.project .msg a
+{
+    color: White;
+}
+.project .msg ul
+{
+    border: 1px solid #fd7c13;
+    background-color: #fca242;
+    padding: 9px 0px;
+    text-indent: 20px;
+    line-height: 20px;
+}
+.project .msg ul
+{
+    border: 1px solid #fd7c13;
+    background-color: #fca242;
+    padding: 9px 0px;
+    text-indent: 20px;
+    line-height: 20px;
+}
+.project .msg.bottom .msghead
+{
+    height: 18px;
+    background: url(../images/map/arrows02.png) no-repeat;
+    background-position: 40px;
+    margin-bottom: -1px;
+    position: relative;
+}
+
+
+.project .msg.top .msgfoot
+{
+    height: 18px;
+    background: url(../images/map/arrows.png) no-repeat;
+    background-position: 40px;
+    margin-top: -1px;
+    position: relative;
+}
+.open
+{
+}
+.building
+{
+}
+.showcondition
+{
+    zoom: 1;
+    margin-top: -34px;
+    position: absolute;
+    z-index: 2;
+}
+.showcondition li
+{
+    float: left;
+    cursor: pointer;
+    line-height: 20px;
+    padding-left: 5px;
+    padding-right: 8px;
+    margin-right: 8px;
+    color: #2791c5;
+}
+
+
+.showcondition li:hover
+{
+    background: url(../images/map/bg01.png) no-repeat;
+}
+.showcondition li:hover dl
+{
+    display: block;
+}
+.showcondition li img
+{
+    position: relative;
+    top: 3px;
+    margin-right: 5px;
+}
+.showcondition li span
+{
+    color: #fd9002;
+}
+.showcondition dl
+{
+    display: none;
+    height: 140px;
+    padding-top: 5px;
+}
+.showcondition dl dd
+{
+    line-height: 24px;
+}
+.showcondition dl dd input
+{
+    position: relative;
+    top: 3px;
+    margin-right: 4px;
+}

@@ -1,0 +1,184 @@
+﻿<!--------------------------------------------------- 月报配置 Title-  Stare-------------------------------------------------------->
+<script type="text/x-jquery-tmpl" id="TmplHeadMonthRptConfig">
+    <tr>
+        <th>序号</th>
+        <th>系统名称</th>
+        <th>模版类型</th>
+        <th>指标汇总模版</th>
+        <th>指标明细模版</th>
+        <th>未完成说明模版</th>
+        <th>补回情况模版</th>
+        <th>操作人</th>
+        <th>操作时间</th>
+    </tr>
+
+</script>
+
+
+<script type="text/x-jquery-tmpl" id="TmplBodyMonthRptConfig">
+    {{each SysData}}
+    <tr>
+        <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+        <td class="Td_Left" style="text-align: center!important">${SystemName}</td>
+        <td class="Td_Left" style="text-align: center!important">{{if Category ==1}}
+                经营系统模版
+            {{else Category ==2}}
+                项目系统模版
+            {{else Category ==3}}
+                集团总部模版
+            {{else Category ==4}}
+                直管公司模版
+            {{/if}}
+        </td>
+        <td class="Td_Left" style="text-align: center!important">
+            <select id="SumTmpl">
+                <option value="sum001">默认指标统计模版</option>
+                <option value="sum002">指标统计模版（商管）</option>
+                <option value="sum003">指标统计模版（游艇）</option>
+                <option value="sum004">指标统计模版（农业）</option>
+                <option value="sum005">指标统计模版（长白山）</option>
+                <option value="sum006">指标统计模版（昆明高尔夫）</option>
+                <option value="sum007">指标统计模版（武汉电影乐园）</option>
+                <option value="sum008">指标统计模版（武汉秀场）</option>
+                <option value="sum009">指标统计模版（西双版纳）</option>
+                <option value="sum010">指标统计模版（集团总部）</option>
+                <option value="sum011">指标统计模版（商业地产总部）</option>
+                <option value="sum012">指标统计模版（文化集团总部）</option>
+
+            </select>
+        </td>
+        <td class="Td_Left" style="text-align: center!important">
+            <select id="DetailTmpl">
+                <option value="Detail001">默认指标明细模版</option>
+                <option value="Detail002">指标明细模版(商管)</option>
+                <option value="Detail003">指标明细模版(物管)</option>
+                <option value="Detail004">指标明细模版(旅业)</option>
+                <option value="Detail005">指标明细模版(集团总部)</option>
+                <option value="Detail006">指标明细模版(商业地产总部)</option>
+                <option value="Detail007">指标明细模版(文化集团总部)</option>
+            </select>
+        </td>
+        <td class="Td_Left" style="text-align: center!important">
+            <select id="MissTargetlTmpl">
+                <option value="MissTargetl001">默认未完成指标模版</option>
+
+            </select>
+        </td>
+        <td class="Td_Left" style="text-align: center!important">
+            <select id="ReturnTmpl">
+                <option value="Return001">默认补回指标模版</option>
+            </select>
+        </td>
+        <td class="Td_Left" style="text-align: center!important">${ModifierName} </td>
+        <td class="Td_Left" style="text-align: center!important">${ModifyTime}</td>
+    </tr>
+    {{/each}}
+</script>
+
+
+
+<!---------------------------------- 文档管理Tmpl ------------------------------------------------------------->
+
+<script type="text/x-jquery-tmpl" id="DocManageTHeadTmpl">
+    <tr>
+        <th style="width: 5%; word-break: keep-all">序号</th>
+        <th style="width: 10%; word-break: keep-all">文件类型</th>
+        <th style="width: 8%; word-break: keep-all">年份</th>
+        <th style="width: 13%; word-break: keep-all">产业集团</th>
+        <th style="width: 8%; word-break: keep-all">系统</th>
+        <th style="width: 8%; word-break: keep-all">公司</th>
+        <th style="width: 15%; word-break: keep-all">附件名称</th>
+        <th style="width: 13%; word-break: keep-all">上传时间</th>
+        <th style="width: 13%; word-break: keep-all">备注</th>
+        <th style="width: 10%; word-break: keep-all">操作</th>
+    </tr>
+
+</script>
+
+
+<script type="text/x-jquery-tmpl" id="DocManageTBodyTmpl">
+    {{each DocManagerData}}
+     <tr>
+         <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
+         <td class="Td_Left" style="text-align: center!important">${ValueAString}</td>
+         <td class="Td_Left" style="text-align: center!important">${FinYear}年</td>
+         <td class="Td_Left" style="text-align: center!important">${ValueBString}</td>
+         <td class="Td_Left" style="text-align: center!important">${ValueCString}</td>
+         <td class="Td_Left" style="text-align: center!important">${ValueDString}</td>
+         <td class="Td_Left" style="text-align: left!important;"><a title="${FileName}" href='/AjaxHander/DownLoadFile.ashx?path=${Url}&FileName=${FileName}' style="cursor: pointer;">${FileName} </a></td>
+         <td class="Td_Left" style="text-align: center!important">${FormatDate(CreateTime,"") }</td>
+
+         <td class="Td_Left" style="text-align: left!important">${Remark}</td>
+         <td class="Td_Left" style="text-align: center!important"><a style="display: inline; color: blue; cursor: pointer;" onclick="Attachment_Edit('${ID}')">编辑</a>&nbsp;&nbsp;
+          <a style="display: inline; color: blue; cursor: pointer;" title="删除文档" onclick="Attachment_Delete('${ID}')">删除</a>
+         </td>
+     </tr>
+
+    {{/each}}
+
+</script>
+
+
+
+<div id="divDocManageRemark" class="popup" style="height: auto; display: none; padding-bottom: 10px">
+    <div class="pop_content" id="content_edit">
+    </div>
+    <!--pop_content-->
+    <div class="pop_operate">
+        <input type="button" class="pop_btn btn_gray" value="取消" onclick="art.dialog({ id: 'divDocManageRemark' }).close();" />
+        <input type="button" class="pop_btn btn_blue" value="确定" onclick=" SaveDocManage();" />
+        <div class="cls"></div>
+    </div>
+    <!--pop_btn-->
+</div>
+
+<script type="text/x-jquery-tmpl" id="DocManage_info_tmpl">
+    <input type="hidden" id="hide_info_id" value="${ID}" />
+    <table style="width: 600px;" class="tab02">
+        <tr>
+            <th style="width: 25%; padding: 5px; padding-right: 10px; text-align: right;">文档名称 </th>
+            <td style="width: 75%; padding: 5px; padding-left: 20px; text-align: left;">${FileName}
+            </td>
+
+        </tr>
+        <tr>
+            <th style="width: 25%; padding: 5px; padding-right: 10px; text-align: right;">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注 </th>
+            <td style="width: 75%; padding: 5px; padding-left: 20px; text-align: left;">
+                <textarea rows="8" cols="4" id="txtDocManageRemark" style="width: 98%; margin-top: 10px;"> ${Remark} </textarea>
+            </td>
+
+        </tr>
+    </table>
+</script>
+
+
+<script type="text/x-jquery-tmpl" id="DocSelect1Tmpl">
+    {{each TreeList}}
+    <input type="radio" name="DocSelectA" onclick="ChangeSelectA('${ID}')" value="${ID}" style="margin-left: 10px; margin-top: 5px" />${TreeNodeName} 
+        {{/each}}
+</script>
+<script type="text/x-jquery-tmpl" id="DocSelect2Tmpl">
+    {{each TreeList}}
+    <input type="radio" name="DocSelectB" onclick="ChangeSelectB('${ID}')" value="${ID}" style="margin-left: 10px; margin-top: 5px" />${TreeNodeName}
+    {{/each}}
+</script>
+<script type="text/x-jquery-tmpl" id="DocSelect3Tmpl">
+    {{each TreeList}}
+    <input type="radio" name="DocSelectC" value="${ID}" onclick="ChangeSelectC('${ID}')" style="margin-left: 10px; margin-top: 5px" />${TreeNodeName}
+     {{/each}}
+</script>
+<script type="text/x-jquery-tmpl" id="DocSelectYearTmpl">
+    <input type="radio" name="DocSelectYear" value="${YearValue}" style="margin-left: 10px; margin-top: 5px" onclick="ChangeYear('${YearValue}')" />${YearValue} 
+</script>
+<script type="text/x-jquery-tmpl" id="DocTypeTmpl">
+    <li><a class="active_sub2" onmouseover="ChangeSelect1(this,'${ID}');"><span>${TreeNodeName}</span></a></li>
+</script>
+
+
+<script type="text/x-jquery-tmpl" id="DocTypeTmplCheck">
+    <li class="selected"><a class="active_sub2" onmouseover="ChangeSelect1(this,'${ID}');"><span>${TreeNodeName}</span></a></li>
+</script>
+
+<script type="text/x-jquery-tmpl" id="DocSelectDown">
+    <option value="${ID}">${TreeNodeName}</option>
+</script>

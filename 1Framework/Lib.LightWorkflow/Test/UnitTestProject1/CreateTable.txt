@@ -1,0 +1,297 @@
+﻿if exists (select 1
+            from  sysobjects
+           where  id = object_id('dbo.Attachment')
+            and   type = 'U')
+   drop table dbo.Attachment
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('dbo.BizProcess')
+            and   type = 'U')
+   drop table dbo.BizProcess
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('dbo.LWF_ApprovalLog')
+            and   type = 'U')
+   drop table dbo.LWF_ApprovalLog
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('dbo.LWF_Process')
+            and   type = 'U')
+   drop table dbo.LWF_Process
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('dbo.LWF_ProcessInstance')
+            and   type = 'U')
+   drop table dbo.LWF_ProcessInstance
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('dbo.LWF_ProcessNode')
+            and   type = 'U')
+   drop table dbo.LWF_ProcessNode
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('dbo.LWF_ProcessNodeInstance')
+            and   type = 'U')
+   drop table dbo.LWF_ProcessNodeInstance
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('dbo.LWF_StakeHolder')
+            and   type = 'U')
+   drop table dbo.LWF_StakeHolder
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('dbo.LWF_TodoWork')
+            and   type = 'U')
+   drop table dbo.LWF_TodoWork
+go
+
+/*==============================================================*/
+/* Table: Attachment                                            */
+/*==============================================================*/
+create table dbo.Attachment (
+   ID                   uniqueidentifier     not null,
+   FileType             smallint             null,
+   FKTableName          nvarchar(50)         collate Chinese_PRC_CI_AS null,
+   FKTableKeyName       nvarchar(50)         collate Chinese_PRC_CI_AS null,
+   FKTableKeyValue      int                  null,
+   FilePath             nvarchar(1000)       collate Chinese_PRC_CI_AS null,
+   FileName             nvarchar(200)        collate Chinese_PRC_CI_AS null,
+   FileSize             int                  null,
+   SortNo               int                  null,
+   ExtName              nvarchar(50)         collate Chinese_PRC_CI_AS null,
+   IsDeleted            bit                  not null default (0),
+   CreateTime           datetime             not null  default getdate(),
+   CreatorName          nvarchar(32)         not null  default (0),
+   constraint PK_PlanFile primary key nonclustered (ID)
+         on "PRIMARY"
+)
+on "PRIMARY"
+go
+
+
+/*==============================================================*/
+/* Table: BizProcess                                            */
+/*==============================================================*/
+create table dbo.BizProcess (
+   ID                   uniqueidentifier     not null,
+   TaskID               int                  null,
+   ProcessType          smallint             null,
+   Title                nvarchar(200)        collate Chinese_PRC_CI_AS null,
+   ParentID             int                  null,
+   Status               smallint             null default (1),
+   IsCurrentVersion     bit                  null,
+   IsDeleted            bit                  not null  default (0),
+   AlarmAction          smallint             not null default (1),
+   AlarmPlanSplitDate   datetime             null,
+   CreateTime           datetime             not null  default getdate(),
+   CreatorName          nvarchar(32)         not null  default (0),
+   constraint PK_BIZPROCESS primary key (ID)
+         on "PRIMARY"
+)
+on "PRIMARY"
+go
+
+/*==============================================================*/
+/* Table: LWF_ApprovalLog                                       */
+/*==============================================================*/
+create table dbo.LWF_ApprovalLog (
+   ID                   uniqueidentifier     not null,
+   ProcessID            nvarchar(36)         not null,
+   ProcessInstanceID    nvarchar(36)         not null,
+   InstanceName         nvarchar(200)        collate Chinese_PRC_CI_AS not null,
+   NodeName             nvarchar(20)         collate Chinese_PRC_CI_AS not null,
+   PreviousNodeInstanceID nvarchar(36)         not null,
+   NodeType             int                  not null,
+   CreatedTime          datetime             not null,
+   CompletedTime        datetime             not null,
+   Status               int                  not null,
+   UserID               int                  not null,
+   UserName             nvarchar(20)         collate Chinese_PRC_CI_AS not null,
+   ApprovalNote         nvarchar(Max)        collate Chinese_PRC_CI_AS not null,
+   OperationType        int                  not null,
+   BizProcessID         nvarchar(36)         null,
+   IsDeleted            bit                  not null  default (0),
+   CreateTime           datetime             not null  default getdate(),
+   CreatorName          nvarchar(32)         not null  default (0),
+   constraint PK_LWF_APPROVALLOG primary key (ID)
+         on "PRIMARY"
+)
+on "PRIMARY"
+go
+
+
+/*==============================================================*/
+/* Table: LWF_Process                                           */
+/*==============================================================*/
+create table dbo.LWF_Process (
+   ID                   uniqueidentifier     not null,
+   ProcessCode          nvarchar(10)         collate Chinese_PRC_CI_AS not null,
+   ProcessName          nvarchar(50)         collate Chinese_PRC_CI_AS not null,
+   IsActived            bit                  not null default (1),
+   Description          nvarchar(100)        collate Chinese_PRC_CI_AS null,
+   IsDeleted            bit                  not null  default (0),
+   CreateTime           datetime             not null  default getdate(),
+   CreatorName          nvarchar(32)         not null  default (0),
+   constraint PK_LWF_PROCESS primary key (ID)
+         on "PRIMARY"
+)
+on "PRIMARY"
+go
+
+/*==============================================================*/
+/* Table: LWF_ProcessInstance                                   */
+/*==============================================================*/
+create table dbo.LWF_ProcessInstance (
+   ID                   uniqueidentifier     not null,
+   ProcessID            nvarchar(36)         not null,
+   ProcessCode          nvarchar(10)         collate Chinese_PRC_CI_AS null,
+   BizProcessID         nvarchar(36)         null,
+   InstanceName         nvarchar(200)        collate Chinese_PRC_CI_AS not null,
+   StartTime            datetime             not null,
+   FinishTime           datetime             null,
+   LastUpdatedTime      datetime             not null,
+   Status               int                  not null,
+   UserID               int                  not null,
+   UserName             nvarchar(20)         collate Chinese_PRC_CI_AS not null,
+   BizProcessContext    nvarchar(Max)        collate Chinese_PRC_CI_AS not null,
+   IsDeleted            bit                  not null  default (0),
+   CreateTime           datetime             not null  default getdate(),
+   CreatorName          nvarchar(32)         not null  default (0),
+   constraint PK_LWF_PROCESSINSTANCE primary key (ID)
+         on "PRIMARY"
+)
+on "PRIMARY"
+go
+
+/*==============================================================*/
+/* Table: LWF_ProcessNode                                       */
+/*==============================================================*/
+create table dbo.LWF_ProcessNode (
+   ID                   uniqueidentifier     not null,
+   ProcessID            nvarchar(36)         not null,
+   NodeName             nvarchar(20)         collate Chinese_PRC_CI_AS not null,
+   NodeSeq              int                  not null,
+   Expression           nvarchar(Max)        collate Chinese_PRC_CI_AS not null,
+   NodeType             int                  not null,
+   IsHandSign           bit                  not null constraint DF__LWF_Proce__IsHan__43D61337 default (0),
+   RoleID                 nvarchar(36)                   not null,
+   Description          nvarchar(100)        collate Chinese_PRC_CI_AS null,
+   ProcessType          nvarchar(20)         collate Chinese_PRC_CI_AS not null,
+   IsDeleted            bit                  not null default (0),
+   CreateTime           datetime             not null  default getdate(),
+   CreatorName          nvarchar(32)         not null  default (0),
+   constraint PK_LWF_PROCESSNODE primary key (ID)
+         on "PRIMARY"
+)
+on "PRIMARY"
+go
+
+
+/*==============================================================*/
+/* Table: LWF_ProcessNodeInstance                               */
+/*==============================================================*/
+create table dbo.LWF_ProcessNodeInstance (
+   ID                   uniqueidentifier     not null,
+   NodeInstanceID       nvarchar(36)         not null,
+   ProcessID            nvarchar(36)         not null,
+   ProcessInstanceID    nvarchar(36)         not null,
+   PreviousNodeInstanceID nvarchar(36)         not null,
+   NodeName             nvarchar(20)         collate Chinese_PRC_CI_AS not null,
+   NodeSeq              int                  not null,
+   Expression           nvarchar(Max)        collate Chinese_PRC_CI_AS not null,
+   NodeType             int                  not null,
+   IsHandSign           bit                  not null  default (0),
+   RoleID               nvarchar(36)         not null,
+   Description          nvarchar(100)        collate Chinese_PRC_CI_AS null,
+   CreatedTime          datetime             not null,
+   LastUpdatedTime      datetime             not null,
+   Status               int                  not null,
+   UserID               int                  not null,
+   UserName             nvarchar(20)         collate Chinese_PRC_CI_AS not null,
+   OperationType        int                  null,
+   BizProcessID         nvarchar(36)         null,
+   ProcessType          nvarchar(20)         collate Chinese_PRC_CI_AS not null,
+   IsDeleted            bit                  not null  default (0),
+   CreateTime           datetime             not null  default getdate(),
+   CreatorName          nvarchar(32)         not null  default (0),
+   constraint PK_LWF_PROCESSNODEINSTANCE primary key (ID)
+         on "PRIMARY"
+)
+on "PRIMARY"
+go
+
+/*==============================================================*/
+/* Table: LWF_StakeHolder                                       */
+/*==============================================================*/
+create table dbo.LWF_StakeHolder (
+   ID                   uniqueidentifier     not null,
+   ProcessID            nvarchar(36)         not null,
+   ProcessInstanceID    nvarchar(36)         not null,
+   UserID               int                  not null,
+   UserName             nvarchar(20)         collate Chinese_PRC_CI_AS not null,
+   NodeType             int                  not null,
+   CreatedTime          datetime             not null,
+   BizProcessID         nvarchar(36)         not null,
+   IsDeleted            bit                  not null default (0),
+   CreateTime           datetime             not null  default getdate(),
+   CreatorName          nvarchar(32)         not null  default (0),
+   constraint PK_LWF_STAKEHOLDER primary key (ID)
+         on "PRIMARY"
+)
+on "PRIMARY"
+go
+/*==============================================================*/
+/* Table: LWF_TodoWork                                          */
+/*==============================================================*/
+create table dbo.LWF_TodoWork (
+   ID                   uniqueidentifier     not null,
+   ProcessID            nvarchar(36)         not null,
+   ProcessInstanceID    nvarchar(36)         not null,
+   ProcessCode          nvarchar(10)         collate Chinese_PRC_CI_AS null,
+   InstanceName         nvarchar(200)        collate Chinese_PRC_CI_AS not null,
+   NodeName             nvarchar(20)         collate Chinese_PRC_CI_AS not null,
+   PreviousNodeInstanceID nvarchar(36)         not null,
+   NodeInstanceID nvarchar(36)         not null,
+   NodeType             int                  not null,
+   CreatedTime          datetime             not null,
+   Status               int                  not null,
+   UserID               int                  not null,
+   UserName             nvarchar(20)         collate Chinese_PRC_CI_AS not null,
+   ModifyUserID         int                  not null,
+   ModifycUserID        nvarchar(20)         collate Chinese_PRC_CI_AS not null,
+   ModifyUserCode       nvarchar(20)         collate Chinese_PRC_CI_AS not null,
+   ModifyUserName       nvarchar(20)         collate Chinese_PRC_CI_AS not null,
+   TodoType             smallint             not null,
+   BizProcessID         nvarchar(36)         not null,
+   CreateProcessUserID  int                  not null,
+   CreateProcesscUserID nvarchar(20)         collate Chinese_PRC_CI_AS not null,
+   CreateProcessUserCode nvarchar(20)         collate Chinese_PRC_CI_AS not null,
+   CreateProcessUserName nvarchar(20)         collate Chinese_PRC_CI_AS not null,
+   CreateProcessTime    datetime             not null,
+   ModifyTime           datetime             not null,
+   ProjectID            nvarchar(36)         null,
+   IsDeleted            bit                  not null  default (0),
+   CreateTime           datetime             not null  default getdate(),
+   CreatorName          nvarchar(32)         not null  default (0),
+   constraint PK_LWF_TODOWORK primary key (ID)
+         on "PRIMARY"
+)
+on "PRIMARY"
+go
+ 

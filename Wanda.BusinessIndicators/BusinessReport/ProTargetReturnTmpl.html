@@ -1,0 +1,2500 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+
+
+    <!--项目公司未完成 和 补回说明模版-->
+    <!--------------------------------------------------- 未完成、 补回说明的 Title-  Stare-------------------------------------------------------->
+    <script type="text/x-jquery-tmpl" id="TmplHeadMiss">
+        <tr>
+            <th rowspan="2" style="min-width:20px; width:4%; word-break:keep-all">序号</th>
+            <th rowspan="2" style="min-width:80px; width:8%; word-break:keep-all">公司名称</th>
+            <th rowspan="2" class="newdiff_miss" style="min-width:80px; width:5%; word-break:keep-all">经营指标</th>
+            <th rowspan="2" style="min-width:80px; width:5%; word-break:keep-all">
+                本月补回/<br />
+                新增差额
+            </th>
+            <th colspan="3" class="shangyue" onclick="if(MissH){ShouSuo('YC');}" style="min-width:180px; width:18%;  cursor: pointer; word-break:keep-all">上月累计(万元)&nbsp; [-]</th>
+            <th colspan="3" style="min-width:180px; width:18%; cursor: pointer;word-break:keep-all" class="TT2" onclick="if(MissH){ShouSuo('XS');}">
+                <div id="CurrentMonthMissTergetDiv">本月累计(万元)</div>
+            </th>
+
+            <th rowspan="2" style="" class="maindata">
+                未完成原因<br />
+                及采取措施
+            </th>
+            <th colspan="2" style="min-width:210px; width:18%; word-break:keep-all">补回说明</th>
+            <th rowspan="2" style="min-width:40px; width:4%; word-break:keep-all">警示<br />灯</th>
+        </tr>
+        <tr>
+            <th class="th_Sub shangyue" style="min-width:60px; width:5%; word-break:keep-all">计划</th>
+            <th class="th_Sub shangyue" style="min-width:60px; width:5%; word-break:keep-all">实际</th>
+            <th class="th_Sub2 shangyue" style="min-width:60px; width:5%; word-break:keep-all">差额</th>
+            <th class="th_Sub1" style="min-width:60px; width:5%; word-break:keep-all">计划</th>
+            <th class="th_Sub" style="min-width:60px; width:5%; word-break:keep-all">实际</th>
+            <th class="th_Sub" style="min-width:60px; width:5%; word-break:keep-all">差额</th>
+            <th class="th_Sub shangyue" style="min-width:80px; width:6%; word-break:keep-all">完成率</th>
+
+            <th style="min-width: 80px; width:6%; word-break:keep-all">要求期限</th>
+            <th style="min-width: 130px; width:10%; word-break:keep-all">补回情况</th>
+        </tr>
+    </script>
+
+
+    <script type="text/x-jquery-tmpl" id="TmplCurrentHeadMiss">
+        <tr>
+            <th rowspan="2" style="min-width:20px; width:4%; word-break:keep-all">序号</th>
+            <th rowspan="2" style="min-width:80px; width:8%; word-break:keep-all">公司名称</th>
+            <th rowspan="2" class="newdiff_CurrenMiss" style="min-width:80px; width:5%; word-break:keep-all">经营指标</th>
+            <th colspan="3" onclick="if(MissH){ShouSuo_Current('XS');}" style="min-width:180px; width:18%;  cursor: pointer; word-break:keep-all">
+                <div id="MonthMissTergetDiv_Current"> 当月发生(万元)&nbsp; [+]</div>
+            </th>
+            <th colspan="3" style="min-width:180px; width:18%; cursor: pointer;word-break:keep-all" class="C_TT2 leiji" onclick='if(MissH) {ShouSuo_Current("YC");}'>
+                本月累计(万元)
+            </th>
+            <th rowspan="2" style="min-width:80px; width:5%; word-break:keep-all">
+                本月累计<br />
+                差额
+            </th>
+            <th rowspan="2" style="" class="maindata">
+                未完成原因<br />
+                及采取措施
+            </th>
+            <th colspan="2" style="min-width:210px; width:18%; word-break:keep-all">补回说明</th>
+            <th rowspan="2" style="min-width:40px; width:4%; word-break:keep-all">警示<br />灯</th>
+        </tr>
+        <tr>
+            <th class="th_Sub" style="min-width:60px; width:5%; word-break:keep-all">计划</th>
+            <th class="th_Sub" style="min-width:60px; width:5%; word-break:keep-all">实际</th>
+            <th class="th_Sub2" style="min-width:60px; width:5%; word-break:keep-all">差额</th>
+            <th class="th_Sub1 leiji" style="min-width:60px; width:5%; word-break:keep-all">计划</th>
+            <th class="th_Sub leiji" style="min-width:60px; width:5%; word-break:keep-all">实际</th>
+            <th class="th_Sub leiji" style="min-width:60px; width:5%; word-break:keep-all">差额</th>
+            <th class="th_Sub leiji" style="min-width:80px; width:6%; word-break:keep-all">完成率</th>
+
+            <th style="min-width: 80px; width:6%;">要求期限</th>
+            <th style="min-width: 130px; width:10%; word-break:keep-all">补回情况</th>
+        </tr>
+    </script>
+
+
+
+    <script type="text/x-jquery-tmpl" id="TmplHeadReturn">
+        <tr>
+            <th rowspan="2" style="width: 4% ;min-width: 40px;">序号</th>
+            <th rowspan="2" style="width: 12%;min-width:90px;">公司名称</th>
+            <th rowspan="2" class="newdiff_retu" style="width: 8%;min-width:90px;">经营指标</th>
+            <th rowspan="2" style="width:8%;min-width:90px">
+                本月补回/<br />
+                新增差额
+            </th>
+            <th colspan="3" style="width:21%; min-width:270px; cursor: pointer;" onclick="if(MissH){ShouSuo('YCSY');}" class="shangyueleiji">上月累计(万元)&nbsp; [-]</th>
+
+            <th colspan="3" style="width: 29%;min-width:360px; cursor: pointer;" class="TTR2" onclick="if(MissH){ShouSuo('XSSY');}">
+                <div id="CurrentMonthBackDetilDiv">本年累计(万元)</div>
+            </th>
+
+            <th rowspan="2">要求期限</th>
+
+            <th rowspan="2" style="width:4%;min-width: 40px ;">警示<br />灯</th>
+        </tr>
+        <tr>
+            <th class="th_Sub shangyueleiji" style="width:7% ;min-width:90px;">计划</th>
+            <th class="th_Sub shangyueleiji" style="width:7%;min-width:90px;">实际</th>
+            <th class="th_Sub2 shangyueleiji" style="width:7%;min-width:90px;">差额</th>
+            <th class="th_Sub1" style="width:7%;min-width:90px;">计划</th>
+            <th class="th_Sub" style="width:7%;min-width:90px;">实际</th>
+            <th class="th_Sub" style="width:7%;min-width:90px;">差额</th>
+            <th class="th_Sub shangyueleiji" style="min-width:120px; width:8%; word-break:keep-all">完成率</th>
+        </tr>
+    </script>
+
+
+    <!--指标-->
+    <script type="text/x-jquery-tmpl" id="TmplTargerList">
+        <li class="sd">
+            <a class="active3" onclick="RtunLiaddCss(this);">${Name}</a>
+        </li>
+    </script>
+
+
+    <script type="text/x-jquery-tmpl" id="TmplMissTargerList">
+        <li class="sd">
+            <a class="active3" onclick="MissLiaddCss(this);">${Name}</a>
+        </li>
+    </script>
+
+    <!---------------------------------------------------未完成、 补回说明的 Title-  End -------------------------------------------------------->
+    <!--------------------------------------------------- 组合指标 补回情况模版-  Stare-------------------------------------------------------->
+    <!--补回情况-->
+    <script type="text/x-jquery-tmpl" id="TmplTargetRetu">
+        {{if Mark=="Group"}}
+        {{each ObjValue}}
+        {{tmpl($value) '#TmplTargetRetu'}}
+        {{/each}}
+        {{else}}
+        {{if Mark=="Counter"}}
+        <tr class="Level1 show">
+            <td colspan="12" class="Td_Merge Level1TDSL show" onclick="TrLv1Show(this);">${Name} <span style="color: red;">(共${getGroupCount(ObjValue,"Retu")}家）</span></td>
+        </tr>
+        {{each ObjValue}}
+        {{if Mark=="Counter"}}
+        {{tmpl($value) '#TmplTargetRetu'}}
+        {{else}}
+        <tr class="Level2" style="display: none;">
+            <td colspan="12" class="Td_Merge Level1TDSL show" style="text-indent:25px" onclick="TrLv2Show(this);">${Name}<span style="color: red;">（共${getGroupCount(ObjValue,"Retu")}家）</span></td>
+        </tr>
+        {{each ObjValue}}
+        <tr class="Level3 minus" style="display: none;">
+            <!--明细数据-->
+            {{if TargetGroupCount ==1 }}
+            <td class="Td_Left" style="text-align: left; padding-left: 20px">${$index+1}</td>
+            <td class="Td_Left" style="text-align: left !important;">${CompanyName}</td>
+            {{else}}
+            {{if ($index+1)%TargetGroupCount ==1 }}
+            <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align:center !important;">${($index+2)/TargetGroupCount}</td>
+            <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: left !important;">${CompanyName}</td>
+            {{/if}}
+            {{/if}}
+
+            <!--指标名称-->
+            <td class="Td_Left" style="text-align: center !important;">${TargetName}</td>
+
+            <!--新增差值-->
+            <td class="Td_Left" {{if AddDifference<0 }} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${AddDifference}">${(AddDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--上月累计计划数-->
+            <td class="Td_Left shangyueleiji" style="white-space: nowrap;" title="${LastNAccumulativePlanAmmount}">${(LastNAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--上月累计实际数-->
+            <td class="Td_TopAndBottom shangyueleiji" style="white-space: nowrap;" title="${LastNAccumulativeActualAmmount}">${(LastNAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--上月差值-->
+            <td class="Td_Right shangyueleiji" {{if LastNAccumulativeDifference <0}} style="white-space: nowrap; color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${LastNAccumulativeDifference}">${(LastNAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计计划数-->
+            <td class="Td_Left" style="white-space: nowrap;" title="${NAccumulativePlanAmmount}">${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计实际数-->
+            <td class="Td_TopAndBottom" style="white-space: nowrap;" title="${NAccumulativeActualAmmount}">${NAccumulativeActualAmmount.thousandize0OrEmpty(0)}</td>
+
+            <!--本月差值-->
+            <td class="Td_Right Special_return" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--本月完成率-->
+            <td class="Td_Right shangyueleiji" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+
+            <!--要求时间 如果要求说明是""显示时间，反之显示本身-->
+            <td class="Td_Right" style="text-align: center !important;">
+                {{if CommitReason==""}}
+                {{if FormatDate(CommitDate,false) =="---"}}${FormatDate(CommitDate,false)}{{else}}${FormatDate(CommitDate,false,"CN").substring(0,FormatDate(CommitDate,false,"CN").length-3)}月{{/if}}
+                {{else}}
+                ${CommitReason}
+                {{/if}}
+            </td>
+
+            <!--预警累计次数-->
+            <td class="Td_TopAndBottom" style="text-align: center !important; vertical-align: middle">
+                {{if Counter==0}}<div class="ebtn"></div>{{else}}<img src="../Images/images1/image${Counter}.png" />{{/if}}
+            </td>
+        </tr>
+        {{/each}}
+        {{/if}}
+        {{/each}}
+        {{else}}
+        <tr class="Level1 show">
+            <td colspan="12" class="Td_Merge Level1TDSL show" onclick="TrLv1Show(this);">${Name} <span style="color: red;">（共${getGroupCount(ObjValue,"Retu")}家）</span></td>
+        </tr>
+        {{each ObjValue}}
+        <tr class="Level3 " style="display: none;">
+
+            <!--序号和公司名称-->
+            {{if TargetGroupCount ==1}}
+            <td class="Td_Left" style="text-align:center !important;">${$index+1}</td>
+            <td class="Td_Left" style="text-align: left !important;">${CompanyName}</td>
+            {{else}}
+            {{if ($index+1)%TargetGroupCount ==1 }}
+            <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align:center !important;">${($index+2)/TargetGroupCount}</td>
+            <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: left !important;">${CompanyName}</td>
+            {{/if}}
+            {{/if}}
+
+            <!--公司名称-->
+            <td class="Td_Left" style="text-align: center !important;">${TargetName}</td>
+
+            <!--新增差值-->
+            <td class="Td_Left" {{if AddDifference<0 }} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${AddDifference}">${(AddDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--上月累计计划数-->
+            <td class="Td_Left shangyueleiji" style="white-space: nowrap;" title="${(LastNAccumulativePlanAmmount)}">${(LastNAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--上月累计实际数-->
+            <td class="Td_TopAndBottom shangyueleiji" style="white-space: nowrap;" title="${LastNAccumulativeActualAmmount}">${(LastNAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--上月差值-->
+            <td class="Td_Right shangyueleiji" {{if LastNAccumulativeDifference <0}} style="white-space: nowrap; color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${LastNAccumulativeDifference}">${(LastNAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计计划数-->
+            <td class="Td_Left" style="white-space: nowrap;" title="${NAccumulativePlanAmmount}">${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计计划数-->
+            <td class="Td_TopAndBottom" style="white-space: nowrap;" title="${NAccumulativeActualAmmount}">${NAccumulativeActualAmmount.thousandize0OrEmpty(0)}</td>
+
+            <!--本月差值-->
+            <td class="Td_Right Special_return" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--本月完成率-->
+            <td class="Td_Right shangyueleiji" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+
+            <!--要求时间 如果要求说明是""显示时间，反之显示本身-->
+            <td class="Td_Right" style="text-align: center !important;">
+                {{if CommitReason==""}}
+                {{if FormatDate(CommitDate,false) =="---"}}${FormatDate(CommitDate,false)}{{else}}${FormatDate(CommitDate,false,"CN").substring(0,FormatDate(CommitDate,false,"CN").length-3)}月{{/if}}
+                {{else}}
+                ${CommitReason}
+                {{/if}}
+            </td>
+
+
+            <!--预计累计次数-->
+            <td class="Td_TopAndBottom" style="text-align: center !important; vertical-align: middle">
+                {{if Counter==0}}<div class="ebtn"></div>{{else}}<img src="../Images/images1/image${Counter}.png" />{{/if}}
+            </td>
+        </tr>
+        {{/each}}
+        {{/if}}
+        {{/if}}
+    </script>
+
+
+    <!--------------------------------------------------- 组合指标 补回情况模版- End-------------------------------------------------------->
+    <!--------------------------------------------------- 组合指标 未完成说明模版-  Stare-------------------------------------------------------->
+    <!--未完成说明-->
+    <script type="text/x-jquery-tmpl" id="TmplMissTarget">
+
+        {{if Mark=="Group"}}
+        {{each ObjValue}}
+        {{tmpl($value) '#TmplMissTarget'}}
+        {{/each}}
+        {{else}}
+        {{if Mark=="Counter"}}
+        <tr class="Level1">
+            <td colspan="14" class="Td_Merge Level1TdSp1" onclick="TrLv1Show(this);">{{html Name}}</td>
+        </tr>
+        {{each ObjValue}}
+        {{if Mark=="Counter"}}
+        {{tmpl($value) '#TmplMissTarget'}}
+        {{else}}
+        <tr class="Level2">
+            <td colspan="14" class="Td_Merge Level1TdSp1" style="text-indent:35px" onclick="TrLv2Show(this);">{{html ReportInstanceSummaryBuilder}}</td>
+        </tr>
+        {{each ObjValue}}
+        <tr class="Level3">
+            {{if TargetGroupCount ==1 }}
+            <td class="Td_Left" style="text-align: center !important;">${$index+1}</td>
+            <td class="Td_Left" style="text-align: left !important;">${CompanyName}</td>
+            {{else}}
+            {{if ($index+1)%TargetGroupCount ==1 }}
+            <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: center !important;">${($index+2)/TargetGroupCount}</td>
+            <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: left !important;">${CompanyName}</td>
+            {{/if}}
+            {{/if}}
+
+            <!--指标名称-->
+            <td class="Td_Left" style="text-align:center !important;">${TargetName}</td>
+
+            <!--新增差值-->
+            <td class="Td_Left" {{if AddDifference<0 }} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${AddDifference}">${(AddDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--上月累计计划数-->
+            <td class="Td_Left shangyue" style="white-space: nowrap;" title="${LastNAccumulativePlanAmmount}">${(LastNAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--上月累计实际数-->
+            <td class="Td_TopAndBottom shangyue" style="white-space: nowrap;" title="${LastNAccumulativeActualAmmount}">${(LastNAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--上月差值-->
+            <td class="Td_Right shangyue" {{if LastNAccumulativeDifference <0}} style="white-space: nowrap; color:red; " {{else}} style="white-space: nowrap;" {{/if}} title="${LastNAccumulativeDifference}">${(LastNAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计计划数-->
+            <td class="Td_Left" style="white-space: nowrap;" title="${NAccumulativePlanAmmount}">${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计实际数-->
+            <td class="Td_TopAndBottom" style="white-space: nowrap;" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--本月差值-->
+            <td class="Td_Right Special" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--本月完成率-->
+            <td class="Td_Right shangyue " {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+
+            {{if TargetGroupCount ==1}}
+            {{if MIssTargetReason!="" && MIssTargetDescription!=""}} <!--原因和说明-->
+            <td class="Td_Right" style="text-align: left !important;">{{html (MIssTargetReason + MIssTargetDescription).substr(1,(MIssTargetReason + MIssTargetDescription).length).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            {{if MIssTargetReason !=""}}
+            <td class="Td_Right" style="text-align: left !important;">{{html (MIssTargetReason.substr(1,MIssTargetReason.length)).replace(/\n/g, "<br/>") + MIssTargetDescription}}</td>
+            {{else MIssTargetDescription!=""}}
+            <td class="Td_Right" style="text-align: left !important;">{{html MIssTargetReason +(MIssTargetDescription.substr(1,MIssTargetDescription.length)).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            <td class="Td_Right"></td>
+            {{/if}}
+            {{/if}}
+
+            {{else}}
+            {{if ($index+1)%TargetGroupCount ==1 }}
+            {{if MIssTargetReason!="" && MIssTargetDescription!=""}} <!--原因和说明 组合指标-->
+            <td class="Td_Right" style="text-align: left !important;">{{html (MIssTargetReason + MIssTargetDescription).substr(1,(MIssTargetReason + MIssTargetDescription).length).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            {{if MIssTargetReason !=""}}
+            <td class="Td_Right" style="text-align: left !important;">{{html (MIssTargetReason.substr(1,MIssTargetReason.length)).replace(/\n/g, "<br/>") + MIssTargetDescription}}</td>
+            {{else MIssTargetDescription !=""}}
+            <td class="Td_Right" style="text-align: left !important;">{{html MIssTargetReason +(MIssTargetDescription.substr(1,MIssTargetDescription.length)).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            <td class="Td_Right"></td>
+            {{/if}}
+            {{/if}}
+            {{else}}
+            <td></td>
+            {{/if}}
+            {{/if}}
+
+            <!--要求时间-->
+            <td class="Td_Right" style="white-space: nowrap; text-align:center !important;color:red;">
+                {{if CommitReason==""}}
+                {{if FormatDate(CommitDate,false) =="---"}}${FormatDate(CommitDate,false)}{{else}}${FormatDate(CommitDate,false,"CN").substring(0,FormatDate(CommitDate,false,"CN").length-3)}月{{/if}}
+                {{else}}
+                ${CommitReason}
+                {{/if}}
+            </td>
+
+
+            <!--承诺时间-->
+            <td class="Td_Right" style="text-align: center !important;color:red; ">
+                {{if ReturnType =="0"}}
+                ---
+                {{else ReturnType =="1"}}
+                补回中<br /><br />
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else ReturnType =="2"}}
+                到期未补回<br />
+                {{if FormatDate(PromissDate,false) =="---"}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else}}
+                <!--承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回 <br />-->
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{/if}}
+                {{else ReturnType =="3"}}
+                预计无法按期补回<br />
+                {{if FormatDate(PromissDate,false) =="---"}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else}}
+                <!--承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回 <br /> -->
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{/if}}
+                {{else ReturnType =="4"}}
+                预计年内无法补回<br />
+                {{if FormatDate(PromissDate,false) =="---"}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{/if}}
+                {{else ReturnType =="5"}}
+                本月新增<br />
+                {{if FormatDate(PromissDate,false) =="---"}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else}}
+                <!--承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回 <br /> -->
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{/if}}
+                {{else ReturnType =="6"}}
+                按期补回<br />
+                {{else ReturnType =="7"}}
+                提前补回<br />
+                {{/if}}
+            </td>
+
+
+
+            <!--预警累计次数-->
+            <td class="Td_TopAndBottom" style="text-align: center !important; vertical-align: middle">
+                {{if Counter==0}} <div class="ebtn"></div> {{else}}<img src="../Images/images1/image${Counter}.png" />{{/if}}
+            </td>
+        </tr>
+        {{/each}}
+        {{/if}}
+        {{/each}}
+        {{else}}
+        <tr class="Level1">
+            <td colspan="14" class="Td_Merge Level1TdSp1 show" onclick="TrLv1Show(this);">{{html Name}}</td>
+        </tr>
+        {{each ObjValue}}
+        <tr class="Level3" style="display:none;">
+            {{if TargetGroupCount ==1 }}
+            <td class="Td_Left" style="text-align: center !important;">${$index+1}</td>
+            <td class="Td_Left" style="text-align: left !important;">${CompanyName}</td>
+            {{else}}
+            {{if ($index+1)%TargetGroupCount ==1 }}
+            <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: center !important;">${($index+2)/TargetGroupCount}</td>
+            <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: left !important;">${CompanyName}</td>
+            {{/if}}
+            {{/if}}
+
+            <!--指标名称-->
+            <td class="Td_Left" style="text-align: center !important;">${TargetName}</td>
+
+            <!--新增差值-->
+            <td class="Td_Left" {{if AddDifference<0 }} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${AddDifference}">${(AddDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--上月累计计划数-->
+            <td class="Td_Left shangyue" style="white-space: nowrap;" title="${LastNAccumulativePlanAmmount}">${(LastNAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--上月累计实际数-->
+            <td class="Td_TopAndBottom shangyue" style="white-space: nowrap;" title="${LastNAccumulativeActualAmmount}">${(LastNAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--上月差值-->
+            <td class="Td_Right shangyue" {{if LastNAccumulativeDifference <0}} style="white-space: nowrap; color:red; " {{else}} style="white-space: nowrap;" {{/if}} title="${LastNAccumulativeDifference}">${(LastNAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计计划数-->
+            <td class="Td_Left" style="white-space: nowrap;" title="${NAccumulativePlanAmmount}">${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计实际数-->
+            <td class="Td_TopAndBottom" style="white-space: nowrap;" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--本月差值-->
+            <td class="Td_Right Special" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--本月完成率-->
+            <td class="Td_Right shangyue" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+
+            {{if TargetGroupCount ==1}}
+            {{if MIssTargetReason!="" && MIssTargetDescription!=""}} <!--原因和说明-->
+            <td class="Td_Right" style="text-align: left !important;">{{html (MIssTargetReason + MIssTargetDescription).substr(0,(MIssTargetReason + MIssTargetDescription).length).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            {{if MIssTargetReason !=""}}
+            <td class="Td_Right" style="text-align: left !important;">{{html (MIssTargetReason.substr(0,MIssTargetReason.length)).replace(/\n/g, "<br/>") + MIssTargetDescription}}</td>
+            {{else MIssTargetDescription!=""}}
+            <td class="Td_Right" style="text-align: left !important;">{{html MIssTargetReason +(MIssTargetDescription.substr(0,MIssTargetDescription.length)).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            <td class="Td_Right"></td>
+            {{/if}}
+            {{/if}}
+
+            {{else}}
+
+            {{if Value =="1"}} <!--等于1标识双指标都未完成 ,这里Value =系统表里的未完成指标的Senquence 赋值 -->
+            {{if MIssTargetReason!="" && MIssTargetDescription!=""}} <!--原因和说明 组合指标-->
+            <td class="Td_Right" style="text-align: left !important;">{{html (MIssTargetReason + MIssTargetDescription).substr(0,(MIssTargetReason + MIssTargetDescription).length).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            {{if MIssTargetReason !=""}}
+            <td class="Td_Right" style="text-align: left !important;">{{html (MIssTargetReason.substr(0,MIssTargetReason.length)).replace(/\n/g, "<br/>") + MIssTargetDescription}}</td>
+            {{else MIssTargetDescription !=""}}
+            <td class="Td_Right" style="text-align: left !important;">{{html MIssTargetReason +(MIssTargetDescription.substr(0,MIssTargetDescription.length)).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            <td class="Td_Right"></td>
+            {{/if}}
+            {{/if}}
+
+            {{else}} <!--其它都是单个指标未完成-->
+            {{if ($index+1)%TargetGroupCount ==1 }}
+            {{if MIssTargetReason!="" && MIssTargetDescription!=""}} <!--原因和说明 组合指标-->
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;">{{html (MIssTargetReason + MIssTargetDescription).substr(0,(MIssTargetReason + MIssTargetDescription).length).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            {{if MIssTargetReason !=""}}
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;">{{html (MIssTargetReason.substr(0,MIssTargetReason.length)).replace(/\n/g, "<br/>") + MIssTargetDescription}}</td>
+            {{else MIssTargetDescription !=""}}
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;">{{html MIssTargetReason +(MIssTargetDescription.substr(0,MIssTargetDescription.length)).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            <td class="Td_Right" rowspan="${TargetGroupCount}"></td>
+            {{/if}}
+            {{/if}}
+            {{/if}}
+
+            {{/if}}
+
+            {{/if}}
+
+            <!--要求时间-->
+            <td class="Td_Right" style="white-space: nowrap; text-align:center !important;color:red;">
+                {{if CommitReason==""}}
+                {{if FormatDate(CommitDate,false) =="---"}}${FormatDate(CommitDate,false)}{{else}}${FormatDate(CommitDate,false,"CN").substring(0,FormatDate(CommitDate,false,"CN").length-3)}月{{/if}}
+                {{else}}
+                ${CommitReason}
+                {{/if}}
+            </td>
+
+            <!--承诺时间-->
+            <td class="Td_Right" style="text-align: center !important;color:red; ">
+                {{if ReturnType =="0"}}
+                ---
+                {{else ReturnType =="1"}}
+                        {{if IsTimeShow(CommitDate)==false }}
+                        补回中<br />
+                        {{/if}}
+                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else ReturnType =="2"}}
+                        {{if IsTimeShow(CommitDate)==false }}
+                        到期未补回<br />
+                        {{/if}}
+                        {{if FormatDate(PromissDate,false) =="---"}}
+                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                        {{else}}
+                        <!--承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回 <br /> -->
+                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                        {{/if}}
+                {{else ReturnType =="3"}}
+                        {{if IsTimeShow(CommitDate)==false }}
+                        预计无法按期补回<br />
+                        {{/if}}
+                        {{if FormatDate(PromissDate,false) =="---"}}
+                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                        {{else}}
+                        <!-- 承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回 <br />-->
+                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                        {{/if}}
+                {{else ReturnType =="4"}}
+                        {{if IsTimeShow(CommitDate)==false }}
+                        预计年内无法补回<br />
+                        {{/if}}
+                        {{if FormatDate(PromissDate,false) =="---"}}
+                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                        {{else}}
+                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                        {{/if}}
+                {{else ReturnType =="5"}}
+                本月新增<br />
+                {{if FormatDate(PromissDate,false) =="---"}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else}}
+                <!--承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回 <br />-->
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{/if}}
+                {{else ReturnType =="6"}}
+                按期补回<br />
+                {{else ReturnType =="7"}}
+                提前补回<br />
+                {{/if}}
+
+
+            </td>
+
+            <!--预警累计次数-->
+            <td class="Td_TopAndBottom" style="text-align: center !important; vertical-align: middle">
+                {{if Counter==0}} <div class="ebtn"></div> {{else}}<img src="../Images/images1/image${Counter}.png" />{{/if}}
+            </td>
+        </tr>
+        {{/each}}
+        {{/if}}
+        {{/if}}
+
+    </script>
+
+
+    <!--未完成说明  当月的 -->
+    <script type="text/x-jquery-tmpl" id="TmplCurrentMissTarget">
+        {{if Mark=="Group"}}
+        {{each ObjValue}}
+        {{tmpl($value) '#TmplCurrentMissTarget'}}
+        {{/each}}
+        {{else}}
+        {{if Mark=="Counter"}}
+        <tr class="Level1">
+            <td colspan="14" class="Td_Merge Curr_Level1TdSp1 show" onclick="TrLv1Show(this);">{{html Name}}</td>
+        </tr>
+        {{each ObjValue}}
+        {{if Mark=="Counter"}}
+        {{tmpl($value) '#TmplCurrentMissTarget'}}
+        {{else}}
+        <tr class="Level2">
+            <td colspan="14" class="Td_Merge Curr_Level1TdSp1 show" style="text-indent:35px" onclick="TrLv2Show(this);">{{html Name}}</td>
+        </tr>
+        {{each ObjValue}}
+
+        {{if CompanyName !="未完成合计"}}
+
+        <tr class="Level3">
+
+            {{if TargetGroupCount ==1 }}
+            <td class="Td_Left" style="text-align: center !important;">${$index+1}</td>
+            <td class="Td_Left" style="text-align: left !important;"> ${CompanyName}</td>
+            {{else}}
+            {{if ($index+1)%TargetGroupCount ==1 }}
+            <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: center !important;">${($index+2)/TargetGroupCount}</td>
+            <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: left !important;">${CompanyName}</td>
+            {{/if}}
+            {{/if}}
+
+
+            {{if TargetGroupCount !=1}}
+            <!--指标名称-->
+            <td class="Td_Left" style="text-align: center !important;">${TargetName}</td>
+            {{else}}
+            <td style="display:none"></td>
+            {{/if}}
+
+            <!--新增差值-->
+            <td class="Td_Left" {{if AddDifference<0 }} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${AddDifference}">${(AddDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--当月计划数-->
+            <td class="Td_Left" style="white-space: nowrap;" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--当月实际数-->
+            <td class="Td_TopAndBottom" style="white-space: nowrap;" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计计划数-->
+            <td class="Td_Left leiji" style="white-space: nowrap;" title="${NAccumulativePlanAmmount}">${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计实际数-->
+            <td class="Td_TopAndBottom leiji" style="white-space: nowrap;" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计差值-->
+            <td class="Td_Right Curr_Special leiji" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计完成率-->
+            <td class="Td_Right leiji" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+
+            <!--本月累计差值-->
+            <td class="Td_Right" {{if NAccumulativeDifference <0}} style="white-space: nowrap; color:red; " {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+
+
+            {{if TargetGroupCount ==1}}
+            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}} <!--原因和说明-->
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (CurrentMIssTargetReason +"<br /> <span style='font-weight:bold;'>采取措施：</span>"+ CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            {{else}}
+            {{if CurrentMIssTargetReason !=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (CurrentMIssTargetReason).replace(/\n/g, "<br/>") +"<br /><span style='font-weight:bold;'>采取措施：</span>"+ CurrentMIssTargetDescription }}</td>
+            {{else CurrentMIssTargetDescription!=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html CurrentMIssTargetReason + "<br /><span style='font-weight:bold;'>采取措施：</span>"+ (CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            {{else}}
+            <td class="Td_Right"></td>
+            {{/if}}
+            {{/if}}
+
+            {{else}}
+            {{if Value =="1"}} <!--等于1标识双指标都未完成 ,这里Value =系统表里的未完成指标的Senquence 赋值 -->
+            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}} <!--原因和说明 组合指标-->
+            <td class="Td_Right" style="text-align: left !important;">{{html (CurrentMIssTargetReason + CurrentMIssTargetDescription).substr(1,(CurrentMIssTargetReason + CurrentMIssTargetDescription).length).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            {{if CurrentMIssTargetReason !=""}}
+            <td class="Td_Right" style="text-align: left !important;">{{html (CurrentMIssTargetReason.substr(1,CurrentMIssTargetReason.length)).replace(/\n/g, "<br/>") + CurrentMIssTargetDescription}}</td>
+            {{else CurrentMIssTargetDescription !=""}}
+            <td class="Td_Right" style="text-align: left !important;">{{html CurrentMIssTargetReason +(CurrentMIssTargetDescription.substr(1,CurrentMIssTargetDescription.length)).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            <td class="Td_Right"></td>
+            {{/if}}
+            {{/if}}
+
+            {{else}} <!--其它都是单个指标未完成-->
+            {{if ($index+1)%TargetGroupCount ==1 }}
+            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}} <!--原因和说明 组合指标-->
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;">{{html (CurrentMIssTargetReason + CurrentMIssTargetDescription).substr(1,(CurrentMIssTargetReason + CurrentMIssTargetDescription).length).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            {{if CurrentMIssTargetReason !=""}}
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;">{{html (CurrentMIssTargetReason.substr(1,CurrentMIssTargetReason.length)).replace(/\n/g, "<br/>") + CurrentMIssTargetDescription}}</td>
+            {{else CurrentMIssTargetDescription !=""}}
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;">{{html CurrentMIssTargetReason +(CurrentMIssTargetDescription.substr(1,CurrentMIssTargetDescription.length)).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            <td class="Td_Right" rowspan="${TargetGroupCount}"></td>
+            {{/if}}
+            {{/if}}
+            {{/if}}
+            {{/if}}
+            {{/if}}
+
+            <!--要求时间 如果要求说明是""显示时间，反之显示本身-->
+            <td class="Td_Right" style="text-align: center !important;">
+                {{if CommitReason==""}}
+                {{if FormatDate(CommitDate,false) =="---"}}${FormatDate(CommitDate,false)}{{else}}${FormatDate(CommitDate,false,"CN").substring(0,FormatDate(CommitDate,false,"CN").length-3)}月{{/if}}
+                {{else}}
+                ${CommitReason}
+                {{/if}}
+            </td>
+
+            <!--承诺时间-->
+            <td class="Td_Right" style="text-align: center !important;color:red; ">
+                {{if ReturnType =="0"}}
+                    {{if NDifference < 0}}
+                    累计完成
+                    {{/if}}
+                {{else ReturnType =="1"}}
+                补回中<br />
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else ReturnType =="2"}}
+                到期未补回<br />
+                {{if FormatDate(PromissDate,false) =="---"}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else}}
+                <!--承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回 <br /> -->
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{/if}}
+                {{else ReturnType =="3"}}
+                预计无法按期补回<br />
+                {{if FormatDate(PromissDate,false) =="---"}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else}}
+                <!-- 承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回 <br />-->
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{/if}}
+                {{else ReturnType =="4"}}
+                预计年内无法补回<br />
+                {{if FormatDate(PromissDate,false) =="---"}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{/if}}
+                {{else ReturnType =="5"}}
+                本月新增<br />
+                {{if FormatDate(PromissDate,false) =="---"}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else}}
+                <!--承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回 <br />-->
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{/if}}
+                {{else ReturnType =="6"}}
+                按期补回<br />
+                {{else ReturnType =="7"}}
+                提前补回<br />
+                {{/if}}
+            </td>
+
+            <!--预警累计次数-->
+            <td class="Td_TopAndBottom" style="text-align: center !important; vertical-align: middle;">
+                {{if Counter==0}} <div class="ebtn">---</div> {{else}}<img src="../Images/images1/image${Counter}.png" />{{/if}}
+            </td>
+        </tr>
+
+        {{/if}}
+        {{/each}}
+        {{/if}}
+        {{/each}}
+        {{else}}
+        <tr class="Level1">
+            <td colspan="14" class="Td_Merge Curr_Level1TdSp1 minus" onclick="TrLv1Show(this);">{{html Name}}</td>
+        </tr>
+        {{each ObjValue}}
+
+        {{if CompanyName !="未完成合计"}}
+
+        <tr class="Level3">
+            {{if TargetGroupCount ==1 }}
+            <td class="Td_Left" style="text-align: center !important;">${$index+1}</td>
+            <td class="Td_Left" style="text-align: left !important;">${CompanyName}</td>
+            {{else}}
+            {{if ($index+1)%TargetGroupCount ==1 }}
+            <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: center !important;">${($index+2)/TargetGroupCount}</td>
+            <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: left !important;">
+                ${CompanyName}
+            </td>
+            {{/if}}
+            {{/if}}
+
+            {{if TargetGroupCount !=1}}
+            <!--指标名称-->
+            <td class="Td_Left" style="text-align: center !important;">${TargetName}</td>
+            {{else}}
+            <td style="display:none"></td>
+            {{/if}}
+
+            <!--当月累计计划数-->
+            <td class="Td_Left" style="white-space: nowrap;" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--当月累计实际数-->
+            <td class="Td_TopAndBottom" style="white-space: nowrap;" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--当月差值-->
+            <td class="Td_Right" {{if NDifference <0}} style="white-space: nowrap; color:red; " {{else}} style="white-space: nowrap;" {{/if}} title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计计划数-->
+            <td class="Td_Left leiji" style="white-space: nowrap;" title="${NAccumulativePlanAmmount}">${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计实际数-->
+            <td class="Td_TopAndBottom leiji" style="white-space: nowrap;" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计差值-->
+            <td class="Td_Right Curr_Special leiji" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计完成率-->
+            <td class="Td_Right leiji" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+            <!--本月累计差值-->
+            <td class="Td_Right" {{if NAccumulativeDifference <0}} style="white-space: nowrap; color:red; " {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+
+            {{if TargetGroupCount ==1}}
+            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}} <!--原因和说明-->
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (CurrentMIssTargetReason +"<br /> <span style='font-weight:bold;'>采取措施：</span>"+ CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            {{else}}
+            {{if CurrentMIssTargetReason !=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (CurrentMIssTargetReason).replace(/\n/g, "<br/>") +"<br /><span style='font-weight:bold;'>采取措施：</span>"+ CurrentMIssTargetDescription }}</td>
+            {{else CurrentMIssTargetDescription !=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html CurrentMIssTargetReason + "<br /><span style='font-weight:bold;'>采取措施：</span>"+ (CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            {{else}}
+            <td class="Td_Right"></td>
+            {{/if}}
+            {{/if}}
+            {{else}}
+
+            <!--------------------------------------------------------------------------------------------------------------------->
+            {{if Value =="1"}} <!--等于1标识双指标都未完成 ,这里Value =系统表里的未完成指标的Senquence 赋值 -->
+            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}} <!--原因和说明 组合指标-->
+            <td class="Td_Right" style="text-align: left !important;">{{html (CurrentMIssTargetReason + CurrentMIssTargetDescription).substr(0,(CurrentMIssTargetReason + CurrentMIssTargetDescription).length).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            {{if CurrentMIssTargetReason !=""}}
+            <td class="Td_Right" style="text-align: left !important;">{{html (CurrentMIssTargetReason.substr(0,CurrentMIssTargetReason.length)).replace(/\n/g, "<br/>") + CurrentMIssTargetDescription}}</td>
+            {{else CurrentMIssTargetDescription !=""}}
+            <td class="Td_Right" style="text-align: left !important;">{{html CurrentMIssTargetReason +(CurrentMIssTargetDescription.substr(0,CurrentMIssTargetDescription.length)).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            <td class="Td_Right"></td>
+            {{/if}}
+            {{/if}}
+
+
+            {{else}} <!--其它都是单个指标未完成-->
+            {{if ($index+1)%TargetGroupCount ==1 }}
+            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}} <!--原因和说明 组合指标-->
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;">{{html (CurrentMIssTargetReason + CurrentMIssTargetDescription).substr(0,(CurrentMIssTargetReason + CurrentMIssTargetDescription).length).replace(/\n/g, "<br/>")}} </td>
+            {{else}}
+            {{if CurrentMIssTargetReason !=""}}
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;">{{html (CurrentMIssTargetReason.substr(0,CurrentMIssTargetReason.length)).replace(/\n/g, "<br/>") + CurrentMIssTargetDescription}}</td>
+            {{else CurrentMIssTargetDescription !=""}}
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;">{{html CurrentMIssTargetReason +(CurrentMIssTargetDescription.substr(0,CurrentMIssTargetDescription.length)).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            <td class="Td_Right" rowspan="${TargetGroupCount}"></td>
+            {{/if}}
+            {{/if}}
+            {{/if}}
+            {{/if}}
+            {{/if}}
+
+
+            <!--要求时间 如果要求说明是""显示时间，反之显示本身-->
+            <td class="Td_Right" style="text-align: center !important;">
+                {{if CommitReason==""}}
+                {{if FormatDate(CommitDate,false) =="---"}}${FormatDate(CommitDate,false)}{{else}}${FormatDate(CommitDate,false,"CN").substring(0,FormatDate(CommitDate,false,"CN").length-3)}月{{/if}}
+                {{else}}
+                ${CommitReason}
+                {{/if}}
+            </td>
+
+            <!--承诺时间-->
+            <td class="Td_Right" style="text-align: center !important;color:red; ">
+                {{if ReturnType =="0"}}
+                    {{if NDifference < 0}}
+                    累计完成
+                    {{/if}}
+                {{else ReturnType =="1"}}
+                        {{if IsTimeShow(CommitDate)==false }}
+                                 补回中<br />
+                        {{/if}}
+                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else ReturnType =="2"}}
+                        {{if IsTimeShow(CommitDate)==false }}
+                        到期未补回<br />
+                        {{/if}}
+                        {{if FormatDate(PromissDate,false) =="---"}}
+                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                        {{else}}
+                        <!--承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回 <br /> -->
+                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                        {{/if}}
+                {{else ReturnType =="3"}}
+                        {{if IsTimeShow(CommitDate)==false }}
+                        预计无法按期补回<br />
+                        {{/if}}
+                        {{if FormatDate(PromissDate,false) =="---"}}
+                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                        {{else}}
+                        <!-- 承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回 <br />-->
+                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                        {{/if}}
+                {{else ReturnType =="4"}}
+                        {{if IsTimeShow(CommitDate)==false }}
+                        预计年内无法补回<br />
+                        {{/if}}
+                        {{if FormatDate(PromissDate,false) =="---"}}
+                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                        {{else}}
+                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                        {{/if}}
+                {{else ReturnType =="5"}}
+                本月新增<br />
+                {{if FormatDate(PromissDate,false) =="---"}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else}}
+                <!--承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回 <br />-->
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{/if}}
+                {{else ReturnType =="6"}}
+                按期补回<br />
+                {{else ReturnType =="7"}}
+                提前补回<br />
+                {{/if}}
+            </td>
+
+            <!--预警累计次数-->
+            <td class="Td_TopAndBottom" style="text-align: center !important; vertical-align: middle; ">
+                {{if Counter==0}} <div class="ebtn">---</div> {{else}}<img src="../Images/images1/image${Counter}.png" />{{/if}}
+            </td>
+        </tr>
+
+        {{/if}}
+        {{/each}}
+        {{/if}}
+        {{/if}}
+
+    </script>
+
+
+    <!--当月未完成-->
+    <script type="text/x-jquery-tmpl" id="TmplCurrentMissTargerList">
+        <!--当月的的-->
+        <li class="sd">
+            <a class="active3" onclick="MissCurrentLiaddCss(this);">${Name}</a>
+        </li>
+    </script>
+
+
+    <!--------------------------------------------------- 组合指标 未完成说明模版-  End-------------------------------------------------------->
+    <!--------------------------------------------------- 上报页面 未完成说明模版-  Stare-------------------------------------------------------->
+    <!--未完成说明 (上报页面  累计的  )-->
+    <script type="text/x-jquery-tmpl" id="TmplMissTargetRpt">
+        {{if Mark=="Group"}}
+        {{each ObjValue}}
+        {{tmpl($value) '#TmplMissTargetRpt'}}
+        {{/each}}
+        {{else}}
+        {{if Mark=="Counter"}}
+        <tr class="Level1">
+            <td colspan="14" class="Td_Merge Level1TdSp1 show" onclick="TrLv1Show(this);">{{html Name}}</td>
+        </tr>
+        {{each ObjValue}}
+        {{if Mark=="Counter"}}
+        {{tmpl($value) '#TmplMissTargetRpt'}}
+        {{else}}
+        <tr class="Level2">
+            <td colspan="14" class="Td_Merge Level1TdSp1 show" style="text-indent:35px" onclick="TrLv2Show(this);">{{html Name}}</td>
+        </tr>
+        {{each ObjValue}}
+
+        {{if CompanyName !="未完成合计"}}
+
+        <tr class="Level3">
+
+            {{if TargetGroupCount ==1 }}
+            <td class="Td_Left" style="text-align: center !important;">${$index+1} </td>
+            <td class="Td_Left" style="text-align: left !important;">${CompanyName}</td>
+            {{else}}
+            {{if ($index+1)%TargetGroupCount ==1 }}
+            <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: center !important;">${($index+2)/TargetGroupCount} </td>
+            <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: left !important;">
+                ${CompanyName}
+            </td>
+            {{/if}}
+            {{/if}}
+
+
+            {{if TargetGroupCount !=1}}
+            <!--指标名称-->
+            <td class="Td_Left" style="text-align: center !important;">${TargetName}</td>
+            {{else}}
+            <td style="display:none"></td>
+            {{/if}}
+
+            <!--新增差值-->
+            <td class="Td_Left" {{if AddDifference<0 }} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${AddDifference}">${(AddDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--上月累计计划数-->
+            <td class="Td_Left shangyue" style="white-space: nowrap;" title="${LastNAccumulativePlanAmmount}">${(LastNAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--上月累计实际数-->
+            <td class="Td_TopAndBottom shangyue" style="white-space: nowrap;" title="${LastNAccumulativeActualAmmount}">${(LastNAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--上月差值-->
+            <td class="Td_Right shangyue" {{if LastNAccumulativeDifference <0}} style="white-space: nowrap; color:red; " {{else}} style="white-space: nowrap;" {{/if}} title="${LastNAccumulativeDifference}">${(LastNAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计计划数-->
+            <td class="Td_Left" style="white-space: nowrap;" title="${NAccumulativePlanAmmount}">${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计实际数-->
+            <td class="Td_TopAndBottom" style="white-space: nowrap;" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--本月差值-->
+            <td class="Td_Right Special" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--本月完成率-->
+            <td class="Td_Right shangyue" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+
+
+            {{if TargetGroupCount ==1}}
+            {{if MIssTargetReason!="" && MIssTargetDescription!=""}} <!--原因和说明-->
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (MIssTargetReason +"<br /> <span style='font-weight:bold;'>采取措施：</span>"+ MIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            {{else}}
+            {{if MIssTargetReason !=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (MIssTargetReason).replace(/\n/g, "<br/>") +"<br /><span style='font-weight:bold;'>采取措施：</span>"+ MIssTargetDescription }}</td>
+            {{else MIssTargetDescription!=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html MIssTargetReason + "<br /><span style='font-weight:bold;'>采取措施：</span>"+ (MIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            {{else}}
+            <td class="Td_Right"></td>
+            {{/if}}
+            {{/if}}
+
+            {{else}}
+
+            {{if Value =="1"}} <!--等于1标识双指标都未完成 ,这里Value =系统表里的未完成指标的Senquence 赋值 -->
+            {{if MIssTargetReason!="" && MIssTargetDescription!=""}} <!--原因和说明 组合指标-->
+            <td class="Td_Right" style="text-align: left !important;">{{html (MIssTargetReason + MIssTargetDescription).substr(0,(MIssTargetReason + MIssTargetDescription).length).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            {{if MIssTargetReason !=""}}
+            <td class="Td_Right" style="text-align: left !important;">{{html (MIssTargetReason.substr(0,MIssTargetReason.length)).replace(/\n/g, "<br/>") + MIssTargetDescription}}</td>
+            {{else MIssTargetDescription !=""}}
+            <td class="Td_Right" style="text-align: left !important;">{{html MIssTargetReason +(MIssTargetDescription.substr(0,MIssTargetDescription.length)).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            <td class="Td_Right"></td>
+            {{/if}}
+            {{/if}}
+
+
+            {{else}} <!--其它都是单个指标未完成-->
+            {{if ($index+1)%TargetGroupCount ==1 }}
+            {{if MIssTargetReason!="" && MIssTargetDescription!=""}} <!--原因和说明 组合指标-->
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;">{{html (MIssTargetReason + MIssTargetDescription).substr(0,(MIssTargetReason + MIssTargetDescription).length).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            {{if MIssTargetReason !=""}}
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;">{{html (MIssTargetReason.substr(0,MIssTargetReason.length)).replace(/\n/g, "<br/>") + MIssTargetDescription}}</td>
+            {{else MIssTargetDescription !=""}}
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;">{{html MIssTargetReason +(MIssTargetDescription.substr(0,MIssTargetDescription.length)).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            <td class="Td_Right" rowspan="${TargetGroupCount}"></td>
+            {{/if}}
+            {{/if}}
+            {{/if}}
+
+
+
+
+            {{/if}}
+            {{/if}}
+
+            <!--要求时间 如果要求说明是""显示时间，反之显示本身-->
+            <td class="Td_Right" style="text-align: center !important;">
+                {{if CommitReason==""}}
+                {{if FormatDate(CommitDate,false) =="---"}}${FormatDate(CommitDate,false)}{{else}}${FormatDate(CommitDate,false,"CN").substring(0,FormatDate(CommitDate,false,"CN").length-3)}月{{/if}}
+                {{else}}
+                ${CommitReason}
+                {{/if}}
+            </td>
+
+            <!--承诺时间-->
+            <td class="Td_Right" style="text-align: center !important;color:red; ">
+                {{if TargetGroupCount ==1}}
+                {{if ReturnType =="0"}}
+
+                {{else ReturnType =="1"}}
+                补回中<br />
+                {{else ReturnType =="2"}}
+                到期未补回<br />
+                {{else ReturnType =="3"}}
+                预计无法按期补回<br />
+                {{else ReturnType =="4"}}
+                预计年内无法补回<br />
+                {{else ReturnType =="5"}}
+                本月新增 <br />
+                {{else ReturnType =="6"}}
+                按期补回<br />
+                {{else ReturnType =="7"}}
+                提前补回<br />
+                {{/if}}
+                {{else}}
+                {{if Value =="1"}} <!--指定双指标--->
+                <a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','all','cumulative')">
+                    {{if ReturnType =="0"}}
+                </a>
+                {{else ReturnType =="1"}}
+                补回中<br />            </a>
+                {{else ReturnType =="2"}}
+                到期未补回<br />        </a>
+                {{else ReturnType =="3"}}
+                预计无法按期补回<br />  </a>
+                {{else ReturnType =="4"}}
+                预计年内无法补回<br />  </a>
+                {{else ReturnType =="5"}}
+                本月新增<br />          </a>
+                {{else ReturnType =="6"}}
+                </a> 按期补回<br />
+                {{else ReturnType =="7"}}
+                </a> 提前补回<br />
+                {{/if}}
+                {{else}}
+                <a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','return','cumulative')">
+                    {{if ReturnType =="0"}}
+                </a>
+                {{else ReturnType =="1"}}
+                补回中<br />            </a>
+                {{else ReturnType =="2"}}
+                到期未补回<br />        </a>
+                {{else ReturnType =="3"}}
+                预计无法按期补回<br />  </a>
+                {{else ReturnType =="4"}}
+                预计年内无法补回<br />  </a>
+                {{else ReturnType =="5"}}
+                本月新增<br />          </a>
+                {{else ReturnType =="6"}}
+                </a> 按期补回<br />
+                {{else ReturnType =="7"}}
+                </a> 提前补回<br />
+                {{/if}}
+                {{/if}}
+                {{/if}}
+                {{if FormatDate(PromissDate,false) =="---"}}
+                ${FormatDate(PromissDate,false)}<br />{{html (ReturnDescription).replace(/\n/g, "<br/>")}}
+                {{else}}
+                <!-- 承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回<br />-->
+                {{html ReturnDescription.replace(/\n/g, "<br/>")}}
+                {{/if}}
+            </td>
+
+            <!--预警累计次数-->
+            <td class="Td_TopAndBottom" style="text-align: center !important; vertical-align: middle">
+                {{if Counter==0}} <div class="ebtn"></div> {{else}}<img src="../Images/images1/image${Counter}.png" />{{/if}}
+            </td>
+        </tr>
+
+        {{/if}}
+        {{/each}}
+        {{/if}}
+        {{/each}}
+        {{else}}
+        <tr class="Level1">
+            <td colspan="14" class="Td_Merge Level1TdSp1 minus" onclick="TrLv1Show(this);">{{html Name}}</td>
+        </tr>
+        {{each ObjValue}}
+
+        {{if CompanyName !="未完成合计"}}
+
+        <tr class="Level3">
+            {{if TargetGroupCount ==1 }}
+            <td class="Td_Left" style="text-align: center !important;">${$index+1}</td>
+            <td class="Td_Left" style="text-align: left !important;">${CompanyName}</td>
+            {{else}}
+            {{if ($index+1)%TargetGroupCount ==1 }}
+            <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: center !important;">${($index+2)/TargetGroupCount}</td>
+            <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: left !important;">
+                <!--这里为了使在本月补回时，不能编辑-->
+                {{if Name.indexOf("本月补回公司")>=0}}
+                ${CompanyName}
+                {{else}}
+                {{if Value !="1"}}
+                <a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','Reason','cumulative')">${CompanyName}</a>
+                {{else}}
+                ${CompanyName}
+                {{/if}}
+                {{/if}}
+            </td>
+            {{/if}}
+            {{/if}}
+
+            {{if TargetGroupCount !=1}}
+            <!--指标名称-->
+            <td class="Td_Left" style="text-align: center !important;">${TargetName}</td>
+            {{else}}
+            <td style="display:none"></td>
+            {{/if}}
+
+            <!--新增差值-->
+            <td class="Td_Left" {{if AddDifference<0 }} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${AddDifference}">${(AddDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--上月累计计划数-->
+            <td class="Td_Left shangyue" style="white-space: nowrap;" title="${LastNAccumulativePlanAmmount}">${(LastNAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--上月累计实际数-->
+            <td class="Td_TopAndBottom shangyue" style="white-space: nowrap;" title="${LastNAccumulativeActualAmmount}">${(LastNAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--上月差值-->
+            <td class="Td_Right shangyue" {{if LastNAccumulativeDifference <0}} style="white-space: nowrap; color:red; " {{else}} style="white-space: nowrap;" {{/if}} title="${LastNAccumulativeDifference}">${(LastNAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计计划数-->
+            <td class="Td_Left" style="white-space: nowrap;" title="${NAccumulativePlanAmmount}">${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计实际数-->
+            <td class="Td_TopAndBottom" style="white-space: nowrap;" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--本月差值-->
+            <td class="Td_Right Special" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--本月完成率-->
+            <td class="Td_Right shangyue" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+
+
+            {{if TargetGroupCount ==1}}
+            {{if MIssTargetReason!="" && MIssTargetDescription!=""}} <!--原因和说明-->
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (MIssTargetReason +"<br /> <span style='font-weight:bold;'>采取措施：</span>"+ MIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            {{else}}
+            {{if MIssTargetReason !=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (MIssTargetReason).replace(/\n/g, "<br/>") +"<br /><span style='font-weight:bold;'>采取措施：</span>"+ MIssTargetDescription }}</td>
+            {{else MIssTargetDescription !=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html MIssTargetReason + "<br /><span style='font-weight:bold;'>采取措施：</span>"+ (MIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            {{else}}
+            <td class="Td_Right"></td>
+            {{/if}}
+            {{/if}}
+            {{else}}
+
+            <!--------------------------------------------------------------------------------------------------------------------->
+            {{if Value =="1"}} <!--等于1标识双指标都未完成 ,这里Value =系统表里的未完成指标的Senquence 赋值 -->
+            {{if MIssTargetReason!="" && MIssTargetDescription!=""}} <!--原因和说明 组合指标-->
+            <td class="Td_Right" style="text-align: left !important;">{{html (MIssTargetReason + MIssTargetDescription).substr(0,(MIssTargetReason + MIssTargetDescription).length).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            {{if MIssTargetReason !=""}}
+            <td class="Td_Right" style="text-align: left !important;">{{html (MIssTargetReason.substr(0,MIssTargetReason.length)).replace(/\n/g, "<br/>") + MIssTargetDescription}}</td>
+            {{else MIssTargetDescription !=""}}
+            <td class="Td_Right" style="text-align: left !important;">{{html MIssTargetReason +(MIssTargetDescription.substr(0,MIssTargetDescription.length)).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            <td class="Td_Right"></td>
+            {{/if}}
+            {{/if}}
+
+
+            {{else}} <!--其它都是单个指标未完成-->
+            {{if ($index+1)%TargetGroupCount ==1 }}
+            {{if MIssTargetReason!="" && MIssTargetDescription!=""}} <!--原因和说明 组合指标-->
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;">{{html (MIssTargetReason + MIssTargetDescription).substr(0,(MIssTargetReason + MIssTargetDescription).length).replace(/\n/g, "<br/>")}} </td>
+            {{else}}
+            {{if MIssTargetReason !=""}}
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;">{{html (MIssTargetReason.substr(0,MIssTargetReason.length)).replace(/\n/g, "<br/>") + MIssTargetDescription}}</td>
+            {{else MIssTargetDescription !=""}}
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;">{{html MIssTargetReason +(MIssTargetDescription.substr(0,MIssTargetDescription.length)).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            <td class="Td_Right" rowspan="${TargetGroupCount}"></td>
+            {{/if}}
+            {{/if}}
+            {{/if}}
+            {{/if}}
+            {{/if}}
+
+
+            <!--要求时间 如果要求说明是""显示时间，反之显示本身-->
+            <td class="Td_Right" style="text-align: center !important;">
+                {{if CommitReason==""}}
+                {{if FormatDate(CommitDate,false) =="---"}}${FormatDate(CommitDate,false)}{{else}}${FormatDate(CommitDate,false,"CN").substring(0,FormatDate(CommitDate,false,"CN").length-3)}月{{/if}}
+                {{else}}
+                ${CommitReason}
+                {{/if}}
+            </td>
+
+            <!--承诺时间-->
+            <td class="Td_Right" style="text-align: center !important;color:red; ">
+                {{if TargetGroupCount ==1}}
+                {{if ReturnType =="0"}}
+
+                {{else ReturnType =="1"}}
+                补回中<br />
+                {{else ReturnType =="2"}}
+                到期未补回<br />
+                {{else ReturnType =="3"}}
+                预计无法按期补回<br />
+                {{else ReturnType =="4"}}
+                预计年内无法补回<br />
+                {{else ReturnType =="5"}}
+                本月新增<br />
+                {{else ReturnType =="6"}}
+                按期补回<br />
+                {{else ReturnType =="7"}}
+                提前补回<br />
+                {{/if}}
+                {{else}}
+                <!--本月补回的公司不能编辑信息-->
+                {{if Name.indexOf("本月补回公司")>=0}}
+                {{if ReturnType =="0"}}
+                {{else ReturnType =="1"}}
+                补回中<br />
+                {{else ReturnType =="2"}}
+                到期未补回<br />
+                {{else ReturnType =="3"}}
+                预计无法按期补回<br />
+                {{else ReturnType =="4"}}
+                预计年内无法补回<br />
+                {{else ReturnType =="5"}}
+                本月新增 <br />
+                {{else ReturnType =="6"}}
+                按期补回<br />
+                {{else ReturnType =="7"}}
+                提前补回<br />
+                {{/if}}
+                {{else}}
+                {{if Value =="1"}} <!--指定双指标--->
+                <a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','all','cumulative')">
+                    {{if ReturnType =="0"}}
+                </a>
+                {{else ReturnType =="1"}}
+                补回中<br />           </a>
+                {{else ReturnType =="2"}}
+                到期未补回<br />       </a>
+                {{else ReturnType =="3"}}
+                预计无法按期补回<br /> </a>
+                {{else ReturnType =="4"}}
+                预计年内无法补回<br /> </a>
+                {{else ReturnType =="5"}}
+                本月新增<br />         </a>
+                {{else ReturnType =="6"}}
+                </a> 按期补回<br />
+                {{else ReturnType =="7"}}
+                </a> 提前补回<br />
+                {{/if}}
+                {{else}}
+                <a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','return','cumulative')">
+                    {{if ReturnType =="0"}}
+                </a>
+                {{else ReturnType =="1"}}
+                补回中<br />           </a>
+                {{else ReturnType =="2"}}
+                到期未补回<br />       </a>
+                {{else ReturnType =="3"}}
+                预计无法按期补回<br /> </a>
+                {{else ReturnType =="4"}}
+                预计年内无法补回<br /> </a>
+                {{else ReturnType =="5"}}
+                本月新增<br />         </a>
+                {{else ReturnType =="6"}}
+                </a> 按期补回<br />
+                {{else ReturnType =="7"}}
+                </a> 提前补回<br />
+                {{/if}}
+                {{/if}}
+                {{/if}}
+
+                {{/if}}
+                {{if FormatDate(PromissDate,false) =="---"}}
+                ${FormatDate(PromissDate,false)}<br />{{html (ReturnDescription).replace(/\n/g, "<br/>")}}
+                {{else}}
+                <!--  承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回  <br />-->
+                {{html (ReturnDescription).replace(/\n/g, "<br/>")}}
+                {{/if}}
+            </td>
+
+            <!--预警累计次数-->
+            <td class="Td_TopAndBottom" style="text-align: center !important; vertical-align: middle">
+                {{if Counter==0}} <div class="ebtn"></div> {{else}}<img src="../Images/images1/image${Counter}.png" />{{/if}}
+            </td>
+        </tr>
+
+        {{/if}}
+        {{/each}}
+        {{/if}}
+        {{/if}}
+
+    </script>
+
+
+    <!--未完成说明 (上报页面  当月的的 )-->
+    <script type="text/x-jquery-tmpl" id="TmplCurrentMissTargetRpt">
+        {{if Mark=="Group"}}
+        {{each ObjValue}}
+        {{tmpl($value) '#TmplCurrentMissTargetRpt'}}
+        {{/each}}
+        {{else}}
+        {{if Mark=="Counter"}}
+        <tr class="Level1">
+            <td colspan="14" class="Td_Merge Curr_Level1TdSp1 show" onclick="TrLv1Show(this);">{{html Name}}</td>
+        </tr>
+        {{each ObjValue}}
+        {{if Mark=="Counter"}}
+        {{tmpl($value) '#TmplCurrentMissTargetRpt'}}
+        {{else}}
+        <tr class="Level2">
+            <td colspan="14" class="Td_Merge Curr_Level1TdSp1 show" style="text-indent:35px" onclick="TrLv2Show(this);">{{html Name}}</td>
+        </tr>
+        {{each ObjValue}}
+
+        {{if CompanyName !="未完成合计"}}
+
+        <tr class="Level3">
+
+            {{if TargetGroupCount ==1 }}
+            <td class="Td_Left" style="text-align: center !important;">${$index+1}</td>
+            <td class="Td_Left" style="text-align: left !important;"> ${CompanyName}</td>
+            {{else}}
+            {{if ($index+1)%TargetGroupCount ==1 }}
+            <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: center !important;">${($index+2)/TargetGroupCount}</td>
+            <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: left !important;">${CompanyName}</td>
+            {{/if}}
+            {{/if}}
+
+
+            {{if TargetGroupCount !=1}}
+            <!--指标名称-->
+            <td class="Td_Left" style="text-align: center !important;">${TargetName}</td>
+            {{else}}
+            <td style="display:none"></td>
+            {{/if}}
+
+            <!--新增差值-->
+            <td class="Td_Left" {{if AddDifference<0 }} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${AddDifference}">${(AddDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--当月计划数-->
+            <td class="Td_Left" style="white-space: nowrap;" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--当月实际数-->
+            <td class="Td_TopAndBottom" style="white-space: nowrap;" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计计划数-->
+            <td class="Td_Left leiji" style="white-space: nowrap;" title="${NAccumulativePlanAmmount}">${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计实际数-->
+            <td class="Td_TopAndBottom leiji" style="white-space: nowrap;" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计差值-->
+            <td class="Td_Right Curr_Special leiji" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计完成率-->
+            <td class="Td_Right leiji" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+
+            <!--本月累计差值-->
+            <td class="Td_Right" {{if NAccumulativeDifference <0}} style="white-space: nowrap; color:red; " {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+
+
+            {{if TargetGroupCount ==1}}
+            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}} <!--原因和说明-->
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (CurrentMIssTargetReason +"<br /> <span style='font-weight:bold;'>采取措施：</span>"+ CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            {{else}}
+            {{if CurrentMIssTargetReason !=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (CurrentMIssTargetReason).replace(/\n/g, "<br/>") +"<br /><span style='font-weight:bold;'>采取措施：</span>"+ CurrentMIssTargetDescription }}</td>
+            {{else CurrentMIssTargetDescription!=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html CurrentMIssTargetReason + "<br /><span style='font-weight:bold;'>采取措施：</span>"+ (CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            {{else}}
+            <td class="Td_Right"></td>
+            {{/if}}
+            {{/if}}
+
+            {{else}}
+            {{if Value =="1"}} <!--等于1标识双指标都未完成 ,这里Value =系统表里的未完成指标的Senquence 赋值 -->
+            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}} <!--原因和说明 组合指标-->
+            <td class="Td_Right" style="text-align: left !important;">{{html (CurrentMIssTargetReason + CurrentMIssTargetDescription).substr(0,(CurrentMIssTargetReason + CurrentMIssTargetDescription).length).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            {{if CurrentMIssTargetReason !=""}}
+            <td class="Td_Right" style="text-align: left !important;">{{html (CurrentMIssTargetReason.substr(0,CurrentMIssTargetReason.length)).replace(/\n/g, "<br/>") + CurrentMIssTargetDescription}}</td>
+            {{else CurrentMIssTargetDescription !=""}}
+            <td class="Td_Right" style="text-align: left !important;">{{html CurrentMIssTargetReason +(CurrentMIssTargetDescription.substr(0,CurrentMIssTargetDescription.length)).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            <td class="Td_Right"></td>
+            {{/if}}
+            {{/if}}
+
+            {{else}} <!--其它都是单个指标未完成-->
+            {{if ($index+1)%TargetGroupCount ==1 }}
+            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}} <!--原因和说明 组合指标-->
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;">{{html (CurrentMIssTargetReason + CurrentMIssTargetDescription).substr(0,(CurrentMIssTargetReason + CurrentMIssTargetDescription).length).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            {{if CurrentMIssTargetReason !=""}}
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;">{{html (CurrentMIssTargetReason.substr(0,CurrentMIssTargetReason.length)).replace(/\n/g, "<br/>") + CurrentMIssTargetDescription}}</td>
+            {{else CurrentMIssTargetDescription !=""}}
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;">{{html CurrentMIssTargetReason +(CurrentMIssTargetDescription.substr(0,CurrentMIssTargetDescription.length)).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            <td class="Td_Right" rowspan="${TargetGroupCount}"></td>
+            {{/if}}
+            {{/if}}
+            {{/if}}
+            {{/if}}
+            {{/if}}
+
+            <!--要求时间 如果要求说明是""显示时间，反之显示本身-->
+            <td class="Td_Right" style="text-align: center !important;">
+                {{if CommitReason==""}}
+                {{if FormatDate(CommitDate,false) =="---"}}${FormatDate(CommitDate,false)}{{else}}${FormatDate(CommitDate,false,"CN").substring(0,FormatDate(CommitDate,false,"CN").length-3)}月{{/if}}
+                {{else}}
+                ${CommitReason}
+                {{/if}}
+            </td>
+
+            <!--承诺时间-->
+            <td class="Td_Right" style="text-align: center !important;color:red; ">
+                {{if TargetGroupCount ==1}}
+                {{if ReturnType =="0"}}
+
+                {{else ReturnType =="1"}}
+                补回中<br />
+                {{else ReturnType =="2"}}
+                到期未补回<br />
+                {{else ReturnType =="3"}}
+                预计无法按期补回<br />
+                {{else ReturnType =="4"}}
+                预计年内无法补回<br />
+                {{else ReturnType =="5"}}
+                本月新增 <br />
+                {{else ReturnType =="6"}}
+                按期补回<br />
+                {{else ReturnType =="7"}}
+                提前补回<br />
+                {{/if}}
+                {{else}}
+                <a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','all','current')">
+                    {{if ReturnType =="0"}}
+                </a>
+                {{else ReturnType =="1"}}
+                补回中<br />            </a>
+                {{else ReturnType =="2"}}
+                到期未补回<br />        </a>
+                {{else ReturnType =="3"}}
+                预计无法按期补回<br />  </a>
+                {{else ReturnType =="4"}}
+                预计年内无法补回<br />  </a>
+                {{else ReturnType =="5"}}
+                本月新增<br />          </a>
+                {{else ReturnType =="6"}}
+                </a> 按期补回<br />
+                {{else ReturnType =="7"}}
+                </a> 提前补回<br />
+                {{/if}}
+                {{/if}}
+
+                {{if FormatDate(PromissDate,false) =="---"}}
+                ${FormatDate(PromissDate,false)}<br />{{html (ReturnDescription).replace(/\n/g, "<br/>")}}
+                {{else}}
+                <!-- 承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回<br />-->
+                {{html ReturnDescription.replace(/\n/g, "<br/>")}}
+                {{/if}}
+            </td>
+
+            <!--预警累计次数-->
+            <td class="Td_TopAndBottom" style="text-align: center !important; vertical-align: middle;">
+                {{if Counter==0}} <div class="ebtn">---</div> {{else}}<img src="../Images/images1/image${Counter}.png" />{{/if}}
+            </td>
+        </tr>
+
+        {{/if}}
+        {{/each}}
+        {{/if}}
+        {{/each}}
+        {{else}}
+        <tr class="Level1">
+            <td colspan="14" class="Td_Merge Curr_Level1TdSp1 minus" onclick="TrLv1Show(this);">{{html Name}}</td>
+        </tr>
+        {{each ObjValue}}
+
+        {{if CompanyName !="未完成合计"}}
+
+        <tr class="Level3">
+            {{if TargetGroupCount ==1 }}
+            <td class="Td_Left" style="text-align: center !important;">${$index+1}</td>
+            <td class="Td_Left" style="text-align: left !important;">${CompanyName}</td>
+            {{else}}
+            {{if ($index+1)%TargetGroupCount ==1 }}
+            <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: center !important;">${($index+2)/TargetGroupCount}</td>
+            <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: left !important;">
+                <!--这里为了使在本月补回时，不能编辑-->
+                {{if Name.indexOf("本月补回公司")>=0}}
+                ${CompanyName}
+                {{else}}
+                {{if Value !="1"}}
+                <a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','Reason','current')">${CompanyName}</a>
+                {{else}}
+                ${CompanyName}
+                {{/if}}
+                {{/if}}
+            </td>
+            {{/if}}
+            {{/if}}
+
+            {{if TargetGroupCount !=1}}
+            <!--指标名称-->
+            <td class="Td_Left" style="text-align: center !important;">${TargetName}</td>
+            {{else}}
+            <td style="display:none"></td>
+            {{/if}}
+
+            <!--当月累计计划数-->
+            <td class="Td_Left" style="white-space: nowrap;" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--当月累计实际数-->
+            <td class="Td_TopAndBottom" style="white-space: nowrap;" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--当月差值-->
+            <td class="Td_Right" {{if NDifference <0}} style="white-space: nowrap; color:red; " {{else}} style="white-space: nowrap;" {{/if}} title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计计划数-->
+            <td class="Td_Left leiji" style="white-space: nowrap;" title="${NAccumulativePlanAmmount}">${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计实际数-->
+            <td class="Td_TopAndBottom leiji" style="white-space: nowrap;" title="${NAccumulativeActualAmmount}">${(NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计差值-->
+            <td class="Td_Right Curr_Special leiji" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+
+            <!--本月累计完成率-->
+            <td class="Td_Right leiji" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
+            <!--本月累计差值-->
+            <td class="Td_Right" {{if NAccumulativeDifference <0}} style="white-space: nowrap; color:red; " {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+
+            {{if TargetGroupCount ==1}}
+            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}} <!--原因和说明-->
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (CurrentMIssTargetReason +"<br /> <span style='font-weight:bold;'>采取措施：</span>"+ CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            {{else}}
+            {{if CurrentMIssTargetReason !=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (CurrentMIssTargetReason).replace(/\n/g, "<br/>") +"<br /><span style='font-weight:bold;'>采取措施：</span>"+ CurrentMIssTargetDescription }}</td>
+            {{else CurrentMIssTargetDescription !=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html CurrentMIssTargetReason + "<br /><span style='font-weight:bold;'>采取措施：</span>"+ (CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            {{else}}
+            <td class="Td_Right"></td>
+            {{/if}}
+            {{/if}}
+            {{else}}
+
+            <!--------------------------------------------------------------------------------------------------------------------->
+            {{if Value =="1"}} <!--等于1标识双指标都未完成 ,这里Value =系统表里的未完成指标的Senquence 赋值 -->
+            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}} <!--原因和说明 组合指标-->
+            <td class="Td_Right" style="text-align: left !important;">{{html (CurrentMIssTargetReason + CurrentMIssTargetDescription).substr(0,(CurrentMIssTargetReason + CurrentMIssTargetDescription).length).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            {{if CurrentMIssTargetReason !=""}}
+            <td class="Td_Right" style="text-align: left !important;">{{html (CurrentMIssTargetReason.substr(0,CurrentMIssTargetReason.length)).replace(/\n/g, "<br/>") + CurrentMIssTargetDescription}}</td>
+            {{else CurrentMIssTargetDescription !=""}}
+            <td class="Td_Right" style="text-align: left !important;">{{html CurrentMIssTargetReason +(CurrentMIssTargetDescription.substr(0,CurrentMIssTargetDescription.length)).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            <td class="Td_Right"></td>
+            {{/if}}
+            {{/if}}
+
+
+            {{else}} <!--其它都是单个指标未完成-->
+            {{if ($index+1)%TargetGroupCount ==1 }}
+            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}} <!--原因和说明 组合指标-->
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;">{{html (CurrentMIssTargetReason + CurrentMIssTargetDescription).substr(0,(CurrentMIssTargetReason + CurrentMIssTargetDescription).length).replace(/\n/g, "<br/>")}} </td>
+            {{else}}
+            {{if CurrentMIssTargetReason !=""}}
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;">{{html (CurrentMIssTargetReason.substr(0,CurrentMIssTargetReason.length)).replace(/\n/g, "<br/>") + CurrentMIssTargetDescription}}</td>
+            {{else CurrentMIssTargetDescription !=""}}
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;">{{html CurrentMIssTargetReason +(CurrentMIssTargetDescription.substr(0,CurrentMIssTargetDescription.length)).replace(/\n/g, "<br/>")}}</td>
+            {{else}}
+            <td class="Td_Right" rowspan="${TargetGroupCount}"></td>
+            {{/if}}
+            {{/if}}
+            {{/if}}
+            {{/if}}
+            {{/if}}
+
+
+            <!--要求时间 如果要求说明是""显示时间，反之显示本身-->
+            <td class="Td_Right" style="text-align: center !important;">
+                {{if CommitReason==""}}
+                {{if FormatDate(CommitDate,false) =="---"}}${FormatDate(CommitDate,false)}{{else}}${FormatDate(CommitDate,false,"CN").substring(0,FormatDate(CommitDate,false,"CN").length-3)}月{{/if}}
+                {{else}}
+                ${CommitReason}
+                {{/if}}
+            </td>
+
+            <!--承诺时间-->
+            <td class="Td_Right" style="text-align: center !important;color:red; ">
+                {{if TargetGroupCount ==1}}
+                {{if ReturnType =="0"}}
+
+                {{else ReturnType =="1"}}
+                补回中<br />
+                {{else ReturnType =="2"}}
+                到期未补回<br />
+                {{else ReturnType =="3"}}
+                预计无法按期补回<br />
+                {{else ReturnType =="4"}}
+                预计年内无法补回<br />
+                {{else ReturnType =="5"}}
+                本月新增<br />
+                {{else ReturnType =="6"}}
+                按期补回<br />
+                {{else ReturnType =="7"}}
+                提前补回<br />
+                {{/if}}
+                {{else}}
+                <!--本月补回的公司不能编辑信息-->
+                {{if Name.indexOf("本月补回公司")>=0}}
+                {{if ReturnType =="0"}}
+                {{else ReturnType =="1"}}
+                补回中<br />
+                {{else ReturnType =="2"}}
+                到期未补回<br />
+                {{else ReturnType =="3"}}
+                预计无法按期补回<br />
+                {{else ReturnType =="4"}}
+                预计年内无法补回<br />
+                {{else ReturnType =="5"}}
+                本月新增 <br />
+                {{else ReturnType =="6"}}
+                按期补回<br />
+                {{else ReturnType =="7"}}
+                提前补回<br />
+                {{/if}}
+                {{else}}
+                {{if Value =="1"}}
+                <a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','all','current')">
+                    {{if ReturnType =="0"}}
+                        {{if NDifference < 0}}
+                            累计完成
+                        {{/if}}
+                </a>
+                {{else ReturnType =="1"}}
+                补回中<br />  </a>
+                {{else ReturnType =="2"}}
+                到期未补回<br />  </a>
+                {{else ReturnType =="3"}}
+                预计无法按期补回<br />  </a>
+                {{else ReturnType =="4"}}
+                预计年内无法补回<br />  </a>
+                {{else ReturnType =="5"}}
+                本月新增<br />  </a>
+                {{else ReturnType =="6"}}
+                按期补回<br />  </a>
+                {{else ReturnType =="7"}}
+                提前补回<br />  </a>
+                {{/if}}
+                {{else}}
+                {{if ReturnType =="0"}}
+                {{else ReturnType =="1"}}
+                补回中<br />
+                {{else ReturnType =="2"}}
+                到期未补回<br />
+                {{else ReturnType =="3"}}
+                预计无法按期补回<br />
+                {{else ReturnType =="4"}}
+                预计年内无法补回<br />
+                {{else ReturnType =="5"}}
+                本月新增 <br />
+                {{else ReturnType =="6"}}
+                按期补回<br />
+                {{else ReturnType =="7"}}
+                提前补回<br />
+                {{/if}}
+                {{/if}}
+                {{/if}}
+                {{/if}}
+                {{if FormatDate(PromissDate,false) =="---"}}
+                {{if ReturnType =="0" && NDifference >=0 }}
+                <span style="text-align:!important;color:black;">---</span>
+                {{else ReturnType =="0" && NDifference < 0 }}
+                    {{if Value !="1"}}
+                    <span style="text-align:!important;color:black;">累计完成</span>
+                    {{/if}}
+                {{else}}
+                ${FormatDate(PromissDate,false)}<br />{{html (ReturnDescription).replace(/\n/g, "<br/>")}}
+                {{/if}}
+                {{else}}
+                <!--  承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回  <br />-->
+                {{html (ReturnDescription).replace(/\n/g, "<br/>")}}
+                {{/if}}
+            </td>
+
+            <!--预警累计次数-->
+            <td class="Td_TopAndBottom" style="text-align: center !important; vertical-align: middle; ">
+                {{if Counter==0}} <div class="ebtn">---</div> {{else}}<img src="../Images/images1/image${Counter}.png" />{{/if}}
+            </td>
+        </tr>
+
+        {{/if}}
+        {{/each}}
+        {{/if}}
+        {{/if}}
+
+    </script>
+
+    <!--------------------------------------------------- 上报页面 未完成说明模版-  End-------------------------------------------------------->
+    <!---------------------------------------------------未完成编辑页面  开始------------------------------------------------------->
+
+    <div id="divMissTargetRpt" class="popup" style="height: auto; display: none; padding-bottom: 10px">
+        <div class="pop_content" id="content_edit">
+        </div>
+        <!--pop_content-->
+        <div class="pop_operate">
+            <input type="button" class="pop_btn btn_gray" value="取消" onclick="art.dialog({ id: 'divMissTargetRpt' }).close();" />
+            <input type="button" class="pop_btn btn_blue" value="确定" onclick=" SaveMissTargetRpt('all');" />
+            <div class="cls"></div>
+        </div>
+        <!--pop_btn-->
+    </div>
+
+
+    <!-----------------------------------未完成编辑页面 所有信息项 --------------------------------------------->
+    <!----------累计未完成编辑-------------------->
+    <script type="text/x-jquery-tmpl" id="rpt_info_tmpl">
+        <input type="hidden" id="hide_info_id" value="${ID}" />
+        <table style="width: 600px;" class="tab02">
+
+            <tr>
+                <th style="width:25%; padding: 5px; padding-right: 10px; text-align: right;"> 公&nbsp;&nbsp;&nbsp;&nbsp;司 </th>
+                <td colspan="3" style="width: 25%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${CompanyName}
+                </td>
+            </tr>
+
+            <tr>
+                <th style="width:25%; padding: 5px; padding-right: 10px; text-align: right;"> 指&nbsp;&nbsp;&nbsp;&nbsp;标</th>
+                <td style="width: 25%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${TargetName}
+                </td>
+                <th style="width: 25%; padding: 5px; padding-right: 10px; text-align: right;">本月补回/新增差额</th>
+                <td style="width: 25%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${AddDifference.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+
+            <tr>
+                <th style=" padding: 5px; padding-right: 10px; text-align: right;">上月累计计划</th>
+                <td style=" padding: 5px; padding-left: 20px; text-align: left;">
+                    ${LastNAccumulativePlanAmmount.thousandize0OrEmpty(0)}
+                </td>
+                <th style=" padding: 5px; padding-right: 10px; text-align: right;">本月累计计划</th>
+                <td style=" padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style=" padding: 5px; padding-right: 10px; text-align: right;">上月累计实际</th>
+                <td style=" padding: 5px; padding-left: 20px; text-align: left;">
+                    ${LastNAccumulativeActualAmmount.thousandize0OrEmpty(0)}
+                </td>
+                <th style=" padding: 5px; padding-right: 10px; text-align: right;">本月累计实际</th>
+                <td style=" padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NAccumulativeActualAmmount.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style=" padding: 5px; padding-right: 10px; text-align: right;">上月累计差额</th>
+                <td style=" padding: 5px; padding-left: 20px; text-align: left;">
+                    ${LastNAccumulativeDifference.thousandize0OrEmpty(0)}
+                </td>
+                <th style=" padding: 5px; padding-right: 10px; text-align: right;">本月累计差额</th>
+                <td style=" padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NAccumulativeDifference.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+
+            <tr>
+                <th colspan="1" style="width: 25%; padding: 5px; padding-right: 10px; text-align: right;">未完成原因</th>
+                <td colspan="3" style="width: 75%; padding: 5px;">
+                    <textarea id="rpt_info_step" rows="6" cols="4" style="width: 95%">{{html MIssTargetReason}}</textarea>
+
+                </td>
+            </tr>
+            <tr>
+                <th colspan="1" style="width: 25%; padding: 5px; padding-right: 10px; text-align: right;">采取措施</th>
+                <td colspan="3" style="width: 75%; padding: 5px;">
+                    <textarea id="rpt_info_desc" rows="6" cols="4" style="width: 95%">${MIssTargetDescription}</textarea>
+
+                </td>
+            </tr>
+            <tr>
+                <th colspan="1" style="width: 25%; padding: 5px; padding-right: 10px; text-align: right;">要求期限</th>
+                <td colspan="3" style="width: 75%; padding: 5px; padding-left: 20px; text-align: left;">{{if FormatDate(CommitDate,false) =="---"}}${FormatDate(CommitDate,false)} {{else}} ${FormatDate(CommitDate,false,"CN").substring(0,FormatDate(CommitDate,false,"CN").length-3)}月{{/if}}</td>
+            </tr>
+
+            <tr>
+                <th colspan="1" style="width: 25%; padding: 5px; padding-right: 10px; text-align: right;">补回情况</th>
+                <td colspan="3" style="width: 75%; padding: 15px; padding-left: 15px; text-align: left;">
+                    {{if ReturnType ==1 }}
+                    <label name="1" style="font-weight:700">补回中</label>
+                    {{else ReturnType ==2 }}
+                    <label name="2" style="font-weight:700">到期未补回</label>
+                    {{else ReturnType==5}}
+                    <label name="5" style="font-weight:700">本月新增指标</label>
+                    {{else ReturnType==6}}
+                    <label name="6" style="font-weight:700">按期补回</label>
+                    {{else ReturnType==7}}
+                    <label name="7" style="font-weight:700">提前补回</label>
+                    {{/if}}
+                    <br />
+                    <div style="padding:10px 0px 0px 0px;">
+                        <select style="width: 65%; line-height:10px;" id="rpt_info_returntype" onchange="SetReturnDesc(this)">
+                            <option value="TT">--请选择--</option>
+                            {{if ReturnType ==1}}
+                            <option value="T1" {{if ReturnType_Sub =="T1"}} selected="selected" {{/if}}>补回中</option>
+                            <option value="T2" {{if ReturnType_Sub =="T2"}} selected="selected" {{/if}}>承诺提前至X月份补回</option>
+                            <option value="T3" {{if ReturnType_Sub =="T3"}} selected="selected" {{/if}}>预计无法按期补回，承诺X月份补回</option>
+                            <option value="T4" {{if ReturnType_Sub =="T4"}} selected="selected" {{/if}}>预计年内无法补回（必保全年完成【】指标【】，差额【】）</option>
+                            <option value="T41" {{if ReturnType_Sub =="T41"}} selected="selected" {{/if}}>完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+                            <option value="T42" {{if ReturnType_Sub =="T42"}} selected="selected" {{/if}}>未完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+                            <option value="T6" {{if ReturnType_Sub =="T6"}} selected="selected" {{/if}}>其它情况</option>
+                            {{else ReturnType ==2}}
+                            <option value="T2" {{if ReturnType_Sub =="T2"}} selected="selected" {{/if}}>承诺X月份补回</option>
+                            <option value="T4" {{if ReturnType_Sub =="T4"}} selected="selected" {{/if}}>预计年内无法补回（必保全年完成【】指标【】，差额【】）</option>
+                            <option value="T41" {{if ReturnType_Sub =="T41"}} selected="selected" {{/if}}>完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+                            <option value="T42" {{if ReturnType_Sub =="T42"}} selected="selected" {{/if}}>未完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+                            <option value="T6" {{if ReturnType_Sub =="T6"}} selected="selected" {{/if}}>其它情况</option>
+                            {{else ReturnType ==5}}
+                            <option value="T2" {{if ReturnType_Sub =="T2"}} selected="selected" {{/if}}>承诺X月份补回</option>
+                            <option value="T4" {{if ReturnType_Sub =="T4"}} selected="selected" {{/if}}>预计年内无法补回（必保全年完成【】指标【】，差额【】）</option>
+                            <option value="T41" {{if ReturnType_Sub =="T41"}} selected="selected" {{/if}}>完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+                            <option value="T42" {{if ReturnType_Sub =="T42"}} selected="selected" {{/if}}>未完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+                            <option value="T6" {{if ReturnType_Sub =="T6"}} selected="selected" {{/if}}>其它情况</option>
+                            {{/if}}
+                        </select>
+                        <input type="text" id="rpt_info_PromissDate" {{if ReturnType_Sub =="T2" ||ReturnType_Sub =="T3" ||ReturnType_Sub =="T6"}} style="width: 130px; line-height:22px; " {{else}} style="width: 130px; line-height:22px;display:none; " {{/if}} class="Wdate" onfocus="WdatePicker({ dateFmt: 'yyyy-MM',Mchanging:ChangelFunc('rpt_info_returntype') })" value="{{if FormatDate(PromissDate,false) !="---"}}${FormatDate(PromissDate,false).substring(0,FormatDate(PromissDate,false).length-3)}{{/if}}" />
+
+                        <input type="text" id="rpt_info_PromissDate_day" {{if ReturnType_Sub =="T5" }} style="width: 120px;line-height:22px;" {{else}} style="width: 120px; line-height:22px;display:none; " {{/if}} class="Wdate" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd',Mchanging:ChangelFunc('rpt_info_returntype') })" value="{{if FormatDate(PromissDate,false) !="---"}}${FormatDate(PromissDate,false)}{{/if}}" />
+
+                        <input type="text" id="rpt_info_return_PromiseTarget" {{if ReturnType_Sub =="T4"}} style="width: 120px; line-height:22px;" {{else}} style="width: 120px; line-height:22px;display:none;" {{/if}} onblur="ChangePromiseTarget();" onchange="ChangePromiseTarget();" value="" placeholder="必保全年金额" />
+                    </div>
+                    <textarea rows="4" cols="4"
+                              {{if ReturnType_Sub=="T1" ||ReturnType_Sub=="T2" ||ReturnType_Sub=="T3" ||ReturnType_Sub=="T5" }}
+                              style="width: 98%; margin-top: 10px; background-color:#ececec;" readonly="readonly"
+                              {{else}}
+                              style="width: 98%; margin-top: 10px;"
+                              {{/if}}
+                              id="rpt_info_back">${ReturnDescription}</textarea>
+                </td>
+            </tr>
+        </table>
+    </script>
+
+    <!----------当月未完成编辑-------------------->
+    <script type="text/x-jquery-tmpl" id="rpt_current_info_tmpl">
+        <input type="hidden" id="hide_info_id" value="${ID}" />
+        <table style="width: 600px;" class="tab02">
+            <tr>
+                <th style="width:25%; padding: 5px; padding-right: 10px; text-align: right;"> 公&nbsp;&nbsp;&nbsp;&nbsp;司 </th>
+                <td style="width: 25%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${CompanyName}
+                </td>
+                <th style="width: 25%; padding: 5px; padding-right: 10px; text-align: right;">经营指标</th>
+                <td style="width: 25%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${TargetName}
+                </td>
+            </tr>
+
+            <tr>
+                <th style=" padding: 5px; padding-right: 10px; text-align: right;">当月计划</th>
+                <td style=" padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NPlanAmmount.thousandize0OrEmpty(0)}
+                </td>
+                <th style=" padding: 5px; padding-right: 10px; text-align: right;">本月累计计划</th>
+                <td style=" padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style=" padding: 5px; padding-right: 10px; text-align: right;">当月实际</th>
+                <td style=" padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NActualAmmount.thousandize0OrEmpty(0)}
+                </td>
+                <th style=" padding: 5px; padding-right: 10px; text-align: right;">本月累计实际</th>
+                <td style=" padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NAccumulativeActualAmmount.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style=" padding: 5px; padding-right: 10px; text-align: right;">当月差额</th>
+                <td style=" padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NDifference.thousandize0OrEmpty(0)}
+                </td>
+                <th style=" padding: 5px; padding-right: 10px; text-align: right;">本月累计差额</th>
+                <td style=" padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NAccumulativeDifference.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+
+            <tr>
+                <th colspan="1" style="width: 25%; padding: 5px; padding-right: 10px; text-align: right;">未完成原因</th>
+                <td colspan="3" style="width: 75%; padding: 5px;">
+                    <textarea id="rpt_info_step" rows="6" cols="4" style="width: 95%">{{html CurrentMIssTargetReason}}</textarea>
+
+                </td>
+            </tr>
+            <tr>
+                <th colspan="1" style="width: 25%; padding: 5px; padding-right: 10px; text-align: right;">
+                    采取措施
+                </th>
+                <td colspan="3" style="width: 75%; padding: 5px;">
+                    <textarea id="rpt_info_desc" rows="6" cols="4" style="width: 95%">${CurrentMIssTargetDescription}</textarea>
+
+                </td>
+            </tr>
+
+            <!--<tr>
+                <th colspan="1" style="width: 25%; padding: 5px; padding-right: 10px; text-align: right;">要求期限</th>
+                <td colspan="3" style="width: 75%; padding: 5px; padding-left: 20px; text-align: left;">{{if FormatDate(CommitDate,false) =="---"}}${FormatDate(CommitDate,false)} {{else}} ${FormatDate(CommitDate,false,"CN").substring(0,FormatDate(CommitDate,false,"CN").length-3)}月{{/if}}</td>
+            </tr>-->
+            <!--<tr>
+                <th colspan="1" style="width: 25%; padding: 5px; padding-right: 10px; text-align: right;">补回情况</th>
+                <td colspan="3" style="width: 75%; padding: 15px; padding-left: 15px; text-align: left;">
+                    {{if ReturnType ==1 }}
+                    <label name="1" style="font-weight:700">补回中</label>
+                    {{else ReturnType ==2 }}
+                    <label name="2" style="font-weight:700">到期未补回</label>
+                    {{else ReturnType==5}}
+                    <label name="5" style="font-weight:700">本月新增指标</label>
+                    {{else ReturnType==6}}
+                    <label name="6" style="font-weight:700">按期补回</label>
+                    {{else ReturnType==7}}
+                    <label name="7" style="font-weight:700">提前补回</label>
+                    {{/if}}
+                    <br />
+                    <div style="padding:10px 0px 0px 0px;">
+                        <select style="width: 65%; line-height:10px;" id="rpt_info_returntype" onchange="SetReturnDesc(this)">
+                            <option value="TT">--请选择--</option>
+                            {{if ReturnType ==1}}
+                            <option value="T1" {{if ReturnType_Sub =="T1"}} selected="selected" {{/if}}>补回中</option>
+                            <option value="T2" {{if ReturnType_Sub =="T2"}} selected="selected" {{/if}}>承诺提前至X月份补回</option>
+                            <option value="T3" {{if ReturnType_Sub =="T3"}} selected="selected" {{/if}}>预计无法按期补回，承诺X月份补回</option>
+                            <option value="T4" {{if ReturnType_Sub =="T4"}} selected="selected" {{/if}}>预计年内无法补回（必保全年完成【】指标【】，差额【】）</option>
+                            <option value="T41" {{if ReturnType_Sub =="T41"}} selected="selected" {{/if}}>完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+                            <option value="T42" {{if ReturnType_Sub =="T42"}} selected="selected" {{/if}}>未完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+
+                            {{if TargetName=="租金收缴率" || TargetName=="大商业物管费收缴率"}}
+                            <option value="T5" {{if ReturnType_Sub =="T5"}} selected="selected" {{/if}}>X月X日已补回</option>
+                            {{/if}}
+                            <option value="T6" {{if ReturnType_Sub =="T6"}} selected="selected" {{/if}}>其它情况</option>
+                            {{else ReturnType ==2}}
+                            <option value="T2" {{if ReturnType_Sub =="T2"}} selected="selected" {{/if}}>承诺X月份补回</option>
+                            <option value="T4" {{if ReturnType_Sub =="T4"}} selected="selected" {{/if}}>预计年内无法补回（必保全年完成【】指标【】，差额【】）</option>
+                            <option value="T41" {{if ReturnType_Sub =="T41"}} selected="selected" {{/if}}>完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+                            <option value="T42" {{if ReturnType_Sub =="T42"}} selected="selected" {{/if}}>未完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+
+                            {{if TargetName=="租金收缴率" || TargetName=="大商业物管费收缴率"}}
+                            <option value="T5" {{if ReturnType_Sub =="T5"}} selected="selected" {{/if}}>X月X日已补回</option>
+                            {{/if}}
+                            <option value="T6" {{if ReturnType_Sub =="T6"}} selected="selected" {{/if}}>其它情况</option>
+                            {{else ReturnType ==5}}
+                            <option value="T2" {{if ReturnType_Sub =="T2"}} selected="selected" {{/if}}>承诺X月份补回</option>
+                            <option value="T4" {{if ReturnType_Sub =="T4"}} selected="selected" {{/if}}>预计年内无法补回（必保全年完成【】指标【】，差额【】）</option>
+                            <option value="T41" {{if ReturnType_Sub =="T41"}} selected="selected" {{/if}}>完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+                            <option value="T42" {{if ReturnType_Sub =="T42"}} selected="selected" {{/if}}>未完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+
+                            {{if TargetName=="租金收缴率" || TargetName=="大商业物管费收缴率" }}
+                            <option value="T5" {{if ReturnType_Sub =="T5"}} selected="selected" {{/if}}>X月X日已补回</option>
+                            {{/if}}
+                            <option value="T6" {{if ReturnType_Sub =="T6"}} selected="selected" {{/if}}>其它情况</option>
+                            {{/if}}
+                        </select>
+
+                        <input type="text" id="rpt_info_PromissDate" {{if ReturnType_Sub =="T2" ||ReturnType_Sub =="T3" ||ReturnType_Sub =="T6"}} style="width: 130px; line-height:22px; " {{else}} style="width: 130px; line-height:22px;display:none; " {{/if}} class="Wdate" onfocus="WdatePicker({ dateFmt: 'yyyy-MM',Mchanging:ChangelFunc('rpt_info_returntype') })" value="{{if FormatDate(PromissDate,false) !="---"}}${FormatDate(PromissDate,false).substring(0,FormatDate(PromissDate,false).length-3)}{{/if}}" />
+
+                        <input type="text" id="rpt_info_PromissDate_day" {{if ReturnType_Sub =="T5" }} style="width: 120px;line-height:22px;" {{else}} style="width: 120px; line-height:22px;display:none; " {{/if}} class="Wdate" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd',Mchanging:ChangelFunc('rpt_info_returntype') })" value="{{if FormatDate(PromissDate,false) !="---"}}${FormatDate(PromissDate,false)}{{/if}}" />
+
+                        <input type="text" id="rpt_info_return_PromiseTarget" {{if ReturnType_Sub =="T4"}} style="width: 120px; line-height:22px;" {{else}} style="width: 120px; line-height:22px;display:none;" {{/if}} onblur="ChangePromiseTarget();" onchange="ChangePromiseTarget();" value="" placeholder="必保全年金额" />
+
+                    </div>
+                    <textarea rows="4" cols="4"
+                              {{if ReturnType_Sub=="T1" ||ReturnType_Sub=="T2" ||ReturnType_Sub=="T3" ||ReturnType_Sub=="T4" ||ReturnType_Sub=="T5" }}
+                              style="width: 98%; margin-top: 10px; background-color:#ececec;" readonly="readonly"
+                              {{else}}
+                              style="width: 98%; margin-top: 10px;"
+                              {{/if}}
+                              id="rpt_info_back">${ReturnDescription}</textarea>
+                </td>
+            </tr>-->
+        </table>
+    </script>
+
+
+    <div id="divMissTargetRpt_Retu" class="popup" style="height: auto; display: none; padding-bottom: 10px">
+        <div class="pop_content" id="content_edit_retuen">
+        </div>
+        <!--pop_content-->
+        <div class="pop_operate">
+            <input type="button" class="pop_btn btn_gray" value="取消" onclick="art.dialog({ id: 'divMissTargetRpt_Retu' }).close();" />
+            <input type="button" class="pop_btn btn_blue" value="确定" onclick=" SaveMissTargetRpt('retuen');" />
+            <div class="cls"></div>
+        </div>
+        <!--pop_btn-->
+    </div>
+
+
+    <!-----------------------------------未完成编辑页面 补回情况项 --------------------------------------------->
+    <!-------------------累计未完成编辑------------------------------->
+    <script type="text/x-jquery-tmpl" id="rpt_info_return_tmpl">
+        <input type="hidden" id="hide_info_return_id" value="${ID}" />
+        <table style="width: 600px;" class="tab02">
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;"> 公&nbsp;&nbsp;&nbsp;&nbsp;司 </th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${CompanyName}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">指标名称</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${TargetName}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月补回/新增差额</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${AddDifference.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">上月累计计划</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${LastNAccumulativePlanAmmount.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">上月累计实际</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${LastNAccumulativeActualAmmount.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">上月累计差额</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${LastNAccumulativeDifference.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计计划</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计实际</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NAccumulativeActualAmmount.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计差额</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NAccumulativeDifference.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">要求期限</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">{{if FormatDate(CommitDate,false) =="---"}}${FormatDate(CommitDate,false)} {{else}} ${FormatDate(CommitDate,false,"CN").substring(0,FormatDate(CommitDate,false,"CN").length-3)}月{{/if}}</td>
+            </tr>
+
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">补回情况</th>
+                <td style="width: 65%; padding: 10px; padding-left: 20px; text-align: left;">
+
+                    {{if ReturnType ==1 }}
+                    <label name="1" style="font-weight:700">补回中</label>
+                    {{else ReturnType ==2 }}
+                    <label name="2" style="font-weight:700">到期未补回</label>
+                    {{else ReturnType==5}}
+                    <label name="5" style="font-weight:700">本月新增指标</label>
+                    {{else ReturnType==6}}
+                    <label name="6" style="font-weight:700">按期补回</label>
+                    {{else ReturnType==7}}
+                    <label name="7" style="font-weight:700">提前补回</label>
+                    {{/if}}
+                    <br />
+                    <div style="padding:10px 0px 0px 0px;">
+                        <select style="width: 60%; line-height:10px;" id="rpt_info_return_returntype" onchange="SetReturnDesc(this);">
+                            <option value="TT">--请选择--</option>
+                            {{if ReturnType ==1}}
+                            <option value="T1">补回中</option>
+                            <option value="T2" {{if ReturnType_Sub =="T2"}} selected="selected" {{/if}}>承诺提前至X月份补回</option>
+                            <option value="T3" {{if ReturnType_Sub =="T3"}} selected="selected" {{/if}}>预计无法按期补回，承诺X月份补回</option>
+
+                            <option value="T4" {{if ReturnType_Sub =="T4"}} selected="selected" {{/if}}>预计年内无法补回（必保全年完成【】指标【】，差额【】）</option>
+                            <option value="T41" {{if ReturnType_Sub =="T41"}} selected="selected" {{/if}}>完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+                            <option value="T42" {{if ReturnType_Sub =="T42"}} selected="selected" {{/if}}>未完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+
+                            <option value="T6">其它情况</option>
+                            {{else ReturnType ==2}}
+                            <option value="T2" {{if ReturnType_Sub =="T2"}} selected="selected" {{/if}}>承诺X月份补回</option>
+
+                            <option value="T4" {{if ReturnType_Sub =="T4"}} selected="selected" {{/if}}>预计年内无法补回（必保全年完成【】指标【】，差额【】）</option>
+                            <option value="T41" {{if ReturnType_Sub =="T41"}} selected="selected" {{/if}}>完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+                            <option value="T42" {{if ReturnType_Sub =="T42"}} selected="selected" {{/if}}>未完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+
+                            <option value="T6">其它情况</option>
+                            {{else ReturnType ==5}}
+                            <option value="T2" {{if ReturnType_Sub =="T2"}} selected="selected" {{/if}}>承诺X月份补回</option>
+                            <option value="T4" {{if ReturnType_Sub =="T4"}} selected="selected" {{/if}}>预计年内无法补回（必保全年完成【】指标【】，差额【】）</option>
+                            <option value="T41" {{if ReturnType_Sub =="T41"}} selected="selected" {{/if}}>完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+                            <option value="T42" {{if ReturnType_Sub =="T42"}} selected="selected" {{/if}}>未完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+                            <option value="T6" {{if ReturnType_Sub =="T6"}} selected="selected" {{/if}}>其它情况</option>
+                            {{/if}}
+                        </select>
+                        <input type="text" id="rpt_info_return_PromissDate" {{if ReturnType_Sub =="T2" ||ReturnType_Sub =="T3" ||ReturnType_Sub =="T6"}} style="width: 120px; line-height:22px;" {{else}} style="width: 120px; line-height:22px;display:none;" {{/if}} class="Wdate" onfocus="WdatePicker({ dateFmt: 'yyyy-MM',Mchanging:ChangelFunc('rpt_info_return_returntype') })" value="{{if FormatDate(PromissDate,false) !="---"}}${FormatDate(PromissDate,false).substring(0,FormatDate(PromissDate,false).length-3)}{{/if}}" />
+                        <input type="text" id="rpt_info_return_PromiseTarget" {{if ReturnType_Sub =="T4"}} style="width: 120px; line-height:22px;" {{else}} style="width: 120px; line-height:22px;display:none;" {{/if}} onblur="ChangePromiseTarget();" onchange="ChangePromiseTarget();" value="" placeholder="必保全年金额" />
+
+                    </div>
+                    <textarea rows="5" cols="4"
+                              {{if ReturnType_Sub=="T1" ||ReturnType_Sub=="T2" ||ReturnType_Sub=="T3" ||ReturnType_Sub=="T4"||ReturnType_Sub=="T5" }}
+                              style="width: 95%; margin-top: 10px; background-color:#ececec;" readonly="readonly"
+                              {{else}}
+                              style="width: 95%; margin-top: 10px;"
+                              {{/if}}
+                              id="rpt_info_return_back">${ReturnDescription}</textarea>
+                </td>
+            </tr>
+        </table>
+    </script>
+
+    <!-------------------当月未完成编辑------------------------------->
+    <script type="text/x-jquery-tmpl" id="rpt_current_info_return_tmpl">
+        <input type="hidden" id="hide_info_return_id" value="${ID}" />
+        <table style="width: 600px;" class="tab02">
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;"> 公&nbsp;&nbsp;&nbsp;&nbsp;司 </th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${CompanyName}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">指标名称</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${TargetName}
+                </td>
+            </tr>
+            <!--<tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月补回/新增差额</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${AddDifference.thousandize0OrEmpty(0)}
+                </td>
+            </tr>-->
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">当月计划</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NPlanAmmount.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">当月实际</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NActualAmmount.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">当月差额</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NDifference.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计计划</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计实际</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NAccumulativeActualAmmount.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计差额</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NAccumulativeDifference.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">要求期限</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">{{if FormatDate(CommitDate,false) =="---"}}${FormatDate(CommitDate,false)} {{else}} ${FormatDate(CommitDate,false,"CN").substring(0,FormatDate(CommitDate,false,"CN").length-3)}月{{/if}}</td>
+            </tr>
+
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">补回情况</th>
+                <td style="width: 65%; padding: 10px; padding-left: 20px; text-align: left;">
+
+                    {{if ReturnType ==1 }}
+                    <label name="1" style="font-weight:700">补回中</label>
+                    {{else ReturnType ==2 }}
+                    <label name="2" style="font-weight:700">到期未补回</label>
+                    {{else ReturnType==5}}
+                    <label name="5" style="font-weight:700">本月新增指标</label>
+                    {{else ReturnType==6}}
+                    <label name="6" style="font-weight:700">按期补回</label>
+                    {{else ReturnType==7}}
+                    <label name="7" style="font-weight:700">提前补回</label>
+                    {{/if}}
+                    <br />
+                    <div style="padding:10px 0px 0px 0px;">
+                        <select style="width: 60%; line-height:10px; " id="rpt_info_return_returntype" onchange="SetReturnDesc(this);">
+                            <option value="TT">--请选择--</option>
+                            {{if ReturnType ==1}}
+                            <option value="T1">补回中</option>
+                            <option value="T2" {{if ReturnType_Sub =="T2"}} selected="selected" {{/if}}>承诺提前至X月份补回</option>
+                            <option value="T3" {{if ReturnType_Sub =="T3"}} selected="selected" {{/if}}>预计无法按期补回，承诺X月份补回</option>
+
+                            <option value="T4" {{if ReturnType_Sub =="T4"}} selected="selected" {{/if}}>预计年内无法补回（必保全年完成【】指标【】，差额【】）</option>
+                            <option value="T41" {{if ReturnType_Sub =="T41"}} selected="selected" {{/if}}>完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+                            <option value="T42" {{if ReturnType_Sub =="T42"}} selected="selected" {{/if}}>未完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+
+                            <option value="T6">其它情况</option>
+                            {{else ReturnType ==2}}
+                            <option value="T2" {{if ReturnType_Sub =="T2"}} selected="selected" {{/if}}>承诺X月份补回</option>
+
+                            <option value="T4" {{if ReturnType_Sub =="T4"}} selected="selected" {{/if}}>预计年内无法补回（必保全年完成【】指标【】，差额【】）</option>
+                            <option value="T41" {{if ReturnType_Sub =="T41"}} selected="selected" {{/if}}>完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+                            <option value="T42" {{if ReturnType_Sub =="T42"}} selected="selected" {{/if}}>未完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+
+                            <option value="T6">其它情况</option>
+                            {{else ReturnType ==5}}
+                            <option value="T2" {{if ReturnType_Sub =="T2"}} selected="selected" {{/if}}>承诺X月份补回</option>
+                            <option value="T4" {{if ReturnType_Sub =="T4"}} selected="selected" {{/if}}>预计年内无法补回（必保全年完成【】指标【】，差额【】）</option>
+                            <option value="T41" {{if ReturnType_Sub =="T41"}} selected="selected" {{/if}}>完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+                            <option value="T42" {{if ReturnType_Sub =="T42"}} selected="selected" {{/if}}>未完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
+                            <option value="T6" {{if ReturnType_Sub =="T6"}} selected="selected" {{/if}}>其它情况</option>
+                            {{/if}}
+                        </select>
+                        <input type="text" id="rpt_info_return_PromissDate" {{if ReturnType_Sub =="T2" ||ReturnType_Sub =="T3" ||ReturnType_Sub =="T6"}} style="width: 120px; line-height:22px;" {{else}} style="width: 120px; line-height:22px;display:none;" {{/if}} class="Wdate" onfocus="WdatePicker({ dateFmt: 'yyyy-MM',Mchanging:ChangelFunc('rpt_info_return_returntype') })" value="{{if FormatDate(PromissDate,false) !="---"}}${FormatDate(PromissDate,false).substring(0,FormatDate(PromissDate,false).length-3)}{{/if}}" />
+                        <input type="text" id="rpt_info_return_PromiseTarget" {{if ReturnType_Sub =="T4"}} style="width: 120px; line-height:22px;" {{else}} style="width: 120px; line-height:22px;display:none;" {{/if}} onblur="ChangePromiseTarget();" onchange="ChangePromiseTarget();" value="" placeholder="必保全年金额" />
+                    </div>
+                    <textarea rows="5" cols="4"
+                              {{if ReturnType_Sub=="T1" ||ReturnType_Sub=="T2" ||ReturnType_Sub=="T3" ||ReturnType_Sub=="T4"||ReturnType_Sub=="T5" }}
+                              style="width: 95%; margin-top: 10px; background-color:#ececec;" readonly="readonly"
+                              {{else}}
+                              style="width: 95%; margin-top: 10px;"
+                              {{/if}}
+                              id="rpt_info_return_back">${ReturnDescription}</textarea>
+                </td>
+            </tr>
+        </table>
+    </script>
+
+
+
+    <div id="divMissTargetRpt_Reason" class="popup" style="height: auto; display: none; padding-bottom: 10px">
+        <div class="pop_content" id="content_edit_Reason">
+        </div>
+        <!--pop_content-->
+        <div class="pop_operate">
+            <input type="button" class="pop_btn btn_gray" value="取消" onclick="art.dialog({ id: 'divMissTargetRpt_Reason' }).close();" />
+            <input type="button" class="pop_btn btn_blue" value="确定" onclick=" SaveMissTargetRpt('Reason');" />
+            <div class="cls"></div>
+        </div>
+        <!--pop_btn-->
+    </div>
+
+    <!-----------------------------------未完成编辑页面 未完成原因/采取措施 --------------------------------------------->
+    <!-------------累计未完成的 ------------------->
+    <script type="text/x-jquery-tmpl" id="rpt_info_Reason_tmpl">
+        <input type="hidden" id="hide_info_Reason_id" value="${ID}" />
+        <table style="width: 600px;" class="tab02">
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;"> 公&nbsp;&nbsp;&nbsp;&nbsp;司 </th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${CompanyName}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月补回/新增差额</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${AddDifference.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">上月累计计划</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${LastNAccumulativePlanAmmount.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">上月累计实际</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${LastNAccumulativeActualAmmount.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">上月累计差额</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${LastNAccumulativeDifference.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计计划</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计实际</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NAccumulativeActualAmmount.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计差额</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NAccumulativeDifference.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">未完成原因</th>
+                <td style="width: 65%; padding: 5px;">
+                    <textarea id="rpt_info_Reason_step" rows="6" cols="4" style="width: 95%">{{html MIssTargetReason}}</textarea>
+
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">采取措施</th>
+                <td style="width: 65%; padding: 5px;">
+                    <textarea id="rpt_info_Reason_desc" rows="6" cols="4" style="width: 95%">${MIssTargetDescription}</textarea>
+                </td>
+            </tr>
+        </table>
+    </script>
+
+    <!-------------当月未完成的 ------------------->
+    <script type="text/x-jquery-tmpl" id="rpt_current_info_Reason_tmpl">
+        <input type="hidden" id="hide_info_Reason_id" value="${ID}" />
+        <table style="width: 600px;" class="tab02">
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;"> 公&nbsp;&nbsp;&nbsp;&nbsp;司 </th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${CompanyName}
+                </td>
+            </tr>
+            <!--<tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月补回/新增差额</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${AddDifference.thousandize0OrEmpty(0)}
+                </td>
+            </tr>-->
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">当月计划</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NPlanAmmount.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">当月实际</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NActualAmmount.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">当月差额</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NDifference.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计计划</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计实际</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NAccumulativeActualAmmount.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计差额</th>
+                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
+                    ${NAccumulativeDifference.thousandize0OrEmpty(0)}
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">未完成原因</th>
+                <td style="width: 65%; padding: 5px;">
+                    <textarea id="rpt_info_Reason_step" rows="6" cols="4" style="width: 95%">{{html CurrentMIssTargetReason}}</textarea>
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">采取措施</th>
+                <td style="width: 65%; padding: 5px;">
+                    <textarea id="rpt_info_Reason_desc" rows="6" cols="4" style="width: 95%">${CurrentMIssTargetDescription}</textarea>
+                </td>
+            </tr>
+        </table>
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

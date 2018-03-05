@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{87FB1ACA-96A4-4419-93B5-4B078873E8FB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Wanda.BusinessIndicators.Web.AjaxHandler</RootNamespace>
+    <AssemblyName>Wanda.BusinessIndicators.Web.AjaxHandler</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aspose.Cells">
+      <HintPath>..\..\1Framework\MSEntLib\Aspose.Cells.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.0.8.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Wanda.BusinessIndicators\Scripts\ueditor\net\Bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Wanda.Platform.WorkFlow.ClientComponent">
+      <HintPath>..\..\Wanda.BusinessIndicators\DllReference\Wanda.Platform.WorkFlow.ClientComponent.dll</HintPath>
+    </Reference>
+    <Reference Include="Wanda.Workflow.Client">
+      <HintPath>..\..\Wanda.BusinessIndicators\DllReference\Wanda.Workflow.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Wanda.Workflow.Object">
+      <HintPath>..\..\Wanda.BusinessIndicators\DllReference\Wanda.Workflow.Object.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CompanyController.cs" />
+    <Compile Include="DepartmentStoreReportController.cs" />
+    <Compile Include="DocumentManagerControll.cs" />
+    <Compile Include="ExpressionParser.cs" />
+    <Compile Include="HistoryReturnControll.cs" />
+    <Compile Include="MonthRptConfigControll.cs" />
+    <Compile Include="TargetController.cs" />
+    <Compile Include="TargetPlanDetailController.cs" />
+    <Compile Include="TargetSimpleReportController.cs" />
+    <Compile Include="MonthlyReportController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TargetApproveController.cs" />
+    <Compile Include="TargetReportedControll.cs" />
+    <Compile Include="TimeConfiguration.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\1Framework\Lib.AuthCenter\Wanda.Lib.AuthCenter.csproj">
+      <Project>{fccad333-b48e-4a04-ad3c-8cb4ca17ef28}</Project>
+      <Name>Wanda.Lib.AuthCenter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\1Framework\Lib.Core\Wanda.Lib.Core.csproj">
+      <Project>{65839f36-193a-41d1-9e79-38bc84984de6}</Project>
+      <Name>Wanda.Lib.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\1Framework\Lib.Data\Wanda.Lib.Data.csproj">
+      <Project>{442c318f-9d99-4a3f-972e-33e8a8c8be51}</Project>
+      <Name>Wanda.Lib.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\1Framework\Lib.Web\Wanda.Lib.Web.csproj">
+      <Project>{9e21a44d-17eb-44f4-a936-27b41ca565fe}</Project>
+      <Name>Wanda.Lib.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BLL\2BLL.csproj">
+      <Project>{06ab4a03-00ca-4f1e-9873-bb3738118324}</Project>
+      <Name>2BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\9Common.csproj">
+      <Project>{1d81e774-65e8-43ff-8f8e-486d28a56275}</Project>
+      <Name>9Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Communication\8Communication.csproj">
+      <Project>{b08f5600-e1ac-4267-959c-e07103b19afb}</Project>
+      <Name>8Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Engine\10Engine.csproj">
+      <Project>{8f011280-24e7-4ee5-8f81-737b7b887e3d}</Project>
+      <Name>10Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\3Model.csproj">
+      <Project>{efa26ef0-4ba9-4563-8d63-554e884f56b7}</Project>
+      <Name>3Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewModel\4ViewModel.csproj">
+      <Project>{ab142c57-a632-4958-9814-4f7c3ea9083a}</Project>
+      <Name>4ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DownExcel\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

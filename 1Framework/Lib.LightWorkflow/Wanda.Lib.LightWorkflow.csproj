@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{824A3D67-D1B4-4166-B1D6-C960534E398C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Wanda.Lib.LightWorkflow</RootNamespace>
+    <AssemblyName>Wanda.Lib.LightWorkflow</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Builder\BaseBuilder.cs" />
+    <Compile Include="Builder\DataExchangeHandleBuilder.cs" />
+    <Compile Include="Dal\LwfBaseCompositionAdapterT.cs" />
+    <Compile Include="Dal\TSM_MessageAdapter.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="Configs\LightWorkflowSettings.cs" />
+    <Compile Include="Dal\ApprovalLogAdapter.cs" />
+    <Compile Include="Dal\BizProcessAdapter.cs" />
+    <Compile Include="Dal\VAdminPinstaneAndStakeHolderAdapter.cs" />
+    <Compile Include="Dal\VBizProcessDraftAdapter.cs" />
+    <Compile Include="Dal\VOAMQListAdapter.cs" />
+    <Compile Include="Dal\VPinstaneAndStakeHolderAdapter.cs" />
+    <Compile Include="Dal\VPInstanceAndApprovalLogAdapter.cs" />
+    <Compile Include="Dal\VTodoWorkAndUserAdapter.cs" />
+    <Compile Include="Entities\VAdminPInstanceAndStakeHolder.cs" />
+    <Compile Include="Entities\VBizProcess.cs" />
+    <Compile Include="Entities\VOAMQMeaages.cs" />
+    <Compile Include="Entities\VPInstanceAndApprovalLog.cs" />
+    <Compile Include="Entities\VPInstanceAndStakeHolder.cs" />
+    <Compile Include="Entities\VTodoWorkAndUser.cs" />
+    <Compile Include="Filter\OAMQFilter.cs" />
+    <Compile Include="Filter\PagenationFilter.cs" />
+    <Compile Include="Filter\TodoWorkFilter.cs" />
+    <Compile Include="Filter\WorkFlowFilter.cs" />
+    <Compile Include="IDal\IProcessAdapter.cs" />
+    <Compile Include="IDal\IProcessInstanceAdapter.cs" />
+    <Compile Include="IDal\IProcessNodeAdapter.cs" />
+    <Compile Include="IDal\IProcessNodeInstanceAdapter.cs" />
+    <Compile Include="IDal\IStakeHolderAdapter.cs" />
+    <Compile Include="IDal\ITodoWorkAdapter.cs" />
+    <Compile Include="IDal\ITSM_MessageAdapter.cs" />
+    <Compile Include="IDal\IOAMQMessagesAdapter.cs" />
+    <Compile Include="IDal\IApprovalLogAdapter.cs" />
+    <Compile Include="Dal\OAMQMessagesAdapter.cs" />
+    <Compile Include="Dal\ProcessInstanceAdapter.cs" />
+    <Compile Include="Dal\ProcessNodeAdapter.cs" />
+    <Compile Include="Dal\ProcessNodeInstanceAdapter.cs" />
+    <Compile Include="Dal\StakeHolderAdapter.cs" />
+    <Compile Include="Dal\TodoWorkAdapter.cs" />
+    <Compile Include="DataExchangeEngine.cs" />
+    <Compile Include="Entities\BBizProcess.cs" />
+    <Compile Include="Entities\LWF_ApprovalLog.cs" />
+    <Compile Include="Entities\LWF_Process.cs" />
+    <Compile Include="Entities\LWF_ProcessInstance.cs" />
+    <Compile Include="Entities\LWF_ProcessNode.cs" />
+    <Compile Include="Entities\LWF_ProcessNodeInstance.cs" />
+    <Compile Include="Entities\LWF_StakeHolder.cs" />
+    <Compile Include="Entities\LWF_TodoWork.cs" />
+    <Compile Include="Entities\OAMQMessages.cs" />
+    <Compile Include="Entities\Partial\LWF_Process.cs" />
+    <Compile Include="Entities\Partial\ProcessNode.cs" />
+    <Compile Include="Entities\TSM_Messages.cs" />
+    <Compile Include="Expression\WorkflowExpressionParser.cs" />
+    <Compile Include="Expression\ExpDefine.cs" />
+    <Compile Include="Expression\ParseExpression.cs" />
+    <Compile Include="Handle\GeneralDataExchangeHandle.cs" />
+    <Compile Include="Interface\IDataExchangeHandle.cs" />
+    <Compile Include="Tools\Resource.cs" />
+    <Compile Include="Services\OAService.cs" />
+    <Compile Include="Tools\ObjectHelper.cs" />
+    <Compile Include="Tools\StringHelper.cs" />
+    <Compile Include="WorkflowEventHandler.cs" />
+    <Compile Include="WorkflowInstance.cs" />
+    <Compile Include="WorkflowEngine.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Test\" />
+    <Folder Include="Web\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\2Lib\Common\9Common.csproj">
+      <Project>{1d81e774-65e8-43ff-8f8e-486d28a56275}</Project>
+      <Name>9Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\2Lib\Model\3Model.csproj">
+      <Project>{efa26ef0-4ba9-4563-8d63-554e884f56b7}</Project>
+      <Name>3Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lib.AuthCenter\Wanda.Lib.AuthCenter.csproj">
+      <Project>{fccad333-b48e-4a04-ad3c-8cb4ca17ef28}</Project>
+      <Name>Wanda.Lib.AuthCenter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lib.Core\Wanda.Lib.Core.csproj">
+      <Project>{65839f36-193a-41d1-9e79-38bc84984de6}</Project>
+      <Name>Wanda.Lib.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lib.Data\Wanda.Lib.Data.csproj">
+      <Project>{442c318f-9d99-4a3f-972e-33e8a8c8be51}</Project>
+      <Name>Wanda.Lib.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lib.Web\Wanda.Lib.Web.csproj">
+      <Project>{9e21a44d-17eb-44f4-a936-27b41ca565fe}</Project>
+      <Name>Wanda.Lib.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

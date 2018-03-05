@@ -1,0 +1,101 @@
+using Wanda.BusinessIndicators.Model;
+using Wanda.BusinessIndicators.DAL;
+using Lib.Core;
+using Lib.Validation;
+using System;
+using Microsoft.Practices.EnterpriseLibrary.PolicyInjection;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Wanda.Lib.Data.AppBase;
+using Lib.Data.AppBase;
+using System.Configuration;
+
+
+namespace Wanda.BusinessIndicators.BLL
+{
+    /// <summary>
+    /// Targetplan对象的业务逻辑操作
+    /// </summary>
+    public class A_TargetplanOperator : BizOperatorBase<A_TargetPlan>
+	{
+    
+        #region Generate Code
+
+        public static readonly A_TargetplanOperator Instance = PolicyInjection.Create<A_TargetplanOperator>();
+
+        private static A_TargetplanAdapter _aTargetplanAdapter = AdapterFactory.GetAdapter<A_TargetplanAdapter>();
+
+        protected override BaseAdapterT<A_TargetPlan> GetAdapter()
+        {
+            return  _aTargetplanAdapter;
+        }
+
+        public IList<A_TargetPlan> GetTargetplanList()
+        {
+            IList<A_TargetPlan> result = _aTargetplanAdapter.GetTargetplanList();
+            return result;
+        }
+
+        public IList<A_TargetPlan> GetTargetplanList(Guid ID)
+        {
+            IList<A_TargetPlan> result = _aTargetplanAdapter.GetTargetplanList(ID);
+            return result;
+        }
+
+        public IList<A_TargetPlan> GetTargetplanList(Guid SystemID, int FinYear)
+        {
+            IList<A_TargetPlan> result = _aTargetplanAdapter.GetTargetplanList(SystemID, FinYear);
+            return result;
+        }
+
+        public Guid AddTargetplan(A_TargetPlan data)
+        {
+            ExceptionHelper.TrueThrow<ArgumentNullException>(data == null, "Argument data is Empty");
+            Guid result = base.AddNewModel(data);
+            return result;
+        }
+
+        public A_TargetPlan GetTargetplan(Guid aTargetplanID)
+        {
+            ExceptionHelper.TrueThrow<ArgumentNullException>(aTargetplanID==null,"Argument aTargetplanID is Empty");
+            return base.GetModelObject(aTargetplanID);
+        }
+
+        public Guid UpdateTargetplan(A_TargetPlan data)
+        {
+            ExceptionHelper.TrueThrow<ArgumentNullException>(data == null, "Argument data is Empty");
+            Guid result = base.UpdateModelObject(data);
+            return result;
+        }
+
+        public Guid RemoveTargetplan(Guid aTargetplanID)
+        {
+            ExceptionHelper.TrueThrow<ArgumentNullException>(aTargetplanID==null,"Argument aTargetplanID is Empty");
+            Guid result = base.RemoveObject(aTargetplanID);
+            return result;
+        }
+
+
+        /// <summary>
+        /// 物理删除
+        /// </summary>
+        /// <param name="Model"></param>
+        /// <returns></returns>
+        public int DeleteModel(A_TargetPlan Model)
+        {
+            return _aTargetplanAdapter.Delete(Model);
+        }
+
+        public IList<A_TargetPlan> GetListByRecalculation(int  time )
+        {
+            time = 0 - time;
+            DateTime OpeeratorTime = DateTime.Now.AddMinutes(time);
+            IList<A_TargetPlan> result = _aTargetplanAdapter.GetTargetplanListByRecalculation(OpeeratorTime);
+            return result;
+        }
+
+        #endregion
+    } 
+}
+

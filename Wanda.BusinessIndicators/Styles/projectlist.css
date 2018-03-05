@@ -1,0 +1,130 @@
+﻿
+
+       
+        .fund_tab
+        {
+            width: 100%; 
+             border-collapse:collapse;
+            border: 1px solid #c4defe;
+        }
+        .fund_tab caption
+        {
+            /*background: url('../images/caption_bg.png') top;*/
+             background-color:#a6cadc; 
+            /*background: url('../images/caption_bg.png') top;*/
+            border: 1px solid #c4defe;
+            height: 28px;
+            line-height: 28px;
+            text-align: left;
+            padding-left: 8px;
+            padding-right: 8px;
+            color: #014594;
+            font-size: 14px;
+            font-weight: bold;
+            border-bottom: 0;
+        }
+        .fund_tab caption .todo
+        {
+             /*background: url(../images/alarm.png) 0 8px no-repeat;*/
+             background: url(../images/ico/todo.gif) 0 8px no-repeat;
+            padding-left: 25px;
+            display: inline-block;
+        }
+           .fund_tab caption .alarm
+        {
+             background: url(../images/alarm.png) 0 8px no-repeat;
+            padding-left: 25px;
+            display: inline-block;
+        }
+
+        .fund_tab th, .fund_tab td
+        {
+
+         line-height:25px;
+            border: 1px solid #c4defe;
+        }
+        .fund_tab thead th
+        {
+            /*background: #a0c9fb;*/
+            background:#eaf7fd;
+            /*color: #fff;*/
+          
+        }
+        .icon02
+        {
+            /*background: url(../images/icon02.png) 0 2px no-repeat;*/
+             background: url(../images/alarm.png) 0 2px no-repeat;
+            padding-left: 25px;
+            display: inline-block;
+        }
+         .icon03
+        {
+             background: url(../images/icon03.png) 0 2px no-repeat; 
+            
+            padding-left: 25px;
+            display: inline-block;
+        }
+        .fund_tab td
+        {
+            text-align: center;
+        }
+        .align_l
+        {
+            text-align: left !important;
+        }
+        .color_red
+        {
+            color: #ff0000 !important;
+        }
+        .fund_tab a
+        { color: blue;
+            text-decoration: none;
+        }
+         .fund_tab  a:visited {
+    color: blue;
+    text-decoration: none;
+}
+          .fund_tab  a:hover {
+   color: #2791c5;
+    text-decoration: none;
+}
+        
+ 
+        .td1
+        {
+            text-align: right !important;
+        }
+        .td2
+        {
+            text-align: left !important;
+            font-weight: bold;
+        }
+
+
+          .icon04
+        {
+            background: url(../images/dqyj.png) 0 2px no-repeat;
+            padding-left: 25px;
+            display: inline-block;
+        }
+
+            .icon05
+        {
+            background: url(../images/zqyj.png) 0 2px no-repeat;
+            padding-left: 25px;
+            display: inline-block;
+        }
+
+        .dueto
+        {
+             background: url(../images/zqyj.png) 0 0px no-repeat;
+            padding-left: 25px;
+         
+        }
+
+          .overdue
+        {
+             background: url(../images/dqyj.png) 0 0px no-repeat;
+            padding-left: 25px;
+          
+        }

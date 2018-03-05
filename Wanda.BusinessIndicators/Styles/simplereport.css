@@ -1,0 +1,295 @@
+﻿
+        .multiselect {
+        }
+
+            .multiselect input label {
+                vertical-align: bottom;
+            }
+
+            .multiselect .list {
+                width: 200px;
+                height: 200px;
+                overflow: auto;
+                position: absolute;
+                border: 1px solid #617775;
+                display: none;
+                background: #fff repeat scroll 0 0;
+                float: left;
+                z-index: 1000000;
+            }
+
+            .multiselect ul li {
+                font-size: 12px;
+                padding: 2px;
+                margin: 2px;
+                line-height: 18px;
+            }
+
+            .multiselect ul {
+                list-style: none outside none;
+                padding-top: 2px;
+                margin: 2px;
+            }
+
+            .multiselect label {
+                padding-left: 5px;
+            }
+        /*tab01,tab02*/
+        .tab01, .tab02, .tab03 {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0px;
+        }
+
+            .tab01 th, .tab02 th, .tab01 td, .tab02 td {
+                padding: 2px;
+            }
+
+            .tab01 th, .tab01 td {
+                border: 1px solid #cccccc;
+                height: 25px;
+                line-height: 25px;
+            }
+
+            .tab01 th {
+                text-align: right;
+                background: #faf9f9;
+                font-weight: normal;
+            }
+            /*eaf7fd*/
+            .tab02 th {
+                background-color: #f0f5fe;
+                font-weight: bold;
+            }
+
+            .tab02 th, .tab02 td {
+                border: 1px solid #cfdefd;
+                height: 25px;
+            }
+
+            .tab02 td {
+                text-align: center;
+                padding-right: 5px;
+            }
+
+        .tab03 {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+            .tab03 th, .tab03 td {
+                padding: 2px;
+                height: 25px;
+            }
+
+            .tab03 th {
+                background-color: #f0f5fe;
+                font-weight: bold;
+            }
+
+            .tab03 th, .tab03 td {
+                border: 1px solid #cfdefd;
+            }
+
+            .tab03 td {
+                text-align: right;
+            }
+
+        .tb_btn {
+            display: inline-block;
+            text-decoration: none;
+            background: url(../images/btn03.png) no-repeat;
+            border: 0;
+            text-align: center;
+            color: white;
+            width: 70px;
+            height: 30px;
+        }
+
+        .sd a.active_sub2 {
+            /*background: url(../images/slither_current1.png) no-repeat;*/
+            height: 25px;
+            background-color: #014594;
+            display: block;
+            line-height: 25px;
+            color: #014594;
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: bold;
+            /*width: 148px;*/
+            text-align: center;
+            color: #ffffff;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .sd a.active1 {
+            background-color: #014594;
+            height: 25px;
+            display: block;
+            line-height: 25px;
+            color: #014594;
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: bold;
+            /*width: 148px;*/
+            text-align: center;
+            color: #ffffff;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .sd a.active2, .sd a.active3, .sd a.active4, .sd a.active5 {
+            background-color: #014594;
+            height: 25px;
+            display: block;
+            line-height: 25px;
+            color: #014594;
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: bold;
+            /*width: 148px;*/
+            text-align: center;
+            color: #ffffff;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+
+        .form_name {
+            height: 35px;
+            /*background:url(../Images/form_title.gif) left top no-repeat; */
+            background: url(../Images/form_title_new_input.jpg) left -5px no-repeat;
+            margin: 0 auto;
+            margin-bottom: 8px;
+        }
+
+        .form_name_build {
+            /*background: url(../Images/form_title_new.jpg) left top no-repeat;*/
+        }
+
+
+        a.headItem:link, a.headItem:visited {
+            text-decoration: none;
+            color: #666;
+        }
+
+        a.headItem:hover {
+            text-decoration: underline;
+        }
+
+
+        .multiselect {
+        }
+
+            .multiselect input label {
+            }
+
+            .multiselect .list {
+                width: 200px;
+                height: 200px;
+                overflow: auto;
+                overflow-x: hidden;
+                position: absolute;
+                border: 1px solid #617775;
+                display: none;
+                background: #fff repeat scroll 0 0;
+                float: left;
+                z-index: 1000000;
+            }
+
+            .multiselect ul li {
+                font-size: 12px;
+                padding: 2px;
+                margin: 2px;
+                line-height: 18px;
+            }
+
+            .multiselect ul {
+                list-style: none outside none;
+                padding-top: 2px;
+                margin: 2px;
+            }
+
+            .multiselect label {
+                padding-left: 5px;
+            }
+
+        .collectTab th {
+            padding: 0px;
+            padding: 0px;
+            margin: 0px;
+            line-height: 20pt;
+            /*height: 16px;*/
+        }
+
+
+        .version_up, .version_down {
+            float: right;
+            padding-right: 5px;
+            position: relative;
+            top: 5px;
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+        }
+
+        .version_up {
+            background: url(../images/collectTitle_up.png) no-repeat;
+        }
+
+        .version_down {
+            background: url(../images/collectTitle_down.png) no-repeat;
+        }
+
+        .chartContainer {
+            width: 800px;
+            height: 300px;
+            text-align: left;
+            line-height: normal;
+            overflow: hidden;
+            font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            position: relative;
+            z-index: 0;
+        }
+
+        .chartFilterTable {
+            width: 800px;
+            padding: 5px;
+            background: white;
+            margin: 0 auto;
+            border: 0;
+        }
+
+        .collectTab tr.alt {
+            background: #f6f6f6;
+        }
+
+        .collectTab tr.sum {
+            font-weight: bold;
+            background-color: rgb(225, 235, 251);
+        }
+
+        tr.rank3 td {
+        }
+
+        tr.rank4 {
+            background-color: #F2F6FC;
+        }
+
+        .hd {
+            display: none;
+        }
+
+        .searchResult {
+            font-size: 12px;
+        }
+
+        #categoryTabs {
+            font-size: 12px;
+        }
+
+        .auto-style1 {
+            height: 27px;
+        }

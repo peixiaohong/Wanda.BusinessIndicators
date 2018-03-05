@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file contains job definitions in schema version 2.0 format -->
+
+<job-scheduling-data xmlns="http://quartznet.sourceforge.net/JobSchedulingData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0">
+
+  <processing-directives>
+    <overwrite-existing-data>true</overwrite-existing-data>
+  </processing-directives>
+
+  <schedule>
+    <!--Delegation Service, 每10秒执行一次 -->
+    <!--<job>
+      <name>JobDemo</name>
+      <group>JobDemo</group>
+      <description>JobDemo</description>
+      <job-type>ScheduleService.Handler.JobDemo, ScheduleService.Handler</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+
+    <trigger>
+      <cron>
+        <name>JobDemo_Trigger</name>
+        <group>JobDemo</group>
+        <job-name>JobDemo</job-name>
+        <job-group>JobDemo</job-group>
+        <cron-expression>0/10 * * * * ?</cron-expression>
+      </cron>
+    </trigger>-->
+
+    <!--SendMessage Service, 每1小时执行一次 -->
+    <job>
+      <name>SendMessage</name>
+      <group>SendMessage</group>
+      <description>SendMessage</description>
+      <job-type>ScheduleService.Handler.SendMessage, ScheduleService.Handler</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+
+    <trigger>
+      <cron>
+        <name>SendMessage_Trigger</name>
+        <group>SendMessage</group>
+        <job-name>SendMessage</job-name>
+        <job-group>SendMessage</job-group>
+        <cron-expression>0 0 * * * ?</cron-expression>
+      </cron>
+    </trigger>
+
+    
+    <!--Recalculation Service, 每半个小时执行一次 -->
+    <job>
+      <name>Recalculation</name>
+      <group>Recalculation</group>
+      <description>Recalculation</description>
+      <job-type>ScheduleService.Handler.Recalculation, ScheduleService.Handler</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+
+    <trigger>
+      <cron>
+        <name>Recalculation_Trigger</name>
+        <group>Recalculation</group>
+        <job-name>Recalculation</job-name>
+        <job-group>Recalculation</job-group>
+        <cron-expression>0 0/30 * * * ?</cron-expression>
+      </cron>
+    </trigger>
+
+    <!--SystemOpenDay Server ,每天早上3点15执行一次-->
+    <job>
+      <name>SystemOpenDay</name>
+      <group>SystemOpenDay</group>
+      <description>SystemOpenDay</description>
+      <job-type>ScheduleService.Handler.SystemOpenDay, ScheduleService.Handler</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+
+    <trigger>
+      <cron>
+        <name>SystemOpenDay_Trigger</name>
+        <group>SystemOpenDay</group>
+        <job-name>SystemOpenDay</job-name>
+        <job-group>SystemOpenDay</job-group>
+        <cron-expression>0 15 3 * * ?</cron-expression>
+      </cron>
+    </trigger>
+
+
+    <!--ProjectMergeProcess Server ,每9分钟执行一次-->
+    <job>
+      <name>ProjectMergeProcess</name>
+      <group>ProjectMergeProcess</group>
+      <description>ProjectMergeProcess</description>
+      <job-type>ScheduleService.Handler.ProjectMergeProcess, ScheduleService.Handler</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+
+    <trigger>
+      <cron>
+        <name>ProjectMergeProcess_Trigger</name>
+        <group>ProjectMergeProcess</group>
+        <job-name>ProjectMergeProcess</job-name>
+        <job-group>ProjectMergeProcess</job-group>
+        <cron-expression>0 0/9 * * * ?</cron-expression>
+      </cron>
+    </trigger>
+
+    <!--ProjectCompleteProcess Server ,每天早上3点30执行一次-->
+    <job>
+      <name>ProjectCompleteProcess</name>
+      <group>ProjectCompleteProcess</group>
+      <description>ProjectCompleteProcess</description>
+      <job-type>ScheduleService.Handler.ProjectCompleteProcess, ScheduleService.Handler</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+
+    <trigger>
+      <cron>
+        <name>ProjectCompleteProcess_Trigger</name>
+        <group>ProjectCompleteProcess</group>
+        <job-name>ProjectCompleteProcess</job-name>
+        <job-group>ProjectCompleteProcess</job-group>
+        <cron-expression>0 30 3 * * ?</cron-expression>
+      </cron>
+    </trigger>
+
+
+
+    <!--CalculateMisssTargetScope Server ,每10分钟执行一次-->
+    <job>
+      <name>CalculateMisssTargetScope</name>
+      <group>CalculateMisssTargetScope</group>
+      <description>CalculateMisssTargetScope</description>
+      <job-type>ScheduleService.Handler.CalculateMisssTargetScope, ScheduleService.Handler</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+
+    <trigger>
+      <cron>
+        <name>CalculateMisssTargetScope_Trigger</name>
+        <group>CalculateMisssTargetScope</group>
+        <job-name>CalculateMisssTargetScope</job-name>
+        <job-group>CalculateMisssTargetScope</job-group>
+        <cron-expression>0 0/10 * * * ?</cron-expression>
+      </cron>
+    </trigger>
+
+    <!--ProjectCompleteProcess Server ,每9分钟执行一次-->
+    <job>
+      <name>ProjectCompleteProcess</name>
+      <group>ProjectCompleteProcess</group>
+      <description>ProjectCompleteProcess</description>
+      <job-type>ScheduleService.Handler.ProjectCompleteProcess, ScheduleService.Handler</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+
+    <trigger>
+      <cron>
+        <name>ProjectCompleteProcess_Trigger</name>
+        <group>ProjectCompleteProcess</group>
+        <job-name>ProjectCompleteProcess</job-name>
+        <job-group>ProjectCompleteProcess</job-group>
+        <cron-expression>0 15 3 * * ?</cron-expression>
+      </cron>
+    </trigger>
+
+
+
+    <!--GenerateQueryAttachments Server ,每1分钟执行一次-->
+    <job>
+      <name>GenerateQueryAttachments</name>
+      <group>GenerateQueryAttachments</group>
+      <description>GenerateQueryAttachments</description>
+      <job-type>ScheduleService.Handler.GenerateQueryAttachments, ScheduleService.Handler</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+
+    <trigger>
+      <cron>
+        <name>GenerateQueryAttachments_Trigger</name>
+        <group>GenerateQueryAttachments</group>
+        <job-name>GenerateQueryAttachments</job-name>
+        <job-group>GenerateQueryAttachments</job-group>
+        <cron-expression>0 0/10 * * * ?</cron-expression>
+      </cron>
+    </trigger>
+
+
+    <!--GenerateQueryAttachments Server ,每1分钟执行一次-->
+    <job>
+      <name>GenerateTargetPlanAttachments</name>
+      <group>GenerateTargetPlanAttachments</group>
+      <description>GenerateTargetPlanAttachments</description>
+      <job-type>ScheduleService.Handler.GenerateTargetPlanAttachments, ScheduleService.Handler</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+
+    <trigger>
+      <cron>
+        <name>GenerateTargetPlanAttachments_Trigger</name>
+        <group>GenerateTargetPlanAttachments</group>
+        <job-name>GenerateTargetPlanAttachments</job-name>
+        <job-group>GenerateTargetPlanAttachments</job-group>
+        <cron-expression>0 0/10 * * * ?</cron-expression>
+      </cron>
+    </trigger>
+
+    
+    <!--GenerateQuerryJsonData Server ,每1分钟执行一次-->
+    <job>
+      <name>GenerateQuerryJsonData</name>
+      <group>GenerateQuerryJsonData</group>
+      <description>GenerateQuerryJsonData</description>
+      <job-type>ScheduleService.Handler.GenerateQuerryJsonData, ScheduleService.Handler</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+
+    <trigger>
+      <cron>
+        <name>GenerateQuerryJsonData_Trigger</name>
+        <group>GenerateQuerryJsonData</group>
+        <job-name>GenerateQuerryJsonData</job-name>
+        <job-group>GenerateQuerryJsonData</job-group>
+        <cron-expression>0 0/1 * * * ?</cron-expression>
+      </cron>
+    </trigger>
+
+  </schedule>
+
+
+
+
+</job-scheduling-data>

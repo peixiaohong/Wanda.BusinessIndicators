@@ -1,0 +1,184 @@
+﻿@charset "utf-8";
+#expand_link {
+	FONT-SIZE: 12px; LEFT: 140px; 
+	POSITION: absolute; TOP: 11px; TEXT-DECORATION: underline
+}
+UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; 
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+IMG {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; 
+	BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;  
+}
+#nav {
+   WIDTH: 200px; 
+	min-height:627px; 
+	 
+	background:#fafafa; 
+}
+#menu {
+	 
+}
+.U1 {
+	BACKGROUND: #fcfcfc;  
+}
+
+.L1
+{
+    margin: 5px 0;
+}
+ 
+.L1 A {
+	 background: url(../images/nav_bg.png);
+     display: block;
+     height: 29px;
+     border: 1px solid #6c8bfb;
+     color: #fff;
+     font-size: 14px;
+     font-weight: bold;
+     text-decoration: none;
+     line-height: 29px;
+     padding-left: 25px;
+}
+.L1 A span
+{
+    padding-left:20px;
+}
+ .parentmenu {
+    background: url(../images/ico/93.ico) no-repeat;
+}
+.L1 A span IMG
+{
+  height:16px   
+ }
+ 
+ .L21
+{
+ background:url(../images/icon.png) no-repeat 40px 10px    
+}
+.L21 A {
+ line-height:29px;
+	PADDING-LEFT: 35px; 
+	FONT-SIZE: 12px; 
+    TEXT-DECORATION: none;
+     background: none;
+     border: 0;
+    color: #333;
+     font-size: 12px;
+     display: inline;
+}
+.L21 A SPAN 
+{
+    
+	PADDING-RIGHT: 0px; 
+	PADDING-LEFT: 16px; 
+	 
+	PADDING-BOTTOM: 0px;  
+	WIDTH: 100%; 
+	CURSOR: hand; 
+	color:#000; 
+	font-weight:bold;
+
+}
+.L21 A:visited SPAN {
+	PADDING-RIGHT: 0px; 
+	PADDING-LEFT: 16px; 
+	 
+	PADDING-BOTTOM: 0px; 
+	VERTICAL-ALIGN: middle; WIDTH: 100%; 
+	CURSOR: hand; 
+}
+
+.L21 A.active SPAN {
+	FONT-WEIGHT: bold;  
+}
+
+.L22
+{
+ background:url(../images/icon.png) no-repeat 40px 10px    
+}
+.L22 A {
+	DISPLAY: inline; 
+	PADDING-LEFT: 55px; 
+	FONT-SIZE: 12px; 
+	COLOR: #333; 
+	HEIGHT: 29px; 
+	line-height:29px;
+	TEXT-DECORATION: none
+}
+ 
+.L22 A SPAN { 
+	font-weight:bold;
+	PADDING-BOTTOM: 0px;  
+    WIDTH: 100%; 
+	CURSOR: hand; 
+} 
+.L22 A : hover{
+color: #014697;
+}
+
+.L22 A : visited{
+color: #014697;
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+.L3
+{
+  
+}
+.L3 A {
+	DISPLAY: inline; 
+	PADDING-LEFT: 45px; 
+	FONT-SIZE: 12px; 
+	COLOR: blue; 
+	HEIGHT: 29px; 
+	line-height:29px;
+	TEXT-DECORATION: none
+}
+ 
+.L3 A SPAN { 
+	font-weight:normal;
+	PADDING-BOTTOM: 0px;  
+    WIDTH: 100%; 
+	CURSOR: hand; 
+	PADDING-LEFT: 16px; 
+	
+} 
+.L3 A : hover{
+color: #014697;
+}
+
+.L3 A : visited{
+color: #014697;
+} 
+ 
+ 
+ 
+
+.Ls A:link {
+	PADDING-RIGHT: 4px; FONT-SIZE: 12px; BACKGROUND: none transparent scroll repeat 0% 0%;
+	 PADDING-TOP: 4px; HEIGHT: 20px; TEXT-ALIGN: right; TEXT-DECORATION: underline
+}
+.Ls A:visited {
+	PADDING-RIGHT: 4px; FONT-SIZE: 12px; BACKGROUND: none transparent scroll repeat 0% 0%; 
+	PADDING-TOP: 4px; HEIGHT: 20px; TEXT-ALIGN: right; TEXT-DECORATION: underline
+}
+.Ls A:hover {
+	PADDING-RIGHT: 4px; FONT-SIZE: 12px; BACKGROUND: none transparent scroll repeat 0% 0%; 
+	PADDING-TOP: 4px; HEIGHT: 20px; TEXT-ALIGN: right; TEXT-DECORATION: underline
+}
+.Ls A:active {
+	PADDING-RIGHT: 4px; FONT-SIZE: 12px; BACKGROUND: none transparent scroll repeat 0% 0%; 
+	PADDING-TOP: 4px; HEIGHT: 20px; TEXT-ALIGN: right; TEXT-DECORATION: underline
+}
+body {
+}
