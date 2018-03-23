@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wanda.BusinessIndicators.Web", "Wanda.BusinessIndicators\Wanda.BusinessIndicators.Web.csproj", "{889E4F76-5EE8-49B4-AC1A-0C3029FBC080}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJTH.BusinessIndicators.Web", "Wanda.BusinessIndicators\LJTH.BusinessIndicators.Web.csproj", "{889E4F76-5EE8-49B4-AC1A-0C3029FBC080}"
 	ProjectSection(ProjectDependencies) = postProject
 		{06AB4A03-00CA-4F1E-9873-BB3738118324} = {06AB4A03-00CA-4F1E-9873-BB3738118324}
 		{FCCAD333-B48E-4A04-AD3C-8CB4CA17EF28} = {FCCAD333-B48E-4A04-AD3C-8CB4CA17EF28}
@@ -262,78 +262,7 @@ Global
 		{866D421A-EBFF-4C27-830B-9447D64C52ED} = {72C2F21E-A9FA-45B4-A428-F5D877BF2B05}
 		{88AD4D85-CCF2-4E57-B27A-4DF5A63301DC} = {72C2F21E-A9FA-45B4-A428-F5D877BF2B05}
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 18
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://code.wanda.cn:8080/tfs/jyzb
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = 1Framework\\Lib.Core\\Wanda.Lib.Core.csproj
-		SccProjectTopLevelParentUniqueName1 = Wanda.BusinessIndicators.sln
-		SccProjectName1 = 1Framework/Lib.Core
-		SccLocalPath1 = 1Framework\\Lib.Core
-		SccProjectUniqueName2 = 1Framework\\Lib.Data\\Wanda.Lib.Data.csproj
-		SccProjectTopLevelParentUniqueName2 = Wanda.BusinessIndicators.sln
-		SccProjectName2 = 1Framework/Lib.Data
-		SccLocalPath2 = 1Framework\\Lib.Data
-		SccProjectUniqueName3 = 1Framework\\Lib.Web\\Wanda.Lib.Web.csproj
-		SccProjectTopLevelParentUniqueName3 = Wanda.BusinessIndicators.sln
-		SccProjectName3 = 1Framework/Lib.Web
-		SccLocalPath3 = 1Framework\\Lib.Web
-		SccProjectUniqueName4 = 1Framework\\Lib.AuthCenter\\Wanda.Lib.AuthCenter.csproj
-		SccProjectTopLevelParentUniqueName4 = Wanda.BusinessIndicators.sln
-		SccProjectName4 = 1Framework/Lib.AuthCenter
-		SccLocalPath4 = 1Framework\\Lib.AuthCenter
-		SccProjectUniqueName5 = 2Lib\\DAL\\1DAL.csproj
-		SccProjectTopLevelParentUniqueName5 = Wanda.BusinessIndicators.sln
-		SccProjectName5 = 2Lib/DAL
-		SccLocalPath5 = 2Lib\\DAL
-		SccProjectUniqueName6 = 2Lib\\BLL\\2BLL.csproj
-		SccProjectTopLevelParentUniqueName6 = Wanda.BusinessIndicators.sln
-		SccProjectName6 = 2Lib/BLL
-		SccLocalPath6 = 2Lib\\BLL
-		SccProjectUniqueName7 = 2Lib\\AjaxHandler\\5AjaxHandler.csproj
-		SccProjectTopLevelParentUniqueName7 = Wanda.BusinessIndicators.sln
-		SccProjectName7 = 2Lib/AjaxHandler
-		SccLocalPath7 = 2Lib\\AjaxHandler
-		SccProjectUniqueName8 = 2Lib\\Model\\3Model.csproj
-		SccProjectTopLevelParentUniqueName8 = Wanda.BusinessIndicators.sln
-		SccProjectName8 = 2Lib/Model
-		SccLocalPath8 = 2Lib\\Model
-		SccProjectUniqueName9 = 2Lib\\ViewModel\\4ViewModel.csproj
-		SccProjectTopLevelParentUniqueName9 = Wanda.BusinessIndicators.sln
-		SccProjectName9 = 2Lib/ViewModel
-		SccLocalPath9 = 2Lib\\ViewModel
-		SccProjectUniqueName10 = 2Lib\\DataExport\\DataExport\\7DataExport.csproj
-		SccProjectTopLevelParentUniqueName10 = Wanda.BusinessIndicators.sln
-		SccProjectName10 = 2Lib/DataExport/DataExport
-		SccLocalPath10 = 2Lib\\DataExport\\DataExport
-		SccProjectUniqueName11 = 2Lib\\Common\\9Common.csproj
-		SccProjectTopLevelParentUniqueName11 = Wanda.BusinessIndicators.sln
-		SccProjectName11 = 2Lib/Common
-		SccLocalPath11 = 2Lib\\Common
-		SccProjectUniqueName12 = 2Lib\\Communication\\8Communication.csproj
-		SccProjectTopLevelParentUniqueName12 = Wanda.BusinessIndicators.sln
-		SccProjectName12 = 2Lib/Communication
-		SccLocalPath12 = 2Lib\\Communication
-		SccProjectUniqueName13 = Wanda.BusinessIndicators\\Wanda.BusinessIndicators.Web.csproj
-		SccProjectTopLevelParentUniqueName13 = Wanda.BusinessIndicators.sln
-		SccProjectName13 = Wanda.BusinessIndicators
-		SccLocalPath13 = Wanda.BusinessIndicators
-		SccProjectUniqueName14 = 2Lib\\Engine\\10Engine.csproj
-		SccProjectTopLevelParentUniqueName14 = Wanda.BusinessIndicators.sln
-		SccProjectName14 = 2Lib/Engine
-		SccLocalPath14 = 2Lib\\Engine
-		SccProjectUniqueName15 = 3Test\\DataCalculate\\DataCalculate.csproj
-		SccProjectTopLevelParentUniqueName15 = Wanda.BusinessIndicators.sln
-		SccProjectName15 = 3Test/DataCalculate
-		SccLocalPath15 = 3Test\\DataCalculate
-		SccProjectUniqueName16 = 4WinApp\\ScheduleService\\Common.ScheduleService.csproj
-		SccProjectTopLevelParentUniqueName16 = Wanda.BusinessIndicators.sln
-		SccProjectName16 = 4WinApp/ScheduleService
-		SccLocalPath16 = 4WinApp\\ScheduleService
-		SccProjectUniqueName17 = 4WinApp\\ScheduleService.Handler\\ScheduleService.Handler.csproj
-		SccProjectTopLevelParentUniqueName17 = Wanda.BusinessIndicators.sln
-		SccProjectName17 = 4WinApp/ScheduleService.Handler
-		SccLocalPath17 = 4WinApp\\ScheduleService.Handler
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ABD300D2-4D16-4C56-8A2E-53B76030CCB6}
 	EndGlobalSection
 EndGlobal
