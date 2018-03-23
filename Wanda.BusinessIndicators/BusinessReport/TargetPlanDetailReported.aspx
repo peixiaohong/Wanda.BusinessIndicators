@@ -2,10 +2,10 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/css/NavStlye.css" type="text/css" rel="stylesheet" />
- <link href="http://zbgk.wf.wanda-dev.cn/RuntimeService/css/wanda-wf-client.css?version=1" type="text/css" rel="Stylesheet" />
-    <script src="http://zbgk.wf.wanda-dev.cn/RuntimeService/js/wanda-wf-client.js?version=1" type="text/javascript"></script>
+    <%--<link href="http://zbgk.wf.wanda-dev.cn/RuntimeService/css/wanda-wf-client.css?version=1" type="text/css" rel="Stylesheet" />
+    <script src="http://zbgk.wf.wanda-dev.cn/RuntimeService/js/wanda-wf-client.js?version=1" type="text/javascript"></script>--%>
     <script type="text/javascript" src="../Scripts/BusinessReport/TargetPlanDetailReported.js"></script>
-    <link href="../ProcessResource/css/wfStyle-201.88.css" rel="stylesheet" />
+    <%--<link href="../ProcessResource/css/wfStyle-201.88.css" rel="stylesheet" />--%>
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
     <script type="text/javascript" src="../Scripts/UpLoad/jquery.uploadify.min.js"></script>
     <script type="text/javascript" src="../ProcessResource/js/wanda-wf-client-201.88.js"></script>

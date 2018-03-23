@@ -87,7 +87,7 @@ namespace Wanda.BusinessIndicators.Web.BusinessReport
                     }
                 }
                 else
-                    ddlSystem.DataSource = StaticResource.Instance.SystemList.Where(p => p.Category == 1).ToList();
+                    ddlSystem.DataSource = StaticResource.Instance.SystemList.Where(p => p.Category == 1).OrderBy(x=>x.Sequence).ToList();
                 
                 ddlSystem.DataTextField = "SystemName";
                 ddlSystem.DataValueField = "ID";

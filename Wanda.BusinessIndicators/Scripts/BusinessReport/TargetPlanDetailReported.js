@@ -118,7 +118,7 @@ function operateNav(sender) {
             $("#process").show();
             //$.blockUI({ message: "<div style='width:200px'><img src='../../images/ajax-loader.gif' alt='waiting'><span style='font-size:20px;padding-left:20px;color:#3f3f3f'>数据请求中...</span></div>" });
             //后续加上 BusinessID
-            GetProcess($("#HideProcessCode").val(), $("#hideTargetPlanID").val());
+            //GetProcess($("#HideProcessCode").val(), $("#hideTargetPlanID").val());
             $("#T2,#UpLoadDataDiv,#DownLoadModel,#Down1").hide();
             break;
 
@@ -153,7 +153,7 @@ $(function () {
             AlwaysReturnToStart: true
         },
     };
-    wanda_wf_client.initAjaxSetting("process", false, otherSetting);
+    //wanda_wf_client.initAjaxSetting("process", false, otherSetting);
 })
 
 

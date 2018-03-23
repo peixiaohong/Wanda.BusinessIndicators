@@ -49,7 +49,7 @@
         <div class="w1240 mauto pr" style="z-index: 99999; width: 100%; position: absolute; height: 20px;" id="wd-fm">
         </div>
     </div>
-    <div style="height: 24px;"></div>
+    <%--<div style="height: 24px;"></div>--%>
 
     <div class="Pagebox">
         <div class="header_target" style="height: 122px">
@@ -100,7 +100,7 @@
         </form>
     </div>
 
-    <div class="footer" style="position: fixed; bottom: 0; width:100%;">
+    <div class="footer hide" style="position: fixed; bottom: 0; width:100%;">
         <b>版权所有©2014 大连万达集团股份有限公司 </b>
     </div>
     <!--footer-->

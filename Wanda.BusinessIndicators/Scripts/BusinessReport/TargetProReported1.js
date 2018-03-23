@@ -69,7 +69,7 @@ function operateNav(sender) {
         case "monthReportSubmit":
             $("#process").show();
             $.blockUI({ message: "<div style='width:200px'><img src='../../images/ajax-loader.gif' alt='waiting'><span style='font-size:20px;padding-left:20px;color:#3f3f3f'>数据请求中...</span></div>" });
-            GetProcess($("#HideProcessCode").val(), MonthReportID);
+            //GetProcess($("#HideProcessCode").val(), MonthReportID);
             $("#T2,#UpLoadDataDiv,#DownLoadModel,#T3,#Down1,#T4,#RptAttachments,#T5").hide();
             break;
 
@@ -174,7 +174,7 @@ $(function () {
             AlwaysReturnToStart:true
         },
     };
-    wanda_wf_client.initAjaxSetting("process", false, otherSetting);
+    //wanda_wf_client.initAjaxSetting("process", false, otherSetting);
 })
 
 

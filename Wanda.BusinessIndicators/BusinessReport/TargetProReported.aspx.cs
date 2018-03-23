@@ -336,18 +336,19 @@ namespace Wanda.BusinessIndicators.Web.BusinessReport
                 List<Wanda.Workflow.Object.ProcessLog> lstBatchProcessLog=new List<Wanda.Workflow.Object.ProcessLog>();
                 if (bmr.SystemBatchID != Guid.Empty)
                 {
-                    if (Wanda.Workflow.Client.WFClientSDK.Exist(bmr.SystemBatchID.ToString()))
-                    {
-                        lstBatchProcessLog = Wanda.Workflow.Client.WFClientSDK.GetProcessLogList(bmr.SystemBatchID.ToString());
-                    }
+
+                    //if (Wanda.Workflow.Client.WFClientSDK.Exist(bmr.SystemBatchID.ToString()))
+                    //{
+                    //    lstBatchProcessLog = Wanda.Workflow.Client.WFClientSDK.GetProcessLogList(bmr.SystemBatchID.ToString());
+                    //}
                 }
-                List<Wanda.Workflow.Object.ProcessLog> lstCurrentProcessLog = Wanda.Workflow.Client.WFClientSDK.GetProcessLogList(bmr.ID.ToString());
+                //List<Wanda.Workflow.Object.ProcessLog> lstCurrentProcessLog = Wanda.Workflow.Client.WFClientSDK.GetProcessLogList(bmr.ID.ToString());
                 
-                if (lstBatchProcessLog!=null)
-                {
-                    lstCurrentProcessLog.AddRange(lstBatchProcessLog);
-                }
-                HideOpinions.Value = JsonConvert.SerializeObject(lstCurrentProcessLog.OrderByDescending(p => p.FinishDateTime));
+                //if (lstBatchProcessLog!=null)
+                //{
+                //    lstCurrentProcessLog.AddRange(lstBatchProcessLog);
+                //}
+                //HideOpinions.Value = JsonConvert.SerializeObject(lstCurrentProcessLog.OrderByDescending(p => p.FinishDateTime));
             }
 
          

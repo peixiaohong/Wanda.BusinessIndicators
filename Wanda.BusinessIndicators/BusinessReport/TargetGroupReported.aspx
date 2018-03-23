@@ -8,8 +8,8 @@
     <script type="text/javascript" src="../Scripts/BusinessReport/TargetGroupReported.js"></script>
     <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported1.js"></script>
     <script type="text/javascript" src="../Scripts/UpLoad/jquery.uploadify.min.js"></script>
- <link href="http://zbgk.wf.wanda-dev.cn/RuntimeService/css/wanda-wf-client.css?version=1" type="text/css" rel="Stylesheet" />
-    <script src="http://zbgk.wf.wanda-dev.cn/RuntimeService/js/wanda-wf-client.js?version=1" type="text/javascript"></script>
+ <%--<link href="http://zbgk.wf.wanda-dev.cn/RuntimeService/css/wanda-wf-client.css?version=1" type="text/css" rel="Stylesheet" />--%>
+    <%--<script src="http://zbgk.wf.wanda-dev.cn/RuntimeService/js/wanda-wf-client.js?version=1" type="text/javascript"></script>--%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="main">

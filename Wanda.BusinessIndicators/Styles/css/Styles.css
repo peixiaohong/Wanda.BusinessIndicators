@@ -1059,3 +1059,4 @@ table.dstab_5 tr.dstab_5_row_alt th, table.tab_2 tr.tab_2_row_alt td { /*backgro
     margin: 0 8px;
     background: #fff;
 }
+.hide{ display:none !important;}
