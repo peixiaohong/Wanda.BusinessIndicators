@@ -6,7 +6,7 @@ using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Wanda.BusinessIndicators.Web.UserControl
+namespace LJTH.BusinessIndicators.Web.UserControl
 {
     public partial class TargetReportUserControl : System.Web.UI.UserControl
     {

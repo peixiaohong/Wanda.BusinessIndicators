@@ -6,10 +6,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Model;
 
-namespace Wanda.BusinessIndicators.Web.SystemConfiguration
+namespace LJTH.BusinessIndicators.Web.SystemConfiguration
 {
     public partial class TargetCollectDisplay : System.Web.UI.Page
     {

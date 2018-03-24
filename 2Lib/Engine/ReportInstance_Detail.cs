@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Model;
 using Lib.Web;
-using Wanda.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.ViewModel;
 using Lib.Expression;
 using System.Collections;
 using System;
 using Lib.Xml;
 
-namespace Wanda.BusinessIndicators.Engine
+namespace LJTH.BusinessIndicators.Engine
 {
     public partial class ReportInstance
     {

@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.SessionState;
-using Wanda.BusinessIndicators.Common;
-using Wanda.BusinessIndicators.Common.Web;
+using LJTH.BusinessIndicators.Common;
+using LJTH.BusinessIndicators.Common.Web;
 
-namespace Wanda.BusinessIndicators.Web.Control
+namespace LJTH.BusinessIndicators.Web.Control
 {
     /// <summary>
     /// UpLoad 的摘要说明

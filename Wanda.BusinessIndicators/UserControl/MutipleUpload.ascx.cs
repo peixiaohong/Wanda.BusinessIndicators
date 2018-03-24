@@ -6,11 +6,11 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Model;
 
 
-namespace Wanda.Fiscal.Budget.Web.Control
+namespace LJTH.Fiscal.Budget.Web.Control
 {
     public partial class MutipleUpload : System.Web.UI.UserControl
     {

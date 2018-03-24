@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.Data.AppBase;
 
-namespace Wanda.Lib.AuthCenter.Model
+namespace LJTH.Lib.AuthCenter.Model
 {
 
     /// <summary>

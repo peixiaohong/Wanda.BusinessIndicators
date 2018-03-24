@@ -2,13 +2,13 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Wanda.Lib.AuthCenter.DAL;
-using Wanda.Lib.AuthCenter.Model;
-using Wanda.Lib.AuthCenter.ViewModel;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.AuthCenter.DAL;
+using LJTH.Lib.AuthCenter.Model;
+using LJTH.Lib.AuthCenter.ViewModel;
+using LJTH.Lib.Data.AppBase;
 using Lib.Data;
 
-namespace Wanda.Lib.AuthCenter.BLL
+namespace LJTH.Lib.AuthCenter.BLL
 {
     public class WD_UserOperator
     {

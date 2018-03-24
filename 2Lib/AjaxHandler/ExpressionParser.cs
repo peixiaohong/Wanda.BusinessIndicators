@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wanda.BusinessIndicators.Web.AjaxHandler
+namespace LJTH.BusinessIndicators.Web.AjaxHandler
 {
     public class ExpressionParserDemo : BaseController
     {

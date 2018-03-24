@@ -5,10 +5,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Model;
 
-namespace Wanda.BusinessIndicators.Web.TargetConfiguration
+namespace LJTH.BusinessIndicators.Web.TargetConfiguration
 {
     public partial class TargetList : System.Web.UI.Page
     {
@@ -48,7 +48,7 @@ namespace Wanda.BusinessIndicators.Web.TargetConfiguration
             if (!IsPostBack)
                 if (!string.IsNullOrEmpty(Request["BusinessID"]))
                 {
-                    var host = new Wanda.BusinessIndicators.Web.AjaxHander.ProcessController();
+                    var host = new LJTH.BusinessIndicators.Web.AjaxHander.ProcessController();
                     
                     host.BusinessID = Request["BusinessID"];
                     if (Wanda.Workflow.Client.WFClientSDK.Exist(host.BusinessID))

@@ -4,11 +4,11 @@
  *          2013-5-2
  */
 using System.Collections.Generic;
-using Wanda.Lib.AuthCenter.DAL;
-using Wanda.Lib.AuthCenter.Model;
+using LJTH.Lib.AuthCenter.DAL;
+using LJTH.Lib.AuthCenter.Model;
 
 
-namespace Wanda.Lib.AuthCenter.BLL
+namespace LJTH.Lib.AuthCenter.BLL
 {
     /// <summary>
     /// BudgetRolling对象的业务逻辑操作

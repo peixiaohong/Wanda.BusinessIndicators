@@ -5,12 +5,12 @@ using System.Text;
 using System.Web;
 using System.Configuration;
 using System.Web.Security;
-using Wanda.Lib.AuthCenter.BLL;
-using Wanda.Lib.AuthCenter.Model;
-using Wanda.Lib.AuthCenter.ViewModel;
-using Wanda.BusinessIndicators.Common;
+using LJTH.Lib.AuthCenter.BLL;
+using LJTH.Lib.AuthCenter.Model;
+using LJTH.Lib.AuthCenter.ViewModel;
+using LJTH.BusinessIndicators.Common;
 
-namespace Wanda.BusinessIndicators.Web
+namespace LJTH.BusinessIndicators.Web
 {
     public partial class _Default : System.Web.UI.Page
     {

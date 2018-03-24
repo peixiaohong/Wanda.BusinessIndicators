@@ -4,8 +4,8 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Model;
 
 namespace ScheduleService.Handler
 {

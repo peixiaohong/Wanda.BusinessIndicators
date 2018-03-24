@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wanda.BusinessIndicators.Engine.ViewModel
+namespace LJTH.BusinessIndicators.Engine.ViewModel
 {
     public class RptFilter
     {

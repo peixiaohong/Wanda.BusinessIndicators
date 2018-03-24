@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.BusinessIndicators.DAL;
-using Wanda.BusinessIndicators.Model;
-using Wanda.Lib.Data.AppBase;
+using LJTH.BusinessIndicators.DAL;
+using LJTH.BusinessIndicators.Model;
+using LJTH.Lib.Data.AppBase;
 
-namespace Wanda.BusinessIndicators.BLL
+namespace LJTH.BusinessIndicators.BLL
 {
     public class B_DocumentAttachmentsOperator : BizOperatorBase<B_DocumentAttachments>
     {

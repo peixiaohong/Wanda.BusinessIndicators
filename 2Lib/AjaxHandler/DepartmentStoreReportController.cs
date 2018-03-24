@@ -4,14 +4,14 @@ using Lib.Web.MVC.Controller;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Common;
-using Wanda.BusinessIndicators.Engine;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Common;
+using LJTH.BusinessIndicators.Engine;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.ViewModel;
 using System.Web.Configuration;
 
-namespace Wanda.BusinessIndicators.Web.AjaxHandler
+namespace LJTH.BusinessIndicators.Web.AjaxHandler
 {
     public class DepartmentStoreReportController : BaseController
     {

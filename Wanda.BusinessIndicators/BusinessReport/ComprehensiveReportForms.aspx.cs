@@ -6,10 +6,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Model;
 
-namespace Wanda.BusinessIndicators.Web.BusinessReport
+namespace LJTH.BusinessIndicators.Web.BusinessReport
 {
     public partial class ComprehensiveReportForms : System.Web.UI.Page
     {

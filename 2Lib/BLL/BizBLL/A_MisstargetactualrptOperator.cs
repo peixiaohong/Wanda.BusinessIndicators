@@ -6,13 +6,13 @@ using Microsoft.Practices.EnterpriseLibrary.PolicyInjection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Wanda.Lib.Data.AppBase;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.DAL;
+using LJTH.Lib.Data.AppBase;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.DAL;
 using Lib.Data.AppBase;
 
 
-namespace Wanda.BusinessIndicators.BLL
+namespace LJTH.BusinessIndicators.BLL
 {
     /// <summary>
     /// Misstargetactualrpt对象的业务逻辑操作

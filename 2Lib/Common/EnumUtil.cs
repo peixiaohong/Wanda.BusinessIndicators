@@ -6,7 +6,7 @@ using System.Reflection;
 using System.ComponentModel;
 using Lib.Core;
 
-namespace Wanda.BusinessIndicators.Common
+namespace LJTH.BusinessIndicators.Common
 {
     public static class EnumUtil
     {

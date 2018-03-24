@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace Wanda.BusinessIndicators.Web.SystemConfiguration {
+namespace LJTH.BusinessIndicators.Web.SystemConfiguration {
     
     
     public partial class MonthReportConfig {

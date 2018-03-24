@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.BusinessIndicators.Model;
-using Wanda.Lib.Data.AppBase;
+using LJTH.BusinessIndicators.Model;
+using LJTH.Lib.Data.AppBase;
 
 
-namespace Wanda.BusinessIndicators.ViewModel
+namespace LJTH.BusinessIndicators.ViewModel
 {
     public class TargetPlanViewModel : BaseModel, IBaseComposedModel
     {

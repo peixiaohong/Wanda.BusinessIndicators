@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace Wanda.BusinessIndicators.Web.SystemConfiguration {
+namespace LJTH.BusinessIndicators.Web.SystemConfiguration {
     
     
     public partial class UpLoadDocumentManager {
@@ -73,7 +73,7 @@ namespace Wanda.BusinessIndicators.Web.SystemConfiguration {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Wanda.BusinessIndicators.Web.UserControl.DocMutipleUpload DocMutipleUpload;
+        protected global::LJTH.BusinessIndicators.Web.UserControl.DocMutipleUpload DocMutipleUpload;
         
         /// <summary>
         /// hideTerrNodeId 控件。

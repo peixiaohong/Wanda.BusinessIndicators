@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace Wanda.BusinessIndicators.Web.ProtoType {
+namespace LJTH.BusinessIndicators.Web.ProtoType {
     
     
     public partial class TargetSimpleReport {

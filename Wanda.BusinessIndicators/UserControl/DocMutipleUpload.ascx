@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DocMutipleUpload.ascx.cs" Inherits="Wanda.BusinessIndicators.Web.UserControl.DocMutipleUpload" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DocMutipleUpload.ascx.cs" Inherits="LJTH.BusinessIndicators.Web.UserControl.DocMutipleUpload" %>
 <style type="text/css">
     #attaTable tbody td {
         text-align: center;

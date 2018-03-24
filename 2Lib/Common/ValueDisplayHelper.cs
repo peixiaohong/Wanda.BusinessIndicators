@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wanda.BusinessIndicators.Common
+namespace LJTH.BusinessIndicators.Common
 {
     //public static class ValueDisplayHelper
     //{

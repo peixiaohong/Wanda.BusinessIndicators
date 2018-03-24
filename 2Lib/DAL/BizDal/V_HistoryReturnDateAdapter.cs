@@ -6,9 +6,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.ViewModel;
 
-namespace Wanda.BusinessIndicators.DAL
+namespace LJTH.BusinessIndicators.DAL
 {
     class V_HistoryReturnDateAdapter : AppBaseAdapterT<HistoryReturnDateVModel>
     {

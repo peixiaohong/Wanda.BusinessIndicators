@@ -7,15 +7,15 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Engine;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Engine;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.ViewModel;
 using Newtonsoft.Json;
-using Wanda.BusinessIndicators.Common;
+using LJTH.BusinessIndicators.Common;
 using System.Configuration;
 
-namespace Wanda.BusinessIndicators.Web.BusinessReport
+namespace LJTH.BusinessIndicators.Web.BusinessReport
 {
     public partial class TargetReportApproveTime : System.Web.UI.Page
     {

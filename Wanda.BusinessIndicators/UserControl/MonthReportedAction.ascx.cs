@@ -5,9 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Wanda.BusinessIndicators.Web;
+using LJTH.BusinessIndicators.Web;
 
-namespace Wanda.BusinessIndicators.Web.UserControl
+namespace LJTH.BusinessIndicators.Web.UserControl
 {
     public partial class MonthReportedAction :System.Web.UI.UserControl
     {

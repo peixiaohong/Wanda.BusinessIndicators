@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#"  MasterPageFile="~/SiteMasterPage/MainMasterPage.Master"  AutoEventWireup="true"   CodeBehind="NoPermission.aspx.cs" Inherits="Wanda.BusinessIndicators.Web.NoPermission"%>
+﻿<%@ Page Language="C#"  MasterPageFile="~/SiteMasterPage/MainMasterPage.Master"  AutoEventWireup="true"   CodeBehind="NoPermission.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.NoPermission"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     

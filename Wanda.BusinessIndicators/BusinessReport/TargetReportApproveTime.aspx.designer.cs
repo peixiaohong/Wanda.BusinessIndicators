@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace Wanda.BusinessIndicators.Web.BusinessReport {
+namespace LJTH.BusinessIndicators.Web.BusinessReport {
     
     
     public partial class TargetReportApproveTime {

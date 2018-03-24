@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Wanda.BusinessIndicators.Common
+namespace LJTH.BusinessIndicators.Common
 {
     public class SiteMapParser
     {

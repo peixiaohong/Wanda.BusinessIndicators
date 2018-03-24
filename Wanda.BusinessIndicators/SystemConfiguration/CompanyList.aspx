@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CompanyList.aspx.cs" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" Inherits="Wanda.BusinessIndicators.Web.CompanyList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CompanyList.aspx.cs" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" Inherits="LJTH.BusinessIndicators.Web.CompanyList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server"> 
 

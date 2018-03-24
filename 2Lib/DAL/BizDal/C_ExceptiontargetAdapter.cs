@@ -5,11 +5,11 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.ViewModel;
 
 
-namespace Wanda.BusinessIndicators.DAL
+namespace LJTH.BusinessIndicators.DAL
 {
     /// <summary>
     /// Exceptiontarget对象的数据访问适配器

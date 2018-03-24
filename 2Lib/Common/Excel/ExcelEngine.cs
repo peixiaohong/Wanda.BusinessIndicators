@@ -11,7 +11,7 @@ using License = Aspose.Cells.License;
 using System.Configuration;
 using System.Reflection;
 
-namespace Wanda.BusinessIndicators.Common
+namespace LJTH.BusinessIndicators.Common
 {
     public class ExcelEngine
     {

@@ -5,9 +5,9 @@ using System;
 using System.Configuration;
 using System.Web;
 using System.Web.Hosting;
-using Wanda.Lib.AuthCenter.ViewModel;
+using LJTH.Lib.AuthCenter.ViewModel;
 
-namespace Wanda.BusinessIndicators.Common
+namespace LJTH.BusinessIndicators.Common
 {
     /// <summary>
     /// 帮助类， 封装常用的Web后台调用的静态方法

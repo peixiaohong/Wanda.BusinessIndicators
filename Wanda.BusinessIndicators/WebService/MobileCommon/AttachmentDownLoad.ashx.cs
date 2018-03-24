@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Wanda.Fiscal.Budget.Web.AjaxHander;
+using LJTH.Fiscal.Budget.Web.AjaxHander;
 
-namespace Wanda.BusinessIndicators.Web.MobileCommon
+namespace LJTH.BusinessIndicators.Web.MobileCommon
 {
     /// <summary>
     /// AttachmentDownLoad 的摘要说明

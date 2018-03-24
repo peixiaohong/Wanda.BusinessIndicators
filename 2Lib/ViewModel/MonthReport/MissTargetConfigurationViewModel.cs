@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.Model;
 using Lib.Xml;
 using Lib.Core;
-using Wanda.BusinessIndicators;
+using LJTH.BusinessIndicators;
 
-namespace Wanda.BusinessIndicators.ViewModel
+namespace LJTH.BusinessIndicators.ViewModel
 {
 
     /// <summary>

@@ -7,12 +7,12 @@ using System.Web;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Engine;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Engine;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.ViewModel;
 using Wanda.Platform.Permission.ClientComponent;
-namespace Wanda.BusinessIndicators.Web.BusinessReport
+namespace LJTH.BusinessIndicators.Web.BusinessReport
 {
     public partial class TargetDirectlyReported : System.Web.UI.Page
     {
@@ -230,7 +230,7 @@ namespace Wanda.BusinessIndicators.Web.BusinessReport
             if (!IsPostBack)
                 if (!string.IsNullOrEmpty(Request["BusinessID"]))
                 {
-                    var host = new Wanda.BusinessIndicators.Web.AjaxHander.ProcessController();
+                    var host = new LJTH.BusinessIndicators.Web.AjaxHander.ProcessController();
                     
                      host.BusinessID = Request["BusinessID"];
                     if (Wanda.Workflow.Client.WFClientSDK.Exist(host.BusinessID))

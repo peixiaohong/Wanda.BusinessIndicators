@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.Model;
 
-namespace Wanda.BusinessIndicators.ViewModel
+namespace LJTH.BusinessIndicators.ViewModel
 {
 
     /// <summary>

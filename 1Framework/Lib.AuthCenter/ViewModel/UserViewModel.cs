@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Wanda.Lib.AuthCenter.Model;
+using LJTH.Lib.AuthCenter.Model;
 
-namespace Wanda.Lib.AuthCenter.ViewModel
+namespace LJTH.Lib.AuthCenter.ViewModel
 {
     //public class UserViewModel
     //{

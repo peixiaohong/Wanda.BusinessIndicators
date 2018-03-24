@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace Wanda.Fiscal.Budget.Web.Control {
+namespace LJTH.Fiscal.Budget.Web.Control {
     
     
     public partial class MutipleUpload {

@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace Wanda.BusinessIndicators.Web {
+namespace LJTH.BusinessIndicators.Web {
     
     
     public partial class NoPermission {

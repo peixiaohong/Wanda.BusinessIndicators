@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Model;
-namespace Wanda.BusinessIndicators.Web.BusinessReport
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Model;
+namespace LJTH.BusinessIndicators.Web.BusinessReport
 {
     public partial class GroupTargetApprove : System.Web.UI.Page
     {

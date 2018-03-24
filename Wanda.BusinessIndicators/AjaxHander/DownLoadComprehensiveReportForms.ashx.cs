@@ -10,15 +10,15 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.SessionState;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Common;
-using Wanda.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Common;
+using LJTH.BusinessIndicators.ViewModel;
 using System.Web.Configuration;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.Engine;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.Engine;
 using System.Drawing;
 
-namespace Wanda.BusinessIndicators.Web.AjaxHander
+namespace LJTH.BusinessIndicators.Web.AjaxHander
 {
     /// <summary>
     /// DownLoadComprehensiveReportForms 的摘要说明

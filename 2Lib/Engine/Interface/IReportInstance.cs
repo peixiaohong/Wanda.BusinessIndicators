@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.ViewModel;
 
-namespace Wanda.BusinessIndicators.Engine
+namespace LJTH.BusinessIndicators.Engine
 {
     /// <summary>
     /// 明细项接口

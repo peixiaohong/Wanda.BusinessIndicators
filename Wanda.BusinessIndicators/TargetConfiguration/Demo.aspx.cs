@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Wanda.BusinessIndicators.Web.TargetConfiguration
+namespace LJTH.BusinessIndicators.Web.TargetConfiguration
 {
     public partial class Demo : System.Web.UI.Page
     {

@@ -3,10 +3,10 @@ using Lib.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Wanda.Lib.AuthCenter.Model;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.AuthCenter.Model;
+using LJTH.Lib.Data.AppBase;
 using Lib.Core;
-namespace Wanda.Lib.AuthCenter.DAL
+namespace LJTH.Lib.AuthCenter.DAL
 {
 
 

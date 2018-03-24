@@ -7,8 +7,8 @@
     <ProjectGuid>{EFA26EF0-4BA9-4563-8D63-554E884F56B7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Wanda.BusinessIndicators.Model</RootNamespace>
-    <AssemblyName>Wanda.BusinessIndicators.Model</AssemblyName>
+    <RootNamespace>LJTH.BusinessIndicators.Model</RootNamespace>
+    <AssemblyName>LJTH.BusinessIndicators.Model</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -86,17 +86,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\1Framework\Lib.AuthCenter\Wanda.Lib.AuthCenter.csproj">
+    <ProjectReference Include="..\..\1Framework\Lib.AuthCenter\LJTH.Lib.AuthCenter.csproj">
       <Project>{fccad333-b48e-4a04-ad3c-8cb4ca17ef28}</Project>
-      <Name>Wanda.Lib.AuthCenter</Name>
+      <Name>LJTH.Lib.AuthCenter</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\1Framework\Lib.Core\Wanda.Lib.Core.csproj">
+    <ProjectReference Include="..\..\1Framework\Lib.Core\LJTH.Lib.Core.csproj">
       <Project>{65839f36-193a-41d1-9e79-38bc84984de6}</Project>
-      <Name>Wanda.Lib.Core</Name>
+      <Name>LJTH.Lib.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\1Framework\Lib.Data\Wanda.Lib.Data.csproj">
+    <ProjectReference Include="..\..\1Framework\Lib.Data\LJTH.Lib.Data.csproj">
       <Project>{442c318f-9d99-4a3f-972e-33e8a8c8be51}</Project>
-      <Name>Wanda.Lib.Data</Name>
+      <Name>LJTH.Lib.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

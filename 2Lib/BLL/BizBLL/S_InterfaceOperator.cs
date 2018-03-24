@@ -1,5 +1,5 @@
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.DAL;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.DAL;
 using Lib.Core;
 using Lib.Validation;
 using System;
@@ -7,11 +7,11 @@ using Microsoft.Practices.EnterpriseLibrary.PolicyInjection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.Data.AppBase;
 using Lib.Data.AppBase;
 
 
-namespace Wanda.BusinessIndicators.BLL
+namespace LJTH.BusinessIndicators.BLL
 {
     /// <summary>
     /// Interface对象的业务逻辑操作

@@ -5,13 +5,13 @@
 using System;
 using Lib.Data;
 using System.Collections.Generic;
-using Wanda.Lib.AuthCenter.Model;
+using LJTH.Lib.AuthCenter.Model;
 using System.Text;
 using System.Data; 
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.Data.AppBase;
 
 
-namespace Wanda.Lib.AuthCenter.DAL
+namespace LJTH.Lib.AuthCenter.DAL
 {
     /// <summary>
     /// Privilege对象的数据访问适配器

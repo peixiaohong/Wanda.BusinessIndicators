@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wanda.Lib.AuthCenter.ViewModel
+namespace LJTH.Lib.AuthCenter.ViewModel
 {
     public class LoginUser
     {

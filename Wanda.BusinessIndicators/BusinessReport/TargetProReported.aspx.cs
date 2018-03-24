@@ -7,16 +7,16 @@ using System.Web;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Engine;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Engine;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.ViewModel;
 using Wanda.Platform.Permission.ClientComponent;
 using Wanda.Workflow.Client;
 using Newtonsoft.Json;
 
 
-namespace Wanda.BusinessIndicators.Web.BusinessReport
+namespace LJTH.BusinessIndicators.Web.BusinessReport
 {
     public partial class TargetProReported : System.Web.UI.Page
     {
@@ -185,7 +185,7 @@ namespace Wanda.BusinessIndicators.Web.BusinessReport
                             //这里批次需要控制，每次审批的状态只能是唯一的
                             // 暂时注销掉  BatchModel = AddSystemBatch();
 
-                            var host = new Wanda.BusinessIndicators.Web.AjaxHander.ProProcessController();
+                            var host = new LJTH.BusinessIndicators.Web.AjaxHander.ProProcessController();
                             host.BusinessID = model.ReportID.ToString();
 
                             if (Wanda.Workflow.Client.WFClientSDK.Exist(host.BusinessID))
@@ -486,7 +486,7 @@ namespace Wanda.BusinessIndicators.Web.BusinessReport
             if (!IsPostBack)
                 if (!string.IsNullOrEmpty(Request["BusinessID"]))
                 {
-                    var host = new Wanda.BusinessIndicators.Web.AjaxHander.ProProcessController();
+                    var host = new LJTH.BusinessIndicators.Web.AjaxHander.ProProcessController();
                     host.BusinessID = Request["BusinessID"];
                     if (Wanda.Workflow.Client.WFClientSDK.Exist(host.BusinessID))
                     {

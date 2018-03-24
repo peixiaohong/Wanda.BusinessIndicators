@@ -58,8 +58,8 @@
  
 
     <!--<siteMapNode id="8" url="#" title="系统管理"  description="background: url(../images/ico/77.png) no-repeat;"  resourceKey="SystemManager" >
-      <siteMapNode id="43" url="http://auth.wanda.cn/" title="角色管理"  description="角色管理"  resourceKey="RoleManager" />
-      <siteMapNode id="46" url="http://wf.wanda.cn/" title="流程管理"  description="流程管理" resourceKey="ProcessManager" />
+      <siteMapNode id="43" url="http://auth.LJTH.cn/" title="角色管理"  description="角色管理"  resourceKey="RoleManager" />
+      <siteMapNode id="46" url="http://wf.LJTH.cn/" title="流程管理"  description="流程管理" resourceKey="ProcessManager" />
     </siteMapNode>-->
   </siteMapNode>
 </siteMap>

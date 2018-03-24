@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TargetCollectDisplay.aspx.cs" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" Inherits="Wanda.BusinessIndicators.Web.SystemConfiguration.TargetCollectDisplay" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TargetCollectDisplay.aspx.cs" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" Inherits="LJTH.BusinessIndicators.Web.SystemConfiguration.TargetCollectDisplay" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript" src="../Scripts/BusinessReport/TargetCollect.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>

@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace Wanda.BusinessIndicators.Web.DepartmentStoreReport {
+namespace LJTH.BusinessIndicators.Web.DepartmentStoreReport {
     
     
     public partial class DSTargetAddDataReport {

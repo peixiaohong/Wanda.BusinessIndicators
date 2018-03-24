@@ -5,10 +5,10 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.BLL.BizBLL;
-using Wanda.BusinessIndicators.Common;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.BLL.BizBLL;
+using LJTH.BusinessIndicators.Common;
+using LJTH.BusinessIndicators.Model;
 
 namespace ScheduleService.Handler
 {

@@ -6,14 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Common;
-using Wanda.BusinessIndicators.Engine;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.ViewModel;
-using Wanda.BusinessIndicators.Web;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Common;
+using LJTH.BusinessIndicators.Engine;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.Web;
 
-namespace Wanda.BusinessIndicators.Web.AjaxHandler
+namespace LJTH.BusinessIndicators.Web.AjaxHandler
 {
     public class TargetSimpleReportController : BaseController
     {

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.Data.AppBase;
 
-namespace Wanda.BusinessIndicators.ViewModel.MonthReport
+namespace LJTH.BusinessIndicators.ViewModel.MonthReport
 {
     public class MonthRptConfigVModel : BaseModel, IBaseComposedModel
     {

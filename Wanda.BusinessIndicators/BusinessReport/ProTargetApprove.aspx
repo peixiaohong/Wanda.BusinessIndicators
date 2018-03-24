@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/EmptyMaster.Master" AutoEventWireup="true" CodeBehind="ProTargetApprove.aspx.cs" Inherits="Wanda.BusinessIndicators.Web.BusinessReport.ProTargetApprove" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/EmptyMaster.Master" AutoEventWireup="true" CodeBehind="ProTargetApprove.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.BusinessReport.ProTargetApprove" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="http://zbgk.wf.wanda-dev.cn/RuntimeService/css/wanda-wf-client.css?version=1" type="text/css" rel="Stylesheet" />

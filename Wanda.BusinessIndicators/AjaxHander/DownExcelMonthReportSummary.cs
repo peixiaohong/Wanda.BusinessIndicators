@@ -6,12 +6,12 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
-using Wanda.BusinessIndicators.Common;
-using Wanda.BusinessIndicators.Engine;
-using Wanda.BusinessIndicators.ViewModel;
-using Wanda.BusinessIndicators.Web.AjaxHandler;
+using LJTH.BusinessIndicators.Common;
+using LJTH.BusinessIndicators.Engine;
+using LJTH.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.Web.AjaxHandler;
 
-namespace Wanda.BusinessIndicators.Web.AjaxHander
+namespace LJTH.BusinessIndicators.Web.AjaxHander
 {
     public partial class DownExcelTemplete
     {

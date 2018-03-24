@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="TargetReported.aspx.cs" Inherits="Wanda.BusinessIndicators.Web.BusinessReport.TargetReported" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="TargetReported.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.BusinessReport.TargetReported" %>
 
 <%@ Register Src="~/UserControl/MonthReportedAction.ascx" TagPrefix="MonthLyReportActionUC" TagName="MonthReportedAction" %>
 <%@ Register Src="~/UserControl/TargetReportUserControl.ascx" TagPrefix="targetReportUC" TagName="TargetReportUserControl" %>

@@ -1,17 +1,17 @@
 
 using System;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.Data.AppBase;
 using System.Collections.Generic;
 using System.Linq;
 using Lib.Data;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.Model;
 using System.Data.SqlClient;
 using System.Text;
 using System.Transactions;
 using System.Data;
-using Wanda.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.ViewModel;
 
-namespace Wanda.BusinessIndicators.DAL
+namespace LJTH.BusinessIndicators.DAL
 {
     /// <summary>
     /// Targetplandetail对象的数据访问适配器

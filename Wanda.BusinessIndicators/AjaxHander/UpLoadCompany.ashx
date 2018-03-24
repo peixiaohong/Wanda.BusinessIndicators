@@ -1,1 +1,1 @@
-﻿<%@ WebHandler Language="C#" CodeBehind="UpLoadCompany.ashx.cs" Class="Wanda.BusinessIndicators.Web.AjaxHander.UpLoadCompany" %>
+﻿<%@ WebHandler Language="C#" CodeBehind="UpLoadCompany.ashx.cs" Class="LJTH.BusinessIndicators.Web.AjaxHander.UpLoadCompany" %>

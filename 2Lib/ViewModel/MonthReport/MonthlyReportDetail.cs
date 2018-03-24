@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.BusinessIndicators.Model;
-using Wanda.Lib.Data.AppBase;
+using LJTH.BusinessIndicators.Model;
+using LJTH.Lib.Data.AppBase;
 
-namespace Wanda.BusinessIndicators.ViewModel
+namespace LJTH.BusinessIndicators.ViewModel
 {
     [ORViewMapping(@"
             SELECT A_MonthlyReportDetail.*,C_Company.CompanyName,C_Company.NeedEvaluation,C_Company.Sequence FROM dbo.A_MonthlyReportDetail	INNER JOIN dbo.C_Company ON 

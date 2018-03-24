@@ -108,7 +108,7 @@ namespace Lib.Web.Download
         private static void InitExcelHandlers()
         {
             // 指定的多个带有controller的assembly的名称
-            string handlerAssemblies = AppSettingConfig.GetSetting("ExcelHandlerAssemblies", "");  //"Wanda.HR.KPI.Web.Common";
+            string handlerAssemblies = AppSettingConfig.GetSetting("ExcelHandlerAssemblies", "");  //"LJTH.HR.KPI.Web.Common";
 
             _excelHandlers = new Dictionary<string, ExcelCategoryHandler>();
 

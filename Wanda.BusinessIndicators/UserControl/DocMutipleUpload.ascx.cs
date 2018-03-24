@@ -6,10 +6,10 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Model;
 
-namespace Wanda.BusinessIndicators.Web.UserControl
+namespace LJTH.BusinessIndicators.Web.UserControl
 {
     /// <summary>
     /// 该类只使用文档分类管理，不适用其它的地方

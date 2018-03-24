@@ -5,11 +5,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.BusinessIndicators.ViewModel;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.BLL;
 
-namespace Wanda.BusinessIndicators.Engine
+namespace LJTH.BusinessIndicators.Engine
 {
     public static class ExtensionMethod
     {

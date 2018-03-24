@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.ViewModel;
 
 
-namespace Wanda.BusinessIndicators.Engine
+namespace LJTH.BusinessIndicators.Engine
 {
     /// <summary>
     /// 更具获取系统，填充某个系统的补充项

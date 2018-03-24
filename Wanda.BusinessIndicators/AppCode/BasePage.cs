@@ -7,7 +7,7 @@ using Wanda.Platform.Permission.Contract;
 using Wanda.Workflow.Client;
 
 
-namespace Wanda.BusinessIndicators.Web
+namespace LJTH.BusinessIndicators.Web
 {
     public abstract class BasePage : System.Web.UI.Page
     {

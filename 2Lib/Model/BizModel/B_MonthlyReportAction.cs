@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.Data.AppBase;
 
-namespace Wanda.BusinessIndicators.Model
+namespace LJTH.BusinessIndicators.Model
 {
     /// <summary>
     /// This object represents the properties and methods of a MonthlyReportDetail.

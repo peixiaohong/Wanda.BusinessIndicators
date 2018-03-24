@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.Data.AppBase;
 using Lib.Xml;
 using Lib.Core;
 
-namespace Wanda.BusinessIndicators.ViewModel
+namespace LJTH.BusinessIndicators.ViewModel
 {
     public class V_GroupCompany : BaseModel
     {

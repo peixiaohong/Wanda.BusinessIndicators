@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/SiteMasterPage/MonthReportMasterPage.Master" CodeBehind="TargetReportApproveTime.aspx.cs" Inherits="Wanda.BusinessIndicators.Web.BusinessReport.TargetReportApproveTime" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/SiteMasterPage/MonthReportMasterPage.Master" CodeBehind="TargetReportApproveTime.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.BusinessReport.TargetReportApproveTime" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

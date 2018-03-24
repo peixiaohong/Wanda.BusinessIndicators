@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="TargetSimpleReport.aspx.cs" Inherits="Wanda.BusinessIndicators.Web.ProtoType.TargetSimpleReport" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="TargetSimpleReport.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.ProtoType.TargetSimpleReport" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" type="text/css" href="../Scripts/UpLoad/uploadify.css" />
     <link href="../styles/mini.css" rel="stylesheet" />

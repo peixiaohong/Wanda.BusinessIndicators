@@ -1,1 +1,1 @@
-﻿<%@ WebService Language="C#" CodeBehind="MobileCommonWebService.asmx.cs" Class="Wanda.BusinessIndicators.Web.MobileCommon.MobileCommonWebService" %>
+﻿<%@ WebService Language="C#" CodeBehind="MobileCommonWebService.asmx.cs" Class="LJTH.BusinessIndicators.Web.MobileCommon.MobileCommonWebService" %>

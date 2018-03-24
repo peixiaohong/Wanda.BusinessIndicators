@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Wanda.BusinessIndicators.Web.TargetConfiguration
+namespace LJTH.BusinessIndicators.Web.TargetConfiguration
 {
 
 

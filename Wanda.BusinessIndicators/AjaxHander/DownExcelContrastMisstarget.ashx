@@ -1,1 +1,1 @@
-﻿<%@ WebHandler Language="C#" CodeBehind="DownExcelContrastMisstarget.ashx.cs" Class="Wanda.BusinessIndicators.Web.AjaxHander.DownExcelContrastMisstarget" %>
+﻿<%@ WebHandler Language="C#" CodeBehind="DownExcelContrastMisstarget.ashx.cs" Class="LJTH.BusinessIndicators.Web.AjaxHander.DownExcelContrastMisstarget" %>

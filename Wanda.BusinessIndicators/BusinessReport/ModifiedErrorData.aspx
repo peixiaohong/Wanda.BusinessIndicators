@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ModifiedErrorData.aspx.cs" Inherits="Wanda.BusinessIndicators.Web.BusinessReport.ModifiedErrorData" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ModifiedErrorData.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.BusinessReport.ModifiedErrorData" %>
 
 <!DOCTYPE html>
 

@@ -134,9 +134,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lib.Core\Wanda.Lib.Core.csproj">
+    <ProjectReference Include="..\Lib.Core\LJTH.Lib.Core.csproj">
       <Project>{65839F36-193A-41D1-9E79-38BC84984DE6}</Project>
-      <Name>Wanda.Lib.Core</Name>
+      <Name>LJTH.Lib.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

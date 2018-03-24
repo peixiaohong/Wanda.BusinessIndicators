@@ -1,1 +1,1 @@
-﻿<%@ WebHandler Language="C#" CodeBehind="DownLoadComprehensiveReportForms.ashx.cs" Class="Wanda.BusinessIndicators.Web.AjaxHander.DownLoadComprehensiveReportForms" %>
+﻿<%@ WebHandler Language="C#" CodeBehind="DownLoadComprehensiveReportForms.ashx.cs" Class="LJTH.BusinessIndicators.Web.AjaxHander.DownLoadComprehensiveReportForms" %>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Wanda.BusinessIndicators.Common.Web
+namespace LJTH.BusinessIndicators.Common.Web
 {
 
     #region Windows API enum and struct

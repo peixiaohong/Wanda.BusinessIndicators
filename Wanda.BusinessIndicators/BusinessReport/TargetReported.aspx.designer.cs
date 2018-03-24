@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace Wanda.BusinessIndicators.Web.BusinessReport {
+namespace LJTH.BusinessIndicators.Web.BusinessReport {
     
     
     public partial class TargetReported {
@@ -100,7 +100,7 @@ namespace Wanda.BusinessIndicators.Web.BusinessReport {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Wanda.BusinessIndicators.Web.UserControl.TargetReportUserControl UserControl;
+        protected global::LJTH.BusinessIndicators.Web.UserControl.TargetReportUserControl UserControl;
         
         /// <summary>
         /// MutipleUpload 控件。
@@ -109,7 +109,7 @@ namespace Wanda.BusinessIndicators.Web.BusinessReport {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Wanda.Fiscal.Budget.Web.Control.MutipleUpload MutipleUpload;
+        protected global::LJTH.Fiscal.Budget.Web.Control.MutipleUpload MutipleUpload;
         
         /// <summary>
         /// MonthReportedAction1 控件。
@@ -118,7 +118,7 @@ namespace Wanda.BusinessIndicators.Web.BusinessReport {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Wanda.BusinessIndicators.Web.UserControl.MonthReportedAction MonthReportedAction1;
+        protected global::LJTH.BusinessIndicators.Web.UserControl.MonthReportedAction MonthReportedAction1;
         
         /// <summary>
         /// HidSystemID 控件。

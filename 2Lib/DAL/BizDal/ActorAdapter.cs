@@ -1,5 +1,5 @@
 ﻿
-namespace Wanda.StageMgt.Lib.DAL
+namespace LJTH.StageMgt.Lib.DAL
 {
 
     internal class ActorAdapter  {

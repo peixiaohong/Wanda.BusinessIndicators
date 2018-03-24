@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.Lib.Data.AppBase;
-using Wanda.BusinessIndicators.Model;
-namespace Wanda.BusinessIndicators.ViewModel
+using LJTH.Lib.Data.AppBase;
+using LJTH.BusinessIndicators.Model;
+namespace LJTH.BusinessIndicators.ViewModel
 {
     public class SimpleReportVModel : BaseModel
     {

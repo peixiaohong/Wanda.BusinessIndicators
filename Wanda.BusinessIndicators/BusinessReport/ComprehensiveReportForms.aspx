@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MonthReportMasterPage.Master" AutoEventWireup="true" CodeBehind="ComprehensiveReportForms.aspx.cs" Inherits="Wanda.BusinessIndicators.Web.BusinessReport.ComprehensiveReportForms" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MonthReportMasterPage.Master" AutoEventWireup="true" CodeBehind="ComprehensiveReportForms.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.BusinessReport.ComprehensiveReportForms" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 

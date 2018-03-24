@@ -4,18 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.Web.MobileCommon;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.Web.MobileCommon;
 using Wanda.Workflow.Client;
 using Wanda.Workflow.Object;
 
-namespace Wanda.BusinessIndicators.Web.MobileCommon
+namespace LJTH.BusinessIndicators.Web.MobileCommon
 {
     /// <summary>
     /// BaseWebService 的摘要说明
     /// </summary>
-    [WebService(Namespace = "http://m.wanda.cn/")]
+    [WebService(Namespace = "http://m.LJTH.cn/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // 若要允许使用 ASP.NET AJAX 从脚本中调用此 Web 服务，请取消注释以下行。 

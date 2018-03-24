@@ -9,13 +9,13 @@ using Lib.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Wanda.Lib.AuthCenter.DAL;
-using Wanda.Lib.AuthCenter.Model;
-using Wanda.Lib.AuthCenter.ViewModel;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.AuthCenter.DAL;
+using LJTH.Lib.AuthCenter.Model;
+using LJTH.Lib.AuthCenter.ViewModel;
+using LJTH.Lib.Data.AppBase;
 
 
-namespace Wanda.Lib.AuthCenter.BLL
+namespace LJTH.Lib.AuthCenter.BLL
 {
     /// <summary>
     /// Roleinfo对象的业务逻辑操作

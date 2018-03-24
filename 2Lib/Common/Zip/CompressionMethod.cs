@@ -1,6 +1,6 @@
 ﻿using Ionic.Zip;
 
-namespace Wanda.HR.Common
+namespace LJTH.HR.Common
 {
     public enum EncryptionAlgorithm
     {

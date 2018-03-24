@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Engine;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Engine;
+using LJTH.BusinessIndicators.Model;
 
-namespace Wanda.BusinessIndicators
+namespace LJTH.BusinessIndicators
 {
     public struct ActualRate
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wanda.HR.KPI.ViewModel.Demo
+namespace LJTH.HR.KPI.ViewModel.Demo
 {
 
     public class Person

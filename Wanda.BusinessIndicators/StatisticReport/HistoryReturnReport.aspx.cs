@@ -4,10 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Model;
 
-namespace Wanda.BusinessIndicators.Web.StatisticReport
+namespace LJTH.BusinessIndicators.Web.StatisticReport
 {
     public partial class HistoryReturnReport : System.Web.UI.Page
     {

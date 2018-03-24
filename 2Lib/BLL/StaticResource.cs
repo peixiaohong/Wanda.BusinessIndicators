@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.Model;
 
-namespace Wanda.BusinessIndicators.BLL
+namespace LJTH.BusinessIndicators.BLL
 {
     public class StaticResource
     {

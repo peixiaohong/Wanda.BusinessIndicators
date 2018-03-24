@@ -6,7 +6,7 @@ using Lib.Data;
 
 
 
-namespace Wanda.Lib.Data.AppBase
+namespace LJTH.Lib.Data.AppBase
 {
     /// <summary>
     /// C/B 类数据实体基类

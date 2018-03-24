@@ -6,10 +6,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Model;
 
-namespace Wanda.BusinessIndicators.Web.DepartmentStoreReport
+namespace LJTH.BusinessIndicators.Web.DepartmentStoreReport
 {
     public partial class DSTargetReport : System.Web.UI.Page
     {

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.BLL.BizBLL;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.BLL.BizBLL;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.ViewModel;
 
-namespace Wanda.BusinessIndicators.Engine
+namespace LJTH.BusinessIndicators.Engine
 {
     [Serializable]
     public class SystemTargetCountEngine

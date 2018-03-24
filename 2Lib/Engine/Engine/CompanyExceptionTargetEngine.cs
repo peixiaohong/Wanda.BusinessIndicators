@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Engine;
-using Wanda.BusinessIndicators.BLL.BizBLL;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Engine;
+using LJTH.BusinessIndicators.BLL.BizBLL;
 
 
-namespace Wanda.BusinessIndicators.Engine
+namespace LJTH.BusinessIndicators.Engine
 {
     [Serializable]
     public  class CompanyExceptionTargetEngine

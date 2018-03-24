@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Services.Protocols;
 
-namespace Wanda.BusinessIndicators.Web.MobileCommon
+namespace LJTH.BusinessIndicators.Web.MobileCommon
 {
     /// <summary>
     /// 移动端安全头

@@ -7,8 +7,8 @@
     <ProjectGuid>{8F011280-24E7-4EE5-8F81-737B7B887E3D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Wanda.BusinessIndicators.Engine</RootNamespace>
-    <AssemblyName>Wanda.BusinessIndicators.Engine</AssemblyName>
+    <RootNamespace>LJTH.BusinessIndicators.Engine</RootNamespace>
+    <AssemblyName>LJTH.BusinessIndicators.Engine</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -123,17 +123,17 @@
     <Compile Include="ViewModel\RptFilter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\1Framework\Lib.Core\Wanda.Lib.Core.csproj">
+    <ProjectReference Include="..\..\1Framework\Lib.Core\LJTH.Lib.Core.csproj">
       <Project>{65839f36-193a-41d1-9e79-38bc84984de6}</Project>
-      <Name>Wanda.Lib.Core</Name>
+      <Name>LJTH.Lib.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\1Framework\Lib.Data\Wanda.Lib.Data.csproj">
+    <ProjectReference Include="..\..\1Framework\Lib.Data\LJTH.Lib.Data.csproj">
       <Project>{442c318f-9d99-4a3f-972e-33e8a8c8be51}</Project>
-      <Name>Wanda.Lib.Data</Name>
+      <Name>LJTH.Lib.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\1Framework\Lib.Web\Wanda.Lib.Web.csproj">
+    <ProjectReference Include="..\..\1Framework\Lib.Web\LJTH.Lib.Web.csproj">
       <Project>{9e21a44d-17eb-44f4-a936-27b41ca565fe}</Project>
-      <Name>Wanda.Lib.Web</Name>
+      <Name>LJTH.Lib.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\BLL\2BLL.csproj">
       <Project>{06ab4a03-00ca-4f1e-9873-bb3738118324}</Project>

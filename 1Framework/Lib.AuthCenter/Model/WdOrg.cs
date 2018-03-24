@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Lib.Data;
 
-namespace Wanda.Lib.AuthCenter.Model
+namespace LJTH.Lib.AuthCenter.Model
 {
     [ORTableMapping("dbo.wd_org")]
     public  class WdOrg

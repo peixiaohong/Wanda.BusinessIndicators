@@ -8,7 +8,7 @@ using System.Data;
 using Lib.Core;
 using System.Web;
 
-namespace Wanda.Lib.Data.AppBase
+namespace LJTH.Lib.Data.AppBase
 {
 
     public abstract class BizOperatorBase : MarshalByRefObject

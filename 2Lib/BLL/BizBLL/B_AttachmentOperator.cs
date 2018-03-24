@@ -5,11 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Wanda.BusinessIndicators.DAL;
-using Wanda.BusinessIndicators.Model;
-using Wanda.Lib.Data.AppBase;
+using LJTH.BusinessIndicators.DAL;
+using LJTH.BusinessIndicators.Model;
+using LJTH.Lib.Data.AppBase;
 
-namespace Wanda.BusinessIndicators.BLL
+namespace LJTH.BusinessIndicators.BLL
 {
     public class B_AttachmentOperator : BizOperatorBase<B_Attachment>
     {

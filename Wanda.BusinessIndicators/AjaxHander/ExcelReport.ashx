@@ -1,1 +1,1 @@
-﻿<%@ WebHandler Language="C#" CodeBehind="ExcelReport.ashx.cs" Class="Wanda.BusinessIndicators.Web.AjaxHander.ExcelReport" %>
+﻿<%@ WebHandler Language="C#" CodeBehind="ExcelReport.ashx.cs" Class="LJTH.BusinessIndicators.Web.AjaxHander.ExcelReport" %>

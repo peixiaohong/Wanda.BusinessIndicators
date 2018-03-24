@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Wanda.Lib.Data.AppBase;
-namespace Wanda.Lib.AuthCenter.Model
+using LJTH.Lib.Data.AppBase;
+namespace LJTH.Lib.AuthCenter.Model
 {
     [Serializable]
     class WdSimpleUserDataFilter : PagenationDataFilter, IDataFilter

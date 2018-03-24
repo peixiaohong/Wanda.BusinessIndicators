@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Lib.Data;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.Data.AppBase;
 
-namespace Wanda.Lib.AuthCenter.Model
+namespace LJTH.Lib.AuthCenter.Model
 {
     /// <summary>
     /// This object represents the properties and methods of a WD_User.

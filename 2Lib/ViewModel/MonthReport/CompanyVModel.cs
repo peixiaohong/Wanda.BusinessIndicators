@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.Lib.Data.AppBase;
-using Wanda.BusinessIndicators.Model;
+using LJTH.Lib.Data.AppBase;
+using LJTH.BusinessIndicators.Model;
 using Lib.Data;
 
-namespace Wanda.BusinessIndicators.ViewModel
+namespace LJTH.BusinessIndicators.ViewModel
 {
     public class CompanyVModel
     {

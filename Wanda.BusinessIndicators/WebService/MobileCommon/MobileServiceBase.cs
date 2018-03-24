@@ -3,15 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Model;
 using Wanda.Workflow.Client;
 using Wanda.Workflow.Object;
 using MJScript = Microsoft.JScript;
 using SDKCommon = Wanda.SDK.Common;
 using UserSourceSDK = Wanda.UserSource.Client;
 
-namespace Wanda.BusinessIndicators.Web.MobileCommon
+namespace LJTH.BusinessIndicators.Web.MobileCommon
 {
     public abstract class MobileServiceBase
     {
@@ -580,7 +580,7 @@ namespace Wanda.BusinessIndicators.Web.MobileCommon
             string strFileWebsite = System.Configuration.ConfigurationManager.AppSettings["FileWebsite"];
             if (string.IsNullOrEmpty(strFileWebsite))
             {
-                strFileWebsite = "http://zbgk.wanda.cn";
+                strFileWebsite = "http://zbgk.LJTH.cn";
             }
             return strFileWebsite + RelativeUrl;
         }

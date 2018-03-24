@@ -39,7 +39,7 @@ namespace Lib.Web.MVC.Controller
         private static void InitControllers()
         {
             // 指定的多个带有controller的assembly的名称
-            string ajaxHandlerAssemblies = ConfigurationManager.AppSettings["ControllerAssemblies"];  //"Wanda.HR.KPI.Web.AjaxHandler";
+            string ajaxHandlerAssemblies = ConfigurationManager.AppSettings["ControllerAssemblies"];  //"LJTH.HR.KPI.Web.AjaxHandler";
 
             _controllers = new Dictionary<string, BaseController>();
 

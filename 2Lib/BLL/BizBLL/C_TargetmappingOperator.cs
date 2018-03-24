@@ -1,14 +1,14 @@
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.DAL;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.DAL;
 using Lib.Core;
 using System;
 using Microsoft.Practices.EnterpriseLibrary.PolicyInjection;
 using System.Collections.Generic;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.Data.AppBase;
 using Lib.Data.AppBase;
 
 
-namespace Wanda.BusinessIndicators.BLL
+namespace LJTH.BusinessIndicators.BLL
 {
     /// <summary>
     /// Targetmapping对象的业务逻辑操作

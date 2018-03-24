@@ -1,16 +1,16 @@
 
 using System;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.Data.AppBase;
 using System.Collections.Generic;
 using System.Linq;
 
 using Lib.Data;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.Model;
 using System.Data.SqlClient;
 using System.Data;
 
 
-namespace Wanda.BusinessIndicators.DAL
+namespace LJTH.BusinessIndicators.DAL
 {
     /// <summary>
     /// Monthlyreport对象的数据访问适配器

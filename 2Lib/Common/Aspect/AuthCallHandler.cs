@@ -2,7 +2,7 @@
 using Microsoft.Practices.Unity.InterceptionExtension;
 using System;
 
-namespace Wanda.BusinessIndicators.Common
+namespace LJTH.BusinessIndicators.Common
 {
 
     public class AuthCallHandler : ICallHandler

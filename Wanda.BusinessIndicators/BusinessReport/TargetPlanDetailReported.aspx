@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="TargetPlanDetailReported.aspx.cs" Inherits="Wanda.BusinessIndicators.Web.BusinessReport.TargetUpdate" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="TargetPlanDetailReported.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.BusinessReport.TargetUpdate" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/css/NavStlye.css" type="text/css" rel="stylesheet" />

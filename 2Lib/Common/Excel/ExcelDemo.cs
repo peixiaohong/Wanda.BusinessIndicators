@@ -6,9 +6,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
-using Wanda.HR.Common;
+using LJTH.HR.Common;
 
-namespace Wanda.BusinessIndicators.Common
+namespace LJTH.BusinessIndicators.Common
 {
     public class DemoExcelHandler : ExcelCategoryHandler
     {

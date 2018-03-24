@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Quartz;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.BLL;
 using Lib.Config;
-using Wanda.BusinessIndicators.Engine;
-using Wanda.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.Engine;
+using LJTH.BusinessIndicators.ViewModel;
 using Lib.Web.Json;
 
 namespace ScheduleService.Handler

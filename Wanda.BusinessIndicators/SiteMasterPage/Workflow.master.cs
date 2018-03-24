@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Wanda.BusinessIndicators.Web
+namespace LJTH.BusinessIndicators.Web
 {
     public partial class Workflow : System.Web.UI.MasterPage
     {

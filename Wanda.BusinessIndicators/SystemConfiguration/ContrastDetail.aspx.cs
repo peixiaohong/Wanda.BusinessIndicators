@@ -4,10 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.BLL;
 using Lib.Core;
-namespace Wanda.BusinessIndicators.Web.SystemConfiguration
+namespace LJTH.BusinessIndicators.Web.SystemConfiguration
 {
     public partial class ContrastDetail : System.Web.UI.Page
     {

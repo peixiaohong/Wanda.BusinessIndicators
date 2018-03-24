@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/SiteMasterPage/MonthReportMasterPage.Master" CodeBehind="DocumentManager.aspx.cs" Inherits="Wanda.BusinessIndicators.Web.SystemConfiguration.DocumentManager" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/SiteMasterPage/MonthReportMasterPage.Master" CodeBehind="DocumentManager.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.SystemConfiguration.DocumentManager" %>
 
 <%@ Register Src="~/UserControl/DocMutipleUpload.ascx" TagPrefix="uc1" TagName="DocMutipleUpload" %>
 

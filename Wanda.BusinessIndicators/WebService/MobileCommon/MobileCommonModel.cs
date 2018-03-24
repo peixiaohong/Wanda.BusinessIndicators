@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Wanda.Workflow.Object;
 
-namespace Wanda.BusinessIndicators.Web.MobileCommon
+namespace LJTH.BusinessIndicators.Web.MobileCommon
 {
     /// <summary>
     /// 返回结构

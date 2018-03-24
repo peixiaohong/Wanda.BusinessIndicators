@@ -1,1 +1,1 @@
-﻿<%@ WebHandler Language="C#" CodeBehind="DownExcelCommitDate.ashx.cs" Class="Wanda.BusinessIndicators.Web.AjaxHander.DownExcelCommitDate1" %>
+﻿<%@ WebHandler Language="C#" CodeBehind="DownExcelCommitDate.ashx.cs" Class="LJTH.BusinessIndicators.Web.AjaxHander.DownExcelCommitDate1" %>

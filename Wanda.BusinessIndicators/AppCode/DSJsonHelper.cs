@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Wanda.BusinessIndicators.Web.AppCode
+namespace LJTH.BusinessIndicators.Web.AppCode
 {
    public class DSJsonHelper
     {

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Wanda.BusinessIndicators.Common;
+using LJTH.BusinessIndicators.Common;
 using Wanda.Platform.Permission.ClientComponent;
 
-namespace Wanda.BusinessIndicators.Web
+namespace LJTH.BusinessIndicators.Web
 {
     public partial class EmptyMaster : System.Web.UI.MasterPage
     {

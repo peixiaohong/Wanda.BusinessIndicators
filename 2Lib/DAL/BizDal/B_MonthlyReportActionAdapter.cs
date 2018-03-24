@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.Model;
 
 
-namespace Wanda.BusinessIndicators.DAL
+namespace LJTH.BusinessIndicators.DAL
 {
     sealed class B_MonthlyReportActionAdapter : AppBaseAdapterT<B_MonthlyReportAction>
     {

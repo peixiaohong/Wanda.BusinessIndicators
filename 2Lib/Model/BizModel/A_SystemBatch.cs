@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.Data.AppBase;
 
-namespace Wanda.BusinessIndicators.Model
+namespace LJTH.BusinessIndicators.Model
 {
     [ORTableMapping("dbo.A_SystemBatch")]
     public class A_SystemBatch : BaseModel

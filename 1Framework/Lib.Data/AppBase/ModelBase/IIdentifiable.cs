@@ -1,7 +1,7 @@
 ﻿
 
 using System;
-namespace Wanda.Lib.Data.AppBase
+namespace LJTH.Lib.Data.AppBase
 {
     /// <summary>
     /// 可用ID识别的对象

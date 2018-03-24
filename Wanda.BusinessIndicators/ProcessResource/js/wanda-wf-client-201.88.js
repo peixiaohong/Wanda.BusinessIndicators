@@ -3,7 +3,7 @@ var isCc = true;
 var wanda_wf = {
     settings: {
         resoucehost: 'http://wfuat.wanda-dev.cn/WebApp/Wanda.Platform.WorkFlow.Controls.Handler/',
-        //resoucehost: 'http://wf.wanda.cn/WebApp/Wanda.Platform.WorkFlow.Controls.Handler/',
+        //resoucehost: 'http://wf.LJTH.cn/WebApp/Wanda.Platform.WorkFlow.Controls.Handler/',
         ProcessDataKey: "processInfo",//"MCS_WF_ProcessJSON",
         title: '由业务系统自定义',
         PostDataKey: "MCS_WF_OperationJSON",

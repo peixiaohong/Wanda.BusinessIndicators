@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Demo.aspx.cs" Inherits="Wanda.BusinessIndicators.Web.TargetConfiguration.Demo" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Demo.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.TargetConfiguration.Demo" %>
 
 <!DOCTYPE html>
 

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Wanda.Workflow.Object;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.ViewModel;
-using Wanda.BusinessIndicators.Engine;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.Engine;
 using Newtonsoft.Json;
-using Wanda.BusinessIndicators.Web.AjaxHander;
+using LJTH.BusinessIndicators.Web.AjaxHander;
 using Lib.Config;
 
-namespace Wanda.BusinessIndicators.Web.MobileCommon
+namespace LJTH.BusinessIndicators.Web.MobileCommon
 {
     public class MonthlyApprovalService : MobileServiceBase
     {

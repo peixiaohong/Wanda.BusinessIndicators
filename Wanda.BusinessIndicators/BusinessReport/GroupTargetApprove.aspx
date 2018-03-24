@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/EmptyMaster.Master" AutoEventWireup="true" CodeBehind="GroupTargetApprove.aspx.cs" Inherits="Wanda.BusinessIndicators.Web.BusinessReport.GroupTargetApprove" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/EmptyMaster.Master" AutoEventWireup="true" CodeBehind="GroupTargetApprove.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.BusinessReport.GroupTargetApprove" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" type="text/css" href="../Scripts/UpLoad/uploadify.css" />
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>

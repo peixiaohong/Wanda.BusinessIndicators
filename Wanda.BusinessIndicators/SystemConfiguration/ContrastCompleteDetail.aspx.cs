@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Wanda.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.BLL;
 
-namespace Wanda.BusinessIndicators.Web
+namespace LJTH.BusinessIndicators.Web
 {
     public partial class ContrastCompleteDetail : System.Web.UI.Page
     {

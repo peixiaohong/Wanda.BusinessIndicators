@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using Lib.Xml;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.Data.AppBase;
 
-namespace Wanda.Lib.AuthCenter.Model
+namespace LJTH.Lib.AuthCenter.Model
 {
     /// <summary>
     /// 用户角色授权视图实体， 

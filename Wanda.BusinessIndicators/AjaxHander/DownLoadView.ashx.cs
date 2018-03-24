@@ -11,16 +11,16 @@ using Aspose.Cells;
 using Lib.Config;
 using Lib.Web.Json;
 
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Common;
-using Wanda.BusinessIndicators.Common.Web;
-using Wanda.BusinessIndicators.Engine;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Common;
+using LJTH.BusinessIndicators.Common.Web;
+using LJTH.BusinessIndicators.Engine;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.ViewModel;
 using System.Drawing;
 using Lib.Core;
 
-namespace Wanda.BusinessIndicators.Web.AjaxHander
+namespace LJTH.BusinessIndicators.Web.AjaxHander
 {
     /// <summary>
     /// 下载需要上传的模版数据

@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace Wanda.BusinessIndicators.Web.StatisticReport {
+namespace LJTH.BusinessIndicators.Web.StatisticReport {
     
     
     public partial class HistoryReturnReport {

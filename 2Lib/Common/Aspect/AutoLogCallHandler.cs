@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 
-namespace Wanda.BusinessIndicators.Common
+namespace LJTH.BusinessIndicators.Common
 {
 
     public class AutoLogCallHandler : ICallHandler
@@ -92,7 +92,7 @@ namespace Wanda.BusinessIndicators.Common
     <Loggers>
       <add name="AutoLog" enable="true">
         <Listeners>
-          <add name="sqlListener" type="Wanda.HR.Common.Log.SqlLogTraceListener, Wanda.HR.Common" connectionString="WandaBudgetConnectionString"></add>
+          <add name="sqlListener" type="LJTH.HR.Common.Log.SqlLogTraceListener, LJTH.HR.Common" connectionString="WandaBudgetConnectionString"></add>
         </Listeners>
       </add>
     </Loggers>

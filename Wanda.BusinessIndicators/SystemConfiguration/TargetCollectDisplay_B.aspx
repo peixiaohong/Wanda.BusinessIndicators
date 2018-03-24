@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TargetCollectDisplay_B.aspx.cs" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master"Inherits="Wanda.BusinessIndicators.Web.SystemConfiguration.TargetCollectDisplay_B" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TargetCollectDisplay_B.aspx.cs" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master"Inherits="LJTH.BusinessIndicators.Web.SystemConfiguration.TargetCollectDisplay_B" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript" src="../Scripts/BusinessReport/TargetCollect_B.js"></script>

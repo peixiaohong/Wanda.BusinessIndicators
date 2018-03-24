@@ -1,1 +1,1 @@
-﻿<%@ WebHandler Language="C#" CodeBehind="DownFileList.ashx.cs" Class="Wanda.BusinessIndicators.Web.AjaxHander.DownFileList" %>
+﻿<%@ WebHandler Language="C#" CodeBehind="DownFileList.ashx.cs" Class="LJTH.BusinessIndicators.Web.AjaxHander.DownFileList" %>

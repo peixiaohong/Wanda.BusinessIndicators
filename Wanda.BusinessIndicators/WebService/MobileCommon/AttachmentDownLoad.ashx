@@ -1,1 +1,1 @@
-﻿<%@ WebHandler Language="C#" CodeBehind="AttachmentDownLoad.ashx.cs" Class="Wanda.BusinessIndicators.Web.MobileCommon.AttachmentDownLoad" %>
+﻿<%@ WebHandler Language="C#" CodeBehind="AttachmentDownLoad.ashx.cs" Class="LJTH.BusinessIndicators.Web.MobileCommon.AttachmentDownLoad" %>

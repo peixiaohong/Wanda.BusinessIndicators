@@ -9,16 +9,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
-using Wanda.Lib.AuthCenter.DAL;
-using Wanda.Lib.AuthCenter.Model;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.AuthCenter.DAL;
+using LJTH.Lib.AuthCenter.Model;
+using LJTH.Lib.Data.AppBase;
 using System.Web;
-using Wanda.Lib.AuthCenter.ViewModel;
+using LJTH.Lib.AuthCenter.ViewModel;
 using Lib.Data.AppBase;
 using Lib.Data;
 
 
-namespace Wanda.Lib.AuthCenter.BLL
+namespace LJTH.Lib.AuthCenter.BLL
 {
     /// <summary>
     /// BPrivilege对象的业务逻辑操作

@@ -97,13 +97,13 @@
     <Compile Include="WebHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lib.Core\Wanda.Lib.Core.csproj">
+    <ProjectReference Include="..\Lib.Core\LJTH.Lib.Core.csproj">
       <Project>{65839f36-193a-41d1-9e79-38bc84984de6}</Project>
-      <Name>Wanda.Lib.Core</Name>
+      <Name>LJTH.Lib.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lib.Data\Wanda.Lib.Data.csproj">
+    <ProjectReference Include="..\Lib.Data\LJTH.Lib.Data.csproj">
       <Project>{442c318f-9d99-4a3f-972e-33e8a8c8be51}</Project>
-      <Name>Wanda.Lib.Data</Name>
+      <Name>LJTH.Lib.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

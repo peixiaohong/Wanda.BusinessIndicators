@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace Wanda.BusinessIndicators.Web.TargetConfiguration {
+namespace LJTH.BusinessIndicators.Web.TargetConfiguration {
     
     
     public partial class TargetList {

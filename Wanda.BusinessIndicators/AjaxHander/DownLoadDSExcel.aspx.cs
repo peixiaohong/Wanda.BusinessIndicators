@@ -9,15 +9,15 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Common;
-using Wanda.BusinessIndicators.Engine;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.ViewModel;
-using Wanda.BusinessIndicators.Web.AppCode;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Common;
+using LJTH.BusinessIndicators.Engine;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.Web.AppCode;
 using System.Web.Configuration;
 
-namespace Wanda.BusinessIndicators.Web.AjaxHander
+namespace LJTH.BusinessIndicators.Web.AjaxHander
 {
     public partial class DownLoadDSExcel : System.Web.UI.Page
     {

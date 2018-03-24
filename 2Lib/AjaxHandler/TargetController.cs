@@ -6,13 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using System.Text;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Common;
-using Wanda.BusinessIndicators.Engine;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.ViewModel;
-using Wanda.BusinessIndicators.Web;
-using Wanda.BusinessIndicators.Web.AjaxHandler;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Common;
+using LJTH.BusinessIndicators.Engine;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.Web;
+using LJTH.BusinessIndicators.Web.AjaxHandler;
 using Newtonsoft.Json;
 using Lib.Core;
 using Lib.Xml;
@@ -24,7 +24,7 @@ using Wanda.Workflow.Client;
 using System.Data;
 using System.Web.Configuration;
 
-namespace Wanda.BusinessIndicators.Web.AjaxHandler
+namespace LJTH.BusinessIndicators.Web.AjaxHandler
 {
     public class TargetController : BaseController
     {

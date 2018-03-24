@@ -6,11 +6,11 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.BusinessIndicators.DAL;
-using Wanda.BusinessIndicators.ViewModel;
-using Wanda.Lib.Data.AppBase;
+using LJTH.BusinessIndicators.DAL;
+using LJTH.BusinessIndicators.ViewModel;
+using LJTH.Lib.Data.AppBase;
 
-namespace Wanda.BusinessIndicators.BLL
+namespace LJTH.BusinessIndicators.BLL
 {
     public class V_HistoryReturnDateOperator : BizOperatorBase<HistoryReturnDateVModel>
     {

@@ -1,5 +1,5 @@
 ﻿
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DownLoadDSExcel.aspx.cs" Inherits="Wanda.BusinessIndicators.Web.AjaxHander.DownLoadDSExcel" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DownLoadDSExcel.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.AjaxHander.DownLoadDSExcel" %>
 
 <!DOCTYPE html>
 

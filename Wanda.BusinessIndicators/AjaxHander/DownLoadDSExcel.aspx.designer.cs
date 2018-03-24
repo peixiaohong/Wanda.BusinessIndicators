@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace Wanda.BusinessIndicators.Web.AjaxHander {
+namespace LJTH.BusinessIndicators.Web.AjaxHander {
     
     
     public partial class DownLoadDSExcel {

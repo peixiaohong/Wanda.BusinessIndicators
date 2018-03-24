@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Wanda.BusinessIndicators.Engine;
-using Wanda.BusinessIndicators.BLL;
-namespace Wanda.BusinessIndicators.Web.ProtoType
+using LJTH.BusinessIndicators.Engine;
+using LJTH.BusinessIndicators.BLL;
+namespace LJTH.BusinessIndicators.Web.ProtoType
 {
     public partial class TargetSimpleReport : System.Web.UI.Page
     {

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Wanda.BusinessIndicators.Web.Demo
+namespace LJTH.BusinessIndicators.Web.Demo
 {
     public partial class TargetTotalDetail : System.Web.UI.Page
     {

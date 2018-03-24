@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.ViewModel;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.Model;
 using System.Xml.Linq;
 
-namespace Wanda.BusinessIndicators.Web.AjaxHandler
+namespace LJTH.BusinessIndicators.Web.AjaxHandler
 {
     public class MonthRptConfigControll : BaseController
     {

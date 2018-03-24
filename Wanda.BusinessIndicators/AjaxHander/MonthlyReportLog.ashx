@@ -1,1 +1,1 @@
-﻿<%@ WebHandler Language="C#" CodeBehind="MonthlyReportLog.ashx.cs" Class="Wanda.BusinessIndicators.Web.AjaxHander.MonthlyReportLog" %>
+﻿<%@ WebHandler Language="C#" CodeBehind="MonthlyReportLog.ashx.cs" Class="LJTH.BusinessIndicators.Web.AjaxHander.MonthlyReportLog" %>

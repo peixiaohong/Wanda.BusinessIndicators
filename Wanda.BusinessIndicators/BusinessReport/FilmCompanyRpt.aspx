@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MonthReportMasterPage.Master" AutoEventWireup="true" CodeBehind="FilmCompanyRpt.aspx.cs" Inherits="Wanda.BusinessIndicators.Web.BusinessReport.FilmCompanyRpt" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MonthReportMasterPage.Master" AutoEventWireup="true" CodeBehind="FilmCompanyRpt.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.BusinessReport.FilmCompanyRpt" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 

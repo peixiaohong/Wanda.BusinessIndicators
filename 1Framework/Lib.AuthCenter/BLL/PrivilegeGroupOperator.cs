@@ -8,15 +8,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
-using Wanda.Lib.AuthCenter.DAL;
-using Wanda.Lib.AuthCenter.Model;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.AuthCenter.DAL;
+using LJTH.Lib.AuthCenter.Model;
+using LJTH.Lib.Data.AppBase;
 using Lib.Data.AppBase;
-using Wanda.Lib.AuthCenter;
+using LJTH.Lib.AuthCenter;
 
 
 
-namespace Wanda.Lib.AuthCenter.BLL
+namespace LJTH.Lib.AuthCenter.BLL
 {
     /// <summary>
     /// Privilege对象的业务逻辑操作

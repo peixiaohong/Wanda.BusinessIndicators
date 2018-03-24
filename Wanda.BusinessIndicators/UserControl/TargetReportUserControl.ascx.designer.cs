@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace Wanda.BusinessIndicators.Web.UserControl {
+namespace LJTH.BusinessIndicators.Web.UserControl {
     
     
     public partial class TargetReportUserControl {

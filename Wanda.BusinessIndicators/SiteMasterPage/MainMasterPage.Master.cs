@@ -7,10 +7,10 @@ using System.Web.Caching;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
-using Wanda.BusinessIndicators.Common;
+using LJTH.BusinessIndicators.Common;
 using Wanda.Platform.Permission.ClientComponent;
 
-namespace Wanda.BusinessIndicators.Web
+namespace LJTH.BusinessIndicators.Web
 {
     public partial class MainMasterPage : System.Web.UI.MasterPage
     {

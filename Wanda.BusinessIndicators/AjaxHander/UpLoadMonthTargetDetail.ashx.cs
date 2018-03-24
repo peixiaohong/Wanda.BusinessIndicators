@@ -9,19 +9,19 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Xml.Linq;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Common;
-using Wanda.BusinessIndicators.Common.Web;
-using Wanda.BusinessIndicators.Engine;
-using Wanda.BusinessIndicators.Engine.Engine;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.ViewModel;
-using Wanda.BusinessIndicators.Web.AjaxHandler;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Common;
+using LJTH.BusinessIndicators.Common.Web;
+using LJTH.BusinessIndicators.Engine;
+using LJTH.BusinessIndicators.Engine.Engine;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.Web.AjaxHandler;
 using Lib.Xml;
 using Newtonsoft.Json;
 using Lib.Web.Json;
 
-namespace Wanda.BusinessIndicators.Web.AjaxHander
+namespace LJTH.BusinessIndicators.Web.AjaxHander
 {
     /// <summary>
     /// UpLoadMonthTargetDetail 的摘要说明
@@ -346,7 +346,7 @@ namespace Wanda.BusinessIndicators.Web.AjaxHander
 
                     //获取当年指标计划ID
                     Guid targetPlanID = Guid.Empty;
-                    List<A_TargetPlan> CurrentYearTargetPlan = Wanda.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetTargetplanList(CurrentRpt._System.ID, FinYear).ToList();
+                    List<A_TargetPlan> CurrentYearTargetPlan = LJTH.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetTargetplanList(CurrentRpt._System.ID, FinYear).ToList();
                     if (CurrentYearTargetPlan.Count > 0)
                     {
                         targetPlanID = CurrentYearTargetPlan[0].ID;
@@ -582,7 +582,7 @@ namespace Wanda.BusinessIndicators.Web.AjaxHander
 
                     //获取当年指标计划ID
                     Guid targetPlanID = Guid.Empty;
-                    List<A_TargetPlan> CurrentYearTargetPlan = Wanda.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetTargetplanList(CurrentRpt._System.ID, FinYear).ToList();
+                    List<A_TargetPlan> CurrentYearTargetPlan = LJTH.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetTargetplanList(CurrentRpt._System.ID, FinYear).ToList();
                     if (CurrentYearTargetPlan.Count > 0)
                     {
                         targetPlanID = CurrentYearTargetPlan[0].ID;
@@ -1011,7 +1011,7 @@ namespace Wanda.BusinessIndicators.Web.AjaxHander
 
             //获取当年指标计划ID
             Guid targetPlanID = Guid.Empty;
-            List<A_TargetPlan> CurrentYearTargetPlan = Wanda.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetTargetplanList(SystemID, FinYear).ToList();
+            List<A_TargetPlan> CurrentYearTargetPlan = LJTH.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetTargetplanList(SystemID, FinYear).ToList();
             if (CurrentYearTargetPlan.Count > 0)
             {
                 targetPlanID = CurrentYearTargetPlan[0].ID;
@@ -1330,7 +1330,7 @@ namespace Wanda.BusinessIndicators.Web.AjaxHander
 
                         //获取当年指标计划ID
                         Guid targetPlanID = Guid.Empty;
-                        List<A_TargetPlan> CurrentYearTargetPlan = Wanda.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetTargetplanList(SysId, FinYear).ToList();
+                        List<A_TargetPlan> CurrentYearTargetPlan = LJTH.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetTargetplanList(SysId, FinYear).ToList();
                         if (CurrentYearTargetPlan.Count > 0)
                         {
                             targetPlanID = CurrentYearTargetPlan[0].ID;

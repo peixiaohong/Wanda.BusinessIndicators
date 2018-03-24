@@ -5,9 +5,9 @@ using System;
 using System.Configuration;
 using System.Web;
 using System.Web.Hosting;
-using Wanda.Lib.AuthCenter.ViewModel;
+using LJTH.Lib.AuthCenter.ViewModel;
 
-namespace Wanda.Lib.AuthCenter
+namespace LJTH.Lib.AuthCenter
 {
     class WebHelper
     {

@@ -7,8 +7,8 @@
     <ProjectGuid>{08A829AE-8AA2-4725-90A7-338BC68BF6B5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Wanda.BusinessIndicators.DAL</RootNamespace>
-    <AssemblyName>Wanda.BusinessIndicators.DAL</AssemblyName>
+    <RootNamespace>LJTH.BusinessIndicators.DAL</RootNamespace>
+    <AssemblyName>LJTH.BusinessIndicators.DAL</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -91,13 +91,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\1Framework\Lib.Core\Wanda.Lib.Core.csproj">
+    <ProjectReference Include="..\..\1Framework\Lib.Core\LJTH.Lib.Core.csproj">
       <Project>{65839f36-193a-41d1-9e79-38bc84984de6}</Project>
-      <Name>Wanda.Lib.Core</Name>
+      <Name>LJTH.Lib.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\1Framework\Lib.Data\Wanda.Lib.Data.csproj">
+    <ProjectReference Include="..\..\1Framework\Lib.Data\LJTH.Lib.Data.csproj">
       <Project>{442c318f-9d99-4a3f-972e-33e8a8c8be51}</Project>
-      <Name>Wanda.Lib.Data</Name>
+      <Name>LJTH.Lib.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Common\9Common.csproj">
       <Project>{1d81e774-65e8-43ff-8f8e-486d28a56275}</Project>

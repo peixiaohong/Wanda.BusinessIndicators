@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Wanda.Lib.Data.AppBase;
-using Wanda.Lib.AuthCenter.Model;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.Data.AppBase;
+using LJTH.Lib.AuthCenter.Model;
+using LJTH.Lib.Data.AppBase;
 
-namespace Wanda.Lib.AuthCenter.DAL
+namespace LJTH.Lib.AuthCenter.DAL
 {
     class VRoleAdapter : AuthBaseCompositionAdapterT<VRoleInfo>
     {

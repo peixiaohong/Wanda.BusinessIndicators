@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Wanda.BusinessIndicators.DAL.BizDal;
-using Wanda.BusinessIndicators.Model;
-using Wanda.Lib.Data.AppBase;
+using LJTH.BusinessIndicators.DAL.BizDal;
+using LJTH.BusinessIndicators.Model;
+using LJTH.Lib.Data.AppBase;
 
-namespace Wanda.BusinessIndicators.BLL.BizBLL
+namespace LJTH.BusinessIndicators.BLL.BizBLL
 {
     public class InterfaceOperator : BizOperatorBase<InterfaceDefinition>
     {

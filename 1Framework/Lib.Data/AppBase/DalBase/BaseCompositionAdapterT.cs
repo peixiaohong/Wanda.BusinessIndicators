@@ -7,7 +7,7 @@ using System.Data.Common;
 using System.Linq;
 using System.Text;
 
-namespace Wanda.Lib.Data.AppBase
+namespace LJTH.Lib.Data.AppBase
 {
     /// <summary>
     /// 视图（实体组合）对象的数据库访问适配器

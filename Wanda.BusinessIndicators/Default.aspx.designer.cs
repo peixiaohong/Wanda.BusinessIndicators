@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Wanda.BusinessIndicators.Web {
+namespace LJTH.BusinessIndicators.Web {
 
 
     public partial class _Default

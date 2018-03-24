@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/EmptyMaster.master" AutoEventWireup="true" CodeBehind="TargetPlanDetailApprove.aspx.cs" Inherits="Wanda.BusinessIndicators.Web.BusinessReport.TargetPlanDetailApprove" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/EmptyMaster.master" AutoEventWireup="true" CodeBehind="TargetPlanDetailApprove.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.BusinessReport.TargetPlanDetailApprove" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 

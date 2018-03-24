@@ -1,1 +1,1 @@
-﻿<%@ WebHandler Language="C#" CodeBehind="DownExcelCompany.ashx.cs" Class="Wanda.BusinessIndicators.Web.AjaxHander.DownExcelCompany" %>
+﻿<%@ WebHandler Language="C#" CodeBehind="DownExcelCompany.ashx.cs" Class="LJTH.BusinessIndicators.Web.AjaxHander.DownExcelCompany" %>

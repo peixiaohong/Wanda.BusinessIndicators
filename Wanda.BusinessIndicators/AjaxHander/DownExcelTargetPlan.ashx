@@ -1,1 +1,1 @@
-﻿<%@ WebHandler Language="C#" CodeBehind="DownExcelTargetPlan.ashx.cs" Class="Wanda.BusinessIndicators.Web.AjaxHander.DownExcelTargetPlan" %>
+﻿<%@ WebHandler Language="C#" CodeBehind="DownExcelTargetPlan.ashx.cs" Class="LJTH.BusinessIndicators.Web.AjaxHander.DownExcelTargetPlan" %>

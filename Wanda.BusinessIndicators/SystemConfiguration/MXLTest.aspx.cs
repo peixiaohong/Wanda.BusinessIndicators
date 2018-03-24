@@ -11,16 +11,16 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
 using System.Xml.Linq;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Engine;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Engine;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.ViewModel;
 using Wanda.Platform.Permission.ClientComponent;
 using Lib.Xml;
 using System.Text.RegularExpressions;
 using Lib.Expression;
 
-namespace Wanda.BusinessIndicators.Web.SystemConfiguration
+namespace LJTH.BusinessIndicators.Web.SystemConfiguration
 {
     public partial class MXLTest : System.Web.UI.Page
     {

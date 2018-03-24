@@ -6,9 +6,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.Model;
 
-namespace Wanda.BusinessIndicators.DAL
+namespace LJTH.BusinessIndicators.DAL
 {
     sealed class C_SystemTreeAdapter : AppBaseAdapterT<C_SystemTree>
     {

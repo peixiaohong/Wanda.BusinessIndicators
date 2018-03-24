@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.BusinessIndicators.ViewModel;
-using Wanda.Lib.Data.AppBase;
+using LJTH.BusinessIndicators.ViewModel;
+using LJTH.Lib.Data.AppBase;
 
-namespace Wanda.BusinessIndicators.DAL
+namespace LJTH.BusinessIndicators.DAL
 {
     class V_MonthlyreportdetailAdapter: AppBaseCompositionAdapterT<MonthlyReportDetail>
     {

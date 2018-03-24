@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Wanda.Workflow.Object;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.ViewModel;
-using Wanda.BusinessIndicators.Engine;
-using Wanda.BusinessIndicators.Web.AjaxHander;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.Engine;
+using LJTH.BusinessIndicators.Web.AjaxHander;
 
-namespace Wanda.BusinessIndicators.Web.MobileCommon
+namespace LJTH.BusinessIndicators.Web.MobileCommon
 {
     public class TargetApprovalService : MobileServiceBase
     {

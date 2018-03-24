@@ -1,12 +1,12 @@
 
 using System;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.Data.AppBase;
 using System.Collections.Generic;
 
 using Lib.Data;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.Model;
 using System.Data.SqlClient;
-namespace Wanda.BusinessIndicators.DAL
+namespace LJTH.BusinessIndicators.DAL
 {
     /// <summary>
     /// Targetkpi对象的数据访问适配器

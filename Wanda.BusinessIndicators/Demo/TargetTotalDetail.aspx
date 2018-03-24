@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TargetTotalDetail.aspx.cs" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master"   Inherits="Wanda.BusinessIndicators.Web.Demo.TargetTotalDetail" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TargetTotalDetail.aspx.cs" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master"   Inherits="LJTH.BusinessIndicators.Web.Demo.TargetTotalDetail" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

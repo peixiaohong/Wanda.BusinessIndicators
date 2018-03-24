@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.Data.AppBase;
 using Lib.Xml;
 
-namespace Wanda.Lib.AuthCenter.Model
+namespace LJTH.Lib.AuthCenter.Model
 {
     [Serializable]
     [ORViewMapping(@"

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wanda.BusinessIndicators;
-using Wanda.BusinessIndicators.Engine;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Model;
+using LJTH.BusinessIndicators;
+using LJTH.BusinessIndicators.Engine;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Model;
 using Lib.Web.Json;
 
 namespace DataCalculate

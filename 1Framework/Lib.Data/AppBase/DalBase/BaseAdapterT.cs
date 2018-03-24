@@ -11,7 +11,7 @@ using System.Reflection;
 using System.Text;
 using System.Transactions;
 
-namespace Wanda.Lib.Data.AppBase
+namespace LJTH.Lib.Data.AppBase
 {
 
 

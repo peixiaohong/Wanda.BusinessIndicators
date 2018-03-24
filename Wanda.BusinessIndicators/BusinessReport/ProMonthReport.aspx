@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/SiteMasterPage/MonthReportMasterPage.Master" AutoEventWireup="true" CodeBehind="ProMonthReport.aspx.cs" Inherits="Wanda.BusinessIndicators.Web.BusinessReport.ProMonthReport" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/SiteMasterPage/MonthReportMasterPage.Master" AutoEventWireup="true" CodeBehind="ProMonthReport.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.BusinessReport.ProMonthReport" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" type="text/css" href="../Scripts/UpLoad/uploadify.css" />

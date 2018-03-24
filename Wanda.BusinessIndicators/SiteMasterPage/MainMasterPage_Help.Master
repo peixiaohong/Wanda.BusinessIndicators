@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMasterPage_Help.Master.cs" Inherits="Wanda.BusinessIndicators.Web.MainMasterPage_Help" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMasterPage_Help.Master.cs" Inherits="LJTH.BusinessIndicators.Web.MainMasterPage_Help" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
@@ -33,10 +33,10 @@
 
 
     <%--以下是生产环境的SSO工具条  --%>
-    <%--<link href="http://sso.wanda.cn/Styles/floatMenu.css" rel="Stylesheet" type="text/css" />
-    <script src="http://sso.wanda.cn/Scripts/floatMenu.js" type="text/javascript"></script>
-    <link href="http://wf.wanda.cn/WebApp/Wanda.Platform.WorkFlow.Controls.Handler/css/css.css" rel="Stylesheet" type="text/css" />
-    <script type="text/javascript" src="http://wf.wanda.cn/WebApp/Wanda.Platform.WorkFlow.Controls.Handler/script/wanda-wf-js.js"></script>
+    <%--<link href="http://sso.LJTH.cn/Styles/floatMenu.css" rel="Stylesheet" type="text/css" />
+    <script src="http://sso.LJTH.cn/Scripts/floatMenu.js" type="text/javascript"></script>
+    <link href="http://wf.LJTH.cn/WebApp/Wanda.Platform.WorkFlow.Controls.Handler/css/css.css" rel="Stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://wf.LJTH.cn/WebApp/Wanda.Platform.WorkFlow.Controls.Handler/script/wanda-wf-js.js"></script>
  --%>
 
     <%--以下是测试环境的SSO工具条

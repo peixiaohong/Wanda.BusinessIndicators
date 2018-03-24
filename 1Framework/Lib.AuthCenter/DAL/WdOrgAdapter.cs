@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using Lib.Data;
 using System.Data;
-using Wanda.Lib.AuthCenter.Model;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.AuthCenter.Model;
+using LJTH.Lib.Data.AppBase;
 
-namespace Wanda.Lib.AuthCenter.DAL
+namespace LJTH.Lib.AuthCenter.DAL
 {
     sealed class WdOrgAdapter : AuthCommonAdapter
     {

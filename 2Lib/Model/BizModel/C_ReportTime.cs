@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Lib.Data;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.Data.AppBase;
 
-namespace Wanda.BusinessIndicators.Model
+namespace LJTH.BusinessIndicators.Model
 {
     [ORTableMapping("dbo.C_ReportTime")]
     public class C_ReportTime : BaseModel

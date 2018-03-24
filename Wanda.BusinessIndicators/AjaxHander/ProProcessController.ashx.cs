@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.Engine;
-using Wanda.BusinessIndicators.ViewModel;
-using Wanda.BusinessIndicators.Common;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.Engine;
+using LJTH.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.Common;
 using Newtonsoft.Json;
 using Wanda.Workflow.Client;
 using Wanda.Workflow.Object;
@@ -15,7 +15,7 @@ using Lib.Xml;
 using System.Xml.Linq;
 using Wanda.Workflow.Object;
 using Wanda.Platform.WorkFlow.ClientComponent;
-namespace Wanda.BusinessIndicators.Web.AjaxHander
+namespace LJTH.BusinessIndicators.Web.AjaxHander
 {
     /// <summary>
     /// ProcessController 的摘要说明

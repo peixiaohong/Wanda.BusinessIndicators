@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Wanda.Lib.Data;
-using Wanda.Lib.Data.AppBase;
+using LJTH.Lib.Data;
+using LJTH.Lib.Data.AppBase;
 
-namespace Wanda.Lib.AuthCenter.DAL
+namespace LJTH.Lib.AuthCenter.DAL
 {
     /*
      设置数据库连接字符串

@@ -4,13 +4,13 @@ using Microsoft.Practices.EnterpriseLibrary.PolicyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Wanda.BusinessIndicators.DAL;
-using Wanda.BusinessIndicators.Model;
-using Wanda.Lib.Data.AppBase;
+using LJTH.BusinessIndicators.DAL;
+using LJTH.BusinessIndicators.Model;
+using LJTH.Lib.Data.AppBase;
 using System.Web;
 
 
-namespace Wanda.BusinessIndicators.BLL
+namespace LJTH.BusinessIndicators.BLL
 {
     public class B_TargetPlanActionOperator : BizOperatorBase<B_TargetPlanAction>
     {

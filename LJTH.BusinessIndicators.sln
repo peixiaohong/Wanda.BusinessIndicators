@@ -27,13 +27,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4WinApp", "4WinApp", "{72C2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5Web", "5Web", "{FB137B23-CB3D-4458-A142-A56B55D80822}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wanda.Lib.Core", "1Framework\Lib.Core\Wanda.Lib.Core.csproj", "{65839F36-193A-41D1-9E79-38BC84984DE6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJTH.Lib.Core", "1Framework\Lib.Core\LJTH.Lib.Core.csproj", "{65839F36-193A-41D1-9E79-38BC84984DE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wanda.Lib.Data", "1Framework\Lib.Data\Wanda.Lib.Data.csproj", "{442C318F-9D99-4A3F-972E-33E8A8C8BE51}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJTH.Lib.Data", "1Framework\Lib.Data\LJTH.Lib.Data.csproj", "{442C318F-9D99-4A3F-972E-33E8A8C8BE51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wanda.Lib.Web", "1Framework\Lib.Web\Wanda.Lib.Web.csproj", "{9E21A44D-17EB-44F4-A936-27B41CA565FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJTH.Lib.Web", "1Framework\Lib.Web\LJTH.Lib.Web.csproj", "{9E21A44D-17EB-44F4-A936-27B41CA565FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wanda.Lib.AuthCenter", "1Framework\Lib.AuthCenter\Wanda.Lib.AuthCenter.csproj", "{FCCAD333-B48E-4A04-AD3C-8CB4CA17EF28}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJTH.Lib.AuthCenter", "1Framework\Lib.AuthCenter\LJTH.Lib.AuthCenter.csproj", "{FCCAD333-B48E-4A04-AD3C-8CB4CA17EF28}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1DAL", "2Lib\DAL\1DAL.csproj", "{08A829AE-8AA2-4725-90A7-338BC68BF6B5}"
 EndProject

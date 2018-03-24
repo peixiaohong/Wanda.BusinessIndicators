@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Wanda.BusinessIndicators.Web.DepartmentStoreReport
+namespace LJTH.BusinessIndicators.Web.DepartmentStoreReport
 {
     public partial class PlayVideo : System.Web.UI.Page
     {

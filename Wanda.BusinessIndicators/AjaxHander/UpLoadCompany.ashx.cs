@@ -9,16 +9,16 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Xml.Linq;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Common;
-using Wanda.BusinessIndicators.Common.Web;
-using Wanda.BusinessIndicators.Engine;
-using Wanda.BusinessIndicators.Engine.Engine;
-using Wanda.BusinessIndicators.Model;
-using Wanda.BusinessIndicators.ViewModel;
-using Wanda.BusinessIndicators.Web.AjaxHandler;
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Common;
+using LJTH.BusinessIndicators.Common.Web;
+using LJTH.BusinessIndicators.Engine;
+using LJTH.BusinessIndicators.Engine.Engine;
+using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.Web.AjaxHandler;
 
-namespace Wanda.BusinessIndicators.Web.AjaxHander
+namespace LJTH.BusinessIndicators.Web.AjaxHander
 {
     /// <summary>
     /// UpLoadCompany 的摘要说明

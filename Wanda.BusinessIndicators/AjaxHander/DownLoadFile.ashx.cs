@@ -4,10 +4,10 @@ using System.Configuration;
 using System.IO;
 using System.Web;
 using System.Web.SessionState;
-using Wanda.BusinessIndicators.Common.Web;
+using LJTH.BusinessIndicators.Common.Web;
 
 
-namespace Wanda.Fiscal.Budget.Web.AjaxHander
+namespace LJTH.Fiscal.Budget.Web.AjaxHander
 {
     /// <summary>
     /// DownLoadFile 的摘要说明

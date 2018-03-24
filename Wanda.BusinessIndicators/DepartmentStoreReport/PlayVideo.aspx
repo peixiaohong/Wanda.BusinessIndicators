@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PlayVideo.aspx.cs" MasterPageFile="~/SiteMasterPage/MainMasterPage_Help.Master" Inherits="Wanda.BusinessIndicators.Web.DepartmentStoreReport.PlayVideo" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PlayVideo.aspx.cs" MasterPageFile="~/SiteMasterPage/MainMasterPage_Help.Master" Inherits="LJTH.BusinessIndicators.Web.DepartmentStoreReport.PlayVideo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
    <%-- <link href="/Styles/ztree/metroStyle/metroStyle.css" rel="stylesheet" />

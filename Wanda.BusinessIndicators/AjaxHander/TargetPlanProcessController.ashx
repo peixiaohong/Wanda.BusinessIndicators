@@ -1,1 +1,1 @@
-﻿<%@ WebHandler Language="C#" CodeBehind="TargetPlanProcessController.ashx.cs" Class="Wanda.BusinessIndicators.Web.AjaxHander.TargetPlanProcessController" %>
+﻿<%@ WebHandler Language="C#" CodeBehind="TargetPlanProcessController.ashx.cs" Class="LJTH.BusinessIndicators.Web.AjaxHander.TargetPlanProcessController" %>

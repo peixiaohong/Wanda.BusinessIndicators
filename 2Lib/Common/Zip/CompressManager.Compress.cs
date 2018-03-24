@@ -4,7 +4,7 @@ using System.Text;
 using Ionic.Zip;
 using Ionic.Zlib;
 
-namespace Wanda.HR.Common
+namespace LJTH.HR.Common
 {
     public partial class CompressManager
     {

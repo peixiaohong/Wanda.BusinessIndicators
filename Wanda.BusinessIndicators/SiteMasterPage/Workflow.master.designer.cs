@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Wanda.BusinessIndicators.Web.SiteMasterPage {
+namespace LJTH.BusinessIndicators.Web.SiteMasterPage {
     
     
     public partial class Workflow {

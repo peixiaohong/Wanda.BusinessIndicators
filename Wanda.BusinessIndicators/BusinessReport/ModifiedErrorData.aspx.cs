@@ -8,9 +8,9 @@ using System.Web.UI.WebControls;
 using Wanda.Platform.WorkFlow.ClientComponent;
 using Wanda.Workflow.Object;
 using Wanda.Workflow.Client;
-using Wanda.BusinessIndicators.BLL;
-using Wanda.BusinessIndicators.Model;
-namespace Wanda.BusinessIndicators.Web.BusinessReport
+using LJTH.BusinessIndicators.BLL;
+using LJTH.BusinessIndicators.Model;
+namespace LJTH.BusinessIndicators.Web.BusinessReport
 {
     public partial class ModifiedErrorData : System.Web.UI.Page
     {

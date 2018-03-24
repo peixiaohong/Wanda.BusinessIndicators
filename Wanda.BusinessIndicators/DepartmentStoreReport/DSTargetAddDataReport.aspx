@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="DSTargetAddDataReport.aspx.cs" Inherits="Wanda.BusinessIndicators.Web.DepartmentStoreReport.DSTargetAddDataReport" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="DSTargetAddDataReport.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.DepartmentStoreReport.DSTargetAddDataReport" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
       <link rel="stylesheet" type="text/css" href="../Scripts/UpLoad/uploadify.css" />
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>

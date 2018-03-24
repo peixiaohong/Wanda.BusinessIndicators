@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MonthReportedAction.ascx.cs" Inherits="Wanda.BusinessIndicators.Web.UserControl.MonthReportedAction" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MonthReportedAction.ascx.cs" Inherits="LJTH.BusinessIndicators.Web.UserControl.MonthReportedAction" %>
 
 <html>
 <head>

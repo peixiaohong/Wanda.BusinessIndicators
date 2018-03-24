@@ -201,14 +201,14 @@ namespace Lib.Data
         {
             //if (ex == null)
             //{
-            //    Wanda.HR.Common.LogHelper.DevLogger.Write(
+            //    LJTH.HR.Common.LogHelper.DevLogger.Write(
             //       new Lib.Log.LogEntity("sql", sql, 0)
             //        );
 
             //}
             //else
             //{
-            //    Wanda.HR.Common.LogHelper.DevLogger.Write(new Lib.Log.LogEntity(ex) { Message = sql });
+            //    LJTH.HR.Common.LogHelper.DevLogger.Write(new Lib.Log.LogEntity(ex) { Message = sql });
             //}
         }
 

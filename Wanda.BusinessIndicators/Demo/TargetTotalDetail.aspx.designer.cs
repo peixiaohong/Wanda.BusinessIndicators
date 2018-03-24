@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace Wanda.BusinessIndicators.Web.Demo {
+namespace LJTH.BusinessIndicators.Web.Demo {
     
     
     public partial class TargetTotalDetail {
