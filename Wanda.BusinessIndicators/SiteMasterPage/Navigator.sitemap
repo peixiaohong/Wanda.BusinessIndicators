@@ -12,7 +12,7 @@
     <siteMapNode id="23" url="/BusinessReport/TargetDirectlyReported.aspx" title="月度经营报告上报"  description="月度经营报告上报(直管)" resourceKey="UpLoadDirectlyMonthReport"/>
  
     <siteMapNode id="3" url="/SystemConfiguration/TargetCollectDisplay.aspx" title="分解指标查询"  description="分解指标查询" resourceKey="TargetSelect"/>
-    <siteMapNode id="3" url="/SystemConfiguration/TargetCollectDisplay_B.aspx" title="分解指标查询B"  description="分解指标查询" resourceKey="TargetSelectB"/>
+    <!--<siteMapNode id="3" url="/SystemConfiguration/TargetCollectDisplay_B.aspx" title="分解指标查询B"  description="分解指标查询" resourceKey="TargetSelectB"/>-->
     <siteMapNode id="4" url="/BusinessReport/TargetPlanDetailReported.aspx" title="分解指标上报"  description="计划指标上报" resourceKey="UpLoadTargetPlanDetail"/>
 
     <siteMapNode id="113" url="#" title="系统报表"  description="系统报表" resourceKey="SystemReportForm">
