@@ -155,7 +155,7 @@
 
 
                 <div id="ApproveAttachDiv" style="padding-bottom: 10px; padding-top: 10px;">
-                    <div style="border: 1px solid #ccc; height: 50px; padding-top: 5px">
+                    <div style="border: 1px solid #ccc; height: 50px; padding-top: 5px;background:#fff;">
                         <div class="content_title1_Left" style="width: 100%; padding-bottom: 10px;">
                             <div>
                                 <label style="padding-left: 10px; color: #012b80; font-weight: bold">

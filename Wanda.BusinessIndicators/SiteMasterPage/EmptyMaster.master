@@ -23,7 +23,7 @@
     <link rel="shortcut icon" href="/Images/images1/favicon.ico" type="image/x-icon" />
     <link href="/Styles/css/Styles.css" rel="stylesheet" />
     <link href="/Styles/css/layout.css" rel="stylesheet" />
-
+    <link href="../Styles/css/main.css" rel="stylesheet" />
     <%--以下是生产环境的wf工具条
     <script type="text/javascript" src="http://wf.LJTH.cn/WebApp/Wanda.Platform.WorkFlow.Controls.Handler/script/wanda-wf-js.js"></script>
     <link href="http://wf.LJTH.cn/WebApp/Wanda.Platform.WorkFlow.Controls.Handler/css/wanda-wf-style.css" rel="Stylesheet" type="text/css" />

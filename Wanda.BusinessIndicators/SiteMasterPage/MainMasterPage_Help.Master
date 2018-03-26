@@ -48,6 +48,7 @@
     <link rel="stylesheet" type="text/css" href="/Scripts/UpLoad/uploadify.css" />
     <link href="/Styles/css/Styles.css" rel="stylesheet" />
     <link href="/Styles/css/layout.css" rel="stylesheet" />
+    <link href="../Styles/css/main.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -58,14 +59,15 @@
     <div style="height: 24px;"></div>
 
     <div class="Pagebox">
-        <div class="header_target" style="height: 122px">
-            <div class="logo_target"><span>经营指标管控系统</span></div>
-            <div class="map_target">
-                <div class="logInfo_target">
+        <div class="header_target" style="height: auto">
+            <div class="logo_target">
+                <img src="../Images/logo0.png" alt="经营指标管控系统"/>
+                <span>经营指标管控系统</span>
+                <div class="map_target">
                     <span>欢迎您，<%=HttpContext.Current.User.Identity.Name %> </span>
                 </div>
             </div>
-            <div style="clear: both"></div>
+            <div style="height:5px;clear: both;background: rgb(232, 235, 239);"></div>
             <div class="jMenu">
                 <ul id="jMenu">
                     <% if (this.NavigatorNodes.FindAll(n => n.Enable).Count >= 1)
@@ -99,7 +101,7 @@
         <!--header-->
         <div id="sitmap" class="breadcrumb_nav" runat="server" clientidmode="Static"></div>
         <form id="form1" runat="server">
-            <div id="main" style="margin-left: 3px; margin-right: 3px;">
+            <div id="main">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
             </div>

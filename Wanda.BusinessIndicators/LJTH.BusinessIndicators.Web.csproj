@@ -154,6 +154,7 @@
     <Content Include="Scripts\TreeGrid\jquery-1.7.1.js" />
     <Content Include="Scripts\TreeGrid\TreeGrid.css" />
     <Content Include="Scripts\TreeGrid\TreeGrid.js" />
+    <Content Include="Styles\css\main.css" />
     <Content Include="Styles\TreeGrid.css" />
     <Content Include="SystemConfiguration\TargetPlanDetailReported.aspx" />
     <Content Include="WebService\MobileCommonWebService.asmx" />
