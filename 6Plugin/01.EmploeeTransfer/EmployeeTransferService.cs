@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Quartz;
-using Lib.Model.Filter;
 using Plugin.EmploeeTransfer.Models;
 using System.Data;
-using Framework.Data;
 using System.Transactions;
 using Plugin.EmployeeTransfer.Helper.DbHelper;
+using Lib.Data;
 
 namespace Plugin.EmployeeTransfer
 {

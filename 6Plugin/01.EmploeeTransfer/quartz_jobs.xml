@@ -23,7 +23,7 @@
         <group>EmployeeTransferServiceTriggerGroup</group>
         <job-name>EmployeeTransferService</job-name>
         <job-group>EmployeeTransferServiceGroup</job-group>
-        <cron-expression>*/1 * * * * ?</cron-expression>
+        <cron-expression>0 30 0 ? * *</cron-expression>
       </cron>
     </trigger>
   </schedule>
