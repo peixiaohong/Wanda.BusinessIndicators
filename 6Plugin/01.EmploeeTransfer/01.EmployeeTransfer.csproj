@@ -137,7 +137,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="01.EmployeeTransfer_TemporaryKey.pfx" />
     <None Include="App.config" />
     <None Include="install\InstallService.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
