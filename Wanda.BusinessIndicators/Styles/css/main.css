@@ -269,3 +269,12 @@
 .txtdisable{
     color: #999 !important;
 }
+.Td_Merge {
+    background-color: #fff;
+}
+.uploadify-button-text a {
+    color: #cb5c61 !important;
+}
+.tab_005 td a:hover, .tab_005 td a:visited, .tab_005 td a:link {
+    color: #337ab7;
+}

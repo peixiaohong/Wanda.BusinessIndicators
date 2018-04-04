@@ -23,7 +23,7 @@
             <asp:HiddenField runat="server" ID="HideProcessCode" ClientIDMode="Static" />
             <asp:HiddenField runat="server" ID="HiddenBatch" ClientIDMode="Static" />
             <asp:HiddenField runat="server" ID="HideOpinions" ClientIDMode="Static" /> <br />
-              <span style="color:red">注：上传excel后，若页面没有出现相应数据，请稍等几分钟再次刷新页面（数据正在后台进行计算），即可恢复正常。请勿因此重复上传数据。</span>
+              <span style="color:#cb5c61">注：上传excel后，若页面没有出现相应数据，请稍等几分钟再次刷新页面（数据正在后台进行计算），即可恢复正常。请勿因此重复上传数据。</span>
         </div>
         <!--导航栏 开始-->
         <targetReportUC:TargetReportUserControl runat="server" ID="UserControl" />
