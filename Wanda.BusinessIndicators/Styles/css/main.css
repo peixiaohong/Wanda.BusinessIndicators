@@ -55,6 +55,9 @@
     padding: 8px 0;
     border-bottom:1px solid #9d2328;
 }
+.jMenu li ul {
+    overflow:visible !important;
+}
 .jMenu li ul li,.jMenu li ul li a.isParent {
     background: #f6f6f6;
     border-bottom:0px solid;
@@ -72,6 +75,9 @@
 .jMenu ul li:hover{
     color:#000;
     border-bottom:3px solid #9d2328;
+}
+.jMenu ul li ul li a:hover{
+    background: #f6f6f6;
 }
 .jMenu ul li.current a:hover span{
     color:#fff !important;
@@ -136,11 +142,17 @@
 }
 .tab_005 td {
     color: #444;
-    background: #fff !important;
     border-top: 1px solid #eee !important;
     border-bottom: 1px solid #eee !important;
 }
-.tab_005, .tab_005 th, .tab_005 .th_Sub, .tab_005 .th_Sub2, .tab_005 .th_Sub1 {
+.tab_005 th a {
+    color: #444 !important;
+}
+.tab_005 {
+    color: #444;
+    border: 1px solid #eee !important;
+}
+.tab_005 th, .tab_005 .th_Sub, .tab_005 .th_Sub2, .tab_005 .th_Sub1 {
     color: #444;
     background: #f6f6f6 !important;
     border: 1px solid #eee !important;
@@ -194,4 +206,34 @@
 }
 #ApproveAttachDiv > div {
     border: 1px solid #eee !important;
+}
+.aui_outer, .aui_inner{
+    border: 0px solid !important;
+}
+.aui_titleBar,.aui_title {
+    background: #9d2328;
+}
+.tab02 th {
+    background: #f6f6f6;
+}
+.tab02 th, .tab02 td, #MonthReportNActualAmmount {
+    border: 1px solid #eee;
+    outline: 0;
+}
+.aui_close {
+    color: #fff !important;
+}
+.aui_close:hover {
+    background: transparent;
+}
+.btn_blue {
+    background: #d2322d;
+    border: 1px solid #cb5c61;
+    border-radius: 5px;
+}
+.btn_gray {
+    background: #fff;
+    color: #cb5c61;
+    border: 1px solid #cb5c61;
+    border-radius: 5px;
 }
