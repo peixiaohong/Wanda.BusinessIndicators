@@ -50,7 +50,7 @@
                                 <asp:CheckBox ID="chkIsLastestVersion" ClientIDMode="Static" runat="server" Text="包含审批中" />
                             </td>
                             <th>
-                                <a class="btn_search" id="ContentPlaceHolder1_LinkButton1" href="#" runat="server" onserverclick="ContentPlaceHolder1_LinkButton1_ServerClick"><span>查询</span></a>
+                                <a class="btn_search" id="ContentPlaceHolder1_LinkButton1" href="#" runat="server" onserverclick="ContentPlaceHolder1_LinkButton1_ServerClick"><span><i class="fa fa-search"></i>&nbsp;查询</span></a>
                            
                             </th>
                         </tr>

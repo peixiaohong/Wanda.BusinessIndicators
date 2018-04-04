@@ -30,7 +30,7 @@
         <div id="weiwancheng1" style="margin-top: 10px;">
             <div id="DownLoadModel" class="">
                 <span style="font-size: 13px; height: 30px; line-height: 60px; display: block; top: -35px; right: 0; z-index: 100; padding-right: 0px;">
-                    <div class="uploadify-button " id="Div4" style="HEIGHT: 25px; LINE-HEIGHT: 25px; text-indent: 0px; WIDTH: 120px; cursor: pointer;">
+                    <div class="uploadify-button " id="Div4" style="HEIGHT: 25px; LINE-HEIGHT: 25px; text-indent: 0px; WIDTH: 150px; cursor: pointer;">
                         <span class="uploadify-button-text">
                             <a id="A4" style="text-decoration: none;" href="javascript:DownLoadTargetPlanExcel(this)">请点此下载填报模版</a></span>
                     </div>

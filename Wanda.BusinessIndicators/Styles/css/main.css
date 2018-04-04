@@ -237,3 +237,35 @@
     border: 1px solid #cb5c61;
     border-radius: 5px;
 }
+.uploadify-button {
+    background: #fff;
+    border: 1px solid #cb5c61;
+    color: #cb5c61;
+    font-weight: normal;
+    border-radius: 2px;
+    padding: 0 12px;
+}
+
+.btn_search, .tab_search span {
+    background: #fff;
+    color: #cb5c61;
+}
+.btn_search {
+    height: auto;
+    border: 1px solid #cb5c61;
+    border-radius: 2px;
+    text-decoration: none !important;
+}
+.tab_search span {
+    padding: 0;
+    font-weight: normal;
+}
+.postion_num, .txt {
+    color: #cb5c61 !important;
+}
+.current .postion_num, .current .txt {
+    color: #fff !important;
+}
+.txtdisable{
+    color: #999 !important;
+}

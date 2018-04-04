@@ -160,7 +160,9 @@
     <Content Include="Scripts\TreeGrid\jquery-1.7.1.js" />
     <Content Include="Scripts\TreeGrid\TreeGrid.css" />
     <Content Include="Scripts\TreeGrid\TreeGrid.js" />
+    <Content Include="Styles\css\font-awesome.min.css" />
     <Content Include="Styles\css\main.css" />
+    <Content Include="Styles\fonts\fontawesome-webfont.svg" />
     <Content Include="Styles\ljth\login.css" />
     <Content Include="Styles\TreeGrid.css" />
     <Content Include="SystemConfiguration\TargetPlanDetailReported.aspx" />
@@ -1852,6 +1854,11 @@
     <Content Include="Scripts\multiple-select-master\multiple-select.jquery.json" />
     <Content Include="SiteMasterPage\MainMasterPage_Help.Master" />
     <Content Include="SiteMasterPage\Empty.Master" />
+    <Content Include="Styles\fonts\fontawesome-webfont.eot" />
+    <Content Include="Styles\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Styles\fonts\fontawesome-webfont.woff" />
+    <Content Include="Styles\fonts\FontAwesome.otf" />
+    <Content Include="Styles\fonts\fontawesome-webfont.woff2" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

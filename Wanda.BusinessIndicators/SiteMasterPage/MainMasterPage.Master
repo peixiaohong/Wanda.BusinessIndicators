@@ -43,7 +43,7 @@
     <link href="http://sso4pub.wanda-dev.cn/Styles/floatMenu.css" rel="Stylesheet" type="text/css" />
     <script src="http://sso4pub.wanda-dev.cn/Scripts/floatMenu.js" type="text/javascript"></script>
      <%--选人控件的样式--%>
-
+    <link href="../Styles/css/font-awesome.min.css" rel="stylesheet" />
     <link href="/Styles/mini.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="/Scripts/UpLoad/uploadify.css" />
     <link href="/Styles/css/Styles.css" rel="stylesheet" />

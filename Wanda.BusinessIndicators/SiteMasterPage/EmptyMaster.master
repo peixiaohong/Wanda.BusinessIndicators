@@ -21,6 +21,7 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <link rel="shortcut icon" href="/Images/images1/favicon.ico" type="image/x-icon" />
+    <link href="../Styles/css/font-awesome.min.css" rel="stylesheet" />
     <link href="/Styles/css/Styles.css" rel="stylesheet" />
     <link href="/Styles/css/layout.css" rel="stylesheet" />
     <link href="../Styles/css/main.css" rel="stylesheet" />
