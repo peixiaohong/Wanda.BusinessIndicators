@@ -115,6 +115,14 @@
     <Content Include="Images\folderClose.png" />
     <Content Include="Images\folderOpen.png" />
     <Content Include="Images\images1\u.jpg" />
+    <Content Include="Images\ljth\62.jpg" />
+    <Content Include="Images\ljth\67-991-611-01.png" />
+    <Content Include="Images\ljth\lg_login_sbmt_hover_wev8.png" />
+    <Content Include="Images\ljth\lg_login_sbmt_wev8.png" />
+    <Content Include="Public\Bridge.aspx" />
+    <Content Include="Public\Login.aspx" />
+    <Content Include="Public\Logout.aspx" />
+    <Content Include="Public\OABridge.aspx" />
     <Content Include="Scripts\BusinessReport\ComprehensiveReportForms.js" />
     <Content Include="Scripts\BusinessReport\FixedRpt.js" />
     <Content Include="Scripts\BusinessReport\TargetPlanReported.js" />
@@ -153,6 +161,7 @@
     <Content Include="Scripts\TreeGrid\TreeGrid.css" />
     <Content Include="Scripts\TreeGrid\TreeGrid.js" />
     <Content Include="Styles\css\main.css" />
+    <Content Include="Styles\ljth\login.css" />
     <Content Include="Styles\TreeGrid.css" />
     <Content Include="SystemConfiguration\TargetPlanDetailReported.aspx" />
     <Content Include="WebService\MobileCommonWebService.asmx" />
@@ -1149,6 +1158,41 @@
     <Compile Include="DepartmentStoreReport\PlayVideo.aspx.designer.cs">
       <DependentUpon>PlayVideo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Public\Bridge.aspx.cs">
+      <DependentUpon>Bridge.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\Bridge.aspx.designer.cs">
+      <DependentUpon>Bridge.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Public\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Public\Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Public\OABridge.aspx.cs">
+      <DependentUpon>OABridge.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\OABridge.aspx.designer.cs">
+      <DependentUpon>OABridge.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SiteMasterPage\Empty.Master.cs">
+      <DependentUpon>Empty.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SiteMasterPage\Empty.Master.designer.cs">
+      <DependentUpon>Empty.Master</DependentUpon>
+    </Compile>
     <Compile Include="SiteMasterPage\MainMasterPage_Help.Master.cs">
       <DependentUpon>MainMasterPage_Help.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1807,6 +1851,7 @@
     <Content Include="Scripts\multiple-select-master\docs\README.md" />
     <Content Include="Scripts\multiple-select-master\multiple-select.jquery.json" />
     <Content Include="SiteMasterPage\MainMasterPage_Help.Master" />
+    <Content Include="SiteMasterPage\Empty.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1855,12 +1900,19 @@
       <Project>{ab142c57-a632-4958-9814-4f7c3ea9083a}</Project>
       <Name>4ViewModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\6Plugin\04.SSO\04.SSO.csproj">
+      <Project>{3bc18b77-1027-45b1-bae9-396b6e14de38}</Project>
+      <Name>04.SSO</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\Charts\" />
     <Folder Include="Images\help\" />
     <Folder Include="Scripts\json\" />
     <Folder Include="Scripts\ProtoType\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

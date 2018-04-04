@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc12="http://www.w3.org/2003/05/soap-encoding" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope" xmlns:tns="http://localhost/services/HrmUserService" xmlns:soapenc11="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap11="http://schemas.xmlsoap.org/soap/envelope/" targetNamespace="http://localhost/services/HrmUserService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://localhost/services/HrmUserService">
+      <xsd:element name="checkUser">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="checkUserResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getToken">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getTokenResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getTokenRequest">
+    <wsdl:part name="parameters" element="tns:getToken" />
+  </wsdl:message>
+  <wsdl:message name="checkUserRequest">
+    <wsdl:part name="parameters" element="tns:checkUser" />
+  </wsdl:message>
+  <wsdl:message name="getTokenResponse">
+    <wsdl:part name="parameters" element="tns:getTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="checkUserResponse">
+    <wsdl:part name="parameters" element="tns:checkUserResponse" />
+  </wsdl:message>
+  <wsdl:portType name="HrmUserServicePortType">
+    <wsdl:operation name="checkUser">
+      <wsdl:input name="checkUserRequest" message="tns:checkUserRequest" />
+      <wsdl:output name="checkUserResponse" message="tns:checkUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getToken">
+      <wsdl:input name="getTokenRequest" message="tns:getTokenRequest" />
+      <wsdl:output name="getTokenResponse" message="tns:getTokenResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HrmUserServiceHttpBinding" type="tns:HrmUserServicePortType">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="checkUser">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="checkUserRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="checkUserResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getToken">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getTokenRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getTokenResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HrmUserService">
+    <wsdl:port name="HrmUserServiceHttpPort" binding="tns:HrmUserServiceHttpBinding">
+      <wsdlsoap:address location="http://192.168.50.118/services/HrmUserService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
