@@ -39,7 +39,8 @@ namespace LJTH.BusinessIndicators.Engine
             {
                 return _SequenceService;
             }
-        }private static SequenceEngine _SequenceService = new SequenceEngine();
+        }
+        private static SequenceEngine _SequenceService = new SequenceEngine();
 
         private Dictionary<string, ISequence> InterfaceInstanceList = new Dictionary<string, ISequence>();
 
