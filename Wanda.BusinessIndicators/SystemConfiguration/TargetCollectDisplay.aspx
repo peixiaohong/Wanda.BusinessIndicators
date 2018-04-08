@@ -38,7 +38,7 @@
                         </td>
 
                         <th>
-                            <a class="btn_search" id="ContentPlaceHolder1_LinkButton1" href="#" onclick="GetSumList()"><span>查询</span></a>
+                            <a class="btn_search" id="ContentPlaceHolder1_LinkButton1" href="#" onclick="GetSumList()"><span><i class="fa fa-search"></i>&nbsp;查询</span></a>
                         </th>
                     </tr>
                 </tbody>

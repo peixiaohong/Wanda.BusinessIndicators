@@ -23,7 +23,7 @@
             <asp:HiddenField runat="server" ID="HideProcessCode" ClientIDMode="Static" />
             <asp:HiddenField runat="server" ID="HiddenBatch" ClientIDMode="Static" />
             <asp:HiddenField runat="server" ID="HideOpinions" ClientIDMode="Static" /> <br />
-              <span style="color:red">注：上传excel后，若页面没有出现相应数据，请稍等几分钟再次刷新页面（数据正在后台进行计算），即可恢复正常。请勿因此重复上传数据。</span>
+              <span style="color:#cb5c61">注：上传excel后，若页面没有出现相应数据，请稍等几分钟再次刷新页面（数据正在后台进行计算），即可恢复正常。请勿因此重复上传数据。</span>
         </div>
         <!--导航栏 开始-->
         <targetReportUC:TargetReportUserControl runat="server" ID="UserControl" />
@@ -32,7 +32,7 @@
         <div id="weiwancheng1" style="margin-top: 10px;">
             <div id="DownLoadModel" class="">
                 <span style="font-size: 13px; height: 30px; line-height: 60px; display: block; top: -35px; right: 0; z-index: 100; padding-right: 0px;">
-                    <div class="uploadify-button " id="Div4" style="HEIGHT: 25px; LINE-HEIGHT: 25px; text-indent: 0px; WIDTH: 120px; cursor: pointer;">
+                    <div class="uploadify-button " id="Div4" style="HEIGHT: 25px; LINE-HEIGHT: 25px; text-indent: 0px; WIDTH: 150px; cursor: pointer;">
                         <span class="uploadify-button-text">
                             <a id="A4" style="text-decoration: none;" href="javascript:DownLoadTargetPlanExcel(this)">请点此下载填报模版</a></span>
                     </div>

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using LJTH.Lib.Data.AppBase;
 using LJTH.Lib.AuthCenter.Model;
-using LJTH.Lib.Data.AppBase;
 
 namespace LJTH.Lib.AuthCenter.DAL
 {

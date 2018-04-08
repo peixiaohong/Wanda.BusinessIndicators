@@ -13,7 +13,6 @@ using Wanda.Workflow.Client;
 using Wanda.Workflow.Object;
 using Lib.Xml;
 using System.Xml.Linq;
-using Wanda.Workflow.Object;
 using Wanda.Platform.WorkFlow.ClientComponent;
 namespace LJTH.BusinessIndicators.Web.AjaxHander
 {
