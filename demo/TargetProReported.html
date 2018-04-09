@@ -209,7 +209,7 @@ function __doPostBack(eventTarget, eventArgument) {
             <input name="ctl00$ContentPlaceHolder1$HideProcessCode" id="HideProcessCode" value="YY_WD-SYSTEM-JY-PRO" type="hidden">
             <input name="ctl00$ContentPlaceHolder1$HiddenBatch" id="HiddenBatch" type="hidden">
             <input name="ctl00$ContentPlaceHolder1$HideOpinions" id="HideOpinions" type="hidden"> <br>
-              <span style="color:red">注：上传excel后，若页面没有出现相应数据，请稍等几分钟再次刷新页面（数据正在后台进行计算），即可恢复正常。请勿因此重复上传数据。</span>
+              <span style="color:#cb5c61">注：上传excel后，若页面没有出现相应数据，请稍等几分钟再次刷新页面（数据正在后台进行计算），即可恢复正常。请勿因此重复上传数据。</span>
         </div>
         <!--导航栏 开始-->
         
@@ -330,7 +330,7 @@ function __doPostBack(eventTarget, eventArgument) {
                 <span style="font-size: 13px; height: 30px; line-height: 60px; display: block; top: -35px; right: 0; z-index: 100; padding-right: 0px;">
                     <div class="uploadify-button " id="Div4" style="HEIGHT: 25px; LINE-HEIGHT: 25px; text-indent: 0px; WIDTH: 150px; cursor: pointer;">
                         <span class="uploadify-button-text">
-                            <a id="A4" style="text-decoration: none;" href="javascript:DownLoadTargetPlanExcel(this)">请点此下载填报模版</a></span>
+                            <a id="A4" style="text-decoration: none;" href="javascript:void(0)">请点此下载填报模版</a></span>
                     </div>
                 </span>
             </div>
@@ -358,7 +358,7 @@ function __doPostBack(eventTarget, eventArgument) {
             </div>-->
             <div class="DownExcelDiv">
                 <span class="DownExcelspan">
-                    <div class="uploadify-button W100P" id="file_upload-button1" onclick="DownExcel(this);">
+                    <div class="uploadify-button W100P" id="file_upload-button1" >
                         <span>
                             <label class="DownExcelLabel" id="BtnDownload">导出数据</label></span>
                     </div>
@@ -380,7 +380,7 @@ function __doPostBack(eventTarget, eventArgument) {
             </div>-->
             <div class="DownExcelDiv">
                 <span class="DownExcelspan">
-                    <div class="uploadify-button W100P" id="Div2" onclick="DownExcelMonthReport();">
+                    <div class="uploadify-button W100P" id="Div2">
                         <span>
                             <label class="DownExcelLabel" id="Label1">导出数据</label></span>
                     </div>
@@ -930,7 +930,7 @@ ContentPlaceHolder1_MutipleUpload_Show();//]]>
 
 
 
-<div id="_my97DP" style="position: absolute; top: -1970px; left: -1970px;"><iframe style="width: 186px; height: 198px;" src="TargetProReported_files/My97DatePicker.htm" border="0" scrolling="no" frameborder="0"></iframe></div><div id="tmplContainer__">
+<!--<div id="_my97DP" style="position: absolute; top: -1970px; left: -1970px;"><iframe style="width: 186px; height: 198px;" src="TargetProReported_files/My97DatePicker.htm" border="0" scrolling="no" frameborder="0"></iframe></div><div id="tmplContainer__">-->
 
 
 
@@ -3153,127 +3153,7 @@ ContentPlaceHolder1_MutipleUpload_Show();//]]>
     </script>
 
     <!-------------------当月未完成编辑------------------------------->
-    <script type="text/x-jquery-tmpl" id="rpt_current_info_return_tmpl">
-        <input type="hidden" id="hide_info_return_id" value="${ID}" />
-        <table style="width: 600px;" class="tab02">
-            <tr>
-                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;"> 公&nbsp;&nbsp;&nbsp;&nbsp;司 </th>
-                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${CompanyName}
-                </td>
-            </tr>
-            <tr>
-                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">指标名称</th>
-                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${TargetName}
-                </td>
-            </tr>
-            <!--<tr>
-                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月补回/新增差额</th>
-                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${AddDifference.thousandize0OrEmpty(0)}
-                </td>
-            </tr>-->
-            <tr>
-                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">当月计划</th>
-                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NPlanAmmount.thousandize0OrEmpty(0)}
-                </td>
-            </tr>
-            <tr>
-                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">当月实际</th>
-                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NActualAmmount.thousandize0OrEmpty(0)}
-                </td>
-            </tr>
-            <tr>
-                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">当月差额</th>
-                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NDifference.thousandize0OrEmpty(0)}
-                </td>
-            </tr>
-            <tr>
-                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计计划</th>
-                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}
-                </td>
-            </tr>
-            <tr>
-                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计实际</th>
-                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NAccumulativeActualAmmount.thousandize0OrEmpty(0)}
-                </td>
-            </tr>
-            <tr>
-                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计差额</th>
-                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NAccumulativeDifference.thousandize0OrEmpty(0)}
-                </td>
-            </tr>
-            <tr>
-                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">要求期限</th>
-                <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">{{if FormatDate(CommitDate,false) =="---"}}${FormatDate(CommitDate,false)} {{else}} ${FormatDate(CommitDate,false,"CN").substring(0,FormatDate(CommitDate,false,"CN").length-3)}月{{/if}}</td>
-            </tr>
 
-            <tr>
-                <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">补回情况</th>
-                <td style="width: 65%; padding: 10px; padding-left: 20px; text-align: left;">
-
-                    {{if ReturnType ==1 }}
-                    <label name="1" style="font-weight:700">补回中</label>
-                    {{else ReturnType ==2 }}
-                    <label name="2" style="font-weight:700">到期未补回</label>
-                    {{else ReturnType==5}}
-                    <label name="5" style="font-weight:700">本月新增指标</label>
-                    {{else ReturnType==6}}
-                    <label name="6" style="font-weight:700">按期补回</label>
-                    {{else ReturnType==7}}
-                    <label name="7" style="font-weight:700">提前补回</label>
-                    {{/if}}
-                    <br />
-                    <div style="padding:10px 0px 0px 0px;">
-                        <select style="width: 60%; line-height:10px; " id="rpt_info_return_returntype" onchange="SetReturnDesc(this);">
-                            <option value="TT">--请选择--</option>
-                            {{if ReturnType ==1}}
-                            <option value="T1">补回中</option>
-                            <option value="T2" {{if ReturnType_Sub =="T2"}} selected="selected" {{/if}}>承诺提前至X月份补回</option>
-                            <option value="T3" {{if ReturnType_Sub =="T3"}} selected="selected" {{/if}}>预计无法按期补回，承诺X月份补回</option>
-
-                            <option value="T4" {{if ReturnType_Sub =="T4"}} selected="selected" {{/if}}>预计年内无法补回（必保全年完成【】指标【】，差额【】）</option>
-                            <option value="T41" {{if ReturnType_Sub =="T41"}} selected="selected" {{/if}}>完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
-                            <option value="T42" {{if ReturnType_Sub =="T42"}} selected="selected" {{/if}}>未完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
-
-                            <option value="T6">其它情况</option>
-                            {{else ReturnType ==2}}
-                            <option value="T2" {{if ReturnType_Sub =="T2"}} selected="selected" {{/if}}>承诺X月份补回</option>
-
-                            <option value="T4" {{if ReturnType_Sub =="T4"}} selected="selected" {{/if}}>预计年内无法补回（必保全年完成【】指标【】，差额【】）</option>
-                            <option value="T41" {{if ReturnType_Sub =="T41"}} selected="selected" {{/if}}>完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
-                            <option value="T42" {{if ReturnType_Sub =="T42"}} selected="selected" {{/if}}>未完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
-
-                            <option value="T6">其它情况</option>
-                            {{else ReturnType ==5}}
-                            <option value="T2" {{if ReturnType_Sub =="T2"}} selected="selected" {{/if}}>承诺X月份补回</option>
-                            <option value="T4" {{if ReturnType_Sub =="T4"}} selected="selected" {{/if}}>预计年内无法补回（必保全年完成【】指标【】，差额【】）</option>
-                            <option value="T41" {{if ReturnType_Sub =="T41"}} selected="selected" {{/if}}>完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
-                            <option value="T42" {{if ReturnType_Sub =="T42"}} selected="selected" {{/if}}>未完成承诺数据（实际全年完成【】指标【】，差额【】）</option>
-                            <option value="T6" {{if ReturnType_Sub =="T6"}} selected="selected" {{/if}}>其它情况</option>
-                            {{/if}}
-                        </select>
-                        <input type="text" id="rpt_info_return_PromissDate" {{if ReturnType_Sub =="T2" ||ReturnType_Sub =="T3" ||ReturnType_Sub =="T6"}} style="width: 120px; line-height:22px;" {{else}} style="width: 120px; line-height:22px;display:none;" {{/if}} class="Wdate" onfocus="WdatePicker({ dateFmt: 'yyyy-MM',Mchanging:ChangelFunc('rpt_info_return_returntype') })" value="{{if FormatDate(PromissDate,false) !="---"}}${FormatDate(PromissDate,false).substring(0,FormatDate(PromissDate,false).length-3)}{{/if}}" />
-                        <input type="text" id="rpt_info_return_PromiseTarget" {{if ReturnType_Sub =="T4"}} style="width: 120px; line-height:22px;" {{else}} style="width: 120px; line-height:22px;display:none;" {{/if}} onblur="ChangePromiseTarget();" onchange="ChangePromiseTarget();" value="" placeholder="必保全年金额" />
-                    </div>
-                    <textarea rows="5" cols="4"
-                              {{if ReturnType_Sub=="T1" ||ReturnType_Sub=="T2" ||ReturnType_Sub=="T3" ||ReturnType_Sub=="T4"||ReturnType_Sub=="T5" }}
-                              style="width: 95%; margin-top: 10px; background-color:#ececec;" readonly="readonly"
-                              {{else}}
-                              style="width: 95%; margin-top: 10px;"
-                              {{/if}}
-                              id="rpt_info_return_back">${ReturnDescription}</textarea>
-                </td>
-            </tr>
-        </table>
-    </script>
 
 
 

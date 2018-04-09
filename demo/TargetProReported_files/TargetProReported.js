@@ -166,12 +166,12 @@ function TargetDetail() {
     $("#CompleteDetailHead").empty();
     $("#tab2_rows").empty();
 
-    //加载表头
-    loadTmpl_2('#TmplProCompany_South_Head').tmpl().appendTo('#CompleteDetailHead'); //加载列头 
+    ////加载表头
+    //loadTmpl_2('#TmplProCompany_South_Head').tmpl().appendTo('#CompleteDetailHead'); //加载列头 
 
-    if (ComplateDetailData[0].ObjValue.length > 4) {
-        loadTmpl_2('#TmplProCompanyDetail_South_Data').tmpl(ComplateDetailData[0]).appendTo('#tab2_rows');
-    }
+    //if (ComplateDetailData[0].ObjValue.length > 4) {
+    //    loadTmpl_2('#TmplProCompanyDetail_South_Data').tmpl(ComplateDetailData[0]).appendTo('#tab2_rows');
+    //}
 
 }
 
@@ -183,15 +183,7 @@ function GetMonthStr() {
 
 //月报说明
 function GetMonthGetDescription() {
-    WebUtil.ajax({
-        async: false,
-        url: "/TargetReportedControll/GetMonthTRptDescription",
-        args: { rpts: WebUtil.jsonToString(ReportInstance) },
-        successReturn: function (result) {
-            $("#MonthGetDescription").val(result);
-            Description = result;
-        }
-    });
+   
 
 }
 

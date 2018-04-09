@@ -43,6 +43,7 @@ function setArrow_nLeft(sender) {
             $(".arrow_n").css("left", "590px");
             $("#PromptMessage").html("请先将累计未完成的补回情况填写完后，再填写当月的补回情况，未完成原因及措施。");
             $("#PromptMessage").addClass("Tishi");
+            $("#PromptMessage").css("color", "#cb5c61");
             return true;
             break;
 

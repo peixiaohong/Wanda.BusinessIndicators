@@ -35,7 +35,7 @@ function operateNav(sender) {
 
             var obj = $("#Tab_MissTargetHead");
             var tab = $("#Tbody_MissTargetData");
-            FloatHeader(obj, tab);
+            //FloatHeader(obj, tab);
             break;
         case "missCurrentTargetReport": //未完成（当月）
             $("#T2,#UpLoadDataDiv,#DownLoadModel,#UpLoadData,#T4,#T3,#T3_1,#Down1,#RptAttachments,#divMonthLyReportAction,#Down1").hide();
@@ -58,7 +58,7 @@ function operateNav(sender) {
             $("#T2,#UpLoadDataDiv,#DownLoadModel,#T3,#T3_1,#Down1,#T4,#RptAttachments,#UpLoadData").hide();
             $("#T5").show();
 
-            SaveMonthlyReportLog(1);
+            //SaveMonthlyReportLog(1);
             $("#divMonthLyReportAction").show();//显示日志列表
             setStlye('missTargetReportSpan,monthReportSpan,monthReportReadySpan,monthReportSubmitSpan');
             
