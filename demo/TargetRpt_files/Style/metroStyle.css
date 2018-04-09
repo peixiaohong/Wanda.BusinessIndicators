@@ -1,0 +1,195 @@
+.ztree_new * {
+	FONT-SIZE: 12px; FONT-FAMILY: Verdana, Arial, Helvetica, AppleGothic, sans-serif; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.ztree_new {
+	COLOR: #333; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; MARGIN: 0px; PADDING-RIGHT: 5px
+}
+.ztree_new LI {
+	LIST-STYLE-TYPE: none; WHITE-SPACE: nowrap; OUTLINE-WIDTH: 0px; PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 0px; OUTLINE-STYLE: none; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; MARGIN: 0px; OUTLINE-COLOR: invert; LINE-HEIGHT: 17px; PADDING-RIGHT: 0px
+}
+.ztree_new LI UL {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 18px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.ztree_new LI UL.line {
+	BACKGROUND: url(img/line_conn.png) repeat-y 0px 0px
+}
+.ztree_new LI A {
+	CURSOR: pointer; TEXT-DECORATION: none; HEIGHT: 21px; VERTICAL-ALIGN: top; COLOR: #333; MARGIN: 0px; DISPLAY: inline-block; PADDING-RIGHT: 3px; BACKGROUND-COLOR: transparent
+}
+.ztree_new LI A:hover {
+	TEXT-DECORATION: underline
+}
+.ztree_new LI A.curSelectedNode {
+	HEIGHT: 21px; COLOR: black; PADDING-TOP: 0px; BACKGROUND-COLOR: #e5e5e5; opacity: 0.8
+}
+.ztree_new LI A.curSelectedNode_Edit {
+	BORDER-TOP: #666 1px solid; HEIGHT: 21px; BORDER-RIGHT: #666 1px solid; BORDER-BOTTOM: #666 1px solid; COLOR: black; PADDING-TOP: 0px; BORDER-LEFT: #666 1px solid; BACKGROUND-COLOR: #e5e5e5; opacity: 0.8
+}
+.ztree_new LI A.tmpTargetNode_inner {
+	BORDER-TOP: #666 1px solid; HEIGHT: 21px; BORDER-RIGHT: #666 1px solid; BORDER-BOTTOM: #666 1px solid; COLOR: white; PADDING-TOP: 0px; FILTER: alpha(opacity=80); BORDER-LEFT: #666 1px solid; BACKGROUND-COLOR: #aaa; opacity: 0.8
+}
+.ztree_new LI A.tmpTargetNode_prev {
+	
+}
+.ztree_new LI A.tmpTargetNode_next {
+	
+}
+.ztree_new LI A INPUT.rename {
+	FONT-SIZE: 12px; BORDER-TOP: #585956 1px solid; HEIGHT: 14px; BORDER-RIGHT: #585956 1px solid; WIDTH: 80px; BORDER-BOTTOM: #585956 1px solid; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; BORDER-LEFT: #585956 1px solid; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.ztree_new LI SPAN {
+	LINE-HEIGHT: 21px; MARGIN-RIGHT: 2px
+}
+.ztree_new LI SPAN.button {
+	CURSOR: pointer; BORDER-TOP: 0px; HEIGHT: 21px; BORDER-RIGHT: 0px; WIDTH: 21px; VERTICAL-ALIGN: middle; BACKGROUND-IMAGE: url(img/metro.png); BACKGROUND-REPEAT: no-repeat; BACKGROUND-ATTACHMENT: scroll; BORDER-BOTTOM: 0px; OUTLINE-WIDTH: medium; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; OUTLINE-STYLE: none; PADDING-LEFT: 0px; BORDER-LEFT: 0px; MARGIN: 0px; DISPLAY: inline-block; OUTLINE-COLOR: invert; LINE-HEIGHT: 0; PADDING-RIGHT: 0px; BACKGROUND-COLOR: transparent
+}
+.ztree_new LI SPAN.chk.button {
+	CURSOR: auto; HEIGHT: 13px; WIDTH: 13px; MARGIN: 0px 2px
+}
+.ztree_new LI SPAN.checkbox_false_full.chk.button {
+	BACKGROUND-POSITION: -5px -5px
+}
+.ztree_new LI SPAN.checkbox_false_full_focus.chk.button {
+	BACKGROUND-POSITION: -5px -26px
+}
+.ztree_new LI SPAN.checkbox_false_part.chk.button {
+	BACKGROUND-POSITION: -5px -48px
+}
+.ztree_new LI SPAN.checkbox_false_part_focus.chk.button {
+	BACKGROUND-POSITION: -5px -68px
+}
+.ztree_new LI SPAN.checkbox_false_disable.chk.button {
+	BACKGROUND-POSITION: -5px -89px
+}
+.ztree_new LI SPAN.checkbox_true_full.chk.button {
+	BACKGROUND-POSITION: -26px -5px
+}
+.ztree_new LI SPAN.checkbox_true_full_focus.chk.button {
+	BACKGROUND-POSITION: -26px -26px
+}
+.ztree_new LI SPAN.checkbox_true_part.chk.button {
+	BACKGROUND-POSITION: -26px -48px
+}
+.ztree_new LI SPAN.checkbox_true_part_focus.chk.button {
+	BACKGROUND-POSITION: -26px -68px
+}
+.ztree_new LI SPAN.checkbox_true_disable.chk.button {
+	BACKGROUND-POSITION: -26px -89px
+}
+.ztree_new LI SPAN.radio_false_full.chk.button {
+	BACKGROUND-POSITION: -47px -5px
+}
+.ztree_new LI SPAN.radio_false_full_focus.chk.button {
+	BACKGROUND-POSITION: -47px -26px
+}
+.ztree_new LI SPAN.radio_false_part.chk.button {
+	BACKGROUND-POSITION: -47px -47px
+}
+.ztree_new LI SPAN.radio_false_part_focus.chk.button {
+	BACKGROUND-POSITION: -47px -68px
+}
+.ztree_new LI SPAN.radio_false_disable.chk.button {
+	BACKGROUND-POSITION: -47px -89px
+}
+.ztree_new LI SPAN.radio_true_full.chk.button {
+	BACKGROUND-POSITION: -68px -5px
+}
+.ztree_new LI SPAN.radio_true_full_focus.chk.button {
+	BACKGROUND-POSITION: -68px -26px
+}
+.ztree_new LI SPAN.radio_true_part.chk.button {
+	BACKGROUND-POSITION: -68px -47px
+}
+.ztree_new LI SPAN.radio_true_part_focus.chk.button {
+	BACKGROUND-POSITION: -68px -68px
+}
+.ztree_new LI SPAN.radio_true_disable.chk.button {
+	BACKGROUND-POSITION: -68px -89px
+}
+.ztree_new LI SPAN.switch.button {
+	HEIGHT: 21px; WIDTH: 21px
+}
+.ztree_new LI SPAN.root_open.button {
+	BACKGROUND-POSITION: -105px -63px
+}
+.ztree_new LI SPAN.root_close.button {
+	BACKGROUND-POSITION: -126px -63px
+}
+.ztree_new LI SPAN.roots_open.button {
+	BACKGROUND-POSITION: -105px 0px
+}
+.ztree_new LI SPAN.roots_close.button {
+	BACKGROUND-POSITION: -126px 0px
+}
+.ztree_new LI SPAN.center_open.button {
+	BACKGROUND-POSITION: -105px -21px
+}
+.ztree_new LI SPAN.center_close.button {
+	BACKGROUND-POSITION: -126px -21px
+}
+.ztree_new LI SPAN.bottom_open.button {
+	BACKGROUND-POSITION: -105px -42px
+}
+.ztree_new LI SPAN.bottom_close.button {
+	BACKGROUND-POSITION: -126px -42px
+}
+.ztree_new LI SPAN.noline_open.button {
+	BACKGROUND-POSITION: -105px -84px
+}
+.ztree_new LI SPAN.noline_close.button {
+	BACKGROUND-POSITION: -126px -84px
+}
+.ztree_new LI SPAN.root_docu.button {
+	BACKGROUND: none transparent scroll repeat 0% 0%
+}
+.ztree_new LI SPAN.roots_docu.button {
+	BACKGROUND-POSITION: -84px 0px
+}
+.ztree_new LI SPAN.center_docu.button {
+	BACKGROUND-POSITION: -84px -21px
+}
+.ztree_new LI SPAN.bottom_docu.button {
+	BACKGROUND-POSITION: -84px -42px
+}
+.ztree_new LI SPAN.noline_docu.button {
+	BACKGROUND: none transparent scroll repeat 0% 0%
+}
+.ztree_new LI SPAN.ico_open.button {
+	VERTICAL-ALIGN: top; BACKGROUND-POSITION: -147px -21px; MARGIN-RIGHT: 2px
+}
+.ztree_new LI SPAN.ico_close.button {
+	VERTICAL-ALIGN: top; BACKGROUND-POSITION: -147px 0px; MARGIN-RIGHT: 2px
+}
+.ztree_new LI SPAN.ico_docu.button {
+	VERTICAL-ALIGN: top; BACKGROUND-POSITION: -147px -42px; MARGIN-RIGHT: 2px
+}
+.ztree_new LI SPAN.edit.button {
+	VERTICAL-ALIGN: top; BACKGROUND-POSITION: -189px -21px; MARGIN-LEFT: 2px; MARGIN-RIGHT: -1px
+}
+.ztree_new LI SPAN.edit.button:hover {
+	BACKGROUND-POSITION: -168px -21px
+}
+.ztree_new LI SPAN.remove.button {
+	VERTICAL-ALIGN: top; BACKGROUND-POSITION: -189px -42px; MARGIN-LEFT: 2px; MARGIN-RIGHT: -1px
+}
+.ztree_new LI SPAN.remove.button:hover {
+	BACKGROUND-POSITION: -168px -42px
+}
+.ztree_new LI SPAN.add.button {
+	VERTICAL-ALIGN: top; BACKGROUND-POSITION: -189px 0px; MARGIN-LEFT: 2px; MARGIN-RIGHT: -1px
+}
+.ztree_new LI SPAN.add.button:hover {
+	BACKGROUND-POSITION: -168px 0px
+}
+.ztree_new LI SPAN.ico_loading.button {
+	VERTICAL-ALIGN: top; BACKGROUND: url(img/loading.gif) no-repeat 0px 0px; MARGIN-RIGHT: 2px
+}
+UL.tmpTargetztree_new {
+	FILTER: alpha(opacity=80); BACKGROUND-COLOR: #ffe6b0; opacity: 0.8
+}
+SPAN.tmpztree_newMove_arrow {
+	BORDER-TOP: 0px; HEIGHT: 21px; BORDER-RIGHT: 0px; WIDTH: 16px; BACKGROUND: url(img/metro.png) no-repeat -168px -84px; BORDER-BOTTOM: 0px; POSITION: absolute; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; BORDER-LEFT: 0px; MARGIN: 2px 0px 0px 1px; DISPLAY: inline-block; PADDING-RIGHT: 0px
+}
+.ztree_newMask {
+	POSITION: absolute; FILTER: alpha(opacity=0); Z-INDEX: 10000; BACKGROUND-COLOR: #cfcfcf; opacity: 0.0
+}
