@@ -1,0 +1,585 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>
+        经营指标管控系统
+    </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+    <script type="text/javascript" src="./TargetConfiguration_files/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="./TargetConfiguration_files/jquery.blockUI.js"></script>
+    <script type="text/javascript" src="./TargetConfiguration_files/base.js"></script>
+    <script type="text/javascript" src="./TargetConfiguration_files/FloatTable.js"></script>
+
+    <script type="text/javascript" src="./TargetConfiguration_files/jMenu.jquery.js"></script>
+    <link rel="stylesheet" href="./TargetConfiguration_files/default.css" />
+    <script type="text/javascript" src="./TargetConfiguration_files/artDialog.js"></script>
+    <script type="text/javascript" src="./TargetConfiguration_files/jquery.cookie.js"></script>
+    <script type="text/javascript" src="./TargetConfiguration_files/jqueryControl.js"></script>
+    <script type="text/javascript" src="./TargetConfiguration_files/posfixed.js"></script>
+    <script type="text/javascript" src="./TargetConfiguration_files/jquery.tmpl.js"></script>
+    <link href="./TargetConfiguration_files/jmenu.css" rel="stylesheet" />
+    <link href="./TargetConfiguration_files/layer.css" rel="stylesheet" />
+    <link href="./TargetConfiguration_files/layer.ext.css" rel="stylesheet" />
+    <script src="./TargetConfiguration_files/layer.min.js"></script>
+    <script src="./TargetConfiguration_files/layer.ext.js"></script>
+    <link href="./TargetConfiguration_files/font-awesome.min.css" rel="stylesheet" />
+    <link href="./TargetConfiguration_files/mini.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="./TargetConfiguration_files/uploadify.css" />
+    <link href="./TargetConfiguration_files/Styles.css" rel="stylesheet" />
+    <link href="./TargetConfiguration_files/layout.css" rel="stylesheet" />
+    <link href="./TargetConfiguration_files/main.css" rel="stylesheet" />
+    <script type="text/javascript" src="TargetConfiguration_files/CompanyList.js"></script>
+</head>
+<body>
+    <div class="" style="display: none; position: absolute;"><div class="aui_outer"><table class="aui_border"><tbody><tr><td class="aui_nw"></td><td class="aui_n"></td><td class="aui_ne"></td></tr><tr><td class="aui_w"></td><td class="aui_c"><div class="aui_inner"><table class="aui_dialog"><tbody><tr><td colspan="2" class="aui_header"><div class="aui_titleBar"><div class="aui_title" style="cursor: move; display: block;"></div><a class="aui_close" href="javascript:/*artDialog*/;" style="display: block;">×</a></div></td></tr><tr><td class="aui_icon" style="display: none;"><div class="aui_iconBg" style="background: none;"></div></td><td class="aui_main" style="width: auto; height: auto;"><div class="aui_content" style="padding: 20px 25px 5px;"></div></td></tr><tr><td colspan="2" class="aui_footer"><div class="aui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="aui_e"></td></tr><tr><td class="aui_sw"></td><td class="aui_s"></td><td class="aui_se" style="cursor: se-resize;"></td></tr></tbody></table></div></div>
+    <div>
+        <div class="w1240 mauto pr" style="z-index: 99999; width: 100%; position: absolute; height: 20px;" id="wd-fm">
+        </div>
+    </div>
+
+    <div class="Pagebox">
+        <div class="header_target" style="height: auto">
+            <div class="logo_target">
+                <img src="TargetConfiguration_files/logo0.png" alt="经营指标管控系统" />
+                <span>经营指标管控系统</span>
+                <div class="map_target">
+                    <span>欢迎您，zhengguilong </span>
+                </div>
+            </div>
+            <div style="height:5px;clear: both;background: rgb(232, 235, 239);"></div>
+            <div class="jMenu">
+                <ul id="jMenu" class="jMenu">
+
+                    <li class="jmenu-level-0">
+                        <a href="TargetRpt.html" class="first fNiv isParent"><span>月度经营报告</span></a>
+                        <ul style="top: 116px; left: 10px; width: 150px;"></ul>
+                    </li>
+
+                    <li class="jmenu-level-0">
+                        <a href="TargetDirectlyRpt.html" class="first fNiv isParent"><span>月度经营报告</span></a>
+                        <ul style="top: 116px; left: 10px; width: 150px;"></ul>
+                    </li>
+
+                    <li class="jmenu-level-0">
+                        <a href="TargetReported.html" class="first fNiv isParent"><span>月度经营报告上报</span></a>
+                        <ul style="top: 116px; left: 124px; width: 150px;"></ul>
+                    </li>
+
+                    <li class="jmenu-level-0">
+                        <a href="TargetCollectDisplay.html" class="first fNiv isParent"><span>分解指标查询</span></a>
+                        <ul style="top: 116px; left: 266px; width: 150px;"></ul>
+                    </li>
+
+                    <li class="jmenu-level-0">
+                        <a href="TargetPlanDetailReported.html" class="first fNiv isParent"><span>分解指标上报</span></a>
+                        <ul style="top: 108px; left: 380px; width: 150px; overflow: hidden; display: none;"></ul>
+                    </li>
+
+                    <li class="jmenu-level-0">
+                        <a href="CompanyList.html" class="first fNiv isParent"><span>系统报表</span></a>
+                        <ul style="top: 116px; left: 494px; width: 150px;">
+
+                            <li>
+                                <a href="ComprehensiveReportForms.html" class="isParent">综合报表</a>
+                                <ul style="top: 0px; left: 150px; width: 150px;"></ul>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="jmenu-level-0">
+                        <a href="DocumentManager.html" class="first fNiv isParent"><span>档案管理</span></a>
+                        <ul style="top: 116px; left: 580px; width: 150px;">
+
+                            <li>
+                                <a href="#" class="isParent">档案上传</a>
+                                <ul style="top: 0px; left: 150px; width: 150px;"></ul>
+                            </li>
+
+                            <li>
+                                <a href="#" class="isParent">档案下载</a>
+                                <ul style="top: 0px; left: 150px; width: 150px;"></ul>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="current first jmenu-level-0">
+                        <a href="CompanyList.html" class="first fNiv isParent"><span>系统管理</span></a>
+                        <ul style="top: 116px; left: 666px; width: 150px;">
+
+                            <li>
+                                <a href="TargetConfiguration.html" class="isParent">指标基本信息管理</a>
+                                <ul style="top: 0px; left: 150px; width: 150px;"></ul>
+                            </li>
+
+                            <li>
+                                <a href="CompanyList.html" class="isParent">公司属性管理</a>
+                                <ul style="top: 0px; left: 150px; width: 150px;">
+
+                                    <li><a href="CompanyList.html">公司属性管理</a></li>
+
+                                    <li><a href="IfContrastCompany.html">可比属性管理</a></li>
+
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="UpdateTimeConfiguration.html" class="isParent">系统开放时间管理</a>
+                                <ul style="top: 0px; left: 150px; width: 150px;"></ul>
+                            </li>
+
+                            <li>
+                                <a href="ReportApproveStatistical.html" class="isParent">月报上报审批情况</a>
+                                <ul style="top: 0px; left: 150px; width: 150px;"></ul>
+                            </li>
+
+                            <li>
+                                <a href="TargetPlanDetailReported.html" class="isParent">指标上报审批情况</a>
+                                <ul style="top: 0px; left: 150px; width: 150px;"></ul>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="jmenu-level-0">
+                        <a href="#" class="first fNiv isParent"><span>系统帮助</span></a>
+                        <ul style="top: 116px; left: 752px; width: 150px;">
+
+                            <li>
+                                <a href="#" class="isParent">上报月报操作视频</a>
+                                <ul style="top: 0px; left: 150px; width: 150px;"></ul>
+                            </li>
+
+                            <li>
+                                <a href="#" class="isParent">经营指标操作手册</a>
+                                <ul style="top: 0px; left: 150px; width: 150px;"></ul>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+            <!--nav-->
+        </div>
+        <!--header-->
+        <div id="sitmap" class="breadcrumb_nav">您当前所在的位置：</div>
+        <form id="form1">
+            <div id="main">
+
+                <div class="main">
+                    <div class="" style="text-align: center;">
+                        <select name="ctl00$ContentPlaceHolder1$ddlSystem" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ddlSystem\',\'\')', 0)" id="ddlSystem" style="width: 150px; height: 25px;">
+                            <option value="50643d29-25d0-4c7b-af6e-aac2e82863ee">和道国际</option>
+                            <option value="9b647585-15ab-48b9-b286-6788d95a2747">合创</option>
+                            <option selected="selected" value="a00ad17d-57da-4f8b-9c60-807a5e83d7a7">房地产事业部</option>
+                            <option value="d3e1e72e-3c3c-4042-8690-20a3168c8abb">产业发展</option>
+                            <option value="db3e4d6e-a272-48d8-9ce9-aa1dbd4472f2">文旅板块</option>
+                            <option value="78648161-53d5-40ff-935f-78baf767cf03">物业公司</option>
+                            <option value="2eb7465b-95da-450c-aa2f-9af04e06d9bc">热力公司</option>
+                            <option value="aafd9a53-21a0-4dc5-b980-5af04f269816">商贸公司</option>
+                            <option value="72a58a88-bb96-464c-bf05-7195b5e6f6e4">金控</option>
+                            <option value="dd181790-9b5e-4cb4-ad2a-d91dd862bd57">融资部</option>
+                            <option value="a54fb361-9787-480f-b332-0e412ec9bb70">总部费用</option>
+                            <option value="a4f3da3f-fc50-4c3e-b0de-3955904e7d8b">集团总部</option>
+                        </select>
+                    </div>
+                    <div>
+                    </div>
+                </div>
+                <div id="margin_t10">
+                    <div class="tabs_m">
+                        <table style="width: 99%">
+                            <tbody>
+                                <tr>
+                                    <td style="width: auto">
+                                        <ul class="tabs" id="tabhead" style="MARGIN-BOTTOM: 0px; HEIGHT: auto; BORDER-BOTTOM-COLOR: #fff; MARGIN-TOP: 5px"><li class="sd">         <a class="active3 active_sub3" id="tab7049cfd3-f6e4-4ddc-8d15-664e65b1b2c5" onclick="CheckCompanyTmpl('7049cfd3-f6e4-4ddc-8d15-664e65b1b2c5');">销售</a>     </li><li class="sd">         <a class="active3" id="tabbb758856-a380-47af-8a76-09bb39c1bc22" onclick="CheckCompanyTmpl('bb758856-a380-47af-8a76-09bb39c1bc22');">回款</a>     </li><li class="sd">         <a class="active3" id="tab481a168a-0dc3-4181-b260-191d9918fb0d" onclick="CheckCompanyTmpl('481a168a-0dc3-4181-b260-191d9918fb0d');">利润额</a>     </li></ul>
+                                    </td>
+                                    <td style="width: auto; float: right">
+                                        <div class="uploadify-button" style="width: 80px; display: inline; float: right; padding: 0" id="Div2" onclick="">
+                                            <span>
+                                                <label class="DownExcelLabel" id="Label2">指标管理</label>
+                                            </span>
+                                        </div>
+                                        <div class="uploadify-button" style="width: 80px; display: inline; float: right; padding: 0;margin-right:13px" id="file_upload-button1" onclick="AddCompany();">
+                                            <span>
+                                                <label class="DownExcelLabel" id="LabelDownload">添加公司</label>
+                                            </span>
+                                        </div>
+                                        <div class="uploadify-button" style="width: 80px; float: right; display: inline; margin-right: 13px" id="Div1" onclick="">
+                                            <span>
+                                                <label class="DownExcelLabel" id="Label1">导出数据</label>
+                                            </span>
+                                        </div>
+                                        <div style="width: 80px; float: right; display: inline; padding-right: 25px" id="UpLoadData">
+                                            <span>
+                                                <span>
+                                                    <div id="file1" class="uploadify" style="height: 25px; width: 80px;"><object id="SWFUpload_0" type="application/x-shockwave-flash" data="./CompanyList_files/uploadify.swf.下载" width="80" height="25" class="swfupload" style="position: absolute; z-index: 1;"><param name="wmode" value="transparent" /><param name="movie" value="../Scripts/UpLoad/uploadify.swf?preventswfcaching=1523202077681" /><param name="quality" value="high" /><param name="menu" value="false" /><param name="allowScriptAccess" value="samedomain" /><param name="allowNetworking" value="all" /><param name="flashvars" value="movieName=SWFUpload_0&amp;uploadURL=%2FAjaxHander%2FUpLoadCompany.ashx%3FSysId%3Da00ad17d-57da-4f8b-9c60-807a5e83d7a7&amp;useQueryString=false&amp;requeueOnError=false&amp;httpSuccess=&amp;assumeSuccessTimeout=30&amp;params=&amp;filePostName=Filedata&amp;fileTypes=*.doc%3B%20*.docx%3B%20*.xls%3B*.xlsx%3B&amp;fileTypesDescription=office%20file&amp;fileSizeLimit=10240&amp;fileUploadLimit=0&amp;fileQueueLimit=999&amp;debugEnabled=false&amp;buttonImageURL=%2FSystemConfiguration%2F&amp;buttonWidth=80&amp;buttonHeight=25&amp;buttonText=&amp;buttonTextTopPadding=0&amp;buttonTextLeftPadding=0&amp;buttonTextStyle=color%3A%20%23000000%3B%20font-size%3A%2016pt%3B&amp;buttonAction=-110&amp;buttonDisabled=false&amp;buttonCursor=-2" /></object><div id="file1-button" class="uploadify-button " style="height: 25px; line-height: 25px; width: 80px;"><span class="uploadify-button-text">导入数据</span></div></div><div id="file1-queue" class="uploadify-queue"></div>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="tab">
+                    <table class="tab_005" id="tb7049cfd3-f6e4-4ddc-8d15-664e65b1b2c5" style="table-layout: fixed;"><thead id="CompanyHead" style="width: 100%; position: static; top: 0px;"><tr> <th style="width: 10%">序号</th><th style="width: 20%">公司名称</th><th>是否尾盘</th><th>小计</th><th style="width: 15%">开业时间</th><th style="width:15">排序值</th></tr></thead><tbody id="CompanyRows"><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">1</td><td class="Td_Left" style="width: 20%">房地产总计</td><td class="Td_Left" style="text-align: center !important;" id="81c039e6-219c-45cf-8771-cf6129a801adCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="81c039e6-219c-45cf-8771-cf6129a801adCompanyProperty2"></td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">2018-3-21</td><td class="Td_Left" style="text-align:center !important;width:15">-1</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">2</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('1d05cd41-ee0b-4348-b881-eb35361f3ae7','0')">保定万和春天</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="1d05cd41-ee0b-4348-b881-eb35361f3ae7CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="1d05cd41-ee0b-4348-b881-eb35361f3ae7CompanyProperty2">保定区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">10</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">3</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('9b604f6c-a7c1-4a06-a839-00ac1905235e','0')">保定万和春天住区</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="9b604f6c-a7c1-4a06-a839-00ac1905235eCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="9b604f6c-a7c1-4a06-a839-00ac1905235eCompanyProperty2">保定区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">20</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">4</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('3bfc7901-43d4-405d-90ce-234f283217a0','0')">保定未来城</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="3bfc7901-43d4-405d-90ce-234f283217a0CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="3bfc7901-43d4-405d-90ce-234f283217a0CompanyProperty2">保定区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">30</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">5</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('93dc084d-72e8-4705-84cd-97ada343fbd4','0')">保定满城隆基泰和广场</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="93dc084d-72e8-4705-84cd-97ada343fbd4CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="93dc084d-72e8-4705-84cd-97ada343fbd4CompanyProperty2">保定区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">40</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">6</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('054bbf88-977b-4006-a921-a9d8e2dcaac4','0')">保定满城诺林湾</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="054bbf88-977b-4006-a921-a9d8e2dcaac4CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="054bbf88-977b-4006-a921-a9d8e2dcaac4CompanyProperty2">保定区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">50</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">7</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('daa8d75c-547b-41e9-816b-a2de41fbbf53','0')">保定万和奥城项目</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="daa8d75c-547b-41e9-816b-a2de41fbbf53CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="daa8d75c-547b-41e9-816b-a2de41fbbf53CompanyProperty2">保定区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">60</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">8</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('df1c9918-6f15-4e71-b66c-d34d0990cea4','0')">保定万和城</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="df1c9918-6f15-4e71-b66c-d34d0990cea4CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="df1c9918-6f15-4e71-b66c-d34d0990cea4CompanyProperty2">保定区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">70</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">9</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('8ac53dec-0db3-43d4-a47b-cb9ff5fda074','0')">保定万和蓝山</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="8ac53dec-0db3-43d4-a47b-cb9ff5fda074CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="8ac53dec-0db3-43d4-a47b-cb9ff5fda074CompanyProperty2">保定区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">80</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">10</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('ac717708-1f8a-4c4a-9461-f8749e71f04b','0')">保定万和悦都项目</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="ac717708-1f8a-4c4a-9461-f8749e71f04bCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="ac717708-1f8a-4c4a-9461-f8749e71f04bCompanyProperty2">保定区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">90</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">11</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('ab904ecf-4abd-43c9-a654-063d51575e14','0')">保定未来花郡</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="ab904ecf-4abd-43c9-a654-063d51575e14CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="ab904ecf-4abd-43c9-a654-063d51575e14CompanyProperty2">保定区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">100</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">12</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('9987d655-ebaa-46fe-8109-1027239dc804','0')">保定未来金融港一期</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="9987d655-ebaa-46fe-8109-1027239dc804CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="9987d655-ebaa-46fe-8109-1027239dc804CompanyProperty2">保定区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">110</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">13</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('756cf50c-67b3-4f03-81ec-71b07e811ae7','0')">保定未来石</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="756cf50c-67b3-4f03-81ec-71b07e811ae7CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="756cf50c-67b3-4f03-81ec-71b07e811ae7CompanyProperty2">保定区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">120</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">14</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('4efee644-c37b-4835-ad44-7691ddf0e6b1','0')">保定未来微墅二期</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="4efee644-c37b-4835-ad44-7691ddf0e6b1CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="4efee644-c37b-4835-ad44-7691ddf0e6b1CompanyProperty2">保定区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">130</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">15</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('1e8ce941-dcc6-4be8-9e8d-4f2062b8e6df','0')">保定未来紫金山</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="1e8ce941-dcc6-4be8-9e8d-4f2062b8e6dfCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="1e8ce941-dcc6-4be8-9e8d-4f2062b8e6dfCompanyProperty2">保定区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">140</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">16</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('5ec0c272-5565-4dba-ac95-19c7e9589222','0')">保定未来微墅项目</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="5ec0c272-5565-4dba-ac95-19c7e9589222CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="5ec0c272-5565-4dba-ac95-19c7e9589222CompanyProperty2">保定区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">150</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">17</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('c7a422e1-b79f-453c-91bd-a3f226fd9649','0')">保定未来花郡二期</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="c7a422e1-b79f-453c-91bd-a3f226fd9649CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="c7a422e1-b79f-453c-91bd-a3f226fd9649CompanyProperty2">保定区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">160</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">18</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('ca4e75fb-7605-46ea-84c6-d37fa0bebf15','0')">保定未来像素</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="ca4e75fb-7605-46ea-84c6-d37fa0bebf15CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="ca4e75fb-7605-46ea-84c6-d37fa0bebf15CompanyProperty2">保定区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">170</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">19</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('87ce791f-6dd3-4125-9e94-73f28cf8231f','0')">沧州泰和世家</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="87ce791f-6dd3-4125-9e94-73f28cf8231fCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="87ce791f-6dd3-4125-9e94-73f28cf8231fCompanyProperty2">沧州区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">180</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">20</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('dde6ad56-23a0-45fd-9570-cd0dd45ef48a','0')">成都铂悦城</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="dde6ad56-23a0-45fd-9570-cd0dd45ef48aCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="dde6ad56-23a0-45fd-9570-cd0dd45ef48aCompanyProperty2">成都区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">190</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">21</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('81a9b26e-7cd0-4347-a522-20d4496a139c','0')">廊坊霸州铂悦山</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="81a9b26e-7cd0-4347-a522-20d4496a139cCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="81a9b26e-7cd0-4347-a522-20d4496a139cCompanyProperty2">廊坊区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">200</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">22</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('4e2f7ab1-6218-4f5c-9ef1-873c125dd436','0')">廊坊香邑廊桥A项目</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="4e2f7ab1-6218-4f5c-9ef1-873c125dd436CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="4e2f7ab1-6218-4f5c-9ef1-873c125dd436CompanyProperty2">廊坊区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">210</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">23</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('f8395bae-8105-4d7e-881c-84c5a1e8bdb9','0')">廊坊香邑廊桥B区</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="f8395bae-8105-4d7e-881c-84c5a1e8bdb9CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="f8395bae-8105-4d7e-881c-84c5a1e8bdb9CompanyProperty2">廊坊区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">220</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">24</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('5b315076-555a-403d-aba0-d6a4318badf4','0')">秦皇岛铂悦山项目</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="5b315076-555a-403d-aba0-d6a4318badf4CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="5b315076-555a-403d-aba0-d6a4318badf4CompanyProperty2">秦皇岛区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">230</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">25</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('38f6a353-f292-4c4d-bcdf-a6bb5a7082ec','0')">秦皇岛万和城</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="38f6a353-f292-4c4d-bcdf-a6bb5a7082ecCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="38f6a353-f292-4c4d-bcdf-a6bb5a7082ecCompanyProperty2">秦皇岛区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">240</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">26</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('94147fb0-1000-4b7d-a552-edbaf8699e51','0')">秦皇岛万和郡</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="94147fb0-1000-4b7d-a552-edbaf8699e51CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="94147fb0-1000-4b7d-a552-edbaf8699e51CompanyProperty2">秦皇岛区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">250</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">27</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('b9fd3b84-68fd-426c-830d-53b74d999443','0')">秦皇岛香邑澜湾A1（住宅）项目</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="b9fd3b84-68fd-426c-830d-53b74d999443CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="b9fd3b84-68fd-426c-830d-53b74d999443CompanyProperty2">秦皇岛区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">260</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">28</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('4289ffba-4963-416b-9082-bbe91a5e007b','0')">石家庄未来时间</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="4289ffba-4963-416b-9082-bbe91a5e007bCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="4289ffba-4963-416b-9082-bbe91a5e007bCompanyProperty2">石家庄区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">270</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">29</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('eff57aa1-3808-476f-99a4-56f4bcd29325','0')">唐山3号地块</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="eff57aa1-3808-476f-99a4-56f4bcd29325CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="eff57aa1-3808-476f-99a4-56f4bcd29325CompanyProperty2">唐山区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">280</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">30</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('24d56507-c090-498f-b591-7f14d94dbc88','0')">唐山铂悦派项目</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="24d56507-c090-498f-b591-7f14d94dbc88CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="24d56507-c090-498f-b591-7f14d94dbc88CompanyProperty2">唐山区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">290</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">31</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('0bfc6ce9-484a-4283-8f0a-25cdcfca7557','0')">唐山铂悦山项目</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="0bfc6ce9-484a-4283-8f0a-25cdcfca7557CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="0bfc6ce9-484a-4283-8f0a-25cdcfca7557CompanyProperty2">唐山区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">300</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">32</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('e9ea66d3-7b2e-4cb3-b1e0-b5a6ad9160f1','0')">天津紫金府</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="e9ea66d3-7b2e-4cb3-b1e0-b5a6ad9160f1CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="e9ea66d3-7b2e-4cb3-b1e0-b5a6ad9160f1CompanyProperty2">天津区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">310</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">33</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('7aa28794-b7b7-4be1-8199-07c35ca5ebb1','0')">邢台万和郡</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="7aa28794-b7b7-4be1-8199-07c35ca5ebb1CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="7aa28794-b7b7-4be1-8199-07c35ca5ebb1CompanyProperty2">邢台区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">320</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">34</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('ee4249f0-7139-4646-9587-1fa069f7eb59','0')">郑州铂悦山</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="ee4249f0-7139-4646-9587-1fa069f7eb59CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="ee4249f0-7139-4646-9587-1fa069f7eb59CompanyProperty2">郑州区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">330</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">35</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('1ad7aad7-3f36-4434-aaac-e6b2bb8f7f6e','0')">涿州泰和世家一期</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="1ad7aad7-3f36-4434-aaac-e6b2bb8f7f6eCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="1ad7aad7-3f36-4434-aaac-e6b2bb8f7f6eCompanyProperty2">涿州区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">340</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">36</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('99a96f71-dc30-4202-9b43-525563fe25e1','0')">涿州香邑溪谷</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="99a96f71-dc30-4202-9b43-525563fe25e1CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="99a96f71-dc30-4202-9b43-525563fe25e1CompanyProperty2">涿州区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">350</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">37</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('c57415f5-1f2d-4fe4-b105-511364bb3b5d','0')">涿州香邑溪谷原墅</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="c57415f5-1f2d-4fe4-b105-511364bb3b5dCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="c57415f5-1f2d-4fe4-b105-511364bb3b5dCompanyProperty2">涿州区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">360</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">38</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('1366720b-8a6e-400f-bf6b-87962b32aed9','0')">白沟北一环4#地块</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="1366720b-8a6e-400f-bf6b-87962b32aed9CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="1366720b-8a6e-400f-bf6b-87962b32aed9CompanyProperty2">白沟区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">370</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">39</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('213c5e14-0abd-437c-83e0-0520d43623aa','0')">白沟高桥</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="213c5e14-0abd-437c-83e0-0520d43623aaCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="213c5e14-0abd-437c-83e0-0520d43623aaCompanyProperty2">白沟区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">380</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">40</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('3799fc36-0ba3-4049-9bce-db0a6d2ccbc4','0')">白沟香邑澜山</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="3799fc36-0ba3-4049-9bce-db0a6d2ccbc4CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="3799fc36-0ba3-4049-9bce-db0a6d2ccbc4CompanyProperty2">白沟区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">390</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">41</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('585731c9-a2b5-401a-b7b1-2457fb129dcf','0')">白沟香意澜廷</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="585731c9-a2b5-401a-b7b1-2457fb129dcfCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="585731c9-a2b5-401a-b7b1-2457fb129dcfCompanyProperty2">白沟区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">400</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">42</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('9b02af44-1eb0-487b-bf38-2c439bb9a75f','0')">白沟香邑澜湾</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="9b02af44-1eb0-487b-bf38-2c439bb9a75fCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="9b02af44-1eb0-487b-bf38-2c439bb9a75fCompanyProperty2">白沟区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">410</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">43</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('52fb3946-f55b-49d3-9050-316484422d6f','0')">白沟万和城</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="52fb3946-f55b-49d3-9050-316484422d6fCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="52fb3946-f55b-49d3-9050-316484422d6fCompanyProperty2">白沟区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">420</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">44</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('e013fc6a-d51e-4637-99f4-ede222885fcc','0')">白沟阳光上和</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="e013fc6a-d51e-4637-99f4-ede222885fccCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="e013fc6a-d51e-4637-99f4-ede222885fccCompanyProperty2">白沟区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">430</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">45</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('065efefa-a015-4958-a5b0-6ac15b11d473','0')">白沟原辅料</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="065efefa-a015-4958-a5b0-6ac15b11d473CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="065efefa-a015-4958-a5b0-6ac15b11d473CompanyProperty2">白沟区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">440</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">46</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('275b863f-4184-4126-96dd-bfcd8ca094e3','0')">承德开发区承德铂悦山C1项目</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="275b863f-4184-4126-96dd-bfcd8ca094e3CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="275b863f-4184-4126-96dd-bfcd8ca094e3CompanyProperty2">承德开发区</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">450</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">47</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('83fced04-787d-4a3e-86dd-3b495891a04a','0')">承德开发区四季城二期</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="83fced04-787d-4a3e-86dd-3b495891a04aCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="83fced04-787d-4a3e-86dd-3b495891a04aCompanyProperty2">承德开发区</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">460</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">48</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('7ac080a7-fc11-4432-8fda-b757cd7856f2','0')">承德开发区四季城一期</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="7ac080a7-fc11-4432-8fda-b757cd7856f2CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="7ac080a7-fc11-4432-8fda-b757cd7856f2CompanyProperty2">承德开发区</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">470</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">49</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('4ef5b88d-06c4-40b6-b4ac-a68831e87a8d','0')">承德开发区未来城</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="4ef5b88d-06c4-40b6-b4ac-a68831e87a8dCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="4ef5b88d-06c4-40b6-b4ac-a68831e87a8dCompanyProperty2">承德开发区</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">480</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">50</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('7c702828-614d-4644-a8ad-1190f4387f32','0')">承德开发区站前广场</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="7c702828-614d-4644-a8ad-1190f4387f32CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="7c702828-614d-4644-a8ad-1190f4387f32CompanyProperty2">承德开发区</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">490</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">51</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('19957fa2-4cab-4961-aeab-4f85f20298a6','0')">承德开发区小铂悦山C-04</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="19957fa2-4cab-4961-aeab-4f85f20298a6CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="19957fa2-4cab-4961-aeab-4f85f20298a6CompanyProperty2">承德开发区</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">500</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">52</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('5608f2a3-c235-4b61-8349-380c939cb92c','0')">承德开发区铂悦山C3</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="5608f2a3-c235-4b61-8349-380c939cb92cCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="5608f2a3-c235-4b61-8349-380c939cb92cCompanyProperty2">承德开发区</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">510</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">53</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('e7d44f75-63f0-43a6-84e1-e821429b7f79','0')">承德双滦区单塔子</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="e7d44f75-63f0-43a6-84e1-e821429b7f79CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="e7d44f75-63f0-43a6-84e1-e821429b7f79CompanyProperty2">承德双滦区</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">520</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">54</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('17abdb48-4203-4a39-964d-61c568f355af','0')">承德双滦区锦绣城</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="17abdb48-4203-4a39-964d-61c568f355afCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="17abdb48-4203-4a39-964d-61c568f355afCompanyProperty2">承德双滦区</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">530</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">55</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('9f24b199-bc5f-42a3-9bff-536818d0dccc','0')">承德双滦区水源地</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="9f24b199-bc5f-42a3-9bff-536818d0dcccCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="9f24b199-bc5f-42a3-9bff-536818d0dcccCompanyProperty2">承德双滦区</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">540</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">56</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('df2e1bdd-6d4a-4033-9dcf-66b1c9d21306','0')">承德双滦区国际广场B项目</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="df2e1bdd-6d4a-4033-9dcf-66b1c9d21306CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="df2e1bdd-6d4a-4033-9dcf-66b1c9d21306CompanyProperty2">承德双滦区</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">550</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">57</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('5c50d8c2-2aa6-4067-a4c3-731f4cfe9aa6','0')">承德双滦区万和城C区</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="5c50d8c2-2aa6-4067-a4c3-731f4cfe9aa6CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="5c50d8c2-2aa6-4067-a4c3-731f4cfe9aa6CompanyProperty2">承德双滦区</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">560</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">58</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('4ee29234-a334-4bac-93b7-d9b1b78b056b','0')">承德双滦区御道A段</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="4ee29234-a334-4bac-93b7-d9b1b78b056bCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="4ee29234-a334-4bac-93b7-d9b1b78b056bCompanyProperty2">承德双滦区</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">570</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">59</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('190b074e-fa55-4ef4-9e62-e99a1e1b86e2','0')">承德双滦区御道5-7段</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="190b074e-fa55-4ef4-9e62-e99a1e1b86e2CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="190b074e-fa55-4ef4-9e62-e99a1e1b86e2CompanyProperty2">承德双滦区</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">580</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">60</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('ec042c3b-3b2c-45b8-b8be-2f9c296442b9','0')">承德双滦区欢乐江山A地块</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="ec042c3b-3b2c-45b8-b8be-2f9c296442b9CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="ec042c3b-3b2c-45b8-b8be-2f9c296442b9CompanyProperty2">承德双滦区</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">590</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">61</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('5fd7fc36-bd9e-4a01-963f-550668220160','0')">承德双滦区欢乐江山B地块</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="5fd7fc36-bd9e-4a01-963f-550668220160CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="5fd7fc36-bd9e-4a01-963f-550668220160CompanyProperty2">承德双滦区</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">600</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">62</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('4f90d134-1154-4b4a-8385-dd2f9e58cd96','0')">承德双滦区欢乐江山C地块</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="4f90d134-1154-4b4a-8385-dd2f9e58cd96CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="4f90d134-1154-4b4a-8385-dd2f9e58cd96CompanyProperty2">承德双滦区</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">610</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">63</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('3a081b79-b4c5-4b63-9fe7-8b2c90c1ec74','0')">邯郸赵都新城</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="3a081b79-b4c5-4b63-9fe7-8b2c90c1ec74CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="3a081b79-b4c5-4b63-9fe7-8b2c90c1ec74CompanyProperty2">邯郸区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">620</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">64</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('46fb12c5-b1b1-4d0e-ba14-c674fcdb069d','0')">邯郸澜湾</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="46fb12c5-b1b1-4d0e-ba14-c674fcdb069dCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="46fb12c5-b1b1-4d0e-ba14-c674fcdb069dCompanyProperty2">邯郸区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">630</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">65</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('31b93e08-e94d-4eb7-bf28-4399705f649c','0')">邯郸未来城</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="31b93e08-e94d-4eb7-bf28-4399705f649cCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="31b93e08-e94d-4eb7-bf28-4399705f649cCompanyProperty2">邯郸区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">640</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">66</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('e3185aef-ffca-4126-9183-63d1aded8160','0')">邯郸紫岸</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="e3185aef-ffca-4126-9183-63d1aded8160CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="e3185aef-ffca-4126-9183-63d1aded8160CompanyProperty2">邯郸区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">650</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">67</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('997d785a-b55c-4454-964d-5cdf84a89ce9','0')">邯郸糖人街东区</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="997d785a-b55c-4454-964d-5cdf84a89ce9CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="997d785a-b55c-4454-964d-5cdf84a89ce9CompanyProperty2">邯郸区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">660</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">68</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('73787497-a86f-40a8-a5d8-0dff0007e034','0')">邯郸糖人街西区</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="73787497-a86f-40a8-a5d8-0dff0007e034CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="73787497-a86f-40a8-a5d8-0dff0007e034CompanyProperty2">邯郸区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">670</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">69</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('db10dfbf-86ce-4a0d-bab8-a3f43a5ecfb8','0')">邯郸星魔方-岭寓</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="db10dfbf-86ce-4a0d-bab8-a3f43a5ecfb8CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="db10dfbf-86ce-4a0d-bab8-a3f43a5ecfb8CompanyProperty2">邯郸区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">680</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">70</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('f9d6e2af-144c-4c33-a6c0-20f1cfdfa517','0')">邯郸星魔方-美寓</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="f9d6e2af-144c-4c33-a6c0-20f1cfdfa517CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="f9d6e2af-144c-4c33-a6c0-20f1cfdfa517CompanyProperty2">邯郸区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">690</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">71</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('de147caa-970b-46ab-866f-7de28f194565','0')">邯郸赵都华府</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="de147caa-970b-46ab-866f-7de28f194565CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="de147caa-970b-46ab-866f-7de28f194565CompanyProperty2">邯郸区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">700</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">72</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('dd1c600b-407b-43a6-92e0-309f7742dd35','0')">邯郸未来花珺</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="dd1c600b-407b-43a6-92e0-309f7742dd35CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="dd1c600b-407b-43a6-92e0-309f7742dd35CompanyProperty2">邯郸区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">710</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">73</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('ead9b21f-f064-421c-a948-d7d0f2a85f43','0')">高碑店八十一号院二期</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="ead9b21f-f064-421c-a948-d7d0f2a85f43CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="ead9b21f-f064-421c-a948-d7d0f2a85f43CompanyProperty2">高碑店区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">720</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">74</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('b2864364-b956-4174-b774-1b1965312ea2','0')">高碑店铂悦郡</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="b2864364-b956-4174-b774-1b1965312ea2CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="b2864364-b956-4174-b774-1b1965312ea2CompanyProperty2">高碑店区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">730</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">75</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('eae51b6a-2c53-403c-8e5c-7bcb1e398591','0')">高碑店高碑店铂悦山住宅小区一期</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="eae51b6a-2c53-403c-8e5c-7bcb1e398591CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="eae51b6a-2c53-403c-8e5c-7bcb1e398591CompanyProperty2">高碑店区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">740</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">76</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('da987742-e0d6-404a-b3f9-fa9763731453','0')">高碑店悦都·观湖公馆</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="da987742-e0d6-404a-b3f9-fa9763731453CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="da987742-e0d6-404a-b3f9-fa9763731453CompanyProperty2">高碑店区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">750</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">77</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('020bea2e-96ee-4792-8afd-08e09ac34a31','0')">高碑店米兰花园</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="020bea2e-96ee-4792-8afd-08e09ac34a31CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="020bea2e-96ee-4792-8afd-08e09ac34a31CompanyProperty2">高碑店区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">760</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">78</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('a31642b7-b0c5-4fa2-ba99-8e478f3ade35','0')">高碑店万和城二期</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="a31642b7-b0c5-4fa2-ba99-8e478f3ade35CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="a31642b7-b0c5-4fa2-ba99-8e478f3ade35CompanyProperty2">高碑店区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">770</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">79</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('d6a8d659-dd77-48b5-8221-e036bb1118eb','0')">高碑店万和派</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="d6a8d659-dd77-48b5-8221-e036bb1118ebCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="d6a8d659-dd77-48b5-8221-e036bb1118ebCompanyProperty2">高碑店区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">780</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">80</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('5d39891a-39be-4ed0-8295-a2444c62aadb','0')">高碑店紫金府</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="5d39891a-39be-4ed0-8295-a2444c62aadbCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="5d39891a-39be-4ed0-8295-a2444c62aadbCompanyProperty2">高碑店区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">790</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">81</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('59700181-62fd-4bd9-bd2e-4cc765dfe2e1','0')">高碑店八十一号院一期</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="59700181-62fd-4bd9-bd2e-4cc765dfe2e1CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="59700181-62fd-4bd9-bd2e-4cc765dfe2e1CompanyProperty2">高碑店区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">800</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">82</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('a3fb56db-9f58-4e83-bff4-c1753a2b9960','0')">高碑店万和城</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="a3fb56db-9f58-4e83-bff4-c1753a2b9960CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="a3fb56db-9f58-4e83-bff4-c1753a2b9960CompanyProperty2">高碑店区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">810</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">83</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('d72d33a9-d2c4-4360-9b00-4b2e61f4f2d9','0')">高碑店玫瑰园</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="d72d33a9-d2c4-4360-9b00-4b2e61f4f2d9CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="d72d33a9-d2c4-4360-9b00-4b2e61f4f2d9CompanyProperty2">高碑店区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">820</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">84</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('77cf3e44-2dfe-4b2b-b3fe-45da24529138','0')">高碑店蔷薇园二期</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="77cf3e44-2dfe-4b2b-b3fe-45da24529138CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="77cf3e44-2dfe-4b2b-b3fe-45da24529138CompanyProperty2">高碑店区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">830</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">85</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('4765803b-aecf-493c-985f-768a748e8584','0')">高碑店蔷薇园一期</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="4765803b-aecf-493c-985f-768a748e8584CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="4765803b-aecf-493c-985f-768a748e8584CompanyProperty2">高碑店区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">840</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">86</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('64e2ce8b-1a74-4e74-9eed-d22933ba6dc9','0')">高碑店悦都</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="64e2ce8b-1a74-4e74-9eed-d22933ba6dc9CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="64e2ce8b-1a74-4e74-9eed-d22933ba6dc9CompanyProperty2">高碑店区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">850</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">87</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('5d48180c-97bb-4eff-92e3-a2eeaf911529','0')">高碑店迎宾路壹号</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="5d48180c-97bb-4eff-92e3-a2eeaf911529CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="5d48180c-97bb-4eff-92e3-a2eeaf911529CompanyProperty2">高碑店区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">860</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">88</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('c3d89821-f9e2-41bc-a79f-93177fec6889','0')">西安万和郡</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="c3d89821-f9e2-41bc-a79f-93177fec6889CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="c3d89821-f9e2-41bc-a79f-93177fec6889CompanyProperty2">西安区域</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">870</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">89</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('e2eafff8-cf96-4de9-9afa-88c47e6014ba','0')">地产总部</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="e2eafff8-cf96-4de9-9afa-88c47e6014baCompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="e2eafff8-cf96-4de9-9afa-88c47e6014baCompanyProperty2">总部</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">880</td></tr><tr><td class="Td_Left" style="text-align: center !important; vertical-align: middle;width: 10px">90</td><td class="Td_Left" style="width: 20%"><a style="text-decoration:underline;color:blue;font-size:13px ;cursor:pointer" onclick="change('74bae5fc-8cc0-432d-afd4-bc6aed8a5567','0')">投资拓展中心</a><a></a></td><td class="Td_Left" style="text-align: center !important;" id="74bae5fc-8cc0-432d-afd4-bc6aed8a5567CompanyProperty1"></td><td class="Td_Left" style="text-align: center !important;" id="74bae5fc-8cc0-432d-afd4-bc6aed8a5567CompanyProperty2">总部</td><td class="Td_Left" style="text-align: center !important; vertical-align: middle">--</td><td class="Td_Left" style="text-align:center !important;width:15">890</td></tr></tbody></table></div>
+
+                </div>
+
+                <input name="ctl00$ContentPlaceHolder1$HiddenSystemJson" type="hidden" id="HiddenSystemJson" />
+
+                <div id="divDetail" class="popup" style="height: auto; display: none; padding-bottom: 10px">
+                    <table style="width: 600px;" class="tab02" id="tbDetail">
+                        <tbody>
+                            <tr>
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">公司名称：</th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;" id="name1">
+                                    <input type="text" style="width: 180px;" id="addname" onkeyup="value=value.replace(//s/g,'')" onkeydown="if(event.keyCode==32) return false" />
+                                </td>
+                            </tr>
+                            <tr id="HCompanyProperty1" style="display: none">
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;" id="NCompanyProperty1"></th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <select id="TCompanyProperty1" style="width: 180px;"><option value="尾盘">是</option><option value="">否</option></select>
+                                </td>
+                            </tr>
+                            <tr id="HCompanyProperty2" style="display: none">
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;" id="NCompanyProperty2"></th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <select id="TCompanyProperty2" style="width: 180px;"></select>
+                                    <input id="CompanyProperty2input" onkeyup="value=value.replace(//s/g,'')" onkeydown="if(event.keyCode==32) return false" style="display:none;width:180px" />
+                                </td>
+                            </tr>
+                            <tr id="HCompanyProperty3" style="display: none">
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;" id="NCompanyProperty3"></th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <select id="TCompanyProperty3" style="width: 180px;"></select>
+                                </td>
+                            </tr>
+                            <tr id="HCompanyProperty4" style="display: none">
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;" id="NCompanyProperty4"></th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <select id="TCompanyProperty4" style="width: 180px;"></select>
+                                </td>
+                            </tr>
+                            <tr id="HCompanyProperty5" style="display: none">
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;" id="NCompanyProperty5"></th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <select id="TCompanyProperty5" style="width: 180px;"></select>
+                                </td>
+                            </tr>
+                            <tr id="HCompanyProperty6" style="display: none">
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;" id="NCompanyProperty6"></th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <select id="TCompanyProperty6" style="width: 180px;"></select>
+                                </td>
+                            </tr>
+                            <tr id="HCompanyProperty7" style="display: none">
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;" id="NCompanyProperty7"></th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <select id="TCompanyProperty7" style="width: 180px;"></select>
+                                </td>
+                            </tr>
+                            <tr id="HCompanyProperty8" style="display: none">
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;" id="NCompanyProperty8"></th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <select id="TCompanyProperty8" style="width: 180px;"></select>
+                                </td>
+                            </tr>
+                            <tr id="HCompanyProperty9" style="display: none">
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;" id="NCompanyProperty9"></th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <select id="TCompanyProperty9" style="width: 180px;"></select>
+                                </td>
+                            </tr>
+                            <tr id="HOpenTime">
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;" id="Th1">开业时间：</th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <input name="ctl00$ContentPlaceHolder1$rpt_info_CommitDate" type="text" id="rpt_info_CommitDate" style="width: 150px;" class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">排序值：</th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <input type="text" style="width: 50px;" id="seq" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">所属指标：</th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;" id="TargetList"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pop_operate">
+                        <input type="button" class="pop_btn btn_gray" value="取消" onclick="art.dialog({ id: 'divDetail' }).close();" />
+                        <input type="button" class="pop_btn btn_blue" value="确定" onclick=" AddsCompany();" id="addtrue" />
+                    </div>
+                </div>
+
+                <div id="EditDetail" class="popup" style="height: auto; display: none; padding-bottom: 10px">
+                    <table style="width: 600px;" class="tab02" id="tbEdit">
+                        <tbody>
+                            <tr>
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">公司名称：</th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;" id="Td1">
+                                    <input type="text" style="width: 180px;" id="EditName" onkeyup="value=value.replace(//s/g,'')" onkeydown="if(event.keyCode==32) return false" />
+                                </td>
+                            </tr>
+                            <tr id="HBCompanyProperty1" style="">
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;" id="NBCompanyProperty1">是否尾盘：</th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <select id="TBCompanyProperty1" style="width: 180px;"><option value="尾盘">是</option><option value="">否</option></select>
+                                </td>
+                            </tr>
+                            <tr id="HBCompanyProperty2" style="">
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;" id="NBCompanyProperty2">小计：</th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <select id="TBCompanyProperty2" style="width: 180px; display: none;"></select>
+                                    <input id="BCompanyProperty2input" onkeyup="value=value.replace(//s/g,'')" onkeydown="if(event.keyCode==32) return false" style="width: 180px;" />
+                                </td>
+                            </tr>
+                            <tr id="HBCompanyProperty3" style="display: none">
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;" id="NBCompanyProperty3"></th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <select id="TBCompanyProperty3" style="width: 180px;"></select>
+                                </td>
+                            </tr>
+                            <tr id="HBCompanyProperty4" style="display: none">
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;" id="NBCompanyProperty4"></th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <select id="TBCompanyProperty4" style="width: 180px;"></select>
+                                </td>
+                            </tr>
+                            <tr id="HBCompanyProperty5" style="display: none">
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;" id="NBCompanyProperty5"></th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <select id="TBCompanyProperty5" style="width: 180px;"></select>
+                                </td>
+                            </tr>
+                            <tr id="HBCompanyProperty6" style="display: none">
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;" id="NBCompanyProperty6"></th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <select id="TBCompanyProperty6" style="width: 180px;"></select>
+                                </td>
+                            </tr>
+                            <tr id="HBCompanyProperty7" style="display: none">
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;" id="NBCompanyProperty7"></th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <select id="TBCompanyProperty7" style="width: 180px;"></select>
+                                </td>
+                            </tr>
+                            <tr id="HBCompanyProperty8" style="display: none">
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;" id="NBCompanyProperty8"></th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <select id="TBCompanyProperty8" style="width: 180px;"></select>
+                                </td>
+                            </tr>
+                            <tr id="HBCompanyProperty9" style="display: none">
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;" id="NBCompanyProperty9"></th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <select id="TBCompanyProperty9" style="width: 180px;"></select>
+                                </td>
+                            </tr>
+                            <tr id="HBCompanyProperty10">
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;" id="ThTime">开业时间：</th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <input name="ctl00$ContentPlaceHolder1$Selecttime" type="text" id="Selecttime" style="width: 150px;" class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">排序值：</th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
+                                    <input type="text" style="width: 50px;" id="ThSeq" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="width: 40%; padding: 5px; padding-right: 60px; text-align: right;">所属指标：</th>
+                                <td colspan="3" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;" id="ThTar"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pop_operate">
+                        <input type="button" class="pop_btn btn_gray" value="取消" onclick="art.dialog({ id: 'EditDetail' }).close();" />
+                        <input type="button" class="pop_btn btn_blue" value="确定" onclick=" SaveCompany();" id="Button1" />
+                    </div>
+                </div>
+                <input name="ctl00$ContentPlaceHolder1$SysID" type="hidden" id="SysID" />
+            </div>
+        </form>
+    </div>
+    <div class="footer hide" style="position: fixed; bottom: 0; width:100%; ">
+        <b>版权所有©2014 大连万达集团股份有限公司 </b>
+    </div>
+    <!--footer-->
+    <script type="text/javascript">
+        // 浏览器支持判断
+        $(function () {
+            var bro = $.browser;
+            if (bro) {
+                if (bro.msie && bro.version > 7) {
+
+                }
+                else {
+                    //var remindCookie = $.cookie("browserIssue");
+                    //if (!remindCookie) {
+                    //    //alert("本系统设计上兼容浏览器IE8、IE9、IE10， 您当前使用的浏览器版本可能有兼容性问题。 \r\n\r\n为了更好的用户体验， 请您更换或升级浏览器！");
+                    //    $.cookie("browserIssue", true, { expires: 0.02 }); //0.02天， 约30mins
+                    //}
+                }
+            }
+        });
+    </script>
+    <script type="text/javascript">
+
+        $(function () {
+            try {
+
+                $("#jMenu").jMenu({
+                    openClick: false,
+                    ulWidth: 150,
+                    TimeBeforeOpening: 100,
+                    TimeBeforeClosing: 11,
+                    animatedText: false,
+                    paddingLeft: 1,
+                    effects: {
+                        effectSpeedOpen: 150,
+                        effectSpeedClose: 150,
+                        effectTypeOpen: 'slide',
+                        effectTypeClose: 'slide',
+                        effectOpen: 'swing',
+                        effectClose: 'swing'
+                    }
+                });
+                $("#jMenu").show();
+            }
+            catch (e) {
+            }
+        })
+
+        function switchSysBar() {
+            var switchPoint = $("#switchPoint");
+            var navContainer = $("#navContainer");
+            var invisible = navContainer.data("hide");
+            if (invisible) {
+                switchPoint.removeClass("spread_handler").addClass("shrink_handler");
+                navContainer.show("fast");
+                navContainer.data("hide", false);
+            }
+            else {
+                switchPoint.removeClass("shrink_handler").addClass("spread_handler");
+                navContainer.hide("fast");
+                navContainer.data("hide", true);
+            }
+            setTimeout(function () {
+                $(window).resize(); //如果有smartFloat, 触发漂浮表头宽度的调整
+                $(window).trigger("navToggle");//如果有smartFloat, 触发漂浮表头纵向位置的调整
+            }, 200);
+        }
+
+        //function toggleNav(sender) {
+        //    var folded = $(sender).data("folded");
+
+        //    if (!folded || typeof (folded) == 'undefined') {
+        //        $(sender).data("folded", true);
+        //        $(sender).parent().find("dl").hide("fast");
+        //    } else {
+        //        $(sender).data("folded", false);
+        //        $(sender).parent().find("dl").show("fast");
+        //    }
+        //}
+
+        //导航状态控制开始
+        function saveState() {
+            var arr = new Array();
+            arr[0] = [];
+            var a = $("#nav ul");
+
+            $(a).each(function (i, row) {
+                var ishow = $(row).css("display");
+                if (ishow == "block") {
+                    arr[0][i] = 1;
+                }
+                else {
+                    arr[0][i] = 0;
+                }
+            });
+            $.cookie("htmlcookie", arr[0], { expires: 7, path: '/' });
+        }
+
+        $(document).ready(function () {
+
+            $("#nav ul li").click(function () {
+                saveState();
+            });
+            
+        });
+        //导航状态控制结束
+    </script>
+    <script type="text/javascript">
+        var cur_id = "";
+        var flag = 0, sflag = 0;
+
+        //-------- 菜单点击事件 -------
+        function c(srcelement) {
+            var targetid, srcelement, targetelement;
+            var strbuf;
+
+            //-------- 如果点击了展开或收缩按钮---------
+            targetid = srcelement.id + "d";
+            targetelement = document.getElementById(targetid);
+
+            if (targetelement.style.display == "none") {
+                srcelement.className = "active";
+                targetelement.style.display = '';
+
+                menu_flag = 0;
+            }
+            else {
+                srcelement.className = "";
+                targetelement.style.display = "none";
+
+                menu_flag = 1;
+                var links = document.getElementsByTagName("A");
+                for (i = 0; i < links.length; i++) {
+                    srcelement = links[i];
+                    if (srcelement.parentNode.className.toUpperCase() == "L1" && srcelement.className == "active" && srcelement.id.substr(0, 1) == "m") {
+                        menu_flag = 0;
+
+                        break;
+                    }
+                }
+            }
+        }
+        function set_current(id) {
+            cur_link = document.getElementById("f" + cur_id)
+            if (cur_link)
+                cur_link.className = "";
+            cur_link = document.getElementById("f" + id);
+            if (cur_link)
+                cur_link.className = "active";
+            cur_id = id;
+        }
+
+        function redirect1(URL, id) {
+            set_current(id);
+            document.location.href = URL;
+        }
+        //function redirect2(URL, id) {
+        //    set_current(id);
+        //    window.open(URL, 'newwindow', '')
+        //}
+        function openForm(id) {
+            set_current(id);
+        }
+
+    </script>
+
+
+</body>
+</html>
