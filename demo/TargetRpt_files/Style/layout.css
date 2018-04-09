@@ -1,0 +1,24 @@
+* {
+	FONT-SIZE: 12px; FONT-FAMILY: "Î¢ÈíÑÅºÚ", Arial, Helvetica, sans-serif; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+.Pagebox {
+	MIN-HEIGHT: 746px
+}
+UL {
+	LIST-STYLE-TYPE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; PADDING-RIGHT: 0px; marin: 0
+}
+A {
+	TEXT-DECORATION: none; COLOR: #333
+}
+A:link {
+	TEXT-DECORATION: none; COLOR: #333
+}
+A:visited {
+	TEXT-DECORATION: none; coloer: #666
+}
+A:hover {
+	TEXT-DECORATION: underline; COLOR: #333
+}
+.footer {
+	HEIGHT: 31px; BACKGROUND: url(../images/footer_bg.png) repeat-x; FONT-WEIGHT: 700; COLOR: #333; TEXT-ALIGN: center; LINE-HEIGHT: 29px
+}
