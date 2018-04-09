@@ -254,5 +254,5 @@ function Delete(e, ID) {
     //});
 }
 function ExceptionChange() {
-    location.href = "../SystemConfiguration/ExceptionTarget.aspx?ID=" + SysID + "&ComeFrom=TargetConfiguration";
+    location.href = "ExceptionTarget.html";
 }
