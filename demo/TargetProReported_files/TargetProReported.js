@@ -1405,41 +1405,7 @@ function DownExcelMonthReport() {
 
 $(function () {
     var error = 0; // 这里是2个上传控件，但是功能是一样的
-    $('#file1,#file2').uploadify({
-        'buttonText': '导入数据',
-        'width': 100,
-        'height': 25,
-        'fileTypeDesc': 'office file',
-        'fileTypeExts': '*.doc; *.docx; *.xls;*.xlsx;',
-        'fileSizeLimit': '10240',
-        //swf文件路径
-        'swf': '../Scripts/UpLoad/uploadify.swf',
-        //后台处理页面
-        'uploader': '/AjaxHander/UpLoadMonthTargetDetail.ashx?FileType=UpProjectTargetPlan&SysId=' + sysID + '&MonthReportID=' + MonthReportID + "&FinYear=" + FinYear + "&FinMonth=" + FinMonth,
-        'onUploadSuccess': function (file, data, response) {
-            error = data;
-            if (data == "" || data == null) {
-                GetReportInstance();
-                $("#T2,#UpLoadDataDiv").show();
-                setStlye('missTargetReportSpan,missCurrentTargetReportSpan,monthReportSpan,monthReportReadySpan');
-            } else {
-                alert(data);
-            }
-        },
-        'onUploadComplete': function () {
-            if (error == 0) {
-                $("#UpLoadData").hide();
-
-                var obj = $("#CompleteDetailHead");
-                var tab = $("#tab2_rows");
-                FloatHeader(obj, tab, false);
-
-            }
-        },
-        'onUploadError': function (file, data, response) {
-            alert("上传失败，程序出错！");
-        }
-    });
+  
 });
 
 

@@ -1,42 +1,85 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head id="Head1"><title>
-	经营指标管控系统
-</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+<html xmlns="http://www.w3.org/1999/xhtml"><head id="Head1">
+    <title>
+        经营指标管控系统
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
 
     <script type="text/javascript" src="TargetPlanDetailReported-4_files/jquery-1.js"></script>
     <script type="text/javascript" src="TargetPlanDetailReported-4_files/jquery_005.js"></script>
     <script type="text/javascript" src="TargetPlanDetailReported-4_files/base.js"></script>
     <script type="text/javascript" src="TargetPlanDetailReported-4_files/FloatTable.js"></script>
-  
+
     <script type="text/javascript" src="TargetPlanDetailReported-4_files/jMenu.js"></script>
-    <link rel="stylesheet" href="TargetPlanDetailReported-4_files/default.css"><script type="text/javascript" src="TargetPlanDetailReported-4_files/artDialog.js"></script>
+    <link rel="stylesheet" href="TargetPlanDetailReported-4_files/default.css" />
+    <script type="text/javascript" src="TargetPlanDetailReported-4_files/artDialog.js"></script>
     <script type="text/javascript" src="TargetPlanDetailReported-4_files/jquery_004.js"></script>
     <script type="text/javascript" src="TargetPlanDetailReported-4_files/jqueryControl.js"></script>
     <script type="text/javascript" src="TargetPlanDetailReported-4_files/posfixed.js"></script>
-    <script type="text/javascript" src="TargetPlanDetailReported-4_files/WdatePicker.js"></script><link href="TargetPlanDetailReported-4_files/WdatePicker.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="TargetPlanDetailReported-4_files/WdatePicker.js"></script>
+    <link href="TargetPlanDetailReported-4_files/WdatePicker.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="TargetPlanDetailReported-4_files/jquery.js"></script>
-    <link rel="shortcut icon" href="http://192.168.50.72:83/Images/images1/favicon.ico" type="image/x-icon"><link href="TargetPlanDetailReported-4_files/jmenu.css" rel="stylesheet">
-    <link href="TargetPlanDetailReported-4_files/NavStlye.css" type="text/css" rel="stylesheet">
-    
+    <link rel="shortcut icon" href="http://192.168.50.72:83/Images/images1/favicon.ico" type="image/x-icon" />
+    <link href="TargetPlanDetailReported-4_files/jmenu.css" rel="stylesheet" />
+    <link href="TargetPlanDetailReported-4_files/NavStlye.css" type="text/css" rel="stylesheet" />
+
     <script type="text/javascript" src="TargetPlanDetailReported-4_files/TargetPlanDetailReported.js"></script>
-    
+
     <script type="text/javascript" src="TargetPlanDetailReported-4_files/jquery_006.js"></script>
     <script type="text/javascript" src="TargetPlanDetailReported-4_files/jquery_002.js"></script>
     <script type="text/javascript" src="TargetPlanDetailReported-4_files/wanda-wf-client-201.js"></script>
     <script type="text/javascript" src="TargetPlanDetailReported-4_files/jquery_003.js"></script>
 
-     <style type="text/css">
+
+    <!--工作流-->
+    <link href="workflow-files_files/bootstrap.css" rel="stylesheet" />
+    <link href="workflow-files_files/site.css" rel="stylesheet" />
+    <script src="workflow-files_files/jquery_002.js"></script>
+    <script src="workflow-files_files/jquery_006.js"></script>
+    <script src="workflow-files_files/base.js"></script>
+    <style type="text/css">
+        .wanda-wfclient-log-quicklog {
+            line-height: 19px;
+            height: 19px;
+        }
+
+        .attachments .attachment-tt {
+            display: inline;
+        }
+
+        .report-attachment-info {
+            padding-left: 70px;
+            text-indent: 2em;
+        }
+
+        .process-plugin {
+            min-height: 100px;
+        }
+
+        #wanda-wfclient-log-content pre {
+            color: #333;
+            word-break: break-all;
+            word-wrap: break-word;
+            background-color: transparent;
+            border: none;
+        }
         .Tishi {
             color: red;
             font-weight: 700;
         }
     </style>
 
-<link href="TargetPlanDetailReported-4_files/floatMenu_002.htm" rel="Stylesheet" type="text/css">
+    <link href="TargetPlanDetailReported-4_files/floatMenu_002.htm" rel="Stylesheet" type="text/css" />
     <script src="TargetPlanDetailReported-4_files/floatMenu.htm" type="text/javascript"></script>
-     
 
-    <link href="TargetPlanDetailReported-4_files/mini.css" rel="stylesheet" type="text/css"><link rel="stylesheet" type="text/css" href="TargetPlanDetailReported-4_files/uploadify.css"><link href="TargetPlanDetailReported-4_files/Styles.css" rel="stylesheet"><link href="TargetPlanDetailReported-4_files/layout.css" rel="stylesheet"><link href="TargetPlanDetailReported-4_files/main.css" rel="stylesheet"></head>
+
+    <link href="TargetPlanDetailReported-4_files/mini.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="TargetPlanDetailReported-4_files/uploadify.css" />
+    <link href="TargetPlanDetailReported-4_files/Styles.css" rel="stylesheet" />
+    <link href="TargetPlanDetailReported-4_files/layout.css" rel="stylesheet" />
+    <link href="TargetPlanDetailReported-4_files/main.css" rel="stylesheet" />
+</head>
 <body><div style="display: none; position: absolute;" class=""><div class="aui_outer"><table class="aui_border"><tbody><tr><td class="aui_nw"></td><td class="aui_n"></td><td class="aui_ne"></td></tr><tr><td class="aui_w"></td><td class="aui_c"><div class="aui_inner"><table class="aui_dialog"><tbody><tr><td colspan="2" class="aui_header"><div class="aui_titleBar"><div class="aui_title" style="cursor: move; display: block;"></div><a class="aui_close" href="javascript:/*artDialog*/;" style="display: block;">×</a></div></td></tr><tr><td class="aui_icon" style="display: none;"><div class="aui_iconBg" style="background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%;"></div></td><td class="aui_main" style="width: auto; height: auto;"><div class="aui_content" style="padding: 20px 25px 5px;"></div></td></tr><tr><td colspan="2" class="aui_footer"><div class="aui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="aui_e"></td></tr><tr><td class="aui_sw"></td><td class="aui_s"></td><td class="aui_se" style="cursor: se-resize;"></td></tr></tbody></table></div></div>
 
     <div>
@@ -355,8 +398,98 @@ function __doPostBack(eventTarget, eventArgument) {
         </div>
         <!--完成情况明细 end-->
 
-         <div id="process" style="display: block;">
-            </div> 
+        <div id="process" style="display: block; ">
+
+
+            <section id="content" >
+                <div class="container">
+                    <div class="row">
+
+                        <div id="taskCollectionView">
+                            <div class="common-wrap task-wrap">
+                                <div class="collection-content clear tc-content">
+                                    <div class="approval-process mg tc-approve" style="">
+                                        <p class="process-t">审批流程</p>
+                                        <div class="process-cont">
+                                            <div id="SJSJ_LC" class="process-plugin">
+                                                <div class="bpf-wf-content" style="">
+                                                    <table class="bpf-wfclient-table">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="width:100px">审批流程</td>
+                                                                <td>
+                                                                    <div id="bpf-wfclient-nav-content">
+                                                                        <div id="bpf-wfclient-nav-div">
+                                                                            <span class="bpf-wfclient-nav-item ">
+                                                                                <span title="发起节点">数据填报</span><span title="姓名：郑桂 (zhengguilong)
+
+职务：专业总监
+
+组织机构：/隆基泰和控股集团/隆基泰和置业/运营管理中心/信息管理部
+
+">【郑桂 】</span><img alt="" src="workflow-files_files/ok.png" />
+                                                                            </span><span class="bpf-wfclient-nav-sparrrow"><img alt="" class="bpf-wfclient-nav-arrrow" src="workflow-files_files/arrow.png" /></span><span class="bpf-wfclient-nav-item bpf-wfclient-nav-node-autoinform" style="font-weight: 600;">
+                                                                                <span title="通知节点">归档</span><span class="bpf-wfclient-nav-item-start">【</span><span title="姓名：郑桂 (zhengguilong)
+
+职务：专业总监
+
+组织机构：/隆基泰和控股集团/隆基泰和置业/运营管理中心/信息管理部
+
+">郑桂</span><span class="bpf-wfclient-nav-item-end">】</span>
+                                                                            </span><span class="bpf-wfclient-nav-sparrrow" style="display: none;"><img alt="" class="bpf-wfclient-nav-arrrow" src="workflow-files_files/arrow.png" /></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr><td>抄送</td><td><div id="bpf-wfclient-cc-content"></div></td></tr>
+                                                            <tr><td>快捷意见</td><td><span class="bpf-wfclient-log-quicklog">同意</span><span class="spmarginright">&nbsp;</span><span class="bpf-wfclient-log-quicklog">不同意</span><span class="spmarginright">&nbsp;</span><span class="bpf-wfclient-log-quicklog">收到</span></td></tr>
+                                                            <tr><td id="bpf-wfclient-log-title">审批意见</td><td><textarea id="bpf-wfclient-log-textarea"></textarea></td></tr>
+                                                        </tbody>
+                                                    </table><div id="bpf-wfclient-button-content" class="bpf-wfclient bpf-wfclient-button-default"><table id="bpf-wfclient-button-table"><tbody><tr style="height: 40px;"><td>&nbsp;</td><td><div id="bpf-wfclient-button-div"><!--按钮区域--><div class="bpf-wfclient-button-btn bpf-wfclient-button-submit" optype="1">提交</div><div class="bpf-wfclient-button-btn bpf-wfclient-button-save" optype="2">转发</div></div></td><td>&nbsp;</td></tr></tbody></table></div><!--审批日志--><div id="bpf-wfclient-log-content"><table style="width: 100%; border-spacing: 0;"><tbody><tr><td style="text-align: center;"><table id="bpf-wfclient-log-logtable" class="bpf-wfclient-table"><tbody><tr><th class="bpf-wfclient-log-logtable-thnode">节点</th><th>审批意见</th><th class="bpf-wfclient-log-logtable-approver">审批人</th><th class="bpf-wfclient-log-logtable-approvedate">审批时间</th><th class="bpf-wfclient-log-logtable-operator">操作</th></tr><tr><td><div>数据填报</div></td><td style="text-align:left"><span><pre>相关说明</pre></span></td><td style="text-align:left"><span style="line-height:20px;" title="郑桂 (zhengguilong)">/隆基泰和控股集团/隆基泰和置业/运营管理中心/信息管理部<br />专业总监<br />郑桂 </span></td><td><div>2018-02-22<br />23:12:05</div></td><td><div>发起</div></td></tr></tbody> </table> </td> </tr> <tr> <td id="bpf-wfclient-log-showmore"> <span><img alt="" src="workflow-files_files/down.png" /> <a>显示更多</a></span></td> </tr> </tbody></table> </div>
+                                                </div><div class="contextMenu" id="divContextMenu" style="display:none;"><ul><li>提交</li><li>转发</li></ul></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </section>
+            <script src="workflow-files_files/TaskCollectionView.js"></script>
+            <script src="workflow-files_files/jquery_004.js"></script>
+            <script src="workflow-files_files/jquery.js"></script>
+            <script src="workflow-files_files/jquery_003.js"></script>
+            <script src="workflow-files_files/jquery_005.js"></script>
+
+
+            <script src="workflow-files_files/bpf-sdk-core.js"></script>
+            <link href="workflow-files_files/bpf-workflow-pc.css" rel="stylesheet" />
+            <script src="workflow-files_files/bpf-workflow-client.js"></script>
+            <script src="workflow-files_files/bpf-workflow-pc.js"></script>
+            <script src="workflow-files_files/bpf-workflow-lang-zh-cn.js"></script>
+            <script src="workflow-files_files/Workflow.js"></script>
+            <link href="workflow-files_files/bpf-sdk-core.css" rel="stylesheet" />
+            <link href="workflow-files_files/bpf-userselect-pc.css" rel="stylesheet" />
+            <script src="workflow-files_files/bpf-sdk-core.js"></script>
+            <script src="workflow-files_files/bpf-userselect-client.js"></script>
+            <script src="workflow-files_files/bpf-userselect-pc.js"></script>
+            <script src="workflow-files_files/bpf-userselect-lang-zh-cn.js"></script>
+            <script src="workflow-files_files/Workflow.js"></script>
+            <script type="text/html" id="script_attachment">
+                <p><a class="attachment-tt tc-attach-item" href="javascript:void(0)"></a></p>
+            </script>
+            <script type="text/html" id="script_report_attachment">
+                <p class="clear report-attachment-info">
+                    <a class="attachment-tt tc-report-attachment pull-left" href="javascript:void(0)"></a>
+                </p>
+            </script>
+
+        </div> 
 
         
     </div>
@@ -472,19 +605,7 @@ function __doPostBack(eventTarget, eventArgument) {
             $("#nav ul li").click(function () {
                 saveState();
             });
-            if ($.cookie('htmlcookie') != null && $.cookie('htmlcookie') != "") {
-
-                var array = $.cookie('htmlcookie').split(',');
-                $("#nav ul").each(function (i, row) {
-                    if (array[i] == 1) {
-                        $(row).css("display", "block");
-                    }
-                    else {
-                        $(row).css("display", "none");
-                    }
-
-                });
-            }
+           
         });
         //导航状态控制结束
     </script>
