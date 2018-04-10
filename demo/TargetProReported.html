@@ -400,12 +400,12 @@
                     <!--下载按钮 开始-->
                     <div id="Down1" class="TClassHide">
                         <!--<div class="DownExcelDiv2 ">
-            <span class="DownExcelspan">
-                <span>
-                    <input name="file_upload" id="file_upload" type="file">
-                </span>
-            </span>
-        </div>-->
+                    <span class="DownExcelspan">
+                        <span>
+                            <input name="file_upload" id="file_upload" type="file">
+                        </span>
+                    </span>
+                </div>-->
                         <div class="DownExcelDiv">
                             <span class="DownExcelspan">
                                 <div class="uploadify-button W100P" id="file_upload-button1">
@@ -422,12 +422,12 @@
                     <!--下载和上报按钮 开始-->
                     <div id="UpLoadDataDiv" class="TClassHide">
                         <!--div class="DownExcelDiv2 ">
-            <span class="DownExcelspan">
-                <span>
-                    <input name="file_upload" id="file2" type="file">
-                </span>
-            </span>
-        </div>-->
+                    <span class="DownExcelspan">
+                        <span>
+                            <input name="file_upload" id="file2" type="file">
+                        </span>
+                    </span>
+                </div>-->
                         <div class="DownExcelDiv">
                             <span class="DownExcelspan">
                                 <div class="uploadify-button W100P" id="Div2">
@@ -1338,6 +1338,72 @@
                 ContentPlaceHolder1_MutipleUpload_Show();//]]>
             </script>
             <script></script>
+            <div id="divDetail" class="popup" style="height: auto; display:none; padding-bottom: 10px">
+                <table style="width: 600px;" class="tab02">
+                    <tr>
+                        <th style="width: 25%;  text-align: center;" colspan="2">项目</th>
+                        <td style="width: 25%;  text-align: left;">
+                            保定万和春天
+                        </td>
+                        <td style="width: 25%;  text-align: left;"></td>
+                        <td style="width: 25%;  text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <th style="width: 8%;   text-align: center;" rowspan="2">销售</th>
+                        <th style="width: 17%;  text-align: center;">本月计划</th>
+                        <td style="width: 25%;  text-align: left;">100</td>
+                        <th style="width: 25%;  text-align: center;">本月实际</th>
+                        <td style="width: 25%;  text-align: left;">100</td>
+                    </tr>
+                    <tr>
+                        <th style="width: 17%;  text-align: center;">累计计划</th>
+                        <td style="width: 25%;  text-align: left;">
+                            300
+                        </td>
+                        <th style="width: 25%;  text-align: center;">累计实际</th>
+                        <td style="width: 25%;  text-align: left;">
+                            300
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="width: 8%;   text-align: center;" rowspan="2">回款</th>
+                        <th style="width: 17%;  text-align: center;">本月计划</th>
+                        <td style="width: 25%;  text-align: left;">200</td>
+                        <th style="width: 25%;  text-align: center;">本月实际</th>
+                        <td style="width: 30%;  text-align: left;">200</td>
+                    </tr>
+                    <tr>
+                        <th style="width: 17%;  text-align: center;">累计计划</th>
+                        <td style="width: 25%;  text-align: left;">
+                            400
+                        </td>
+                        <th style="width: 25%;  text-align: center;">累计实际</th>
+                        <td style="width: 25%;  text-align: left;">
+                            400
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="width: 8%;   text-align: center;" rowspan="2">利润额</th>
+                        <th style="width: 17%;  text-align: center;">本月计划</th>
+                        <td style="width: 25%;  text-align: left;">50</td>
+                        <th style="width: 25%;  text-align: center;">本月实际</th>
+                        <td style="width: 25%;  text-align: left;">50</td>
+                    </tr>
+                    <tr>
+                        <th style="width: 17%;  text-align: center;">累计计划</th>
+                        <td style="width: 25%;  text-align: left;">
+                            100
+                        </td>
+                        <th style="width: 25%;  text-align: center;">累计实际</th>
+                        <td style="width: 25%;  text-align: left;">
+                            100
+                        </td>
+                    </tr>
+                </table>
+                <div class="pop_operate" style="text-align:center;width:100%;padding:5px 0px;">
+                    <input type="button" class="pop_btn btn_blue" value="确定" style="float:none!important;" onclick="art.dialog({ id: 'divDetail' }).close();" />
+                </div>
+            </div>
         </form>
     </div>
 

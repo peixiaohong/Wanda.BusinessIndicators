@@ -49,6 +49,15 @@ function ComplateDetailLiaddCss2(sender) {
     }
 }
 
+function showDetail() {
+    art.dialog({
+        content: $("#divDetail").html(),
+        lock: true,
+        id: 'divDetail',
+        title: '<span>指标完成情况</span>'
+    });
+}
+
 //页面加载事件
 $(function () {
 
