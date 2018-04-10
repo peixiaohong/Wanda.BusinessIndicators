@@ -194,22 +194,21 @@ function InitSysTree() {
 // 树控件只能点击最末级子节点
 function beforeClick(treeId, treeNode) {
 
-    //var check = (treeNode && !treeNode.isParent);
+    var check = (treeNode && !treeNode.isParent);
 
-    //if (check) {
-    //    $("#TxtSystem").val(treeNode.TreeNodeName);
-
-    //    if (treeNode.Category == 1) {
-    //        window.location.href = "TargetRpt.aspx?_sysid=" + treeNode.ID + "&_finYear=" + $("#ddlYear").val() + "&_finMonth=" + $("#ddlMonth").val() + "&IsLastestVersion=" + IsLatestVersion;
-    //    }
-    //    if (treeNode.Category == 2) {
-    //        window.location.href = "ProMonthReport.aspx?_sysid=" + treeNode.ID + "&_finYear=" + $("#ddlYear").val() + "&_finMonth=" + $("#ddlMonth").val() + "&IsLastestVersion=" + IsLatestVersion;
-    //    } else if (treeNode.Category == 3) {
-    //        window.location.href = "TargetGroupRpt.aspx?_sysid=" + treeNode.ID + "&_finYear=" + $("#ddlYear").val() + "&_finMonth=" + $("#ddlMonth").val() + "&IsLastestVersion=" + IsLatestVersion;
-    //    } else if (treeNode.Category == 4) {
-    //        window.location.href = "TargetDirectlyRpt.aspx?_sysid=" + treeNode.ID + "&_finYear=" + $("#ddlYear").val() + "&_finMonth=" + $("#ddlMonth").val() + "&IsLastestVersion=" + IsLatestVersion;
-    //    }
-    //}
+    if (check) {
+        $("#TxtSystem").val(treeNode.TreeNodeName);
+        if (treeNode.Category == 1) {
+            window.location.href = "TargetRpt-HDGJ.html";
+        }
+        if (treeNode.Category == 2) {
+            window.location.href = "TargetRpt.html";
+        } else if (treeNode.Category == 3) {
+            //window.location.href = "TargetGroupRpt.aspx?_sysid=" + treeNode.ID + "&_finYear=" + $("#ddlYear").val() + "&_finMonth=" + $("#ddlMonth").val() + "&IsLastestVersion=" + IsLatestVersion;
+        } else if (treeNode.Category == 4) {
+            //window.location.href = "TargetDirectlyRpt.aspx?_sysid=" + treeNode.ID + "&_finYear=" + $("#ddlYear").val() + "&_finMonth=" + $("#ddlMonth").val() + "&IsLastestVersion=" + IsLatestVersion;
+        }
+    }
 }
 
 function onCheck(e, treeId, treeNode) {
@@ -787,7 +786,142 @@ function ComplateDetailLiaddCss2(sender) {
         $("#importedDataTable4").show();
     }
 }
+function ComplateDetailLiaddCss3(sender) {
+    var TemplData = {};
 
+    $("#Ul8 .active_sub3").each(function () {
+        $(this).removeClass("active_sub3");
+    });
+    $(sender).addClass("active_sub3");
+
+    currentDetailTarget = $("#Ul8 li .active_sub3 ");
+    if ($(sender).attr("data-value") == "完成情况明细-经营收入") {
+        $("#importedDataTable20").show();
+        $("#importedDataTable21").hide();
+        $("#importedDataTable22").hide();
+        $("#importedDataTable23").hide();
+        $("#importedDataTable24").hide();
+    }
+    else if ($(sender).attr("data-value") == "完成情况明细-EBITDA") {
+        $("#importedDataTable20").hide();
+        $("#importedDataTable21").show();
+        $("#importedDataTable22").hide();
+        $("#importedDataTable23").hide();
+        $("#importedDataTable24").hide();
+    }
+    else if ($(sender).attr("data-value") == "完成情况明细-回款额") {
+        $("#importedDataTable20").hide();
+        $("#importedDataTable21").hide();
+        $("#importedDataTable22").show();
+        $("#importedDataTable23").hide();
+        $("#importedDataTable24").hide();
+    }
+    else if ($(sender).attr("data-value") == "完成情况明细-出租率") {
+            $("#importedDataTable20").hide();
+            $("#importedDataTable21").hide();
+            $("#importedDataTable22").hide();
+            $("#importedDataTable23").show();
+            $("#importedDataTable24").hide();
+        }
+    else if ($(sender).attr("data-value") == "完成情况明细-重点事项达成率") {
+            $("#importedDataTable20").hide();
+            $("#importedDataTable21").hide();
+            $("#importedDataTable22").hide();
+            $("#importedDataTable23").hide();
+            $("#importedDataTable24").show();
+        }
+}
+
+function MissCurrentLiaddCss1(sender) {
+    var TemplData = {};
+
+    $("#U2_1 .active_sub3").each(function () {
+        $(this).removeClass("active_sub3");
+    });
+    $(sender).addClass("active_sub3");
+
+    currentDetailTarget = $("#U2_1 li .active_sub3 ");
+    if ($(sender).attr("data-value") == "完成情况明细-经营收入") {
+        $("#Tab_CurrentMissTarget10").show();
+        $("#Tab_CurrentMissTarget20").hide();
+        $("#Tab_CurrentMissTarget30").hide();
+        $("#Tab_CurrentMissTarget40").hide();
+        $("#Tab_CurrentMissTarget50").hide();
+    }
+    else if ($(sender).attr("data-value") == "完成情况明细-EBITDA") {
+        $("#Tab_CurrentMissTarget10").hide();
+        $("#Tab_CurrentMissTarget20").show();
+        $("#Tab_CurrentMissTarget30").hide();
+        $("#Tab_CurrentMissTarget40").hide();
+        $("#Tab_CurrentMissTarget50").hide();
+    }
+    else if ($(sender).attr("data-value") == "完成情况明细-回款额") {
+        $("#Tab_CurrentMissTarget10").hide();
+        $("#Tab_CurrentMissTarget20").hide();
+        $("#Tab_CurrentMissTarget30").show();
+        $("#Tab_CurrentMissTarget40").hide();
+        $("#Tab_CurrentMissTarget50").hide();
+    }
+    else if ($(sender).attr("data-value") == "完成情况明细-出租率") {
+        $("#Tab_CurrentMissTarget10").hide();
+        $("#Tab_CurrentMissTarget20").hide();
+        $("#Tab_CurrentMissTarget30").hide();
+        $("#Tab_CurrentMissTarget40").show();
+        $("#Tab_CurrentMissTarget50").hide();
+    }
+    else if ($(sender).attr("data-value") == "完成情况明细-重点事项达成率") {
+        $("#Tab_CurrentMissTarget10").hide();
+        $("#Tab_CurrentMissTarget20").hide();
+        $("#Tab_CurrentMissTarget30").hide();
+        $("#Tab_CurrentMissTarget40").hide();
+        $("#Tab_CurrentMissTarget50").show();
+    }
+}
+function MissLiaddCss1(sender) {
+    var TemplData = {};
+
+    $("#U2 .active_sub3").each(function () {
+        $(this).removeClass("active_sub3");
+    });
+    $(sender).addClass("active_sub3");
+
+    currentDetailTarget = $("#U2 li .active_sub3 ");
+    if ($(sender).attr("data-value") == "完成情况明细-经营收入") {
+        $("#Tab_MissTarget10").show();
+        $("#Tab_MissTarget20").hide();
+        $("#Tab_MissTarget30").hide();
+        $("#Tab_MissTarget40").hide();
+        $("#Tab_MissTarget50").hide();
+    }
+    else if ($(sender).attr("data-value") == "完成情况明细-EBITDA") {
+        $("#Tab_MissTarget10").hide();
+        $("#Tab_MissTarget20").show();
+        $("#Tab_MissTarget30").hide();
+        $("#Tab_MissTarget40").hide();
+        $("#Tab_MissTarget50").hide();
+    }
+    else if ($(sender).attr("data-value") == "完成情况明细-回款额") {
+        $("#Tab_MissTarget10").hide();
+        $("#Tab_MissTarget20").hide();
+        $("#Tab_MissTarget30").show();
+        $("#Tab_MissTarget40").hide();
+        $("#Tab_MissTarget50").hide();
+    }
+    else if ($(sender).attr("data-value") == "完成情况明细-出租率") {
+        $("#Tab_MissTarget10").hide();
+        $("#Tab_MissTarget20").hide();
+        $("#Tab_MissTarget30").hide();
+        $("#Tab_MissTarget40").show();
+        $("#Tab_MissTarget50").hide();
+    }
+    else if ($(sender).attr("data-value") == "完成情况明细-重点事项达成率") {
+        $("#Tab_MissTarget10").hide();
+        $("#Tab_MissTarget20").hide();
+        $("#Tab_MissTarget30").hide();
+        $("#Tab_MissTarget40").hide();
+        $("#Tab_MissTarget50").show();
+    }
+}
 
 var ComplateTargetDetailTemplate = null;
 function SetComplateTargetDetailData(sender, Type) {
@@ -2262,4 +2396,30 @@ function showDetail() {
         id: 'divDetail',
         title: '<span>指标完成情况</span>'
     });
+}
+
+function f_ddlfjzb(sender) {
+    if ($(sender).val() == 2) {
+        window.location.href = "TargetRpt.html"
+    }
+    else {
+        window.location.href = "TargetRpt-NKB.html"
+    }
+}
+function f_ddlfjzb_hdgj(sender) {
+    if ($(sender).val() == 2) {
+        window.location.href = "TargetRpt-HDGJ.html"
+    }
+    else {
+        window.location.href = "TargetRpt-HDGJ-NKB.html"
+    }
+}
+
+function f_ddlSystem(sender) {
+    if ($(sender).val() == "50643d29-25d0-4c7b-af6e-aac2e82863ee") {
+        window.location.href = "TargetRpt-HDGJ.html"
+    }
+    else if ($(sender).val() == "a00ad17d-57da-4f8b-9c60-807a5e83d7a7") {
+        window.location.href = "TargetRpt.html"
+    }
 }
