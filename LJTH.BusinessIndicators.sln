@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJTH.BusinessIndicators.Web", "Wanda.BusinessIndicators\LJTH.BusinessIndicators.Web.csproj", "{889E4F76-5EE8-49B4-AC1A-0C3029FBC080}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -389,7 +389,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{889E4F76-5EE8-49B4-AC1A-0C3029FBC080} = {72C2F21E-A9FA-45B4-A428-F5D877BF2B05}
+		{889E4F76-5EE8-49B4-AC1A-0C3029FBC080} = {FB137B23-CB3D-4458-A142-A56B55D80822}
 		{65839F36-193A-41D1-9E79-38BC84984DE6} = {8F32234F-34D2-496C-8605-A725FF97E748}
 		{442C318F-9D99-4A3F-972E-33E8A8C8BE51} = {8F32234F-34D2-496C-8605-A725FF97E748}
 		{9E21A44D-17EB-44F4-A936-27B41CA565FE} = {8F32234F-34D2-496C-8605-A725FF97E748}

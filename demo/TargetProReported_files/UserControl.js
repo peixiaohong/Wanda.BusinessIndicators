@@ -71,6 +71,7 @@ function setArrow_nLeft(sender) {
                 $(".arrow_n").css("left", "1060");
                 $("#PromptMessage").html("请仔细选择加签，保证分管副总裁审批节点以前审批人完整。");
                 $("#PromptMessage").addClass("Tishi");
+                $("#workflowdiv").css("display", "block");
                 return true;
             } else {
                 return false;
