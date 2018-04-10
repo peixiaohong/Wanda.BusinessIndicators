@@ -170,584 +170,602 @@
                         <div class="content_t_r"></div>
                     </div>
                     <div class="content_m" style="overflow: hidden">
-                        <div style="float: left; width: 30%;">
-                            <span>上报年</span>
-                            <select id="ddlYears" style="width: 120px;">
-                                <option value="2008">2008</option>
-                                <option value="2009">2009</option>
-                                <option value="2010">2010</option>
-                                <option value="2011">2011</option>
-                                <option value="2012">2012</option>
-                                <option value="2013">2013</option>
-                                <option value="2014">2014</option>
-                                <option value="2015">2015</option>
-                                <option value="2016">2016</option>
-                                <option value="2017">2017</option>
-                                <option value="2018">2018</option>
-                                <option value="2019">2019</option>
-                                <option value="2020">2020</option>
-                                <option value="2021">2021</option>
-                                <option value="2022">2022</option>
+                        <div style="float: left; width: 25%;">
+                            <span>板块</span>
+                            <select id="ddlSystem" style="width: 120px; " selected="selected">
+                                <option  selected="selected">全部</option>
+                                <option value="50643d29-25d0-4c7b-af6e-aac2e82863ee">和道国际</option>
+                                <option value="9b647585-15ab-48b9-b286-6788d95a2747">合创</option>
+                                <option value="a00ad17d-57da-4f8b-9c60-807a5e83d7a7">房地产事业部</option>
+                                <option value="d3e1e72e-3c3c-4042-8690-20a3168c8abb">产业发展</option>
+                                <option value="db3e4d6e-a272-48d8-9ce9-aa1dbd4472f2">文旅板块</option>
+                                <option value="78648161-53d5-40ff-935f-78baf767cf03">物业公司</option>
+                                <option value="2eb7465b-95da-450c-aa2f-9af04e06d9bc">热力公司</option>
+                                <option value="aafd9a53-21a0-4dc5-b980-5af04f269816">商贸公司</option>
+                                <option value="72a58a88-bb96-464c-bf05-7195b5e6f6e4">金控</option>
+                                <option value="dd181790-9b5e-4cb4-ad2a-d91dd862bd57">融资部</option>
+                                <option value="a54fb361-9787-480f-b332-0e412ec9bb70">总部费用</option>
+                                <option value="a4f3da3f-fc50-4c3e-b0de-3955904e7d8b">集团总部</option>
                             </select>
                         </div>
-                        <div style="width: 30%; float: left">
-                            <span>上报月份</span>
-                            <select class="DownExcelDiv" style="width: 100px; margin-left: 20px;" id="ddlMonths">
-                                <option value="1">1月</option>
-                                <option value="2">2月</option>
-                                <option value="3">3月</option>
-                                <option value="4">4月</option>
-                                <option value="5">5月</option>
-                                <option value="6">6月</option>
-                                <option value="7">7月</option>
-                                <option value="8">8月</option>
-                                <option value="9">9月</option>
-                                <option value="10">10月</option>
-                                <option value="11">11月</option>
-                                <option value="12">12月</option>
-                            </select>
+                            <div style="float: left; width: 25%;">
+                                <span>上报年份</span>
+                                <select id="ddlYears" style="width: 120px;">
+                                    <option value="2008">2008</option>
+                                    <option value="2009">2009</option>
+                                    <option value="2010">2010</option>
+                                    <option value="2011">2011</option>
+                                    <option value="2012">2012</option>
+                                    <option value="2013">2013</option>
+                                    <option value="2014">2014</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2018" selected="selected">2018</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                </select>
+                            </div>
+                            <div style="width: 25%; float: left">
+                                <span>上报月份</span>
+                                <select class="DownExcelDiv" style="width: 100px; margin-left: 20px;" id="ddlMonths">
+                                    <option value="1">1月</option>
+                                    <option value="2" selected="selected">2月</option>
+                                    <option value="3">3月</option>
+                                    <option value="4">4月</option>
+                                    <option value="5">5月</option>
+                                    <option value="6">6月</option>
+                                    <option value="7">7月</option>
+                                    <option value="8">8月</option>
+                                    <option value="9">9月</option>
+                                    <option value="10">10月</option>
+                                    <option value="11">11月</option>
+                                    <option value="12">12月</option>
+                                </select>
+                            </div>
+                            <div class="DownExcelDiv" id="DownMovie" style="width: 200px; float: left;">
+                                <a class="btn_search" id="ContentPlaceHolder1_LinkButton1"><span>查询</span></a>
+                            </div>
                         </div>
-                        <div class="DownExcelDiv" id="DownMovie" style="width: 200px; float: left;">
-                            <a class="btn_search" id="ContentPlaceHolder1_LinkButton1"><span>查询</span></a>
+                        <div class="content_b_l">
+                            <div class="content_b_r"></div>
                         </div>
-                    </div>
-                    <div class="content_b_l">
-                        <div class="content_b_r"></div>
-                    </div>
-                    <!--明细项 开始-->
-                    <!--明细项 开始-->
-                    <div class="margin_t10">
-                        <div class="tabs_m">
-                            <ul id="Ul3">
-                                <li class="selected m_1"><a class="active_sub2"><span>综合查询</span></a></li>
-                            </ul>
+                        <!--明细项 开始-->
+                        <!--明细项 开始-->
+                        <div class="margin_t10">
+                            <div class="tabs_m">
+                                <ul id="Ul3">
+                                    <li class="selected m_1"><a class="active_sub2"><span>综合查询</span></a></li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <div class="tabs_content">
-                        <div class="scrolldoorFrame copy">
-                            <table class="tab_005">
-                                <tr>
-                                    <th class="Td_Right" rowspan=2>板块</th>
-                                    <th class="Td_Right" rowspan=2>考核指标</th>
-                                    <th class="Td_Right" colspan=4>本月发生</th>
-                                    <th class="Td_Right" colspan=4>本年累计</th>
-                                </tr>
-                                <tr>
-                                    <th class="Td_Right">计划数</th>
-                                    <th class="Td_Right">实际数</th>
-                                    <th class="Td_Right">差额</th>
-                                    <th class="Td_Right">完成率</th>
-                                    <th class="Td_Right">计划数</th>
-                                    <th class="Td_Right">实际数</th>
-                                    <th class="Td_Right">差额</th>
-                                    <th class="Td_Right">完成率</th>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right" rowspan=5>房地产事业部</td>
-                                    <td class="Td_Right">销售额</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">销售回款</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">利润额</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">关键节点达成率</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">维修事项达成率</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right" rowspan=5>
-                                        产业发展<span style='mso-spacerun:yes'>&nbsp;</span>
-                                    </td>
-                                    <td class="Td_Right">经营净利润</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">招商额</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">回款额</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">大机构招商</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">工业用地拓展</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right" rowspan=6>文旅板块</td>
-                                    <td class="Td_Right">经营收入</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">EBITDA</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">会籍费</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">土地收储（租地）</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">土地收储（征地）</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">重点事项达成率</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right" rowspan=5>物业公司</td>
-                                    <td class="Td_Right">回款</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">EBITDA</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">经营收入</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">基础物业收费率</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">维修事项达成率</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right" rowspan=4>热力公司</td>
-                                    <td class="Td_Right">经营性回款</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">EBITDA</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">经营收入</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">2#热源厂节点达成率</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right" rowspan=6>
-                                        和道国际<span style='mso-spacerun:yes'>&nbsp;</span>
-                                    </td>
-                                    <td class="Td_Right">经营收入</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">EBITDA</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">回款额</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">出租率</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">经营率</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">重点事项达成率</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right" rowspan=3>商贸公司</td>
-                                    <td class="Td_Right">经营收入</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">经营利润</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">统一收银额</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right" rowspan=3>合创</td>
-                                    <td class="Td_Right">营业收入</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">税后经营净利润</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">回款额</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right" rowspan=5>
-                                        金控<span style='mso-spacerun:yes'>&nbsp;</span>
-                                    </td>
-                                    <td class="Td_Right">融资收入</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">营业收入</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">利润额</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">历史欠款追缴</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">基金管理规模</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">融资部</td>
-                                    <td class="Td_Right">融资转款额</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
-                                <tr>
-                                    <td class="Td_Right">总部费用</td>
-                                    <td class="Td_Right">置业（实业）费用额</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">100</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">300</td>
-                                    <td class="Td_Right">0</td>
-                                    <td class="Td_Right">100%</td>
-                                </tr>
+                        <div class="tabs_content">
+                            <div class="scrolldoorFrame copy">
+                                <table class="tab_005">
+                                    <tr>
+                                        <th class="Td_Right" rowspan=2>板块</th>
+                                        <th class="Td_Right" rowspan=2>考核指标</th>
+                                        <th class="Td_Right" colspan=4>本月发生</th>
+                                        <th class="Td_Right" colspan=4>本年累计</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="Td_Right">计划数</th>
+                                        <th class="Td_Right">实际数</th>
+                                        <th class="Td_Right">差额</th>
+                                        <th class="Td_Right">完成率</th>
+                                        <th class="Td_Right">计划数</th>
+                                        <th class="Td_Right">实际数</th>
+                                        <th class="Td_Right">差额</th>
+                                        <th class="Td_Right">完成率</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right" rowspan=5>房地产事业部</td>
+                                        <td class="Td_Right">销售额</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">销售回款</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">利润额</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">关键节点达成率</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">维修事项达成率</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right" rowspan=5>
+                                            产业发展<span style='mso-spacerun:yes'>&nbsp;</span>
+                                        </td>
+                                        <td class="Td_Right">经营净利润</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">招商额</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">回款额</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">大机构招商</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">工业用地拓展</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right" rowspan=6>文旅板块</td>
+                                        <td class="Td_Right">经营收入</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">EBITDA</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">会籍费</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">土地收储（租地）</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">土地收储（征地）</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">重点事项达成率</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right" rowspan=5>物业公司</td>
+                                        <td class="Td_Right">回款</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">EBITDA</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">经营收入</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">基础物业收费率</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">维修事项达成率</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right" rowspan=4>热力公司</td>
+                                        <td class="Td_Right">经营性回款</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">EBITDA</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">经营收入</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">2#热源厂节点达成率</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right" rowspan=6>
+                                            和道国际<span style='mso-spacerun:yes'>&nbsp;</span>
+                                        </td>
+                                        <td class="Td_Right">经营收入</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">EBITDA</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">回款额</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">出租率</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">经营率</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">重点事项达成率</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right" rowspan=3>商贸公司</td>
+                                        <td class="Td_Right">经营收入</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">经营利润</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">统一收银额</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right" rowspan=3>合创</td>
+                                        <td class="Td_Right">营业收入</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">税后经营净利润</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">回款额</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right" rowspan=5>
+                                            金控<span style='mso-spacerun:yes'>&nbsp;</span>
+                                        </td>
+                                        <td class="Td_Right">融资收入</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">营业收入</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">利润额</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">历史欠款追缴</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">基金管理规模</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">融资部</td>
+                                        <td class="Td_Right">融资转款额</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="Td_Right">总部费用</td>
+                                        <td class="Td_Right">置业（实业）费用额</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">100</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">300</td>
+                                        <td class="Td_Right">0</td>
+                                        <td class="Td_Right">100%</td>
+                                    </tr>
 
-                            </table>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
 
 
             </div>

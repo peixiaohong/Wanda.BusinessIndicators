@@ -29,6 +29,35 @@ function loadTmpl_1(selector) {
 }
 
 
+
+function ComplateDetailLiaddCss2(sender) {
+    var TemplData = {};
+
+    $("#Ul6 .active_sub3").each(function () {
+        $(this).removeClass("active_sub3");
+    });
+    $(sender).addClass("active_sub3");
+
+    currentDetailTarget = $("#Ul6 li .active_sub3 ");
+    if ($(sender).attr("data-value") == "完成情况明细-利润额") {
+        $("#importedDataTable5").show();
+        $("#importedDataTable4").hide();
+    }
+    else if ($(sender).attr("data-value") == "完成情况明细-销售+回款") {
+        $("#importedDataTable5").hide();
+        $("#importedDataTable4").show();
+    }
+}
+
+function showDetail() {
+    art.dialog({
+        content: $("#divDetail").html(),
+        lock: true,
+        id: 'divDetail',
+        title: '<span>指标完成情况</span>'
+    });
+}
+
 //页面加载事件
 $(function () {
 
