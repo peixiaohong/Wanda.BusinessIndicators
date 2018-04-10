@@ -175,22 +175,22 @@ function InitSysTree() {
 // 树控件只能点击最末级子节点
 function beforeClick(treeId, treeNode) {
 
-    var check = (treeNode && !treeNode.isParent);
+    //var check = (treeNode && !treeNode.isParent);
 
-    if (check) {
-        $("#TxtSystem").val(treeNode.TreeNodeName);
+    //if (check) {
+    //    $("#TxtSystem").val(treeNode.TreeNodeName);
 
-        if (treeNode.Category == 1) {
-            window.location.href = "TargetRpt.aspx?_sysid=" + treeNode.ID + "&_finYear=" + $("#ddlYear").val() + "&_finMonth=" + $("#ddlMonth").val() + "&IsLastestVersion=" + IsLatestVersion;
-        }
-        if (treeNode.Category == 2) {
-            window.location.href = "ProMonthReport.aspx?_sysid=" + treeNode.ID + "&_finYear=" + $("#ddlYear").val() + "&_finMonth=" + $("#ddlMonth").val() + "&IsLastestVersion=" + IsLatestVersion;
-        } else if (treeNode.Category == 3) {
-            window.location.href = "TargetGroupRpt.aspx?_sysid=" + treeNode.ID + "&_finYear=" + $("#ddlYear").val() + "&_finMonth=" + $("#ddlMonth").val() + "&IsLastestVersion=" + IsLatestVersion;
-        } else if (treeNode.Category == 4) {
-            window.location.href = "TargetDirectlyRpt.aspx?_sysid=" + treeNode.ID + "&_finYear=" + $("#ddlYear").val() + "&_finMonth=" + $("#ddlMonth").val() + "&IsLastestVersion=" + IsLatestVersion;
-        }
-    }
+    //    if (treeNode.Category == 1) {
+    //        window.location.href = "TargetRpt.aspx?_sysid=" + treeNode.ID + "&_finYear=" + $("#ddlYear").val() + "&_finMonth=" + $("#ddlMonth").val() + "&IsLastestVersion=" + IsLatestVersion;
+    //    }
+    //    if (treeNode.Category == 2) {
+    //        window.location.href = "ProMonthReport.aspx?_sysid=" + treeNode.ID + "&_finYear=" + $("#ddlYear").val() + "&_finMonth=" + $("#ddlMonth").val() + "&IsLastestVersion=" + IsLatestVersion;
+    //    } else if (treeNode.Category == 3) {
+    //        window.location.href = "TargetGroupRpt.aspx?_sysid=" + treeNode.ID + "&_finYear=" + $("#ddlYear").val() + "&_finMonth=" + $("#ddlMonth").val() + "&IsLastestVersion=" + IsLatestVersion;
+    //    } else if (treeNode.Category == 4) {
+    //        window.location.href = "TargetDirectlyRpt.aspx?_sysid=" + treeNode.ID + "&_finYear=" + $("#ddlYear").val() + "&_finMonth=" + $("#ddlMonth").val() + "&IsLastestVersion=" + IsLatestVersion;
+    //    }
+    //}
 }
 
 function onCheck(e, treeId, treeNode) {
