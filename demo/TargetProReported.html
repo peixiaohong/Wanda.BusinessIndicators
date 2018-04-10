@@ -985,8 +985,8 @@
                     <!--附件上传 开始-->
 
                     <div id="RptAttachments" class="TClassHide">
-                        <div class="content_title1_Left" style="padding-bottom: 10px; margin-bottom: 10px; border-bottom-color: #014696; border-bottom-style: solid;">
-                            <span class="blue_txt">
+                        <div class="content_title1_Left" style="padding-bottom: 10px; margin-bottom: 10px; border-bottom-color: #014696; border-bottom-style: solid; height:20px !important;">
+                            <span class="blue_txt"  >
                                 附件上传
                             </span>
                         </div>
@@ -1120,13 +1120,13 @@
                         </script>
                         <div id="propose_enclosure" class="launchProcess_cont">
 
-                            <div class="DownExcelDiv" style="height: 35px;">
+                            <!--<div class="DownExcelDiv" style="height: 35px;">
                                 <span class="DownExcelspan">
                                     <span>
                                         <input name="ctl00$ContentPlaceHolder1$MutipleUpload$AttaUpload" id="ContentPlaceHolder1_MutipleUpload_AttaUpload" serverdataid="" type="file" />
                                     </span>
                                 </span>
-                            </div>
+                            </div>-->
                             <div style="border: 1px solid #ccc; min-height: 80px; margin-top: 10px;">
                                 <table class="form_table" id="attaTable" style="width: 90%; display: none;">
                                     <thead>
@@ -1187,8 +1187,59 @@
 
                         <div style="display: none;" id="MonthReportLog">
                             <table class="tab_005" id="importedDataTable2">
-                                <thead id="MonthlyReportActionHead"><tr class="tab_5_row_alt">        <th style="width: 20%">年</th>        <th style="width: 20%">月</th>         <th style="width: 20%">操作</th>        <th style="width: 20%">操作人</th>        <th style="width: 20%">操作时间</th>    </tr></thead>
-                                <tbody id="tab_rows"><tr>        <td class="Td_Left" style="width: 20%">2018</td>        <td class="Td_Left" style="width: 20%">3</td>        <td class="Td_Left" style="width: 20%">保存</td>        <td class="Td_Left" style="width: 20%">zhoupengfei</td>        <td class="Td_Left" style="width: 20%">2018/4/9 14:43:44</td>    </tr><tr>        <td class="Td_Left" style="width: 20%">2018</td>        <td class="Td_Left" style="width: 20%">3</td>        <td class="Td_Left" style="width: 20%">保存</td>        <td class="Td_Left" style="width: 20%">zhoupengfei</td>        <td class="Td_Left" style="width: 20%">2018/4/9 11:13:16</td>    </tr><tr>        <td class="Td_Left" style="width: 20%">2018</td>        <td class="Td_Left" style="width: 20%">3</td>        <td class="Td_Left" style="width: 20%">保存</td>        <td class="Td_Left" style="width: 20%">zhoupengfei</td>        <td class="Td_Left" style="width: 20%">2018/4/9 11:03:00</td>    </tr><tr>        <td class="Td_Left" style="width: 20%">2018</td>        <td class="Td_Left" style="width: 20%">3</td>        <td class="Td_Left" style="width: 20%">保存</td>        <td class="Td_Left" style="width: 20%">zhoupengfei</td>        <td class="Td_Left" style="width: 20%">2018/4/9 10:54:34</td>    </tr><tr>        <td class="Td_Left" style="width: 20%">2018</td>        <td class="Td_Left" style="width: 20%">3</td>        <td class="Td_Left" style="width: 20%">保存</td>        <td class="Td_Left" style="width: 20%">zhoupengfei</td>        <td class="Td_Left" style="width: 20%">2018/4/9 10:43:43</td>    </tr><tr>        <td class="Td_Left" style="width: 20%">2018</td>        <td class="Td_Left" style="width: 20%">3</td>        <td class="Td_Left" style="width: 20%">保存</td>        <td class="Td_Left" style="width: 20%">zhengguilong</td>        <td class="Td_Left" style="width: 20%">2018/4/4 15:58:17</td>    </tr></tbody>
+                                <thead id="MonthlyReportActionHead">
+                                <tr class="tab_5_row_alt">        
+                                    <th style="width: 20%">年</th>
+                                    <th style="width: 20%">月</th>
+                                    <th style="width: 20%">操作</th>
+                                    <th style="width: 20%">操作人</th>
+                                    <th style="width: 20%">操作时间</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tab_rows">
+                                <tr>        
+                                    <td class="Td_Left" style="width: 20%">2018</td>
+                                    <td class="Td_Left" style="width: 20%">3</td> 
+                                    <td class="Td_Left" style="width: 20%">保存</td> 
+                                    <td class="Td_Left" style="width: 20%">zhengguilong</td>
+                                    <td class="Td_Left" style="width: 20%">2018/4/9 14:43:44</td>
+                                    </tr>
+                                <tr>       
+                                    <td class="Td_Left" style="width: 20%">2018</td> 
+                                    <td class="Td_Left" style="width: 20%">3</td>    
+                                    <td class="Td_Left" style="width: 20%">保存</td> 
+                                    <td class="Td_Left" style="width: 20%">zhengguilong</td>  
+                                    <td class="Td_Left" style="width: 20%">2018/4/9 11:13:16</td> 
+                                    </tr>
+                                <tr>       
+                                    <td class="Td_Left" style="width: 20%">2018</td> 
+                                    <td class="Td_Left" style="width: 20%">3</td>  
+                                    <td class="Td_Left" style="width: 20%">保存</td>  
+                                    <td class="Td_Left" style="width: 20%">zhengguilong</td>  
+                                    <td class="Td_Left" style="width: 20%">2018/4/9 11:03:00</td>  
+                                    </tr>
+                                <tr>       
+                                    <td class="Td_Left" style="width: 20%">2018</td> 
+                                    <td class="Td_Left" style="width: 20%">3</td>    
+                                    <td class="Td_Left" style="width: 20%">保存</td>  
+                                    <td class="Td_Left" style="width: 20%">zhengguilong</td>   
+                                    <td class="Td_Left" style="width: 20%">2018/4/9 10:54:34</td>  
+                                    </tr>
+                                <tr>     
+                                    <td class="Td_Left" style="width: 20%">2018</td>  
+                                    <td class="Td_Left" style="width: 20%">3</td>    
+                                    <td class="Td_Left" style="width: 20%">保存</td>     
+                                    <td class="Td_Left" style="width: 20%">zhengguilong</td>   
+                                    <td class="Td_Left" style="width: 20%">2018/4/9 10:43:43</td> 
+                                    </tr>
+                                <tr>        
+                                    <td class="Td_Left" style="width: 20%">2018</td>  
+                                    <td class="Td_Left" style="width: 20%">3</td>     
+                                    <td class="Td_Left" style="width: 20%">保存</td>   
+                                    <td class="Td_Left" style="width: 20%">zhengguilong</td>  
+                                    <td class="Td_Left" style="width: 20%">2018/4/4 15:58:17</td> 
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
 
@@ -1223,7 +1274,7 @@
                                                                                     <div id="bpf-wfclient-nav-content">
                                                                                         <div id="bpf-wfclient-nav-div">
                                                                                             <span class="bpf-wfclient-nav-item ">
-                                                                                                <span title="发起节点">月度上报</span><span title="姓名：郑桂 (zhengguilong)
+                                                                                                <span title="发起节点">月度经营报告上报</span><span title="姓名：郑桂 (zhengguilong)
 
 职务：专业总监
 
@@ -1247,7 +1298,7 @@
                                                                             <tr><td>快捷意见</td><td><span class="bpf-wfclient-log-quicklog">同意</span><span class="spmarginright">&nbsp;</span><span class="bpf-wfclient-log-quicklog">不同意</span><span class="spmarginright">&nbsp;</span><span class="bpf-wfclient-log-quicklog">收到</span></td></tr>
                                                                             <tr><td id="bpf-wfclient-log-title">审批意见</td><td><textarea id="bpf-wfclient-log-textarea"></textarea></td></tr>
                                                                         </tbody>
-                                                                    </table><div id="bpf-wfclient-button-content" class="bpf-wfclient bpf-wfclient-button-default"><table id="bpf-wfclient-button-table"><tbody><tr style="height: 40px;"><td>&nbsp;</td><td><div id="bpf-wfclient-button-div"><!--按钮区域--><div class="bpf-wfclient-button-btn bpf-wfclient-button-submit" optype="1">提交</div><div class="bpf-wfclient-button-btn bpf-wfclient-button-save" optype="2">转发</div></div></td><td>&nbsp;</td></tr></tbody></table></div><!--审批日志--><div id="bpf-wfclient-log-content"><table style="width: 100%; border-spacing: 0;"><tbody><tr><td style="text-align: center;"><table id="bpf-wfclient-log-logtable" class="bpf-wfclient-table"><tbody><tr><th class="bpf-wfclient-log-logtable-thnode">节点</th><th>审批意见</th><th class="bpf-wfclient-log-logtable-approver">审批人</th><th class="bpf-wfclient-log-logtable-approvedate">审批时间</th><th class="bpf-wfclient-log-logtable-operator">操作</th></tr><tr><td><div>月度上报</div></td><td style="text-align:left"><span><pre>相关说明</pre></span></td><td style="text-align:left"><span style="line-height:20px;" title="郑桂 (zhengguilong)">/隆基泰和控股集团/隆基泰和置业/运营管理中心/信息管理部<br />专业总监<br />郑桂 </span></td><td><div>2018-02-22<br />23:12:05</div></td><td><div>发起</div></td></tr></tbody> </table> </td> </tr> <tr> <td id="bpf-wfclient-log-showmore"> <span><img alt="" src="workflow-files_files/down.png" /> <a>显示更多</a></span></td> </tr> </tbody></table> </div>
+                                                                    </table><div id="bpf-wfclient-button-content" class="bpf-wfclient bpf-wfclient-button-default"><table id="bpf-wfclient-button-table"><tbody><tr style="height: 40px;"><td>&nbsp;</td><td><div id="bpf-wfclient-button-div"><!--按钮区域--><div class="bpf-wfclient-button-btn bpf-wfclient-button-submit" optype="1">提交</div><div class="bpf-wfclient-button-btn bpf-wfclient-button-save" optype="2">转发</div></div></td><td>&nbsp;</td></tr></tbody></table></div><!--审批日志--><div id="bpf-wfclient-log-content"><table style="width: 100%; border-spacing: 0;"><tbody><tr><td style="text-align: center;"><table id="bpf-wfclient-log-logtable" class="bpf-wfclient-table"><tbody><tr><th class="bpf-wfclient-log-logtable-thnode">节点</th><th>审批意见</th><th class="bpf-wfclient-log-logtable-approver">审批人</th><th class="bpf-wfclient-log-logtable-approvedate">审批时间</th><th class="bpf-wfclient-log-logtable-operator">操作</th></tr><tr><td><div>月度经营报告上报</div></td><td style="text-align:left"><span><pre>相关说明</pre></span></td><td style="text-align:left"><span style="line-height:20px;" title="郑桂 (zhengguilong)">/隆基泰和控股集团/隆基泰和置业/运营管理中心/信息管理部<br />专业总监<br />郑桂 </span></td><td><div>2018-02-22<br />23:12:05</div></td><td><div>发起</div></td></tr></tbody> </table> </td> </tr> <tr> <td id="bpf-wfclient-log-showmore"> <span><img alt="" src="workflow-files_files/down.png" /> <a>显示更多</a></span></td> </tr> </tbody></table> </div>
                                                                 </div><div class="contextMenu" id="divContextMenu" style="display:none;"><ul><li>提交</li><li>转发</li></ul></div>
                                                             </div>
                                                         </div>
@@ -1356,7 +1407,7 @@
                         <th style="width: 17%;  text-align: center;">本月计划</th>
                         <td style="width: 25%;  text-align: left;">100</td>
                         <th style="width: 25%;  text-align: center;">本月实际</th>
-                        <td style="width: 25%;  text-align: left;">100</td>
+                        <td style="width: 25%;  text-align: left;"><input type="text" /></td>
                     </tr>
                     <tr>
                         <th style="width: 17%;  text-align: center;">累计计划</th>
@@ -1365,7 +1416,7 @@
                         </td>
                         <th style="width: 25%;  text-align: center;">累计实际</th>
                         <td style="width: 25%;  text-align: left;">
-                            300
+                            <input type="text" />
                         </td>
                     </tr>
                     <tr>
@@ -1373,7 +1424,7 @@
                         <th style="width: 17%;  text-align: center;">本月计划</th>
                         <td style="width: 25%;  text-align: left;">200</td>
                         <th style="width: 25%;  text-align: center;">本月实际</th>
-                        <td style="width: 30%;  text-align: left;">200</td>
+                        <td style="width: 30%;  text-align: left;"><input type="text" /></td>
                     </tr>
                     <tr>
                         <th style="width: 17%;  text-align: center;">累计计划</th>
@@ -1382,7 +1433,7 @@
                         </td>
                         <th style="width: 25%;  text-align: center;">累计实际</th>
                         <td style="width: 25%;  text-align: left;">
-                            400
+                            <input type="text" />
                         </td>
                     </tr>
                     <tr>
@@ -1390,7 +1441,7 @@
                         <th style="width: 17%;  text-align: center;">本月计划</th>
                         <td style="width: 25%;  text-align: left;">50</td>
                         <th style="width: 25%;  text-align: center;">本月实际</th>
-                        <td style="width: 25%;  text-align: left;">50</td>
+                        <td style="width: 25%;  text-align: left;"><input type="text" /></td>
                     </tr>
                     <tr>
                         <th style="width: 17%;  text-align: center;">累计计划</th>
@@ -1399,7 +1450,7 @@
                         </td>
                         <th style="width: 25%;  text-align: center;">累计实际</th>
                         <td style="width: 25%;  text-align: left;">
-                            100
+                            <input type="text" />
                         </td>
                     </tr>
                 </table>
