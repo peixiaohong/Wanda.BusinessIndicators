@@ -285,8 +285,8 @@ function __doPostBack(eventTarget, eventArgument) {
             <div class="scrolldoorFrame copy">
                 <table class="tab_005" id="SumTable" style="display: none;">
                     <thead id="Head" style="width: 100%">
-                        
-                        
+
+
                         <tr>
                             <th style="width: 12%" rowspan="2">月份</th>
                             <th id="Dsum" colspan="3">当前数</th>
@@ -304,8 +304,8 @@ function __doPostBack(eventTarget, eventArgument) {
                             <th rowspan="2" style="width: 6%">序号</th>
                             <th rowspan="2" style="width: 11%">门店</th>
                             <th rowspan="2" style="width: 11%">年度指标</th>
-                            <th colspan="12" class="sum" style="cursor: pointer" onclick="ClickChange('sum')">累计数  &nbsp;  &nbsp;<img src="TargetCollectDisplay-5_files/btn02.png"></th>
-                            <th colspan="12" style="display: none; cursor: pointer" class="dan" onclick="ClickChange('dan')">当月数  &nbsp;  &nbsp;<img src="TargetCollectDisplay-5_files/btn02.png"></th>
+                            <th colspan="12" class="sum" style="cursor: pointer" onclick="ClickChange('sum')">累计数  &nbsp;  &nbsp;<img src="TargetCollectDisplay-5_files/btn02.png" /></th>
+                            <th colspan="12" style="display: none; cursor: pointer" class="dan" onclick="ClickChange('dan')">当月数  &nbsp;  &nbsp;<img src="TargetCollectDisplay-5_files/btn02.png" /></th>
                         </tr>
                         <tr>
                             <th class="sum">1-1月</th>
@@ -320,7 +320,7 @@ function __doPostBack(eventTarget, eventArgument) {
                             <th class="sum">1-10月</th>
                             <th class="sum">1-11月</th>
                             <th class="sum">1-12月</th>
-                            
+
                             <th style="display: none" class="dan">1月</th>
                             <th style="display: none" class="dan">2月</th>
                             <th style="display: none" class="dan">3月</th>
@@ -342,17 +342,43 @@ function __doPostBack(eventTarget, eventArgument) {
                 <table class="tab_005" id="HistoryTable" style="">
                     <thead id="Thead2">
                         <tr>
-                            <th style="width: 15%">上报人</th>
-                            <th style="width: 15%">上报日期</th>
+                            <th>版本名称</th>
+                            <th style="width: 10%">上报人</th>
+                            <th style="width: 10%">上报日期</th>
                             <th style="width: 10%">文档下载</th>
-                            <th style="width: 10%">指标状态</th>
+                            <th style="width: 10%">是否为主要</th>
+                            <th style="width: 10%">是否启用</th>
                             <th style="width: 10%">操作</th>
-                            <th style="width: 15%">审批日期</th>
+                            <th style="width: 10%">审批日期</th>
                             <th style="width: 10%">查看日志</th>
                         </tr>
                     </thead>
-                    <tbody id="HistoryTr"></tbody>
+                    <tbody id="HistoryTr">
+                        <tr>
+                            <td class="Td_Right">考核版</td>
+                            <td class="Td_Right">zhengguilong</td>
+                            <td class="Td_Right">2018/2/7</td>
+                            <td class="Td_Center"><a href="#" onclick="DownLoad('3fc43bc7-813c-446d-8755-447ae7d50be7')">下载 </a></td>
+                            <td class="Td_Center" style="color: #9d2328">是</td>
+                            <td class="Td_Center">是</td>
+                            <td class="Td_Center"></td>
+                            <td class="Td_Right">2018/3/8</td>
+                            <td class="Td_Center"><a href="#" onclick="CheckAction('3fc43bc7-813c-446d-8755-447ae7d50be7')">点击查看</a></td>
+                        </tr>
+                        <tr>
+                            <td class="Td_Right">内控版</td>
+                            <td class="Td_Right">zhengguilong</td>
+                            <td class="Td_Right">2018/1/19</td>
+                            <td class="Td_Center"><a href="#" onclick="DownLoad('1d2ad7e4-7893-40a4-a013-f145594d9678')">下载 </a></td>
+                            <td class="Td_Center" style="color: gray">否</td>
+                            <td class="Td_Center">是</td>
+                            <td class="Td_Center"><a href="#" onclick="ActTarget('1d2ad7e4-7893-40a4-a013-f145594d9678')">设为主要</a></td>
+                            <td class="Td_Right">2018/1/29</td>
+                            <td class="Td_Center"><a href="#" onclick="CheckAction('1d2ad7e4-7893-40a4-a013-f145594d9678')">点击查看</a></td>
+                        </tr>
+                    </tbody>
                 </table>
+
             </div>
         </div>
     </div>
