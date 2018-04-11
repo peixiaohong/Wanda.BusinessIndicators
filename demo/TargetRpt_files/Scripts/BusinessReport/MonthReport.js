@@ -206,7 +206,7 @@ function beforeClick(treeId, treeNode) {
         } else if (treeNode.Category == 3) {
             //window.location.href = "TargetGroupRpt.aspx?_sysid=" + treeNode.ID + "&_finYear=" + $("#ddlYear").val() + "&_finMonth=" + $("#ddlMonth").val() + "&IsLastestVersion=" + IsLatestVersion;
         } else if (treeNode.Category == 4) {
-            //window.location.href = "TargetDirectlyRpt.aspx?_sysid=" + treeNode.ID + "&_finYear=" + $("#ddlYear").val() + "&_finMonth=" + $("#ddlMonth").val() + "&IsLastestVersion=" + IsLatestVersion;
+            window.location.href = "TargetDirectlyRpt.html";
         }
     }
 }
@@ -2416,10 +2416,14 @@ function f_ddlfjzb_hdgj(sender) {
 }
 
 function f_ddlSystem(sender) {
+    alert($(sender).val());
     if ($(sender).val() == "50643d29-25d0-4c7b-af6e-aac2e82863ee") {
         window.location.href = "TargetRpt-HDGJ.html"
     }
     else if ($(sender).val() == "a00ad17d-57da-4f8b-9c60-807a5e83d7a7") {
         window.location.href = "TargetRpt.html"
+    }
+    else if ($(sender).val() == "9b647585-15ab-48b9-b286-6788d95a2747") {
+        window.location.href = "TargetDirectlyRpt.html"
     }
 }
