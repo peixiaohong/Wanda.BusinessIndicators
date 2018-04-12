@@ -751,7 +751,7 @@ function ComplateDetailLiaddCss(sender) {
     $(sender).addClass("active_sub3");
 
     currentDetailTarget = $("#Ul4 li .active_sub3 ");
-    if ($(sender).attr("data-value") == "经营报告明细-销售") {
+    if ($(sender).attr("data-value") == "经营报告明细-销售+回款") {
         $("#importedDataTable1").show();
         $("#importedDataTable2").hide();
         $("#importedDataTable3").hide();

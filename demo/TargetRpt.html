@@ -319,7 +319,7 @@
                         <DIV class=content_m>
                             <DIV class=blue_txt>月报说明</DIV>
                             <DIV style="WIDTH: 100%; POSITION: relative; PADDING-BOTTOM: 3px"></DIV>
-                            <DIV id=txtDes><BR>一、2月累计经营指标完成情况：<BR>1、销售收入：计划17,800万元，实际完成&nbsp;17,655万元，累计完成率99.2%，5家公司未完成累计销售收入指标<BR>2、回款收入：计划35,600万元，实际完成35,488万元，累计完成率99.7%，5家公司未完成累计回款收入指标<BR>3、利润额收入：计划8,900万元，实际完成8,893万元，累计完成率99.7%，5家公司未完成累计利润额收入指标<BR>二、2月当月经营指标完成情况：<BR>1、销售收入：计划8,900万元，实际完成&nbsp;8,861万元，当月完成率99.6%，3家公司未完成当月销售收入指标<BR>2、回款收入：计划17,800万元，实际完成17,758万元，当月完成率99.8%，3家公司未完成当月回款收入指标<BR>2、利润额收入：计划4,450万元，实际完成4,448万元，当月完成率100.0%，1家公司未完成当月利润额收入指标<BR></DIV>
+                            <DIV id=txtDes><BR>一、2月累计经营指标完成情况：<BR>1、销售收入：计划<span style="background-color:yellow;font-weight:bold;">17,800</span>万元，实际完成&nbsp;<span style="background-color:yellow;font-weight:bold;">17,655</span>万元，累计完成率<span style="background-color:yellow;font-weight:bold;">99.2%</span>，<span style="background-color:yellow;font-weight:bold;">5</span>家公司未完成累计销售收入指标<BR>2、回款收入：计划<span style="background-color:yellow;font-weight:bold;">35,600</span>万元，实际完成<span style="background-color:yellow;font-weight:bold;">35,488</span>万元，累计完成率<span style="background-color:yellow;font-weight:bold;">99.7%</span>，<span style="background-color:yellow;font-weight:bold;">5</span>家公司未完成累计回款收入指标<BR>3、利润额收入：计划<span style="background-color:yellow;font-weight:bold;">8,900</span>万元，实际完成<span style="background-color:yellow;font-weight:bold;">8,893</span>万元，累计完成率<span style="background-color:yellow;font-weight:bold;">99.7%</span>，<span style="background-color:yellow;font-weight:bold;">5</span>家公司未完成累计利润额收入指标<BR>二、2月当月经营指标完成情况：<BR>1、销售收入：计划<span style="color:rgb(157,35,40)">8,900</span>万元，实际完成&nbsp;<span style="color:rgb(157,35,40)">8,861</span>万元，当月完成率<span style="color:rgb(157,35,40)">99.6%</span>，<span style="color:rgb(157,35,40)">3</span>家公司未完成当月销售收入指标<BR>2、回款收入：计划<span style="color:rgb(157,35,40)">17,800</span>万元，实际完成<span style="color:rgb(157,35,40)">17,758</span>万元，当月完成率<span style="color:rgb(157,35,40)">99.8%</span>，<span style="color:rgb(157,35,40)">3</span>家公司未完成当月回款收入指标<BR>2、利润额收入：计划<span style="color:rgb(157,35,40)">4,450</span>万元，实际完成<span style="color:rgb(157,35,40)">4,448</span>万元，当月完成率<span style="color:rgb(157,35,40)">100%</span>，<span style="color:rgb(157,35,40)">1</span>家公司未完成当月利润额收入指标<BR></DIV>
                         </DIV>
                         <DIV class=content_b_l>
                             <DIV class=content_b_r></DIV>
@@ -431,10 +431,7 @@
                                 <DIV class="scrolldoorFrame copy">
                                     <UL class=tabs id=Ul4 style="MARGIN-BOTTOM: 0px; HEIGHT: auto; MARGIN-TOP: 5px; BORDER-BOTTOM-COLOR: #fff">
                                         <li class="sd">
-                                            <a class="active2 active_sub3" data-value="经营报告明细-销售" onclick="ComplateDetailLiaddCss(this);">销售</a>
-                                        </li>
-                                        <li class="sd">
-                                            <a class="active2"  data-value="经营报告明细-回款" onclick="ComplateDetailLiaddCss(this);">回款</a>
+                                            <a class="active2 active_sub3" data-value="经营报告明细-销售+回款" onclick="ComplateDetailLiaddCss(this);">销售+回款</a>
                                         </li>
                                         <li class="sd">
                                              <a class="active2 "  data-value="经营报告明细-利润额" onclick="ComplateDetailLiaddCss(this);">利润额</a>
@@ -442,177 +439,252 @@
                                     </UL>
                                     <TABLE class=tab_005 id=importedDataTable1>
                                         <THEAD id=CompleteDetailHead style="WIDTH: 100%; POSITION: static; TOP: 0px">
-                                            <TR class=tab_5_row_alt jQuery171023892230250285523="67">
-                                                <TH style="WIDTH: 275px" rowSpan=2 colSpan=2>名称</TH>
-                                                <TH style="WIDTH: 35%" colSpan=4><A style="TEXT-DECORATION: none; COLOR: #ffffff" href='javascript:void(0)'>本月发生(万元) <IMG class=DetailMonthly id=imgDetailMonthly src="TargetRpt_files/images/btn_down02_w.png"> </A></TH>
-                                                <TH style="WIDTH: 35%" colSpan=4><A style="TEXT-DECORATION: none; COLOR: #ffffff" href='javascript:void(0)'>本年累计(万元) <IMG class=Detail id=imgDetail src="TargetRpt_files/images/btn_down03_w.png"> </A></TH>
-                                                <TH style="WIDTH: 10%" rowSpan=2>警示灯</TH>
+                                            <TR jQuery171023892230250285523="67">
+                                                <TH style="WIDTH: 10%" rowSpan=3 colSpan=2>名称</TH>
+                                                <TH style="WIDTH: 25%" rowspan="1" colSpan=4><A style="TEXT-DECORATION: none; COLOR: #ffffff" href='javascript:void(0)'>2月情况(万元) <IMG class=DetailMonthly id=imgDetailMonthly src="TargetRpt_files/images/btn_down02_w.png"> </A></TH>
+                                                <TH style="WIDTH: 15%" colSpan=2 rowspan="2"><A style="TEXT-DECORATION: none; COLOR: #ffffff" href='javascript:void(0)'>2月指标完成比例</A></TH>
+                                                <TH style="WIDTH: 25%" rowspan="1" colSpan=4><A style="TEXT-DECORATION: none; COLOR: #ffffff" href='javascript:void(0)'>1-2月情况(万元) <IMG class=Detail id=imgDetail src="TargetRpt_files/images/btn_down03_w.png"> </A></TH>
+                                                <TH style="WIDTH: 15%" colSpan=2 rowspan="2"><A style="TEXT-DECORATION: none; COLOR: #ffffff" href='javascript:void(0)'>1-2月指标完成比例</A></TH>
+                                                <TH style="WIDTH: 10%" rowSpan=2 colspan="2">警示灯</TH>
                                             </TR>
-                                            <TR class=tab_5_row_alt jQuery171023892230250285523="68">
-                                                <TH class=th_Sub >计划</TH>
-                                                <TH class=th_Sub>实际</TH>
-                                                <TH class=th_Sub>差额</TH>
-                                                <TH class=th_Sub2>完成率</TH>
-                                                <TH class=th_Sub1>计划</TH>
-                                                <TH class=th_Sub>实际</TH>
-                                                <TH class=th_Sub>差额</TH>
-                                                <TH class=th_Sub>完成率</TH>
+                                            <TR jQuery171023892230250285523="68">
+                                                <TH colspan="2">计划</TH>
+                                                <TH colspan="2">实际</TH>
+                                                <TH colspan="2">计划</TH>
+                                                <TH colspan="2">实际</TH>
+                                            </TR>
+                                            <TR jQuery171023892230250285523="68">
+                                                <TH class=th_Sub>销售</TH>
+                                                <TH class=th_Sub1>回款</TH>
+                                                <TH class=th_Sub>销售</TH>
+                                                <TH class=th_Sub1>回款</TH>
+                                                <TH class=th_Sub>销售</TH>
+                                                <TH class=th_Sub1>回款</TH>
+                                                <TH class=th_Sub>销售</TH>
+                                                <TH class=th_Sub1>回款</TH>
+                                                <TH class=th_Sub>销售</TH>
+                                                <TH class=th_Sub1>回款</TH>
+                                                <TH class=th_Sub>销售</TH>
+                                                <TH class=th_Sub1>回款</TH>
+                                                <TH class=th_Sub>销售</TH>
+                                                <TH class=th_Sub1>回款</TH>
                                             </TR>
                                         </THEAD>
                                         <TBODY id=tab2_rows>
                                             <TR class=item1 style="LINE-HEIGHT: 25px !important" onclick="ClickCounter(this,'CompanyPropertyItem0')" jQuery171023892230250285523="84">
                                                 <TD class="Td_Left Td_Merge" style="WIDTH: 18% !important; FONT-WEIGHT: bold; TEXT-ALIGN: center !important" colSpan=2>总部</TD>
-                                                <TD class="Td_Left Td_Merge">200</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">300</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">100</TD>
-                                                <TD class="Td_right Td_Merge" style="PADDING-BOTTOM: 5px; TEXT-ALIGN: center !important; PADDING-TOP: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px">150%</TD>
-                                                <TD class="Td_Left Td_Merge">4,000</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">5,000</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">1,000</TD>
-                                                <TD class="Td_TopAndBottom align_right Td_Merge">125%</TD>
+                                                <TD title=100 class=Td_TopAndBottom>100</TD>
+                                                <TD title=200 class=Td_TopAndBottom>200</TD>
+                                                <TD title=100 class=Td_TopAndBottom>100</TD>
+                                                <TD title=200 class=Td_TopAndBottom>200</TD>
+                                                <TD title=100% class=Td_TopAndBottom>100%</TD>
+                                                <TD title=100% class=Td_TopAndBottom>100%</TD>
+                                                <TD title=200 class=Td_TopAndBottom>200</TD>
+                                                <TD title=400 class=Td_TopAndBottom>400</TD>
+                                                <TD title=200 class=Td_TopAndBottom>200</TD>
+                                                <TD title=400 class=Td_TopAndBottom>400</TD>
+                                                <TD title=100% class=Td_TopAndBottom>100%</TD>
+                                                <TD title=100% class=Td_TopAndBottom>100%</TD>
+                                                <TD class="Td_Left Td_Merge" style="PADDING-BOTTOM: 5px; TEXT-ALIGN: center !important; PADDING-TOP: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px"></TD>
                                                 <TD class="Td_Left Td_Merge" style="PADDING-BOTTOM: 5px; TEXT-ALIGN: center !important; PADDING-TOP: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px"></TD>
                                             </TR>
-                                            <TR class="item1" style="LINE-HEIGHT: 25px !important"  onclick="ClickCounter2(this)">
+                                            <TR class="item1" style="LINE-HEIGHT: 25px !important" onclick="ClickCounter2(this)">
                                                 <TD class="Td_Left Td_Merge" style="WIDTH: 18% !important; FONT-WEIGHT: bold; TEXT-ALIGN: center !important" colSpan=2>环京区域</TD>
-                                                <TD class="Td_Left Td_Merge">12,000</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">26,000</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">14,000</TD>
-                                                <TD class="Td_right Td_Merge" style="PADDING-BOTTOM: 5px; TEXT-ALIGN: center !important; PADDING-TOP: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px">217%</TD>
-                                                <TD class="Td_Left Td_Merge">24,000</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">31,000</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">7,000</TD>
-                                                <TD class="Td_TopAndBottom align_right Td_Merge">129%</TD>
+                                                <TD class="Td_Left Td_Merge">600</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">1,200</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">290</TD>
+                                                <TD class="Td_Left Td_Merge">590</TD>
+                                                <TD class="Td_Left Td_Merge">98%</TD>
+                                                <TD class="Td_Left Td_Merge">100%</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">1,200</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">2,400</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">1,158</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">2,400</TD>
+                                                <TD class="Td_TopAndBottom align_right Td_Merge" style="BACKGROUND-COLOR: #fabf8f">96.5%</TD>
+                                                <TD class="Td_TopAndBottom align_right Td_Merge">100%</TD>
+                                                <TD class="Td_Left Td_Merge" style="PADDING-BOTTOM: 5px; TEXT-ALIGN: center !important; PADDING-TOP: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px"></TD>
                                                 <TD class="Td_Left Td_Merge" style="PADDING-BOTTOM: 5px; TEXT-ALIGN: center !important; PADDING-TOP: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px"></TD>
                                             </TR>
                                             <TR class="item1 DetailShow" style="LINE-HEIGHT: 25px !important" onclick="ClickCounter(this,'CompanyPropertyItem0')" jQuery171023892230250285523="94">
                                                 <TD class="Td_Left Td_Merge" style="TEXT-ALIGN: center !important">1</TD>
                                                 <TD class="Td_Left Td_Merge" style="FONT-WEIGHT: bold; TEXT-ALIGN: left !important">涿州区域</TD>
-                                                <TD title=6000 class="Td_Left align_right Td_Merge">6,000</TD>
-                                                <TD title=14000 class="Td_TopAndBottom Td_Merge">14,000</TD>
-                                                <TD title=8000 class="Td_TopAndBottom Td_Merge">8,000</TD>
-                                                <TD title=233% class="Td_TopAndBottom Td_Merge">233%</TD>
-                                                <TD title=12000 class="Td_Left Td_Merge">12,000</TD>
-                                                <TD title=14000 class="Td_TopAndBottom Td_Merge">14,000</TD>
-                                                <TD title=2000 class="Td_TopAndBottom Td_Merge">2,000</TD>
-                                                <TD title=117% class="Td_TopAndBottom Td_Merge">117%</TD>
-                                                <TD title=0 class="Td_Left Td_Merge" style="TEXT-ALIGN: center !important"></TD>
+                                                <TD class="Td_Left Td_Merge">300</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">600</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">290</TD>
+                                                <TD class="Td_Left Td_Merge">600</TD>
+                                                <TD class="Td_Left Td_Merge">100%</TD>
+                                                <TD class="Td_Left Td_Merge">100%</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">600</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">1,200</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">558</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">1,200</TD>
+                                                <TD class="Td_TopAndBottom align_right Td_Merge"  style="BACKGROUND-COLOR: #fabf8f">98%</TD>
+                                                <TD class="Td_TopAndBottom align_right Td_Merge">100%</TD>
+                                                <TD class="Td_Left Td_Merge" style="PADDING-BOTTOM: 5px; TEXT-ALIGN: center !important; PADDING-TOP: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px"></TD>
+                                                <TD class="Td_Left Td_Merge" style="PADDING-BOTTOM: 5px; TEXT-ALIGN: center !important; PADDING-TOP: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px"></TD>
                                             </TR>
                                             <TR jQuery171023892230250285523="87">
                                                 <TD class=Td_Left style="TEXT-ALIGN: center !important">1</TD>
                                                 <TD class=Td_Left style="TEXT-ALIGN: left !important" colSpan=1>泰和世家一期</TD>
-                                                <TD title=2000 class="Td_Left align_right DetailMonthlyCss tabOrderBackground">2,000</TD>
-                                                <TD title=5000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">5,000</TD>
-                                                <TD title=3000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">3,000</TD>
-                                                <TD title=250% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">250%</TD>
-                                                <TD title=4000 class="Td_Left DetailCss">4,000</TD>
-                                                <TD title=5000 class="Td_TopAndBottom DetailCss">5,000</TD>
-                                                <TD title=1000 class="Td_TopAndBottom DetailCss">1,000</TD>
-                                                <TD title=125% class="Td_TopAndBottom DetailCss">125%</TD>
+                                                <TD title=100 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=100 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=400 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=400 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
+                                                <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                                 <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
                                             <TR jQuery171023892230250285523="88">
                                                 <TD class=Td_Left style="TEXT-ALIGN: center !important">2</TD>
                                                 <TD class=Td_Left style="TEXT-ALIGN: left !important" colSpan=1>香邑溪谷</TD>
-                                                <TD title=2000 class="Td_Left align_right DetailMonthlyCss tabOrderBackground">2,000</TD>
-                                                <TD title=5000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">5,000</TD>
-                                                <TD title=3000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">3,000</TD>
-                                                <TD title=250% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">250%</TD>
-                                                <TD title=4000 class="Td_Left DetailCss">4,000</TD>
-                                                <TD title=5000 class="Td_TopAndBottom DetailCss">5,000</TD>
-                                                <TD title=1000 class="Td_TopAndBottom DetailCss">1,000</TD>
-                                                <TD title=125% class="Td_TopAndBottom DetailCss">125%</TD>
+                                                <TD title=100 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=90 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">90</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=90.0% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground" style="BACKGROUND-COLOR: #fabf8f">90.0%</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=400 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=178 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">178</TD>
+                                                <TD title=400 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=89% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground" style="BACKGROUND-COLOR: #fabf8f">89%</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
+                                                <TD class=Td_Right><IMG src="TargetRpt_files/images/images1/image2.png"> </TD>
                                                 <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
                                             <TR jQuery171023892230250285523="89">
                                                 <TD class=Td_Left style="TEXT-ALIGN: center !important">3</TD>
                                                 <TD class=Td_Left style="TEXT-ALIGN: left !important" colSpan=1>香邑溪谷原墅</TD>
-                                                <TD title=2000 class="Td_Left align_right DetailMonthlyCss tabOrderBackground">2,000</TD>
-                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
-                                                <TD title=2000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">2,000</TD>
-                                                <TD title=200% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200%</TD>
-                                                <TD title=4000 class="Td_Left DetailCss">4,000</TD>
-                                                <TD title=4000 class="Td_TopAndBottom DetailCss">4,000</TD>
-                                                <TD title=0 class="Td_TopAndBottom DetailCss">0</TD>
-                                                <TD title=100% class="Td_TopAndBottom DetailCss">100%</TD>
+                                                <TD title=100 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=100 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=400 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=180 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">180</TD>
+                                                <TD title=400 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=90% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground" style="BACKGROUND-COLOR: #fabf8f">90%</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
+                                                <TD class=Td_Right><IMG src="TargetRpt_files/images/images1/image2.png"> </TD>
                                                 <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
-                                            <TR class="item1 DetailShow"  style="LINE-HEIGHT: 25px !important" onclick="ClickCounter(this,'CompanyPropertyItem0')" jQuery171023892230250285523="94">
+                                            <TR class="item1 DetailShow" style="LINE-HEIGHT: 25px !important" onclick="ClickCounter(this,'CompanyPropertyItem0')" jQuery171023892230250285523="94">
                                                 <TD class="Td_Left Td_Merge" style="TEXT-ALIGN: center !important">2</TD>
                                                 <TD class="Td_Left Td_Merge" style="FONT-WEIGHT: bold; TEXT-ALIGN: left !important" colSpan=1>廊坊区域</TD>
-                                                <TD class="Td_Left Td_Merge">6,000</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">12,000</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">6,000</TD>
-                                                <TD class="Td_right Td_Merge" style="PADDING-BOTTOM: 5px; TEXT-ALIGN: center !important; PADDING-TOP: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px">200%</TD>
-                                                <TD class="Td_Left Td_Merge">12,000</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">18,000</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">6,000</TD>
-                                                <TD class="Td_TopAndBottom align_right Td_Merge">150%</TD>
+                                                <TD class="Td_Left Td_Merge">300</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">600</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">300</TD>
+                                                <TD class="Td_Left Td_Merge">600</TD>
+                                                <TD class="Td_Left Td_Merge">100%</TD>
+                                                <TD class="Td_Left Td_Merge">100%</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">600</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">1,200</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">600</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">1,200</TD>
+                                                <TD class="Td_TopAndBottom align_right Td_Merge">100%</TD>
+                                                <TD class="Td_TopAndBottom align_right Td_Merge">100%</TD>
+                                                <TD class="Td_Left Td_Merge" style="PADDING-BOTTOM: 5px; TEXT-ALIGN: center !important; PADDING-TOP: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px"></TD>
                                                 <TD class="Td_Left Td_Merge" style="PADDING-BOTTOM: 5px; TEXT-ALIGN: center !important; PADDING-TOP: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px"></TD>
                                             </TR>
                                             <TR style="DISPLAY: none" jQuery171023892230250285523="90">
                                                 <TD class=Td_Left style="TEXT-ALIGN: center !important">1</TD>
                                                 <TD class=Td_Left style="TEXT-ALIGN: left !important" colSpan=1>霸州铂锐山</TD>
-                                                <TD title=2000 class="Td_Left align_right DetailMonthlyCss tabOrderBackground">2,000</TD>
-                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
-                                                <TD title=2000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">2,000</TD>
-                                                <TD title=200% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200%</TD>
-                                                <TD title=4000 class="Td_Left DetailCss">4,000</TD>
-                                                <TD title=4000 class="Td_TopAndBottom DetailCss">4,000</TD>
-                                                <TD title=0 class="Td_TopAndBottom DetailCss">0</TD>
-                                                <TD title=100% class="Td_TopAndBottom DetailCss">100%</TD>
+                                                <TD title=100 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=100 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=400 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=400 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
+                                                <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                                 <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
                                             <TR style="DISPLAY: none" jQuery171023892230250285523="91">
                                                 <TD class=Td_Left style="TEXT-ALIGN: center !important">2</TD>
                                                 <TD class=Td_Left style="TEXT-ALIGN: left !important" colSpan=1>香邑廊桥A项目</TD>
-                                                <TD title=2000 class="Td_Left align_right DetailMonthlyCss tabOrderBackground">2,000</TD>
-                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
-                                                <TD title=2000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">2,000</TD>
-                                                <TD title=200% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200%</TD>
-                                                <TD title=4000 class="Td_Left DetailCss">4,000</TD>
-                                                <TD title=4000 class="Td_TopAndBottom DetailCss">4,000</TD>
-                                                <TD title=0 class="Td_TopAndBottom DetailCss">0</TD>
-                                                <TD title=100% class="Td_TopAndBottom DetailCss">100%</TD>
+                                                <TD title=100 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=100 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=400 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=400 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
+                                                <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                                 <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
                                             <TR style="DISPLAY: none" jQuery171023892230250285523="92">
                                                 <TD class=Td_Left style="TEXT-ALIGN: center !important">3</TD>
                                                 <TD class=Td_Left style="TEXT-ALIGN: left !important" colSpan=1>香邑廊桥B区</TD>
-                                                <TD title=2000 class="Td_Left align_right DetailMonthlyCss tabOrderBackground">2,000</TD>
-                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
-                                                <TD title=2000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">2,000</TD>
-                                                <TD title=200% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200%</TD>
-                                                <TD title=4000 class="Td_Left DetailCss">4,000</TD>
-                                                <TD title=4000 class="Td_TopAndBottom DetailCss">4,000</TD>
-                                                <TD title=0 class="Td_TopAndBottom DetailCss">0</TD>
-                                                <TD title=100% class="Td_TopAndBottom DetailCss">100%</TD>
+                                                <TD title=100 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=100 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=400 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=200 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=400 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
+                                                <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                                 <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
                                             <TR class="item1 Td_Merge item3" style="CURSOR: default !important; HEIGHT: 35px !important; LINE-HEIGHT: 25px !important" jQuery171023892230250285523="101">
                                                 <TD class=Td_Left style="FONT-WEIGHT: bold; TEXT-ALIGN: center !important" colSpan=2>冀南区域</TD>
-                                                <TD title=30000 class="Td_Left align_right num">30,000</TD>
-                                                <TD title=49600 class=Td_TopAndBottom>49,600</TD>
-                                                <TD title=19600 class=Td_TopAndBottom>19,600</TD>
-                                                <TD title=165% class=Td_TopAndBottom>165%</TD>
-                                                <TD title=60000 class=Td_Left>60,000</TD>
-                                                <TD title=49600 class=Td_TopAndBottom>49,600</TD>
-                                                <TD title=-10400 class=Td_TopAndBottom>-10,400</TD>
-                                                <TD title=83% class=Td_TopAndBottom>83%</TD>
+                                                <TD title=3000 class="Td_Left align_right num">3,000</TD>
+                                                <TD title=3000 class="Td_Left align_right num">3,000</TD>
+                                                <TD title=3000 class=Td_TopAndBottom>3,000</TD>
+                                                <TD title=3000 class=Td_TopAndBottom>3,000</TD>
+                                                <TD title=100% class=Td_TopAndBottom>100%</TD>
+                                                <TD title=100% class=Td_TopAndBottom>100%</TD>
+                                                <TD title=6000 class=Td_Left>6,000</TD>
+                                                <TD title=6000 class=Td_Left>6,000</TD>
+                                                <TD title=6000 class=Td_Left>6,000</TD>
+                                                <TD title=6000 class=Td_Left>6,000</TD>
+                                                <TD title=100% class=Td_TopAndBottom>100%</TD>
+                                                <TD title=100% class=Td_TopAndBottom>100%</TD>
+                                                <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                                 <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
                                             <TR class="item1 Td_Merge" style="CURSOR: default !important; HEIGHT: 35px !important; LINE-HEIGHT: 25px !important" jQuery171023892230250285523="101">
                                                 <TD class=Td_Left style="FONT-WEIGHT: bold; TEXT-ALIGN: center !important" colSpan=2>合计</TD>
-                                                <TD title=42200 class="Td_Left align_right num">42,200</TD>
-                                                <TD title=75900 class=Td_TopAndBottom>75,900</TD>
-                                                <TD title=33700 class=Td_TopAndBottom>33,700</TD>
-                                                <TD title=181% class=Td_TopAndBottom>181%</TD>
-                                                <TD title=88000 class=Td_Left>88,000</TD>
-                                                <TD title=85600 class=Td_TopAndBottom>85,600</TD>
-                                                <TD title=-2400 class=Td_TopAndBottom>-2,400</TD>
-                                                <TD title=97% class=Td_TopAndBottom>97%</TD>
+                                                <TD title=3700 class="Td_Left align_right num">3,700</TD>
+                                                <TD title=4400 class=Td_TopAndBottom>4,400</TD>
+                                                <TD title=3390 class=Td_TopAndBottom>3,390</TD>
+                                                <TD title=3790 class=Td_TopAndBottom>3,790</TD>
+                                                <TD title=91% class=Td_TopAndBottom>91%</TD>
+                                                <TD title=86% class=Td_TopAndBottom>86%</TD>
+                                                <TD title=7400 class=Td_Left>7,400</TD>
+                                                <TD title=8800 class=Td_TopAndBottom>8,800</TD>
+                                                <TD title=7358 class=Td_TopAndBottom>7,358</TD>
+                                                <TD title=8800 class=Td_TopAndBottom>8,800</TD>
+                                                <TD title=100% class=Td_TopAndBottom>100%</TD>
+                                                <TD title=100% class=Td_TopAndBottom>100%</TD>
+                                                <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                                 <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
                                         </TBODY>
+
                                     </TABLE>
                                     <TABLE class="tab_005" id="importedDataTable2" style="display:none;">
                                         <THEAD id=CompleteDetailHead style="WIDTH: 100%; POSITION: static; TOP: 0px">
@@ -678,10 +750,10 @@
                                                 <TD title=5000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">5,000</TD>
                                                 <TD title=3000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">3,000</TD>
                                                 <TD title=250% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">250%</TD>
-                                                <TD title=4000 class="Td_Left DetailCss">4,000</TD>
-                                                <TD title=5000 class="Td_TopAndBottom DetailCss">5,000</TD>
-                                                <TD title=1000 class="Td_TopAndBottom DetailCss">1,000</TD>
-                                                <TD title=125% class="Td_TopAndBottom DetailCss">125%</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
+                                                <TD title=5000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">5,000</TD>
+                                                <TD title=1000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">1,000</TD>
+                                                <TD title=125% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">125%</TD>
                                                 <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
                                             <TR jQuery171023892230250285523="88">
@@ -691,10 +763,10 @@
                                                 <TD title=5000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">5,000</TD>
                                                 <TD title=3000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">3,000</TD>
                                                 <TD title=250% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">250%</TD>
-                                                <TD title=4000 class="Td_Left DetailCss">4,000</TD>
-                                                <TD title=5000 class="Td_TopAndBottom DetailCss">5,000</TD>
-                                                <TD title=1000 class="Td_TopAndBottom DetailCss">1,000</TD>
-                                                <TD title=125% class="Td_TopAndBottom DetailCss">125%</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
+                                                <TD title=5000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">5,000</TD>
+                                                <TD title=1000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">1,000</TD>
+                                                <TD title=125% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">125%</TD>
                                                 <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
                                             <TR jQuery171023892230250285523="89">
@@ -704,10 +776,10 @@
                                                 <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
                                                 <TD title=2000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">2,000</TD>
                                                 <TD title=200% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200%</TD>
-                                                <TD title=4000 class="Td_Left DetailCss">4,000</TD>
-                                                <TD title=4000 class="Td_TopAndBottom DetailCss">4,000</TD>
-                                                <TD title=0 class="Td_TopAndBottom DetailCss">0</TD>
-                                                <TD title=100% class="Td_TopAndBottom DetailCss">100%</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
+                                                <TD title=0 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">0</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
                                                 <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
                                             <TR class="item1 DetailShow" style="LINE-HEIGHT: 25px !important" onclick="ClickCounter(this,'CompanyPropertyItem0')" jQuery171023892230250285523="94">
@@ -730,10 +802,10 @@
                                                 <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
                                                 <TD title=2000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">2,000</TD>
                                                 <TD title=200% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200%</TD>
-                                                <TD title=4000 class="Td_Left DetailCss">4,000</TD>
-                                                <TD title=4000 class="Td_TopAndBottom DetailCss">4,000</TD>
-                                                <TD title=0 class="Td_TopAndBottom DetailCss">0</TD>
-                                                <TD title=100% class="Td_TopAndBottom DetailCss">100%</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
+                                                <TD title=0 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">0</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
                                                 <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
                                             <TR style="DISPLAY: none" jQuery171023892230250285523="91">
@@ -743,10 +815,10 @@
                                                 <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
                                                 <TD title=2000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">2,000</TD>
                                                 <TD title=200% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200%</TD>
-                                                <TD title=4000 class="Td_Left DetailCss">4,000</TD>
-                                                <TD title=4000 class="Td_TopAndBottom DetailCss">4,000</TD>
-                                                <TD title=0 class="Td_TopAndBottom DetailCss">0</TD>
-                                                <TD title=100% class="Td_TopAndBottom DetailCss">100%</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
+                                                <TD title=0 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">0</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
                                                 <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
                                             <TR style="DISPLAY: none" jQuery171023892230250285523="92">
@@ -756,10 +828,10 @@
                                                 <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
                                                 <TD title=2000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">2,000</TD>
                                                 <TD title=200% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200%</TD>
-                                                <TD title=4000 class="Td_Left DetailCss">4,000</TD>
-                                                <TD title=4000 class="Td_TopAndBottom DetailCss">4,000</TD>
-                                                <TD title=0 class="Td_TopAndBottom DetailCss">0</TD>
-                                                <TD title=100% class="Td_TopAndBottom DetailCss">100%</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
+                                                <TD title=0 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">0</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
                                                 <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
                                             <TR class="item1 Td_Merge item3" style="CURSOR: default !important; HEIGHT: 35px !important; LINE-HEIGHT: 25px !important" jQuery171023892230250285523="101">
@@ -789,99 +861,88 @@
                                         </TBODY>
                                     </TABLE>
                                     <TABLE class="tab_005" id="importedDataTable3" style="display:none;">
-                                        <THEAD id=CompleteDetailHead style="WIDTH: 100%; POSITION: static; TOP: 0px">
-                                            <TR class=tab_5_row_alt jQuery171023892230250285523="67">
-                                                <TH style="WIDTH: 275px" rowSpan=2 colSpan=2>名称</TH>
-                                                <TH style="WIDTH: 35%" colSpan=4><A style="TEXT-DECORATION: none; COLOR: #ffffff" href='javascript:void(0)'>本月发生(万元) <IMG class=DetailMonthly id=imgDetailMonthly src="TargetRpt_files/images/btn_down02_w.png"> </A></TH>
-                                                <TH style="WIDTH: 35%" colSpan=4><A style="TEXT-DECORATION: none; COLOR: #ffffff" href='javascript:void(0)'>本年累计(万元) <IMG class=Detail id=imgDetail src="TargetRpt_files/images/btn_down03_w.png"> </A></TH>
-                                                <TH style="WIDTH: 10%" rowSpan=2>警示灯</TH>
+                                        <THEAD id=CompleteDetailHead style="POSITION: static; TOP: 0px">
+                                            <TR jQuery17106318566827328957="50">
+                                                <TH style="WIDTH: 5%" rowSpan=9 colSpan=1>序号</TH>
+                                                <TH style="WIDTH: 10%" rowSpan=3 colSpan=1>项目</TH>
+                                                <TH rowSpan=1 colSpan=3>2月情况(万元)</TH>
+                                                <TH rowSpan=1 colSpan=3>1-2月情况(万元)</TH>
+                                                <TH style="CURSOR: pointer; WIDTH: 10%" onclick=unfoldTitle(); rowSpan=1 colspan="1">警示灯&nbsp;&nbsp;&gt;&gt;</TH>
                                             </TR>
-                                            <TR class=tab_5_row_alt jQuery171023892230250285523="68">
-                                                <TH class=th_Sub>计划</TH>
-                                                <TH class=th_Sub>实际</TH>
-                                                <TH class=th_Sub>差额</TH>
-                                                <TH class=th_Sub2>完成率</TH>
-                                                <TH class=th_Sub1>计划</TH>
-                                                <TH class=th_Sub>实际</TH>
-                                                <TH class=th_Sub>差额</TH>
-                                                <TH class=th_Sub>完成率</TH>
+                                            <TR jQuery17106318566827328957="51">
+                                                <!--当月-->
+                                                <TH>2月利润指标（金额）</TH>
+                                                <TH>2月利润完成(金额）</TH>
+                                                <TH>2月利润指标完成比例</TH><!--月累计-->
+                                                <TH>1-2月利润指标（金额）</TH>
+                                                <TH>1-2月利润完成(金额）</TH>
+                                                <TH>1-2月利润指标完成比例</TH>
+                                                <TH>利润额</TH>
                                             </TR>
                                         </THEAD>
                                         <TBODY id=tab2_rows>
                                             <TR class=item1 style="LINE-HEIGHT: 25px !important" onclick="ClickCounter(this,'CompanyPropertyItem0')" jQuery171023892230250285523="84">
                                                 <TD class="Td_Left Td_Merge" style="WIDTH: 18% !important; FONT-WEIGHT: bold; TEXT-ALIGN: center !important" colSpan=2>总部</TD>
-                                                <TD class="Td_Left Td_Merge">200</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">300</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">100</TD>
+                                                <TD class="Td_Left Td_Merge">100</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">200</TD>
                                                 <TD class="Td_right Td_Merge" style="PADDING-BOTTOM: 5px; TEXT-ALIGN: center !important; PADDING-TOP: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px">150%</TD>
-                                                <TD class="Td_Left Td_Merge">4,000</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">5,000</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">1,000</TD>
+                                                <TD class="Td_Left Td_Merge">4,00</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">5,00</TD>
                                                 <TD class="Td_TopAndBottom align_right Td_Merge">125%</TD>
                                                 <TD class="Td_Left Td_Merge" style="PADDING-BOTTOM: 5px; TEXT-ALIGN: center !important; PADDING-TOP: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px"></TD>
                                             </TR>
                                             <TR class="item1" style="LINE-HEIGHT: 25px !important" onclick="ClickCounter2(this)">
                                                 <TD class="Td_Left Td_Merge" style="WIDTH: 18% !important; FONT-WEIGHT: bold; TEXT-ALIGN: center !important" colSpan=2>环京区域</TD>
-                                                <TD class="Td_Left Td_Merge">12,000</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">26,000</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">14,000</TD>
+                                                <TD class="Td_Left Td_Merge">12,00</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">26,00</TD>
                                                 <TD class="Td_right Td_Merge" style="PADDING-BOTTOM: 5px; TEXT-ALIGN: center !important; PADDING-TOP: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px">217%</TD>
-                                                <TD class="Td_Left Td_Merge">24,000</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">31,000</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">7,000</TD>
+                                                <TD class="Td_Left Td_Merge">24,00</TD>
+                                                <TD class="Td_TopAndBottom Td_Merge">31,00</TD>
                                                 <TD class="Td_TopAndBottom align_right Td_Merge">129%</TD>
                                                 <TD class="Td_Left Td_Merge" style="PADDING-BOTTOM: 5px; TEXT-ALIGN: center !important; PADDING-TOP: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px"></TD>
                                             </TR>
                                             <TR class="item1 DetailShow" style="LINE-HEIGHT: 25px !important" onclick="ClickCounter(this,'CompanyPropertyItem0')" jQuery171023892230250285523="94">
                                                 <TD class="Td_Left Td_Merge" style="TEXT-ALIGN: center !important">1</TD>
                                                 <TD class="Td_Left Td_Merge" style="FONT-WEIGHT: bold; TEXT-ALIGN: left !important">涿州区域</TD>
-                                                <TD title=6000 class="Td_Left align_right Td_Merge">6,000</TD>
-                                                <TD title=14000 class="Td_TopAndBottom Td_Merge">14,000</TD>
-                                                <TD title=8000 class="Td_TopAndBottom Td_Merge">8,000</TD>
+                                                <TD title=6000 class="Td_Left align_right Td_Merge">600</TD>
+                                                <TD title=14000 class="Td_TopAndBottom Td_Merge">14,00</TD>
                                                 <TD title=233% class="Td_TopAndBottom Td_Merge">233%</TD>
-                                                <TD title=12000 class="Td_Left Td_Merge">12,000</TD>
-                                                <TD title=14000 class="Td_TopAndBottom Td_Merge">14,000</TD>
-                                                <TD title=2000 class="Td_TopAndBottom Td_Merge">2,000</TD>
+                                                <TD title=12000 class="Td_Left Td_Merge">12,00</TD>
+                                                <TD title=14000 class="Td_TopAndBottom Td_Merge">14,00</TD>
                                                 <TD title=117% class="Td_TopAndBottom Td_Merge">117%</TD>
                                                 <TD title=0 class="Td_Left Td_Merge" style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
                                             <TR jQuery171023892230250285523="87">
                                                 <TD class=Td_Left style="TEXT-ALIGN: center !important">1</TD>
                                                 <TD class=Td_Left style="TEXT-ALIGN: left !important" colSpan=1>泰和世家一期</TD>
-                                                <TD title=2000 class="Td_Left align_right DetailMonthlyCss tabOrderBackground">2,000</TD>
-                                                <TD title=5000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">5,000</TD>
-                                                <TD title=3000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">3,000</TD>
+                                                <TD title=2000 class="Td_Left align_right DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=5000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">500</TD>
                                                 <TD title=250% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">250%</TD>
-                                                <TD title=4000 class="Td_Left DetailCss">4,000</TD>
-                                                <TD title=5000 class="Td_TopAndBottom DetailCss">5,000</TD>
-                                                <TD title=1000 class="Td_TopAndBottom DetailCss">1,000</TD>
-                                                <TD title=125% class="Td_TopAndBottom DetailCss">125%</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=5000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">500</TD>
+                                                <TD title=125% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">125%</TD>
                                                 <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
                                             <TR jQuery171023892230250285523="88">
                                                 <TD class=Td_Left style="TEXT-ALIGN: center !important">2</TD>
                                                 <TD class=Td_Left style="TEXT-ALIGN: left !important" colSpan=1>香邑溪谷</TD>
-                                                <TD title=2000 class="Td_Left align_right DetailMonthlyCss tabOrderBackground">2,000</TD>
-                                                <TD title=5000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">5,000</TD>
-                                                <TD title=3000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">3,000</TD>
+                                                <TD title=2000 class="Td_Left align_right DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=5000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">500</TD>
                                                 <TD title=250% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">250%</TD>
-                                                <TD title=4000 class="Td_Left DetailCss">4,000</TD>
-                                                <TD title=5000 class="Td_TopAndBottom DetailCss">5,000</TD>
-                                                <TD title=1000 class="Td_TopAndBottom DetailCss">1,000</TD>
-                                                <TD title=125% class="Td_TopAndBottom DetailCss">125%</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=5000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">500</TD>
+                                                <TD title=125% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">125%</TD>
                                                 <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
                                             <TR jQuery171023892230250285523="89">
                                                 <TD class=Td_Left style="TEXT-ALIGN: center !important">3</TD>
                                                 <TD class=Td_Left style="TEXT-ALIGN: left !important" colSpan=1>香邑溪谷原墅</TD>
-                                                <TD title=2000 class="Td_Left align_right DetailMonthlyCss tabOrderBackground">2,000</TD>
-                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
-                                                <TD title=2000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">2,000</TD>
+                                                <TD title=2000 class="Td_Left align_right DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
                                                 <TD title=200% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200%</TD>
-                                                <TD title=4000 class="Td_Left DetailCss">4,000</TD>
-                                                <TD title=4000 class="Td_TopAndBottom DetailCss">4,000</TD>
-                                                <TD title=0 class="Td_TopAndBottom DetailCss">0</TD>
-                                                <TD title=100% class="Td_TopAndBottom DetailCss">100%</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
                                                 <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
                                             <TR class="item1 DetailShow" style="LINE-HEIGHT: 25px !important" onclick="ClickCounter(this,'CompanyPropertyItem0')" jQuery171023892230250285523="94">
@@ -889,74 +950,62 @@
                                                 <TD class="Td_Left Td_Merge" style="FONT-WEIGHT: bold; TEXT-ALIGN: left !important" colSpan=1>廊坊区域</TD>
                                                 <TD class="Td_Left Td_Merge">6,000</TD>
                                                 <TD class="Td_TopAndBottom Td_Merge">12,000</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">6,000</TD>
                                                 <TD class="Td_right Td_Merge" style="PADDING-BOTTOM: 5px; TEXT-ALIGN: center !important; PADDING-TOP: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px">200%</TD>
                                                 <TD class="Td_Left Td_Merge">12,000</TD>
                                                 <TD class="Td_TopAndBottom Td_Merge">18,000</TD>
-                                                <TD class="Td_TopAndBottom Td_Merge">6,000</TD>
                                                 <TD class="Td_TopAndBottom align_right Td_Merge">150%</TD>
                                                 <TD class="Td_Left Td_Merge" style="PADDING-BOTTOM: 5px; TEXT-ALIGN: center !important; PADDING-TOP: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px"></TD>
                                             </TR>
                                             <TR style="DISPLAY: none" jQuery171023892230250285523="90">
                                                 <TD class=Td_Left style="TEXT-ALIGN: center !important">1</TD>
                                                 <TD class=Td_Left style="TEXT-ALIGN: left !important" colSpan=1>霸州铂锐山</TD>
-                                                <TD title=2000 class="Td_Left align_right DetailMonthlyCss tabOrderBackground">2,000</TD>
-                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
-                                                <TD title=2000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">2,000</TD>
+                                                <TD title=2000 class="Td_Left align_right DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
                                                 <TD title=200% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200%</TD>
-                                                <TD title=4000 class="Td_Left DetailCss">4,000</TD>
-                                                <TD title=4000 class="Td_TopAndBottom DetailCss">4,000</TD>
-                                                <TD title=0 class="Td_TopAndBottom DetailCss">0</TD>
-                                                <TD title=100% class="Td_TopAndBottom DetailCss">100%</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
                                                 <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
                                             <TR style="DISPLAY: none" jQuery171023892230250285523="91">
                                                 <TD class=Td_Left style="TEXT-ALIGN: center !important">2</TD>
                                                 <TD class=Td_Left style="TEXT-ALIGN: left !important" colSpan=1>香邑廊桥A项目</TD>
-                                                <TD title=2000 class="Td_Left align_right DetailMonthlyCss tabOrderBackground">2,000</TD>
-                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
-                                                <TD title=2000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">2,000</TD>
+                                                <TD title=2000 class="Td_Left align_right DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
                                                 <TD title=200% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200%</TD>
-                                                <TD title=4000 class="Td_Left DetailCss">4,000</TD>
-                                                <TD title=4000 class="Td_TopAndBottom DetailCss">4,000</TD>
-                                                <TD title=0 class="Td_TopAndBottom DetailCss">0</TD>
-                                                <TD title=100% class="Td_TopAndBottom DetailCss">100%</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
                                                 <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
                                             <TR style="DISPLAY: none" jQuery171023892230250285523="92">
                                                 <TD class=Td_Left style="TEXT-ALIGN: center !important">3</TD>
                                                 <TD class=Td_Left style="TEXT-ALIGN: left !important" colSpan=1>香邑廊桥B区</TD>
-                                                <TD title=2000 class="Td_Left align_right DetailMonthlyCss tabOrderBackground">2,000</TD>
-                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">4,000</TD>
-                                                <TD title=2000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">2,000</TD>
+                                                <TD title=2000 class="Td_Left align_right DetailMonthlyCss tabOrderBackground">200</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
                                                 <TD title=200% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">200%</TD>
-                                                <TD title=4000 class="Td_Left DetailCss">4,000</TD>
-                                                <TD title=4000 class="Td_TopAndBottom DetailCss">4,000</TD>
-                                                <TD title=0 class="Td_TopAndBottom DetailCss">0</TD>
-                                                <TD title=100% class="Td_TopAndBottom DetailCss">100%</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=4000 class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">400</TD>
+                                                <TD title=100% class="Td_TopAndBottom DetailMonthlyCss tabOrderBackground">100%</TD>
                                                 <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
                                             <TR class="item1 Td_Merge item3" style="CURSOR: default !important; HEIGHT: 35px !important; LINE-HEIGHT: 25px !important" jQuery171023892230250285523="101">
                                                 <TD class=Td_Left style="FONT-WEIGHT: bold; TEXT-ALIGN: center !important" colSpan=2>冀南区域</TD>
-                                                <TD title=30000 class="Td_Left align_right num">30,000</TD>
-                                                <TD title=49600 class=Td_TopAndBottom>49,600</TD>
-                                                <TD title=19600 class=Td_TopAndBottom>19,600</TD>
+                                                <TD title=30000 class="Td_Left align_right num">3,000</TD>
+                                                <TD title=49600 class=Td_TopAndBottom>4,960</TD>
                                                 <TD title=165% class=Td_TopAndBottom>165%</TD>
-                                                <TD title=60000 class=Td_Left>60,000</TD>
-                                                <TD title=49600 class=Td_TopAndBottom>49,600</TD>
-                                                <TD title=-10400 class=Td_TopAndBottom>-10,400</TD>
-                                                <TD title=83% class=Td_TopAndBottom>83%</TD>
-                                                <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
+                                                <TD title=60000 class=Td_Left>6,000</TD>
+                                                <TD title=49600 class=Td_TopAndBottom>4,960</TD>
+                                                <TD title=83% class=Td_TopAndBottom style="background-color:#fabf8f;">83%</TD>
+                                                <TD class=Td_Right><IMG src="TargetRpt_files/images/images1/image2.png"> </TD>
                                             </TR>
                                             <TR class="item1 Td_Merge" style="CURSOR: default !important; HEIGHT: 35px !important; LINE-HEIGHT: 25px !important" jQuery171023892230250285523="101">
                                                 <TD class=Td_Left style="FONT-WEIGHT: bold; TEXT-ALIGN: center !important" colSpan=2>合计</TD>
-                                                <TD title=42200 class="Td_Left align_right num">42,200</TD>
-                                                <TD title=75900 class=Td_TopAndBottom>75,900</TD>
-                                                <TD title=33700 class=Td_TopAndBottom>33,700</TD>
+                                                <TD title=42200 class="Td_Left align_right num">4,220</TD>
+                                                <TD title=75900 class=Td_TopAndBottom>7,590</TD>
                                                 <TD title=181% class=Td_TopAndBottom>181%</TD>
-                                                <TD title=88000 class=Td_Left>88,000</TD>
-                                                <TD title=85600 class=Td_TopAndBottom>85,600</TD>
-                                                <TD title=-2400 class=Td_TopAndBottom>-2,400</TD>
+                                                <TD title=88000 class=Td_Left>8,800</TD>
+                                                <TD title=85600 class=Td_TopAndBottom>8,560</TD>
                                                 <TD title=97% class=Td_TopAndBottom>97%</TD>
                                                 <TD title=0 class=Td_Left style="TEXT-ALIGN: center !important"></TD>
                                             </TR>
@@ -972,17 +1021,17 @@
                                         <li class="sd">
                                             <a class="active2  active_sub3" data-value="完成情况明细-销售+回款" onclick="ComplateDetailLiaddCss2(this);">销售+回款</a>
                                         </li>
-                                        <li class="sd">  
-                                               <a class="active2 " data-value="完成情况明细-利润额" onclick="ComplateDetailLiaddCss2(this);">利润额</a> 
-                                            </li>
+                                        <li class="sd">
+                                            <a class="active2 " data-value="完成情况明细-利润额" onclick="ComplateDetailLiaddCss2(this);">利润额</a>
+                                        </li>
                                     </ul>
                                     <TABLE class=tab_005 id=importedDataTable4>
                                         <THEAD id=CompleteDetailHead style="POSITION: static; TOP: 0px">
                                             <TR jQuery17106318566827328957="50">
                                                 <TH style="WIDTH: 5%" rowSpan=3 colSpan=1>序号</TH>
                                                 <TH style="WIDTH: 10%" rowSpan=3 colSpan=1>项目</TH>
-                                                <TH rowSpan=1 colSpan=6>2月情况</TH>
-                                                <TH rowSpan=1 colSpan=6>1-2月情况</TH>
+                                                <TH rowSpan=1 colSpan=6>2月情况(万元)</TH>
+                                                <TH rowSpan=1 colSpan=6>1-2月情况(万元)</TH>
                                                 <TH style="CURSOR: pointer; WIDTH: 10%" rowSpan=2 colSpan=2>警示灯&nbsp;&nbsp;&gt;&gt;</TH>
                                             </TR>
                                             <TR jQuery17106318566827328957="51">
@@ -1061,22 +1110,16 @@
                                                 <TD class=Td_Right style="TEXT-ALIGN: center !important">保定万和春天住区</TD><!-- 年度当月指标--->
                                                 <TD title=100 class=Td_TopAndBottom>100</TD>
                                                 <TD title=200 class=Td_TopAndBottom>200</TD>
-
                                                 <TD title=100 class=Td_TopAndBottom>100</TD>
                                                 <TD title=200 class=Td_TopAndBottom>200</TD>
-
                                                 <TD title=100.0% class=Td_TopAndBottom>100.0%</TD>
                                                 <TD title=100.0% class=Td_TopAndBottom>100.0%</TD>
-
                                                 <TD title=200 class=Td_TopAndBottom>200</TD>
                                                 <TD title=400 class=Td_TopAndBottom>400</TD>
-
                                                 <TD title=180 class=Td_TopAndBottom>180</TD>
                                                 <TD title=400 class=Td_TopAndBottom>400</TD>
-
                                                 <TD title=90.0% class=Td_TopAndBottom style="BACKGROUND-COLOR: #fabf8f">90.0%</TD>
                                                 <TD title=100.0% class=Td_TopAndBottom>100.0%</TD>
-
                                                 <TD class=Td_Right><IMG src="TargetRpt_files/images/images1/image2.png"> </TD>
                                                 <TD class=Td_Right>
                                                     <DIV class=ebtn></DIV>
@@ -1299,8 +1342,8 @@
                                             <TR jQuery17106318566827328957="50">
                                                 <TH style="WIDTH: 5%" rowSpan=9 colSpan=1>序号</TH>
                                                 <TH style="WIDTH: 10%" rowSpan=3 colSpan=1>项目</TH>
-                                                <TH rowSpan=1 colSpan=3>2月情况</TH>
-                                                <TH rowSpan=1 colSpan=3>1-2月情况</TH>
+                                                <TH rowSpan=1 colSpan=3>2月情况(万元)</TH>
+                                                <TH rowSpan=1 colSpan=3>1-2月情况(万元)</TH>
                                                 <TH style="CURSOR: pointer; WIDTH: 10%" onclick=unfoldTitle(); rowSpan=1 colspan="1">警示灯&nbsp;&nbsp;&gt;&gt;</TH>
                                             </TR>
                                             <TR jQuery17106318566827328957="51">
@@ -9368,7 +9411,7 @@
                                             </TD>
                                         </TR>
                                     </TBODY>
-                                </TABLE>  
+                                </TABLE>
                             </DIV><!--补回情况 结束--><!--经营指标完成门店数量情况 开始-->
                             <DIV class=TClassHide id=T5 style="DISPLAY: none">
                                 <UL class=tabs id=Ul5 style="MARGIN-BOTTOM: 0px; HEIGHT: auto; MARGIN-TOP: 5px; BORDER-BOTTOM-COLOR: #fff"></UL>
@@ -9398,6 +9441,7 @@
                                     <TBODY class=tab_001 id=AddTarget_Tbody></TBODY>
                                 </TABLE>
                             </DIV><!--新增经营指标未完成门店 结束--><!--上报日志 开始-->
+
                             <DIV class=TClassHide id=T9 style="DISPLAY: none">
                                 <INPUT name=ctl00$ContentPlaceHolder1$detailhidden id=detailhidden type=hidden value=hide>
                                 <UL class=tabs style="MARGIN-BOTTOM: 0px; HEIGHT: auto; MARGIN-TOP: 5px; BORDER-BOTTOM-COLOR: #fff"></UL>
