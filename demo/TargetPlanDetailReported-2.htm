@@ -220,7 +220,7 @@ function __doPostBack(eventTarget, eventArgument) {
 	<option value="a4f3da3f-fc50-4c3e-b0de-3955904e7d8b">集团总部</option>
 
 </select>
-                <span id="ContentPlaceHolder1_lblName" style="font-size:18px; text-indent:3px; height:26px; line-height:26px; border:none; width:200px;">2018年年计划指标上报</span>
+                <span id="ContentPlaceHolder1_lblName" style="font-size:18px; text-indent:3px; height:26px; line-height:26px; border:none; width:200px;">2018年<span style="margin-right:10px;"></span>年计划指标上报</span>
                 <input name="ctl00$ContentPlaceHolder1$hideTargetPlanID" id="hideTargetPlanID" value="260bf6e0-7036-41d0-aaea-e1bd698309b0" type="hidden">
                 <input name="ctl00$ContentPlaceHolder1$HidSystemID" id="HidSystemID" value="a00ad17d-57da-4f8b-9c60-807a5e83d7a7" type="hidden">
                 <input name="ctl00$ContentPlaceHolder1$HidSystemText" id="HidSystemText" type="hidden">
@@ -320,11 +320,27 @@ function __doPostBack(eventTarget, eventArgument) {
 
         <!--下载按钮 开始-->
         <div id="Down1" class="TClassHide" style="display: block;">
+            <div style="top:-18px; position:relative; left:-290px;">
+                <span class="DownExcelspan">
+                    <span style="font-weight:bold; color:#cb5c61;">版本名称：</span>
+                    <span>
+                        <select id="Select1" style="width:100px; color:black;">
+                            <option>--请选择--</option>
+                            <option>考核版</option>
+                            <option>内控版</option>
+                        </select>
+                        <!--<input type="text" style="width: 180px;margin-right:15px; height:25px;" />-->
+                    </span>
+                </span>
+                
+            </div>
             <div class="DownExcelDiv2 ">
                 <span class="DownExcelspan">
                     <span>
                         <div class="uploadify" id="file2" style="width: 100px; height: 25px;">
-                            <div class="uploadify-button " id="file2-button" style="width: 100px; height: 25px; line-height: 25px;"><span class="uploadify-button-text">导入数据</span></div>
+                            <div class="uploadify-button " id="file2-button" style="width: 100px; height: 25px; line-height: 25px;">
+                                <span class="uploadify-button-text">导入数据</span>
+                            </div>
                         </div>
                     </span>
                 </span>
@@ -333,7 +349,8 @@ function __doPostBack(eventTarget, eventArgument) {
                 <span class="DownExcelspan">
                     <div class="uploadify-button W100P" id="file_upload-button1">
                         <span>
-                            <label class="DownExcelLabel" id="BtnDownload">导出数据</label></span>
+                            <label class="DownExcelLabel" id="BtnDownload">导出数据</label>
+                        </span>
                     </div>
                 </span>
             </div>
