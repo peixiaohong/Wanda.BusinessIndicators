@@ -81,6 +81,12 @@
     <Compile Include="BizModel\S_Interface.cs" />
     <Compile Include="BizModel\S_InterfaceInstance.cs" />
     <Compile Include="BizModel\B_MonthlyReport.cs" />
+    <Compile Include="BizModel\S_Menu.cs" />
+    <Compile Include="BizModel\S_Organizational.cs" />
+    <Compile Include="BizModel\S_Org_User.cs" />
+    <Compile Include="BizModel\S_Role.cs" />
+    <Compile Include="BizModel\S_RolePermissions.cs" />
+    <Compile Include="BizModel\S_Role_User.cs" />
     <Compile Include="BizModel\TSM_Messages.cs" />
     <Compile Include="Filter\AttachmentFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

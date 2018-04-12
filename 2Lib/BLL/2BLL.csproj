@@ -103,6 +103,12 @@
     <Compile Include="BizBLL\S_InterfaceinstanceOperator.cs" />
     <Compile Include="BizBLL\S_InterfaceOperator.cs" />
     <Compile Include="BizBLL\A_SystemBatchOperator.cs" />
+    <Compile Include="BizBLL\S_MenuActionOperator.cs" />
+    <Compile Include="BizBLL\S_OrganizationalActionOperator.cs" />
+    <Compile Include="BizBLL\S_Org_UserActionOperator.cs" />
+    <Compile Include="BizBLL\S_RoleActionOperator.cs" />
+    <Compile Include="BizBLL\S_RolePermissionsActionOperator.cs" />
+    <Compile Include="BizBLL\S_Role_UserActionOperator.cs" />
     <Compile Include="BizBLL\TSM_MessagesOperator.cs" />
     <Compile Include="BizBLL\V_HistoryReturnDateOperator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -80,6 +80,11 @@
     <Compile Include="BizDal\C_TargetkpiAdapter.cs" />
     <Compile Include="BizDal\C_TargetmappingAdapter.cs" />
     <Compile Include="BizDal\R_MissTargetEvaluationScopeAdapter.cs" />
+    <Compile Include="BizDal\S_MenuAdapter.cs" />
+    <Compile Include="BizDal\S_OrganizationalAdapter.cs" />
+    <Compile Include="BizDal\S_RoleAdapter.cs" />
+    <Compile Include="BizDal\S_RolePermissionsAdapter.cs" />
+    <Compile Include="BizDal\S_Role_UserAdapter.cs" />
     <Compile Include="BizDal\V_HistoryReturnDateAdapter.cs" />
     <Compile Include="BizDal\InterfaceAdapter.cs" />
     <Compile Include="BizDal\SysConfigAdapter.cs" />
@@ -89,6 +94,7 @@
     <Compile Include="BizDal\V_MonthlyreportdetailAdapter.cs" />
     <Compile Include="BizDal\A_SystemBatchAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BizDal\S_Org_UserAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\1Framework\Lib.Core\LJTH.Lib.Core.csproj">

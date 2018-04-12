@@ -286,6 +286,98 @@ WHERE B.[{4}]='{5}' and A.[ISDELETED]<1 and B.[ISDELETED]<1 ",
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 批量插入数据
+        /// </summary>
+        /// <param name="dataList"></param>
+        /// <returns></returns>
+        public int InsertList(List<T> dataList)
+        {
+            StringBuilder sqlBuilder = new StringBuilder();
+            int i = 0;
+            if (dataList.Count > 0)
+            {
+                foreach (T data in dataList)
+                {
+                    sqlBuilder.Append(ORMapping.GetInsertSql<T>(data, TSqlBuilder.Instance) + sqlSeperator);
+
+                    if (sqlBuilder.Length > 7000)
+                    {
+                        i += ExecuteSql(sqlBuilder.ToString());
+
+                        sqlBuilder.Clear();
+                    }
+                }
+
+                if (sqlBuilder.Length > 0)
+                {
+                    i += ExecuteSql(sqlBuilder.ToString());
+                }
+            }
+            return i;
+        }
+
+        /// <summary>
+        /// 批量修改数据
+        /// </summary>
+        /// <param name="dataList"></param>
+        /// <returns></returns>
+        public int UpdateList(List<T> dataList)
+        {
+            StringBuilder sqlBuilder = new StringBuilder();
+            int i = 0;
+            if (dataList.Count > 0)
+            {
+                foreach (T data in dataList)
+                {
+                    sqlBuilder.Append(ORMapping.GetUpdateSql<T>(data, TSqlBuilder.Instance) + sqlSeperator);
+
+                    if (sqlBuilder.Length > 7000)
+                    {
+                        i += ExecuteSql(sqlBuilder.ToString());
+
+                        sqlBuilder.Clear();
+                    }
+                }
+
+                if (sqlBuilder.Length > 0)
+                {
+                    i += ExecuteSql(sqlBuilder.ToString());
+                }
+            }
+            return i;
+        }
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="dataList"></param>
+        /// <returns></returns>
+        public int DeleteList(List<T> dataList)
+        {
+            StringBuilder sqlBuilder = new StringBuilder();
+            int i = 0;
+            if (dataList.Count > 0)
+            {
+                foreach (T data in dataList)
+                {
+                    sqlBuilder.Append(ORMapping.GetDeleteSql<T>(data, TSqlBuilder.Instance) + sqlSeperator);
+
+                    if (sqlBuilder.Length > 7000)
+                    {
+                        i += ExecuteSql(sqlBuilder.ToString());
+
+                        sqlBuilder.Clear();
+                    }
+                }
+
+                if (sqlBuilder.Length > 0)
+                {
+                    i += ExecuteSql(sqlBuilder.ToString());
+                }
+            }
+            return i;
+        }
+
     }
 
 
