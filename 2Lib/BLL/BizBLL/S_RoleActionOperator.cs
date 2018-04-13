@@ -37,6 +37,16 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         {
             return _s_RoleAdapter.GetDatas();
         }
+
+        /// <summary>
+        /// 添加一条数据
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public int InsertData(S_Role data)
+        {
+            return _s_RoleAdapter.InsertData(data);
+        }
         #endregion 
     }
 }
