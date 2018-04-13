@@ -278,3 +278,9 @@
 .tab_005 td a:hover, .tab_005 td a:visited, .tab_005 td a:link {
     color: #337ab7;
 }
+.tab_search tbody tr td{
+    width:10%!important;
+}
+.tab_search tbody tr th{
+    width:6%!important;
+}
