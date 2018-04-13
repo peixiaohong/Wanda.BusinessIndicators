@@ -43,6 +43,7 @@
       <siteMapNode id="15" url="/SystemConfiguration/UpdateTimeConfiguration.aspx" title="系统开放时间管理"  description="系统开放时间管理" resourceKey="SystemTimeManager"/>
       <siteMapNode id="16" url="/SystemConfiguration/ReportApproveStatistical.aspx" title="月报上报审批情况"  description="月报上报审批情况" resourceKey="ReportStatManager"/>
       <siteMapNode id="19" url="/SystemConfiguration/TargetPlanDetailReported.aspx" title="指标上报审批情况"  description="指标上报审批情况" resourceKey="TargetStatManager"/>
+      <siteMapNode id="120" url="/SystemConfiguration/RoleManager.aspx" title="角色管理"  description="角色管理" resourceKey="RoleManager"/>
 
     </siteMapNode>
 

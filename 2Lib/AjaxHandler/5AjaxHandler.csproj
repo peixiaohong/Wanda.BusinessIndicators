@@ -70,6 +70,7 @@
     <Compile Include="ExpressionParser.cs" />
     <Compile Include="HistoryReturnControll.cs" />
     <Compile Include="MonthRptConfigControll.cs" />
+    <Compile Include="RoleManagerControll.cs" />
     <Compile Include="TargetController.cs" />
     <Compile Include="TargetPlanDetailController.cs" />
     <Compile Include="TargetSimpleReportController.cs" />

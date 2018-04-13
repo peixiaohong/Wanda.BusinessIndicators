@@ -28,6 +28,15 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         #endregion
 
         #region methods
+
+        /// <summary>
+        /// 获取全部有效的角色
+        /// </summary>
+        /// <returns></returns>
+        public List<S_Role> GetDatas()
+        {
+            return _s_RoleAdapter.GetDatas();
+        }
         #endregion 
     }
 }

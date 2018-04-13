@@ -41,5 +41,15 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
         {
             return base.Remove(data);
         }
+
+        /// <summary>
+        /// 获取全部有效的角色
+        /// </summary>
+        /// <returns></returns>
+        public List<S_Role> GetDatas()
+        {
+            string sql = "Select * From  [dbo].[S_Role] Where [IsDelete]=0 ";
+            return ExecuteQuery(sql);
+        }
     }
 }

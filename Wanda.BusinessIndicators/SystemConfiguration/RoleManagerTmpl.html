@@ -1,0 +1,15 @@
+﻿<script type="text/x-jquery-tmpl" id="ShowMenuDataTmpl">
+    {{each(i,item) Data}}
+    <tr>
+        <td>${i+1}</td>
+        <td>${item.CnName}</td>
+        <td>${item.Description}</td>
+        <td><input type="button" value="设置" /></td>
+        <td><input type="button" value="设置" /></td>
+        <td>
+            <a href="javascript:void(0)">编辑</a>
+            <a href="javascript:void(0)">删除</a>
+        </td>
+    </tr>
+    {{/each}}
+</script>

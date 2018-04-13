@@ -152,6 +152,7 @@
     <Content Include="Scripts\multiple-select-master\multiple-select.css" />
     <Content Include="Scripts\multiple-select-master\multiple-select.js" />
     <Content Include="Scripts\multiple-select-master\multiple-select.png" />
+    <Content Include="Scripts\SystemConfiguration\RoleManager.js" />
     <Content Include="Scripts\TreeGrid\1.html" />
     <Content Include="Scripts\TreeGrid\application.js" />
     <Content Include="Scripts\TreeGrid\images\defaultLeaf.gif" />
@@ -165,6 +166,8 @@
     <Content Include="Styles\fonts\fontawesome-webfont.svg" />
     <Content Include="Styles\ljth\login.css" />
     <Content Include="Styles\TreeGrid.css" />
+    <Content Include="SystemConfiguration\RoleManager.aspx" />
+    <Content Include="SystemConfiguration\RoleManagerTmpl.html" />
     <Content Include="SystemConfiguration\TargetPlanDetailReported.aspx" />
     <Content Include="WebService\MobileCommonWebService.asmx" />
     <Content Include="WebService\MobileCommon\BaseWebService.asmx" />
@@ -1201,6 +1204,13 @@
     </Compile>
     <Compile Include="SiteMasterPage\MainMasterPage_Help.Master.designer.cs">
       <DependentUpon>MainMasterPage_Help.Master</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfiguration\RoleManager.aspx.cs">
+      <DependentUpon>RoleManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguration\RoleManager.aspx.designer.cs">
+      <DependentUpon>RoleManager.aspx</DependentUpon>
     </Compile>
     <Compile Include="SystemConfiguration\TargetPlanDetailReported.aspx.cs">
       <DependentUpon>TargetPlanDetailReported.aspx</DependentUpon>
