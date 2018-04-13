@@ -18,6 +18,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         {
             return "测试成功";
         }
+
         #region 角色管理List页面
         /// <summary>
         /// 无条件加载页面
@@ -164,6 +165,102 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 var data = S_RoleActionOperator.Instance.GetRoleByID(ID.ToGuid());
                 Success = 1;
                 Message = "查询成功";
+                return new
+                {
+                    Data = data,
+                    Success = Success,
+                    Message = Message
+                };
+            }
+            catch (Exception ex)
+            {
+                return new
+                {
+                    Data = "",
+                    Success = 0,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        #endregion
+
+        #region 功能点
+
+        /// <summary>
+        /// 获取菜单权限
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        [LibAction]
+        public Object GetMenuDatas(string ID)
+        {
+            string Message = string.Empty;
+            int Success = 0;
+            try
+            {
+                var data = S_MenuActionOperator.Instance.GetRoleMenus(ID.ToGuid());
+                Success = 1;
+                Message = "查询成功";
+                return new
+                {
+                    Data = data,
+                    Success = Success,
+                    Message = Message
+                };
+            }
+            catch (Exception ex)
+            {
+                return new
+                {
+                    Data = "",
+                    Success = 0,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        [LibAction]
+        public Object SaveRolePermissions(string RoleID, string data)
+        {
+
+            string Message = string.Empty;
+            int Success = 0;
+
+            if (RoleID == "")
+            {
+                return new
+                {
+                    Data = "",
+                    Success = 0,
+                    Message ="参数丢失"
+                };
+            }
+
+            try
+            {
+                List<S_RolePermissions> entitys = JsonConvert.DeserializeObject<List<S_RolePermissions>>(data);
+                foreach (var item in entitys)
+                {
+                    item.CreateTime = DateTime.Now;
+                    item.CreateUserID = 0;
+                    item.CreatorName = "测试";
+                    item.IsDeleted = false;
+                    item.ModifierName = "测试";
+                    item.ModifyTime = DateTime.Now;
+                    item.ID = Guid.NewGuid();
+                }
+                var resultData = S_RolePermissionsActionOperator.Instance.SaveListData(RoleID.ToGuid(),entitys);
+                if (resultData > 0)
+                {
+                    Success = 1;
+                    Message = "保存成功";
+                }
+                else
+                {
+                    Success = 0;
+                    Message = "保存失败";
+                }
                 return new
                 {
                     Data = data,

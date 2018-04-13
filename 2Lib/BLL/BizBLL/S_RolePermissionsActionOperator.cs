@@ -32,6 +32,31 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
 
 
         #region methods
+
+        /// <summary>
+        /// 修改/保存 角色菜单权限
+        /// </summary>
+        /// <param name="RoleID">角色ID</param>
+        /// <param name="listData">权限表数据</param>
+        /// <returns></returns>
+        public int SaveListData(Guid RoleID, List<S_RolePermissions> listData)
+        {
+            List<S_RolePermissions> oldlistData = _s_RolePermissionsAdapter.GetListData(RoleID);
+            int dNumber = 1;
+            if (oldlistData.Count > 0)
+            {
+                dNumber = _s_RolePermissionsAdapter.DeleteList(oldlistData);
+            }
+            if (dNumber > 0)
+            {
+                return _s_RolePermissionsAdapter.InsertList(listData);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         #endregion 
     }
 }
