@@ -9,7 +9,7 @@ Create Table S_Menu
 	   ,[Sequence]	 Int			  Not Null			   --序号
 	   ,[Url]		 NVarchar(100)	  Not Null			   --地址
 	   ,ResourceKey	 NVarchar(100)	  Not Null
-	   ,IsDelete	 Bit			  Null				   --是否删除
+	   ,IsDeleted	 Bit			  Null				   --是否删除
 	   ,CreateTime	 DateTime		  Not Null
 	   ,CreatorName	 NVarchar(100)	  Null
 	   ,CreateUserID Int			  Not Null
@@ -22,7 +22,7 @@ Create Table S_RolePermissions
 		ID			 UniqueIdentifier Not Null Primary Key --ID
 	   ,RoleID		 UniqueIdentifier Not Null			   --角色ID
 	   ,MenuID		 UniqueIdentifier Not Null			   --菜单ID
-	   ,IsDelete	 Bit			  Null				   --是否删除
+	   ,IsDeleted	 Bit			  Null				   --是否删除
 	   ,CreateTime	 DateTime		  Not Null
 	   ,CreatorName	 NVarchar(100)	  Null
 	   ,CreateUserID Int			  Not Null
@@ -35,7 +35,7 @@ Create Table S_Role_User
 		ID			 UniqueIdentifier Not Null Primary Key --ID
 	   ,RoleID		 UniqueIdentifier Null				   --角色ID
 	   ,EmployeeID	 Int			  Null				   --用户账号
-	   ,IsDelete	 Bit			  Null				   --是否删除
+	   ,IsDeleted	 Bit			  Null				   --是否删除
 	   ,CreateTime	 DateTime		  Not Null
 	   ,CreatorName	 NVarchar(100)	  Null
 	   ,CreateUserID Int			  Not Null
@@ -50,7 +50,7 @@ Create Table S_Role
 	   ,CnName		  NVarchar(50)	   Null					--中文名称
 	   ,EnName		  NVarchar(50)	   Null					--英文名称
 	   ,[Description] NVarchar(Max)	   Null					--备注
-	   ,IsDelete	  Bit			   Null					--是否删除
+	   ,IsDeleted	  Bit			   Null					--是否删除
 	   ,CreateTime	  DateTime		   Not Null
 	   ,CreatorName	  NVarchar(100)	   Null
 	   ,CreateUserID  Int			   Not Null
@@ -66,7 +66,7 @@ Create Table S_Organizational
 	   ,Code		 NVarchar(60)	  Null				   --编码
 	   ,ParentID	 UniqueIdentifier Not Null			   --父级ID
 	   ,[Level]		 Int			  Not Null			   --等级 1板块 2大区 3区域 4项目
-	   ,IsDelete	 Bit			  Null				   --是否删除
+	   ,IsDeleted	 Bit			  Null				   --是否删除
 	   ,CreateTime	 DateTime		  Not Null
 	   ,CreatorName	 NVarchar(100)	  Null
 	   ,CreateUserID Int			  Not Null
@@ -80,7 +80,7 @@ Create Table S_Org_User
 	   ,SystemID	 UniqueIdentifier Not Null
 	   ,EmployeeID	 Int			  Null				   --用户ID
 	   ,CompanyID	 UniqueIdentifier Not Null			   --组织架构
-	   ,IsDelete	 Bit			  Null				   --是否删除
+	   ,IsDeleted	 Bit			  Null				   --是否删除
 	   ,CreateTime	 DateTime		  Not Null
 	   ,CreatorName	 NVarchar(100)	  Null
 	   ,CreateUserID Int			  Not Null
