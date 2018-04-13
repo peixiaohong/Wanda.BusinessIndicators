@@ -111,6 +111,8 @@
     <Content Include="DllReference\Wanda.SDK.Common.dll" />
     <Content Include="DllReference\Wanda.UserSource.Client.dll" />
     <Content Include="Excel\Help\最新月报上报视频.mp4" />
+    <Content Include="Images\action-icon.png" />
+    <Content Include="Images\close-icon.png" />
     <Content Include="Images\defaultLeaf.gif" />
     <Content Include="Images\folderClose.png" />
     <Content Include="Images\folderOpen.png" />

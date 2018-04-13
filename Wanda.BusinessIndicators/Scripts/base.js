@@ -129,7 +129,7 @@ var CommonUtil = {
 //田振建添加错误提示框实现 Start
     $.MsgBox = {
         Alert: function (title, sketchErrorMessage,msg) {
-            GenerateHtml("alert", title,sketchErrorMessage, msg);
+            GenerateHtml("alert", title, sketchErrorMessage, msg);
             btnOk();  //alert只是弹出消息，因此没必要用到回调函数callback
             btnNo();
         },
@@ -140,10 +140,15 @@ var CommonUtil = {
         }
     }
     //生成Html
-    var GenerateHtml = function (type, title,sketchErrorMessage, msg) {
+var GenerateHtml = function (type, title, sketchErrorMessage, msg) {
         var _html = "";
-        _html += '<div id="mb_box"></div><div id="mb_con"><span id="mb_tit">' + title + '</span>';
-        _html += '<a id="mb_ico">x</a><div id="se_msg">' + sketchErrorMessage + '</div><div id="mb_msg"><TEXTAREA id=ErrorTextarea style="BACKGROUND-COLOR: #ffffff" rows=4 cols=3 jQuery17105382105803377364="16">' + msg + '</TEXTAREA></div><div id="mb_btnbox">';
+        _html += '<div id="mb_box"></div><div id="mb_con"><span id="mb_tit"><img src="../Images/action-icon.png">  ' + title + ' <a id="mb_ico"><img src="../Images/close-icon.png"></a></span>';
+        if (msg == "add") {
+            _html += '<div id="mb_msg"><div style="margin-bottom: 15px;"><span>角色名称：</span><input type="text" id="CnName"/><p  class="CnNameAction"style="padding-left:10px;color: #cb5c61;display:none;">请输入角色名称<p></div><div><span>角色描述：</span><input type="text" id="Description"/></div></div><div id="mb_btnbox">';
+        } else{
+            _html += '<div id="se_msg">' + sketchErrorMessage + '</div><div id="mb_btnbox">';
+        }
+        
         if (type == "alert") {
             _html += '<input id="mb_btn_ok" type="button" value="确定" />';
         }
@@ -162,49 +167,44 @@ var CommonUtil = {
             filter: 'Alpha(opacity=60)', backgroundColor: 'black', top: '0', left: '0', opacity: '0.6'
         });
         $("#mb_con").css({
-            zIndex: '999999', width: '600px', position: 'fixed', 
-            backgroundColor: 'White', borderRadius: '15px'
+            zIndex: '999999', width: '80%', position: 'fixed', maxWidth: "300px",
+            backgroundColor: 'White', borderRadius: '3px'
         });
         $("#mb_tit").css({
-            display: 'block', fontSize: '14px', color: '#444', padding: '10px 15px',
-            backgroundColor: '#DDD', borderRadius: '15px 15px 0 0',
-            borderBottom: '3px solid #009BFE', fontWeight: 'bold'
+            display: 'block', fontSize: '14px', color: '#666666', padding: '10px 15px',
         });
-
+        $("#mb_tit img").css({
+            width: "18px", height: "18px", verticalAlign: "middle"
+        });
         $("#se_msg").css({
-            padding: '10px,10px,10px,20px', lineHeight: '20px',
-            fontSize: '13px', borderBottom: '1px dashed #DDD'
+            padding: "0 1.6em .8em", minHeight: "50px", fontSize: "15px", marginTop: "15px", textAlign: "center",
+            lineHeight: "1.3", wordWrap: "breakWord", wordBreak: "breakAll",borderBottom: "1px solid #ccc",
+            color: "#999"
         });
 
         $("#mb_msg").css({
-            padding: '10px,10px,10px,20px', lineHeight: '20px',
-            borderBottom: '1px dashed #DDD', fontSize: '13px',display:'none'
+            padding: '15px', lineHeight: '20px', textAlign: "center",
+            borderBottom: '1px solid #ccc', fontSize: '13px'
         });
-
+        $("#mb_msg input").css({
+            outline: 0,
+        });
         $("#ErrorTextarea").css({
             width: '92%',
         height: '205px',
         padding: '5px 20px 5px 20px',
         border:'1px solid #ccc'
         });
-       
-
-
         $("#mb_ico").css({
-            display: 'block', position: 'absolute', right: '10px', top: '9px',
-            border: '1px solid Gray', width: '18px', height: '18px', textAlign: 'center',
-            lineHeight: '16px', cursor: 'pointer', borderRadius: '12px', fontFamily: '微软雅黑'
+            width: '15px', height: '15px', cursor: 'pointer',float:"right",
         });
-        $("#mb_btnbox").css({ margin: '15px 0 10px 0', textAlign: 'center' });
-        $("#mb_btn_ok,#mb_btn_no").css({ width: '85px', height: '30px', color: 'white', border: 'none' });
-        $("#mb_btn_ok").css({ backgroundColor: '#168bbb' });
-        $("#mb_btn_no").css({ backgroundColor: 'gray', marginLeft: '20px' });
-        //右上角关闭按钮hover样式
-        $("#mb_ico").hover(function () {
-            $(this).css({ backgroundColor: 'Red', color: 'White' });
-        }, function () {
-            $(this).css({ backgroundColor: '#DDD', color: 'black' });
-        });
+        $("#mb_ico img").css({
+            width: '15px', height: '15px',
+        })
+        $("#mb_btnbox").css({ margin: '5px 0', textAlign: 'center' });
+        $("#mb_btn_ok,#mb_btn_no").css({ width: '70px', height: '30px', color: 'white', border: '1px solid #cb5c61', borderRadius: "4px", outline: 0, cursor:"pointer" });
+        $("#mb_btn_ok").css({ backgroundColor: '#d2322d' });
+        $("#mb_btn_no").css({ marginLeft: '20px', color: "#cb5c61",backgroundColor: "#fff" });
         var _widht = document.documentElement.clientWidth;  //屏幕宽
         var _height = document.documentElement.clientHeight; //屏幕高
         var boxWidth = $("#mb_con").width();
@@ -215,9 +215,10 @@ var CommonUtil = {
     //确定按钮事件
     var btnOk = function (callback) {
         $("#mb_btn_ok").click(function () {
-            $("#mb_box,#mb_con").remove();
             if (typeof (callback) == 'function') {
                 callback();
+            } else {
+                $("#mb_box,#mb_con").remove();
             }
         });
     }
