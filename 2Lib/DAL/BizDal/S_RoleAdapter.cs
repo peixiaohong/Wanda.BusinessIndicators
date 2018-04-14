@@ -10,7 +10,7 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
     /// <summary>
     /// 角色
     /// </summary>
-    sealed class S_RoleAdapter: AppBaseAdapterT<S_Role>
+    sealed class S_RoleAdapter : AppBaseAdapterT<S_Role>
     {
         /// <summary>
         /// 插入单条数据
@@ -46,10 +46,19 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
         /// 获取全部有效的角色
         /// </summary>
         /// <returns></returns>
-        public List<S_Role> GetDatas()
+        public List<S_Role> GetDatas(string CnName)
         {
-            string sql = "Select * From  [dbo].[S_Role] Where [IsDelete]=0 ";
+            string sql = string.Empty;
+            if (CnName == "")
+            {
+                sql = "Select * From  [dbo].[S_Role] Where [IsDeleted]=0 ORDER BY CreateTime DESC ";
+            }
+            else
+            {
+                sql = string.Format("Select * From  [dbo].[S_Role] Where [IsDeleted]=0 and CnName like '%{0}%' ORDER BY CreateTime DESC ", CnName);
+            }
             return ExecuteQuery(sql);
         }
     }
 }
+

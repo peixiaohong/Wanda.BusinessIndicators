@@ -33,9 +33,9 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         /// 获取全部有效的角色
         /// </summary>
         /// <returns></returns>
-        public List<S_Role> GetDatas()
+        public List<S_Role> GetDatas(string CnName)
         {
-            return _s_RoleAdapter.GetDatas();
+            return _s_RoleAdapter.GetDatas(CnName);
         }
 
         /// <summary>
@@ -46,6 +46,26 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         public int InsertData(S_Role data)
         {
             return _s_RoleAdapter.InsertData(data);
+        }
+
+        /// <summary>
+        /// 根据ID获取一条数据
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        public S_Role GetRoleByID(Guid ID)
+        {
+            return base.GetModelObject(ID);
+        }
+
+        /// <summary>
+        /// 修改数据
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public Guid UpdateData(S_Role data)
+        {
+            return base.UpdateModelObject(data);
         }
         #endregion 
     }

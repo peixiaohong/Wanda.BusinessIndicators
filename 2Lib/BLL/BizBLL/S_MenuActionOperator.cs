@@ -32,6 +32,16 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
 
 
         #region methods
+
+        /// <summary>
+        /// 获取单个角色的菜单
+        /// </summary>
+        /// <param name="ID">角色ID</param>
+        /// <returns></returns>
+        public List<S_Menu> GetRoleMenus(Guid ID)
+        {
+            return _sMenuAdapter.GetRoleMenus(ID);
+        }
         #endregion 
     }
 }

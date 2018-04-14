@@ -278,3 +278,24 @@
 .tab_005 td a:hover, .tab_005 td a:visited, .tab_005 td a:link {
     color: #337ab7;
 }
+/*角色管理*/
+.role-list {
+    table-layout: fixed;
+}
+.role-list thead th {
+    height: 40px;
+}
+.role-list th, .role-list td{
+    text-align:center;
+    border-right: 1px solid #eee;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+}
+.role-delete-icon{
+    font-size: 13px;
+}
+.role-list span:hover{
+    cursor:pointer;
+    
+}

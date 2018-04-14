@@ -32,6 +32,7 @@ function LoadPage()
         url: "/RoleManagerControll/GetRoles",
         args: {},
         successReturn: function (resultData) {
+            console.log(resultData);
             if (resultData.Success == 1) {
                 $('#ShowMenuData').empty();
                 loadTmpl('#ShowMenuDataTmpl').tmpl(resultData).appendTo('#ShowMenuData');
@@ -52,29 +53,111 @@ function RegisterEvent()
     //新增角色弹框页面确定按钮
     $(".InsertRoleData_OK").off('click').on('click', function ()
     {
-        InsertRole();
+        SaveRole();
+    });
+    $(".QueryConditions_Button").off("click").on("click", function ()
+    {
+        QueryRoleData();
+    });
+}
+//保存数据
+function SaveRole()
+{
+    $.MsgBox.Confirm("添加角色", "", "add", function () {
+        var CnName = $("#CnName").val();
+        var Description = $("#Description").val();
+        $(".CnNameAction").css("display", "none");
+        if (!CnName) {
+            $(".CnNameAction").css("display", "block");
+            return;
+        }
+        Load();
+        var S_Role = {
+            "CnName": CnName,
+            "Description": Description
+        };
+        WebUtil.ajax({
+            async: false,
+            url: "/RoleManagerControll/SaveRole",
+            args: { RoleData: JSON.stringify(S_Role) },
+            successReturn: function (resultData) {
+                if (resultData.Success == 1) {
+                    $("#mb_box,#mb_con").remove();
+                    $.MsgBox.Alert("提示", "添加成功");
+                    LoadPage();
+                    console.log("添加成功" + resultData.Message);
+                }
+                else {
+                    $("#mb_box,#mb_con").remove();
+                    $.MsgBox.Alert("提示", resultData.Message);
+                    console.log("添加失败" + resultData.Message);
+                }
+                Fake();
+            }
+        });
     });
 }
 
-//新增角色数据
-function InsertRole()
+//查询条件
+function QueryRoleData()
 {
-    var CnName= $("#CnName").val();
-    var Description = $("#Description").val();
+    //参数
+    var keyWord = $("#QrName").val();
     Load();
     WebUtil.ajax({
         async: false,
         url: "/RoleManagerControll/GetRoles",
-        args: { CnName: CnName, Description: Description},
+        args: { CnName: keyWord},
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
-                console.log("添加成功" + resultData.Message);
+                $('#ShowMenuData').empty();
+                loadTmpl('#ShowMenuDataTmpl').tmpl(resultData).appendTo('#ShowMenuData');
             }
-            else
-            {
-                console.log("添加失败" + resultData.Message);
+            else {
+                console.log(resultData.Message);
             }
             Fake();
+        }
+    });
+}
+
+//删除角色
+function DeleteRoleData(el)
+{
+    var id = $(el).attr("data-id");
+    console.log(id);
+    $.MsgBox.Confirm("提示", "确认删除", "", function () {
+        WebUtil.ajax({
+            async: false,
+            url: "/RoleManagerControll/DeleteRoleData",
+            args: { ID: id },
+            successReturn: function (resultData) {
+                if (resultData.Success == 1) {
+                    $("#mb_box,#mb_con").remove();
+                    $.MsgBox.Alert("提示", "删除成功");
+                    LoadPage();
+                    console.log("删除成功" + resultData.Message);
+                }
+                else {
+                    $("#mb_box,#mb_con").remove();
+                    $.MsgBox.Alert("提示", "删除失败");
+                    console.log("删除失败" + resultData.Message);
+                }
+            }
+        });
+    });
+}
+
+//编辑数据[获取数据]
+function EditRole(el)
+{
+    var id = $(el).attr("data-id");
+    WebUtil.ajax({
+        async: false,
+        url: "/RoleManagerControll/GetRoleDataByID",
+        args: { ID: "7AAEC46E-E885-4C40-97DF-5DAF5816683E" },
+        successReturn: function (resultData) {
+            console.log(resultData);
         }
     });
 }

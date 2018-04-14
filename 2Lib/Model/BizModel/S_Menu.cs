@@ -61,5 +61,11 @@ namespace LJTH.BusinessIndicators.Model.BizModel
         /// </summary>
         [ORFieldMapping("CreateUserID")]
         public int CreateUserID { get; set; }
+
+        /// <summary>
+        /// 是否选中
+        /// </summary>
+        [NoMapping]
+        public int IsChecked { get; set; }
     }
 }
