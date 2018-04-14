@@ -79,6 +79,7 @@
     <Compile Include="BizDal\C_TargetAdapter.cs" />
     <Compile Include="BizDal\C_TargetkpiAdapter.cs" />
     <Compile Include="BizDal\C_TargetmappingAdapter.cs" />
+    <Compile Include="BizDal\EmployeeAdapter.cs" />
     <Compile Include="BizDal\R_MissTargetEvaluationScopeAdapter.cs" />
     <Compile Include="BizDal\S_MenuAdapter.cs" />
     <Compile Include="BizDal\S_OrganizationalAdapter.cs" />

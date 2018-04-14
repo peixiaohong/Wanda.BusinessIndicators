@@ -21,18 +21,15 @@ namespace LJTH.BusinessIndicators.Model.BizModel
         public Guid SystemID { get; set; }
 
         /// <summary>
-        /// 人员ID
+        /// 人员
         /// </summary>
-        public int EmployeeID { get; set; }
+        [ORFieldMapping("LoginName")]
+        public string LoginName { get; set; }
 
         /// <summary>
         /// 项目ID
         /// </summary>
+        [ORFieldMapping("CompanyID")]
         public Guid CompanyID { get; set; }
-
-        /// <summary>
-        /// 创建人ID
-        /// </summary>
-        public int CreateUserID { get; set; }
     }
 }

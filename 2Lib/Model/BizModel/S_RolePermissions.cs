@@ -25,12 +25,5 @@ namespace LJTH.BusinessIndicators.Model.BizModel
         /// </summary>
         [ORFieldMapping("MenuID")]
         public Guid MenuID { get; set; }
-
-        /// <summary>
-        /// 创建人ID
-        /// </summary>
-        [ORFieldMapping("CreateUserID")]
-        public int CreateUserID { get; set; }
-
     }
 }

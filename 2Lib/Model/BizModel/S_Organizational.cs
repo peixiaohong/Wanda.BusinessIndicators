@@ -37,11 +37,5 @@ namespace LJTH.BusinessIndicators.Model.BizModel
         /// </summary>
         [ORFieldMapping("Level")]
         public int Level { get; set; }
-
-        /// <summary>
-        /// 创建人ID
-        /// </summary>
-        [ORFieldMapping("CreateUserID")]
-        public int CreateUserID { get; set; }
     }
 }

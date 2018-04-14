@@ -54,6 +54,7 @@
     <Compile Include="Common\BindPair.cs" />
     <Compile Include="Demo\DemoModels.cs" />
     <Compile Include="Base\ICascadeObject.cs" />
+    <Compile Include="Employee\AllUserPermissions.cs" />
     <Compile Include="Group\V_GroupCompany.cs" />
     <Compile Include="Group\V_GroupMonthlyReportDetail.cs" />
     <Compile Include="MonthReport\CompanyVModel.cs" />

@@ -12,7 +12,6 @@ Create Table S_Menu
 	   ,IsDeleted	 Bit			  Null				   --是否删除
 	   ,CreateTime	 DateTime		  Not Null
 	   ,CreatorName	 NVarchar(100)	  Null
-	   ,CreateUserID Int			  Not Null
 	   ,ModifierName NVarchar(100)	  Null
 	   ,ModifyTime	 DateTime		  Null
 	);
@@ -25,7 +24,6 @@ Create Table S_RolePermissions
 	   ,IsDeleted	 Bit			  Null				   --是否删除
 	   ,CreateTime	 DateTime		  Not Null
 	   ,CreatorName	 NVarchar(100)	  Null
-	   ,CreateUserID Int			  Not Null
 	   ,ModifierName NVarchar(100)	  Null
 	   ,ModifyTime	 DateTime		  Null
 	);
@@ -34,7 +32,7 @@ Create Table S_Role_User
 	(
 		ID			 UniqueIdentifier Not Null Primary Key --ID
 	   ,RoleID		 UniqueIdentifier Null				   --角色ID
-	   ,EmployeeID	 Int			  Null				   --用户账号
+	   ,LoginName	 nvarchar(100)	  Null				   --用户账号
 	   ,IsDeleted	 Bit			  Null				   --是否删除
 	   ,CreateTime	 DateTime		  Not Null
 	   ,CreatorName	 NVarchar(100)	  Null
@@ -53,7 +51,6 @@ Create Table S_Role
 	   ,IsDeleted	  Bit			   Null					--是否删除
 	   ,CreateTime	  DateTime		   Not Null
 	   ,CreatorName	  NVarchar(100)	   Null
-	   ,CreateUserID  Int			   Not Null
 	   ,ModifierName  NVarchar(100)	   Null
 	   ,ModifyTime	  DateTime		   Null
 	);
@@ -69,7 +66,6 @@ Create Table S_Organizational
 	   ,IsDeleted	 Bit			  Null				   --是否删除
 	   ,CreateTime	 DateTime		  Not Null
 	   ,CreatorName	 NVarchar(100)	  Null
-	   ,CreateUserID Int			  Not Null
 	   ,ModifierName NVarchar(100)	  Null
 	   ,ModifyTime	 DateTime		  Null
 	);
@@ -78,12 +74,11 @@ Create Table S_Org_User
 	(
 		ID			 UniqueIdentifier Primary Key Not Null --主键编码
 	   ,SystemID	 UniqueIdentifier Not Null
-	   ,EmployeeID	 Int			  Null				   --用户ID
+	   ,LoginName	 Nvarchar(100)	  Null				   --用户ID
 	   ,CompanyID	 UniqueIdentifier Not Null			   --组织架构
 	   ,IsDeleted	 Bit			  Null				   --是否删除
 	   ,CreateTime	 DateTime		  Not Null
 	   ,CreatorName	 NVarchar(100)	  Null
-	   ,CreateUserID Int			  Not Null
 	   ,ModifierName NVarchar(100)	  Null
 	   ,ModifyTime	 DateTime		  Null
 	);

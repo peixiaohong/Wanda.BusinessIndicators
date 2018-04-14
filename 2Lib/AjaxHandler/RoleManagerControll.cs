@@ -2,6 +2,7 @@
 using Lib.Web.MVC.Controller;
 using LJTH.BusinessIndicators.BLL.BizBLL;
 using LJTH.BusinessIndicators.Model.BizModel;
+using LJTH.BusinessIndicators.Model.Filter;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -63,12 +64,32 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             try
             {
                 S_Role entity = JsonConvert.DeserializeObject<S_Role>(RoleData);
+
+                // 数据验证
+                if (entity.CnName == "" && entity.Description == "")
+                {
+                    return new {
+                        Data = "",
+                        Success = 0,
+                        Message = "参数传递失败"
+                    };
+                }
+                List<S_Role> oldRoles = S_RoleActionOperator.Instance.GetDatas(entity.CnName);
                 #region 添加数据
                 if (entity.ID == "00000000-0000-0000-0000-000000000000".ToGuid())
                 {
+                    if (oldRoles != null && oldRoles.Count > 0)
+                    {
+                        return new
+                        {
+                            Data = "",
+                            Success = 0,
+                            Message = "保存的角色名：【" + entity.CnName + "】已经存在，不允许角色名称重复"
+                        };
+                    }
+
                     entity.ID = Guid.NewGuid();
                     entity.CreateTime = DateTime.Now;
-                    entity.CreateUserID = 1;
                     entity.CreatorName = "测试";
                     entity.EnName = "wu";
                     entity.IsDeleted = false;
@@ -90,6 +111,15 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 #region 修改
                 else
                 {
+                    if (oldRoles != null && oldRoles.Where(or=>or.ID!=entity.ID).Count()>0)
+                    {
+                        return new
+                        {
+                            Data = "",
+                            Success = 0,
+                            Message = "更改的角色名：【" + entity.CnName + "】已经存在，不允许角色名称重复"
+                        };
+                    }
                     entity.ModifierName = "";
                     entity.ModifyTime = DateTime.Now;
                     Guid number = S_RoleActionOperator.Instance.UpdateData(entity);
@@ -243,7 +273,6 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 foreach (var item in entitys)
                 {
                     item.CreateTime = DateTime.Now;
-                    item.CreateUserID = 0;
                     item.CreatorName = "测试";
                     item.IsDeleted = false;
                     item.ModifierName = "测试";
@@ -273,6 +302,43 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 return new
                 {
                     Data = "",
+                    Success = 0,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        #endregion
+
+        #region 人员设置
+
+        [LibAction]
+        public object GetAllUser(string data)
+        {
+            string Message = string.Empty;
+            int Success = 0;
+            int TotalCount = 0;
+
+            try
+            {
+                AllUserPermissionsFilter filter = JsonConvert.DeserializeObject<AllUserPermissionsFilter>(data);
+                var resultData = EmployeeActionOperator.Instance.GetAllUser(filter,out TotalCount);
+                Success = 1;
+                Message = "查询成功";
+                return new
+                {
+                    Data = resultData,
+                    TotalCount=TotalCount,
+                    Success = Success,
+                    Message = Message
+                };
+            }
+            catch (Exception ex)
+            {
+                return new
+                {
+                    Data = "",
+                    TotalCount= TotalCount,
                     Success = 0,
                     Message = ex.Message
                 };

@@ -97,6 +97,7 @@
     <Compile Include="BizBLL\C_TargetkpiOpreator.cs" />
     <Compile Include="BizBLL\C_TargetmappingOperator.cs" />
     <Compile Include="BizBLL\C_TargetOperator.cs" />
+    <Compile Include="BizBLL\EmployeeActionOperator.cs" />
     <Compile Include="BizBLL\InterfaceOperator.cs" />
     <Compile Include="BizBLL\R_MissTargetEvaluationScopeOperator.cs" />
     <Compile Include="BizBLL\SysConfigOperator.cs" />

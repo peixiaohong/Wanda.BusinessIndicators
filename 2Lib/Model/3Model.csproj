@@ -75,6 +75,7 @@
     <Compile Include="BizModel\C_Target.cs" />
     <Compile Include="BizModel\C_Targetkpi.cs" />
     <Compile Include="BizModel\C_TargetMapping.cs" />
+    <Compile Include="BizModel\Employee.cs" />
     <Compile Include="BizModel\Interface.cs" />
     <Compile Include="BizModel\R_MissTargetEvaluationScope.cs" />
     <Compile Include="BizModel\SysConfig.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="BizModel\S_RolePermissions.cs" />
     <Compile Include="BizModel\S_Role_User.cs" />
     <Compile Include="BizModel\TSM_Messages.cs" />
+    <Compile Include="Filter\AllUserPermissionsFilter.cs" />
     <Compile Include="Filter\AttachmentFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

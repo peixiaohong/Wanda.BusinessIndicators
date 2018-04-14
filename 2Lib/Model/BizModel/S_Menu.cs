@@ -57,12 +57,6 @@ namespace LJTH.BusinessIndicators.Model.BizModel
         public string ResourceKey { get; set; }
 
         /// <summary>
-        /// 创建人ID
-        /// </summary>
-        [ORFieldMapping("CreateUserID")]
-        public int CreateUserID { get; set; }
-
-        /// <summary>
         /// 是否选中
         /// </summary>
         [NoMapping]

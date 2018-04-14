@@ -23,13 +23,7 @@ namespace LJTH.BusinessIndicators.Model.BizModel
         /// <summary>
         /// 用户ID
         /// </summary>
-        [ORFieldMapping("EmployeeID")]
-        public int EmployeeID { get; set; }
-
-        /// <summary>
-        /// 创建人ID
-        /// </summary>
-        [ORFieldMapping("CreateUserID")]
-        public int CreateUserID { get; set; }
+        [ORFieldMapping("LoginName")]
+        public string LoginName { get; set; }
     }
 }
