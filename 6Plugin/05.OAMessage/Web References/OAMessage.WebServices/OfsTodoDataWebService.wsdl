@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc12="http://www.w3.org/2003/05/soap-encoding" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope" xmlns:tns="webservices.ofs.weaver.com.cn" xmlns:soapenc11="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap11="http://schemas.xmlsoap.org/soap/envelope/" targetNamespace="webservices.ofs.weaver.com.cn" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="webservices.ofs.weaver.com.cn">
+      <xsd:complexType name="anyType2anyTypeMap">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="entry">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element minOccurs="0" maxOccurs="1" name="key" type="xsd:anyType" />
+                <xsd:element minOccurs="0" maxOccurs="1" name="value" type="xsd:anyType" />
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="receiveRequestInfoByMap">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="tns:anyType2anyTypeMap" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="receiveRequestInfoByMapResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="tns:anyType2anyTypeMap" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processOverRequestByMap">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="tns:anyType2anyTypeMap" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processOverRequestByMapResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="tns:anyType2anyTypeMap" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="receiveRequestInfoByXml">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="receiveRequestInfoByXmlResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processDoneRequestByJson">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processDoneRequestByJsonResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="deleteUserRequestInfoByMap">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="tns:anyType2anyTypeMap" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="deleteUserRequestInfoByMapResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="tns:anyType2anyTypeMap" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="deleteUserRequestInfoByXML">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="deleteUserRequestInfoByXMLResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processDoneRequestByXml">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processDoneRequestByXmlResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="deleteRequestInfoByMap">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="tns:anyType2anyTypeMap" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="deleteRequestInfoByMapResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="tns:anyType2anyTypeMap" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processOverRequestByXml">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processOverRequestByXmlResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="receiveRequestInfoByJson">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="receiveRequestInfoByJsonResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="receiveTodoRequestByJson">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="receiveTodoRequestByJsonResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="deleteRequestInfoByXML">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="deleteRequestInfoByXMLResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="receiveTodoRequestByXml">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="receiveTodoRequestByXmlResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="deleteUserRequestInfoByJson">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="deleteUserRequestInfoByJsonResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processDoneRequestByMap">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="tns:anyType2anyTypeMap" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processDoneRequestByMapResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="tns:anyType2anyTypeMap" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="deleteRequestInfoByJson">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="deleteRequestInfoByJsonResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processOverRequestByJson">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="processOverRequestByJsonResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="receiveTodoRequestByMap">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="tns:anyType2anyTypeMap" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="receiveTodoRequestByMapResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="tns:anyType2anyTypeMap" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="receiveRequestInfoByMapResponse">
+    <wsdl:part name="parameters" element="tns:receiveRequestInfoByMapResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteRequestInfoByMapRequest">
+    <wsdl:part name="parameters" element="tns:deleteRequestInfoByMap" />
+  </wsdl:message>
+  <wsdl:message name="deleteUserRequestInfoByXMLRequest">
+    <wsdl:part name="parameters" element="tns:deleteUserRequestInfoByXML" />
+  </wsdl:message>
+  <wsdl:message name="deleteRequestInfoByMapResponse">
+    <wsdl:part name="parameters" element="tns:deleteRequestInfoByMapResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteUserRequestInfoByMapRequest">
+    <wsdl:part name="parameters" element="tns:deleteUserRequestInfoByMap" />
+  </wsdl:message>
+  <wsdl:message name="processOverRequestByMapRequest">
+    <wsdl:part name="parameters" element="tns:processOverRequestByMap" />
+  </wsdl:message>
+  <wsdl:message name="receiveRequestInfoByJsonResponse">
+    <wsdl:part name="parameters" element="tns:receiveRequestInfoByJsonResponse" />
+  </wsdl:message>
+  <wsdl:message name="receiveTodoRequestByXmlRequest">
+    <wsdl:part name="parameters" element="tns:receiveTodoRequestByXml" />
+  </wsdl:message>
+  <wsdl:message name="processDoneRequestByMapRequest">
+    <wsdl:part name="parameters" element="tns:processDoneRequestByMap" />
+  </wsdl:message>
+  <wsdl:message name="receiveRequestInfoByXmlRequest">
+    <wsdl:part name="parameters" element="tns:receiveRequestInfoByXml" />
+  </wsdl:message>
+  <wsdl:message name="receiveRequestInfoByMapRequest">
+    <wsdl:part name="parameters" element="tns:receiveRequestInfoByMap" />
+  </wsdl:message>
+  <wsdl:message name="processDoneRequestByXmlResponse">
+    <wsdl:part name="parameters" element="tns:processDoneRequestByXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="processOverRequestByJsonRequest">
+    <wsdl:part name="parameters" element="tns:processOverRequestByJson" />
+  </wsdl:message>
+  <wsdl:message name="processDoneRequestByJsonRequest">
+    <wsdl:part name="parameters" element="tns:processDoneRequestByJson" />
+  </wsdl:message>
+  <wsdl:message name="processOverRequestByXmlRequest">
+    <wsdl:part name="parameters" element="tns:processOverRequestByXml" />
+  </wsdl:message>
+  <wsdl:message name="deleteRequestInfoByJsonResponse">
+    <wsdl:part name="parameters" element="tns:deleteRequestInfoByJsonResponse" />
+  </wsdl:message>
+  <wsdl:message name="processDoneRequestByXmlRequest">
+    <wsdl:part name="parameters" element="tns:processDoneRequestByXml" />
+  </wsdl:message>
+  <wsdl:message name="processDoneRequestByJsonResponse">
+    <wsdl:part name="parameters" element="tns:processDoneRequestByJsonResponse" />
+  </wsdl:message>
+  <wsdl:message name="receiveRequestInfoByXmlResponse">
+    <wsdl:part name="parameters" element="tns:receiveRequestInfoByXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="processDoneRequestByMapResponse">
+    <wsdl:part name="parameters" element="tns:processDoneRequestByMapResponse" />
+  </wsdl:message>
+  <wsdl:message name="receiveTodoRequestByJsonResponse">
+    <wsdl:part name="parameters" element="tns:receiveTodoRequestByJsonResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteUserRequestInfoByXMLResponse">
+    <wsdl:part name="parameters" element="tns:deleteUserRequestInfoByXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteUserRequestInfoByJsonResponse">
+    <wsdl:part name="parameters" element="tns:deleteUserRequestInfoByJsonResponse" />
+  </wsdl:message>
+  <wsdl:message name="receiveTodoRequestByXmlResponse">
+    <wsdl:part name="parameters" element="tns:receiveTodoRequestByXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="receiveRequestInfoByJsonRequest">
+    <wsdl:part name="parameters" element="tns:receiveRequestInfoByJson" />
+  </wsdl:message>
+  <wsdl:message name="deleteRequestInfoByJsonRequest">
+    <wsdl:part name="parameters" element="tns:deleteRequestInfoByJson" />
+  </wsdl:message>
+  <wsdl:message name="processOverRequestByMapResponse">
+    <wsdl:part name="parameters" element="tns:processOverRequestByMapResponse" />
+  </wsdl:message>
+  <wsdl:message name="receiveTodoRequestByMapRequest">
+    <wsdl:part name="parameters" element="tns:receiveTodoRequestByMap" />
+  </wsdl:message>
+  <wsdl:message name="receiveTodoRequestByJsonRequest">
+    <wsdl:part name="parameters" element="tns:receiveTodoRequestByJson" />
+  </wsdl:message>
+  <wsdl:message name="processOverRequestByJsonResponse">
+    <wsdl:part name="parameters" element="tns:processOverRequestByJsonResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteRequestInfoByXMLResponse">
+    <wsdl:part name="parameters" element="tns:deleteRequestInfoByXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="processOverRequestByXmlResponse">
+    <wsdl:part name="parameters" element="tns:processOverRequestByXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteRequestInfoByXMLRequest">
+    <wsdl:part name="parameters" element="tns:deleteRequestInfoByXML" />
+  </wsdl:message>
+  <wsdl:message name="receiveTodoRequestByMapResponse">
+    <wsdl:part name="parameters" element="tns:receiveTodoRequestByMapResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteUserRequestInfoByJsonRequest">
+    <wsdl:part name="parameters" element="tns:deleteUserRequestInfoByJson" />
+  </wsdl:message>
+  <wsdl:message name="deleteUserRequestInfoByMapResponse">
+    <wsdl:part name="parameters" element="tns:deleteUserRequestInfoByMapResponse" />
+  </wsdl:message>
+  <wsdl:portType name="OfsTodoDataWebServicePortType">
+    <wsdl:operation name="receiveRequestInfoByMap">
+      <wsdl:input name="receiveRequestInfoByMapRequest" message="tns:receiveRequestInfoByMapRequest" />
+      <wsdl:output name="receiveRequestInfoByMapResponse" message="tns:receiveRequestInfoByMapResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="processOverRequestByMap">
+      <wsdl:input name="processOverRequestByMapRequest" message="tns:processOverRequestByMapRequest" />
+      <wsdl:output name="processOverRequestByMapResponse" message="tns:processOverRequestByMapResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="receiveRequestInfoByXml">
+      <wsdl:input name="receiveRequestInfoByXmlRequest" message="tns:receiveRequestInfoByXmlRequest" />
+      <wsdl:output name="receiveRequestInfoByXmlResponse" message="tns:receiveRequestInfoByXmlResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="processDoneRequestByJson">
+      <wsdl:input name="processDoneRequestByJsonRequest" message="tns:processDoneRequestByJsonRequest" />
+      <wsdl:output name="processDoneRequestByJsonResponse" message="tns:processDoneRequestByJsonResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteUserRequestInfoByMap">
+      <wsdl:input name="deleteUserRequestInfoByMapRequest" message="tns:deleteUserRequestInfoByMapRequest" />
+      <wsdl:output name="deleteUserRequestInfoByMapResponse" message="tns:deleteUserRequestInfoByMapResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteUserRequestInfoByXML">
+      <wsdl:input name="deleteUserRequestInfoByXMLRequest" message="tns:deleteUserRequestInfoByXMLRequest" />
+      <wsdl:output name="deleteUserRequestInfoByXMLResponse" message="tns:deleteUserRequestInfoByXMLResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="processDoneRequestByXml">
+      <wsdl:input name="processDoneRequestByXmlRequest" message="tns:processDoneRequestByXmlRequest" />
+      <wsdl:output name="processDoneRequestByXmlResponse" message="tns:processDoneRequestByXmlResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteRequestInfoByMap">
+      <wsdl:input name="deleteRequestInfoByMapRequest" message="tns:deleteRequestInfoByMapRequest" />
+      <wsdl:output name="deleteRequestInfoByMapResponse" message="tns:deleteRequestInfoByMapResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="processOverRequestByXml">
+      <wsdl:input name="processOverRequestByXmlRequest" message="tns:processOverRequestByXmlRequest" />
+      <wsdl:output name="processOverRequestByXmlResponse" message="tns:processOverRequestByXmlResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="receiveRequestInfoByJson">
+      <wsdl:input name="receiveRequestInfoByJsonRequest" message="tns:receiveRequestInfoByJsonRequest" />
+      <wsdl:output name="receiveRequestInfoByJsonResponse" message="tns:receiveRequestInfoByJsonResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="receiveTodoRequestByJson">
+      <wsdl:input name="receiveTodoRequestByJsonRequest" message="tns:receiveTodoRequestByJsonRequest" />
+      <wsdl:output name="receiveTodoRequestByJsonResponse" message="tns:receiveTodoRequestByJsonResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteRequestInfoByXML">
+      <wsdl:input name="deleteRequestInfoByXMLRequest" message="tns:deleteRequestInfoByXMLRequest" />
+      <wsdl:output name="deleteRequestInfoByXMLResponse" message="tns:deleteRequestInfoByXMLResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="receiveTodoRequestByXml">
+      <wsdl:input name="receiveTodoRequestByXmlRequest" message="tns:receiveTodoRequestByXmlRequest" />
+      <wsdl:output name="receiveTodoRequestByXmlResponse" message="tns:receiveTodoRequestByXmlResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteUserRequestInfoByJson">
+      <wsdl:input name="deleteUserRequestInfoByJsonRequest" message="tns:deleteUserRequestInfoByJsonRequest" />
+      <wsdl:output name="deleteUserRequestInfoByJsonResponse" message="tns:deleteUserRequestInfoByJsonResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="processDoneRequestByMap">
+      <wsdl:input name="processDoneRequestByMapRequest" message="tns:processDoneRequestByMapRequest" />
+      <wsdl:output name="processDoneRequestByMapResponse" message="tns:processDoneRequestByMapResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteRequestInfoByJson">
+      <wsdl:input name="deleteRequestInfoByJsonRequest" message="tns:deleteRequestInfoByJsonRequest" />
+      <wsdl:output name="deleteRequestInfoByJsonResponse" message="tns:deleteRequestInfoByJsonResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="processOverRequestByJson">
+      <wsdl:input name="processOverRequestByJsonRequest" message="tns:processOverRequestByJsonRequest" />
+      <wsdl:output name="processOverRequestByJsonResponse" message="tns:processOverRequestByJsonResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="receiveTodoRequestByMap">
+      <wsdl:input name="receiveTodoRequestByMapRequest" message="tns:receiveTodoRequestByMapRequest" />
+      <wsdl:output name="receiveTodoRequestByMapResponse" message="tns:receiveTodoRequestByMapResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OfsTodoDataWebServiceHttpBinding" type="tns:OfsTodoDataWebServicePortType">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="receiveRequestInfoByMap">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="receiveRequestInfoByMapRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="receiveRequestInfoByMapResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processOverRequestByMap">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processOverRequestByMapRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processOverRequestByMapResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="receiveRequestInfoByXml">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="receiveRequestInfoByXmlRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="receiveRequestInfoByXmlResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processDoneRequestByJson">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processDoneRequestByJsonRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processDoneRequestByJsonResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteUserRequestInfoByMap">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="deleteUserRequestInfoByMapRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="deleteUserRequestInfoByMapResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteUserRequestInfoByXML">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="deleteUserRequestInfoByXMLRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="deleteUserRequestInfoByXMLResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processDoneRequestByXml">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processDoneRequestByXmlRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processDoneRequestByXmlResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteRequestInfoByMap">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="deleteRequestInfoByMapRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="deleteRequestInfoByMapResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processOverRequestByXml">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processOverRequestByXmlRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processOverRequestByXmlResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="receiveRequestInfoByJson">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="receiveRequestInfoByJsonRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="receiveRequestInfoByJsonResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="receiveTodoRequestByJson">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="receiveTodoRequestByJsonRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="receiveTodoRequestByJsonResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteRequestInfoByXML">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="deleteRequestInfoByXMLRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="deleteRequestInfoByXMLResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="receiveTodoRequestByXml">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="receiveTodoRequestByXmlRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="receiveTodoRequestByXmlResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteUserRequestInfoByJson">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="deleteUserRequestInfoByJsonRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="deleteUserRequestInfoByJsonResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processDoneRequestByMap">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processDoneRequestByMapRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processDoneRequestByMapResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteRequestInfoByJson">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="deleteRequestInfoByJsonRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="deleteRequestInfoByJsonResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processOverRequestByJson">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="processOverRequestByJsonRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="processOverRequestByJsonResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="receiveTodoRequestByMap">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="receiveTodoRequestByMapRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="receiveTodoRequestByMapResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OfsTodoDataWebService">
+    <wsdl:port name="OfsTodoDataWebServiceHttpPort" binding="tns:OfsTodoDataWebServiceHttpBinding">
+      <wsdlsoap:address location="http://192.168.50.118//services/OfsTodoDataWebService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

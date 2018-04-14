@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{43E2CAC9-E9BD-4344-82F6-644796E5B8A0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Plugin.OAMessage</RootNamespace>
+    <AssemblyName>Plugin.OAMessage</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.PolicyInjection">
+      <HintPath>..\..\01.Framework\00.MSEntLib\Microsoft.Practices.EnterpriseLibrary.PolicyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="OAMessageAdapter.cs" />
+    <Compile Include="OAMessageBuilder.cs" />
+    <Compile Include="OAMessageEntity.cs" />
+    <Compile Include="OAMessageOperator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="OAMessageException.cs" />
+    <Compile Include="OAMessageEntityFilter.cs" />
+    <Compile Include="Web References\OAMessage.WebServices\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\OAMessage.WebServices\anyType2anyTypeMapEntry.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\OAMessage.WebServices\OfsTodoDataWebService.wsdl" />
+    <None Include="Web References\OAMessage.WebServices\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://192.168.50.118//services/OfsTodoDataWebService%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\OAMessage.WebServices\</RelPath>
+      <UpdateFromURL>http://192.168.50.118//services/OfsTodoDataWebService%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Plugin_OAMessage_OAMessage_WebServices_OfsTodoDataWebService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\1Framework\Lib.Core\LJTH.Lib.Core.csproj">
+      <Project>{65839f36-193a-41d1-9e79-38bc84984de6}</Project>
+      <Name>LJTH.Lib.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\1Framework\Lib.Data\LJTH.Lib.Data.csproj">
+      <Project>{442c318f-9d99-4a3f-972e-33e8a8c8be51}</Project>
+      <Name>LJTH.Lib.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\1Framework\Lib.Web\LJTH.Lib.Web.csproj">
+      <Project>{9e21a44d-17eb-44f4-a936-27b41ca565fe}</Project>
+      <Name>LJTH.Lib.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\2Lib\Common\9Common.csproj">
+      <Project>{1d81e774-65e8-43ff-8f8e-486d28a56275}</Project>
+      <Name>9Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\2Lib\DAL\1DAL.csproj">
+      <Project>{08a829ae-8aa2-4725-90a7-338bc68bf6b5}</Project>
+      <Name>1DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\2Lib\Model\3Model.csproj">
+      <Project>{efa26ef0-4ba9-4563-8d63-554e884f56b7}</Project>
+      <Name>3Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\04.SSO\04.SSO.csproj">
+      <Project>{3bc18b77-1027-45b1-bae9-396b6e14de38}</Project>
+      <Name>04.SSO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
