@@ -1,6 +1,6 @@
 ﻿$(function () {
-    var businessId = utils.getQueryString("businessID");
-    Task.Init(businessId);
+    //var businessId = utils.getQueryString("businessID");
+    //Task.Init(businessId);
 });
 var Task = {
     Init: function (businessId) {
