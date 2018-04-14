@@ -32,7 +32,7 @@ function setArrow_nLeft(sender) {
             break;
         case "dataUpload":
             $(".arrow_n").css("left", "250px");
-            $("#PromptMessage").html("请使用系统提供的填报模板导入本月数据，如已导入，再次导入将覆盖当前数据。");
+            $("#PromptMessage").html("请使用系统提供的填报模板导入数据，如已导入，再次导入将覆盖当前数据。");
             $("#PromptMessage").removeClass("Tishi");
             break;
         //case "missTargetReport":
@@ -85,14 +85,14 @@ $(function setTitle() {
         }
 
     })
-    setStlye('downLoadTemplateSpan,dataUploadSpan');
+    //setStlye('downLoadTemplateSpan,dataUploadSpan');
 });
 
 
 function operateNav(sender) {
     switch (sender) {
         case "downLoadTemplate":
-            window.location.href = "TargetPlanDetailReported.html";
+            window.location.href = "TargetPlanDetailReported-1.html";
             break;
         case "dataUpload":
             window.location.href = "TargetPlanDetailReported-2.htm";
@@ -102,6 +102,9 @@ function operateNav(sender) {
             break;
         case "monthReportSubmit":
             window.location.href = "TargetPlanDetailReported-4.htm";
+            break;
+        case "inputName":
+            window.location.href = "TargetPlanDetailReported.html";
             break;
 
     }
@@ -174,42 +177,21 @@ function LoadTargetPlanDetailData(sender) {
 
 var currentTargetPlanDetail;
 function TargetPlanDetailLiaddCss(sender) {
-    var TemplData = {};
-    $.each(TargetPlanDeailData, function (i, item) {
-        if (item.Name == $(sender).text()) {
-            TemplData = item;
-            return;
-        }
-    });
-    $("#Ul4 .active_sub3").each(function () {
-        $(this).removeClass("active_sub3");
-    });
-    $(sender).addClass("active_sub3");
-    currentTargetPlanDetail = sender;
-
-
-
-
-    //$("#rows").empty();
-    //$("#TargetPlanDetailHead").empty();
-
-    //if (TemplData.HtmlTemplate != undefined) {
-    //    strTemplate = TemplData.HtmlTemplate.split(',');
-    //}
-    //if (strTemplate[0] != "" && strTemplate[0] != undefined) {
-    //    loadTmplTargetPlanDetail('#' + strTemplate[0]).tmpl().appendTo('#TargetPlanDetailHead'); //加载列头
-    //}
-    //else if ($(sender).text() == "汇总") {
-    //    AddSumHead(TargetPlanDeailData);
-    //}
-    //else {
-    //    loadTmplTargetPlanDetail('#TargetPlanDetailReportTableHeadTemplate').tmpl().appendTo('#TargetPlanDetailHead'); //加载列头
-    //}
-
-    //LoadTargetPlanDetailData(TemplData)
-    var obj = $("#TargetPlanDetailHead");
-    var tab = $("#rows");
-    FloatHeader(obj, tab);
+    switch (sender) {
+        case 1:
+            window.location.href = "TargetPlanDetailReported-2.htm";
+            break;
+        case 2:
+            window.location.href = "TargetPlanDetailReported-2-1.htm";
+            break;
+        case 3:
+            window.location.href = "TargetPlanDetailReported-2-2.htm";
+            break;
+        case 4:
+            window.location.href = "TargetPlanDetailReported-2-3.htm";
+            break;
+        default:
+    }
 }
 
 function AddSumHead(result) {

@@ -7,7 +7,7 @@ using LJTH.Lib.Data.AppBase;
 
 namespace LJTH.BusinessIndicators.DAL
 {
-    class AppBaseCompositionAdapterT<T> : BaseCompositionAdapterT<T>
+    public class AppBaseCompositionAdapterT<T> : BaseCompositionAdapterT<T>
          where T : IBaseComposedModel, new()
     {
         protected override string ConnectionName
@@ -16,7 +16,7 @@ namespace LJTH.BusinessIndicators.DAL
         }
     }
 
-    class AppCommonAdapter : CommonAdapter
+    public class AppCommonAdapter : CommonAdapter
     {
         protected override string ConnectionName
         {
@@ -24,7 +24,7 @@ namespace LJTH.BusinessIndicators.DAL
         }
     }
 
-    class AppBaseAdapterT<T> : BaseAdapterT<T>
+    public class AppBaseAdapterT<T> : BaseAdapterT<T>
      where T : BaseModel, new()
     {
         protected override string ConnectionName
