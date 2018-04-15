@@ -61,9 +61,17 @@ function RegisterEvent()
     });
 }
 //保存数据
-function SaveRole()
+function SaveRole(type,data)
 {
-    $.MsgBox.Confirm("添加角色", "", "add", function () {
+    var title = "添加角色";
+    var msg = "添加成功";
+    if (type == "edit") {
+        title = "编辑角色";
+        msg = "编辑成功"
+    }
+    console.log(data)
+    $.MsgBox.Confirm(title, "", "add", function () {
+        console.log(data);
         var CnName = $("#CnName").val();
         var Description = $("#Description").val();
         $(".CnNameAction").css("display", "none");
@@ -83,7 +91,7 @@ function SaveRole()
             successReturn: function (resultData) {
                 if (resultData.Success == 1) {
                     $("#mb_box,#mb_con").remove();
-                    $.MsgBox.Alert("提示", "添加成功");
+                    $.MsgBox.Alert("提示", msg);
                     LoadPage();
                     console.log("添加成功" + resultData.Message);
                 }
@@ -155,9 +163,14 @@ function EditRole(el)
     WebUtil.ajax({
         async: false,
         url: "/RoleManagerControll/GetRoleDataByID",
-        args: { ID: "7AAEC46E-E885-4C40-97DF-5DAF5816683E" },
+        args: { ID: id },
         successReturn: function (resultData) {
-            console.log(resultData);
+            if (resultData.Success == 1) {
+                SaveRole("edit", resultData.Data);
+            } else {
+                $.MsgBox.Alert("提示", "获取数据失败");
+                console.log("删除失败" + resultData.Message);
+            }
         }
     });
 }
