@@ -169,6 +169,10 @@ namespace Lib.Web.MVC.Controller
             }
         }
 
-
+        public string UserName
+        {
+            get { return HttpContext.Current.User.Identity.Name; }
+        }
+        
     }
 }

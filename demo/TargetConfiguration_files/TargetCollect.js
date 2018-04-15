@@ -431,41 +431,41 @@ function ActTarget(id) {
         content: $("#divDetail").html(),
         lock: true,
         id: 'divDetail',
-        title: '<span>激活原因</span>'
+        title: '<span>操作原因</span>'
     });
 }
 
 function AddRemark() {
 
     var Remarks = $("#Remark").val();
-    WebUtil.ajax({
-        async: true,
-        url: "/TargetController/ChangeTargetStatus",
-        args: { TargetPlanID: TarplanID, Description: Remarks },
-        successReturn: function (result) {
-            GetSumList();
+    //WebUtil.ajax({
+    //    async: true,
+    //    url: "/TargetController/ChangeTargetStatus",
+    //    args: { TargetPlanID: TarplanID, Description: Remarks },
+    //    successReturn: function (result) {
+    //        GetSumList();
             art.dialog({ id: 'divDetail' }).close();
             alert("激活成功");
-        }
-    });
+    //    }
+    //});
 }
 
 function CheckAction(ID) {
     $("#historyaction").empty();
-    WebUtil.ajax({
-        async: true,
-        url: "/TargetController/GetActionByTargetplanID",
-        args: { TargetplanID: ID },
-        successReturn: function (result) {
-            loadTmplhistory('#TargetAction').tmpl(result).appendTo('#historyaction');
+    //WebUtil.ajax({
+    //    async: true,
+    //    url: "/TargetController/GetActionByTargetplanID",
+    //    args: { TargetplanID: ID },
+    //    successReturn: function (result) {
+    //        loadTmplhistory('#TargetAction').tmpl(result).appendTo('#historyaction');
             art.dialog({
                 content: $("#div1").html(),
                 lock: true,
                 id: 'div1',
                 title: '<span>操作日志</span>'
             });
-        }
-    });
+    //    }
+    //});
 
 
 
