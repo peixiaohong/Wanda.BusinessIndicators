@@ -278,3 +278,11 @@
 .tab_005 td a:hover, .tab_005 td a:visited, .tab_005 td a:link {
     color: #337ab7;
 }
+
+.tab_005 caption {
+    color: #444;
+    background-color: #f6f6f6;
+    border: 1px solid #eee;
+    font-weight: 800;
+    line-height: 25px;
+}
