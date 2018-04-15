@@ -169,9 +169,16 @@ namespace Lib.Web.MVC.Controller
             }
         }
 
-        public string UserName
+        public string CurrentUserName
         {
-            get { return HttpContext.Current.User.Identity.Name; }
+            get {
+                if (ConfigurationManager.AppSettings["EnableLogin"] == "false")
+                {
+                    return ConfigurationManager.AppSettings["virtualUser"];
+                }
+                else
+                    return HttpContext.Current.User.Identity.Name;
+            }
         }
         
     }
