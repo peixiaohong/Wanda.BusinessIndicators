@@ -52,7 +52,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         {
                             throw new ApplicationException("未在配置中找到附件文件存放路径， 或指定路径不存在！");
                         }
-                    }
+                    } 
                     else
                     {
                         throw new ApplicationException("未在配置中找到附件文件存放路径， 或指定路径不存在！");
