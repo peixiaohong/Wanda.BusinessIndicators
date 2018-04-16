@@ -57,7 +57,7 @@ function UsersLoadPage() {
     var roleData = {
         "keyWord": keyword,
         "PageIndex": 1,
-        "PageSize": 200
+        "PageSize": 10
     }
     WebUtil.ajax({
         async: false,
@@ -96,7 +96,7 @@ function RegisterEvent() {
     })
     // 添加用户确定
     $(".user_add_sumbit").off('click').on('click', function () {
-        
+        SaveRole();
     })
     // 添加用户取消
     $(".user_add_cancel").off('click').on('click', function () {
@@ -105,58 +105,41 @@ function RegisterEvent() {
 }
 
 //保存数据
-function SaveRole(type, data) {
-    var title = "添加角色";
-    var msg = "添加成功";
-    var datamsg = ""
-    if (type == "edit") {
-        title = "编辑角色";
-        msg = "编辑成功";
-        datamsg = JSON.stringify(data);
+function SaveRole() {
+    var el = $(".userChecked");
+    var LoginNames = [];
+    for (var i = 0; i < el.length; i++) {
+        var name = el.eq(i).attr("name");
+        if (el.eq(i).attr("checked") == "checked") {
+            LoginNames.push(name);
+        }
     }
-    $.MsgBox.Confirm(title, datamsg, type, function () {
-        var CnName = $("#CnName").val();
-        var Description = $("#Description").val();
-        $(".CnNameAction").css("display", "none");
-        if (!CnName) {
-            $(".CnNameAction").css("display", "block");
-            return;
-        }
-        Load();
-        var S_Role = {
-            "CnName": CnName,
-            "Description": Description
-        };
-        if (type == "edit") {
-            S_Role = {
-                "CnName": CnName,
-                "Description": Description,
-                "CreateTime": data.CreateTime,
-                "CreatorName": data.CreatorName,
-                "EnName": data.EnName,
-                "ID": data.ID,
-                "IsDeleted": data.IsDeleted
-            };
-        }
-        WebUtil.ajax({
-            async: false,
-            url: "/RoleManagerControll/SaveRole",
-            args: { RoleData: JSON.stringify(S_Role) },
-            successReturn: function (resultData) {
-                if (resultData.Success == 1) {
-                    $("#mb_box,#mb_con").remove();
-                    $.MsgBox.Alert("提示", msg);
-                    LoadPage();
-                    console.log("添加成功" + resultData.Message);
-                }
-                else {
-                    $("#mb_box,#mb_con").remove();
-                    $.MsgBox.Alert("提示", resultData.Message);
-                    console.log("添加失败" + resultData.Message);
-                }
-                Fake();
+    if (!LoginNames.length) {
+        $.MsgBox.Alert("提示", "请选择用户");
+        return false;
+    }
+    var S_Role = {
+        "LoginNames": LoginNames,
+        "RoleID": "6ffdbe6d-83c4-43e4-9c10-565c7d88a43c"
+    }
+    WebUtil.ajax({
+        async: false,
+        url: "/RoleManagerControll/SaveUser_Role",
+        args: { LoginNames: LoginNames, RoleID:"6ffdbe6d-83c4-43e4-9c10-565c7d88a43c" },
+        successReturn: function (resultData) {
+            if (resultData.Success == 1) {
+                $("#mb_box,#mb_con").remove();
+                $.MsgBox.Alert("提示", "添加成功");
+                LoadPage();
+                console.log("添加成功" + resultData.Message);
             }
-        });
+            else {
+                $("#mb_box,#mb_con").remove();
+                $.MsgBox.Alert("提示", "添加失败");
+                console.log("添加失败:" + resultData.Message);
+            }
+            Fake();
+        }
     });
 }
 
@@ -198,8 +181,8 @@ function DeleteRoleUserData(el) {
     $.MsgBox.Confirm("提示", "确认删除", "", function () {
         WebUtil.ajax({
             async: false,
-            url: "/RoleManagerControll/GetAllUser",
-            args: { data: JSON.stringify(roleData) },
+            url: "/RoleManagerControll/DeleteRole_User",
+            args: roleData,
             successReturn: function (resultData) {
                 if (resultData.Success == 1) {
                     $("#mb_box,#mb_con").remove();
@@ -216,20 +199,3 @@ function DeleteRoleUserData(el) {
     });
 }
 
-//编辑数据[获取数据]
-function EditRole(el) {
-    var id = $(el).attr("data-id");
-    WebUtil.ajax({
-        async: false,
-        url: "/RoleManagerControll/GetRoleDataByID",
-        args: { ID: id },
-        successReturn: function (resultData) {
-            if (resultData.Success == 1) {
-                SaveRole("edit", resultData.Data);
-            } else {
-                $.MsgBox.Alert("提示", "获取数据失败");
-                console.log("获取数据失败" + resultData.Message);
-            }
-        }
-    });
-}
