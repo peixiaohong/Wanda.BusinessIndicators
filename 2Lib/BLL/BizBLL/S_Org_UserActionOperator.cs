@@ -31,6 +31,15 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         #endregion
 
         #region methods
-        #endregion 
+        /// <summary>
+        /// 根据组织架构ID查询授权数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<S_Org_User> GetDataByOrgID(Guid id)
+        {
+            return _s_Org_UserAdapter.GetDataByOrgID(id);
+        }
+        #endregion
     }
 }

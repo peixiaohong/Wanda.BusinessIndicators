@@ -61,8 +61,9 @@ Create Table S_Organizational
 		ID			 UniqueIdentifier Primary Key Not Null --主键ID[板块是SystemID 项目是CompanyID
 	   ,CnName		 NVarchar(60)	  Not Null			   --名称
 	   ,Code		 NVarchar(60)	  Null				   --编码
-	   ,ParentID	 UniqueIdentifier Not Null			   --父级ID
+	   ,ParentID	 UniqueIdentifier Null			   --父级ID
 	   ,[Level]		 Int			  Not Null			   --等级 1板块 2大区 3区域 4项目
+	   ,IsLastNode	 Bit  default(0)  Not Null	
 	   ,IsDeleted	 Bit			  Null				   --是否删除
 	   ,CreateTime	 DateTime		  Not Null
 	   ,CreatorName	 NVarchar(100)	  Null

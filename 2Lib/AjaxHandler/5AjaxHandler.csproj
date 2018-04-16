@@ -71,6 +71,7 @@
     <Compile Include="HistoryReturnControll.cs" />
     <Compile Include="MonthRptConfigControll.cs" />
     <Compile Include="RoleManagerControll.cs" />
+    <Compile Include="S_OrganizationalManagerControll.cs" />
     <Compile Include="TargetController.cs" />
     <Compile Include="TargetPlanDetailController.cs" />
     <Compile Include="TargetSimpleReportController.cs" />

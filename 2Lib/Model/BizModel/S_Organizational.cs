@@ -33,7 +33,7 @@ namespace LJTH.BusinessIndicators.Model.BizModel
         public Guid ParentID { get; set; }
 
         /// <summary>
-        /// 等级 1板块 2大区 3区域 4项目
+        /// 等级  1隆基泰和 2板块 3大区 4区域 5项目
         /// </summary>
         [ORFieldMapping("Level")]
         public int Level { get; set; }
