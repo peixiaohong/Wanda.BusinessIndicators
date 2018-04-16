@@ -299,3 +299,51 @@
     cursor:pointer;
     
 }
+.role-list a {
+    text-decoration:none !important;
+}
+/*用户管理*/
+.user-model {
+    width: 100%;
+    height: 100%;
+    position:fixed;
+    left: 0 ;
+    top: 0;
+    background:rgba(0,0,0,0.6);
+    display: none;
+}
+.user-main {
+    width: 80%;
+    height: 490px;
+    background: #fff;
+    position:absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom:0;
+    margin: auto;
+}
+.user-content {
+    height: 307px;
+    overflow-y:auto;
+}
+.btnbox {
+    margin: 5px 0px;
+    text-align: center;
+}
+.btnbox input {
+    width: 70px;
+    height: 30px;
+    border-radius: 4px;
+    outline: 0px;
+    cursor: pointer;
+    border: 1px solid rgb(203, 92, 97); 
+}
+.btn_ok {
+    color: white;
+    background-color: rgb(210, 50, 45);
+}
+.btn_no {
+    color: rgb(203, 92, 97);
+    background-color: rgb(255, 255, 255);
+}
