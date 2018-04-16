@@ -53,11 +53,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\6Plugin\05.OAMessage\05.OAMessage.csproj">
-      <Project>{43e2cac9-e9bd-4344-82f6-644796e5b8a0}</Project>
-      <Name>05.OAMessage</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
