@@ -62,7 +62,7 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
                                          From tempData As A  
                                          Where A.[IsDeleted]=0 Order By [A].[Level]
                                          ", loginName);
-            return ExecuteQuery(sql);
+            return base.DataTableToListT(ExecuteReturnTable(sql));
         }
 
 

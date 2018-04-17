@@ -77,7 +77,7 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
             {
                 sql += string.Format(" And A.[CnName] Like '%{0}%'", cnName);
             }
-            return ExecuteQuery(sql);
+            return base.DataTableToListT(ExecuteReturnTable(sql));
         }
     }
 }
