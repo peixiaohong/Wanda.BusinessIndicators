@@ -58,6 +58,11 @@ function RegisterEvent()
     {
         QueryRoleData();
     });
+    // 菜单权限确定
+    $(".limits_sumbit").off("click").on("click", function () {
+        var id = $(this).attr("data-id");
+        SaveLimitData(id);
+    });
 }
 //保存数据
 function SaveRole(type,data)
@@ -181,4 +186,85 @@ function EditRole(el)
             }
         }
     });
+}
+// 权限设置
+function SetLimits(el) {
+    $(".user-model").css("display", "block");
+    Load();
+    var id = $(el).attr("data-id");
+    $(".limits_sumbit").attr("data-id", id);
+    WebUtil.ajax({
+        async: false,
+        url: "/RoleManagerControll/GetMenuDatas",
+        args: { ID: id },
+        successReturn: function (resultData) {
+            if (resultData.Success == 1) {
+                Ztree(resultData);
+            } else {
+                $.MsgBox.Alert("提示", "获取数据失败");
+                console.log("获取数据失败" + resultData.Message);
+            }
+        }
+    });
+}
+function Ztree(data) {
+    console.log(data);
+    var zNodes = [{ id: "00000000-0000-0000-0000-000000000000", pId: "00000000-0000-0000-0000-000000000000", name: "菜单管理", open: true }];
+    data.Data.forEach(function (one) {
+        var zNodesObj = { id: "", pId: "", name: "", checked: "" };
+        zNodesObj.id = one.ID;
+        zNodesObj.pId = one.ParentMenuID;
+        zNodesObj.name = one.CnName;
+        zNodesObj.checked = one.IsChecked;
+        zNodes.push(zNodesObj);
+    });
+    var setting = {
+        check: {
+            enable: true
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        }
+    };
+    $.fn.zTree.init($("#tree"), setting, zNodes);
+    var zTree = $.fn.zTree.getZTreeObj("tree");
+    zTree.setting.check.chkboxType = { "Y": "ps", "N": "ps" };
+    Fake();
+}
+function SaveLimitData(id) {
+    var treeObj = $.fn.zTree.getZTreeObj("tree");
+    var nodes = treeObj.getCheckedNodes(true);
+    if (!nodes.length) {
+        $.MsgBox.Alert("提示", "请选择权限");
+        return false;
+    }
+    WebUtil.ajax({
+        async: false,
+        url: "/RoleManagerControll/SaveRolePermissions",
+        args: {
+            RoleId: id,
+            data: FilterChecked(nodes, id)
+        },
+        successReturn: function (resultData) {
+            if (resultData.Success == 1) {
+                console.log(resultData);
+                $.MsgBox.Alert("提示", "保存成功");
+            } else {
+                $.MsgBox.Alert("提示", "保存失败");
+                console.log("保存失败;" + resultData.Message);
+            }
+        }
+    });
+}
+function FilterChecked(data,RoleId) {
+    var match = [];
+    data.forEach(function (one) {
+        if (one.check_Child_State == -1 && one.checked) {
+            var obj = { "RoleId": RoleId,"MenuID":one.id}
+            match.push(obj);
+        }
+    })
+    return JSON.stringify(match);
 }
