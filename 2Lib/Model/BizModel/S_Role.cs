@@ -36,6 +36,6 @@ namespace LJTH.BusinessIndicators.Model.BizModel
         /// 是否选中
         /// </summary>
         [NoMapping]
-        public bool IsChecked { get; set; }
+        public int IsChecked { get; set; }
     }
 }
