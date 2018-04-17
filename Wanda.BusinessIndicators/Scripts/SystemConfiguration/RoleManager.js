@@ -63,6 +63,9 @@ function RegisterEvent()
         var id = $(this).attr("data-id");
         SaveLimitData(id);
     });
+    $(".limits_cancel").off("click").on("click", function () {
+        $(".user-model").css("display", "none");
+    });
 }
 //保存数据
 function SaveRole(type,data)
@@ -250,6 +253,7 @@ function SaveLimitData(id) {
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
                 console.log(resultData);
+                $(".user-model").css("display", "none");
                 $.MsgBox.Alert("提示", "保存成功");
             } else {
                 $.MsgBox.Alert("提示", "保存失败");
