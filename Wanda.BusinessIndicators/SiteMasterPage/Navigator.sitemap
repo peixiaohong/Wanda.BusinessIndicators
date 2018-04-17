@@ -7,8 +7,8 @@
 
 
     <siteMapNode id="2" url="/BusinessReport/TargetReported.aspx" title="月度经营报告上报"  description="月度经营报告上报(经营)" resourceKey="UpLoadMonthReport"/>
-    <siteMapNode id="21" url="/BusinessReport/TargetProReported.aspx" title="月度经营报告上报"  description="月度经营报告上报(项目)" resourceKey="UpLoadProMonthReport"/>
-    <siteMapNode id="22" url="/BusinessReport/TargetGroupReported.aspx" title="月度经营报告上报"  description="月度经营报告上报(集团)" resourceKey="UpLoadGroupMonthReport"/>
+    <!--<siteMapNode id="21" url="/BusinessReport/TargetProReported.aspx" title="月度经营报告上报"  description="月度经营报告上报(项目)" resourceKey="UpLoadProMonthReport"/>-->
+    <!--<siteMapNode id="22" url="/BusinessReport/TargetGroupReported.aspx" title="月度经营报告上报"  description="月度经营报告上报(集团)" resourceKey="UpLoadGroupMonthReport"/>-->
     <siteMapNode id="23" url="/BusinessReport/TargetDirectlyReported.aspx" title="月度经营报告上报"  description="月度经营报告上报(直管)" resourceKey="UpLoadDirectlyMonthReport"/>
  
     <siteMapNode id="3" url="/SystemConfiguration/TargetCollectDisplay.aspx" title="分解指标查询"  description="分解指标查询" resourceKey="TargetSelect"/>
@@ -17,10 +17,10 @@
 
     <siteMapNode id="113" url="#" title="系统报表"  description="系统报表" resourceKey="SystemReportForm">
       <siteMapNode id="1314" url="/BusinessReport/ComprehensiveReportForms.aspx" title="综合报表" description="综合报表" resourceKey="ReportApprovalTime"/>
-      <siteMapNode id="1314" url="/BusinessReport/ChildrenCompanyRpt.aspx" title="万达宝贝王报表" description="万达宝贝王报表" resourceKey="ReportApprovalTime"/>
+      <!--<siteMapNode id="1314" url="/BusinessReport/ChildrenCompanyRpt.aspx" title="万达宝贝王报表" description="万达宝贝王报表" resourceKey="ReportApprovalTime"/>
       <siteMapNode id="1314" url="/BusinessReport/FilmCompanyRpt.aspx" title="万达电影报表" description="万达电影报表" resourceKey="ReportApprovalTime"/>
       <siteMapNode id="1314" url="/BusinessReport/WandaBusinessRpt.aspx" title="万达商业整体报表" description="万达商业整体报表" resourceKey="ReportApprovalTime"/>
-      <siteMapNode id="1314" url="/BusinessReport/WandaCultureRpt.aspx" title="万达文化集团整体报表 " description="万达文化集团整体报表" resourceKey="ReportApprovalTime"/>
+      <siteMapNode id="1314" url="/BusinessReport/WandaCultureRpt.aspx" title="万达文化集团整体报表 " description="万达文化集团整体报表" resourceKey="ReportApprovalTime"/>-->
       
       <siteMapNode id="1312" url="/SystemConfiguration/ContrastMisstargetDetail.aspx" title="未完成家数统计表"  description="未完成家数统计表" resourceKey="ContrastMisstargetDetail"/>
       <siteMapNode id="1313" url="/SystemConfiguration/ContrastCompleteDetail.aspx" title="年度完成情况对比表"  description="年度完成情况对比表" resourceKey="ContrastCompleteDetail"/>

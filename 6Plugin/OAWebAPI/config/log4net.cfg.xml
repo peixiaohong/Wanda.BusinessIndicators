@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <configSections>
+    <section   name="log4net"   type="System.Configuration.IgnoreSectionHandler"   />
+  </configSections>
+  <log4net>
+    <appender name="RollingLogFileAppender" type="log4net.Appender.RollingFileAppender">
+      <file value="log\ALL\" />
+      <appendToFile value="true"/>
+      <maxSizeRollBackups value="1000"/>
+      <param name="StaticLogFileName" value="false" />
+      <param name="RollingStyle" value="Date" />
+      <param name="DatePattern" value="&quot;Logs_&quot;yyyyMMdd&quot;.txt&quot;" />
+      <layout type="log4net.Layout.PatternLayout">
+        <param name="ConversionPattern" value="%d [%t] %-5p %c [%x]  - %m%n"     />
+      </layout>
+    </appender>
+    <appender name="ErrorFileAppender" type="log4net.Appender.RollingFileAppender">
+      <file value="log\" />
+      <appendToFile value="true"/>
+      <maxSizeRollBackups value="1000"/>
+      <param name="StaticLogFileName" value="false" />
+      <param name="RollingStyle" value="Date" />
+      <param name="DatePattern" value="&quot;Error_&quot;yyyyMMdd&quot;.txt&quot;" />
+      <layout type="log4net.Layout.PatternLayout">
+        <param name="ConversionPattern" value="%d [%t] %-5p %c [%x]  - %m%n"     />
+      </layout>
+      <filter type="log4net.Filter.LevelRangeFilter">
+        <levelMin value="WARN" />
+        <levelMax value="FATAL" />
+      </filter>
+    </appender>
+    <root>
+      <level value="WARN"/>
+      <appender-ref ref="RollingLogFileAppender"/>
+      <appender-ref ref="ErrorFileAppender"></appender-ref>
+    </root>
+  </log4net>
+</configuration>

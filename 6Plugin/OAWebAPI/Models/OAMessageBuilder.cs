@@ -1,11 +1,8 @@
-﻿using Plugin.SSO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
+using OAWebAPI.OAMessage.WebServices;
 
 namespace Plugin.OAMessage
 {
@@ -23,9 +20,9 @@ namespace Plugin.OAMessage
         /// <param name="appurl"></param>
         /// <param name="creator"></param>
         /// <param name="receiver"></param>
-        public static void ReceiveTodo(string flowid, string flowtitle, string workflowname, string nodename, string pcurl, string appurl, string creator, string receiver)
+        public static string ReceiveTodo(string syscode,string flowid, string flowtitle, string workflowname, string nodename, string pcurl, string appurl, string creator, string receiver)
         {
-            CommonReceive(flowid, flowtitle, workflowname, nodename, pcurl, appurl, creator, receiver, 0, 0, DateTime.Now);
+            return CommonReceive(syscode,flowid, flowtitle, workflowname, nodename, pcurl, appurl, creator, receiver, 0, 0, DateTime.Now);
         }
         /// <summary>
         /// 接收已办
@@ -36,15 +33,19 @@ namespace Plugin.OAMessage
         /// <param name="receiver"></param>
         /// <param name="pcurl"></param>
         /// <param name="appurl"></param>
-        public static void ReceiveDone(string flowid, string nodename, string receiver)
+        public static string ReceiveDone(string syscode, string flowid, string nodename, string receiver)
         {
-            var finder = OAMessageOperator.Instance.LoadOAMessage(flowid, nodename, receiver);
+            var finder = OAMessageOperator.LoadOAMessage(flowid, nodename, receiver,syscode,RequestType.Done);
             if (finder == null)
             {
-                throw new OAMessageException("当前待办未找到(flowid+nodename+receiver)无法设置为已读状态");
+                throw new OAMessageException("当前待办未找到(flowid+nodename+receiver)无法设置为已办状态");
             }
-            finder.AppUrl = null;
-            CommonReceive(finder.FlowID,finder.FlowTitle, finder.WorkflowName, finder.NodeName, finder.PCUrl, finder.AppUrl, finder.CreateFlowUser, finder.ReceiverFlowUser, 2, 0, finder.CreateFlowTime);
+            string appUrl = null;
+            string pcUrl = null;
+            DateTime dt = DateTime.Now;
+            DateTime.TryParse(finder.CREATETIME, out dt);
+            //return CommonReceive(syscode, finder.FlowID, finder.FlowTitle, finder.WorkflowName, finder.NodeName, finder.PCUrl, finder.AppUrl, finder.CreateFlowUser, finder.ReceiverFlowUser, 2, 0, finder.CreateFlowTime);
+            return CommonReceive(syscode, finder.REQUESTID,finder.REQUESTNAME, finder.WORKFLOWNAME, finder.CURRENTNODENAME,pcUrl, appUrl, finder.LOGINID, finder.JSRLOGINID, 2, 0, dt);
         }
         /// <summary>
         /// 接收办结
@@ -55,37 +56,63 @@ namespace Plugin.OAMessage
         /// <param name="receiver"></param>
         /// <param name="pcurl"></param>
         /// <param name="appurl"></param>
-        public static void ReceiveOver(string flowid, string nodename, string receiver)
+        public static string ReceiveOver(string syscode, string flowid, string nodename, string receiver)
         {
-            var finder = OAMessageOperator.Instance.LoadOAMessage(flowid, nodename, receiver);
+            var finder = OAMessageOperator.LoadOAMessage(flowid, nodename, receiver,syscode,RequestType.Over);
             if (finder == null)
             {
-                throw new OAMessageException("当前待办未找到(flowid+nodename+receiver)无法设置为已读状态");
+                throw new OAMessageException("当前待办未找到(flowid+nodename+receiver)无法设置为办结状态");
             }
-            finder.AppUrl = null;
-            finder.PCUrl = null;
-            CommonReceive(finder.FlowID, finder.FlowTitle, finder.WorkflowName, finder.NodeName, finder.PCUrl, finder.AppUrl, finder.CreateFlowUser, finder.ReceiverFlowUser, 4, 0, finder.CreateFlowTime);
+            string appUrl = null;
+            string pcUrl = null;
+            DateTime dt = DateTime.Now;
+            DateTime.TryParse(finder.CREATETIME, out dt);
+            //return CommonReceive(syscode, finder.FlowID, finder.FlowTitle, finder.WorkflowName, finder.NodeName, finder.PCUrl, finder.AppUrl, finder.CreateFlowUser, finder.ReceiverFlowUser, 4, 0, finder.CreateFlowTime);
+            return CommonReceive(syscode, finder.REQUESTID, finder.REQUESTNAME, finder.WORKFLOWNAME, finder.CURRENTNODENAME, pcUrl, appUrl, finder.LOGINID, finder.JSRLOGINID, 4, 0,dt);
         }
         /// <summary>
-        /// 接收已读
+        /// 直接办结
         /// </summary>
         /// <param name="flowid"></param>
+        /// <param name="flowtitle"></param>
         /// <param name="nodename"></param>
         /// <param name="receiver"></param>
-        public static void ReceiveRead(string flowid, string nodename, string receiver)
+        /// <param name="pcurl"></param>
+        /// <param name="appurl"></param>
+        public static string ReceiveDirectOver(string syscode, string flowid, string nodename, string receiver)
         {
-            var finder = OAMessageOperator.Instance.LoadOAMessage(flowid, nodename, receiver);
+            var finder = OAMessageOperator.LoadOAMessage(flowid, nodename, receiver, syscode, RequestType.DirectOver);
             if (finder == null)
             {
-                throw new OAMessageException("当前待办未找到(flowid+nodename+receiver)无法设置为已读状态");
+                throw new OAMessageException("当前待办未找到(flowid+nodename+receiver)无法设置为办结状态");
             }
-            //如果当前待办为已读 则不再进行更新
-            if (finder.ViewType == 1)
-            {
-                return;
-            }
-            CommonReceive(finder.FlowID, finder.FlowTitle, finder.WorkflowName, finder.NodeName, finder.PCUrl, finder.AppUrl, finder.CreateFlowUser, finder.ReceiverFlowUser, finder.FlowType, 1, finder.CreateFlowTime);
+            string appUrl = null;
+            string pcUrl = null;
+            DateTime dt = DateTime.Now;
+            DateTime.TryParse(finder.CREATETIME, out dt);
+            //return CommonReceive(syscode, finder.FlowID, finder.FlowTitle, finder.WorkflowName, finder.NodeName, finder.PCUrl, finder.AppUrl, finder.CreateFlowUser, finder.ReceiverFlowUser, 4, 0, finder.CreateFlowTime);
+            return CommonReceive(syscode, finder.REQUESTID, finder.REQUESTNAME, finder.WORKFLOWNAME, finder.CURRENTNODENAME, pcUrl, appUrl, finder.LOGINID, finder.JSRLOGINID, 4, 0, dt);
         }
+        ///// <summary>
+        ///// 接收已读
+        ///// </summary>
+        ///// <param name="flowid"></param>
+        ///// <param name="nodename"></param>
+        ///// <param name="receiver"></param>
+        //public static string ReceiveRead(string syscode,string flowid, string nodename, string receiver)
+        //{
+        //    var finder = OAMessageOperator.LoadOAMessage(flowid, nodename, receiver);
+        //    if (finder == null)
+        //    {
+        //        throw new OAMessageException("当前待办未找到(flowid+nodename+receiver)无法设置为已读状态");
+        //    }
+        //    //如果当前待办为已读 则不再进行更新
+        //    //if (finder.ViewType == 1)
+        //    //{
+        //    //    return "";
+        //    //}
+        //    return CommonReceive(syscode,finder.FlowID, finder.FlowTitle, finder.WorkflowName, finder.NodeName, finder.PCUrl, finder.AppUrl, finder.CreateFlowUser, finder.ReceiverFlowUser, finder.FlowType, 1, finder.CreateFlowTime);
+        //}
         /// <summary>
         /// 通用接收待办类
         /// </summary>
@@ -99,62 +126,35 @@ namespace Plugin.OAMessage
         /// <param name="receiver">流程接收人</param>
         /// <param name="isremark">流程处理状态 0待办 2已办 4办结</param>
         /// <param name="viewtype">流程查看状态 0未读 1已读</param>
-        private static void CommonReceive(string flowid, string flowtitle, string workflowname, string nodename, string pcurl, string appurl, string creator, string receiver, int isremark, int viewtype, DateTime createtime)
+        private static string CommonReceive(string syscode,string flowid, string flowtitle, string workflowname, string nodename, string pcurl, string appurl, string creator, string receiver, int isremark, int viewtype, DateTime createtime)
         {
             try
             {
-                using (OAMessage.WebServices.OfsTodoDataWebService service = new OAMessage.WebServices.OfsTodoDataWebService())
+                using (OfsTodoDataWebService service = new OfsTodoDataWebService())
                 {
                     var receiveTime = DateTime.Now;
                     var paramList = new Dictionary<string, string>();
-                    paramList.Add("syscode", ConfigurationManager.AppSettings["OA.SysCode"]);
+                    paramList.Add("syscode", syscode);
                     paramList.Add("flowid", flowid);
                     paramList.Add("requestname", flowtitle);
                     paramList.Add("workflowname", workflowname);
                     paramList.Add("nodename", nodename);
-                    paramList.Add("pcurl", SSOToolkit.Instance.GetAuthOAUrlWithSSO(pcurl, receiver, flowid));
-                    paramList.Add("appurl", SSOToolkit.Instance.GetAuthOAUrlWithSSO(appurl, receiver, flowid));
+                    paramList.Add("pcurl", pcurl);
+                    paramList.Add("appurl", appurl);
                     paramList.Add("creator", creator);
                     paramList.Add("isremark", isremark.ToString());
                     paramList.Add("viewtype", viewtype.ToString());
                     paramList.Add("createdatetime", createtime.ToString("yyyy-MM-dd HH:mm:ss"));
                     paramList.Add("receiver", receiver);
                     paramList.Add("receivedatetime", receiveTime.ToString("yyyy-MM-dd HH:mm:ss"));
-                    var array = paramList.Select(x => new OAMessage.WebServices.anyType2anyTypeMapEntry()
+                    var array = paramList.Select(x => new anyType2anyTypeMapEntry()
                     {
                         key = x.Key,
                         value = x.Value
                     }).ToArray();
                     var result = service.receiveRequestInfoByMap(array);
-                    var model = new OAMessageEntity()
-                    {
-                        ResultData = string.Join(",", result.ToList().Select(x => string.Format("{0}:{1}", x.key, x.value))),
-                        AppUrl = appurl,
-                        CreateTime = DateTime.Now,
-                        CreateFlowTime = createtime,
-                        CreateFlowUser = creator,
-                        //CreatorLoginName = creator,
-                        CreatorName = creator,
-                        FlowID = flowid,
-                        FlowTitle = flowtitle,
-                        FlowType = isremark,
-                        ID = Guid.NewGuid(),
-                        IsDeleted = false,
-                        //ModifierLoginName = creator,
-                        ModifierName = creator,
-                        ModifyTime = DateTime.Now,
-                        NodeName = nodename,
-                        PCUrl = pcurl,
-                        ReceiverFlowTime = receiveTime,
-                        ReceiverFlowUser = receiver,
-                        ViewType = viewtype,
-                        WorkflowName = workflowname
-                    };
-                    if (model.ResultData.Length > 1000)
-                    {
-                        model.ResultData = model.ResultData.Substring(0, 1000);
-                    }
-                    OAMessageOperator.Instance.AddModel(model);
+                    string ResultData = string.Join(",", result.ToList().Select(x => string.Format("{0}:{1}", x.key, x.value)));
+                    return ResultData;
                 }
             }
             catch (Exception ex)
@@ -176,7 +176,7 @@ namespace Plugin.OAMessage
                 /// <param name="receiver">待办接收人</param>
                 public static void Todo(string flowid, string flowtitle, string workflowname, string nodename, string pcurl, string appurl, string creator, string receiver)
                 {
-                    using (OAMessage.WebServices.OfsTodoDataWebService service = new OAMessage.WebServices.OfsTodoDataWebService())
+                    using (OfsTodoDataWebService service = new OfsTodoDataWebService())
                     {
                         var paramList = new Dictionary<string, string>();
                         paramList.Add("syscode", ConfigurationManager.AppSettings["OA.SysCode"]);
@@ -190,7 +190,7 @@ namespace Plugin.OAMessage
                         paramList.Add("createdatetime", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                         paramList.Add("receiver", receiver);
                         paramList.Add("receivedatetime", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                        var array = paramList.Select(x => new OAMessage.WebServices.anyType2anyTypeMapEntry()
+                        var array = paramList.Select(x => new anyType2anyTypeMapEntry()
                         {
                             key = x.Key,
                             value = x.Value
@@ -208,7 +208,7 @@ namespace Plugin.OAMessage
                 /// <param name="receiver"></param>
                 public static void Done(string flowid, string flowtitle, string workflowname, string nodename, string receiver)
                 {
-                    using (OAMessage.WebServices.OfsTodoDataWebService service = new OAMessage.WebServices.OfsTodoDataWebService())
+                    using (OfsTodoDataWebService service = new OfsTodoDataWebService())
                     {
                         var paramList = new Dictionary<string, string>();
                         paramList.Add("syscode", ConfigurationManager.AppSettings["OA.SysCode"]);
@@ -217,7 +217,7 @@ namespace Plugin.OAMessage
                         paramList.Add("workflowname", workflowname);
                         paramList.Add("nodename", nodename);
                         paramList.Add("receiver", receiver);
-                        var array = paramList.Select(x => new OAMessage.WebServices.anyType2anyTypeMapEntry()
+                        var array = paramList.Select(x => new anyType2anyTypeMapEntry()
                         {
                             key = x.Key,
                             value = x.Value
@@ -235,7 +235,7 @@ namespace Plugin.OAMessage
                 /// <param name="receiver"></param>
                 public static void Over(string flowid, string flowtitle, string workflowname, string nodename, string receiver)
                 {
-                    using (OAMessage.WebServices.OfsTodoDataWebService service = new OAMessage.WebServices.OfsTodoDataWebService())
+                    using (OfsTodoDataWebService service = new OfsTodoDataWebService())
                     {
                         var paramList = new Dictionary<string, string>();
                         paramList.Add("syscode", ConfigurationManager.AppSettings["OA.SysCode"]);
@@ -244,7 +244,7 @@ namespace Plugin.OAMessage
                         paramList.Add("workflowname", workflowname);
                         paramList.Add("nodename", nodename);
                         paramList.Add("receiver", receiver);
-                        var array = paramList.Select(x => new OAMessage.WebServices.anyType2anyTypeMapEntry()
+                        var array = paramList.Select(x => new anyType2anyTypeMapEntry()
                         {
                             key = x.Key,
                             value = x.Value
@@ -258,20 +258,21 @@ namespace Plugin.OAMessage
         /// 取消整个流程
         /// </summary>
         /// <param name="flowid"></param>
-        public static void CancelProcess(string flowid)
+        public static string CancelProcess(string syscode,string flowid)
         {
-            using (OAMessage.WebServices.OfsTodoDataWebService service = new OAMessage.WebServices.OfsTodoDataWebService())
+            using (OfsTodoDataWebService service = new OfsTodoDataWebService())
             {
                 var paramList = new Dictionary<string, string>();
-                paramList.Add("syscode", ConfigurationManager.AppSettings["OA.SysCode"]);
+                paramList.Add("syscode", syscode);
                 paramList.Add("flowid", flowid);
 
-                var array = paramList.Select(x => new OAMessage.WebServices.anyType2anyTypeMapEntry()
+                var array = paramList.Select(x => new anyType2anyTypeMapEntry()
                 {
                     key = x.Key,
                     value = x.Value
                 }).ToArray();
                 var result = service.deleteRequestInfoByMap(array);
+                return string.Join(",", result.ToList().Select(x => string.Format("{0}:{1}", x.key, x.value)));
             }
         }
         /// <summary>
@@ -279,21 +280,22 @@ namespace Plugin.OAMessage
         /// </summary>
         /// <param name="flowid"></param>
         /// <param name="receiver"></param>
-        public static void Cancel(string flowid, string receiver)
+        public static string Cancel(string syscode,string flowid, string receiver)
         {
-            using (OAMessage.WebServices.OfsTodoDataWebService service = new OAMessage.WebServices.OfsTodoDataWebService())
+            using (OfsTodoDataWebService service = new OfsTodoDataWebService())
             {
                 var paramList = new Dictionary<string, string>();
-                paramList.Add("syscode", ConfigurationManager.AppSettings["OA.SysCode"]);
+                paramList.Add("syscode", syscode);
                 paramList.Add("flowid", flowid);
                 paramList.Add("userid", receiver);
 
-                var array = paramList.Select(x => new OAMessage.WebServices.anyType2anyTypeMapEntry()
+                var array = paramList.Select(x => new anyType2anyTypeMapEntry()
                 {
                     key = x.Key,
                     value = x.Value
                 }).ToArray();
                 var result = service.deleteUserRequestInfoByMap(array);
+                return string.Join(",", result.ToList().Select(x => string.Format("{0}:{1}", x.key, x.value)));
             }
         }
     }
