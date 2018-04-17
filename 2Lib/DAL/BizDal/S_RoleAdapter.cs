@@ -43,7 +43,7 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
         }
 
         /// <summary>
-        /// 获取全部有效的角色
+        /// 获取全部有效的角色【用户角色管理页面】
         /// </summary>
         /// <returns></returns>
         public List<S_Role> GetDatas(string CnName)
@@ -56,6 +56,26 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
             else
             {
                 sql = string.Format("Select * From  [dbo].[S_Role] Where [IsDeleted]=0 and CnName like '%{0}%' ORDER BY CreateTime DESC ", CnName);
+            }
+            return ExecuteQuery(sql);
+        }
+        /// <summary>
+        /// 获取全部有效角色 【用于用户授权角色页面】
+        /// </summary>
+        /// <param name="cnName"></param>
+        /// <param name="loginName">用户账号必填</param>
+        /// <returns></returns>
+        public List<S_Role> GetDatasByCnName(string cnName, string loginName)
+        {
+            string sql = string.Format(@"Select A.[ID],A.[CnName],A.[Description], 
+	                                           Case  When Exists(Select 1 From [dbo].[S_Role_User] Where [IsDeleted]=0 And [RoleID]=A.[ID] And [LoginName]='{0}')  Then 1
+			                                         Else 0
+			                                         End  As IsChecked
+                                        From [dbo].[S_Role] As A
+                                        Where A.[IsDeleted]=0 ", loginName);
+            if (cnName != "")
+            {
+                sql += string.Format(" And A.[CnName] Like '%{0}%'", cnName);
             }
             return ExecuteQuery(sql);
         }

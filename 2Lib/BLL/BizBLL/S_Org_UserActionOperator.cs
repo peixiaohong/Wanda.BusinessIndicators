@@ -40,6 +40,36 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         {
             return _s_Org_UserAdapter.GetDataByOrgID(id);
         }
+
+        /// <summary>
+        /// 获取组织架构【用户设置组织】
+        /// </summary>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<S_Org_User> GetDataByLoginName(string loginName)
+        {
+            return _s_Org_UserAdapter.GetDataByLoginName(loginName);
+        }
+
+        /// <summary>
+        /// 删除数据，根据账号
+        /// </summary>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public int DeleteDataByLoginName(string loginName)
+        {
+            return _s_Org_UserAdapter.DeleteDataByLoginName(loginName);
+        }
+
+        /// <summary>
+        /// 批量添加数据
+        /// </summary>
+        /// <param name="listData"></param>
+        /// <returns></returns>
+        public int InsertListData(List<S_Org_User> listData)
+        {
+            return _s_Org_UserAdapter.InsertList(listData);
+        }
         #endregion
     }
 }

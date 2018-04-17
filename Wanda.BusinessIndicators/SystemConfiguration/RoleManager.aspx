@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="RoleManager.aspx.cs" Inherits="Wanda.BusinessIndicators.Web.SystemConfiguration.RoleManager" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <script  type="text/javascript" src="../Scripts/SystemConfiguration/RoleManager.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
+    <script  type="text/javascript" src="../Scripts/SystemConfiguration/RoleManager.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="main">

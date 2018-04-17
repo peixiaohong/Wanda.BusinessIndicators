@@ -31,5 +31,11 @@ namespace LJTH.BusinessIndicators.Model.BizModel
         /// </summary>
         [ORFieldMapping("Description")]
         public string Description { get; set; }
+
+        /// <summary>
+        /// 是否选中
+        /// </summary>
+        [NoMapping]
+        public bool IsChecked { get; set; }
     }
 }

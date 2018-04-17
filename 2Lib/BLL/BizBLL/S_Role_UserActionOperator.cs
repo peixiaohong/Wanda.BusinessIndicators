@@ -61,7 +61,17 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         /// <returns></returns>
         public int DelteDataByRoleID_LoginName(Guid roleID, string loginName)
         {
-            return _s_Role_UserAdapter.DelteDataByRoleID_LoginName(roleID, loginName);
+            return _s_Role_UserAdapter.DeleteDataByRoleID_LoginName(roleID, loginName);
+        }
+
+        /// <summary>
+        /// 根据用户账号，删除所有的 用户-角色 关系
+        /// </summary>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public int DeleteDatasByLoginName(string loginName)
+        {
+            return _s_Role_UserAdapter.DeleteDatasByLoginName(loginName);
         }
 
         #endregion

@@ -29,7 +29,7 @@ function LoadPage()
     Load();
     WebUtil.ajax({
         async: false,
-        url: "/RoleManagerControll/GetRoles",
+        url: "/UserInfoManagerControll/GetUserRoles",
         args: {},
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
