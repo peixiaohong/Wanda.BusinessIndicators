@@ -20,9 +20,10 @@
                             <td>
                                 <input type="text"  style="width: 210px;outline:0;" id="QrName">
                             </td>
-                            <th style="width: 150px">
+                            <th style="width: 200px">
                                 <a  class="btn_search QueryConditions_Button" href="javascript:void(0)"><span><i class="fa fa-search"></i>&nbsp;查询</span></a>
                                 <a  class="btn_search InsertRoleData_OK" href="javascript:void(0)"><span><i class="fa fa-plus"></i>&nbsp;添加</span></a>
+                                <a  class="btn_search" href="./RoleManager.aspx"><span><i class="fa fa-reply"></i>&nbsp;返回</span></a>
                             </th>
                         </tr>
                     </tbody>

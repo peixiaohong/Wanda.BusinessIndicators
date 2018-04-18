@@ -156,6 +156,7 @@
     <Content Include="Scripts\multiple-select-master\multiple-select.png" />
     <Content Include="Scripts\SystemConfiguration\RoleManager.js" />
     <Content Include="Scripts\SystemConfiguration\RoleUsers.js" />
+    <Content Include="Scripts\SystemConfiguration\UserInfoManager.js" />
     <Content Include="Scripts\TreeGrid\1.html" />
     <Content Include="Scripts\TreeGrid\application.js" />
     <Content Include="Scripts\TreeGrid\images\defaultLeaf.gif" />
@@ -173,6 +174,7 @@
     <Content Include="SystemConfiguration\RoleManagerTmpl.html" />
     <Content Include="SystemConfiguration\RoleUsers.aspx" />
     <Content Include="SystemConfiguration\TargetPlanDetailReported.aspx" />
+    <Content Include="SystemConfiguration\UserInfoManager.aspx" />
     <Content Include="WebService\MobileCommonWebService.asmx" />
     <Content Include="WebService\MobileCommon\BaseWebService.asmx" />
     <Content Include="AjaxHander\DownLoadDSExcel.aspx" />
@@ -1229,6 +1231,13 @@
     </Compile>
     <Compile Include="SystemConfiguration\TargetPlanDetailReported.aspx.designer.cs">
       <DependentUpon>TargetPlanDetailReported.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfiguration\UserInfoManager.aspx.cs">
+      <DependentUpon>UserInfoManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguration\UserInfoManager.aspx.designer.cs">
+      <DependentUpon>UserInfoManager.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebService\MobileCommonWebService.asmx.cs">
       <DependentUpon>MobileCommonWebService.asmx</DependentUpon>
