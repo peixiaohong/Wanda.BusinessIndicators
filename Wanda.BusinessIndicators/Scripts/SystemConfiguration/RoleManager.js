@@ -211,9 +211,11 @@ function SetLimits(el) {
     });
 }
 function Ztree(data) {
-    console.log(data);
     var zNodes = [{ id: "00000000-0000-0000-0000-000000000000", pId: "00000000-0000-0000-0000-000000000000", name: "菜单管理", open: true }];
     data.Data.forEach(function (one) {
+        if (one.IsChecked) {
+            zNodes[0].checked = true;
+        };
         var zNodesObj = { id: "", pId: "", name: "", checked: "" };
         zNodesObj.id = one.ID;
         zNodesObj.pId = one.ParentMenuID;
@@ -239,9 +241,6 @@ function Ztree(data) {
 function SaveLimitData(id) {
     var treeObj = $.fn.zTree.getZTreeObj("tree");
     var nodes = treeObj.getCheckedNodes(true);
-    //if (nodes.length > 0) {
-    //    var node = sNodes[0].getParentNode();
-    //}
     if (!nodes.length) {
         $.MsgBox.Alert("提示", "请选择权限");
         return false;
