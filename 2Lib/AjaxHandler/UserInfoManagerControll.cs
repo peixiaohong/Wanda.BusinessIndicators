@@ -1,6 +1,7 @@
 ﻿using Lib.Web;
 using Lib.Web.MVC.Controller;
 using LJTH.BusinessIndicators.BLL.BizBLL;
+using LJTH.BusinessIndicators.Common;
 using LJTH.BusinessIndicators.Model.BizModel;
 using Newtonsoft.Json;
 using System;
@@ -105,6 +106,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     entitys.Add(su);
                 }
                 int number = S_Role_UserActionOperator.Instance.InsertListData(entitys);
+                //清除缓存
+                WebHelper.InvalidAuthCache();
                 if (number > 0)
                 {
                     success = 1;
@@ -211,6 +214,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     item.ID = Guid.NewGuid();
                 }
                 var number=S_Org_UserActionOperator.Instance.InsertListData(entitys);
+                //清除缓存
+                WebHelper.InvalidAuthCache();
                 if (number > 0)
                 {
                     success = 1;
