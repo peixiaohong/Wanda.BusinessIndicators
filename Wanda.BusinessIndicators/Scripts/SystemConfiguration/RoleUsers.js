@@ -28,7 +28,7 @@ $(document).ready(function () {
 function LoadPage() {
     Load();
     var roleData = {
-        "RoleID": "B960DEB4-E281-4C44-B611-1B1CF709E410",
+        "RoleID": getQueryString("RoleId"),
         "PageIndex": 1,
         "PageSize":10
     }
@@ -64,7 +64,6 @@ function UsersLoadPage() {
         url: "/RoleManagerControll/GetAllUser",
         args: { data: JSON.stringify(roleData) },
         successReturn: function (resultData) {
-            console.log(resultData);
             if (resultData.Success == 1) {
 
                 $('#UsersData').empty();
@@ -107,34 +106,35 @@ function RegisterEvent() {
 //保存数据
 function SaveRole() {
     var el = $(".userChecked");
-    var LoginNames = [];
+    var LoginNames = "";
     for (var i = 0; i < el.length; i++) {
         var name = el.eq(i).attr("name");
         if (el.eq(i).attr("checked") == "checked") {
-            LoginNames.push(name);
+            LoginNames += name + ",";
         }
     }
     if (!LoginNames.length) {
         $.MsgBox.Alert("提示", "请选择用户");
         return false;
     }
+    console.log(LoginNames.slice(0, LoginNames.length - 1));
     var S_Role = {
-        "LoginNames": LoginNames,
-        "RoleID": "6ffdbe6d-83c4-43e4-9c10-565c7d88a43c"
+        "PageLoginNames": LoginNames.slice(0, LoginNames.length-1),
+        "RoleID": getQueryString("RoleId")
     }
     WebUtil.ajax({
         async: false,
         url: "/RoleManagerControll/SaveUser_Role",
-        args: { LoginNames: LoginNames, RoleID:"6ffdbe6d-83c4-43e4-9c10-565c7d88a43c" },
+        args: S_Role,
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
-                $("#mb_box,#mb_con").remove();
+                $(".user-model").css("display", "none");
                 $.MsgBox.Alert("提示", "添加成功");
                 LoadPage();
                 console.log("添加成功" + resultData.Message);
             }
             else {
-                $("#mb_box,#mb_con").remove();
+                $(".user-model").css("display", "none");
                 $.MsgBox.Alert("提示", "添加失败");
                 console.log("添加失败:" + resultData.Message);
             }
@@ -149,7 +149,7 @@ function QueryRoleData() {
     var keyWord = $("#QrName").val();
     var roleData = {
         "keyWord": keyWord,
-        "RoleID": "B960DEB4-E281-4C44-B611-1B1CF709E410",
+        "RoleID": getQueryString("RoleId"),
         "PageIndex": 1,
         "PageSize": 10
     }
@@ -175,7 +175,7 @@ function QueryRoleData() {
 function DeleteRoleUserData(el) {
     var name = $(el).attr("data-name");
     var roleData = {
-        "RoleID": "B960DEB4-E281-4C44-B611-1B1CF709E410",
+        "RoleID": getQueryString("RoleId"),
         "LoginName": name
     }
     $.MsgBox.Confirm("提示", "确认删除", "", function () {
@@ -198,4 +198,9 @@ function DeleteRoleUserData(el) {
         });
     });
 }
-
+function getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
+} 

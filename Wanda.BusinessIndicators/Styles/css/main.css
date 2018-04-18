@@ -347,3 +347,9 @@
     color: rgb(203, 92, 97);
     background-color: rgb(255, 255, 255);
 }
+.ztree_defined {
+    background: #fff;
+    border:1px solid #eee;
+    height:345px;
+    overflow: auto;
+}

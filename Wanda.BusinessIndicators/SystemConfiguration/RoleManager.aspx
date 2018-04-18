@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="RoleManager.aspx.cs" Inherits="Wanda.BusinessIndicators.Web.SystemConfiguration.RoleManager" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script  type="text/javascript" src="../Scripts/SystemConfiguration/RoleManager.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="main">
@@ -50,7 +51,7 @@
                                     <th style="width: 25%;">角色名称</th>         
                                     <th style="width: 40%;">角色描述</th>                
                                     <th style="width: 10%">人员设置</th>         
-                                    <th style="width: 10%">设置功能点</th>     
+                                    <th style="width: 10%">权限设置</th>     
                                     <th style="width: 10%">操作</th>
                                 </tr>    
                             </thead>
@@ -62,4 +63,27 @@
             </div>
         </div>
     </div>
+    <div class="user-model">
+        <div class="main user-main" style="width:300px;height:450px">
+        <div class="margin_t10">
+            <div class="tabs_m">
+                <ul>
+                    <li class="selected m_1"><a class="active_sub2"><span>权限设置</span></a></li>
+                </ul>
+            </div>
+            <div class="tabs_content user-content" style="height: auto">
+                <!--内容-->
+                <div style="margin-top: 5px;">
+                   <ul id="tree" class="ztree ztree_defined"></ul>
+                </div>
+            </div>
+            <div class="btnbox">
+                <input class="btn_ok limits_sumbit" type="button" value="确定">
+                <input class="btn_no limits_cancel" type="button" value="取消">
+
+            </div>
+        </div>
+    </div>
+    </div>
+    
 </asp:Content>

@@ -80,6 +80,9 @@
     <Compile Include="TargetApproveController.cs" />
     <Compile Include="TargetReportedControll.cs" />
     <Compile Include="TimeConfiguration.cs" />
+    <Compile Include="UserInfoManagerControll.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\1Framework\Lib.AuthCenter\LJTH.Lib.AuthCenter.csproj">

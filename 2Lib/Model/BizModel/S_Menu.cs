@@ -12,7 +12,7 @@ namespace LJTH.BusinessIndicators.Model.BizModel
     /// 菜单表
     /// </summary>
     [ORTableMapping("dbo.S_Menu")]
-    public class S_Menu: BaseModel
+    public class S_Menu : BaseModel
     {
         /// <summary>
         /// 中文名称

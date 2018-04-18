@@ -42,6 +42,17 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         {
             return _sMenuAdapter.GetRoleMenus(ID);
         }
-        #endregion 
+
+        /// <summary>
+        /// 获取人已经授予的菜单
+        /// </summary>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<S_Menu> GetLoinNameMenu(string loginName)
+        {
+            return _sMenuAdapter.GetLoinNameMenu(loginName);
+        }
+
+        #endregion
     }
 }
