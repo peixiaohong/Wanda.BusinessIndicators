@@ -32,16 +32,53 @@ namespace LJTH.BusinessIndicators.Engine
                     ReportDate = DateTime.Parse(GroupRpt[0].FinYear + "-" + Convert.ToInt32(GroupRpt[0].FinMonth + 1) + "-01").AddDays(-1);
                 }
 
+                var TargetPlanListByYear = StaticResource.Instance.GetTargetPlanList(GroupRpt[0].SystemID, GroupRpt[0].FinYear);
+                var TargetData = StaticResource.Instance.GetTargetList(GroupRpt[0].SystemID, DateTime.Now).ToList();
                 foreach (MonthlyReportDetail item in GroupRpt)
                 {
                     if (item.TargetID == Guid.Empty)
                     {
                         continue;
                     }
+                    else if (!TargetData.Where(T => T.ID == item.TargetID).Any())
+                    {
+                        continue;
+                    }
 
-                    string TargetName = StaticResource.Instance.GetTargetList(item.SystemID, DateTime.Now).ToList().Find(T => T.ID == item.TargetID).TargetName;
+                    string TargetName = TargetData.Find(T => T.ID == item.TargetID).TargetName;
                     //StaticResource.Instance.TargetList[item.SystemID].Find(T => T.ID == item.TargetID).TargetName;
-                    
+                    var targetPlanByYearData = TargetPlanListByYear.Where(t => t.CompanyID == item.CompanyID && t.TargetID == item.TargetID);
+                    decimal SumTarget = 0;
+                    if (targetPlanByYearData.Any())
+                    {
+                        SumTarget = targetPlanByYearData.Sum(s => s.Target);
+                    }
+                    if (hastable.ContainsKey(TargetName + ".NPlanAmmountByYear") == false) //年度指标
+                        hastable.Add(TargetName + ".NPlanAmmountByYear", SumTarget);
+                    else
+                        hastable[TargetName + ".NPlanAmmountByYear"] = SumTarget;
+
+                    if (hastable.ContainsKey(TargetName + ".NDisplayRateByYear") == false) //年度指标完成率
+                    {
+                        if (SumTarget != 0) {
+                            hastable.Add(TargetName + ".NDisplayRateByYear", Math.Round((item.NAccumulativeActualAmmount / SumTarget), 5, MidpointRounding.AwayFromZero).ToString("P1"));
+                        }
+                        else
+                        {
+                            hastable.Add(TargetName + ".NDisplayRateByYear", "--");
+                        }
+                    }
+                    else
+                    {
+                        if (SumTarget != 0)
+                        {
+                            hastable.Add(TargetName + ".NDisplayRateByYear", Math.Round((item.NAccumulativeActualAmmount / SumTarget), 5, MidpointRounding.AwayFromZero).ToString("P1"));
+                        }
+                        else
+                        {
+                            hastable.Add(TargetName + ".NDisplayRateByYear", "/");
+                        }
+                    }
                     if (hastable.ContainsKey(TargetName + ".IsDelayComplete") == false) //延迟完成
                         hastable.Add(TargetName + ".IsDelayComplete", item.IsDelayComplete);
                     else

@@ -324,9 +324,22 @@ function ChangeTargetDetail(sender, TabOrSearch) {
         if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDIsLatestVersion, ComplateDetailData[0], "B") == true) {
             getMonthReprotDetailData();
         }
+    }
+    else if ($(sender).text() == "经营报告明细" && TabOrSearch != "Search") {
 
+        $('#T1,#T2,#T3,#T3_1,#T4,#MonthReportExplainDiv,#ApproveAttachDiv,#T5,#T6,#T7,#T8,#T9').hide();
+        $('#T2_1,#DownExcel').show();
+        var obj = $("#CompleteDetailHead_1");
+        var tab = $("#tab2_rows_1");
+        FloatHeader(obj, tab, false, "MonthRpt");
 
-    } else if ($(sender).text() == "当月未完成" && TabOrSearch != "Search") {
+        //经营报告明细
+        GetMonthReportDetailSearchCondition();
+        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDIsLatestVersion, ComplateDetailData[0], "B") == true) {
+            getAreaMonthReprotDetailData();
+        }
+    }
+    else if ($(sender).text() == "当月未完成" && TabOrSearch != "Search") {
         $("#T4,#T1,#T2,#T3,#MonthReportExplainDiv,#ApproveAttachDiv,#T5,#T6,#T7,#T8,#T9").hide();
         $("#T3_1,#DownExcel").show();
         var obj = $("#Tab_MissTargetHead");
@@ -793,21 +806,41 @@ function ComplateDetailLiaddCss(sender) {
     $(sender).addClass("active_sub3");
 
     currentDetailTarget = $("#Ul4 li .active_sub3 ");
+    var tabTitle = $("#Ul3 .selected a span").text();
+    if (tabTitle == "完成情况明细") {
+        $("#importedDataTable2").css("width", "100%");
+    }
+    else if (tabTitle == "经营报告明细") {
+
+    }
 
     strComplateMonthReportDetilHtmlTemplate = new Array();
     if (TemplData.HtmlTemplate != undefined) {
         strComplateMonthReportDetilHtmlTemplate = TemplData.HtmlTemplate.split(',');
     }
-    //tmpl模板名称
+
+    $("#CompleteDetailHead").empty();
+        //表头Tmpl名称
+    if (strComplateMonthReportDetilHtmlTemplate[0] != "" && strComplateMonthReportDetilHtmlTemplate[0] != undefined) {
+        loadTmpl('#' + strComplateMonthReportDetilHtmlTemplate[0]).tmpl(TemplData).appendTo('#CompleteDetailHead');
+    } else {
+        loadTmpl('#CompleteDetailHeadTemplate').tmpl().appendTo('#CompleteDetailHead');
+    }
+
+        //tmpl模板名称
     if (strComplateMonthReportDetilHtmlTemplate[1] != "" && strComplateMonthReportDetilHtmlTemplate[1] != undefined) {
         ComplateTargetDetailTemplate = strComplateMonthReportDetilHtmlTemplate[1];
     } else {
         ComplateTargetDetailTemplate = "ComplateTargetDetailTemplate"
     }
 
+    var dataArray = [];
+    var data = { "data": TemplData
+    };
+    dataArray.push(data);
 
     $("#tab2_rows").empty();
-    loadTmpl('#' + ComplateTargetDetailTemplate).tmpl(TemplData).appendTo('#tab2_rows');
+    loadTmpl('#' +ComplateTargetDetailTemplate).tmpl(dataArray).appendTo('#tab2_rows');
     SetComplateTargetDetailData(TemplData, 2);
 
 }
@@ -823,7 +856,7 @@ function SetComplateTargetDetailData(sender, Type) {
     $("#CompleteDetailHead").empty();
     //表头Tmpl名称
     if (strComplateMonthReportDetilHtmlTemplate[0] != "" && strComplateMonthReportDetilHtmlTemplate[0] != undefined) {
-        loadTmpl('#' + strComplateMonthReportDetilHtmlTemplate[0]).tmpl().appendTo('#CompleteDetailHead');
+        loadTmpl('#' + strComplateMonthReportDetilHtmlTemplate[0]).tmpl(sender).appendTo('#CompleteDetailHead');
     } else {
         loadTmpl('#CompleteDetailHeadTemplate').tmpl().appendTo('#CompleteDetailHead');
     }
@@ -850,27 +883,19 @@ function SetComplateTargetDetailData(sender, Type) {
 
         loadTmpl('#ComplateTargetDetailHeadTemplate').tmpl(ComplateDetailData).appendTo('#Ul4');
         $("#tab2_rows").empty();
-        loadTmpl('#' + ComplateTargetDetailTemplate).tmpl(sender).appendTo('#tab2_rows');
+
+        var dataArray = [];
+        var data = { "data": sender };
+        dataArray.push(data);
+        loadTmpl('#' + ComplateTargetDetailTemplate).tmpl(dataArray).appendTo('#tab2_rows');
+
         $("#Ul4 :first a").addClass("active_sub3");
     } else {
         if (Type == 1) {
             ComplateDetailLiaddCss(currentDetailTarget);
         }
     }
-
-    if (MonthReportOrderType == "Detail") {
-        $(".DetailMonthly").attr("src", "../Images/btn_down02_w.png");
-        $(".Detail").attr("src", "../Images/btn_down03_w.png");
-        $(".DetailMonthlyCss").addClass("tabOrderBackground");
-    } else {
-        $(".DetailMonthly").attr("src", "../Images/btn_down03_w.png");
-        $(".Detail").attr("src", "../Images/btn_down02_w.png");
-        $(".DetailCss").addClass("tabOrderBackground");
-
-    }
-
-
-
+    AddBackGroundColor();
 }
 
 
@@ -899,8 +924,64 @@ function MonthReportOrder(sender) {
     currentDetailTarget = $("#Ul4 li .active_sub3 ");
     MonthReportOrderType = sender;
     getMonthReprotDetailData();
+}
+
+function showMonthReprotDetail(companyId) {
+    var targetData = [];
+    for (var i = 0; i < ComplateDetailData.length; i++) {
+        if (ComplateDetailData[i].IsBlendTarget) {
+            //1、取指标
+            for (var j = 0; j < ComplateDetailData[i].ObjValue.length; j++) {
+                //targetData.push(ComplateDetailData[i].ObjValue[j]);
+                //2、取指标下的完成与未完成信息
+                for (var k = 0; k < ComplateDetailData[i].ObjValue[j].ObjValue[0].ObjValue.length; k++) {
+                    //  3、取完成与未完成信息下的公司信息
+                    var companyData = Enumerable.From(ComplateDetailData[i].ObjValue[j].ObjValue[0].ObjValue[k].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
+                    if (companyData.length > 0) {
+                        targetData.push(companyData[0]);
+                    }
+                }
+            }
+        }
+        else {
+            //1、取指标下的完成与未完成信息
+            if (ComplateDetailData[i].ObjValue[0].Mark == "CompanyProperty") {
+                for (var j = 0; j < ComplateDetailData[i].ObjValue[0].ObjValue.length; j++) {
+                    if (ComplateDetailData[i].ObjValue[0].ObjValue[j].ObjValue != undefined) {
+                        //targetData.push(ComplateDetailData[i].ObjValue[j]);
+                        //  2、取完成与未完成信息下的公司信息
+                        var companyData = Enumerable.From(ComplateDetailData[i].ObjValue[0].ObjValue[j].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
+                        if (companyData.length > 0) {
+                            targetData.push(companyData[0]);
+                        }
+                    }
+                }
+            }
+            else if (ComplateDetailData[i].ObjValue[0].Mark == "Counter" && ComplateDetailData[i].ObjValue[0].Name == "HaveDetail") {
+                //  2、取完成与未完成信息下的公司信息
+                var companyData = Enumerable.From(ComplateDetailData[i].ObjValue[0].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
+                if (companyData.length > 0) {
+                    targetData.push(companyData[0]);
+                }
+            }
+        }
+    }
+    $("#tbCompanyDataDetail").empty();
+    var resultData = { "data": targetData };
+    loadTmpl('#CompanyDataDetail_tmpl').tmpl(resultData).appendTo('#tbCompanyDataDetail');
+
+    art.dialog({
+        content: $("#divDetail").html(),
+        lock: true,
+        id: 'divDetail',
+        title: '<span>指标完成情况</span>'
+    });
+}
+//-------------经营报告明细------------------------------------------------------------------------------------------------------
+function getAreaMonthReprotDetailData() {
 
 }
+
 //-------------补回情况------------------------------------------------------------------------------------------------------
 function getMonthReportReturnData() {
     var latest = false;
@@ -2261,5 +2342,77 @@ function IsTimeShow(obj)
         }
     } catch (e) {
         return false;
+    }
+}
+//获取月份
+function GetMonthStr() {
+    return $("#ddlMonth").val()
+}
+//完成情况明细点击警示灯展开全部列
+function unfoldTitle() {
+    $("#CompleteDetailHead").html("");
+    $("#tab2_rows").html("");
+    var targetName = $("#Ul4 .active_sub3")[0].innerText;
+    var TemplData = {};
+    $.each(ComplateDetailData, function (i, item) {
+        if (item.Name == targetName) {
+            TemplData = item;
+            return;
+        }
+    });
+
+    //加载表头
+    loadTmpl('#TmplCompleteDetail_Head_All').tmpl(TemplData).appendTo('#CompleteDetailHead'); //加载列头 
+
+    var dataArray = [];
+    var data = { "data": TemplData };
+    dataArray.push(data);
+
+    loadTmpl('#TmplCompleteDetail_Data_All').tmpl(dataArray).appendTo('#tab2_rows');
+    $("#importedDataTable2").css("width", "110%");
+
+    var obj = $("#CompleteDetailHead");
+    var tab = $("#tab2_rows");
+    FloatHeader(obj, tab, false, "MonthRpt");
+    AddBackGroundColor();
+}
+//完成情况明细点击警示灯收缩列
+function shrinkageTitle() {
+    $("#CompleteDetailHead").html("");
+    $("#tab2_rows").html("");
+
+    var targetName = $("#Ul4 .active_sub3")[0].innerText;
+    var TemplData = {};
+    $.each(ComplateDetailData, function (i, item) {
+        if (item.Name == targetName) {
+            TemplData = item;
+            return;
+        }
+    });
+    //加载表头
+    loadTmpl('#TmplCompleteDetail_Head').tmpl(TemplData).appendTo('#CompleteDetailHead'); //加载列头 
+
+    var dataArray = [];
+    var data = { "data": TemplData };
+    dataArray.push(data);
+
+    loadTmpl('#TmplCompleteDetail_Data').tmpl(dataArray).appendTo('#tab2_rows');
+
+    $("#importedDataTable2").css("width", "100%");
+    var obj = $("#CompleteDetailHead");
+    var tab = $("#tab2_rows");
+    FloatHeader(obj, tab, false, "MonthRpt");
+    AddBackGroundColor();
+}
+function AddBackGroundColor() {
+    if (MonthReportOrderType == "Detail") {
+        $(".DetailMonthly").attr("src", "../Images/btn_down02_w.png");
+        $(".Detail").attr("src", "../Images/btn_down03_w.png");
+        $(".DetailMonthlyCss").addClass("tabOrderBackground");
+    } else {
+        $(".DetailMonthly").attr("src", "../Images/btn_down03_w.png");
+        $(".Detail").attr("src", "../Images/btn_down02_w.png");
+        $(".DetailCss").addClass("tabOrderBackground");
+
     }
 }

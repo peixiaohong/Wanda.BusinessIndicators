@@ -5,14 +5,14 @@
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
 
 
-    <script  type="text/javascript" src="../Scripts/ztree/jquery.ztree.all-3.5.min.js"></script>
+    <script type="text/javascript" src="../Scripts/ztree/jquery.ztree.all-3.5.min.js"></script>
     <script type="text/javascript" src="../Scripts/ztree/jquery.ztree.core-3.5.min.js"></script>
     <script type="text/javascript" src="../Scripts/ztree/jquery.ztree.excheck-3.5.min.js"></script>
-    
-        <link href="/Styles/ztree/metroStyle/metroStyle.css" rel="stylesheet" />
+
+    <link href="/Styles/ztree/metroStyle/metroStyle.css" rel="stylesheet" />
     <script type="text/javascript" src="../Scripts/BusinessReport/MonthReport.js"></script>
     <script type="text/javascript" src="../Scripts/jquery.base64.js"></script>
-
+    <script type="text/javascript" src="../Scripts/linq.min.js"></script>
     <script type="text/javascript">
         var TreeDataJson = <%=TreeDataJson%>;
     </script>
@@ -35,7 +35,7 @@
                             <th>上报系统</th>
                             <td>
                                 <input type="text" id="TxtSystem" style="width: 210px;" onclick="showMenu();" />
-                                <asp:DropDownList ID="ddlSystem" ClientIDMode="Static" runat="server" Style="width: 120px;display:none;" AutoPostBack="True" OnSelectedIndexChanged="ddlSystem_SelectedIndexChanged"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlSystem" ClientIDMode="Static" runat="server" Style="width: 120px; display: none;" AutoPostBack="True" OnSelectedIndexChanged="ddlSystem_SelectedIndexChanged"></asp:DropDownList>
                             </td>
                             <th>上报年份</th>
                             <td>
@@ -45,13 +45,14 @@
                             <td>
                                 <asp:DropDownList ID="ddlMonth" ClientIDMode="Static" runat="server" Style="width: 120px;"></asp:DropDownList>
                             </td>
-                            <th style="text-align:center"><input id="submana"  runat="server" clientidmode="Static" style="width:80px;text-align:center;height:27px;display:none" type="button"  class="uploadify-button" value="" onclick="AddMessages()" /></th>
+                            <th style="text-align: center">
+                                <input id="submana" runat="server" clientidmode="Static" style="width: 80px; text-align: center; height: 27px; display: none" type="button" class="uploadify-button" value="" onclick="AddMessages()" /></th>
                             <td>
                                 <asp:CheckBox ID="chkIsLastestVersion" ClientIDMode="Static" runat="server" Text="包含审批中" />
                             </td>
                             <th>
                                 <a class="btn_search" id="ContentPlaceHolder1_LinkButton1" href="#" runat="server" onserverclick="ContentPlaceHolder1_LinkButton1_ServerClick"><span><i class="fa fa-search"></i>&nbsp;查询</span></a>
-                           
+
                             </th>
                         </tr>
                     </tbody>
@@ -88,14 +89,15 @@
             <div class="tabs_m">
                 <ul id="Ul3">
                     <li class="selected m_1"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>月度经营报告</span></a></li>
+                    <li><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>经营报告明细</span></a></li>
                     <li><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>完成情况明细</span></a></li>
                     <li><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>当月未完成</span></a></li>
                     <li><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>累计未完成</span></a></li>
                     <li><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>补回情况明细</span></a></li>
                     <li id="BHhide1"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>其它情况</span></a></li>
-                    <li id="detailmana" style="display:none" runat="server" clientidmode="Static"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>上报日志</span></a></li>
-                    
-<%--                    <li id="BHhide2"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>指标完成情况明细</span></a></li>
+                    <li id="detailmana" style="display: none" runat="server" clientidmode="Static"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>上报日志</span></a></li>
+
+                    <%--                <li id="BHhide2"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>指标完成情况明细</span></a></li>
                     <li id="BHhide3"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>补回指标缺口情况</span></a></li>
                     <li id="BHhide4"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>新增未完成门店情况</span></a></li>--%>
                 </ul>
@@ -139,6 +141,21 @@
                 </div>
                 <!--月度报告 结束-->
 
+                <!--经营报告明细 start-->
+                <div class="TClassHide" id="T2_1">
+                    <div class="scrolldoorFrame copy">
+                        <ul class="tabs" id="Ul4_1" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
+                        </ul>
+                        <table class="tab_005" id="importedDataTable2_1">
+                            <thead id="CompleteDetailHead_1" style="width: 100%">
+                            </thead>
+                            <tbody id="tab2_rows_1">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--经营报告明细 end-->
+
                 <!--完成情况明细 start-->
                 <div class="TClassHide" id="T2">
                     <div class="scrolldoorFrame copy">
@@ -155,7 +172,7 @@
                 <!--完成情况明细 end-->
 
 
-                 <!--未完成说明（当月） 开始-->
+                <!--未完成说明（当月） 开始-->
                 <div class="TClassHide" id="T3_1">
                     <ul class="tabs" id="U2_1" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                     </ul>
@@ -200,7 +217,7 @@
 
                 <!--经营指标完成门店数量情况 开始-->
                 <div id="T5" class="TClassHide">
-                    <ul  id="Ul5"  class="tabs" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
+                    <ul id="Ul5" class="tabs" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                     </ul>
                     <table id="Table1" class="tab_005" style="width: 100%;">
                         <thead id="DSMonthReportSummaryHead">
@@ -252,7 +269,7 @@
                 <!--上报日志 开始-->
                 <div id="T9" class="TClassHide">
                     <input type="hidden" id="detailhidden" runat="server" clientidmode="Static" />
-                     <ul class="tabs" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
+                    <ul class="tabs" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                     </ul>
                     <table class="tab_005" style="table-layout: fixed; margin-top: 5px;">
                         <thead id="ActionHead">
@@ -263,7 +280,7 @@
                 </div>
                 <!--上报日志 结束-->
                 <div id="ApproveAttachDiv" style="padding-bottom: 10px; padding-top: 10px;">
-                    <div style="border: 1px solid #ccc; min-height: 50px; padding-top: 5px;padding-bottom:5px;background:#fff;">
+                    <div style="border: 1px solid #ccc; min-height: 50px; padding-top: 5px; padding-bottom: 5px; background: #fff;">
                         <div class="content_title1_Left" style="width: 100%; padding-bottom: 10px;">
                             <div>
                                 <label style="padding-left: 10px; color: #012b80; font-weight: bold">
@@ -272,12 +289,11 @@
                             </div>
                         </div>
                         <div id="listAttDiv" class="AttDiv" style="padding-left: 10px">
-                          
                         </div>
                     </div>
                 </div>
                 <!--附件 结束-->
-                
+
             </div>
         </div>
     </div>
@@ -285,8 +301,20 @@
     <input type="hidden" id="sgBig" value="<%=MonthSGBig%>" />
     <input type="hidden" id="sgrent" value="<%=MonthSGRent%>" />
 
-    <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
-	<ul id="SysTree" class="ztree_new" style="margin-top:0; width:200px; height:350px; background-color :#fff; border:1px solid #000; overflow-y:auto;"></ul>
-</div>
+    <div id="menuContent" class="menuContent" style="display: none; position: absolute;">
+        <ul id="SysTree" class="ztree_new" style="margin-top: 0; width: 200px; height: 350px; background-color: #fff; border: 1px solid #000; overflow-y: auto;"></ul>
+
+    </div>
+
+    <div id="divDetail" class="popup" style="height: auto; display: none; padding-bottom: 10px">
+        <table style="width: 600px;" class="tab02">
+            <tbody id="tbCompanyDataDetail">
+                
+            </tbody>
+        </table>
+        <div class="pop_operate" style="text-align: center; width: 100%; padding: 5px 0px;">
+            <input type="button" class="pop_btn btn_blue" value="确定" style="float: none!important;" onclick="art.dialog({ id: 'divDetail' }).close();" />
+        </div>
+    </div>
 
 </asp:Content>

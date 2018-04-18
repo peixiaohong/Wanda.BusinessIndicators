@@ -109,7 +109,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             string uploadpath = Path.Combine(UploadFilePath, filePath);
 
 
-           
+
 
 
 
@@ -209,6 +209,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 //ReportInstance CurrentRpt = new ReportInstance(MonthReportID, true);  Update 2017-7-5  做成公有的，便于后面的Json序列化
 
 
+                var IsBlendTager = excel.GetStringCustomProperty(book.Worksheets[0], "IsBlendTager") == "1";
                 for (int j = 0; j < count; j++)
                 {
                     if (excel.GetStringCustomProperty(book.Worksheets[j], "SheetName") != "MonthReportDetail")
@@ -221,10 +222,26 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         error = "请下载当前系统的模板！";
                         return;
                     }
-                    if (CurrentRpt._Target.Where(p => p.TargetName == book.Worksheets[j].Name).ToList().Count < 0)
+
+                    //混合指标和
+                    if (IsBlendTager && j == 0)
                     {
-                        error = "上传数据中的指标不是当前系统的指标，请重新添加！";
-                        return;
+                        var targetNames = book.Worksheets[j].Name.Split('+').ToList();
+                        if (targetNames.Count != 2
+                            || CurrentRpt._Target.Where(p => p.TargetName == targetNames[0]).ToList().Count < 0
+                            || CurrentRpt._Target.Where(p => p.TargetName == targetNames[1]).ToList().Count < 0)
+                        {
+                            error = "上传数据中的混合指标不是当前系统的指标，请重新添加！";
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        if (CurrentRpt._Target.Where(p => p.TargetName == book.Worksheets[j].Name).ToList().Count < 0)
+                        {
+                            error = "上传数据中的指标不是当前系统的指标，请重新添加！";
+                            return;
+                        }
                     }
                 }
 
@@ -239,9 +256,16 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     Cells cells = workSheet.Cells;
                     if (cells.MaxDataRow - 3 > 0 && cells.MaxDataColumn > 0)
                     {
-
+                        // 上传混合指标
+                        if (IsBlendTager && i == 0)
+                        {
+                            //处理一个sheet上面两个指标，ListDV是引用类型，不用返回
+                            var BlendResult = UpTargetPlanDetailExcelForBlend(excel, workSheet, ListDV, out error);
+                            if (!BlendResult)
+                                return;
+                            continue;
+                        }
                         DataTable dt = cells.ExportDataTable(4, 1, cells.MaxDataRow - 3, cells.MaxDataColumn);
-
                         {
                             MonthlyReportDetail mrd = null;
 
@@ -279,7 +303,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     }
                     try
                     {
-                        ListDV.AddRange(FormatTargetDetail(out error, listMrd, SysId, FinYear, FinMonth, workSheet.Name, CurrentRpt));
+                        ListDV.AddRange(FormatTargetDetailNew(out error, listMrd, SysId, FinYear, FinMonth, workSheet.Name, CurrentRpt));
                     }
                     catch (ExcelException)
                     {
@@ -290,7 +314,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 }
                 try
                 {
-                    AddOrUpdateData(ListDV);
+                    AddOrUpdateDataNew(ListDV);
                 }
                 catch (Exception es)
                 {
@@ -301,6 +325,76 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
         }
 
+        /// <summary>
+        /// 添加混合指标Sheet
+        /// </summary>
+        /// <param name="excel"></param>
+        /// <param name="workSheet"></param>
+        /// <param name="ListDV"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        private bool UpTargetPlanDetailExcelForBlend(ExcelEngine excel, Worksheet workSheet, List<DictionaryVmodel> ListDV, out string error)
+        {
+            error = "";
+            List<MonthlyReportDetail> listMrdOne = new List<MonthlyReportDetail>();
+            List<MonthlyReportDetail> listMrdTwo = new List<MonthlyReportDetail>();
+            Cells cells = workSheet.Cells;
+            DataTable dt = cells.ExportDataTable(4, 1, cells.MaxDataRow - 3, cells.MaxDataColumn);
+            {
+                MonthlyReportDetail mrdOne = null;
+                MonthlyReportDetail mrdTwo = null;
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    try
+                    {
+                        mrdOne = new MonthlyReportDetail();
+                        mrdTwo = new MonthlyReportDetail();
+                        if (!string.IsNullOrEmpty(dr[1].ToString()))
+                        {
+                            mrdOne.CompanyID = dr[1].ToString().ToGuid();
+                            mrdTwo.CompanyID = dr[1].ToString().ToGuid();
+                        }
+                        if (!string.IsNullOrEmpty(dr[2].ToString()))
+                        {
+                            mrdOne.CompanyName = dr[2].ToString();
+                            mrdTwo.CompanyName = dr[2].ToString();
+                        }
+                        if (!string.IsNullOrEmpty(dr[3].ToString()))
+                            mrdOne.NPlanAmmount = Convert.ToDecimal(dr[3]); //计划数
+
+                        if (!string.IsNullOrEmpty(dr[4].ToString()))
+                            mrdTwo.NPlanAmmount = Convert.ToDecimal(dr[4]); //计划数
+
+                        if (!string.IsNullOrEmpty(dr[5].ToString()))
+                            mrdOne.NActualAmmount = Convert.ToDecimal(dr[5]); //实际数
+
+                        if (!string.IsNullOrEmpty(dr[6].ToString()))
+                            mrdTwo.NActualAmmount = Convert.ToDecimal(dr[6]); //实际数
+                        //if (dr.ItemArray.Count() > 6)
+                        //{
+                        //    if (!string.IsNullOrEmpty(dr[5].ToString()))
+                        //        mrd.NAccumulativePlanAmmount = Convert.ToDecimal(dr[5]); //累计计划数
+                        //    if (!string.IsNullOrEmpty(dr[6].ToString()))
+                        //        mrd.NAccumulativeActualAmmount = Convert.ToDecimal(dr[6]); //累计实际数
+                        //}
+
+                    }
+                    catch (Exception)
+                    {
+                        error = "实际数或计划数为数字必填项。";//添加数据有问题，请重新添加。
+                        return false;
+                    }
+
+                    listMrdOne.Add(mrdOne);
+                    listMrdTwo.Add(mrdTwo);
+                }
+
+                ListDV.AddRange(FormatTargetDetailNew(out error, listMrdOne, SysId, FinYear, FinMonth, excel.GetStringCustomProperty(workSheet, "TragertName"), CurrentRpt));
+                ListDV.AddRange(FormatTargetDetailNew(out error, listMrdTwo, SysId, FinYear, FinMonth, excel.GetStringCustomProperty(workSheet, "TragertTwoName"), CurrentRpt));
+            }
+            return true;
+        }
 
         public void UpGroupTargetPlanDetailExcel(out string error, HttpContext context, string filePathName)
         {
@@ -1099,8 +1193,6 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
         }
 
-
-
         public void AddOrUpdateData(List<DictionaryVmodel> ListDV)
         {
             List<B_MonthlyReportDetail> lstInsertMonthReportDetail = new List<B_MonthlyReportDetail>();
@@ -1134,7 +1226,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             if (bmr != null && lstInsertMonthReportDetail.Count > 0)
             {
                 bmr.Status = 5;
-                B_MonthlyreportOperator.Instance.UpdateMonthlyreport(bmr); 
+                B_MonthlyreportOperator.Instance.UpdateMonthlyreport(bmr);
             }
 
             //上报的时候序列化后的Json数据
@@ -1176,7 +1268,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             }
 
             //上报的时候序列化后的Json数据
-           // SaveJsonData(MonthReportID);
+            // SaveJsonData(MonthReportID);
 
         }
 
@@ -1254,12 +1346,6 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 B_MonthlyReportJsonDataOperator.Instance.AddMonthlyReportJsonData(JsonData);
             }
         }
-
-
-
-
-
-
 
 
         public bool IsReusable
@@ -1596,12 +1682,128 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             {
                 bmr.Status = 4;
                 B_MonthlyreportOperator.Instance.UpdateMonthlyreport(bmr);
-                
+
             }
 
             //上报的时候序列化后的Json数据
             SaveJsonData(MonthReportID);
         }
 
+
+        #region 优化上传指标
+
+        /// <summary>
+        /// 整合数据（优化：改成删除后批量插入）
+        /// </summary>
+        /// <param name="error"></param>
+        /// <param name="listTartgetDetail">完成情况明细</param>
+        /// <param name="SystemID">系统ID</param>
+        /// <param name="FinYear">年</param>
+        /// <param name="FinMonth">月</param>
+        /// <param name="targetName">指标名称</param>
+        /// <param name="CurrentRpt">当前Rpt</param>
+        /// <returns></returns>
+        public List<DictionaryVmodel> FormatTargetDetailNew(out string error, List<MonthlyReportDetail> listTartgetDetail, Guid SystemID, int FinYear, int FinMonth, string targetName, ReportInstance CurrentRpt)
+        {
+            error = "";
+            List<DictionaryVmodel> listdv = new List<DictionaryVmodel>();
+            List<MonthlyReportDetail> lstInsertMonthReportDetail = new List<MonthlyReportDetail>();
+            Guid targetID;
+            try
+            {
+                targetID = CurrentRpt._Target.Where(p => p.TargetName == targetName).ToList()[0].ID;
+            }
+            catch (Exception)
+            {
+                error = "请确认上传的指标是否是本系统的指标!";
+                return null;
+            }
+
+            //获取当年指标计划ID
+            Guid targetPlanID = Guid.Empty;
+            List<A_TargetPlan> CurrentYearTargetPlan = LJTH.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetTargetplanList(SystemID, FinYear).ToList();
+            if (CurrentYearTargetPlan.Count > 0)
+            {
+                targetPlanID = CurrentYearTargetPlan[0].ID;
+            }
+
+
+            //获取当前月的数据
+            List<MonthlyReportDetail> listCurrentMonthReportDetail = CurrentRpt.ReportDetails.Where(p => p.TargetID == targetID).ToList();
+
+
+            MonthlyReportDetail monthlyReportDetail = null;
+            //是否存在B_MonthlyReport
+
+            foreach (MonthlyReportDetail mrd in listTartgetDetail)
+            {
+                monthlyReportDetail = new MonthlyReportDetail();
+
+                monthlyReportDetail.ID = new Guid();
+                monthlyReportDetail.CreateTime = DateTime.Now;
+                monthlyReportDetail.CreatorName = "System";
+                monthlyReportDetail.SystemID = SystemID;//系统ID
+                monthlyReportDetail.FinYear = FinYear;//当前年
+                monthlyReportDetail.FinMonth = FinMonth;//当前月
+                monthlyReportDetail.TargetID = targetID;//指标ID
+                List<C_Company> listCompany = StaticResource.Instance.CompanyList[SystemID].ToList().Where(p => p.CompanyName == mrd.CompanyName).ToList();
+                if (listCompany.Count() == 0)
+                {
+                    continue;
+                }
+                else
+                {
+                    monthlyReportDetail.CompanyID = listCompany[0].ID; //公司ID
+                    monthlyReportDetail.CompanyProperty1 = listCompany[0].CompanyProperty1; //公司ID
+                    monthlyReportDetail.CompanyProperty = JsonConvert.SerializeObject(listCompany[0]);
+                }
+
+                monthlyReportDetail.TargetPlanID = targetPlanID;//计划指标ID
+                monthlyReportDetail.MonthlyReportID = MonthReportID;//月度报告ID
+                monthlyReportDetail.NPlanAmmount = mrd.NPlanAmmount;//计划指标
+                monthlyReportDetail.NActualAmmount = mrd.NActualAmmount;// 实际数
+                monthlyReportDetail.NDifference = mrd.NActualAmmount - mrd.NPlanAmmount;//差额
+                monthlyReportDetail.NAccumulativePlanAmmount = mrd.NAccumulativePlanAmmount;//累计计划指标
+                monthlyReportDetail.NAccumulativeActualAmmount = mrd.NAccumulativeActualAmmount;//累计实际数
+                monthlyReportDetail.NAccumulativeDifference = mrd.NAccumulativeActualAmmount - mrd.NAccumulativePlanAmmount;//累计差额
+
+                //计算年度累计
+                lstInsertMonthReportDetail.Add(monthlyReportDetail);
+            }
+
+            listdv.Add(new DictionaryVmodel("Insert", lstInsertMonthReportDetail));
+            return listdv;
+        }
+
+
+        public void AddOrUpdateDataNew(List<DictionaryVmodel> ListDV)
+        {
+            List<B_MonthlyReportDetail> lstInsertMonthReportDetail = new List<B_MonthlyReportDetail>();
+            foreach (DictionaryVmodel dv in ListDV)
+            {
+                List<B_MonthlyReportDetail> B_ReportDetails = new List<B_MonthlyReportDetail>();
+                List<MonthlyReportDetail> Listmrd = (List<MonthlyReportDetail>)dv.ObjValue;
+
+                Listmrd.ForEach(p => B_ReportDetails.Add(CalculationEvaluationEngine.CalculationEvaluationService.Calculation(p.ToBModel(), "")));
+                lstInsertMonthReportDetail.AddRange(B_ReportDetails);
+            }
+            if (lstInsertMonthReportDetail.Count > 0)
+            {
+                //优化，批量插入
+                B_MonthlyreportdetailOperator.Instance.BulkAddTargetDetail(lstInsertMonthReportDetail);
+            }
+
+            B_MonthlyReport bmr = B_MonthlyreportOperator.Instance.GetMonthlyreport(MonthReportID);
+            if (bmr != null && lstInsertMonthReportDetail.Count > 0)
+            {
+                bmr.Status = 5;
+                B_MonthlyreportOperator.Instance.UpdateMonthlyreport(bmr);
+            }
+
+            //上报的时候序列化后的Json数据
+            SaveJsonData(MonthReportID);
+
+        }
+        #endregion
     }
 }
