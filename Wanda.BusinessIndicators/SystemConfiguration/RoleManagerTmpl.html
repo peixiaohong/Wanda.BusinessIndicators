@@ -5,7 +5,7 @@
         <td>${item.CnName}</td>
         <td>${item.Description}</td>
         <td><a href="./RoleUsers.aspx?RoleId=${item.ID}">设置</a></td>
-        <td><span data-id="${item.ID}" onclick="SetLimits(this)">设置</span></td>
+        <td><a href="javascript:void(0)" data-id="${item.ID}" onclick="SetLimits(this)">设置</a></td>
         <td>
             <span class="role-edit-icon"  data-id="${item.ID}" onclick="EditRole(this)"><i class="fa fa-pencil"></i></span>
             <span class="role-delete-icon" data-id="${item.ID}" onclick="DeleteRoleData(this)"><i class="fa fa-times"></i></span>

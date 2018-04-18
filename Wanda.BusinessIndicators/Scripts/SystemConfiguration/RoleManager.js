@@ -239,6 +239,9 @@ function Ztree(data) {
 function SaveLimitData(id) {
     var treeObj = $.fn.zTree.getZTreeObj("tree");
     var nodes = treeObj.getCheckedNodes(true);
+    //if (nodes.length > 0) {
+    //    var node = sNodes[0].getParentNode();
+    //}
     if (!nodes.length) {
         $.MsgBox.Alert("提示", "请选择权限");
         return false;
