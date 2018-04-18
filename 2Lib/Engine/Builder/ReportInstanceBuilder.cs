@@ -22,7 +22,22 @@ namespace LJTH.BusinessIndicators.Engine
         }
 
     }
+    /// <summary>
+    /// 经营报告明细项
+    /// </summary>
+    public class ReportInstanceManageDetailBuilder : BaseBuilder<IReportInstanceManageDetail>
+    {
+        private static ReportInstanceManageDetailBuilder _Instance = new ReportInstanceManageDetailBuilder();
 
+        public static ReportInstanceManageDetailBuilder Instance
+        {
+            get
+            {
+                return _Instance;
+            }
+        }
+
+    }
     /// <summary>
     /// 月度报告
     /// </summary>

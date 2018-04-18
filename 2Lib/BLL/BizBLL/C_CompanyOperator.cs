@@ -17,8 +17,8 @@ namespace LJTH.BusinessIndicators.BLL
     /// Company对象的业务逻辑操作
     /// </summary>
     public class C_CompanyOperator : BizOperatorBase<C_Company>
-	{
-    
+    {
+
         #region Generate Code
 
         public static readonly C_CompanyOperator Instance = PolicyInjection.Create<C_CompanyOperator>();
@@ -27,7 +27,7 @@ namespace LJTH.BusinessIndicators.BLL
 
         protected override BaseAdapterT<C_Company> GetAdapter()
         {
-            return  _cCompanyAdapter;
+            return _cCompanyAdapter;
         }
 
         public IList<C_Company> GetCompanyList()
@@ -56,7 +56,7 @@ namespace LJTH.BusinessIndicators.BLL
 
         public C_Company GetCompany(Guid cCompanyID)
         {
-            ExceptionHelper.TrueThrow<ArgumentNullException>(cCompanyID==null ,"Argument cCompanyID is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(cCompanyID == null, "Argument cCompanyID is Empty");
             return base.GetModelObject(cCompanyID);
         }
 
@@ -89,7 +89,7 @@ namespace LJTH.BusinessIndicators.BLL
 
         public Guid RemoveCompany(Guid cCompanyID)
         {
-            ExceptionHelper.TrueThrow<ArgumentNullException>(cCompanyID==null ,"Argument cCompanyID is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(cCompanyID == null, "Argument cCompanyID is Empty");
             Guid result = base.RemoveObject(cCompanyID);
             return result;
         }
@@ -113,7 +113,7 @@ namespace LJTH.BusinessIndicators.BLL
                 return _cCompanyAdapter.UpdateCompanylLisr(CompanyList);
             else
                 return 0;
-            
+
         }
 
         public int AddCompanyList(List<C_Company> CompanyList)
@@ -122,7 +122,7 @@ namespace LJTH.BusinessIndicators.BLL
             int n = 0;
             if (CompanyList.Count > 0)
             {
-               
+
                 foreach (C_Company item in CompanyList)
                 {
                     item.ID = Guid.NewGuid();
@@ -133,7 +133,7 @@ namespace LJTH.BusinessIndicators.BLL
                     n++;
                     AddCompany(item);
                 }
-                
+
             }
             if (n == CompanyList.Count)
             {
@@ -153,7 +153,7 @@ namespace LJTH.BusinessIndicators.BLL
         /// <returns></returns>
         public List<C_Company> GetCompanyListBySystemID(int FinYear, int FinMonth, Guid SystemID, int IsMissTarget, bool IsLatestVersion)
         {
-            return _cCompanyAdapter.GetCompanyListBySystemID(FinYear, FinMonth, SystemID, IsMissTarget,IsLatestVersion);
+            return _cCompanyAdapter.GetCompanyListBySystemID(FinYear, FinMonth, SystemID, IsMissTarget, IsLatestVersion);
         }
 
         /// <summary>
@@ -209,6 +209,18 @@ namespace LJTH.BusinessIndicators.BLL
         }
 
         #endregion
-    } 
+
+        #region  新增方法
+        /// <summary>
+        /// 根据项目公司名称查询项目 注意不是模糊查询
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        public List<C_Company> GetCompanyInfoByName(string name)
+        {
+            return _cCompanyAdapter.GetCompanyInfoByName(name);
+        }
+        #endregion
+    }
 }
 

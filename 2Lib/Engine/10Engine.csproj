@@ -59,6 +59,7 @@
     <Compile Include="DefaultHandle\DefaultExceptionTargetEvaluation.cs" />
     <Compile Include="DefaultHandle\DefaultLastMonthCompanies.cs" />
     <Compile Include="DefaultHandle\DefaultReportInstanceCurrentMissTarget.cs" />
+    <Compile Include="DefaultHandle\DefaultReportInstanceManageDetail.cs" />
     <Compile Include="DefaultHandle\DefaultSummaryTargetEvaluation.cs" />
     <Compile Include="DefaultHandle\DefaultBizContext.cs" />
     <Compile Include="DefaultHandle\DefaultDisplayRate.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Engine\ExceptionTargetEvaluationEngine.cs" />
     <Compile Include="Engine\MonthDescriptionValueEngine.cs" />
     <Compile Include="Engine\ReportInstanceCurrentMissTargetEngine.cs" />
+    <Compile Include="Engine\ReportInstanceManageDetailEngine.cs" />
     <Compile Include="Engine\ResetCalculationEvationEngine.cs" />
     <Compile Include="Engine\SequenceEngine.cs" />
     <Compile Include="Engine\TargetEvaluationEngine.cs" />

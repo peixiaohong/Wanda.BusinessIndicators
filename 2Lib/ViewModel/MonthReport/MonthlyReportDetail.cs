@@ -9,11 +9,12 @@ using LJTH.Lib.Data.AppBase;
 
 namespace LJTH.BusinessIndicators.ViewModel
 {
-    [ORViewMapping(@"
-            SELECT A_MonthlyReportDetail.*,C_Company.CompanyName,C_Company.NeedEvaluation,C_Company.Sequence FROM dbo.A_MonthlyReportDetail	INNER JOIN dbo.C_Company ON 
-                dbo.A_MonthlyReportDetail.SystemID = dbo.C_Company.SystemID AND 
-                    dbo.A_MonthlyReportDetail.CompanyID = dbo.C_Company.ID  ",
-                 "MonthlyReportDetailVModel")]
+
+    //[ORViewMapping(@"
+    //        SELECT A_MonthlyReportDetail.*,C_Company.CompanyName,C_Company.NeedEvaluation,C_Company.Sequence FROM dbo.A_MonthlyReportDetail	INNER JOIN dbo.C_Company ON 
+    //            dbo.A_MonthlyReportDetail.SystemID = dbo.C_Company.SystemID AND 
+    //                dbo.A_MonthlyReportDetail.CompanyID = dbo.C_Company.ID  ",
+    //             "MonthlyReportDetailVModel")]
 
     public class MonthlyReportDetail : BaseModel, IBaseComposedModel
     {
@@ -108,8 +109,19 @@ namespace LJTH.BusinessIndicators.ViewModel
 
         [ORFieldMapping("MIssTargetDescription")]
         public string MIssTargetDescription { get; set; }
-
-
+        /// <summary>
+        /// 年度指标
+        /// </summary>
+        public decimal NPlanAmmountByYear { get; set; }
+        /// <summary>
+        /// 年度实际
+        /// </summary>
+        public decimal NActualAmmountByYear { get; set; }
+        /// <summary>
+        /// 年度完成率
+        /// </summary>
+        public string NDisplayRateByYear { get; set; }
+        
         /// <summary>
         /// 当月未完成说明
         /// </summary>

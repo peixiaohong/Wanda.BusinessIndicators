@@ -23,7 +23,21 @@ namespace LJTH.BusinessIndicators.Engine
         /// <returns></returns>
         List<DictionaryVmodel> GetDetailRptDataSource(ReportInstance RptModel,string strCompanyProperty, string strOrderType, bool IncludeHaveDetail);
     }
-
+    /// <summary>
+    /// 经营月报明细项接口
+    /// </summary>
+    public interface IReportInstanceManageDetail
+    {
+        /// <summary>
+        /// 获取明细指标数据
+        /// </summary>
+        /// <param name="RptModel">ReportInstance:通用类型数据</param>
+        /// <param name="strCompanyProperty">公司属性：在查询经营系统中用到，项目系统中暂时没用到, （这里占用该字段来标注，引擎的调用方式：当strCompanyProperty=“Reported”时，表示是在指标上报页面调用的，反之则是在查询的时候调用）</param>
+        /// <param name="strOrderType">排序字段：在经营系统中用到，在项目系统中被当作IsPlan字段来用</param>
+        /// <param name="IncludeHaveDetail">是否包含明细：在经营系统中用到，在项目系统中被当作IsLatestVersion用</param>
+        /// <returns></returns>
+        List<DictionaryVmodel> GetManageDetailRptDataSource(ReportInstance RptModel, string strCompanyProperty, string strOrderType, bool IncludeHaveDetail);
+    }
     /// <summary>
     /// 月报说明接口
     /// </summary>

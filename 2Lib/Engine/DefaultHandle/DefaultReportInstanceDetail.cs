@@ -32,7 +32,6 @@ namespace LJTH.BusinessIndicators.Engine
         List<C_Target> _Target = null;
         public List<DictionaryVmodel> GetDetailRptDataSource(ReportInstance RptModel, string strCompanyProperty, string strOrderType, bool IncludeHaveDetail)
         {
-            
             _System = RptModel._System;
             FinMonth = RptModel.FinMonth;
             FinYear = RptModel.FinYear;
@@ -74,11 +73,12 @@ namespace LJTH.BusinessIndicators.Engine
                 lstVItemCompanyProperty = SpliteCompanyPropertyXml("List", _System.Configuration)[0].listCP.ToList();
             }
             List<DictionaryVmodel> listvmodel = FromatData(lstVTarget, lstVItemCompanyProperty);
-
+            if (lstVTarget.Where(m => m.IsBlendTarget == true).Any())
+            {
+                listvmodel = GetMergeComplateMonthReportDetail(listvmodel);
+            }
             return listvmodel;
         }
-
-
 
         /// <summary>
         /// 拼装数据
@@ -171,7 +171,7 @@ namespace LJTH.BusinessIndicators.Engine
                             strHtmlTemplate = GetComplateMonthReportDetailHtmlTemplate(_System.Configuration);
                         }
                     }
-                    listDictionaryVModel.Add(new DictionaryVmodel(vtarget.TargetName, ItemCompanyPropertyViewModel, "Target", strHtmlTemplate));
+                    listDictionaryVModel.Add(new DictionaryVmodel(vtarget.TargetName, ItemCompanyPropertyViewModel, "Target", strHtmlTemplate, 0, vtarget.Senquence));
                     #endregion
                 }
             }
@@ -198,6 +198,16 @@ namespace LJTH.BusinessIndicators.Engine
                 bmrd.NAccumulativePlanAmmount = listMRD.Sum(p => p.NAccumulativePlanAmmount);
                 bmrd.NAccumulativeActualAmmount = listMRD.Sum(p => p.NAccumulativeActualAmmount);
                 bmrd.NAccumulativeDifference = listMRD.Sum(p => p.NAccumulativeDifference);
+                bmrd.NPlanAmmountByYear = listMRD.Sum(p => p.NPlanAmmountByYear);
+                if (bmrd.NPlanAmmountByYear != 0)
+                {
+                    bmrd.NDisplayRateByYear = Math.Round((bmrd.NAccumulativeActualAmmount / bmrd.NPlanAmmountByYear), 5, MidpointRounding.AwayFromZero).ToString("P1");
+                }
+                else
+                {
+                    bmrd.NDisplayRateByYear = "--";
+                }
+
             }
             bmrd = TargetEvaluationEngine.TargetEvaluationService.Calculation(bmrd, false);
             listSummaryMRD.Add(bmrd);
@@ -367,7 +377,15 @@ namespace LJTH.BusinessIndicators.Engine
             bmrd.NAccumulativePlanAmmount = listData.Sum(p => p.NAccumulativePlanAmmount);
             bmrd.NAccumulativeActualAmmount = listData.Sum(p => p.NAccumulativeActualAmmount);
             bmrd.NAccumulativeDifference = listData.Sum(p => p.NAccumulativeDifference);
-
+            bmrd.NPlanAmmountByYear = listData.Sum(p => p.NPlanAmmountByYear);
+            if (bmrd.NPlanAmmountByYear != 0)
+            {
+                bmrd.NDisplayRateByYear = Math.Round((bmrd.NAccumulativeActualAmmount / bmrd.NPlanAmmountByYear), 5, MidpointRounding.AwayFromZero).ToString("P1");
+            }
+            else
+            {
+                bmrd.NDisplayRateByYear = "--";
+            }
             if (IsDifferenceException) //异常
             {
               List<MonthlyReportDetail> aa = listData.Where(p => p.NAccumulativeDifference < 0).ToList();
@@ -454,7 +472,19 @@ namespace LJTH.BusinessIndicators.Engine
             List<VTarget> targetList = new List<VTarget>();
 
             XElement elementCTD = xelement;
-            if (elementCTD.Elements("ComplateTargetDetail").Elements("Target") != null)
+            if (elementCTD.Elements("ComplateTargetDetail").Elements("BlendTargets").Count()>0)
+            {
+                //完成情况明细模板
+                List<XElement> Targets = elementCTD.Elements("ComplateTargetDetail").Elements("BlendTargets").Elements("Target").ToList();
+                VTarget vt = null;
+                foreach (XElement target in Targets)
+                {
+                    vt = new VTarget(target);
+                    targetList.Add(vt);
+                }
+
+            }
+            if (elementCTD.Elements("ComplateTargetDetail").Elements("Target").Count() > 0)
             {
                 //完成情况明细模板
                 List<XElement> Targets = elementCTD.Elements("ComplateTargetDetail").Elements("Target").ToList();
@@ -565,18 +595,77 @@ namespace LJTH.BusinessIndicators.Engine
             }
             return listDV;
         }
+        /// <summary>
+        ///  合并完成情况明细（混合指标）
+        /// </summary>
+        /// <param name="dvCurrent">已计算的单项指标集合</param>
+        /// <returns></returns>
+        public List<DictionaryVmodel> GetMergeComplateMonthReportDetail(List<DictionaryVmodel> dvCurrentList)
+        {
+            List<DictionaryVmodel> dvResult = new List<DictionaryVmodel>();
+            
+            var completeBlendTargetDetailXml = SplitCompleteBlendTargetDetailXml(_System.Configuration);
+            //遍历完成情况明细中包含几个混合指标（目前需求一个版块只允许有一个）
+            foreach (var item in completeBlendTargetDetailXml)
+            {
+                //合并混合指标为Object            
+                List<DictionaryVmodel> dvMergeList = new List<DictionaryVmodel>();
+
+                DictionaryVmodel dv = new DictionaryVmodel();
+                dv.Name = item.TargetName;
+                dv.IsBlendTarget = true;
+                dv.Mark = "Target";
+                dv.Senquence = item.Senquence;
+                foreach (var dvItem in dvCurrentList)
+                {
+                    dv.HtmlTemplate = dvItem.HtmlTemplate;
+                    var TargetList = item.VTargetList.Where(m => m.TargetName == dvItem.Name).ToList();
+                    //判断当前指标是否为混合指标
+                    if (TargetList != null && TargetList.Count() > 0)
+                    {
+                        dvMergeList.Add(dvItem);
+                    }
+                    else
+                    {
+                        //如果不存在单指标才重新添加
+                        if (dvResult.Where(m => m.Name == dvItem.Name).Count() == 0)
+                            dvResult.Add(dvItem);
+                    }
+                }
+                if (dvMergeList.Count > 0)
+                {
+                    dv.ObjValue = dvMergeList;
+                    dvResult.Add(dv);
+                }
+            }
+            //重新排序
+            return dvResult.OrderBy(m=>m.Senquence).ToList();
+        }
+        /// <summary>
+        /// 读取xml文件（ComplateTargetDetail.xml）
+        /// </summary>
+        /// <returns>完成情况明细模板-混合指标</returns>
+        private List<VBlendTarget> SplitCompleteBlendTargetDetailXml(XElement xelement)
+        {
+            List<VBlendTarget> targetList = new List<VBlendTarget>();
+
+            XElement elementCTD = xelement;
+
+            if (elementCTD.Elements("ComplateTargetDetail").Elements("BlendTargets").Count() > 0)
+            {
+                //完成情况明细模板
+                List<XElement> Targets = elementCTD.Elements("ComplateTargetDetail").Elements("BlendTargets").ToList();
+                VBlendTarget vt = null;
+                foreach (XElement target in Targets)
+                {
+                    vt = new VBlendTarget(target);
+                    targetList.Add(vt);
+                }
+            }
+            return targetList;
+        }
+
     }
-
-
-
-
-
-
-
-
-
-
-
 
     public class ReportInstanceGroupDetail : IReportInstanceDetail
     {
@@ -953,7 +1042,6 @@ namespace LJTH.BusinessIndicators.Engine
         }
     }
 
-
     public class ReportInstanceDirectlyDetail : IReportInstanceDetail
     {
         public List<DictionaryVmodel> GetDetailRptDataSource(ReportInstance RptModel, string strCompanyProperty, string strOrderType, bool IncludeHaveDetail)
@@ -962,4 +1050,5 @@ namespace LJTH.BusinessIndicators.Engine
             return lstSummary;
         }
     }
+
 }

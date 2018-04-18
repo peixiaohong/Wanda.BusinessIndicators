@@ -144,6 +144,7 @@ namespace Plugin.EmployeeTransfer
                 string.Format(@"
 INSERT INTO [dbo].[Employee]
            ([ID]
+           ,[OAID]
            ,[LoginName]
            ,[EmployeeName]
            ,[Gender]
@@ -158,7 +159,7 @@ INSERT INTO [dbo].[Employee]
            ,[OrderLevel]
            ,[CreatorLoginName]
            ,[CreatorName]
-           ,[CreatorTime]
+           ,[CreateTime]
            ,[ModifierLoginName]
            ,[ModifierName]
            ,[ModifyTime]
@@ -169,29 +170,31 @@ INSERT INTO [dbo].[Employee]
 
 )
      VALUES
-           ({0}
-           ,'{1}'
+           ('{0}'
+           ,{1}
            ,'{2}'
-           ,{3}
-           ,'{4}'
+           ,'{3}'
+           ,{4}
            ,'{5}'
            ,'{6}'
            ,'{7}'
            ,'{8}'
            ,'{9}'
-           ,{10}
+           ,'{10}'
            ,{11}
            ,{12}
-           ,'{13}'
+           ,{13}
            ,'{14}'
            ,'{15}'
            ,'{16}'
            ,'{17}'
            ,'{18}'
-           ,{19}
+           ,'{19}'
            ,{20}
-           ,'{21}'
-           ,'{22}')"
+           ,{21}
+           ,'{22}'
+           ,'{23}')"
+    , Guid.NewGuid()
     , x.ID
     , x.PERSON_ID_MDM
     , x.FIRST_NAME + x.LAST_NAME

@@ -182,7 +182,7 @@ namespace LJTH.BusinessIndicators.ViewModel
             this.Mark = Marks;
         }
 
-        public DictionaryVmodel(string Names, object Values, string Marks,string HtmlTemplate)
+        public DictionaryVmodel(string Names, object Values, string Marks, string HtmlTemplate)
         {
             this.Name = Names;
             this.ObjValue = Values;
@@ -198,6 +198,16 @@ namespace LJTH.BusinessIndicators.ViewModel
             this.Value = value;
             this.RowSpanCount = rowSpanCount;
         }
+        public DictionaryVmodel(string Names, object Values, string Marks, string htmlTemplate, int rowSpanCount,int senquence)
+        {
+            this.Name = Names;
+            this.ObjValue = Values;
+            this.Mark = Marks;
+            this.HtmlTemplate = htmlTemplate;
+            this.RowSpanCount = rowSpanCount;
+            this.Senquence = senquence;
+        }
+
 
         /// <summary>
         /// 名字
@@ -243,7 +253,13 @@ namespace LJTH.BusinessIndicators.ViewModel
 
 
         //明细项小计字段
-        public B_MonthlyReportDetail BMonthReportDetail {get;set;}
+        public B_MonthlyReportDetail BMonthReportDetail { get; set; }
+        //是否混合指标
+        public bool IsBlendTarget { get; set; }
+        //排序
+        public int Senquence { get; set; }
+        //是否包含区域
+        public bool IsHaveArea { get; set; }
     }
 
     public class TargetMonthlyReportDetail

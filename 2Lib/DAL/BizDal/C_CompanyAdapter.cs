@@ -28,7 +28,7 @@ namespace LJTH.BusinessIndicators.DAL
             SqlParameter companyId = CreateSqlParameter("@CompanyId", System.Data.DbType.Guid, _companyId);
             SqlParameter VersionTime = CreateSqlParameter("@VersionTime", System.Data.DbType.Guid, _VersionTime);
 
-            return ExecuteQuery(sql, companyId, VersionTime) ;
+            return ExecuteQuery(sql, companyId, VersionTime);
 
         }
 
@@ -235,8 +235,24 @@ WHERE   SystemID = @SystemID
         AND IsDeleted = 0
         AND CompanyName LIKE '%总计%'";
             SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
-            return ExecuteQuery(sql, pSystemID );
+            return ExecuteQuery(sql, pSystemID);
         }
+
+        #region 新增方法
+
+        /// <summary>
+        /// 根据项目公司名称查询项目 注意不是模糊查询
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public List<C_Company> GetCompanyInfoByName(string name) {
+
+            string sql = string.Format(@"Select * From [dbo].[C_Company] Where [CompanyName]='{0}'", name);
+            return ExecuteQuery(sql);
+        }
+
+
+        #endregion
     }
 }
 

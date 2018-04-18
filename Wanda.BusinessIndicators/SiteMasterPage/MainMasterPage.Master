@@ -27,7 +27,10 @@
     <link href="/styles/popup.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="/styles/menu.css" />--%>
     <link href="/Styles/jmenu.css" rel="stylesheet" />
-
+    <%--<link href="../Styles/ztree/demo.css" rel="stylesheet" />--%>
+    <link href="../Styles/ztree/zTreeStyle.css" rel="stylesheet" />
+    <script src="../Scripts/ztree/jquery.ztree.core-3.5.min.js"></script>
+    <script src="../Scripts/ztree/jquery.ztree.excheck-3.5.min.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 

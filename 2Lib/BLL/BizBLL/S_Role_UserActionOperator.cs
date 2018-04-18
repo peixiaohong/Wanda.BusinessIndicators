@@ -32,6 +32,49 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
 
 
         #region methods
-        #endregion 
+
+        /// <summary>
+        /// 根据角色ID, 查询已经配置的所有账号
+        /// </summary>
+        /// <param name="RoleID"></param>
+        /// <returns></returns>
+        public List<string> GetDataByRoleID(Guid RoleID)
+        {
+            return _s_Role_UserAdapter.GetDataByRoleID(RoleID);
+        }
+
+        /// <summary>
+        /// 批量新增数据
+        /// </summary>
+        /// <param name="datas"></param>
+        /// <returns></returns>
+        public int InsertListData(List<S_Role_User> datas)
+        {
+            return _s_Role_UserAdapter.InsertList(datas);
+        }
+
+        /// <summary>
+        /// 根据角色ID,用户账号删除对应的关系
+        /// </summary>
+        /// <param name="roleID"></param>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public int DelteDataByRoleID_LoginName(Guid roleID, string loginName)
+        {
+            return _s_Role_UserAdapter.DeleteDataByRoleID_LoginName(roleID, loginName);
+        }
+
+        /// <summary>
+        /// 根据用户账号，删除所有的 用户-角色 关系
+        /// </summary>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public int DeleteDatasByLoginName(string loginName)
+        {
+            return _s_Role_UserAdapter.DeleteDatasByLoginName(loginName);
+        }
+
+        #endregion
     }
 }
+

@@ -133,7 +133,7 @@ var CommonUtil = {
             btnOk();  //alert只是弹出消息，因此没必要用到回调函数callback
             btnNo();
         },
-        Confirm: function (title,sketchErrorMessage, msg, callback) {
+        Confirm: function (title, sketchErrorMessage, msg, callback) {
             GenerateHtml("confirm", title,sketchErrorMessage, msg);
             btnOk(callback);
             btnNo();
@@ -145,7 +145,11 @@ var GenerateHtml = function (type, title, sketchErrorMessage, msg) {
         _html += '<div id="mb_box"></div><div id="mb_con"><span id="mb_tit"><img src="../Images/action-icon.png">  ' + title + ' <a id="mb_ico"><img src="../Images/close-icon.png"></a></span>';
         if (msg == "add") {
             _html += '<div id="mb_msg"><div style="margin-bottom: 15px;"><span>角色名称：</span><input type="text" id="CnName"/><p  class="CnNameAction"style="padding-left:10px;color: #cb5c61;display:none;">请输入角色名称<p></div><div><span>角色描述：</span><input type="text" id="Description"/></div></div><div id="mb_btnbox">';
-        } else{
+        } else if (msg == "edit") {
+            
+            _html += '<div id="mb_msg"><div style="margin-bottom: 15px;"><span>角色名称：</span><input type="text" id="CnName" value="' + JSON.parse(sketchErrorMessage).CnName + '"/><p  class="CnNameAction"style="padding-left:10px;color: #cb5c61;display:none;">请输入角色名称<p></div><div><span>角色描述：</span><input type="text" id="Description" value="' + JSON.parse(sketchErrorMessage).Description + '"/></div></div><div id="mb_btnbox">';
+        }
+        else {
             _html += '<div id="se_msg">' + sketchErrorMessage + '</div><div id="mb_btnbox">';
         }
         

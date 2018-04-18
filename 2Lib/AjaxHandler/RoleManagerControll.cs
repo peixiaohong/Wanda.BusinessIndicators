@@ -1,6 +1,7 @@
 ﻿using Lib.Web;
 using Lib.Web.MVC.Controller;
 using LJTH.BusinessIndicators.BLL.BizBLL;
+using LJTH.BusinessIndicators.Common;
 using LJTH.BusinessIndicators.Model.BizModel;
 using LJTH.BusinessIndicators.Model.Filter;
 using Newtonsoft.Json;
@@ -111,7 +112,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 #region 修改
                 else
                 {
-                    if (oldRoles != null && oldRoles.Where(or=>or.ID!=entity.ID).Count()>0)
+                    if (oldRoles != null && oldRoles.Where(or => or.ID != entity.ID).Count() > 0)
                     {
                         return new
                         {
@@ -263,7 +264,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 {
                     Data = "",
                     Success = 0,
-                    Message ="参数丢失"
+                    Message = "参数丢失"
                 };
             }
 
@@ -279,7 +280,9 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     item.ModifyTime = DateTime.Now;
                     item.ID = Guid.NewGuid();
                 }
-                var resultData = S_RolePermissionsActionOperator.Instance.SaveListData(RoleID.ToGuid(),entitys);
+                var resultData = S_RolePermissionsActionOperator.Instance.SaveListData(RoleID.ToGuid(), entitys);
+                //清除缓存
+                WebHelper.InvalidAuthCache();
                 if (resultData > 0)
                 {
                     Success = 1;
@@ -292,7 +295,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 }
                 return new
                 {
-                    Data = data,
+                    Data = resultData,
                     Success = Success,
                     Message = Message
                 };
@@ -312,6 +315,11 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
 
         #region 人员设置
 
+        /// <summary>
+        /// 获取用户信息
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         [LibAction]
         public object GetAllUser(string data)
         {
@@ -322,13 +330,13 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             try
             {
                 AllUserPermissionsFilter filter = JsonConvert.DeserializeObject<AllUserPermissionsFilter>(data);
-                var resultData = EmployeeActionOperator.Instance.GetAllUser(filter,out TotalCount);
+                var resultData = EmployeeActionOperator.Instance.GetAllUser(filter, out TotalCount);
                 Success = 1;
                 Message = "查询成功";
                 return new
                 {
                     Data = resultData,
-                    TotalCount=TotalCount,
+                    TotalCount = TotalCount,
                     Success = Success,
                     Message = Message
                 };
@@ -338,7 +346,146 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 return new
                 {
                     Data = "",
-                    TotalCount= TotalCount,
+                    TotalCount = TotalCount,
+                    Success = 0,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        /// <summary>
+        /// 保存角色—用户信息
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [LibAction]
+        public object SaveUser_Role(string PageLoginNames, string RoleID)
+        {
+            string Message = string.Empty;
+            int Success = 0;
+
+            if (RoleID == "" || PageLoginNames == "")
+            {
+                return new
+                {
+                    Data = "",
+                    Success = 0,
+                    Message = "参数丢失"
+                };
+            }
+
+            try
+            {
+                List<string> oldLoginNames = S_Role_UserActionOperator.Instance.GetDataByRoleID(RoleID.ToGuid());
+                List<S_Role_User> entitys = new List<S_Role_User>();
+                string[] LoginNames = PageLoginNames.Split(',');
+                if (LoginNames.Count() < 1)
+                {
+                    return new
+                    {
+                        Data = "",
+                        Success = 0,
+                        Message = "参数丢失"
+                    };
+                }
+                foreach (var item in LoginNames)
+                {
+                    if (oldLoginNames.Count > 0)
+                    {
+                        if (oldLoginNames.Contains(item))
+                        {
+                            break;
+                        }
+                    }
+                    S_Role_User su = new S_Role_User();
+                    su.RoleID = RoleID.ToGuid();
+                    su.LoginName = item;
+                    su.CreateTime = DateTime.Now;
+                    su.CreatorName = "测试";
+                    su.IsDeleted = false;
+                    su.ModifierName = "测试";
+                    su.ModifyTime = DateTime.Now;
+                    su.ID = Guid.NewGuid();
+                    entitys.Add(su);
+                }
+                int resultData = S_Role_UserActionOperator.Instance.InsertListData(entitys);
+                //清除缓存
+                WebHelper.InvalidAuthCache();
+                if (resultData > 0)
+                {
+                    Success = 1;
+                    Message = "保存成功";
+                }
+                else
+                {
+                    Success = 0;
+                    Message = "保存失败";
+                }
+                return new
+                {
+                    Data = "",
+                    Success = Success,
+                    Message = Message
+                };
+            }
+            catch (Exception ex)
+            {
+                return new
+                {
+                    Data = "",
+                    Success = 0,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        /// <summary>
+        /// 删除用户和角色的关联【一条数据】
+        /// </summary>
+        /// <param name="RoleID"></param>
+        /// <param name="LoginName"></param>
+        /// <returns></returns>
+        [LibAction]
+        public object DeleteRole_User(string RoleID,string LoginName)
+        {
+
+            string Message = string.Empty;
+            int Success = 0;
+            try
+            {
+                if (RoleID == "" || LoginName == "")
+                {
+                    return new
+                    {
+                        Data = "",
+                        Success = 0,
+                        Message = "参数不完整"
+                    };
+                }
+                
+                var resultData = S_Role_UserActionOperator.Instance.DelteDataByRoleID_LoginName(RoleID.ToGuid(),LoginName);
+                if (resultData > 0)
+                {
+                    Success = 1;
+                    Message = "删除成功";
+                }
+                else
+                {
+                    Success = 0;
+                    Message = "删除失败";
+                }
+                return new
+                {
+                    Data = resultData,
+                    Success = Success,
+                    Message = Message
+                };
+            }
+            catch (Exception ex)
+            {
+                return new
+                {
+                    Data = "",
                     Success = 0,
                     Message = ex.Message
                 };

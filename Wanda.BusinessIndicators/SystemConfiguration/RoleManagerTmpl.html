@@ -4,12 +4,43 @@
         <td>${i+1}</td>
         <td>${item.CnName}</td>
         <td>${item.Description}</td>
-        <td><span>设置</span></td>
-        <td><span>设置</span></td>
+        <td><a href="./RoleUsers.aspx?RoleId=${item.ID}">设置</a></td>
+        <td><a href="javascript:void(0)" data-id="${item.ID}" onclick="SetLimits(this)">设置</a></td>
         <td>
-            <span class="role-edit-icon"  data-id="${item.ID}" onclick="SaveRole('edit',this)"><i class="fa fa-pencil"></i></span>
+            <span class="role-edit-icon"  data-id="${item.ID}" onclick="EditRole(this)"><i class="fa fa-pencil"></i></span>
             <span class="role-delete-icon" data-id="${item.ID}" onclick="DeleteRoleData(this)"><i class="fa fa-times"></i></span>
         </td>
+    </tr>
+    {{/each}}
+</script>
+
+<script type="text/x-jquery-tmpl" id="ShowMenuUsersDataTmpl">
+    {{each(i,item) Data}}
+    <tr>
+        <td>${i+1}</td>
+        <td>${item.EmployeeName}</td>
+        <td>${item.LoginName}</td>
+        <td>${item.JobTitle}</td>
+        <td><span title="${item.DeptFullName}">${item.DeptFullName}</span></td>
+        <td>${item.RoleName}</td>
+        <td>${item.OrgName}</td>
+        <td>
+            <span class="role-delete-icon" data-name="${item.LoginName}" onclick="DeleteRoleUserData(this)"><i class="fa fa-times"></i></span>
+        </td>
+    </tr>
+    {{/each}}
+</script>
+
+<script type="text/x-jquery-tmpl" id="UsersDataTmpl">
+    {{each(i,item) Data}}
+    <tr>
+        <td>
+            <input type="checkbox" name="${item.LoginName}" value="" class="userChecked"/>
+        </td>
+        <td>${item.EmployeeName}</td>
+        <td>${item.LoginName}</td>
+        <td>${item.JobTitle}</td>
+        <td><span title="${item.DeptFullName}">${item.DeptFullName}</span></td>
     </tr>
     {{/each}}
 </script>

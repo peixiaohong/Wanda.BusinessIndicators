@@ -190,6 +190,7 @@ FROM    dbo.C_Target CT
             {
                 MonthlyReportDetail item = new MonthlyReportDetail();
                 ORMapping.DataRowToObject(row, item);
+                item.NDisplayRateByYear = item.NPlanAmmountByYear == 0 ? "--" : Math.Round((item.NAccumulativeActualAmmount / item.NPlanAmmountByYear), 5, MidpointRounding.AwayFromZero).ToString("P1");
                 data.Add(item);
             });
             return data;

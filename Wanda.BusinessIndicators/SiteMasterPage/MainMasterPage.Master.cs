@@ -9,6 +9,8 @@ using System.Web.UI.WebControls;
 using System.Xml;
 using LJTH.BusinessIndicators.Common;
 using Wanda.Platform.Permission.ClientComponent;
+using LJTH.BusinessIndicators.BLL.BizBLL;
+using LJTH.BusinessIndicators.Model.BizModel;
 
 namespace LJTH.BusinessIndicators.Web
 {
@@ -58,17 +60,13 @@ namespace LJTH.BusinessIndicators.Web
 
         private List<NavSiteMapNode> GetCachedNavNodes()
         {
-            string cacheKey = "List_NavSiteMapNode_"; //+ WebHelper.GetCurrentUser().UserID;
-            List<NavSiteMapNode> result = null;
+            string cacheKey = "List_NavSiteMapNode_" + HttpContext.Current.User.Identity.Name;
+            List<NavSiteMapNode> result = (List<NavSiteMapNode>)HttpContext.Current.Cache[cacheKey];
 
             //  result = (List<NavSiteMapNode>) HttpContext.Current.Cache[cacheKey];
             if (result == null)
             {
-                string mapFile = MapPath("~/sitemasterpage/navigator.sitemap");
-                SiteMapParser parser = new SiteMapParser(mapFile);
-                NavSiteMap siteMap = parser.GetCachedMap();
-                result = GetNavNodesAfterCheck(siteMap);
-
+                result = GetMenus();
                 CacheDependency fileDependency = new CacheDependency(Server.MapPath(WebHelper.AuthCacheDependencyFile));
                 HttpContext.Current.Cache.Insert(cacheKey, result, fileDependency);
             }
@@ -229,6 +227,74 @@ namespace LJTH.BusinessIndicators.Web
             return true;
         }
 
+        #region 读取数据库中配置的菜单
+        private List<NavSiteMapNode> GetMenus()
+        {
+            List<S_Menu> menus = S_MenuActionOperator.Instance.GetLoinNameMenu(HttpContext.Current.User.Identity.Name);
+            if (menus.Count < 1)
+            {
+                Response.Redirect("../NoPermission.aspx");
+            }
+            List<NavSiteMapNode> list_node = new List<NavSiteMapNode>();
+            Guid parentMenuID = "00000000-0000-0000-0000-000000000000".ToGuid();
+            foreach (var item in menus.Where(o => o.ParentMenuID == parentMenuID))
+            {
+                bool IsSelect = false;
+
+                NavSiteMapNode nm = new NavSiteMapNode();
+                nm.Enable = true;
+                nm.Description = item.CnName;
+                nm.ID = item.Sequence;
+                nm.Popup = false;
+                nm.ResourceKey = item.ResourceKey;
+                nm.Title = item.CnName;
+                nm.Url = item.Url;
+                nm.Nodes = GetSubmenu(menus, item.ID, ref IsSelect);
+                if (this.Request.Url.AbsoluteUri.ToLower().Contains(item.Url.ToLower()))
+                {
+                    if (IsSelect)
+                    {
+                        nm.Selected = IsSelect;
+                    }
+                    if (nm.Nodes.Count < 1)
+                    {
+                        nm.Selected = true;
+                    }
+                }
+                list_node.Add(nm);
+            }
+            return list_node;
+        }
+
+        private List<NavSiteMapNode> GetSubmenu(List<S_Menu> menuInfo, Guid parentMenuID, ref bool IsSelect)
+        {
+            IsSelect = false;
+            List<NavSiteMapNode> list_node = new List<NavSiteMapNode>();
+            foreach (var item in menuInfo.Where(o => o.ParentMenuID == parentMenuID))
+            {
+                NavSiteMapNode nm = new NavSiteMapNode();
+                nm.Enable = true;
+                nm.Description = item.CnName;
+                nm.ID = item.Sequence;
+                nm.Popup = false;
+                nm.ResourceKey = item.ResourceKey;
+                nm.Title = item.CnName;
+                nm.Url = item.Url;
+                nm.Nodes = GetSubmenu(menuInfo, item.ID, ref IsSelect);
+                if (this.Request.Url.AbsoluteUri.ToLower().Contains(item.Url.ToLower()))
+                {
+                    if (item.Url != "")
+                    {
+                        nm.Selected = true;
+                        IsSelect = true;
+                    }
+                }
+                list_node.Add(nm);
+            }
+            return list_node;
+        }
+
+        #endregion 
         //private bool _enabledSSO = true;
 
         //protected void Button1_Click(object sender, EventArgs e)
@@ -245,4 +311,5 @@ namespace LJTH.BusinessIndicators.Web
         //}
 
     }
+
 }

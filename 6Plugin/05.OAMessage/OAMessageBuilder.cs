@@ -37,13 +37,13 @@ namespace Plugin.OAMessage
         /// <param name="pcurl"></param>
         /// <param name="appurl"></param>
         public static void ReceiveDone(string flowid, string nodename, string receiver)
-        
         {
             var finder = OAMessageOperator.Instance.LoadOAMessage(flowid, nodename, receiver);
             if (finder == null)
             {
                 throw new OAMessageException("当前待办未找到(flowid+nodename+receiver)无法设置为已读状态");
             }
+            finder.AppUrl = null;
             CommonReceive(finder.FlowID,finder.FlowTitle, finder.WorkflowName, finder.NodeName, finder.PCUrl, finder.AppUrl, finder.CreateFlowUser, finder.ReceiverFlowUser, 2, 0, finder.CreateFlowTime);
         }
         /// <summary>
@@ -62,6 +62,8 @@ namespace Plugin.OAMessage
             {
                 throw new OAMessageException("当前待办未找到(flowid+nodename+receiver)无法设置为已读状态");
             }
+            finder.AppUrl = null;
+            finder.PCUrl = null;
             CommonReceive(finder.FlowID, finder.FlowTitle, finder.WorkflowName, finder.NodeName, finder.PCUrl, finder.AppUrl, finder.CreateFlowUser, finder.ReceiverFlowUser, 4, 0, finder.CreateFlowTime);
         }
         /// <summary>

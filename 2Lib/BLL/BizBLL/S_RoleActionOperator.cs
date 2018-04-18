@@ -67,6 +67,17 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         {
             return base.UpdateModelObject(data);
         }
-        #endregion 
+
+        /// <summary>
+        /// 获取全部有效角色 【用于用户授权角色页面】
+        /// </summary>
+        /// <param name="cnName"></param>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<S_Role> GetDatasByCnName(string cnName, string loginName)
+        {
+            return _s_RoleAdapter.GetDatasByCnName(cnName, loginName);
+        }
+        #endregion
     }
 }

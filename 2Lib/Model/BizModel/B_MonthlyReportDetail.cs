@@ -300,6 +300,21 @@ namespace LJTH.BusinessIndicators.Model
         [ORFieldMapping("CompanyProperty")]
         public string CompanyProperty{get;set;}
 
-	} 
+        /// <summary>
+        /// 年度指标
+        /// </summary>
+        [NoMapping]
+        public decimal NPlanAmmountByYear { get; set; }
+        /// <summary>
+        /// 年度实际
+        /// </summary>
+        [NoMapping]
+        public decimal NActualAmmountByYear { get; set; }
+        /// <summary>
+        /// 年度完成率
+        /// </summary>
+        [NoMapping]
+        public string NDisplayRateByYear { get; set; }
+    } 
 }
 
