@@ -10,7 +10,8 @@ using System.Text;
 using System.Transactions;
 using System.Data;
 using LJTH.BusinessIndicators.ViewModel;
-
+using System.Reflection;
+using System.Configuration;
 
 namespace LJTH.BusinessIndicators.DAL
 {
@@ -29,10 +30,6 @@ namespace LJTH.BusinessIndicators.DAL
             return ExecuteQuery(sql);
         }
 
-        
-
-
-
 
         /// <summary>
         /// 更新列表
@@ -47,7 +44,7 @@ namespace LJTH.BusinessIndicators.DAL
             {
                 List.ForEach(p =>
                 {
-                  
+
                     sb.Append(ORMapping.GetUpdateSql<B_MonthlyReportDetail>(p, TSqlBuilder.Instance) + sqlSeperator);
                 });
 
@@ -135,21 +132,21 @@ namespace LJTH.BusinessIndicators.DAL
                 return false;
         }
 
-       /// <summary>
-       /// A表获取数据，复制到B表
-       /// </summary>
-       /// <param name="MonthlyReportID"></param>
-       /// <returns></returns>
-        internal List<B_MonthlyReportDetail> GetMonthlyReportDetail_ByAToB( int FinYear , int FinMonth ,Guid SystemID , Guid MonthlyReportID)
+        /// <summary>
+        /// A表获取数据，复制到B表
+        /// </summary>
+        /// <param name="MonthlyReportID"></param>
+        /// <returns></returns>
+        internal List<B_MonthlyReportDetail> GetMonthlyReportDetail_ByAToB(int FinYear, int FinMonth, Guid SystemID, Guid MonthlyReportID)
         {
             string sql = "GetMonthlyReportDetail_ByAToB ";
-            
-            SqlParameter p1 =  CreateSqlParameter("@FinYear", DbType.Int32 , FinYear);
-            SqlParameter p2 =  CreateSqlParameter("@FinMonth", DbType.Int32, FinMonth);
-            SqlParameter p3 =  CreateSqlParameter("@SystemID", DbType.Guid, SystemID);
-            SqlParameter p4 =  CreateSqlParameter("@MonthlyReportID", DbType.Guid, MonthlyReportID);
+
+            SqlParameter p1 = CreateSqlParameter("@FinYear", DbType.Int32, FinYear);
+            SqlParameter p2 = CreateSqlParameter("@FinMonth", DbType.Int32, FinMonth);
+            SqlParameter p3 = CreateSqlParameter("@SystemID", DbType.Guid, SystemID);
+            SqlParameter p4 = CreateSqlParameter("@MonthlyReportID", DbType.Guid, MonthlyReportID);
             DataSet ds = DbHelper.RunSPReturnDS(sql, ConnectionName, p1, p2, p3, p4);
-   
+
             List<B_MonthlyReportDetail> data = new List<B_MonthlyReportDetail>();
             ds.Tables[0].Rows.Cast<System.Data.DataRow>().ForEach(row =>
             {
@@ -169,14 +166,14 @@ namespace LJTH.BusinessIndicators.DAL
         /// <param name="SystemID"></param>
         /// <param name="MonthlyReportID"></param>
         /// <returns></returns>
-        internal List<B_MonthlyReportDetail> GetMonthlyReportDetail_ByBToB(int FinYear, int FinMonth, Guid SystemID, Guid OldMonthlyReportID  , Guid NewMonthlyReportID)
+        internal List<B_MonthlyReportDetail> GetMonthlyReportDetail_ByBToB(int FinYear, int FinMonth, Guid SystemID, Guid OldMonthlyReportID, Guid NewMonthlyReportID)
         {
 
             string sql = "GetMonthlyReportDetail_ByBToB ";
-            SqlParameter p1 =  CreateSqlParameter("@FinYear", DbType.Int32 , FinYear);
-            SqlParameter p2 =  CreateSqlParameter("@FinMonth", DbType.Int32, FinMonth);
-            SqlParameter p3 =  CreateSqlParameter("@SystemID", DbType.Guid, SystemID);
-            SqlParameter p4 =  CreateSqlParameter("@OldMonthlyReportID", DbType.Guid, OldMonthlyReportID);
+            SqlParameter p1 = CreateSqlParameter("@FinYear", DbType.Int32, FinYear);
+            SqlParameter p2 = CreateSqlParameter("@FinMonth", DbType.Int32, FinMonth);
+            SqlParameter p3 = CreateSqlParameter("@SystemID", DbType.Guid, SystemID);
+            SqlParameter p4 = CreateSqlParameter("@OldMonthlyReportID", DbType.Guid, OldMonthlyReportID);
             SqlParameter p5 = CreateSqlParameter("@NewMonthlyReportID", DbType.Guid, NewMonthlyReportID);
 
             DataSet ds = DbHelper.RunSPReturnDS(sql, ConnectionName, p1, p2, p3, p4, p5);
@@ -192,8 +189,6 @@ namespace LJTH.BusinessIndicators.DAL
             return data;
 
         }
-
-
 
         internal IList<MonthlyReportVM> GetBVMonthlyReport(Guid MonthlyReportID)
         {
@@ -224,8 +219,6 @@ WHERE   MonthlyReportID = @MonthlyReportID
             return data;
         }
 
-
-
         internal List<MonthlyReportDetail> GetMonthlyReportDetailList(Guid MonthlyReportID)
         {
 
@@ -233,7 +226,7 @@ WHERE   MonthlyReportID = @MonthlyReportID
             string sql = "GetMonthlyReportDetailList ";
             SqlParameter p1 = new SqlParameter("@MonthlyReportID", MonthlyReportID);
             DataSet ds = DbHelper.RunSPReturnDS(sql, ConnectionName, p1);
-          
+
             List<MonthlyReportDetail> data = new List<MonthlyReportDetail>();
             ds.Tables[0].Rows.Cast<System.Data.DataRow>().ForEach(row =>
             {
@@ -268,6 +261,140 @@ WHERE   MonthlyReportID = @MonthlyReportID
         }
 
 
+        #region 批量插入数据
+
+        internal int BulkAddMonthlyReportDetailLisr(List<B_MonthlyReportDetail> list)
+        {
+            int result = list.Count();
+            try
+            {
+                string createTableSql = "	SELECT * FROM B_MonthlyReportDetail WHERE 1=2";
+                string sql = string.Format(@"DELETE
+                        FROM    B_MonthlyReportDetail
+                        WHERE   SystemID = '{0}'
+                                AND TargetPlanID = '{1}'
+                                AND FinYear = {2}
+                                AND FinMonth = {3}
+                                AND TargetID IN ( {4} )
+                                AND CompanyID IN ( {5} );", list[0].SystemID, list[0].TargetPlanID, list[0].FinYear, list[0].FinMonth
+                           , string.Format(@"'{0}'", string.Join(",", list.Select(v => v.TargetID).Distinct()).Replace(",", "','"))
+                           , string.Format(@"'{0}'", string.Join(",", list.Select(v => v.CompanyID).Distinct()).Replace(",", "','")));
+                list.ConvertAll(v => v.ID = System.Guid.NewGuid());
+                list.ConvertAll(v => v.ModifyTime = DateTime.Now);
+                using (TransactionScope scope = TransactionScopeFactory.Create())
+                {
+                    var con = new SqlConnection(DbConnectionManager.GetConnectionString(base.ConnectionName));
+                    con.Open();
+                    //创建表结构
+                    SqlCommand createTableCmd = new SqlCommand(createTableSql, con);
+                    SqlDataAdapter sdap = new SqlDataAdapter();
+                    sdap.SelectCommand = createTableCmd;
+                    DataTable dt = new DataTable();
+                    sdap.Fill(dt);
+
+                    //获取数据
+                    ConvertToTable(dt, list);
+
+                    SqlCommand cmd = new SqlCommand(sql, con);
+                    cmd.ExecuteNonQuery();
+                    SqlBulkCopy bulkCopy = new SqlBulkCopy(con);
+                    bulkCopy.DestinationTableName = "B_MonthlyReportDetail";
+                    if (dt != null && dt.Rows.Count != 0)
+                        bulkCopy.BatchSize = dt.Rows.Count;
+                    bulkCopy.WriteToServer(dt);
+                    con.Close();
+                    scope.Complete();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                result = 0;
+            }
+            return result;
+        }
+
+        private DataTable ConvertToTable(DataTable dt, List<B_MonthlyReportDetail> list)
+        {
+            PropertyInfo[] props = typeof(B_MonthlyReportDetail).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            PropertyInfo pi;
+            foreach (var item in list)
+            {
+                DataRow dr = dt.NewRow();
+                foreach (DataColumn c in dt.Columns)
+                {
+                    pi = props.Where(v => v.Name == c.ColumnName).FirstOrDefault();
+                    if (pi != null)
+                    {
+                        dr[c.ColumnName] = pi.GetValue(item)==null ? DBNull.Value : pi.GetValue(item);
+                    }
+                }
+                dt.Rows.Add(dr);
+            }
+            return dt;
+        }
+
+        /// <summary>
+        /// Convert a List{T} to a DataTable.
+        /// </summary>
+        private DataTable ToDataTable<T>(List<T> items)
+        {
+            var tb = new DataTable(typeof(T).Name);
+
+            PropertyInfo[] props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+            foreach (PropertyInfo prop in props)
+            {
+                Type t = GetCoreType(prop.PropertyType);
+                tb.Columns.Add(prop.Name, t);
+            }
+
+            foreach (T item in items)
+            {
+                var values = new object[props.Length];
+
+                for (int i = 0; i < props.Length; i++)
+                {
+                    values[i] = props[i].GetValue(item, null);
+                }
+
+                tb.Rows.Add(values);
+            }
+
+            return tb;
+        }
+
+        /// <summary>
+        /// Return underlying type if type is Nullable otherwise return the type
+        /// </summary>
+        public static Type GetCoreType(Type t)
+        {
+            if (t != null && IsNullable(t))
+            {
+                if (!t.IsValueType)
+                {
+                    return t;
+                }
+                else
+                {
+                    return Nullable.GetUnderlyingType(t);
+                }
+            }
+            else
+            {
+                return t;
+            }
+        }
+
+        /// <summary>
+        /// Determine of specified type is nullable
+        /// </summary>
+        public static bool IsNullable(Type t)
+        {
+            return !t.IsValueType || (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>));
+        }
+        #endregion
     }
 }
 

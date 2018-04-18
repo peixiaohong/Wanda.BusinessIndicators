@@ -44,7 +44,7 @@ namespace LJTH.BusinessIndicators.BLL
         /// <param name="Month"></param>
         /// <param name="MonthReportID">可以为NULL</param>
         /// <returns></returns>
-        public IList<B_MonthlyReportDetail> GetMonthlyreportdetailList(Guid SystemID, int Year, int Month,Guid MonthReportID)
+        public IList<B_MonthlyReportDetail> GetMonthlyreportdetailList(Guid SystemID, int Year, int Month, Guid MonthReportID)
         {
             B_MonthlyReport report = null;
             if (MonthReportID == Guid.Empty)
@@ -65,7 +65,7 @@ namespace LJTH.BusinessIndicators.BLL
 
         public IList<B_MonthlyReportDetail> GetMonthlyreportdetailList(Guid MonthReportID)
         {
-            if (MonthReportID != Guid.Empty && MonthReportID !=null)
+            if (MonthReportID != Guid.Empty && MonthReportID != null)
             {
                 IList<B_MonthlyReportDetail> result = _bMonthlyreportdetailAdapter.GetMonthlyreportdetailList(MonthReportID);
                 return result;
@@ -192,7 +192,7 @@ namespace LJTH.BusinessIndicators.BLL
             }
         }
 
-       
+
         /// <summary>
         /// 包含有草稿的数据
         /// </summary>
@@ -299,6 +299,24 @@ namespace LJTH.BusinessIndicators.BLL
             return _bMonthlyreportdetailAdapter.GetMonthlyReportDetail_ByBToB(FinYear, FinMonth, SysId, OldMonthReportID, NewMonthReportID);
         }
 
+
+
+        /// <summary>
+        /// 添加指标数据
+        /// </summary>
+        /// <param name="list">指标数据</param>
+        /// <returns>执行状态</returns>
+        public int BulkAddTargetDetail(List<B_MonthlyReportDetail> list)
+        {
+            if (list.Count > 0)
+            {
+                return _bMonthlyreportdetailAdapter.BulkAddMonthlyReportDetailLisr(list);
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 }
 
