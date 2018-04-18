@@ -1,6 +1,7 @@
 ﻿using Lib.Data.AppBase;
 using LJTH.BusinessIndicators.DAL.BizDal;
 using LJTH.BusinessIndicators.Model.BizModel;
+using LJTH.BusinessIndicators.ViewModel.Common;
 using LJTH.Lib.Data.AppBase;
 using Microsoft.Practices.EnterpriseLibrary.PolicyInjection;
 using System;
@@ -84,6 +85,62 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
             return _s_OrganizationalAdapter.GetChildDataByID(id);
         }
 
+        #endregion
+
+
+        #region 数据权限
+        /// <summary>
+        /// 根据板块拿授权的区域
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<DataPermissions> GetUserAuthorizationArea(Guid systemID, string loginName)
+        {
+            return _s_OrganizationalAdapter.GetUserAuthorizationArea(systemID, loginName);
+        }
+
+        /// <summary>
+        /// 根据登陆人拿所有的授权组织
+        /// </summary>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetUserAuthorizationOrg(string loginName)
+        {
+            return _s_OrganizationalAdapter.GetUserAuthorizationOrg(loginName);
+        }
+
+        /// <summary>
+        /// 根据登陆人拿到所有的板块
+        /// </summary>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetUserSystemData(string loginName)
+        {
+            return _s_OrganizationalAdapter.GetUserSystemData(loginName);
+        }
+
+        /// <summary>
+        /// 根据登陆人，板块ID拿到所有的项目
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetUserCompanyData(Guid systemID, string loginName)
+        {
+            return _s_OrganizationalAdapter.GetUserCompanyData(systemID,loginName);
+        }
+
+        /// <summary>
+        /// 根据登陆人，获取板块下第一个大区
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetUserRegional(Guid systemID, string loginName)
+        {
+            return _s_OrganizationalAdapter.GetUserRegional(systemID, loginName);
+        }
         #endregion
     }
 }

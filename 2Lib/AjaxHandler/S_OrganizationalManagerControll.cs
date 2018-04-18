@@ -101,6 +101,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                         company.CreatorName = company.ModifierName = base.CurrentUserName;
                         company.IsDeleted = false;
                         entity.ID = C_CompanyOperator.Instance.AddCompany(company);
+                        entity.IsCompany = true;
                     }
                     //插入组织架构数据
                     int number = S_OrganizationalActionOperator.Instance.InsertData(entity);
@@ -179,7 +180,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         /// <param name="id"></param>
         /// <returns></returns>
         [LibAction]
-        public object DeleteData(string id)
+        public object DeleteData(string id,bool isCompany)
         {
             if (id == "")
             {
@@ -212,7 +213,10 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                         Message = "已经授权的组织不能删除"
                     };
                 }
-
+                if (isCompany)
+                {
+                    C_CompanyOperator.Instance.RemoveCompany(id.ToGuid());
+                }
                 var number = S_OrganizationalActionOperator.Instance.DeleteData(id.ToGuid());
                 if (number > 0)
                 {

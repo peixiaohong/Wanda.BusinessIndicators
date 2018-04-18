@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\BindPair.cs" />
+    <Compile Include="Common\DataPermissions.cs" />
     <Compile Include="Demo\DemoModels.cs" />
     <Compile Include="Base\ICascadeObject.cs" />
     <Compile Include="Employee\AllUserPermissions.cs" />

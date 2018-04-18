@@ -36,7 +36,7 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
                                          )
                                          Select [B].* From tempData As A
                                          Inner Join [dbo].[S_Org_User] As B On A.[ID]=B.[CompanyID]
-                                         Where A.[IsLastNode]=1", id);
+                                         Where A.[IsCompany]=1", id);
             return ExecuteQuery(sql);
         }
 
