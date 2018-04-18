@@ -15,6 +15,40 @@ namespace LJTH.BusinessIndicators.ViewModel
     {
 
     }
+    public class VBlendTarget
+    {
+        public VBlendTarget(XElement vBlendTarget)
+        {
+            TargetIDs = vBlendTarget.GetAttributeValue("TargetIDs", "");
+            TargetName = vBlendTarget.GetAttributeValue("TargetName", "");
+            string TargetValue = vBlendTarget.GetAttributeValue("TargetValue", "");
+            ExceptionHelper.TrueThrow(string.IsNullOrEmpty(TargetValue), "TargetValue is NULL in the configuration setting");
+            
+            string senquence = vBlendTarget.GetAttributeValue("Senquence", "");
+            int t = 10000;
+            int.TryParse(senquence, out t);
+            Senquence = t;
+            IsBlendTarget = bool.Parse(vBlendTarget.GetAttributeValue("IsBlendTarget", "false"));
+            //ExceptionHelper.TrueThrow(vBlendTarget.Elements("Counter") == null, string.Format("Group:{0} don't have Counter define", TargetName));
+            List<XElement> targetList = vBlendTarget.Elements("Target").ToList();
+            if (targetList != null && targetList.Count > 0)
+            {
+                VTargetList = new List<VTarget>();
+                foreach (var item in targetList)
+                {
+                    VTargetList.Add(new VTarget(item));
+
+                }
+            }
+        }
+        public string TargetName { get; set; }
+        public string TargetIDs { get; set; }
+        public int Senquence { get; set; }
+        public bool IsBlendTarget { get; set; }
+
+        public List<VTarget> VTargetList { get; set; }
+
+    }
     /// <summary>
     /// 完成明细情况
     /// </summary>
@@ -35,9 +69,10 @@ namespace LJTH.BusinessIndicators.ViewModel
             int t = 10000;
             int.TryParse(senquence, out t);
             Senquence = t;
-            
-            ExceptionHelper.TrueThrow(vtarget.Elements("Counter") == null, string.Format("Group:{0} don't have Counter define", TargetName));
+            IsBlendTarget = bool.Parse(vtarget.GetAttributeValue("IsBlendTarget", "false"));
+            //ExceptionHelper.TrueThrow(vtarget.Elements("Counter") == null, string.Format("Group:{0} don't have Counter define", TargetName));
             List<XElement> Counters = vtarget.Elements("Counter").ToList();
+            if(Counters!=null && Counters.Count > 0) { }
             foreach (XElement Counter in Counters)
             {
                 CounterList.Add(new VCounter(Counter));
@@ -48,6 +83,8 @@ namespace LJTH.BusinessIndicators.ViewModel
         public List<Guid> TargetIDs { get; set; }
         public int Senquence { get; set; }
         public List<VCounter> CounterList { get; set; }
+        public bool IsBlendTarget { get; set; }
+
     }
 
     public class VCompany 

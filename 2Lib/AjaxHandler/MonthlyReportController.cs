@@ -273,11 +273,6 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             return listSRDS;
         }
 
-
-
-
-
-
         /// <summary>
         /// 完成情况明细
         /// </summary>  
@@ -288,6 +283,48 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         /// <returns>ist<MonthReportSummaryViewModel></returns>
         [LibAction]
         public List<DictionaryVmodel> GetDetailRptDataSource(string rpts, string strCompanyProperty, string strMonthReportOrderType, bool IncludeHaveDetail)
+        {
+            ReportInstance rpt = JsonHelper.Deserialize<ReportInstance>(rpts);
+            List<DictionaryVmodel> AllData = new List<DictionaryVmodel>();
+
+            if (rpt._MonthReportID != Guid.Empty)
+            {
+                B_MonthlyReportJsonData B_JsonData = new B_MonthlyReportJsonData();
+                try
+                {
+                    B_JsonData = B_MonthlyReportJsonDataOperator.Instance.GetMonthlyReportJsonData(rpt._MonthReportID);
+                }
+                catch (Exception)
+                {
+                    B_JsonData = null;
+                }
+
+                //获取 表中的JSon数据
+                if (B_JsonData != null && !string.IsNullOrEmpty(B_JsonData.QuerryDetaileJsonData) && strMonthReportOrderType == "Detail")
+                {
+                    AllData = JsonHelper.Deserialize<List<DictionaryVmodel>>(B_JsonData.QuerryDetaileJsonData);
+                }
+                else
+                {
+                    AllData = ReportInstanceDetailEngine.ReportInstanceDetailService.GetDetailRptDataSource(rpt, strCompanyProperty, strMonthReportOrderType, IncludeHaveDetail);
+                }
+            }
+            return AllData;
+        }
+
+
+
+
+        /// <summary>
+        /// 经营报告明细
+        /// </summary>  
+        /// <param name="SystemID">系统ID</param>
+        /// <param name="Year">年</param>
+        /// <param name="Month">月</param>
+        /// <param name="IsLatestVersion">包含审批中</param>
+        /// <returns>ist<MonthReportSummaryViewModel></returns>
+        [LibAction]
+        public List<DictionaryVmodel> GetManageDetailRptDataSource(string rpts, string strCompanyProperty, string strMonthReportOrderType, bool IncludeHaveDetail)
         {
             ReportInstance rpt = JsonHelper.Deserialize<ReportInstance>(rpts);
             List<DictionaryVmodel> AllData = new List<DictionaryVmodel>();
@@ -311,7 +348,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 }
                 else
                 {
-                    AllData = ReportInstanceDetailEngine.ReportInstanceDetailService.GetDetailRptDataSource(rpt, strCompanyProperty, strMonthReportOrderType, IncludeHaveDetail);
+                    AllData = ReportInstanceManageDetailEngine.ReportInstanceManageDetailService.GetManageDetailRptDataSource(rpt, strCompanyProperty, strMonthReportOrderType, IncludeHaveDetail);
                 }
             }
             return AllData;
