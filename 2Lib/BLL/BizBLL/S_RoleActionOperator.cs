@@ -39,6 +39,16 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         }
 
         /// <summary>
+        /// 获取名称是一样的角色
+        /// </summary>
+        /// <param name="cnName"></param>
+        /// <returns></returns>
+        public List<S_Role> GetDatasByCnName(string cnName)
+        {
+            return _s_RoleAdapter.GetDatasByCnName(cnName);
+        }
+
+        /// <summary>
         /// 添加一条数据
         /// </summary>
         /// <param name=""></param>

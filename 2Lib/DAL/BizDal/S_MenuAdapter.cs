@@ -49,7 +49,7 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
                                        Inner Join  [dbo].[S_Role] As C On B.[RoleID]=C.[ID] And C.[IsDeleted]=0
                                        Inner Join [dbo].[S_RolePermissions] As D On C.Id=D.[RoleID] And D.[IsDeleted]=0
                                        Inner Join [dbo].[S_Menu] As E On D.[MenuID]=E.[ID] 
-                                       Where A.[IsDeleted]=0  And A.[LoginName]='zhengguilong'
+                                       Where A.[IsDeleted]=0  And A.[LoginName]='{0}'
                                        Union All
                                        Select A.[ID],A.[CnName],A.[EnName],A.[ParentMenuID],A.[Sequence],A.[Level],A.[Url],A.[ResourceKey] From [dbo].[S_Menu] As A 
                                        Inner Join menu_TempData As B On B.[ParentMenuID]=A.[ID]

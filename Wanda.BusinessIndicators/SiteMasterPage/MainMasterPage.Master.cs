@@ -83,10 +83,11 @@ namespace LJTH.BusinessIndicators.Web
             //url = ".." + url;
             for (int i = 0; i < NavigatorNodes.Count; i++)
             {
-
+                NavigatorNodes[i].Selected = false;
                 if (url == NavigatorNodes[i].Url)
                 {
                     first = NavigatorNodes[i].Title;
+                    NavigatorNodes[i].Selected = true;
                     //first = NavigatorNodes[i].Title+"<img src=\"../images/btn08.png\" />";
                 }
                 else
@@ -101,6 +102,7 @@ namespace LJTH.BusinessIndicators.Web
                                 first = NavigatorNodes[i].Title + "<img src=\"../images/btn08.png\" />";
                                 //two = NavigatorNodes[i].Nodes[a].Title + "<img src=\"../images/btn08.png\" />";
                                 two = NavigatorNodes[i].Nodes[a].Title;
+                                NavigatorNodes[i].Selected = true;
                             }
                         }
                     }
@@ -230,6 +232,7 @@ namespace LJTH.BusinessIndicators.Web
         #region 读取数据库中配置的菜单
         private List<NavSiteMapNode> GetMenus()
         {
+            bool isPageExist = false;
             List<S_Menu> menus = S_MenuActionOperator.Instance.GetLoinNameMenu(HttpContext.Current.User.Identity.Name);
             if (menus.Count < 1)
             {
@@ -240,7 +243,6 @@ namespace LJTH.BusinessIndicators.Web
             foreach (var item in menus.Where(o => o.ParentMenuID == parentMenuID))
             {
                 bool IsSelect = false;
-
                 NavSiteMapNode nm = new NavSiteMapNode();
                 nm.Enable = true;
                 nm.Description = item.CnName;
@@ -255,13 +257,19 @@ namespace LJTH.BusinessIndicators.Web
                     if (IsSelect)
                     {
                         nm.Selected = IsSelect;
+                        isPageExist = true;
                     }
                     if (nm.Nodes.Count < 1)
                     {
                         nm.Selected = true;
+                        isPageExist = true;
                     }
                 }
                 list_node.Add(nm);
+            }
+            if (!isPageExist)
+            {
+                Response.Redirect("../NoPermission.aspx");
             }
             return list_node;
         }

@@ -75,7 +75,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                         Message = "参数传递失败"
                     };
                 }
-                List<S_Role> oldRoles = S_RoleActionOperator.Instance.GetDatas(entity.CnName);
+                List<S_Role> oldRoles = S_RoleActionOperator.Instance.GetDatasByCnName(entity.CnName);
                 #region 添加数据
                 if (entity.ID == "00000000-0000-0000-0000-000000000000".ToGuid())
                 {
@@ -91,10 +91,10 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
 
                     entity.ID = Guid.NewGuid();
                     entity.CreateTime = DateTime.Now;
-                    entity.CreatorName = "测试";
-                    entity.EnName = "wu";
+                    entity.CreatorName =base.CurrentUserName;
+                    entity.EnName = "";
                     entity.IsDeleted = false;
-                    entity.ModifierName = "测试";
+                    entity.ModifierName = base.CurrentUserName;
                     entity.ModifyTime = DateTime.Now;
                     int number = S_RoleActionOperator.Instance.InsertData(entity);
                     if (number > 0)
@@ -121,7 +121,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                             Message = "更改的角色名：【" + entity.CnName + "】已经存在，不允许角色名称重复"
                         };
                     }
-                    entity.ModifierName = "";
+                    entity.ModifierName = base.CurrentUserName;
                     entity.ModifyTime = DateTime.Now;
                     Guid number = S_RoleActionOperator.Instance.UpdateData(entity);
                     Success = 1;
@@ -160,6 +160,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             {
                 #region 添加数据
                 Guid number = S_RoleActionOperator.Instance.RemoveObject(ID.ToGuid());
+                //清除缓存
+                WebHelper.InvalidAuthCache();
                 Success = 1;
                 Message = "删除成功";
                 #endregion
@@ -274,9 +276,9 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 foreach (var item in entitys)
                 {
                     item.CreateTime = DateTime.Now;
-                    item.CreatorName = "测试";
+                    item.CreatorName = base.CurrentUserName;
                     item.IsDeleted = false;
-                    item.ModifierName = "测试";
+                    item.ModifierName =base.CurrentUserName;
                     item.ModifyTime = DateTime.Now;
                     item.ID = Guid.NewGuid();
                 }
@@ -401,9 +403,9 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     su.RoleID = RoleID.ToGuid();
                     su.LoginName = item;
                     su.CreateTime = DateTime.Now;
-                    su.CreatorName = "测试";
+                    su.CreatorName = base.CurrentUserName;
                     su.IsDeleted = false;
-                    su.ModifierName = "测试";
+                    su.ModifierName = base.CurrentUserName;
                     su.ModifyTime = DateTime.Now;
                     su.ID = Guid.NewGuid();
                     entitys.Add(su);
@@ -464,6 +466,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 }
                 
                 var resultData = S_Role_UserActionOperator.Instance.DelteDataByRoleID_LoginName(RoleID.ToGuid(),LoginName);
+                //清除缓存
+                WebHelper.InvalidAuthCache();
                 if (resultData > 0)
                 {
                     Success = 1;

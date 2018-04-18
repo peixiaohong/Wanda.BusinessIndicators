@@ -49,7 +49,14 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
             }
             if (dNumber > 0)
             {
-                return _s_RolePermissionsAdapter.InsertList(listData);
+                if (listData.Count > 0)
+                {
+                    return _s_RolePermissionsAdapter.InsertList(listData);
+                }
+                else
+                {
+                    return 1;
+                }
             }
             else
             {

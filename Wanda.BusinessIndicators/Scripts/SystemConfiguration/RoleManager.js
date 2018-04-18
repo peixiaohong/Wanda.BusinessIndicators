@@ -242,8 +242,7 @@ function SaveLimitData(id) {
     var treeObj = $.fn.zTree.getZTreeObj("tree");
     var nodes = treeObj.getCheckedNodes(true);
     if (!nodes.length) {
-        $.MsgBox.Alert("提示", "请选择权限");
-        return false;
+        $.MsgBox.Alert("提示", "没有选择任何权限");
     }
     WebUtil.ajax({
         async: false,

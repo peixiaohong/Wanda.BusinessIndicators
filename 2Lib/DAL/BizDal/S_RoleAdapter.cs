@@ -59,6 +59,18 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
             }
             return ExecuteQuery(sql);
         }
+
+        /// <summary>
+        /// 获取名称是一样的角色
+        /// </summary>
+        /// <param name="cnName"></param>
+        /// <returns></returns>
+        public List<S_Role> GetDatasByCnName(string cnName)
+        {
+            string sql = string.Format("Select * From  [dbo].[S_Role] Where [IsDeleted]=0 and CnName ='{0}' ORDER BY CreateTime DESC ", cnName);
+            return ExecuteQuery(sql);
+        }
+
         /// <summary>
         /// 获取全部有效角色 【用于用户授权角色页面】
         /// </summary>
