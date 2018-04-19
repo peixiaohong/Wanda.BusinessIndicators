@@ -46,112 +46,160 @@ function LoadPage() {
 
 //注册事件
 function RegisterEvent() {
-    //新增角色弹框页面确定按钮
-    $(".InsertRoleData_OK").off('click').on('click', function () {
-        SaveRole('add');
+    // 新增确定
+    $(".add_submit").off("click").on("click", function () {
+        SaveOrganization("Add");
     });
-    $(".QueryConditions_Button").off("click").on("click", function () {
-        QueryRoleData();
+    // 修改确定
+    $(".edit_submit").off("click").on("click", function () {
+        SaveOrganization("Edit");
     });
-    // 菜单权限确定
-    $(".limits_sumbit").off("click").on("click", function () {
-        var id = $(this).attr("data-id");
-        SaveLimitData(id);
+
+}
+//是否选择到板块
+function CheckOrganization(type) {
+    var el = $(".organization_name").find("input");
+    var val = el.val();
+    var isCompany = el.attr("data-isCompany");
+    var level = el.attr("data-level");
+    var id = el.attr("data-id");
+    if (!val) {
+        $.MsgBox.Alert("提示", "请选择板块");
+        return false;
+    }
+    if (type == "Add") {
+        if (level == 1) {
+            $.MsgBox.Alert("提示", "系统板块不能新增");
+            return false;
+        }
+        if (isCompany) {
+            $.MsgBox.Alert("提示", "项目类型不能新增");
+            return false;
+        }
+        $(".organization_name").css("display", "block");
+        $(".organization_edit").css("display", "block");
+        $(".organization_edit_name").val("");
+        $(".organization_edit").find("input[type=checkbox]").removeAttr("disabled");
+        $(".organization_edit").find("input[type=checkbox]").css("cursor", "default");
+        $(".add_submit").css("display", "block");
+        $(".edit_submit").css("display", "none");
+
+    } else if (type == "Edit") {
+        if (level == 1 || level == 2) {
+            $.MsgBox.Alert("提示", "系统板块不能修改");
+            return false;
+        }
+        $(".organization_name").css("display", "none");
+        $(".organization_edit").css("display", "block");
+        $(".organization_edit_name").val(el.val());
+        $(".organization_edit").find("input[type=checkbox]").attr({
+            "disabled": "disabled",
+            "checked": isCompany
+        });
+        $(".organization_edit").find("input[type=checkbox]").css("cursor", "not-allowed");
+        $(".add_submit").css("display", "none");
+        $(".edit_submit").css("display", "block");
+    } else if (type == "Delete") {
+        if (!val) {
+            $.MsgBox.Alert("提示", "请选择板块");
+            return false;
+        }
+        DeleteOrganizationData(id, isCompany);
+    }
+}
+//确定后初始
+function initPage() {
+    $(".organization_name").find("input").val("");
+    $(".organization_name").find("input").attr({
+        "data-id": "",
+        "data-pid": "",
+        "data-name": "",
+        "data-systemID": "",
+        "data-level": "",
+        "data-isCompany": ""
     });
-    $(".limits_cancel").off("click").on("click", function () {
-        $(".user-model").css("display", "none");
-    });
+    $(".organization_name").css("display", "block");
+    $(".organization_edit").css("display", "none");
 }
 //保存数据
-function SaveRole(type, data) {
-    var title = "添加角色";
-    var msg = "添加成功";
-    var datamsg = ""
-    if (type == "edit") {
-        title = "编辑角色";
-        msg = "编辑成功";
-        datamsg = JSON.stringify(data);
+function SaveOrganization(type) {
+    var el = $(".organization_name").find("input");
+    var systemID = el.attr("data-systemID");
+    var pid = el.attr("data-id");
+    var id = "00000000-0000-0000-0000-000000000000";
+    var level = Number(el.attr("data-level")) + 1;
+    var isCompany = $(".organization_edit").find("input[type=checkbox]").attr("checked");
+    var val = $(".organization_edit_name").val();
+    if (type == "Edit") {
+        level = Number(el.attr("data-level"));
+        id = el.attr("data-id");
+        pid = el.attr("data-pid");
+        isCompany = el.attr("data-isCompany");
     }
-    $.MsgBox.Confirm(title, datamsg, type, function () {
-        var CnName = $("#CnName").val();
-        var Description = $("#Description").val();
-        $(".CnNameAction").css("display", "none");
-        if (!CnName) {
-            $(".CnNameAction").css("display", "block");
-            return;
-        }
-        Load();
-        var S_Role = {
-            "CnName": CnName,
-            "Description": Description
-        };
-        if (type == "edit") {
-            S_Role = {
-                "CnName": CnName,
-                "Description": Description,
-                "CreateTime": data.CreateTime,
-                "CreatorName": data.CreatorName,
-                "EnName": data.EnName,
-                "ID": data.ID,
-                "IsDeleted": data.IsDeleted
-            };
-        }
-        WebUtil.ajax({
-            async: false,
-            url: "/RoleManagerControll/SaveRole",
-            args: { RoleData: JSON.stringify(S_Role) },
-            successReturn: function (resultData) {
-                if (resultData.Success == 1) {
-                    $("#mb_box,#mb_con").remove();
-                    $.MsgBox.Alert("提示", msg);
-                    LoadPage();
-                    console.log("添加成功" + resultData.Message);
-                }
-                else {
-                    $("#mb_box,#mb_con").remove();
-                    $.MsgBox.Alert("提示", resultData.Message);
-                    console.log("添加失败" + resultData.Message);
-                }
-                Fake();
-            }
-        });
-    });
-}
+    if (isCompany) {
+        isCompany = true;
+    } else {
+        isCompany = false;
+    }
+    var data = {
+        "ID": id,
+        "SystemID": systemID,
+        "CnName": val,
+        "Code": "",
+        "ParentID": pid,
+        "Level": level,
+        "IsCompany": isCompany
+    }
+    var companyData = {
+        "ID": id,
+        "SystemID": systemID,
+        "CompanyName": val
+    }
 
-//查询条件
-function QueryRoleData() {
-    //参数
-    var keyWord = $("#QrName").val();
-    Load();
+    if (!val) {
+        $.MsgBox.Alert("提示", "组织名称不能为空");
+        return false;
+    }
+    console.log(data);
     WebUtil.ajax({
         async: false,
-        url: "/RoleManagerControll/GetRoles",
-        args: { CnName: keyWord },
+        url: "/S_OrganizationalManagerControll/SaveData",
+        args: {
+            "type": type,
+            "data": JSON.stringify(data),
+            "IsCompany": isCompany,
+            "companyData": JSON.stringify(companyData),
+        },
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
-                $('#ShowMenuData').empty();
-                loadTmpl('#ShowMenuDataTmpl').tmpl(resultData).appendTo('#ShowMenuData');
+                initPage();
+                $.MsgBox.Alert("提示", resultData.Message);
+                LoadPage();
             }
             else {
-                console.log(resultData.Message);
+                $.MsgBox.Alert("提示", resultData.Message);
             }
-            Fake();
         }
     });
+
 }
 
-//删除角色
-function DeleteRoleData(el) {
-    var id = $(el).attr("data-id");
+//删除组织
+function DeleteOrganizationData(id, isCompany) {
+
     $.MsgBox.Confirm("提示", "确认删除", "", function () {
         WebUtil.ajax({
             async: false,
-            url: "/RoleManagerControll/DeleteRoleData",
-            args: { ID: id },
+            url: "/S_OrganizationalManagerControll/DeleteData",
+            args: {
+                "id": id,
+                "isCompany": isCompany
+            },
             successReturn: function (resultData) {
                 if (resultData.Success == 1) {
                     $("#mb_box,#mb_con").remove();
                     $.MsgBox.Alert("提示", "删除成功");
+                    initPage();
                     LoadPage();
                 }
                 else {
@@ -164,50 +212,16 @@ function DeleteRoleData(el) {
     });
 }
 
-//编辑数据[获取数据]
-function EditRole(el) {
-    var id = $(el).attr("data-id");
-    WebUtil.ajax({
-        async: false,
-        url: "/RoleManagerControll/GetRoleDataByID",
-        args: { ID: id },
-        successReturn: function (resultData) {
-            if (resultData.Success == 1) {
-                SaveRole("edit", resultData.Data);
-            } else {
-                $.MsgBox.Alert("提示", "获取数据失败");
-                console.log("获取数据失败" + resultData.Message);
-            }
-        }
-    });
-}
-// 权限设置
-function SetLimits(el) {
-    $(".user-model").css("display", "block");
-    Load();
-    var id = $(el).attr("data-id");
-    $(".limits_sumbit").attr("data-id", id);
-    WebUtil.ajax({
-        async: false,
-        url: "/RoleManagerControll/GetMenuDatas",
-        args: { ID: id },
-        successReturn: function (resultData) {
-            if (resultData.Success == 1) {
-                Ztree(resultData);
-            } else {
-                $.MsgBox.Alert("提示", "获取数据失败");
-                console.log("获取数据失败" + resultData.Message);
-            }
-        }
-    });
-}
 function Ztree(data) {
     var zNodes = [];
     data.Data.forEach(function (one) {
-        var zNodesObj = { id: "", pId: "", name: ""};
+        var zNodesObj = { id: "", pId: "", name: "", level: "", systemID: "", isCompany: false };
         zNodesObj.id = one.ID;
         zNodesObj.pId = one.ParentID;
         zNodesObj.name = one.CnName;
+        zNodesObj.level = one.Level;
+        zNodesObj.systemID = one.SystemID;
+        zNodesObj.isCompany = one.IsCompany;
         zNodes.push(zNodesObj);
         zNodes[0].open = true;
     });
@@ -234,42 +248,18 @@ function Ztree(data) {
     zTree.setting.check.chkboxType = { "Y": "ps", "N": "ps" };
     Fake();
     function zTreeOnClick(event, treeId, treeNode) {
-        console.log(treeNode);
+        console.log(treeNode)
+        var el = $(".organization_name").find("input");
+        el.attr({
+            "data-id": treeNode.id,
+            "data-pid": treeNode.pId,
+            "data-name": treeNode.name,
+            "data-systemID": treeNode.systemID,
+            "data-level": treeNode.level + 1,
+            "data-isCompany": treeNode.isCompany
+        });
+        el.val(treeNode.name);
+        $(".organization_name").css("display", "block");
+        $(".organization_edit").css("display", "none");
     };
-}
-function SaveLimitData(id) {
-    var treeObj = $.fn.zTree.getZTreeObj("tree");
-    var nodes = treeObj.getCheckedNodes(true);
-    if (!nodes.length) {
-        $.MsgBox.Alert("提示", "请选择权限");
-        return false;
-    }
-    WebUtil.ajax({
-        async: false,
-        url: "/RoleManagerControll/SaveRolePermissions",
-        args: {
-            RoleId: id,
-            data: FilterChecked(nodes, id)
-        },
-        successReturn: function (resultData) {
-            if (resultData.Success == 1) {
-                console.log(resultData);
-                $(".user-model").css("display", "none");
-                $.MsgBox.Alert("提示", "保存成功");
-            } else {
-                $.MsgBox.Alert("提示", "保存失败");
-                console.log("保存失败;" + resultData.Message);
-            }
-        }
-    });
-}
-function FilterChecked(data, RoleId) {
-    var match = [];
-    data.forEach(function (one) {
-        if (one.check_Child_State == -1 && one.checked) {
-            var obj = { "RoleId": RoleId, "MenuID": one.id }
-            match.push(obj);
-        }
-    })
-    return JSON.stringify(match);
 }

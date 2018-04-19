@@ -1221,6 +1221,13 @@
     <Compile Include="SiteMasterPage\wfCtrl.ascx.designer.cs">
       <DependentUpon>wfCtrl.ascx</DependentUpon>
     </Compile>
+    <Compile Include="SystemConfiguration\OrganizationalManager.aspx.cs">
+      <DependentUpon>OrganizationalManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguration\OrganizationalManager.aspx.designer.cs">
+      <DependentUpon>OrganizationalManager.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SystemConfiguration\RoleManager.aspx.cs">
       <DependentUpon>RoleManager.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
