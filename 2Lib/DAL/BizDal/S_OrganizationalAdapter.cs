@@ -70,6 +70,44 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
             return ExecuteQuery(sql, parameters);
         }
 
+        /// <summary>
+        /// 根据板块ID,大区Id获取项目，如果大区下没有，就拿板块下的项目
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="regionalID"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetCompanyByRegionalID(Guid systemID, Guid regionalID)
+        {
+            List<S_Organizational> entitys = new List<S_Organizational>();
+            string sql = @"With tempData
+                          As
+                          (
+	                          Select * From [dbo].[S_Organizational]  Where [ParentID]=@SystemID And [SystemID]=@SystemID And [ID]=@RegionalID And [IsDeleted]=0
+	                          Union All
+                              Select A.* From [dbo].[S_Organizational] As A 
+	                          Inner Join tempData As B On A.[ParentID]=B.[ID]
+	                          Where A.[IsDeleted]=0
+                          )
+                        Select * From tempData As A Where A.[IsDeleted]=0 And A.[IsCompany]=1 And A.[Level]>3";
+            DbParameter[] parameters1 = new DbParameter[] 
+            {
+                CreateSqlParameter("@SystemID",DbType.Guid,systemID),
+                CreateSqlParameter("@RegionalID",DbType.Guid,regionalID)
+            };
+            entitys = ExecuteQuery(sql, parameters1);
+            if (entitys != null || entitys.Count > 0)
+            {
+                return entitys;
+            }
+            sql = "Select * From [dbo].[S_Organizational] Where [ParentID]=@SystemID And [SystemID]=@SystemID And [IsCompany]=1";
+            DbParameter[] parameters2 = new DbParameter[]
+            {
+                CreateSqlParameter("@SystemID",DbType.Guid,systemID)
+            };
+            return ExecuteQuery(sql, parameters2);
+        }
+
+
         #region 数据权限
         /// <summary>
         /// 根据板块拿授权的区域

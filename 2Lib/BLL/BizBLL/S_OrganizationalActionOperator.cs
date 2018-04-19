@@ -95,6 +95,17 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
             return _s_OrganizationalAdapter.GetSystem_Regional(systemID);
         }
 
+        /// <summary>
+        /// 根据板块ID,大区Id获取项目，如果大区下没有，就拿板块下的项目
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="regionalID"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetCompanyByRegionalID(Guid systemID, Guid regionalID)
+        {
+            return _s_OrganizationalAdapter.GetCompanyByRegionalID(systemID, regionalID);
+        }
+
         #endregion
 
 
