@@ -148,6 +148,7 @@
     <Content Include="Scripts\multiple-select-master\multiple-select.css" />
     <Content Include="Scripts\multiple-select-master\multiple-select.js" />
     <Content Include="Scripts\multiple-select-master\multiple-select.png" />
+    <Content Include="Scripts\SystemConfiguration\OrganizationalManager.js" />
     <Content Include="Scripts\SystemConfiguration\RoleManager.js" />
     <Content Include="Scripts\SystemConfiguration\RoleUsers.js" />
     <Content Include="Scripts\SystemConfiguration\UserInfoManager.js" />
@@ -166,6 +167,7 @@
     <Content Include="Styles\fonts\fontawesome-webfont.svg" />
     <Content Include="Styles\ljth\login.css" />
     <Content Include="Styles\TreeGrid.css" />
+    <Content Include="SystemConfiguration\OrganizationalManager.aspx" />
     <Content Include="SystemConfiguration\RoleManager.aspx" />
     <Content Include="SystemConfiguration\RoleManagerTmpl.html" />
     <Content Include="SystemConfiguration\RoleUsers.aspx" />

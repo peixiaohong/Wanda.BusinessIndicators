@@ -1,4 +1,5 @@
-﻿<script type="text/x-jquery-tmpl" id="ShowMenuDataTmpl">
+﻿<!--角色管理-->
+<script type="text/x-jquery-tmpl" id="ShowMenuDataTmpl">
     {{each(i,item) Data}}
     <tr>
         <td>${i+1}</td>
@@ -7,13 +8,13 @@
         <td><a href="./RoleUsers.aspx?RoleId=${item.ID}">设置</a></td>
         <td><a href="javascript:void(0)" data-id="${item.ID}" onclick="SetLimits(this)">设置</a></td>
         <td>
-            <span class="role-edit-icon"  data-id="${item.ID}" onclick="EditRole(this)"><i class="fa fa-pencil"></i></span>
+            <span class="role-edit-icon" data-id="${item.ID}" onclick="EditRole(this)"><i class="fa fa-pencil"></i></span>
             <span class="role-delete-icon" data-id="${item.ID}" onclick="DeleteRoleData(this)"><i class="fa fa-times"></i></span>
         </td>
     </tr>
     {{/each}}
 </script>
-
+<!--角色管理用户-->
 <script type="text/x-jquery-tmpl" id="ShowMenuUsersDataTmpl">
     {{each(i,item) Data}}
     <tr>
@@ -30,12 +31,40 @@
     </tr>
     {{/each}}
 </script>
-
+<!--角色管理添加用户-->
 <script type="text/x-jquery-tmpl" id="UsersDataTmpl">
     {{each(i,item) Data}}
     <tr>
         <td>
-            <input type="checkbox" name="${item.LoginName}" value="" class="userChecked"/>
+            <input type="checkbox" name="${item.LoginName}" value="" class="userChecked" />
+        </td>
+        <td>${item.EmployeeName}</td>
+        <td>${item.LoginName}</td>
+        <td>${item.JobTitle}</td>
+        <td><span title="${item.DeptFullName}">${item.DeptFullName}</span></td>
+    </tr>
+    {{/each}}
+</script>
+<!--用户管理-->
+<script type="text/x-jquery-tmpl" id="UsersMenuDataTmpl">
+    {{each(i,item) Data}}
+    <tr>
+        <td>${i+1}</td>
+        <td>${item.EmployeeName}</td>
+        <td>${item.LoginName}</td>
+        <td>${item.JobTitle}</td>
+        <td><span title="${item.DeptFullName}">${item.DeptFullName}</span></td>
+        <td><a href="javascript:void(0)" data-role="${item.RoleName}" data-login="${item.LoginName}" onclick="SetUsersRole(this)">设置</a></td>
+        <td><a href="javascript:void(0)">设置</a></td>
+    </tr>
+    {{/each}}
+</script>
+<!--用户管理设置角色-->
+<script type="text/x-jquery-tmpl" id="UsersRolesDataTmpl">
+    {{each(i,item) Data}}
+    <tr>
+        <td>
+            <input type="checkbox" name="${item.LoginName}" value="" class="userChecked" />
         </td>
         <td>${item.EmployeeName}</td>
         <td>${item.LoginName}</td>

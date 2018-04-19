@@ -14,7 +14,6 @@ function Fake() {
 }
 //#endregion 公共方法
 
-//页面加载
 $(document).ready(function () {
 
     //注册事件
@@ -25,23 +24,20 @@ $(document).ready(function () {
 });
 
 //页面数据加载
-function LoadPage()
-{
-    //加载动画开始
+function LoadPage() {
     Load();
     WebUtil.ajax({
         async: false,
-        url: "/RoleManagerControll/GetRoles",
+        url: "/S_OrganizationalManagerControll/GetAllOrgData",
         args: {},
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
-                $('#ShowMenuData').empty();
-                loadTmpl('#ShowMenuDataTmpl').tmpl(resultData).appendTo('#ShowMenuData');
+                console.log(resultData);
+                Ztree(resultData);
             }
-            else
-            {
+            else {
+                console.log(resultData.Message);
             }
-            //加载动画结束
             Fake();
         }
     });
@@ -49,16 +45,12 @@ function LoadPage()
 }
 
 //注册事件
-function RegisterEvent()
-{
+function RegisterEvent() {
     //新增角色弹框页面确定按钮
-    $(".InsertRoleData_OK").off('click').on('click', function ()
-    {
+    $(".InsertRoleData_OK").off('click').on('click', function () {
         SaveRole('add');
     });
-    //查询按钮
-    $(".QueryConditions_Button").off("click").on("click", function ()
-    {
+    $(".QueryConditions_Button").off("click").on("click", function () {
         QueryRoleData();
     });
     // 菜单权限确定
@@ -71,8 +63,7 @@ function RegisterEvent()
     });
 }
 //保存数据
-function SaveRole(type,data)
-{
+function SaveRole(type, data) {
     var title = "添加角色";
     var msg = "添加成功";
     var datamsg = ""
@@ -80,7 +71,7 @@ function SaveRole(type,data)
         title = "编辑角色";
         msg = "编辑成功";
         datamsg = JSON.stringify(data);
-    } 
+    }
     $.MsgBox.Confirm(title, datamsg, type, function () {
         var CnName = $("#CnName").val();
         var Description = $("#Description").val();
@@ -114,10 +105,12 @@ function SaveRole(type,data)
                     $("#mb_box,#mb_con").remove();
                     $.MsgBox.Alert("提示", msg);
                     LoadPage();
+                    console.log("添加成功" + resultData.Message);
                 }
                 else {
                     $("#mb_box,#mb_con").remove();
                     $.MsgBox.Alert("提示", resultData.Message);
+                    console.log("添加失败" + resultData.Message);
                 }
                 Fake();
             }
@@ -126,21 +119,21 @@ function SaveRole(type,data)
 }
 
 //查询条件
-function QueryRoleData()
-{
+function QueryRoleData() {
     //参数
     var keyWord = $("#QrName").val();
     Load();
     WebUtil.ajax({
         async: false,
         url: "/RoleManagerControll/GetRoles",
-        args: { CnName: keyWord},
+        args: { CnName: keyWord },
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
                 $('#ShowMenuData').empty();
                 loadTmpl('#ShowMenuDataTmpl').tmpl(resultData).appendTo('#ShowMenuData');
             }
             else {
+                console.log(resultData.Message);
             }
             Fake();
         }
@@ -148,10 +141,9 @@ function QueryRoleData()
 }
 
 //删除角色
-function DeleteRoleData(el)
-{
+function DeleteRoleData(el) {
     var id = $(el).attr("data-id");
-    $.MsgBox.Confirm("提示", "确认删除，删除后角色设置的功能和用户将失效！", "", function () {
+    $.MsgBox.Confirm("提示", "确认删除", "", function () {
         WebUtil.ajax({
             async: false,
             url: "/RoleManagerControll/DeleteRoleData",
@@ -165,6 +157,7 @@ function DeleteRoleData(el)
                 else {
                     $("#mb_box,#mb_con").remove();
                     $.MsgBox.Alert("提示", "删除失败");
+                    console.log("删除失败" + resultData.Message);
                 }
             }
         });
@@ -172,8 +165,7 @@ function DeleteRoleData(el)
 }
 
 //编辑数据[获取数据]
-function EditRole(el)
-{
+function EditRole(el) {
     var id = $(el).attr("data-id");
     WebUtil.ajax({
         async: false,
@@ -184,6 +176,7 @@ function EditRole(el)
                 SaveRole("edit", resultData.Data);
             } else {
                 $.MsgBox.Alert("提示", "获取数据失败");
+                console.log("获取数据失败" + resultData.Message);
             }
         }
     });
@@ -203,43 +196,53 @@ function SetLimits(el) {
                 Ztree(resultData);
             } else {
                 $.MsgBox.Alert("提示", "获取数据失败");
+                console.log("获取数据失败" + resultData.Message);
             }
         }
     });
 }
 function Ztree(data) {
-    var zNodes = [{ id: "00000000-0000-0000-0000-000000000000", pId: "00000000-0000-0000-0000-000000000000", name: "菜单管理", open: true }];
+    var zNodes = [];
     data.Data.forEach(function (one) {
-        if (one.IsChecked) {
-            zNodes[0].checked = true;
-        };
-        var zNodesObj = { id: "", pId: "", name: "", checked: "" };
+        var zNodesObj = { id: "", pId: "", name: ""};
         zNodesObj.id = one.ID;
-        zNodesObj.pId = one.ParentMenuID;
+        zNodesObj.pId = one.ParentID;
         zNodesObj.name = one.CnName;
-        zNodesObj.checked = one.IsChecked;
         zNodes.push(zNodesObj);
+        zNodes[0].open = true;
     });
     var setting = {
-        check: {
-            enable: true
+        view: {
+            dblClickExpand: false,
+            showLine: true,
+            selectedMulti: false
         },
         data: {
             simpleData: {
-                enable: true
+                enable: true,
+                idKey: "id",
+                pIdKey: "pId",
+                rootPId: ""
             }
+        },
+        callback: {
+            onClick: zTreeOnClick
         }
     };
     $.fn.zTree.init($("#tree"), setting, zNodes);
     var zTree = $.fn.zTree.getZTreeObj("tree");
     zTree.setting.check.chkboxType = { "Y": "ps", "N": "ps" };
     Fake();
+    function zTreeOnClick(event, treeId, treeNode) {
+        console.log(treeNode);
+    };
 }
 function SaveLimitData(id) {
     var treeObj = $.fn.zTree.getZTreeObj("tree");
     var nodes = treeObj.getCheckedNodes(true);
     if (!nodes.length) {
-        $.MsgBox.Alert("提示", "没有选择任何权限");
+        $.MsgBox.Alert("提示", "请选择权限");
+        return false;
     }
     WebUtil.ajax({
         async: false,
@@ -250,19 +253,21 @@ function SaveLimitData(id) {
         },
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
+                console.log(resultData);
                 $(".user-model").css("display", "none");
                 $.MsgBox.Alert("提示", "保存成功");
             } else {
                 $.MsgBox.Alert("提示", "保存失败");
+                console.log("保存失败;" + resultData.Message);
             }
         }
     });
 }
-function FilterChecked(data,RoleId) {
+function FilterChecked(data, RoleId) {
     var match = [];
     data.forEach(function (one) {
         if (one.check_Child_State == -1 && one.checked) {
-            var obj = { "RoleId": RoleId,"MenuID":one.id}
+            var obj = { "RoleId": RoleId, "MenuID": one.id }
             match.push(obj);
         }
     })

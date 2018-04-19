@@ -353,3 +353,19 @@
     height:345px;
     overflow: auto;
 }
+/*组织架构*/
+.clear:after{
+    display:block;
+    content:"";
+    clear:both;
+}
+.organization_btn a {
+    color: #cb5c61
+}
+.organization_content {
+    padding:5px;
+}
+.organization_content>div{
+   display:inline-block;
+   margin-right: 15%;
+}
