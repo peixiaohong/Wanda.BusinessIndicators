@@ -121,7 +121,7 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
                             (
 	                            Select * From [dbo].[S_Organizational]  Where [SystemID]=@SystemID And Id=@SystemID And [IsDeleted]=0
 	                            Union All
-                                Select * From [dbo].[S_Organizational] As A
+                                Select A.* From [dbo].[S_Organizational] As A
 	                            Inner Join [GetSystem_subset] As B On B.[ID]=A.[ParentID] And B.[IsDeleted]=0
 	                            Where A.[IsDeleted]=0
                             )
