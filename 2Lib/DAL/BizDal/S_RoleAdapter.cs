@@ -1,6 +1,8 @@
 ﻿using LJTH.BusinessIndicators.Model.BizModel;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,15 +51,21 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
         public List<S_Role> GetDatas(string CnName)
         {
             string sql = string.Empty;
-            if (CnName == "")
+            if (string.IsNullOrEmpty(CnName))
             {
                 sql = "Select * From  [dbo].[S_Role] Where [IsDeleted]=0 ORDER BY CreateTime DESC ";
+                return ExecuteQuery(sql);
             }
             else
             {
-                sql = string.Format("Select * From  [dbo].[S_Role] Where [IsDeleted]=0 and CnName like '%{0}%' ORDER BY CreateTime DESC ", CnName);
+                sql = "Select * From  [dbo].[S_Role] Where [IsDeleted]=0 and CnName like @CnName ORDER BY CreateTime DESC ";
+                CnName = "%" + CnName + "%";
+                DbParameter[] parameters = new DbParameter[] 
+                {
+                    CreateSqlParameter("@CnName",DbType.String,CnName)
+                };
+                return ExecuteQuery(sql, parameters);
             }
-            return ExecuteQuery(sql);
         }
 
         /// <summary>

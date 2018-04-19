@@ -14,6 +14,7 @@ function Fake() {
 }
 //#endregion 公共方法
 
+//页面加载
 $(document).ready(function () {
 
     //注册事件
@@ -26,10 +27,11 @@ $(document).ready(function () {
 //页面数据加载
 function LoadPage()
 {
+    //加载动画开始
     Load();
     WebUtil.ajax({
         async: false,
-        url: "/UserInfoManagerControll/GetUserRoles",
+        url: "/RoleManagerControll/GetRoles",
         args: {},
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
@@ -38,8 +40,8 @@ function LoadPage()
             }
             else
             {
-                console.log(resultData.Message);
             }
+            //加载动画结束
             Fake();
         }
     });
@@ -54,6 +56,7 @@ function RegisterEvent()
     {
         SaveRole('add');
     });
+    //查询按钮
     $(".QueryConditions_Button").off("click").on("click", function ()
     {
         QueryRoleData();
@@ -111,12 +114,10 @@ function SaveRole(type,data)
                     $("#mb_box,#mb_con").remove();
                     $.MsgBox.Alert("提示", msg);
                     LoadPage();
-                    console.log("添加成功" + resultData.Message);
                 }
                 else {
                     $("#mb_box,#mb_con").remove();
                     $.MsgBox.Alert("提示", resultData.Message);
-                    console.log("添加失败" + resultData.Message);
                 }
                 Fake();
             }
@@ -140,7 +141,6 @@ function QueryRoleData()
                 loadTmpl('#ShowMenuDataTmpl').tmpl(resultData).appendTo('#ShowMenuData');
             }
             else {
-                console.log(resultData.Message);
             }
             Fake();
         }
@@ -165,7 +165,6 @@ function DeleteRoleData(el)
                 else {
                     $("#mb_box,#mb_con").remove();
                     $.MsgBox.Alert("提示", "删除失败");
-                    console.log("删除失败" + resultData.Message);
                 }
             }
         });
@@ -185,7 +184,6 @@ function EditRole(el)
                 SaveRole("edit", resultData.Data);
             } else {
                 $.MsgBox.Alert("提示", "获取数据失败");
-                console.log("获取数据失败" + resultData.Message);
             }
         }
     });
@@ -205,7 +203,6 @@ function SetLimits(el) {
                 Ztree(resultData);
             } else {
                 $.MsgBox.Alert("提示", "获取数据失败");
-                console.log("获取数据失败" + resultData.Message);
             }
         }
     });
@@ -253,12 +250,10 @@ function SaveLimitData(id) {
         },
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
-                console.log(resultData);
                 $(".user-model").css("display", "none");
                 $.MsgBox.Alert("提示", "保存成功");
             } else {
                 $.MsgBox.Alert("提示", "保存失败");
-                console.log("保存失败;" + resultData.Message);
             }
         }
     });
