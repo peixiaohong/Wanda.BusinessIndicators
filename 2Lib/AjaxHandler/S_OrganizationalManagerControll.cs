@@ -81,6 +81,18 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     entity.CreatorName = entity.ModifierName = base.CurrentUserName;
                     entity.ID = Guid.NewGuid();
                     entity.IsDeleted = false;
+
+                    var disctinctNames=S_OrganizationalActionOperator.Instance.GetSystemsubsetCnName(entity.SystemID, entity.CnName);
+                    if (disctinctNames.Count > 0)
+                    {
+                        return new
+                        {
+                            Data = "",
+                            Success = 0,
+                            Message = "同一个板块一下不能有重复的名称"
+                        };
+                    }
+
                     //是项目 且名字已经存在company表
                     if (IsCompany && companyNameNumbers > 0)
                     {
@@ -119,6 +131,18 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 //修改数据
                 else
                 {
+
+                    var disctinctNames = S_OrganizationalActionOperator.Instance.GetSystemsubsetCnName(entity.SystemID, entity.CnName);
+                    if (disctinctNames.Where(i=>i.ID!=entity.ID).Count() > 0)
+                    {
+                        return new
+                        {
+                            Data = "",
+                            Success = 0,
+                            Message = "同一个板块一下不能有重复的名称"
+                        };
+                    }
+
                     //如果是项目
                     if (IsCompany)
                     {

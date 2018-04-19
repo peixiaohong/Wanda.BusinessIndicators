@@ -108,6 +108,32 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
         }
 
 
+        /// <summary>
+        /// 根据板块ID,名称查询已有数据
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="cnName"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetSystemsubsetCnName(Guid systemID, string cnName)
+        {
+            string sql = @"With GetSystem_subset
+                            As
+                            (
+	                            Select * From [dbo].[S_Organizational]  Where [SystemID]=@SystemID And Id=@SystemID And [IsDeleted]=0
+	                            Union All
+                                Select * From [dbo].[S_Organizational] As A
+	                            Inner Join [GetSystem_subset] As B On B.[ID]=A.[ParentID] And B.[IsDeleted]=0
+	                            Where A.[IsDeleted]=0
+                            )
+                            Select * From [GetSystem_subset] Where [CnName]=@CnName";
+            DbParameter[] parameters = new DbParameter[] 
+            {
+                CreateSqlParameter("@SystemID",DbType.Guid,systemID),
+                CreateSqlParameter("@CnName",DbType.String,cnName)
+            };
+            return ExecuteQuery(sql, parameters);
+        }
+
         #region 数据权限
         /// <summary>
         /// 根据板块拿授权的区域

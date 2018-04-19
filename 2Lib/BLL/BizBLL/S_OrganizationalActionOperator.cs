@@ -106,6 +106,18 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
             return _s_OrganizationalAdapter.GetCompanyByRegionalID(systemID, regionalID);
         }
 
+
+        /// <summary>
+        /// 根据板块ID,名称查询已有数据
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="cnName"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetSystemsubsetCnName(Guid systemID, string cnName)
+        {
+            return _s_OrganizationalAdapter.GetSystemsubsetCnName(systemID, cnName);
+        }
+
         #endregion
 
 
@@ -149,7 +161,7 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         /// <returns></returns>
         public List<S_Organizational> GetUserCompanyData(Guid systemID, string loginName)
         {
-            return _s_OrganizationalAdapter.GetUserCompanyData(systemID,loginName);
+            return _s_OrganizationalAdapter.GetUserCompanyData(systemID, loginName);
         }
 
         /// <summary>
