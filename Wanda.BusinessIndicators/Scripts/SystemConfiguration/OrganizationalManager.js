@@ -72,7 +72,7 @@ function CheckOrganization(type) {
             $.MsgBox.Alert("提示", "系统板块不能新增");
             return false;
         }
-        if (isCompany) {
+        if (isCompany == "true") {
             $.MsgBox.Alert("提示", "项目类型不能新增");
             return false;
         }

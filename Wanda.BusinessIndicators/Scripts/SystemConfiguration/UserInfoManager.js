@@ -145,21 +145,24 @@ function QueryRoleData() {
     });
 }
 
-// 设置角色
+// 设置/查询角色
 function SetUsersRole(el) {
     $(".user-model").css("display", "block");
     Load();
-    var RoleName = $(el).attr("data-role");
-    var LoginName = $(el).attr("data-login");
+    if (el) {
+        var LoginName = $(el).attr("data-login");
+        $("#UsersRoleName").attr()
+    }
+    var RoleName = $("#UsersRoleName").val();
     WebUtil.ajax({
         async: false,
-        url: "/RoleManagerControll/GetUserRoles",
+        url: "/UserInfoManagerControll/GetUserRoles",
         args: { "cnName": RoleName, "loginName": LoginName},
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
                 console.log(resultData)
-                //$('#UsersMenuData').empty();
-                //loadTmpl('#UsersMenuDataTmpl').tmpl(resultData).appendTo('#UsersMenuData');
+                $('#UsersRolesData').empty();
+                loadTmpl('#UsersRolesDataTmpl').tmpl(resultData).appendTo('#UsersRolesData');
             }
             else {
                 console.log(resultData.Message);

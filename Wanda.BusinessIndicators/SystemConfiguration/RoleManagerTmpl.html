@@ -54,7 +54,7 @@
         <td>${item.LoginName}</td>
         <td>${item.JobTitle}</td>
         <td><span title="${item.DeptFullName}">${item.DeptFullName}</span></td>
-        <td><a href="javascript:void(0)" data-role="${item.RoleName}" data-login="${item.LoginName}" onclick="SetUsersRole(this)">设置</a></td>
+        <td><a href="javascript:void(0)" data-login="${item.LoginName}" onclick="SetUsersRole(this)">设置</a></td>
         <td><a href="javascript:void(0)">设置</a></td>
     </tr>
     {{/each}}
@@ -66,8 +66,8 @@
         <td>
             <input type="checkbox" name="${item.LoginName}" value="" class="userChecked" />
         </td>
-        <td>${item.EmployeeName}</td>
-        <td>${item.LoginName}</td>
+        <td>${item.CnName}</td>
+        <td>${item.Description}</td>
         <td>${item.JobTitle}</td>
         <td><span title="${item.DeptFullName}">${item.DeptFullName}</span></td>
     </tr>

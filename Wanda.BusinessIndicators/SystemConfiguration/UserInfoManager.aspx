@@ -78,7 +78,7 @@
                         <tr>
                             <th>角色名称</th>
                             <td>
-                                <input type="text"  style="width: 210px;outline:0;" id="UsersNameAdd">
+                                <input type="text"  style="width: 210px;outline:0;" id="UsersRoleName">
                             </td>
                             <th style="width: 150px">
                                 <a  class="btn_search QueryConditions_Button" href="javascript:void(0)"><span><i class="fa fa-search"></i>&nbsp;查询</span></a>
