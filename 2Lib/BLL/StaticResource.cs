@@ -75,6 +75,7 @@ namespace LJTH.BusinessIndicators.BLL
             {
                 if (_SystemList == null || _SystemList.Count <= 0)
                 {
+
                     DateTime CurrentDate = DateTime.Now;
                     _SystemList = C_SystemOperator.Instance.GetSystemList(CurrentDate).OrderBy(S => S.Sequence).ToList();
                 }

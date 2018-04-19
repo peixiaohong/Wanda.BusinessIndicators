@@ -93,12 +93,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DllReference\Wanda.UserSource.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Wanda.Workflow.Client">
-      <HintPath>DllReference\Wanda.Workflow.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Wanda.Workflow.Object">
-      <HintPath>DllReference\Wanda.Workflow.Object.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="BusinessReport\ChildrenCompanyRpt.aspx" />
@@ -165,6 +159,8 @@
     <Content Include="Scripts\TreeGrid\jquery-1.7.1.js" />
     <Content Include="Scripts\TreeGrid\TreeGrid.css" />
     <Content Include="Scripts\TreeGrid\TreeGrid.js" />
+    <Content Include="SiteMasterPage\userSelectCtrl.ascx" />
+    <Content Include="SiteMasterPage\wfCtrl.ascx" />
     <Content Include="Styles\css\font-awesome.min.css" />
     <Content Include="Styles\css\main.css" />
     <Content Include="Styles\fonts\fontawesome-webfont.svg" />
@@ -175,8 +171,6 @@
     <Content Include="SystemConfiguration\RoleUsers.aspx" />
     <Content Include="SystemConfiguration\TargetPlanDetailReported.aspx" />
     <Content Include="SystemConfiguration\UserInfoManager.aspx" />
-    <Content Include="WebService\MobileCommonWebService.asmx" />
-    <Content Include="WebService\MobileCommon\BaseWebService.asmx" />
     <Content Include="AjaxHander\DownLoadDSExcel.aspx" />
     <Content Include="App_Data\modelFile\CompanyProperty.xml" />
     <Content Include="App_Data\modelFile\ComplateTargetDetail.xml" />
@@ -1211,6 +1205,20 @@
     <Compile Include="SiteMasterPage\MainMasterPage_Help.Master.designer.cs">
       <DependentUpon>MainMasterPage_Help.Master</DependentUpon>
     </Compile>
+    <Compile Include="SiteMasterPage\userSelectCtrl.ascx.cs">
+      <DependentUpon>userSelectCtrl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SiteMasterPage\userSelectCtrl.ascx.designer.cs">
+      <DependentUpon>userSelectCtrl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="SiteMasterPage\wfCtrl.ascx.cs">
+      <DependentUpon>wfCtrl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SiteMasterPage\wfCtrl.ascx.designer.cs">
+      <DependentUpon>wfCtrl.ascx</DependentUpon>
+    </Compile>
     <Compile Include="SystemConfiguration\RoleManager.aspx.cs">
       <DependentUpon>RoleManager.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1239,23 +1247,6 @@
     <Compile Include="SystemConfiguration\UserInfoManager.aspx.designer.cs">
       <DependentUpon>UserInfoManager.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebService\MobileCommonWebService.asmx.cs">
-      <DependentUpon>MobileCommonWebService.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="WebService\MobileCommon\AttachmentDownLoad.ashx.cs">
-      <DependentUpon>AttachmentDownLoad.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="WebService\MobileCommon\BaseWebService.asmx.cs">
-      <DependentUpon>BaseWebService.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="WebService\MobileCommon\ConstantFlowCode.cs" />
-    <Compile Include="WebService\MobileCommon\CredentialSoapHeader.cs" />
-    <Compile Include="WebService\MobileCommon\MobileCommonModel.cs" />
-    <Compile Include="WebService\MobileCommon\MobileServiceBase.cs" />
-    <Compile Include="WebService\MonthlyApprovalService.cs" />
-    <Compile Include="WebService\TargetApprovalService.cs" />
     <Compile Include="AjaxHander\DownExcelCommitDate.ashx.cs">
       <DependentUpon>DownExcelCommitDate.ashx</DependentUpon>
     </Compile>
@@ -1854,7 +1845,6 @@
     <Content Include="Excel\指标历史下载模板V1.xlsx" />
     <Content Include="Excel\完成情况明细模板-长白山2016版V1.xlsx" />
     <Content Include="Excel\指标上报模版V1-长白山2016版.xlsx" />
-    <Content Include="WebService\MobileCommon\AttachmentDownLoad.ashx" />
     <Content Include="packages.config" />
     <Fakes Include="Fakes\Newtonsoft.Json.fakes" />
     <Content Include="Excel\月度经营报告_商管系统查询V1.xlsx" />
@@ -1941,6 +1931,14 @@
     <ProjectReference Include="..\6Plugin\04.SSO\04.SSO.csproj">
       <Project>{3bc18b77-1027-45b1-bae9-396b6e14de38}</Project>
       <Name>04.SSO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\6Plugin\BPF.Workflow.Client\BPF.Workflow.Client.csproj">
+      <Project>{5bd5cc30-3bd6-4b83-af1a-cf62e7f67297}</Project>
+      <Name>BPF.Workflow.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\6Plugin\BPF.Workflow.Object\BPF.Workflow.Object.csproj">
+      <Project>{3b2bb7db-894f-4604-b720-be5f017f77b6}</Project>
+      <Name>BPF.Workflow.Object</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

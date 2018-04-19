@@ -56,12 +56,6 @@
     <Reference Include="Wanda.Platform.WorkFlow.ClientComponent">
       <HintPath>..\..\Wanda.BusinessIndicators\DllReference\Wanda.Platform.WorkFlow.ClientComponent.dll</HintPath>
     </Reference>
-    <Reference Include="Wanda.Workflow.Client">
-      <HintPath>..\..\Wanda.BusinessIndicators\DllReference\Wanda.Workflow.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Wanda.Workflow.Object">
-      <HintPath>..\..\Wanda.BusinessIndicators\DllReference\Wanda.Workflow.Object.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompanyController.cs" />
@@ -100,6 +94,14 @@
     <ProjectReference Include="..\..\1Framework\Lib.Web\LJTH.Lib.Web.csproj">
       <Project>{9e21a44d-17eb-44f4-a936-27b41ca565fe}</Project>
       <Name>LJTH.Lib.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\6Plugin\BPF.Workflow.Client\BPF.Workflow.Client.csproj">
+      <Project>{5bd5cc30-3bd6-4b83-af1a-cf62e7f67297}</Project>
+      <Name>BPF.Workflow.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\6Plugin\BPF.Workflow.Object\BPF.Workflow.Object.csproj">
+      <Project>{3b2bb7db-894f-4604-b720-be5f017f77b6}</Project>
+      <Name>BPF.Workflow.Object</Name>
     </ProjectReference>
     <ProjectReference Include="..\BLL\2BLL.csproj">
       <Project>{06ab4a03-00ca-4f1e-9873-bb3738118324}</Project>

@@ -118,7 +118,7 @@ function operateNav(sender) {
             $("#process").show();
             //$.blockUI({ message: "<div style='width:200px'><img src='../../images/ajax-loader.gif' alt='waiting'><span style='font-size:20px;padding-left:20px;color:#3f3f3f'>数据请求中...</span></div>" });
             //后续加上 BusinessID
-            //GetProcess($("#HideProcessCode").val(), $("#hideTargetPlanID").val());
+            GetProcess($("#HideProcessCode").val(), $("#hideTargetPlanID").val());
             $("#T2,#UpLoadDataDiv,#DownLoadModel,#Down1").hide();
             break;
 
@@ -153,26 +153,26 @@ $(function () {
             AlwaysReturnToStart: true
         },
     };
-    //wanda_wf_client.initAjaxSetting("process", false, otherSetting);
+    bpf_wf_client.initAjaxSetting("process", false, otherSetting);
 })
 
 
 
 function GetProcess(key, instanceID) {
     FlowCode = key;
-    var businessID = wanda_wf_tool.getQueryString("BusinessID");
+    var businessID = bpf_wf_tool.getQueryString("BusinessID");
     if (businessID != "") {
-        wanda_wf_client.getProcess(businessID, function () {
+        bpf_wf_client.getProcess(businessID, function () {
 
         });
     }
     else {
-        wanda_wf_client.exist(instanceID, function () {
-            wanda_wf_client.getProcess(instanceID, function () {
+        bpf_wf_client.exist(instanceID, function () {
+            bpf_wf_client.getProcess(instanceID, function () {
                 $.unblockUI();
             })
         }, function () {
-            wanda_wf_client.createProcess({
+            bpf_wf_client.createProcess({
                 FlowCode: FlowCode,
                 BusinessID: instanceID,
                 ProcessTitl: $('select#ddlSystem').find('option:selected').text() + $("#HideFinYear").val() + "年计划指标上报",
@@ -391,7 +391,7 @@ function TargetPlanDetailLiaddCss(sender) {
 }
 
 function AddSumHead(result) {
-    var head = " <tr><th style=\"width: 12%\" rowspan=\"2\">月份</th> <th colspan=\"" + result.length + "\">当前数</th> <th colspan=\"" + result.length + "\">累计数</th>";
+    var head = " <tr><th style=\"width: 12%\" rowspan=\"2\">月份</th> <th colspan=\"" + result.length + "\">当月数</th> <th colspan=\"" + result.length + "\">累计数</th>";
     head += " </tr><tr id=\"TrTarget\">";
     for (var i = 0; i < result.length; i++) {
         head += "<th>" + result[i].Name + "</th>";

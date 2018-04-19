@@ -9,8 +9,8 @@ using LJTH.BusinessIndicators.Engine;
 using LJTH.BusinessIndicators.ViewModel;
 using LJTH.BusinessIndicators.Common;
 using Newtonsoft.Json;
-using Wanda.Workflow.Client;
-using Wanda.Workflow.Object;
+using BPF.Workflow.Client;
+using BPF.Workflow.Object;
 using Lib.Xml;
 using System.Xml.Linq;
 using Wanda.Platform.WorkFlow.ClientComponent;
@@ -162,10 +162,10 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         public List<NavigatActivity1> GetProcessIntance(string BusinessID , string UserLonginID = null)
         {
 
-            var p = Wanda.Workflow.Client.WFClientSDK.GetProcess(null, BusinessID, UserLonginID);
+            var p = BPF.Workflow.Client.WFClientSDK.GetProcess(null, BusinessID, UserLonginID);
             List<NavigatActivity1> listna = new List<NavigatActivity1>();
             NavigatActivity1 na1 = null;
-            Dictionary<string, Wanda.Workflow.Object.Node> list = new Dictionary<string, Node>();
+            Dictionary<string, BPF.Workflow.Object.Node> list = new Dictionary<string, Node>();
             string strNextNodeID = p.ProcessInstance.StartNodeID;
             foreach (var p1 in p.NodeInstanceList)
             {
@@ -289,7 +289,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         {
             if (WFClientSDK.Exist(BusinessID))
             {
-                var p = Wanda.Workflow.Client.WFClientSDK.GetProcess(null, this.BusinessID, UserLonginID);
+                var p = BPF.Workflow.Client.WFClientSDK.GetProcess(null, this.BusinessID, UserLonginID);
                 //获取当前节点是否为暂挂节点。
                 var nodetype = 0;
                 if (p.ProcessInstance.RunningNodeID != null && p.ProcessInstance.RunningNodeID != "")
@@ -360,7 +360,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         //这里针对的是汇总后批次的流程意见
                         B_SystemBatch _batchModel = new B_SystemBatch();
                         _batchModel = B_SystemBatchOperator.Instance.GetSystemBatch(this.BusinessID.ToGuid());
-                        List<Wanda.Workflow.Object.ProcessLog> _list = Wanda.Workflow.Client.WFClientSDK.GetProcessLogList(this.BusinessID);
+                        List<BPF.Workflow.Object.ProcessLog> _list = BPF.Workflow.Client.WFClientSDK.GetProcessLogList(this.BusinessID);
 
                         _batchModel.Batch_Opinions = JsonConvert.SerializeObject(_list);
 
@@ -369,7 +369,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     }
                 }
 
-                //var p = Wanda.Workflow.Client.WFClientSDK.GetProcess(null, this.BusinessID);
+                //var p = BPF.Workflow.Client.WFClientSDK.GetProcess(null, this.BusinessID);
 
                 //
                 //汇总流程审批完成。执行listB TO listA ,对最后的审批做了更加严谨的判断

@@ -83,7 +83,7 @@ namespace LJTH.BusinessIndicators.Web
                     host.BusinessID = Request["BusinessID"];
 
 
-                    if (Wanda.Workflow.Client.WFClientSDK.Exist(host.BusinessID))
+                    if (BPF.Workflow.Client.WFClientSDK.Exist(host.BusinessID))
                     {
                         HttpContext.Current.Response.Clear();
                         Server.Execute("~/BusinessReport/TargetApprove.aspx");

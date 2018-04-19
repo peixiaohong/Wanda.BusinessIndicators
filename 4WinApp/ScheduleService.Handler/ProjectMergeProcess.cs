@@ -9,8 +9,8 @@ using LJTH.BusinessIndicators.ViewModel;
 using Lib.Core;
 using LJTH.BusinessIndicators.Common;
 using System.Web;
-using Wanda.Workflow.Client;
-using Wanda.Workflow.Object;
+using BPF.Workflow.Client;
+using BPF.Workflow.Object;
 using Newtonsoft.Json;
 using Wanda.Platform.WorkFlow.ClientComponent;
 
@@ -126,13 +126,13 @@ namespace ScheduleService.Handler
 
                                 //重新在批次表中，获取数据
                                 BatchRptList = JsonConvert.DeserializeObject<List<V_SubReport>>(batchModel.SubReport);
-                                List<Wanda.Workflow.Object.ProcessLog> _list = new List<ProcessLog>();
+                                List<BPF.Workflow.Object.ProcessLog> _list = new List<ProcessLog>();
                                 if (BatchRptList.Count > 0)
                                 {
                                     BatchRptList.ForEach(BR =>
                                     {
                                         //B_MonthlyReport bm = B_MonthlyreportOperator.Instance.GetMonthlyreport(BR.ReportID);
-                                        _list.AddRange(Wanda.Workflow.Client.WFClientSDK.GetProcessLogList(BR.ReportID.ToString()));
+                                        _list.AddRange(BPF.Workflow.Client.WFClientSDK.GetProcessLogList(BR.ReportID.ToString()));
                                     });
                                 }
                                 batchModel.Opinions = JsonConvert.SerializeObject(_list.OrderByDescending(p => p.FinishDateTime));
@@ -255,7 +255,7 @@ namespace ScheduleService.Handler
             try
             {
                 Common.ScheduleService.Log.Instance.Info("项目系统合并流程启动开始！");
-                var starup = new Wanda.Workflow.Client.WFStartupParameter()
+                var starup = new BPF.Workflow.Client.WFStartupParameter()
                 {
                     FlowCode = "YY_WD-SYSTEM-JY-PRONEW",
                     BusinessID = this.BusinessID,
@@ -267,13 +267,13 @@ namespace ScheduleService.Handler
 
                 //重新在批次表中，获取数据
                 BatchRptList = JsonConvert.DeserializeObject<List<V_SubReport>>(batch.SubReport);
-                List<Wanda.Workflow.Object.ProcessLog> _list = new List<ProcessLog>();
+                List<BPF.Workflow.Object.ProcessLog> _list = new List<ProcessLog>();
                 if (BatchRptList.Count > 0)
                 {
                     BatchRptList.ForEach(BR =>
                     {
                         //B_MonthlyReport bm = B_MonthlyreportOperator.Instance.GetMonthlyreport(BR.ReportID);
-                        _list.AddRange(Wanda.Workflow.Client.WFClientSDK.GetProcessLogList(BR.ReportID.ToString()));
+                        _list.AddRange(BPF.Workflow.Client.WFClientSDK.GetProcessLogList(BR.ReportID.ToString()));
                     });
                 }
                 batch.Opinions = JsonConvert.SerializeObject(_list);
@@ -343,12 +343,12 @@ namespace ScheduleService.Handler
         {
 
             List<NavigatActivity1> listna = new List<NavigatActivity1>();
-            if (Wanda.Workflow.Client.WFClientSDK.Exist(BusinessID))
+            if (BPF.Workflow.Client.WFClientSDK.Exist(BusinessID))
             {
                 try
                 {
                     NavigatActivity1 na1 = null;
-                    Dictionary<string, Wanda.Workflow.Object.Node> list = new Dictionary<string, Node>();
+                    Dictionary<string, BPF.Workflow.Object.Node> list = new Dictionary<string, Node>();
                     string strNextNodeID = p.ProcessInstance.StartNodeID;
                     foreach (var p1 in p.NodeInstanceList)
                     {
