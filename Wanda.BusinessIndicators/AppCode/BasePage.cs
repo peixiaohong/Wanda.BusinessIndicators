@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Wanda.Platform.Permission.ClientComponent;
 using Wanda.Platform.Permission.Contract;
-using Wanda.Workflow.Client;
+using BPF.Workflow.Client;
 
 
 namespace LJTH.BusinessIndicators.Web
@@ -14,7 +14,7 @@ namespace LJTH.BusinessIndicators.Web
         /// <summary>
         /// 当前人
         /// </summary>
-        protected string CurrentUser { get { return Wanda.Workflow.Client.SDKHelper.GetUserName(Context); } }
+        protected string CurrentUser { get { return BPF.Workflow.Client.SDKHelper.GetUserName(Context); } }
 
         private List<MemberPropertyResult> _currentUserPropertity = null;
 
@@ -109,7 +109,7 @@ namespace LJTH.BusinessIndicators.Web
         /// <returns></returns>
         internal static string GetCurrentUser
         {
-            get { return Wanda.Workflow.Client.SDKHelper.GetUserName(HttpContext.Current); }
+            get { return BPF.Workflow.Client.SDKHelper.GetUserName(HttpContext.Current); }
         }
     }
 }

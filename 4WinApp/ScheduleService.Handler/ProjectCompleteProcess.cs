@@ -7,8 +7,8 @@ using LJTH.BusinessIndicators.BLL;
 using LJTH.BusinessIndicators.Model;
 using LJTH.BusinessIndicators.ViewModel;
 using Newtonsoft.Json;
-using Wanda.Workflow.Client;
-using Wanda.Workflow.Object;
+using BPF.Workflow.Client;
+using BPF.Workflow.Object;
 
 namespace ScheduleService.Handler
 {
@@ -25,7 +25,7 @@ namespace ScheduleService.Handler
             {
                 foreach (B_SystemBatch Bsystembatch in listBSB)
                 {
-                    if (Wanda.Workflow.Client.WFClientSDK.Exist(Bsystembatch.ID.ToString()))
+                    if (BPF.Workflow.Client.WFClientSDK.Exist(Bsystembatch.ID.ToString()))
                     {
                         WorkflowContext SummaryProcessWorkflow = WFClientSDK.GetProcess(null, Bsystembatch.ID.ToString(), new UserInfo() { UserCode = "$VirtualUserCode$项目汇总服务" });
                         if (SummaryProcessWorkflow.ProcessInstance.Status == 3)
@@ -33,7 +33,7 @@ namespace ScheduleService.Handler
                             List<V_SubReport> listVs = JsonConvert.DeserializeObject<List<V_SubReport>>(Bsystembatch.SubReport);
                             foreach (V_SubReport vs in listVs)
                             {
-                                if (Wanda.Workflow.Client.WFClientSDK.Exist(vs.ReportID.ToString()))
+                                if (BPF.Workflow.Client.WFClientSDK.Exist(vs.ReportID.ToString()))
                                 {
                                     WorkflowContext ChildrenWorkflow = WFClientSDK.GetProcess(null, vs.ReportID.ToString(), new UserInfo() { UserCode = "$VirtualUserCode$虚拟汇总人" });
                                     if (ChildrenWorkflow.ProcessInstance.Status != 3)

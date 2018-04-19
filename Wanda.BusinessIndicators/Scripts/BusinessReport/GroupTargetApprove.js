@@ -142,7 +142,7 @@ $(function () {
         },
         OnAfterExecute: afterAction,
     };
-    wanda_wf_client.initAjaxSetting("#process", false, otherSetting);
+    bpf_wf_client.initAjaxSetting("#process", false, otherSetting);
 })
 function afterAction(args) {
     if (args.WorkflowContext.StatusCode == 0) {
@@ -151,7 +151,7 @@ function afterAction(args) {
     }
 }
 function GetGroupTargetApproveProcess(instanceID) {
-    wanda_wf_client.getProcess(instanceID, function () {
+    bpf_wf_client.getProcess(instanceID, function () {
         $.unblockUI();
     });
 }

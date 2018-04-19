@@ -8,7 +8,8 @@ using LJTH.BusinessIndicators.Model;
 using System.Data.SqlClient;
 using System.Text;
 using System.Transactions;
-
+using System.Data.Common;
+using System.Data;
 
 namespace LJTH.BusinessIndicators.DAL
 {
@@ -247,8 +248,12 @@ WHERE   SystemID = @SystemID
         /// <returns></returns>
         public List<C_Company> GetCompanyInfoByName(string name) {
 
-            string sql = string.Format(@"Select * From [dbo].[C_Company] Where [CompanyName]='{0}'", name);
-            return ExecuteQuery(sql);
+            string sql = string.Format(@"Select * From [dbo].[C_Company] Where [CompanyName]=@CompanyName", name);
+            DbParameter[] parameters = new DbParameter[]
+            {
+                 CreateSqlParameter("@CompanyName",DbType.String,name)
+            };
+            return ExecuteQuery(sql,parameters);
         }
 
 

@@ -25,14 +25,14 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
             //string sql = string.Format("exec Proc_GetContractList @ContractCode,@ContractName,@PartyAUnitName,@DataStatus,@ContractTypeCode,@ScalingName,@PartyBUnitName,@BusinessKey,@ProjectID,@pageSize,@pageNumber,@PageSource");
             string sql = string.Format("Exec [dbo].[Pro_GetUserPersionInfo] @LoginName,@RoleID,@KeyWord,@PageIndex, @PageSize");
 
-            DbParameter[] parameter = new DbParameter[]{
+            DbParameter[] parameters = new DbParameter[]{
                 CreateSqlParameter("@LoginName",DbType.String,filter.LoginName),
                 CreateSqlParameter("@RoleID",DbType.Guid,filter.RoleID),
                 CreateSqlParameter("@KeyWord",DbType.String,filter.keyWord),
                 CreateSqlParameter("@PageIndex",DbType.Int32,filter.PageIndex),
                 CreateSqlParameter("@PageSize",DbType.Int32,filter.PageSize)
             };
-            DataSet ds = ExecuteReturnDataSet(sql, parameter);
+            DataSet ds = ExecuteReturnDataSet(sql, parameters);
             List<AllUserPermissions> list = new List<AllUserPermissions>();
             TotalCount = 0;
             if (ds != null)

@@ -1,6 +1,8 @@
 ﻿using LJTH.BusinessIndicators.Model.BizModel;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,18 +28,22 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
         /// <returns></returns>
         public List<S_Org_User> GetDataByOrgID(Guid id)
         {
-            string sql = string.Format(@"WITH tempData
-                                         AS
-                                         (
-                                         SELECT * FROM [dbo].[S_Organizational] WHERE id='{0}'
-                                         UNION ALL
-                                         SELECT [A].* FROM [dbo].[S_Organizational] A
-                                         Inner Join tempData B  On A.[ParentID] =B.[ID] 
-                                         )
-                                         Select [B].* From tempData As A
-                                         Inner Join [dbo].[S_Org_User] As B On A.[ID]=B.[CompanyID]
-                                         Where A.[IsCompany]=1", id);
-            return ExecuteQuery(sql);
+            string sql = @"WITH tempData
+                           AS
+                           (
+                           SELECT * FROM [dbo].[S_Organizational] WHERE ID=@ID
+                           UNION ALL
+                           SELECT [A].* FROM [dbo].[S_Organizational] A
+                           Inner Join tempData B  On A.[ParentID] =B.[ID] 
+                           )
+                           Select [B].* From tempData As A
+                           Inner Join [dbo].[S_Org_User] As B On A.[ID]=B.[CompanyID]
+                           Where A.[IsCompany]=1";
+            DbParameter[] parameters = new DbParameter[]
+            {
+              CreateSqlParameter("@ID",DbType.Guid,id)
+            };
+            return ExecuteQuery(sql, parameters);
         }
 
         /// <summary>
@@ -47,22 +53,26 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
         /// <returns></returns>
         public List<S_Org_User> GetDataByLoginName(string loginName)
         {
-            string sql = string.Format(@"WITH tempData
-                                         AS
-                                         (
-                                         SELECT * FROM [dbo].[S_Organizational] WHERE id='00000000-0000-0000-0000-000000000000' And [IsDeleted]=0
-                                         UNION ALL
-                                         SELECT [A].* FROM [dbo].[S_Organizational] A
-                                         Inner Join tempData B  On A.[ParentID] =B.[ID]  And A.[IsDeleted]=0
-                                         )
-                                         Select [A].ID,A.[CnName],A.[ParentID],A.[Level],A.[IsLastNode],A.[IsDeleted],
-	                                            Case When Exists(Select 1 From [dbo].[S_Org_User] Where [CompanyID]=A.[ID] And [IsDeleted]=0 And [LoginName]='%{0}%') Then 1
-			                                         Else 0
-			                                         End As IsChecked
-                                         From tempData As A  
-                                         Where A.[IsDeleted]=0 Order By [A].[Level]
-                                         ", loginName);
-            return base.DataTableToListT(ExecuteReturnTable(sql));
+            string sql = @"WITH tempData
+                           AS
+                           (
+                           SELECT * FROM [dbo].[S_Organizational] WHERE id='00000000-0000-0000-0000-000000000000' And [IsDeleted]=0
+                           UNION ALL
+                           SELECT [A].* FROM [dbo].[S_Organizational] A
+                           Inner Join tempData B  On A.[ParentID] =B.[ID]  And A.[IsDeleted]=0
+                           )
+                           Select [A].ID,A.[CnName],A.[ParentID],A.[Level],A.[IsLastNode],A.[IsDeleted],
+	                              Case When Exists(Select 1 From [dbo].[S_Org_User] Where [CompanyID]=A.[ID] And [IsDeleted]=0 And [LoginName]=@LoginName ) Then 1
+			                           Else 0
+			                           End As IsChecked
+                           From tempData As A  
+                           Where A.[IsDeleted]=0 Order By [A].[Level]";
+            loginName = "%" + loginName + "%";
+            DbParameter[] parameters = new DbParameter[]
+            {
+                CreateSqlParameter("@LoginName",DbType.String,loginName)
+            };
+            return base.DataTableToListT(ExecuteReturnTable(sql, parameters));
         }
 
 
@@ -73,8 +83,12 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
         /// <returns></returns>
         public int DeleteDataByLoginName(string loginName)
         {
-            string sql = string.Format(@"Delete [dbo].[S_Org_User] Where [LoginName]='{0}'",loginName);
-            return ExecuteSql(sql);
+            string sql = "Delete [dbo].[S_Org_User] Where [LoginName]=@LoginName";
+            DbParameter[] parameters = new DbParameter[]
+            {
+                CreateSqlParameter("@LoginName",DbType.String,loginName)
+            };
+            return ExecuteSql(sql,parameters);
         }
     }
 }

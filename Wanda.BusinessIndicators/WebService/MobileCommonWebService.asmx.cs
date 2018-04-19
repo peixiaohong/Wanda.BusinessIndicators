@@ -6,8 +6,8 @@ using System.Web.Script.Services;
 using System.Web.Services;
 using LJTH.BusinessIndicators.Model;
 using LJTH.BusinessIndicators.BLL;
-using Wanda.Workflow.Object;
-using UserSourceSDK = Wanda.UserSource.Client;
+using BPF.Workflow.Object;
+using UserSourceSDK = BPF.UserSource.Client;
 
 namespace LJTH.BusinessIndicators.Web.MobileCommon
 {

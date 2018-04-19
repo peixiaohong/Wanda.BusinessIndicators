@@ -6,8 +6,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Wanda.Platform.WorkFlow.ClientComponent;
-using Wanda.Workflow.Object;
-using Wanda.Workflow.Client;
+using BPF.Workflow.Object;
+using BPF.Workflow.Client;
 using LJTH.BusinessIndicators.BLL;
 using LJTH.BusinessIndicators.Model;
 namespace LJTH.BusinessIndicators.Web.BusinessReport
@@ -34,13 +34,13 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         public List<NavigatActivity1> GetProcessIntance(string BusinessID)
         {
             List<NavigatActivity1> listna = new List<NavigatActivity1>();
-            if (Wanda.Workflow.Client.WFClientSDK.Exist(BusinessID))
+            if (BPF.Workflow.Client.WFClientSDK.Exist(BusinessID))
             {
-                var p = Wanda.Workflow.Client.WFClientSDK.GetProcess(null, BusinessID);
+                var p = BPF.Workflow.Client.WFClientSDK.GetProcess(null, BusinessID);
                 if (p != null)
                 {
                     NavigatActivity1 na1 = null;
-                    Dictionary<string, Wanda.Workflow.Object.Node> list = new Dictionary<string, Node>();
+                    Dictionary<string, BPF.Workflow.Object.Node> list = new Dictionary<string, Node>();
                     string strNextNodeID = p.ProcessInstance.StartNodeID;
                     foreach (var p1 in p.NodeInstanceList)
                     {

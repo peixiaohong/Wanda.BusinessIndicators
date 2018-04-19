@@ -1,5 +1,9 @@
 ﻿<%@ Master Language="C#"  AutoEventWireup="true" CodeBehind="EmptyMaster.master.cs" Inherits="LJTH.BusinessIndicators.Web.EmptyMaster" %>
 
+<%@ Register Src="wfCtrl.ascx" TagPrefix="uc1" TagName="wfCtrl" %>
+<%@ Register Src="userSelectCtrl.ascx" TagPrefix="uc1" TagName="userSelectCtrl" %>
+
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -24,22 +28,18 @@
     <link href="../Styles/css/font-awesome.min.css" rel="stylesheet" />
     <link href="/Styles/css/Styles.css" rel="stylesheet" />
     <link href="/Styles/css/layout.css" rel="stylesheet" />
-    <link href="../Styles/css/main.css" rel="stylesheet" />
-    <%--以下是生产环境的wf工具条
-    <script type="text/javascript" src="http://wf.LJTH.cn/WebApp/Wanda.Platform.WorkFlow.Controls.Handler/script/wanda-wf-js.js"></script>
-    <link href="http://wf.LJTH.cn/WebApp/Wanda.Platform.WorkFlow.Controls.Handler/css/wanda-wf-style.css" rel="Stylesheet" type="text/css" />
-    --%>
 
-    <%--以下是测试环境的wf工具条--%>
-<%--    <link href="http://wfuat.wanda-dev.cn/WebApp/Wanda.Platform.WorkFlow.Controls.Handler/css/css.css" rel="Stylesheet" type="text/css" /> 
-    <script type="text/javascript" src="http://wfuat.wanda-dev.cn/WebApp/Wanda.Platform.WorkFlow.Controls.Handler/script/wanda-wf-js.js"></script>--%>
     <link href="/Styles/mini.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="/Scripts/UpLoad/uploadify.css" />
-
+    
+    <link href="../Styles/css/main.css" rel="stylesheet" />
+    <uc1:userSelectCtrl runat="server" ID="userSelectCtrl" />
+    <uc1:wfCtrl runat="server" ID="wfCtrl1" />
 </head>
 <body style="background:#fff;">
     <div class="Pagebox">
         <form id="form1" runat="server">
+
             <div id="main" style="margin-left: 3px; margin-right: 3px;">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>

@@ -1,6 +1,8 @@
 ﻿using LJTH.BusinessIndicators.Model.BizModel;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,10 +23,13 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
         {
             string sql = string.Format(@"Select A.* From [dbo].[S_RolePermissions] As A
                                          Inner Join [dbo].[S_Menu] As B On A.[MenuID]=B.[ID] And B.[IsDeleted]=0
-                                         Where A.[IsDeleted]=0 And A.[RoleID]='{0}'
+                                         Where A.[IsDeleted]=0 And A.[RoleID]=@RoleID
                                          Order By B.[Sequence] Asc ", ID);
-
-            return ExecuteQuery(sql);
+            DbParameter[] parameters = new DbParameter[]
+            {
+                 CreateSqlParameter("@RoleID",DbType.Guid,ID)
+            };
+            return ExecuteQuery(sql,parameters);
         }
     }
 }
