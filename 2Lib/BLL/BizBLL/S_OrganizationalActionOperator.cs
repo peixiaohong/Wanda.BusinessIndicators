@@ -85,6 +85,16 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
             return _s_OrganizationalAdapter.GetChildDataByID(id);
         }
 
+        /// <summary>
+        /// 根据板块拿到所有的大区
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetSystem_Regional(Guid systemID)
+        {
+            return _s_OrganizationalAdapter.GetSystem_Regional(systemID);
+        }
+
         #endregion
 
 
@@ -101,7 +111,7 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         }
 
         /// <summary>
-        /// 根据登陆人拿所有的授权组织
+        /// 根据登陆人拿所有授权的组织架构数据
         /// </summary>
         /// <param name="loginName"></param>
         /// <returns></returns>
@@ -111,7 +121,7 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         }
 
         /// <summary>
-        /// 根据登陆人拿到所有的板块
+        /// 根据登陆人拿到所有授权的板块
         /// </summary>
         /// <param name="loginName"></param>
         /// <returns></returns>
@@ -121,7 +131,7 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         }
 
         /// <summary>
-        /// 根据登陆人，板块ID拿到所有的项目
+        /// 根据登陆人，板块ID拿到所有授权的项目
         /// </summary>
         /// <param name="systemID"></param>
         /// <param name="loginName"></param>
@@ -132,7 +142,7 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         }
 
         /// <summary>
-        /// 根据登陆人，获取板块下第一个大区
+        /// 根据登陆人，获取板块下第一层授权的大区
         /// </summary>
         /// <param name="systemID"></param>
         /// <param name="loginName"></param>
