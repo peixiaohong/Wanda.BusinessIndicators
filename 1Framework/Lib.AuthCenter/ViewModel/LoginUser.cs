@@ -16,25 +16,39 @@ namespace LJTH.Lib.AuthCenter.ViewModel
 
     public class LoginUserInfo
     {
-        public Guid UserID { get; set; }
+        //public bool IsNormalEmployeeStatus
+        //{
+        //    get
+        //    {
+        //        var normalEmployeeStatusList = ConfigurationManager.AppSettings["NormalEmployeeStatus"].Split(new string[] { ",", "，" }, StringSplitOptions.RemoveEmptyEntries).Select(x => Convert.ToInt32(x)).ToList();
+        //        return normalEmployeeStatusList.Any(x => x == EmployeeStatus);
+        //    }
+        //}
 
-        public int WD_UserID { get; set; }
 
-        public string Name { get; set; }
+        public int EmployeeStatus { get; set; }
+        public string UnitFullPath { get; set; }
+        public string EmployeeID { get; set; }
+
+        public string EmployeeCode { get; set; }
 
         public string LoginName { get; set; }
 
-        public string DisplayName { get; set; }
+        public string CNName { get; set; }
 
-        public string Department { get; set; }
+        public string UnitName { get; set; }
 
-        public string JobTitle { get; set; }
+        public int UnitID { get; set; }
 
-        public string Gender { get; set; }
+        public string ActualUnitName { get; set; }
 
-        public string Phone { get; set; }
+        public int actualUnitID { get; set; }
 
-        public string Status { get; set; }
+        public string OrgName { get; set; }
+
+        public int OrgID { get; set; }
+        public string jobName { get; set; }
+
     }
 
     public class LoginUserInfoCache : CacheQueue<String, LoginUserInfo>

@@ -161,7 +161,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             int success = 0;
             try
             {
-                var resutlData = S_Org_UserActionOperator.Instance.GetDataByLoginName(loginName);
+                var resutlData = S_OrganizationalActionOperator.Instance.GetDataByLoginName(loginName);
                 success = 1;
                 message = "查询数据库成功";
                 return new

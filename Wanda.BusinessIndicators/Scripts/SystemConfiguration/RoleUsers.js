@@ -13,7 +13,8 @@ function Fake() {
     $.unblockUI();
 }
 //#endregion 公共方法
-
+var PageSize = 10;
+var PageNumber = 1;
 $(document).ready(function () {
 
     //注册事件
@@ -30,7 +31,7 @@ function LoadPage() {
     var roleData = {
         "RoleID": getQueryString("RoleId"),
         "PageIndex": 1,
-        "PageSize":10
+        "PageSize":9999
     }
     WebUtil.ajax({
         async: false,
@@ -56,19 +57,28 @@ function UsersLoadPage() {
     var keyword = $("#UsersNameAdd").val();
     var roleData = {
         "keyWord": keyword,
-        "PageIndex": 1,
-        "PageSize": 10
+        "PageIndex": PageNumber,
+        "PageSize": PageSize
     }
     WebUtil.ajax({
         async: false,
         url: "/RoleManagerControll/GetAllUser",
         args: { data: JSON.stringify(roleData) },
         successReturn: function (resultData) {
+            var totalCount = resultData.TotalCount;
             if (resultData.Success == 1) {
-
                 $('#UsersData').empty();
                 loadTmpl('#UsersDataTmpl').tmpl(resultData).appendTo('#UsersData');
-                window.isLoadUsers = false;
+                $("#pager").empty();
+                $("#pager").paginationex({
+                    current: PageNumber,
+                    pageSize: PageSize,
+                    totalCount: totalCount,
+                    navTo: function (pageIndex) {
+                        PageNumber = pageIndex;
+                        UsersLoadPage();
+                    }
+                });
             }
             else {
                 console.log(resultData.Message);
@@ -84,6 +94,9 @@ function RegisterEvent() {
     //新增角色弹框页面确定按钮
     $(".InsertRoleData_OK").off('click').on('click', function () {
         $(".user-model").css("display", "block");
+        $("#QrName").val("");
+        PageSize = 10;
+        PageNumber = 1;
         UsersLoadPage();
     });
     $(".QueryConditions_Button").off("click").on("click", function () {
@@ -100,6 +113,7 @@ function RegisterEvent() {
     // 添加用户取消
     $(".user_add_cancel").off('click').on('click', function () {
         $(".user-model").css("display", "none");
+        $("#UsersNameAdd").val("");
     })
 }
 
@@ -129,6 +143,7 @@ function SaveRole() {
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
                 $(".user-model").css("display", "none");
+                $("#UsersNameAdd").val("");
                 $.MsgBox.Alert("提示", "添加成功");
                 LoadPage();
                 console.log("添加成功" + resultData.Message);

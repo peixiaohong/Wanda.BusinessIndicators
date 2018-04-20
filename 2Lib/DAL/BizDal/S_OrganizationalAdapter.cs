@@ -108,6 +108,62 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
         }
 
 
+        /// <summary>
+        /// 根据板块ID,名称查询已有数据
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="cnName"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetSystemsubsetCnName(Guid systemID, string cnName)
+        {
+            string sql = @"With GetSystem_subset
+                            As
+                            (
+	                            Select * From [dbo].[S_Organizational]  Where [SystemID]=@SystemID And Id=@SystemID And [IsDeleted]=0
+	                            Union All
+                                Select A.* From [dbo].[S_Organizational] As A
+	                            Inner Join [GetSystem_subset] As B On B.[ID]=A.[ParentID] And B.[IsDeleted]=0
+	                            Where A.[IsDeleted]=0
+                            )
+                            Select * From [GetSystem_subset] Where [CnName]=@CnName";
+            DbParameter[] parameters = new DbParameter[] 
+            {
+                CreateSqlParameter("@SystemID",DbType.Guid,systemID),
+                CreateSqlParameter("@CnName",DbType.String,cnName)
+            };
+            return ExecuteQuery(sql, parameters);
+        }
+
+
+        /// <summary>
+        /// 获取组织架构【用户设置组织】
+        /// </summary>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetDataByLoginName(string loginName)
+        {
+            string sql = @"WITH tempData
+                           AS
+                           (
+                           SELECT * FROM [dbo].[S_Organizational] WHERE id='00000000-0000-0000-0000-000000000000' And [IsDeleted]=0
+                           UNION ALL
+                           SELECT [A].* FROM [dbo].[S_Organizational] A
+                           Inner Join tempData B  On A.[ParentID] =B.[ID]  And A.[IsDeleted]=0
+                           )
+                           Select [A].ID,A.[CnName],A.[ParentID],A.[Level],A.[IsCompany],A.[IsDeleted],A.[SystemID],
+	                              Case When Exists(Select 1 From [dbo].[S_Org_User] Where [CompanyID]=A.[ID] And [IsDeleted]=0 And [LoginName]=@LoginName  ) Then 1
+			                           Else 0
+			                           End As IsChecked
+                           From tempData As A  
+                           Where A.[IsDeleted]=0 Order By [A].[Level]";
+            DbParameter[] parameters = new DbParameter[]
+            {
+                CreateSqlParameter("@LoginName",DbType.String,loginName)
+            };
+            return base.DataTableToListT(ExecuteReturnTable(sql, parameters));
+        }
+
+
         #region 数据权限
         /// <summary>
         /// 根据板块拿授权的区域

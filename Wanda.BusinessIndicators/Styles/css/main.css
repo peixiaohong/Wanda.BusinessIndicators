@@ -303,18 +303,18 @@
     text-decoration:none !important;
 }
 /*用户管理*/
-.user-model {
+.user-model, .organization-model {
     width: 100%;
     height: 100%;
-    position:fixed;
-    left: 0 ;
+    position: fixed;
+    left: 0;
     top: 0;
-    background:rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.6);
     display: none;
 }
 .user-main {
     width: 80%;
-    height: 490px;
+    height: 540px;
     background: #fff;
     position:absolute;
     left: 0;
@@ -324,7 +324,7 @@
     margin: auto;
 }
 .user-content {
-    height: 307px;
+    height: 350px;
     overflow-y:auto;
 }
 .btnbox {
@@ -352,4 +352,39 @@
     border:1px solid #eee;
     height:345px;
     overflow: auto;
+}
+/*组织架构*/
+.clear:after{
+    display:block;
+    content:"";
+    clear:both;
+}
+.organization_btn a {
+    color: #cb5c61
+}
+.organization_content {
+    padding:5px;
+}
+.organization_content>div{
+  text-align:center;
+}
+.organization_content input[type=text]{
+   outline: 0;
+   
+}
+.organization_name{
+    margin: 20px 0;
+}
+.organization_name input{
+    cursor:not-allowed;
+}
+.organization_edit {
+    display: none;
+}
+.organization_edit li {
+    margin-top: 20px;
+}
+.add_submit, .edit_submit{
+    display:none;
+    margin: 0 auto;
 }

@@ -55,6 +55,8 @@ namespace LJTH.BusinessIndicators.Common
         {
             string cacheKey = null;
             LoginUserInfo result = null;
+            string IsUservirtualUser = ConfigurationManager.AppSettings["IsVirtualUser"];
+            IsUservirtualUser = string.IsNullOrEmpty(IsUservirtualUser) ? "true" : IsUservirtualUser;
 
 
             string ssoUsername = HttpContext.Current.Items["WD_SSO_UserName"] != null ? HttpContext.Current.Items["WD_SSO_UserName"].ToString() : string.Empty;
@@ -76,7 +78,8 @@ namespace LJTH.BusinessIndicators.Common
 
                     if (result == null)
                     {
-                        throw new Exception("该用户无权登录绩效考核管理系统，请联系系统管理员。");
+                        //throw new Exception("该用户无权登录绩效考核管理系统，请联系系统管理员。");
+                        return null;
                     }
 
                     LoginUserInfoCache.Instance.Add(cacheKey, result);

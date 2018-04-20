@@ -182,7 +182,7 @@ var Month
 function GetProcess(key, instanceID) {
     Month = $("#hideFinMonth").val() * 1 > 9 ? $("#hideFinMonth").val() : "0" + $("#hideFinMonth").val();
     FlowCode = key;
-    var businessID = wanda_wf_tool.getQueryString("BusinessID");
+    var businessID = bpf_wf_tool.getQueryString("BusinessID");
     if (businessID != "") {
         bpf_wf_client.getProcess(businessID, function () {
             $.unblockUI();

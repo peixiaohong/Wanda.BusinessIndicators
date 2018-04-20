@@ -54,6 +54,7 @@ function RegisterEvent()
     //新增角色弹框页面确定按钮
     $(".InsertRoleData_OK").off('click').on('click', function ()
     {
+        $("#QrName").val("");
         SaveRole('add');
     });
     //查询按钮
@@ -151,7 +152,7 @@ function QueryRoleData()
 function DeleteRoleData(el)
 {
     var id = $(el).attr("data-id");
-    $.MsgBox.Confirm("提示", "确认删除", "", function () {
+    $.MsgBox.Confirm("提示", "确认删除，删除后角色设置的功能和用户将失效！", "", function () {
         WebUtil.ajax({
             async: false,
             url: "/RoleManagerControll/DeleteRoleData",

@@ -94,21 +94,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\1Framework\Lib.AuthCenter\LJTH.Lib.AuthCenter.csproj">
-      <Project>{fccad333-b48e-4a04-ad3c-8cb4ca17ef28}</Project>
-      <Name>LJTH.Lib.AuthCenter</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\1Framework\Lib.Core\LJTH.Lib.Core.csproj">
-      <Project>{65839f36-193a-41d1-9e79-38bc84984de6}</Project>
-      <Name>LJTH.Lib.Core</Name>
-    </ProjectReference>
+    <Folder Include="Misc\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\1Framework\Lib.Data\LJTH.Lib.Data.csproj">
       <Project>{442c318f-9d99-4a3f-972e-33e8a8c8be51}</Project>
       <Name>LJTH.Lib.Data</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Misc\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
