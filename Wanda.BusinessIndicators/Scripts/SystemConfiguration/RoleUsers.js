@@ -30,18 +30,27 @@ function LoadPage() {
     Load();
     var roleData = {
         "RoleID": getQueryString("RoleId"),
-        "PageIndex": 1,
-        "PageSize":9999
+        "PageIndex": PageNumber,
+        "PageSize": PageSize
     }
     WebUtil.ajax({
         async: false,
         url: "/RoleManagerControll/GetAllUser",
         args: { data: JSON.stringify(roleData)},
         successReturn: function (resultData) {
-            console.log(resultData);
+            var totalCount = resultData.TotalCount;
             if (resultData.Success == 1) {           
                 $('#ShowMenuUsersData').empty();
                 loadTmpl('#ShowMenuUsersDataTmpl').tmpl(resultData).appendTo('#ShowMenuUsersData');
+                $("#InitPager").paginationex({
+                    current: PageNumber,
+                    pageSize: PageSize,
+                    totalCount: totalCount,
+                    navTo: function (pageIndex) {
+                        PageNumber = pageIndex;
+                        LoadPage();
+                    }
+                });
             }
             else {
                 console.log(resultData.Message);
