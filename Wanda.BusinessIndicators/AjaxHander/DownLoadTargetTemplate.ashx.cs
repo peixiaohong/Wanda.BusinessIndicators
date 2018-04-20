@@ -775,7 +775,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         excel.SetCustomProperty(worksheets[z + 1], "SystemID", listTarget[0].SystemID.ToString());
                         excel.SetCustomProperty(worksheets[z + 1], "TragertID", listTarget[0].ID.ToString());
                         excel.SetCustomProperty(worksheets[z + 1], "TragertName", listTarget[0].TargetName);
-                        excel.SetCustomProperty(worksheets[z], "SystemBatchID", SystemBatchID.ToString());
+                        excel.SetCustomProperty(worksheets[z + 1], "SystemBatchID", SystemBatchID.ToString());
                         excel.SetCustomProperty(worksheets[z + 1], "SheetName", "MonthReportDetail");
                     }
                     worksheets[z + 1].Cells[0, 1].PutValue(rpt._System.SystemName + otherListTargetPlanView[z].Name);
