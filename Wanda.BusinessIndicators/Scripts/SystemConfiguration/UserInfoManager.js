@@ -61,18 +61,18 @@ function RegisterEvent() {
         UsersLoadPage();
     });
     $(".QueryConditions_Button").off("click").on("click", function () {
-        QueryRoleData();
+        SetUsersRole();
     });
     //用户查询 
     $(".QueryUsers_Button").off('click').on('click', function () {
         UsersLoadPage();
     })
-    // 设置用户确定
-    $(".user_add_sumbit").off('click').on('click', function () {
+    // 设置角色确定
+    $(".set_role_sumbit").off('click').on('click', function () {
         SaveRole();
     })
-    // 设置用户取消
-    $(".user_add_cancel").off('click').on('click', function () {
+    // 设置角色取消
+    $(".set_role_cancel").off('click').on('click', function () {
         $(".user-model").css("display", "none");
     })
 }
@@ -80,25 +80,23 @@ function RegisterEvent() {
 //保存数据
 function SaveRole() {
     var el = $(".userChecked");
-    var LoginNames = "";
+    var loginName = $("#UsersRoleName").attr("data-login");
+    var roleIDs = ""
     for (var i = 0; i < el.length; i++) {
-        var name = el.eq(i).attr("name");
+        var roleId = el.eq(i).attr("data-role");
         if (el.eq(i).attr("checked") == "checked") {
-            LoginNames += name + ",";
+            roleIDs += roleId + ",";
         }
     }
-    if (!LoginNames.length) {
-        $.MsgBox.Alert("提示", "请选择用户");
-        return false;
-    }
-    console.log(LoginNames.slice(0, LoginNames.length - 1));
+    console.log(roleIDs.slice(0, roleIDs.length - 1));
     var S_Role = {
-        "PageLoginNames": LoginNames.slice(0, LoginNames.length - 1),
-        "RoleID": getQueryString("RoleId")
+        "roleIDs": roleIDs.slice(0, roleIDs.length - 1),
+        "loginName": loginName
     }
+    console.log(S_Role);
     WebUtil.ajax({
         async: false,
-        url: "/RoleManagerControll/SaveUser_Role",
+        url: "/UserInfoManagerControll/SaveUsesRoles",
         args: S_Role,
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
@@ -151,7 +149,9 @@ function SetUsersRole(el) {
     Load();
     if (el) {
         var LoginName = $(el).attr("data-login");
-        $("#UsersRoleName").attr()
+        $("#UsersRoleName").attr("data-login", LoginName);
+    } else {
+        var LoginName = $("#UsersRoleName").attr("data-login");
     }
     var RoleName = $("#UsersRoleName").val();
     WebUtil.ajax({

@@ -106,10 +106,8 @@
                             <thead style="width: 100%">
                                 <tr class="tab_5_row_alt">      
                                     <th style="width: 5%;">序号</th>
-                                    <th style="width: 20%;">员工名称</th>         
-                                    <th style="width: 20%;">用户名称</th>                
-                                    <th style="width: 20%">岗位</th>         
-                                    <th style="width: 35%">部门</th>     
+                                    <th style="width: 20%;">角色名称</th>         
+                                    <th style="width: 20%;">角色描述</th>                 
                                 </tr>    
                             </thead>
                             <tbody id="UsersRolesData">
@@ -119,8 +117,8 @@
                 </div>
             </div>
             <div class="btnbox">
-                <input class="btn_ok user_add_sumbit" type="button" value="确定">
-                <input class="btn_no user_add_cancel" type="button" value="取消">
+                <input class="btn_ok set_role_sumbit" type="button" value="确定">
+                <input class="btn_no set_role_cancel" type="button" value="取消">
 
             </div>
         </div>

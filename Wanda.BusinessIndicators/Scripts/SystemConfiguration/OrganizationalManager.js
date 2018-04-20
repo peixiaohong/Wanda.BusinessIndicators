@@ -61,6 +61,12 @@ function CheckOrganization(type) {
     var el = $(".organization_name").find("input");
     var val = el.val();
     var isCompany = el.attr("data-isCompany");
+    if (isCompany == "true") {
+        isCompany = true
+    } else if (isCompany == "false") {
+        isCompany = false;
+    }
+    console.log(isCompany);
     var level = el.attr("data-level");
     var id = el.attr("data-id");
     if (!val) {
@@ -72,7 +78,7 @@ function CheckOrganization(type) {
             $.MsgBox.Alert("提示", "系统板块不能新增");
             return false;
         }
-        if (isCompany == "true") {
+        if (isCompany) {
             $.MsgBox.Alert("提示", "项目类型不能新增");
             return false;
         }
