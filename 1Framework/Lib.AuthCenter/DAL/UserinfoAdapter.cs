@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using LJTH.Lib.AuthCenter.Model;
 using LJTH.Lib.Data.AppBase;
-
+using LJTH.Lib.AuthCenter.ViewModel;
 
 namespace LJTH.Lib.AuthCenter.DAL
 {
@@ -121,19 +121,32 @@ namespace LJTH.Lib.AuthCenter.DAL
         /// </summary> 
         /// <param name="userName"></param>
         /// <returns></returns>
-        public BUserinfo GetUserInfoByName(string userName)
+        public LoginUserInfo GetUserInfoByName(string loginName)
         {
-            string sql = string.Format(@"
-select * from {0} 
-where LoginName='{1}' 
-    and {2}",
-            ORMapping.GetTableName(typeof(BUserinfo)),
-             SqlTextHelper.SafeQuote(userName),
-            base.NotDeleted);
+            string sql = @"
+SELECT * from V_Employee
+    where username='" + loginName + "'";
+            DataTable dt = ExecuteReturnTable(sql);
+            LoginUserInfo model = null;
+            if (dt != null && dt.Rows.Count > 0)
+            {
 
-            IList<BUserinfo> list = ExecuteQuery(sql);
-
-            return list.FirstOrDefault();
+                model = new LoginUserInfo();
+                model.UnitFullPath = !string.IsNullOrEmpty(dt.Rows[0]["unitFullPath"].ToString()) ? dt.Rows[0]["unitFullPath"].ToString() : "";
+                model.EmployeeID = !string.IsNullOrEmpty(dt.Rows[0]["employeeID"].ToString()) ? dt.Rows[0]["employeeID"].ToString() : "";
+                model.EmployeeCode = !string.IsNullOrEmpty(dt.Rows[0]["employeeCode"].ToString()) ? dt.Rows[0]["employeeCode"].ToString() : "";
+                model.LoginName = !string.IsNullOrEmpty(dt.Rows[0]["username"].ToString()) ? dt.Rows[0]["username"].ToString() : "";
+                model.CNName = !string.IsNullOrEmpty(dt.Rows[0]["employeeName"].ToString()) ? dt.Rows[0]["employeeName"].ToString() : "";
+                model.UnitID = !string.IsNullOrEmpty(dt.Rows[0]["unitID"].ToString()) ? int.Parse(dt.Rows[0]["unitID"].ToString()) : 0;
+                model.UnitName = !string.IsNullOrEmpty(dt.Rows[0]["unitName"].ToString()) ? dt.Rows[0]["unitName"].ToString() : "";
+                model.OrgID = !string.IsNullOrEmpty(dt.Rows[0]["orgID"].ToString()) ? int.Parse(dt.Rows[0]["orgID"].ToString()) : 0;
+                model.OrgName = !string.IsNullOrEmpty(dt.Rows[0]["orgName"].ToString()) ? dt.Rows[0]["orgName"].ToString() : "";
+                model.actualUnitID = !string.IsNullOrEmpty(dt.Rows[0]["actualUnitID"].ToString()) ? int.Parse(dt.Rows[0]["actualUnitID"].ToString().Trim()) : 0;
+                model.ActualUnitName = !string.IsNullOrEmpty(dt.Rows[0]["ActualUnitName"].ToString()) ? dt.Rows[0]["ActualUnitName"].ToString() : "";
+                model.jobName = !string.IsNullOrEmpty(dt.Rows[0]["jobName"].ToString()) ? dt.Rows[0]["jobName"].ToString() : "";
+                model.EmployeeStatus = !string.IsNullOrEmpty(dt.Rows[0]["employeeStatus"].ToString()) ? int.Parse(dt.Rows[0]["employeeStatus"].ToString()) : 0;
+            }
+            return model;
 
 
         }

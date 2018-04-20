@@ -8,7 +8,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
 using LJTH.BusinessIndicators.Common;
-using Wanda.Platform.Permission.ClientComponent;
 using LJTH.BusinessIndicators.BLL.BizBLL;
 using LJTH.BusinessIndicators.Model.BizModel;
 

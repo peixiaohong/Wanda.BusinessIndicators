@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Wanda.BusinessIndicators.Web</RootNamespace>
-    <AssemblyName>Wanda.BusinessIndicators.Web</AssemblyName>
+    <RootNamespace>LJTH.BusinessIndicators.Web</RootNamespace>
+    <AssemblyName>LJTH.BusinessIndicators.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -51,6 +51,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Aspose.Cells.5.3.0\Aspose.Cells.dll</HintPath>
     </Reference>
+    <Reference Include="BPF.SDK.Common">
+      <HintPath>..\packages\WorkFlow\BPF.SDK.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="BPF.UserSelect.Client">
+      <HintPath>..\packages\WorkFlow\BPF.UserSelect.Client.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Azure.Documents.Client, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Azure.DocumentDB.1.1.0\lib\net40\Microsoft.Azure.Documents.Client.dll</HintPath>
     </Reference>
@@ -84,14 +90,6 @@
     <Reference Include="Wanda.Platform.WorkFlow.ClientComponent, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\SourceCode-2015-10-15流程服务迁移\JYZB\Wanda.BusinessIndicators\Wanda.BusinessIndicators\DllReference\Wanda.Platform.WorkFlow.ClientComponent.dll</HintPath>
-    </Reference>
-    <Reference Include="Wanda.SDK.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>DllReference\Wanda.SDK.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Wanda.UserSource.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>DllReference\Wanda.UserSource.Client.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
