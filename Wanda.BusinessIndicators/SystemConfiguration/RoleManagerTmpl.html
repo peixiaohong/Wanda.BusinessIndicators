@@ -64,7 +64,11 @@
     {{each(i,item) Data}}
     <tr>
         <td>
-            <input type="checkbox" data-role="${item.ID} value="" class="userChecked" />
+            {{if Data[i].IsChecked}}
+            <input type="checkbox" data-role="${item.ID}" value="" class="userChecked" checked />
+            {{else}}
+            <input type="checkbox" data-role="${item.ID}" value="" class="userChecked" />
+            {{/if}}
         </td>
         <td>${item.CnName}</td>
         <td>${item.Description}</td>

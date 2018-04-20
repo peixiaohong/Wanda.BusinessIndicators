@@ -75,6 +75,15 @@ function RegisterEvent() {
     $(".set_role_cancel").off('click').on('click', function () {
         $(".user-model").css("display", "none");
     })
+    // 设置组织确定
+    $(".set_orgs_sumbit").off('click').on('click', function () {
+        var name = $(this).attr("name");
+        SaveOrgs(name);
+    })
+    // 设置组织取消
+    $(".set_orgs_cancel").off('click').on('click', function () {
+        $(".organization-model").css("display", "none");
+    })
 }
 
 //保存数据
@@ -88,7 +97,10 @@ function SaveRole() {
             roleIDs += roleId + ",";
         }
     }
-    console.log(roleIDs.slice(0, roleIDs.length - 1));
+    if (!roleIDs) {
+        $.MsgBox.Alert("提示", "角色不能为空");
+        return false;
+    }
     var S_Role = {
         "roleIDs": roleIDs.slice(0, roleIDs.length - 1),
         "loginName": loginName
@@ -126,6 +138,9 @@ function SetUsersRole(el) {
         var LoginName = $("#UsersRoleName").attr("data-login");
     }
     var RoleName = $("#UsersRoleName").val();
+    if (!RoleName) {
+        RoleName = ""
+    }
     WebUtil.ajax({
         async: false,
         url: "/UserInfoManagerControll/GetUserRoles",
@@ -152,10 +167,11 @@ function SetOrgs(el) {
     Load();
     WebUtil.ajax({
         async: false,
-        url: "/S_OrganizationalManagerControll/GetAllOrgData",
-        args: {},
+        url: "/UserInfoManagerControll/GetUserOrgs",
+        args: { "loginName": loginName},
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
+                $(".set_orgs_sumbit").attr("name", loginName)
                 Ztree(resultData);
             } else {
                 console.log(resultData.Message);
@@ -166,30 +182,70 @@ function SetOrgs(el) {
 }
 function Ztree(data) {
     console.log(data);
-    //var zNodes = [{ id: "00000000-0000-0000-0000-000000000000", pId: "00000000-0000-0000-0000-000000000000", name: "菜单管理", open: true }];
-    //data.Data.forEach(function (one) {
-    //    if (one.IsChecked) {
-    //        zNodes[0].checked = true;
-    //    };
-    //    var zNodesObj = { id: "", pId: "", name: "", checked: "" };
-    //    zNodesObj.id = one.ID;
-    //    zNodesObj.pId = one.ParentMenuID;
-    //    zNodesObj.name = one.CnName;
-    //    zNodesObj.checked = one.IsChecked;
-    //    zNodes.push(zNodesObj);
-    //});
-    //var setting = {
-    //    check: {
-    //        enable: true
-    //    },
-    //    data: {
-    //        simpleData: {
-    //            enable: true
-    //        }
-    //    }
-    //};
-    //$.fn.zTree.init($("#tree"), setting, zNodes);
-    //var zTree = $.fn.zTree.getZTreeObj("tree");
-    //zTree.setting.check.chkboxType = { "Y": "ps", "N": "ps" };
-    //Fake();
+    var zNodes = [];
+    data.Data.forEach(function (one) {
+        var zNodesObj = { id: "", pId: "", name: "", checked: "", systemID: "" };
+        if (one.ID == "00000000-0000-0000-0000-000000000000") {
+            zNodesObj.open = true;
+        }
+        zNodesObj.id = one.ID;
+        zNodesObj.pId = one.ParentID;
+        zNodesObj.name = one.CnName;
+        zNodesObj.checked = one.IsChecked;
+        zNodesObj.systemID = one.SystemID;
+        zNodes.push(zNodesObj);
+    });
+    var setting = {
+        check: {
+            enable: true
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        }
+    };
+    $.fn.zTree.init($("#tree"), setting, zNodes);
+    var zTree = $.fn.zTree.getZTreeObj("tree");
+    zTree.setting.check.chkboxType = { "Y": "ps", "N": "ps" };
+    Fake();
+}
+function SaveOrgs(name) {
+    var treeObj = $.fn.zTree.getZTreeObj("tree");
+    var nodes = treeObj.getCheckedNodes(true);
+    if (!nodes.length) {
+        $.MsgBox.Alert("提示", "没有选择任何权限");
+    }
+    WebUtil.ajax({
+        async: false,
+        url: "/UserInfoManagerControll/SaveUser_org",
+        args: {
+            loginName: name,
+            data: FilterChecked(nodes,name)
+        },
+        successReturn: function (resultData) {
+            if (resultData.Success == 1) {
+                $(".organization-model").css("display", "none");
+                $.MsgBox.Alert("提示", "保存成功");
+            } else {
+                console.log(resultData.Message)
+                $.MsgBox.Alert("提示", "保存失败");
+            }
+        }
+    });
+}
+function FilterChecked(data,name) {
+    var match = [];
+    data.forEach(function (one) {
+        if (one.check_Child_State == -1 && one.checked) {
+            var obj = {
+                "SystemID": one.systemID,
+                "LoginName": name,
+                "CompanyID": one.id,
+                "IsChecked": one.checked
+            }
+            match.push(obj);
+        }
+    })
+    return JSON.stringify(match);
 }

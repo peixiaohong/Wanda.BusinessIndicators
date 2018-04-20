@@ -84,6 +84,7 @@ function RegisterEvent() {
     //新增角色弹框页面确定按钮
     $(".InsertRoleData_OK").off('click').on('click', function () {
         $(".user-model").css("display", "block");
+        $("#QrName").val("");
         UsersLoadPage();
     });
     $(".QueryConditions_Button").off("click").on("click", function () {
@@ -100,6 +101,7 @@ function RegisterEvent() {
     // 添加用户取消
     $(".user_add_cancel").off('click').on('click', function () {
         $(".user-model").css("display", "none");
+        $("#UsersNameAdd").val("");
     })
 }
 
@@ -129,6 +131,7 @@ function SaveRole() {
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
                 $(".user-model").css("display", "none");
+                $("#UsersNameAdd").val("");
                 $.MsgBox.Alert("提示", "添加成功");
                 LoadPage();
                 console.log("添加成功" + resultData.Message);

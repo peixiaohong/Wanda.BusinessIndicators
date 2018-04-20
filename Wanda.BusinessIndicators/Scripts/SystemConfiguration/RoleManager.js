@@ -54,6 +54,7 @@ function RegisterEvent()
     //新增角色弹框页面确定按钮
     $(".InsertRoleData_OK").off('click').on('click', function ()
     {
+        $("#QrName").val("");
         SaveRole('add');
     });
     //查询按钮

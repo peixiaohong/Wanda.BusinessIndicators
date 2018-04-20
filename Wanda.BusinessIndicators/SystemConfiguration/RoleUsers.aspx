@@ -16,7 +16,7 @@
                 <table class="tab_search">
                     <tbody>
                         <tr>
-                            <th>用户名称</th>
+                            <th>关键字</th>
                             <td>
                                 <input type="text"  style="width: 210px;outline:0;" id="QrName">
                             </td>
