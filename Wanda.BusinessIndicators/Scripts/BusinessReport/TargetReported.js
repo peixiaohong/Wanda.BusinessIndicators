@@ -10,6 +10,7 @@ var sysID;
 var FinYear;
 var FinMonth;
 var MonthReportID;
+var SystemBatchID;//大区ID
 
 var Monthsg;//从webconfig中读取的商管ID
 var Monthsgrent;//从webconfig中读取的商管租金收缴率的ID
@@ -83,11 +84,12 @@ $(function () {
     MonthReportID = $("#hideMonthReportID").attr("value");
     FinYear = $("#hideFinYear").attr("value");
     FinMonth = $("#hideFinMonth").attr("value");
+    SystemBatchID = $('#ddlSystemBatchID').attr("value"); //大区ID
     //获取ReportInstance实例，将此实例传回后台。
     GetReportInstance();
 
     MissTagetExcelReport();
-    
+
     //自动保存,光标离开
     $("#MonthGetDescription").blur(function () {
         $("#MonthGetDescription").css("background-color", "#FFFFFF");
@@ -122,8 +124,7 @@ $(function () {
 
 })
 
-function MissTagetExcelReport()
-{
+function MissTagetExcelReport() {
     if (DownLoadTag == "missCurrentTargetReport") {
         MissType = 'CurrentMissTargetRpt';
     } else {
@@ -136,7 +137,7 @@ function MissTagetExcelReport()
         'buttonText': '导入数据',
         'width': 100,
         'height': 25,
-        'successTimeout':50, 
+        'successTimeout': 50,
         'fileTypeDesc': 'office file',
         'fileTypeExts': '*.doc; *.docx; *.xls;*.xlsx',
         'fileSizeLimit': '10240',
@@ -144,7 +145,7 @@ function MissTagetExcelReport()
         'uploader': '../AjaxHander/ExcelReport.ashx?FileType=' + MissType + '&SysId=' + sysID + '&MonthReportID=' + MonthReportID + "&FinYear=" + FinYear + "&FinMonth=" + FinMonth,
         'formData': { "action": "未完成指标填写" },
         'onSelect': function (e, queueId, fileObj) {
-           
+
         },
         'onUploadSuccess': function (file, data, response) {
             if (data == "") {
@@ -192,18 +193,17 @@ function getMonthReportMissTargetData(Upload) {
         args: { rpts: "", monthRptID: $("#hideMonthReportID").val(), UploadStr: Upload },
         successReturn: function (result) {
 
-            if (result != null && result != undefined)
-            {
+            if (result != null && result != undefined) {
                 if (result[0] != null && result[0] != undefined) {
                     MissTargetData = result[0].ObjValue;
                     TmplMissTargetData(MissTargetData, false);
-                } 
+                }
 
                 if (result[1] != null && result[1] != undefined) {
                     CurrentMissTargetData = result[1].ObjValue;
                     TmplCurrentMissTargetData(CurrentMissTargetData, false);
                 }
-            }   
+            }
         }
     });
 
@@ -811,7 +811,7 @@ function SaveMissTargetRpt(obj) {
                         pdate = new Date(PromissDate.replace("-", "//"));
                     } else { pdate = new Date(PromissDate.replace("-", "//") + "/1 0:00:00"); }
 
-                    currentInfo.PromissDate= info.PromissDate = pdate.toDateString();
+                    currentInfo.PromissDate = info.PromissDate = pdate.toDateString();
                 } else {
                     alert("承诺补回期限为必填项");
                     return false;
@@ -856,7 +856,7 @@ function SaveMissTargetRpt(obj) {
                         return false;
                     }
                 }
-                currentInfo.ReturnType_Sub=info.ReturnType_Sub = returnTypeSub;
+                currentInfo.ReturnType_Sub = info.ReturnType_Sub = returnTypeSub;
 
             } else {
 
@@ -881,7 +881,7 @@ function SaveMissTargetRpt(obj) {
             TmplMissTargetData(MissTargetData, true);
             TmplCurrentMissTargetData(CurrentMissTargetData, true);
         }
-    } else{
+    } else {
 
         if (obj == "all") {  //编辑所有的项
 
@@ -943,8 +943,7 @@ function SaveMissTargetRpt(obj) {
                 info.MIssTargetDescription = "\n" + $("#rpt_info_desc").val(); //采取措施
                 info.ReturnDescription = $("#rpt_info_back").val(); //补回情况
 
-            } else
-            {
+            } else {
                 //代表的是当月
                 info.CurrentMIssTargetReason = "\n" + $("#rpt_info_step").val();  //未完成原因
                 info.CurrentMIssTargetDescription = "\n" + $("#rpt_info_desc").val(); //采取措施
@@ -957,8 +956,7 @@ function SaveMissTargetRpt(obj) {
             {
                 info.MIssTargetReason = "\n" + $("#rpt_info_Reason_step").val();  //未完成原因
                 info.MIssTargetDescription = "\n" + $("#rpt_info_Reason_desc").val(); //采取措施
-            } else
-            {
+            } else {
                 //代表的是当月
                 info.CurrentMIssTargetReason = "\n" + $("#rpt_info_Reason_step").val();  //未完成原因
                 info.CurrentMIssTargetDescription = "\n" + $("#rpt_info_Reason_desc").val(); //采取措施
@@ -997,7 +995,7 @@ function SaveMissTargetRpt(obj) {
                 return false;
             }
         }
-        
+
         WebUtil.ajax({
             async: true,
             url: "/TargetReportedControll/ModifyMissTargetRptInfo",
@@ -1328,8 +1326,7 @@ function SaveMonthReportDetail() {
         var tempNAccumulativePlanAmmount = $("#SGMonthReportNAccumulativePlanAmmount").attr("value");
         var tempNAccumulativeActualAmmount = $("#SGMonthReportNAccumulativeActualAmmount").attr("value");
 
-        if ($v.isRequired($("#SGMonthReportNPlanAmmount").val()) == false || $v.isRequired($("#SGMonthReportNActualAmmount").val()) == false || $v.isRequired($("#SGMonthReportNAccumulativePlanAmmount").val()) == false || $v.isRequired($("#SGMonthReportNAccumulativeActualAmmount").val()) == false)
-        { return alert("必填项！") };
+        if ($v.isRequired($("#SGMonthReportNPlanAmmount").val()) == false || $v.isRequired($("#SGMonthReportNActualAmmount").val()) == false || $v.isRequired($("#SGMonthReportNAccumulativePlanAmmount").val()) == false || $v.isRequired($("#SGMonthReportNAccumulativeActualAmmount").val()) == false) { return alert("必填项！") };
 
         if ($v.isNumber($("#SGMonthReportNPlanAmmount").val()) == false || $v.isNumber($("#SGMonthReportNActualAmmount").val()) == false || $v.isNumber($("#SGMonthReportNAccumulativePlanAmmount").val()) == false || $v.isNumber($("#SGMonthReportNAccumulativeActualAmmount").val()) == false) {
             return alert("请输入数字");
@@ -1348,8 +1345,7 @@ function SaveMonthReportDetail() {
         var tempNActualAmmount = $("#WGMonthReportNActualAmmount").attr("value");
         var tempNAccumulativeActualAmmount = $("#WGMonthReportNAccumulativeActualAmmount").attr("value");
 
-        if ($v.isRequired($("#WGMonthReportNActualAmmount").val()) == false || $v.isRequired($("#WGMonthReportNAccumulativeActualAmmount").val()) == false)
-        { return alert("必填项！") };
+        if ($v.isRequired($("#WGMonthReportNActualAmmount").val()) == false || $v.isRequired($("#WGMonthReportNAccumulativeActualAmmount").val()) == false) { return alert("必填项！") };
 
         if ($v.isNumber($("#WGMonthReportNActualAmmount").val()) == false || $v.isNumber($("#WGMonthReportNAccumulativeActualAmmount").val()) == false) {
             return alert("请输入数字");
@@ -1364,11 +1360,9 @@ function SaveMonthReportDetail() {
     } else {
         var tempVal = $("#MonthReportNActualAmmount").attr("value");
 
-        if ($v.isRequired($("#MonthReportNActualAmmount").val()) == false)
-        { return alert("必填项！"); }
+        if ($v.isRequired($("#MonthReportNActualAmmount").val()) == false) { return alert("必填项！"); }
 
-        if ($v.isNumber($("#MonthReportNActualAmmount").val()) == false)
-        { return alert("请输入数字！"); }
+        if ($v.isNumber($("#MonthReportNActualAmmount").val()) == false) { return alert("请输入数字！"); }
 
         if (!isNaN(tempVal)) {
             if (tempVal == "-0") {
@@ -1417,7 +1411,7 @@ function MonthReportOrder(sender) {
 
 //下载计划指标模板
 function DownLoadTargetPlanExcel(sender) {
-    window.open("/AjaxHander/DownLoadTargetTemplate.ashx?FileType=DownTargetPlan&SysId=" + sysID + "&FinYear=" + FinYear + "&FinMonth=" + FinMonth + "&MonthReportID=" + MonthReportID);
+    window.open("/AjaxHander/DownLoadTargetTemplate.ashx?FileType=DownTargetPlan&SysId=" + sysID + "&SystemBatchID=" + SystemBatchID + "&FinYear=" + FinYear + "&FinMonth=" + FinMonth + "&MonthReportID=" + MonthReportID);
 
 }
 
@@ -1433,7 +1427,7 @@ $(function () {
         'buttonText': '导入数据',
         'width': 100,
         'height': 25,
-        'successTimeout': 60, 
+        'successTimeout': 60,
         'fileTypeDesc': 'office file',
         'fileTypeExts': '*.doc; *.docx; *.xls;*.xlsx;',
         'fileSizeLimit': '10240',
@@ -1548,8 +1542,7 @@ function TrLv2Show(obj) {
 
         $(tr).nextUntil(".Level2").each(function () {
 
-            if ($(this).hasClass("Level1") == true)
-            { return; } else {
+            if ($(this).hasClass("Level1") == true) { return; } else {
 
                 if ($(this).context.className.indexOf("Level3") >= 0) {
                     $(this).show();
@@ -1560,8 +1553,7 @@ function TrLv2Show(obj) {
     else {
         $(obj).removeClass("minus").addClass("show");
         $(tr).nextUntil(".Level2").each(function () {
-            if ($(this).hasClass("Level1") == true)
-            { return; } else {
+            if ($(this).hasClass("Level1") == true) { return; } else {
                 if ($(this).context.className.indexOf("Level3") >= 0) {
                     $(this).hide();
                 }
@@ -1586,8 +1578,7 @@ function getGroupCount(obj, send) {
                 {
                     $.each(item.ObjValue, function (j, item1) {
 
-                        if (item.Mark != undefined)
-                        { } else { $.each(item.ObjValue, function (m, data2) { RowCount++; }); }
+                        if (item.Mark != undefined) { } else { $.each(item.ObjValue, function (m, data2) { RowCount++; }); }
                     });
                 } else { $.each(item.ObjValue, function (m, data1) { RowCount++; }); }
 

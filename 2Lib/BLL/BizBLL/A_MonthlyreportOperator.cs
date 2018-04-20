@@ -76,6 +76,15 @@ namespace LJTH.BusinessIndicators.BLL
         }
 
 
+        public A_MonthlyReport GetAMonthlyReport(Guid SystemID,Guid SystemBatchID, int Year, int Month)
+        {
+            ExceptionHelper.TrueThrow<ArgumentNullException>(SystemID == null ? true : false, "Argument SystemID is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(SystemBatchID == null ? true : false, "Argument SystemID is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(Year <= 0 ? true : false, "Argument Year is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(Month <= 0 ? true : false, "Argument Month is Empty");
+            return _aMonthlyreportAdapter.GetLatestAMonthlyReport(SystemID, SystemBatchID, Year, Month);
+        }
+
         /// <summary>
         /// 物理删除
         /// </summary>

@@ -26,7 +26,7 @@ namespace Lib.Data
             {
                 if (item.Data != null && item.Data != DBNull.Value )
                 {
-                    if(item.Data.ToString() !="00000000-0000-0000-0000-000000000000")
+                    if(item.Data.ToString() !="00000000-0000-0000-0000-000000000000" || item.DataField== "SystemBatchID")
                     {
                     if (strBFields.Length > 0)
                         strBFields.Append(", ");

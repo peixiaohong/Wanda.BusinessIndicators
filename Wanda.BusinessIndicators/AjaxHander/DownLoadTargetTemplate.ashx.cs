@@ -70,7 +70,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         int FinYear = 0;
         int FinMonth = 0;
         Guid MonthReportID = Guid.Empty;
-        Guid AreaID = Guid.Empty;
+        Guid SystemBatchID = Guid.Empty;
 
         public void ProcessRequest(HttpContext context)
         {
@@ -99,9 +99,9 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 MonthReportID = HttpContext.Current.Request["MonthReportID"].ToGuid();
             }
 
-            if (!string.IsNullOrEmpty(HttpContext.Current.Request["AreaID"]))
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request["SystemBatchID"]))
             {
-                AreaID = HttpContext.Current.Request["AreaID"].ToGuid();
+                SystemBatchID = HttpContext.Current.Request["SystemBatchID"].ToGuid();
             }
 
             switch (FileType)
@@ -522,7 +522,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         excel.SetCustomProperty(worksheets[z], "SystemID", listTarget[0].SystemID.ToString());
                         excel.SetCustomProperty(worksheets[z], "TragertID", listTarget[0].ID.ToString());
                         excel.SetCustomProperty(worksheets[z], "TragertName", listTarget[0].TargetName);
-                        excel.SetCustomProperty(worksheets[z], "AreaID", AreaID.ToString());
+                        excel.SetCustomProperty(worksheets[z], "SystemBatchID", SystemBatchID.ToString());
                         excel.SetCustomProperty(worksheets[z], "SheetName", "MonthReportDetail");
                     }
                     worksheets[z].Cells[0, 1].PutValue(rpt._System.SystemName + listTargetPlanView[z].Name);
@@ -775,7 +775,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         excel.SetCustomProperty(worksheets[z + 1], "SystemID", listTarget[0].SystemID.ToString());
                         excel.SetCustomProperty(worksheets[z + 1], "TragertID", listTarget[0].ID.ToString());
                         excel.SetCustomProperty(worksheets[z + 1], "TragertName", listTarget[0].TargetName);
-                        excel.SetCustomProperty(worksheets[z], "AreaID", AreaID.ToString());
+                        excel.SetCustomProperty(worksheets[z], "SystemBatchID", SystemBatchID.ToString());
                         excel.SetCustomProperty(worksheets[z + 1], "SheetName", "MonthReportDetail");
                     }
                     worksheets[z + 1].Cells[0, 1].PutValue(rpt._System.SystemName + otherListTargetPlanView[z].Name);
@@ -945,7 +945,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             excel.SetCustomProperty(ws, "TragertName", blendTargetList[0].TargetName);
             excel.SetCustomProperty(ws, "TragertTwoID", blendTargetList[1].ID.ToString());
             excel.SetCustomProperty(ws, "TragertTwoName", blendTargetList[1].TargetName);
-            excel.SetCustomProperty(ws, "AreaID", AreaID.ToString());
+            excel.SetCustomProperty(ws, "SystemBatchID", SystemBatchID.ToString());
             excel.SetCustomProperty(ws, "SheetName", "MonthReportDetail");
             ws.Cells[0, 1].PutValue(string.Format(@"{0}年度{1}{2}", FinYear, rpt._System.SystemName, fileName));
             ws.Cells[1, 4].PutValue(string.Format(@"{0}月情况", FinMonth));

@@ -273,11 +273,12 @@ WHERE   MonthlyReportID = @MonthlyReportID
                 string sql = string.Format(@"DELETE
                         FROM    B_MonthlyReportDetail
                         WHERE   SystemID = '{0}'
-                                AND TargetPlanID = '{1}'
-                                AND FinYear = {2}
-                                AND FinMonth = {3}
-                                AND TargetID IN ( {4} )
-                                AND CompanyID IN ( {5} );", list[0].SystemID, list[0].TargetPlanID, list[0].FinYear, list[0].FinMonth
+                                AND MonthlyReportID='{1}'
+                                AND TargetPlanID = '{2}'
+                                AND FinYear = {3}
+                                AND FinMonth = {4}
+                                AND TargetID IN ( {5} )
+                                AND CompanyID IN ( {6} );", list[0].SystemID, list[0].MonthlyReportID,  list[0].TargetPlanID, list[0].FinYear, list[0].FinMonth
                            , string.Format(@"'{0}'", string.Join(",", list.Select(v => v.TargetID).Distinct()).Replace(",", "','"))
                            , string.Format(@"'{0}'", string.Join(",", list.Select(v => v.CompanyID).Distinct()).Replace(",", "','")));
                 list.ConvertAll(v => v.ID = System.Guid.NewGuid());
@@ -328,7 +329,7 @@ WHERE   MonthlyReportID = @MonthlyReportID
                     pi = props.Where(v => v.Name == c.ColumnName).FirstOrDefault();
                     if (pi != null)
                     {
-                        dr[c.ColumnName] = pi.GetValue(item)==null ? DBNull.Value : pi.GetValue(item);
+                        dr[c.ColumnName] = pi.GetValue(item) == null ? DBNull.Value : pi.GetValue(item);
                     }
                 }
                 dt.Rows.Add(dr);

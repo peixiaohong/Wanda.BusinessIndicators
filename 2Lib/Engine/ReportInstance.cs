@@ -46,6 +46,7 @@ namespace LJTH.BusinessIndicators.Engine
             _MonthReportID = MonthReportID;
             B_MonthlyReport report = B_MonthlyreportOperator.Instance.GetMonthlyreport(_MonthReportID);
             _SystemID = report.SystemID;
+            _SystemBatchID = report.SystemBatchID;
             FinYear = report.FinYear;
             FinMonth = report.FinMonth;
             DataSource = _DataSource;
@@ -56,6 +57,9 @@ namespace LJTH.BusinessIndicators.Engine
         private string DataSource = string.Empty;
 
         public Guid _SystemID { get; set; }
+
+        public Guid _SystemBatchID { get; set; }
+
         public int FinYear { get; set; }
         public int FinMonth { get; set; }
         public string SummaryTemplate { get; set; }

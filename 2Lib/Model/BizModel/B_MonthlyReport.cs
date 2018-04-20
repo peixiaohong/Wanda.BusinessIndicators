@@ -84,11 +84,11 @@ namespace LJTH.BusinessIndicators.Model
         public String DataOptimizationJson { get; set; }
 
 
-        /// <summary>
-        /// 大区ID
-        /// </summary>
-        [ORFieldMapping("AreaID")]
-        public Guid AreaID { get; set; }
+        ///// <summary>
+        ///// 大区ID
+        ///// </summary>
+        //[ORFieldMapping("AreaID")]
+        //public Guid AreaID { get; set; }
 
     #endregion
 

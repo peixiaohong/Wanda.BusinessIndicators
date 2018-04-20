@@ -219,7 +219,13 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     }
                     if (excel.GetStringCustomProperty(book.Worksheets[j], "SystemID") != SysId.ToString())
                     {
-                        error = "请下载当前系统的模板！";
+                        error = "请下载当前板块的模板！";
+                        return;
+                    }
+
+                    if (excel.GetStringCustomProperty(book.Worksheets[j], "SystemBatchID") != CurrentRpt._SystemBatchID.ToString())
+                    {
+                        error = "请下载当前大区的模板！";
                         return;
                     }
 
@@ -1792,7 +1798,6 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 //优化，批量插入
                 B_MonthlyreportdetailOperator.Instance.BulkAddTargetDetail(lstInsertMonthReportDetail);
             }
-
             B_MonthlyReport bmr = B_MonthlyreportOperator.Instance.GetMonthlyreport(MonthReportID);
             if (bmr != null && lstInsertMonthReportDetail.Count > 0)
             {
