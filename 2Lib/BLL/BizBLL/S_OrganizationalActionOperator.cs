@@ -118,6 +118,17 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
             return _s_OrganizationalAdapter.GetSystemsubsetCnName(systemID, cnName);
         }
 
+        /// <summary>
+        /// 获取组织架构【用户设置组织】
+        /// </summary>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetDataByLoginName(string loginName)
+        {
+            return _s_OrganizationalAdapter.GetDataByLoginName(loginName);
+        }
+
+
         #endregion
 
 
