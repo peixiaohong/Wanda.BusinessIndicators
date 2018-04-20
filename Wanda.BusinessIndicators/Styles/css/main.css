@@ -314,7 +314,7 @@
 }
 .user-main {
     width: 80%;
-    height: 490px;
+    height: 540px;
     background: #fff;
     position:absolute;
     left: 0;
@@ -324,7 +324,7 @@
     margin: auto;
 }
 .user-content {
-    height: 307px;
+    height: 350px;
     overflow-y:auto;
 }
 .btnbox {

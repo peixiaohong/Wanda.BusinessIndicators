@@ -1170,6 +1170,166 @@ function InitTabs() {
                 }
             });
         }
+        // 客户端分页
+        , paginationex: function (options) {
+
+            var context = $(this);
+            var _setting = {
+                current: 1, // 当前页
+                pageSize: 10, // 每页多少行
+                pageCount: 1, // 共多少页
+                totalCount: 0, // 共多少条数据
+                navTo: function (pageIndex, pageSize) { }, //跳转到第几页， 需要使用者自己实现： 1 获得绑定数据，刷新表格 2 刷新分页器
+                //onPaging: function (opt) {
+                //    var _default = {
+                //        data: null,
+                //        tmplHtml: "",
+
+                //    };
+                //},
+                cols: "20",
+                other: null
+            };
+
+            $.extend(_setting, options);
+            if (_setting.pageSize > 0 && _setting.totalCount > 0) {
+                _setting.pageCount = Math.ceil(_setting.totalCount / _setting.pageSize);
+            }
+            else {
+                _setting.pageCount = 0;
+                _setting.current = 0;
+            }
+            // class: pagination, pager, first, prev, next, last, currentPage, totalPage, go, totalItemCount, w20
+            // variance: ${current}, ${pageCount}, ${totalCount}
+            var pageTmpl = [
+                //"<tr   class='pagination'>",
+                //"    <td colspan='" + _setting.cols + "'>",
+                "        <div >",
+                "            <a href='javascript:void(0)' class='first' style='border:1px solid #ccc;border-radius:3px!important;'>首页</a>",
+                "            <a href='javascript:void(0)' class='prev' style='border:1px solid #ccc;border-radius:3px!important;'>上一页</a>",
+                "            <a href='javascript:void(0)' class='next' style='border:1px solid #ccc;border-radius:3px!important;'>下一页</a>",
+                "            <a href='javascript:void(0)' class='last' style='border:1px solid #ccc;border-radius:3px!important;'>尾页</a>",
+                "            <span>当前页：<span class='currentPage'>${current}</span>/<span class='totalPage'>${pageCount}</span></span>",
+                "            <span>&nbsp;&nbsp;&nbsp;&nbsp;跳转至：第</span>",
+                "            <input class='numBox targetIndex numOnly' name='targetIndex' type='text' value='${current}' maxlength=7 style='width:30px;border:1px #bebebe solid;position:relative;top:-1px;text-align:center;padding-top:3px;padding-bottom:2px;border-radius:0px!important;'/>",
+                "            <span>页</span>",
+                "            <input class='go' type='button' value='跳转' style='cursor:pointer;border:1px solid #ccc;border-radius:3px!important;position:relative;top:-1px;padding:2px 7px;padding-top:4px;'/>",
+                "            <span>&nbsp;&nbsp;&nbsp;&nbsp;共有<span class='totalItemCount'>${totalCount}</span>条数据</span>",
+                "        </div>",
+                //"    </td>",
+                //"</tr>"
+            ];
+            var pageTmplMarkups = pageTmpl.join("");
+            var pageTemplate = $.template("pageTemplate", pageTmplMarkups);
+            var pager = $.tmpl("pageTemplate", _setting); //分页控件
+            pager.appendTo(context);
+
+            //分面样式修改
+
+            if (_setting.current == 0) {
+                pager.find("a.first").attr("disabled", true);
+                pager.find("a.prev").attr("disabled", true);
+            } else {
+                pager.find("a.first").attr("disabled", false);
+                pager.find("a.prev").attr("disabled", false);
+            }
+
+            if (_setting.current == _setting.pageCount - 1) {
+                pager.find("a.next").attr("disabled", true);
+                pager.find("a.last").attr("disabled", true);
+
+            } else {
+                pager.find("a.next").attr("disabled", false);
+                pager.find("a.last").attr("disabled", false);
+            }
+            //分页操作事件
+            pager.find("a.first")
+                .attr("title", "快捷键 HOME")
+                .click(function () {
+                    if (_setting.totalCount == 0) return;
+                    _setting.navTo(1, _setting.pageSize);
+                    //var btn = context.find("a.first");
+                    //if (btn.length > 0) {
+                    //    btn.focus();
+                    //}
+
+                });
+            pager.find("a.prev")
+                .attr("title", "快捷键 <-")
+                .click(function () {
+                    if (_setting.current > 1)
+                        _setting.navTo(_setting.current - 1, _setting.pageSize);
+
+                    if (_setting.current == 0) {
+                        pager.find("a.first").attr("disabled", true);
+                        pager.find("a.prev").attr("disabled", true);
+                    } else {
+                        pager.find("a.first").attr("disabled", false);
+                        pager.find("a.prev").attr("disabled", false);
+                    }
+                    //var btn = context.find("a.prev");
+                    //if (btn.length > 0) {
+                    //    btn.focus();
+                    //}
+
+                });
+            pager.find("a.next")
+                .attr("title", "快捷键 ->")
+                .click(function () {
+                    if (_setting.current < _setting.pageCount)
+                        _setting.navTo(_setting.current + 1, _setting.pageSize);
+                    //var btn = context.find("a.next");
+                    //if (btn.length > 0) {
+                    //    btn.focus();
+                    //}
+                });
+            pager.find("a.last")
+                .attr("title", "快捷键 END")
+                .click(function () {
+                    _setting.navTo(_setting.pageCount, _setting.pageSize);
+                    //var btn = context.find("a.last");
+                    //if (btn.length > 0) {
+                    //    btn.focus();
+                    //}
+                });
+            pager.find("input.targetIndex").keyup(function () {
+                if (event.keyCode == 13) { pager.find("input.go").click(); }
+                var input = context.find("input.targetIndex");
+                if (input.length > 0) {
+                    input.focus();
+                }
+
+            });
+            pager.find("input.go").click(function () {
+                var targetIndex = pager.find("input.targetIndex").val().toInt();
+                if (targetIndex < 1) {
+                    targetIndex = 1;
+                }
+                else if (targetIndex > _setting.pageCount) {
+                    targetIndex = _setting.pageCount;
+                }
+                _setting.navTo(targetIndex - 1, _setting.pageSize);
+
+                //var input = context.find("input.targetIndex");
+                //if (input.length > 0) {
+                //    input.focus();
+                //}
+            });
+            pager.keyup(function () {
+                //  alert(event.keyCode);
+                switch (event.keyCode) {
+                    case 33: case 37: pager.find("a.prev").click(); break;/*page up*/
+                    case 34: case 39: pager.find("a.next").click(); break;/*page down*/
+                    case 35: pager.find("a.last").click(); break;/*end*/
+                    case 36: pager.find("a.first").click(); break; /*home*/
+                    default: break;
+                }
+                // alert(context.find("input.targetIndex").length);
+                context.find("input.targetIndex").click();
+                event.returnValue = false;
+            })
+        }
+
     });
 })(jQuery);
 jQuery.extend({

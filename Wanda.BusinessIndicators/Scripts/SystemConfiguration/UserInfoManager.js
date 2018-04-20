@@ -13,12 +13,12 @@ function Fake() {
     $.unblockUI();
 }
 //#endregion 公共方法
-
+var PageSize = 10;
+var PageNumber = 1;
 $(document).ready(function () {
 
     //注册事件
     RegisterEvent();
-
     //数据加载
     UsersLoadPage();
 
@@ -31,18 +31,28 @@ function UsersLoadPage() {
     console.log(keyword)
     var roleData = {
         "keyWord": keyword,
-        "PageIndex": 1,
-        "PageSize": 10
+        "PageIndex": PageNumber,
+        "PageSize": PageSize
     }
     WebUtil.ajax({
         async: false,
         url: "/RoleManagerControll/GetAllUser",
         args: { data: JSON.stringify(roleData) },
         successReturn: function (resultData) {
+            var totalCount = resultData.TotalCount;
             if (resultData.Success == 1) {
-                console.log(resultData)
                 $('#UsersMenuData').empty();
                 loadTmpl('#UsersMenuDataTmpl').tmpl(resultData).appendTo('#UsersMenuData');
+                $("#pager").empty();
+                $("#pager").paginationex({
+                    current: PageNumber,
+                    pageSize: PageSize,
+                    totalCount: totalCount,
+                    navTo: function (pageIndex) {
+                        PageNumber = pageIndex;
+                        UsersLoadPage();
+                    }
+                });
             }
             else {
                 console.log(resultData.Message);
