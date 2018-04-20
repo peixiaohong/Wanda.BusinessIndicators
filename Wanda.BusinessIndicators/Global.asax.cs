@@ -1,9 +1,11 @@
-﻿using System;
+﻿using LJTH.BusinessIndicators.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
+using LJTH.Lib.AuthCenter.BLL;
 
 namespace LJTH.BusinessIndicators.Web
 {
@@ -12,6 +14,7 @@ namespace LJTH.BusinessIndicators.Web
 
         protected void Application_Start(object sender, EventArgs e)
         {
+            WebHelper.Instance.GetUser += UserinfoOperator.Instance.GetUserInfoByName;
 
         }
 

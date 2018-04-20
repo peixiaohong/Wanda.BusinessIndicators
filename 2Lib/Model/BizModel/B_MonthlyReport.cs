@@ -87,8 +87,8 @@ namespace LJTH.BusinessIndicators.Model
         /// <summary>
         /// ´óÇøID
         /// </summary>
-        [ORFieldMapping("AreaID")]
-        public Guid AreaID { get; set; }
+        //[ORFieldMapping("AreaID")]
+        //public Guid AreaID { get; set; }
 
     #endregion
 

@@ -4,11 +4,19 @@
 <%@ Register Src="~/UserControl/TargetReportUserControl.ascx" TagPrefix="targetReportUC" TagName="TargetReportUserControl" %>
 <%@ Register Src="~/UserControl/MutipleUpload.ascx" TagPrefix="targetReportUC" TagName="MutipleUpload" %>
 
+<%@ Register Src="~/SiteMasterPage/wfCtrl.ascx" TagPrefix="uc1" TagName="wfCtrl" %>
+<%@ Register Src="~/SiteMasterPage/userSelectCtrl.ascx" TagPrefix="uc1" TagName="userSelectCtrl" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
     <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported.js"></script>
     <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported1.js"></script>
     <script type="text/javascript" src="../Scripts/UpLoad/jquery.uploadify.min.js"></script>
+
+    <uc1:wfCtrl runat="server" ID="wfCtrl" />
+    <uc1:userSelectCtrl runat="server" ID="userSelectCtrl" />
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="main">
