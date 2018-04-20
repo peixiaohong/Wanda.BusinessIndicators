@@ -32,7 +32,7 @@ function LoadPage() {
         args: {},
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
-                console.log(resultData);
+                //console.log(resultData);
                 Ztree(resultData);
             }
             else {
@@ -66,7 +66,7 @@ function CheckOrganization(type) {
     } else if (isCompany == "false") {
         isCompany = false;
     }
-    console.log(isCompany);
+    //console.log(isCompany);
     var level = el.attr("data-level");
     var id = el.attr("data-id");
     if (!val) {
@@ -166,7 +166,7 @@ function SaveOrganization(type) {
         $.MsgBox.Alert("提示", "组织名称不能为空");
         return false;
     }
-    console.log(data);
+    //console.log(data);
     WebUtil.ajax({
         async: false,
         url: "/S_OrganizationalManagerControll/SaveData",

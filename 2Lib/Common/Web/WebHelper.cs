@@ -44,8 +44,7 @@ namespace LJTH.BusinessIndicators.Common
                 return result;
             }
         }
-
-
+        
 
         /// <summary>
         /// 获得当前的登陆用户信息
@@ -55,14 +54,13 @@ namespace LJTH.BusinessIndicators.Common
         {
             string cacheKey = null;
             LoginUserInfo result = null;
-            string IsUservirtualUser = ConfigurationManager.AppSettings["IsVirtualUser"];
-            IsUservirtualUser = string.IsNullOrEmpty(IsUservirtualUser) ? "true" : IsUservirtualUser;
-
 
             string ssoUsername = HttpContext.Current.Items["WD_SSO_UserName"] != null ? HttpContext.Current.Items["WD_SSO_UserName"].ToString() : string.Empty;
-
             string strUserName = HttpContext.Current.User.Identity != null ? HttpContext.Current.User.Identity.Name : ssoUsername;
-
+            if (!EnabledSSO)
+            {
+                strUserName = ConfigurationManager.AppSettings["virtualUser"];
+            }
             cacheKey = strUserName;
 
             if (string.IsNullOrEmpty(cacheKey))

@@ -51,7 +51,7 @@
                 <img src="../Images/logo0.png" alt="经营指标管控系统"/>
                 <span>经营指标管控系统</span>
                 <div class="map_target">
-                    欢迎您：<%=LJTH.BusinessIndicators.Common.WebHelper.Instance.GetLoginUserInfo().CNName %>（<%=LJTH.BusinessIndicators.Common.WebHelper.Instance.GetLoginUserInfo().ActualUnitName %>）&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Public/Logout.aspx">退出</a>
+                    欢迎您：<%=LJTH.BusinessIndicators.Common.WebHelper.GetCurrentUser().CNName %>（<%=LJTH.BusinessIndicators.Common.WebHelper.GetCurrentUser().ActualUnitName %>）&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Public/Logout.aspx">退出</a>
                 </div>
             </div>
             <div style="height:5px;clear: both;background: rgb(232, 235, 239);"></div>
