@@ -115,34 +115,6 @@ function SaveRole() {
     });
 }
 
-//查询条件
-function QueryRoleData() {
-    //参数
-    var keyWord = $("#QrName").val();
-    var roleData = {
-        "keyWord": keyWord,
-        "RoleID": getQueryString("RoleId"),
-        "PageIndex": 1,
-        "PageSize": 10
-    }
-    Load();
-    WebUtil.ajax({
-        async: false,
-        url: "/RoleManagerControll/GetAllUser",
-        args: { data: JSON.stringify(roleData) },
-        successReturn: function (resultData) {
-            if (resultData.Success == 1) {
-                $('#ShowMenuUsersData').empty();
-                loadTmpl('#ShowMenuUsersDataTmpl').tmpl(resultData).appendTo('#ShowMenuUsersData');
-            }
-            else {
-                console.log(resultData.Message);
-            }
-            Fake();
-        }
-    });
-}
-
 // 设置/查询角色
 function SetUsersRole(el) {
     $(".user-model").css("display", "block");
@@ -172,36 +144,52 @@ function SetUsersRole(el) {
     });
 
 }
-//角色用户
-function DeleteRoleUserData(el) {
-    var name = $(el).attr("data-name");
-    var roleData = {
-        "RoleID": getQueryString("RoleId"),
-        "LoginName": name
-    }
-    $.MsgBox.Confirm("提示", "确认删除", "", function () {
-        WebUtil.ajax({
-            async: false,
-            url: "/RoleManagerControll/DeleteRole_User",
-            args: roleData,
-            successReturn: function (resultData) {
-                if (resultData.Success == 1) {
-                    $("#mb_box,#mb_con").remove();
-                    $.MsgBox.Alert("提示", "删除成功");
-                    LoadPage();
-                }
-                else {
-                    $("#mb_box,#mb_con").remove();
-                    $.MsgBox.Alert("提示", "删除失败");
-                    console.log("删除失败" + resultData.Message);
-                }
+// 设置架构
+function SetOrgs(el) {
+    $(".organization-model").css("display", "block");
+    var loginName = $(el).attr("data-login");
+    console.log(loginName);
+    Load();
+    WebUtil.ajax({
+        async: false,
+        url: "/S_OrganizationalManagerControll/GetAllOrgData",
+        args: {},
+        successReturn: function (resultData) {
+            if (resultData.Success == 1) {
+                Ztree(resultData);
+            } else {
+                console.log(resultData.Message);
+                $.MsgBox.Alert("提示", "获取数据失败");
             }
-        });
+        }
     });
 }
-function getQueryString(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]);
-    return null;
-} 
+function Ztree(data) {
+    console.log(data);
+    //var zNodes = [{ id: "00000000-0000-0000-0000-000000000000", pId: "00000000-0000-0000-0000-000000000000", name: "菜单管理", open: true }];
+    //data.Data.forEach(function (one) {
+    //    if (one.IsChecked) {
+    //        zNodes[0].checked = true;
+    //    };
+    //    var zNodesObj = { id: "", pId: "", name: "", checked: "" };
+    //    zNodesObj.id = one.ID;
+    //    zNodesObj.pId = one.ParentMenuID;
+    //    zNodesObj.name = one.CnName;
+    //    zNodesObj.checked = one.IsChecked;
+    //    zNodes.push(zNodesObj);
+    //});
+    //var setting = {
+    //    check: {
+    //        enable: true
+    //    },
+    //    data: {
+    //        simpleData: {
+    //            enable: true
+    //        }
+    //    }
+    //};
+    //$.fn.zTree.init($("#tree"), setting, zNodes);
+    //var zTree = $.fn.zTree.getZTreeObj("tree");
+    //zTree.setting.check.chkboxType = { "Y": "ps", "N": "ps" };
+    //Fake();
+}

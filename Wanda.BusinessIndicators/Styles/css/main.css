@@ -303,13 +303,13 @@
     text-decoration:none !important;
 }
 /*用户管理*/
-.user-model {
+.user-model, .organization-model {
     width: 100%;
     height: 100%;
-    position:fixed;
-    left: 0 ;
+    position: fixed;
+    left: 0;
     top: 0;
-    background:rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.6);
     display: none;
 }
 .user-main {

@@ -55,7 +55,7 @@
         <td>${item.JobTitle}</td>
         <td><span title="${item.DeptFullName}">${item.DeptFullName}</span></td>
         <td><a href="javascript:void(0)" data-login="${item.LoginName}" onclick="SetUsersRole(this)">设置</a></td>
-        <td><a href="javascript:void(0)">设置</a></td>
+        <td><a href="javascript:void(0)" data-login="${item.LoginName}" onclick="SetOrgs(this)">设置</a></td>
     </tr>
     {{/each}}
 </script>

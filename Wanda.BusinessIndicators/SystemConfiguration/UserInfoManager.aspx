@@ -124,5 +124,26 @@
         </div>
     </div>
     </div>
+    <div class="organization-model">
+        <div class="main user-main" style="width: 300px; height: 450px">
+            <div class="margin_t10">
+                <div class="tabs_m">
+                    <ul>
+                        <li class="selected m_1"><a class="active_sub2"><span>组织架构</span></a></li>
+                    </ul>
+                </div>
+                <div class="tabs_content user-content" style="height: auto">
+                    <!--内容-->
+                    <div style="margin-top: 5px;">
+                        <ul id="tree" class="ztree ztree_defined"></ul>
+                    </div>
+                </div>
+                <div class="btnbox">
+                    <input class="btn_ok set_orgs_sumbit" type="button" value="确定">
+                    <input class="btn_no set_orgs_cancel" type="button" value="取消">
+                </div>
+            </div>
+        </div>
+    </div>
 </asp:Content>
 
