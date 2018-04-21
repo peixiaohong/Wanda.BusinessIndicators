@@ -240,8 +240,16 @@ function SaveLimitData(id) {
     var treeObj = $.fn.zTree.getZTreeObj("tree");
     var nodes = treeObj.getCheckedNodes(true);
     if (!nodes.length) {
-        $.MsgBox.Alert("提示", "没有选择任何权限");
+        $.MsgBox.Confirm("提示", "没有选中", "", function () {
+            $("#mb_box,#mb_con").remove();
+            SaveLimitFunction(nodes,id)
+        })
+    } else {
+        SaveLimitFunction(nodes,id);
     }
+    
+}
+function SaveLimitFunction(nodes,id) {
     WebUtil.ajax({
         async: false,
         url: "/RoleManagerControll/SaveRolePermissions",

@@ -142,7 +142,8 @@ function SaveOrganization(type) {
         pid = el.attr("data-pid");
         isCompany = el.attr("data-isCompany");
     }
-    if (isCompany) {
+    //console.log(isCompany);
+    if (isCompany == "true") {
         isCompany = true;
     } else {
         isCompany = false;
@@ -254,7 +255,7 @@ function Ztree(data) {
     zTree.setting.check.chkboxType = { "Y": "ps", "N": "ps" };
     Fake();
     function zTreeOnClick(event, treeId, treeNode) {
-        console.log(treeNode)
+        //console.log(treeNode)
         var el = $(".organization_name").find("input");
         el.attr({
             "data-id": treeNode.id,
