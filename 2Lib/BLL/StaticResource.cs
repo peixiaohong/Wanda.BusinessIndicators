@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using LJTH.BusinessIndicators.BLL.BizBLL;
-using LJTH.BusinessIndicators.DAL.BizDal;
 using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.Model.BizModel;
 
 namespace LJTH.BusinessIndicators.BLL
 {

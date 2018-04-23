@@ -855,13 +855,13 @@ function SetComplateTargetDetailData(sender, Type) {
     if (strComplateMonthReportDetilHtmlTemplate[0] != "" && strComplateMonthReportDetilHtmlTemplate[0] != undefined) {
         loadTmpl('#' + strComplateMonthReportDetilHtmlTemplate[0]).tmpl(sender).appendTo('#CompleteDetailHead');
     } else {
-        loadTmpl('#CompleteDetailHeadTemplate').tmpl().appendTo('#CompleteDetailHead');
+        loadTmpl('#TmplCompleteDetail_Head').tmpl().appendTo('#CompleteDetailHead');
     }
     //tmpl模板名称
     if (strComplateMonthReportDetilHtmlTemplate[1] != "" && strComplateMonthReportDetilHtmlTemplate[1] != undefined) {
         ComplateTargetDetailTemplate = strComplateMonthReportDetilHtmlTemplate[1];
     } else {
-        ComplateTargetDetailTemplate = "ComplateTargetDetailTemplate"
+        ComplateTargetDetailTemplate = "TmplCompleteDetail_Data"
     }
 
     if (currentDetailTarget == null) {
@@ -877,15 +877,15 @@ function SetComplateTargetDetailData(sender, Type) {
         //        ComplateDetailData.push(jsonBH[i]);
         //    }
         //}
+        if (ComplateDetailData.length > 0) {
+            loadTmpl('#ComplateTargetDetailHeadTemplate').tmpl(ComplateDetailData).appendTo('#Ul4');
+            $("#tab2_rows").empty();
 
-        loadTmpl('#ComplateTargetDetailHeadTemplate').tmpl(ComplateDetailData).appendTo('#Ul4');
-        $("#tab2_rows").empty();
-
-        var dataArray = [];
-        var data = { "data": sender };
-        dataArray.push(data);
-        loadTmpl('#' + ComplateTargetDetailTemplate).tmpl(dataArray).appendTo('#tab2_rows');
-
+            var dataArray = [];
+            var data = { "data": sender };
+            dataArray.push(data);
+            loadTmpl('#' + ComplateTargetDetailTemplate).tmpl(dataArray).appendTo('#tab2_rows');
+        }
         $("#Ul4 :first a").addClass("active_sub3");
     } else {
         if (Type == 1) {
@@ -994,8 +994,7 @@ function getManageReprotDetailData() {
         args: { rpts: WebUtil.jsonToString(ReportInstance), strCompanyProperty: CompanyProperty, strMonthReportOrderType: MonthReportOrderType, IncludeHaveDetail: IncludeHaveDetail },
         successReturn: function (ResultData) {
             ManageReportDetailData = ResultData;
-            if (ManageReportDetailData.length > 0)
-                SetManageMonthReprotDetailData(ManageReportDetailData[0], 1);
+            SetManageMonthReprotDetailData(ManageReportDetailData[0], 1);
         }
     });
 
@@ -1019,7 +1018,7 @@ function SetManageMonthReprotDetailData(sender, Type) {
     if (strManageMonthReprotDetailHtmlTemplate[0] != "" && strManageMonthReprotDetailHtmlTemplate[0] != undefined) {
         loadTmpl('#' + strManageMonthReprotDetailHtmlTemplate[0]).tmpl(sender).appendTo('#CompleteDetailHead_1');
     } else {
-        loadTmpl('#CompleteDetailHeadTemplate').tmpl().appendTo('#CompleteDetailHead_1');
+        loadTmpl('#TmplCompleteDetail_Head').tmpl().appendTo('#CompleteDetailHead_1');
     }
     //tmpl模板名称
     if (strManageMonthReprotDetailHtmlTemplate[1] != "" && strManageMonthReprotDetailHtmlTemplate[1] != undefined) {
@@ -1033,11 +1032,13 @@ function SetManageMonthReprotDetailData(sender, Type) {
         loadTmpl('#ManageTargetDetailHeadTemplate').tmpl(ManageReportDetailData).appendTo('#Ul4_1');
         $("#tab2_rows_1").empty();
 
-        var dataArray = [];
-        var data = { "data": sender };
-        dataArray.push(data);
-        loadTmpl('#' + strManageMonthReprotDetailTemplate).tmpl(dataArray).appendTo('#tab2_rows_1');
+        if (ManageReportDetailData.length > 0) {
 
+            var dataArray = [];
+            var data = { "data": sender };
+            dataArray.push(data);
+            loadTmpl('#' + strManageMonthReprotDetailTemplate).tmpl(dataArray).appendTo('#tab2_rows_1');
+        }
         $("#Ul4_1 :first a").addClass("active_sub3");
     } else {
         if (Type == 1) {
@@ -2558,7 +2559,7 @@ function unfoldTitle() {
     if (tipName == "经营报告明细") {
         $("#CompleteDetailHead_1").html("");
         $("#tab2_rows_1").html("");
-        var targetName = $("#Ul4_1 .active_sub3")[0].innerText;
+        var targetName = $("#Ul4_1 .active_sub3")[0] == undefined ? "" : $("#Ul4_1 .active_sub3")[0].innerText;
         var TemplData = {};
         $.each(ManageReportDetailData, function (i, item) {
             if (item.Name == targetName) {
@@ -2585,7 +2586,7 @@ function unfoldTitle() {
     else if (tipName == "完成情况明细"){
         $("#CompleteDetailHead").html("");
         $("#tab2_rows").html("");
-        var targetName = $("#Ul4 .active_sub3")[0].innerText;
+        var targetName = $("#Ul4 .active_sub3")[0] == undefined ? "" : $("#Ul4 .active_sub3")[0].innerText;
         var TemplData = {};
         $.each(ComplateDetailData, function (i, item) {
             if (item.Name == targetName) {
@@ -2622,7 +2623,7 @@ function shrinkageTitle() {
         $("#CompleteDetailHead_1").html("");
         $("#tab2_rows_1").html("");
 
-        var targetName = $("#Ul4_1 .active_sub3")[0].innerText;
+        var targetName = $("#Ul4_1 .active_sub3")[0] == undefined ? "" : $("#Ul4_1 .active_sub3")[0].innerText;
         var TemplData = {};
         $.each(ManageReportDetailData, function (i, item) {
             if (item.Name == targetName) {
@@ -2649,7 +2650,7 @@ function shrinkageTitle() {
         $("#CompleteDetailHead").html("");
         $("#tab2_rows").html("");
 
-        var targetName = $("#Ul4 .active_sub3")[0].innerText;
+        var targetName = $("#Ul4 .active_sub3")[0] == undefined ? "" : $("#Ul4 .active_sub3")[0].innerText;
         var TemplData = {};
         $.each(ComplateDetailData, function (i, item) {
             if (item.Name == targetName) {
