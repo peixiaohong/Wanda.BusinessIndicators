@@ -268,7 +268,7 @@ namespace LJTH.BusinessIndicators.Web
             }
             if (!isPageExist)
             {
-                Response.Redirect("../NoPermission.aspx");
+                //Response.Redirect("../NoPermission.aspx");
             }
             return list_node;
         }

@@ -53,7 +53,7 @@ function LoadPage() {
                 });
             }
             else {
-                console.log(resultData.Message);
+                //console.log(resultData.Message);
             }
             Fake();
         }
@@ -90,7 +90,7 @@ function UsersLoadPage() {
                 });
             }
             else {
-                console.log(resultData.Message);
+                //console.log(resultData.Message);
             }
             Fake();
         }
@@ -163,12 +163,12 @@ function SaveRoleFun(data) {
                 $("#UsersNameAdd").val("");
                 $.MsgBox.Alert("提示", "添加成功");
                 LoadPage();
-                console.log("添加成功" + resultData.Message);
+                //console.log("添加成功" + resultData.Message);
             }
             else {
                 $(".user-model").css("display", "none");
                 $.MsgBox.Alert("提示", "添加失败");
-                console.log("添加失败:" + resultData.Message);
+                //console.log("添加失败:" + resultData.Message);
             }
             Fake();
         }
@@ -196,7 +196,7 @@ function QueryRoleData() {
                 loadTmpl('#ShowMenuUsersDataTmpl').tmpl(resultData).appendTo('#ShowMenuUsersData');
             }
             else {
-                console.log(resultData.Message);
+                //console.log(resultData.Message);
             }
             Fake();
         }
@@ -224,7 +224,7 @@ function DeleteRoleUserData(el) {
                 else {
                     $("#mb_box,#mb_con").remove();
                     $.MsgBox.Alert("提示", "删除失败");
-                    console.log("删除失败" + resultData.Message);
+                    //console.log("删除失败" + resultData.Message);
                 }
             }
         });

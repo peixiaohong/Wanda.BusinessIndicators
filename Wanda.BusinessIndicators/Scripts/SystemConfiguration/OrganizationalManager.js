@@ -36,7 +36,7 @@ function LoadPage() {
                 Ztree(resultData);
             }
             else {
-                console.log(resultData.Message);
+                //console.log(resultData.Message);
             }
             Fake();
         }
@@ -212,7 +212,7 @@ function DeleteOrganizationData(id, isCompany) {
                 else {
                     $("#mb_box,#mb_con").remove();
                     $.MsgBox.Alert("提示", "删除失败");
-                    console.log("删除失败" + resultData.Message);
+                    //console.log("删除失败" + resultData.Message);
                 }
             }
         });

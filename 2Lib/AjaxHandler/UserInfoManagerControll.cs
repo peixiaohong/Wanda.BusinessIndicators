@@ -65,7 +65,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         [LibAction]
         public object SaveUsesRoles(string loginName, string roleIDs)
         {
-            if (loginName == "" || roleIDs == "")
+            if (loginName == "")
             {
                 return new
                 {
@@ -78,47 +78,54 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             int success = 0;
             try
             {
-                string[] roleIds = roleIDs.Split(',');
-                if (roleIds.Length < 1)
-                {
-                    return new
-                    {
-                        Data = "",
-                        Success = 0,
-                        Message = "参数：角色ID传递为null"
-                    };
-                }
                 var resutlDeleteUser_Role = S_Role_UserActionOperator.Instance.DeleteDatasByLoginName(loginName);
-                List<S_Role_User> entitys = new List<S_Role_User>();
-                foreach (var item in roleIds)
+                if (roleIDs != null && roleIDs != "")
                 {
-                    S_Role_User su = new S_Role_User()
+                    string[] roleIds = roleIDs.Split(',');
+                    if (roleIds.Length < 1)
                     {
-                        ID = Guid.NewGuid(),
-                        LoginName = loginName,
-                        RoleID = item.ToGuid(),
-                        IsDeleted = false,
-                        CreateTime = DateTime.Now,
-                        CreatorName = base.CurrentUserName,
-                        ModifierName = base.CurrentUserName,
-                        ModifyTime = DateTime.Now
-                    };
-                    entitys.Add(su);
-                }
-                if (entitys.Count > 0)
-                {
-                    int number = S_Role_UserActionOperator.Instance.InsertListData(entitys);
-                    //清除缓存
-                    WebHelper.InvalidAuthCache();
-                    if (number > 0)
+                        return new
+                        {
+                            Data = "",
+                            Success = 0,
+                            Message = "参数：角色ID传递为null"
+                        };
+                    }
+                    List<S_Role_User> entitys = new List<S_Role_User>();
+                    foreach (var item in roleIds)
                     {
-                        success = 1;
-                        message = "设置角色成功";
+                        S_Role_User su = new S_Role_User()
+                        {
+                            ID = Guid.NewGuid(),
+                            LoginName = loginName,
+                            RoleID = item.ToGuid(),
+                            IsDeleted = false,
+                            CreateTime = DateTime.Now,
+                            CreatorName = base.CurrentUserName,
+                            ModifierName = base.CurrentUserName,
+                            ModifyTime = DateTime.Now
+                        };
+                        entitys.Add(su);
+                    }
+                    if (entitys.Count > 0)
+                    {
+                        int number = S_Role_UserActionOperator.Instance.InsertListData(entitys);
+
+                        if (number > 0)
+                        {
+                            success = 1;
+                            message = "设置角色成功";
+                        }
+                        else
+                        {
+                            success = 0;
+                            message = "设置角色失败";
+                        }
                     }
                     else
                     {
-                        success = 0;
-                        message = "设置角色失败";
+                        success = 1;
+                        message = "设置成功";
                     }
                 }
                 else
@@ -126,6 +133,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     success = 1;
                     message = "设置成功";
                 }
+                //清除缓存
+                WebHelper.InvalidAuthCache();
                 return new
                 {
                     Data = "",

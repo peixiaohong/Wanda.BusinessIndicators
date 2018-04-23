@@ -109,7 +109,7 @@
                             <table class="tab_005 role-list">
                                 <thead style="width: 100%">
                                     <tr class="tab_5_row_alt">
-                                        <th style="width: 5%;">序号</th>
+                                        <th style="width: 5%;"></th>
                                         <th style="width: 20%;">角色名称</th>
                                         <th style="width: 20%;">角色描述</th>
                                     </tr>
