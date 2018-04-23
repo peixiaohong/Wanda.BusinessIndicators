@@ -32,6 +32,7 @@
 
             <asp:HiddenField runat="server" ID="Hide_sg" ClientIDMode="Static" />
             <asp:HiddenField runat="server" ID="Hide_sgrent" ClientIDMode="Static" />
+            <asp:HiddenField runat="server" ID="HiddenBatch" ClientIDMode="Static" />
 
             <br />
             <span style="color: red">注：上传excel后，若页面没有出现相应数据，请稍等几分钟再次刷新页面（数据正在后台进行计算），即可恢复正常。请勿因此重复上传数据。</span>

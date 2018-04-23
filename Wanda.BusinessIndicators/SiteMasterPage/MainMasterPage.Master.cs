@@ -232,7 +232,7 @@ namespace LJTH.BusinessIndicators.Web
         private List<NavSiteMapNode> GetMenus()
         {
             bool isPageExist = false;
-            List<S_Menu> menus = S_MenuActionOperator.Instance.GetLoinNameMenu(HttpContext.Current.User.Identity.Name);
+            List<S_Menu> menus = S_MenuActionOperator.Instance.GetLoinNameMenu(WebHelper.GetCurrentLoginUser());
             if (menus.Count < 1)
             {
                 Response.Redirect("../NoPermission.aspx");

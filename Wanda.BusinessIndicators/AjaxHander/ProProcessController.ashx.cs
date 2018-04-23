@@ -46,7 +46,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
 
         /// <summary>
-        ///  业务处理
+        ///  业务处理，更新Monthlyreport表ProcessOwn字段，添加actio表记录
         /// </summary>
         public void DisposeBusinessData()
         {
@@ -112,6 +112,10 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             
         }
 
+        /// <summary>
+        /// 处理流程按钮事件
+        /// </summary>
+        /// <param name="UserLonginID"></param>
         public void ExecutionBusinessData(string UserLonginID = null)
         {
 
@@ -284,7 +288,10 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
 
         }
-
+        /// <summary>
+        /// 判断是否为虚拟暂挂节点，如果是 则更新IsReady=true。如果不是，更新合并审批意见。汇总流程审批完成。执行listB TO listA
+        /// </summary>
+        /// <param name="UserLonginID"></param>
         protected void AfterExcuteBusinessData(string UserLonginID = null)
         {
             if (WFClientSDK.Exist(BusinessID))
@@ -387,7 +394,9 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 }
             }
         }
-
+        /// <summary>
+        /// 更新执行工作流后更新对应字段的值。如果是合并审批中退回，退回所有分支流程。
+        /// </summary>
         protected void ProcessExecuteBusinessData()
         {
 
@@ -421,7 +430,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     tempRPT = _rpt;
                     ExceptionHelper.TrueThrow(_rpt == null, string.Format("cannot find the report data which id={0}", BusinessID));
 
-                    //工作流状态
+                    //工作流状态，如果合并审批退回，退回所有分支流程
                     WorkFlowStatus(_rpt, true);
 
                     //针对退回，单独做了处理
@@ -655,7 +664,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         }
 
         /// <summary>
-        /// 记录工作流状态
+        /// 记录工作流状态,针对退回特殊处理
         /// </summary>
         /// <param name="rpt"></param>
         /// <param name="IsProType">是否是批次</param>

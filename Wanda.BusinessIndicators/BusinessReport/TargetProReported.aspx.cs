@@ -289,8 +289,6 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             {
 
                 #region 没有包含在批次里系统
-
-
                 if (string.IsNullOrEmpty(Request["BusinessID"])) //正常上报
                 {
                     //添加月报说明

@@ -223,7 +223,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         return;
                     }
 
-                    if (excel.GetStringCustomProperty(book.Worksheets[j], "SystemBatchID") != CurrentRpt._SystemBatchID.ToString())
+                    if (excel.GetStringCustomProperty(book.Worksheets[j], "AreaID") != CurrentRpt.AreaID.ToString())
                     {
                         error = "请下载当前大区的模板！";
                         return;
