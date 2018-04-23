@@ -136,19 +136,19 @@ namespace LJTH.BusinessIndicators.DAL
         /// <param name="Year"></param>
         /// <param name="Month"></param>
         /// <returns></returns>
-        public B_MonthlyReport GetMonthlyReportDraftList(Guid SystemID, Guid SystemBatchID, int Year, int Month)
+        public B_MonthlyReport GetMonthlyReportDraftList(Guid SystemID, Guid AreaID, int Year, int Month)
         {
             string sql = ORMapping.GetSelectSql<B_MonthlyReport>(TSqlBuilder.Instance);
 
             sql += "WHERE " + base.NotDeleted;
-            sql += " AND SystemID=@SystemID AND SystemBatchID=@SystemBatchID AND FinYear=@Year AND FinMonth=@Month AND WFStatus='Draft' ";
+            sql += " AND SystemID=@SystemID AND AreaID=@AreaID AND FinYear=@Year AND FinMonth=@Month AND WFStatus='Draft' ";
             sql += " ORDER BY CreateTime DESC";
 
             SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
-            SqlParameter pSystemBatchID = CreateSqlParameter("@SystemBatchID", System.Data.DbType.Guid, SystemBatchID);
+            SqlParameter pAreaID = CreateSqlParameter("@AreaID", System.Data.DbType.Guid, AreaID);
             SqlParameter pYear = CreateSqlParameter("@Year", System.Data.DbType.String, Year);
             SqlParameter pMonth = CreateSqlParameter("@Month", System.Data.DbType.String, Month);
-            List<B_MonthlyReport> list = ExecuteQuery(sql, pSystemID, pSystemBatchID, pYear, pMonth);
+            List<B_MonthlyReport> list = ExecuteQuery(sql, pSystemID, pAreaID, pYear, pMonth);
             return (list != null && list.Count > 0) ? list.FirstOrDefault() : null;
         }
 
@@ -251,20 +251,20 @@ namespace LJTH.BusinessIndicators.DAL
         /// <param name="Month">月</param>
         /// <param name="MonthlyReportID">月报ID</param>
         /// <returns></returns>
-        public B_MonthlyReport GetLatestMonthlyReport(Guid SystemID, Guid SystemBatchID, int Year, int Month, Guid MonthlyReportID)
+        public B_MonthlyReport GetLatestMonthlyReport(Guid SystemID, Guid AreaID, int Year, int Month, Guid MonthlyReportID)
         {
             string sql = ORMapping.GetSelectSql<B_MonthlyReport>(TSqlBuilder.Instance);
 
             sql += "WHERE " + base.NotDeleted;
-            sql += " AND SystemID=@SystemID AND SystemBatchID=@SystemBatchID AND FinYear=@Year AND FinMonth=@Month AND ID not in(@MonthlyReportID) AND (WFStatus ='Progress' or  WFStatus ='Approved')";
+            sql += " AND SystemID=@SystemID AND AreaID=@AreaID AND FinYear=@Year AND FinMonth=@Month AND ID not in(@MonthlyReportID) AND (WFStatus ='Progress' or  WFStatus ='Approved')";
             sql += " ORDER BY CreateTime DESC";
 
             SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
-            SqlParameter pSystemBatchID = CreateSqlParameter("@SystemBatchID", System.Data.DbType.Guid, SystemBatchID);
+            SqlParameter pAreaID = CreateSqlParameter("@AreaID", System.Data.DbType.Guid, AreaID);
             SqlParameter pYear = CreateSqlParameter("@Year", System.Data.DbType.String, Year);
             SqlParameter pMonth = CreateSqlParameter("@Month", System.Data.DbType.String, Month);
             SqlParameter pMonthlyReportID = CreateSqlParameter("@MonthlyReportID", System.Data.DbType.Guid, MonthlyReportID);
-            List<B_MonthlyReport> list = ExecuteQuery(sql, pSystemID, pSystemBatchID, pYear, pMonth, pMonthlyReportID);
+            List<B_MonthlyReport> list = ExecuteQuery(sql, pSystemID, pAreaID, pYear, pMonth, pMonthlyReportID);
 
             return (list != null && list.Count > 0) ? list.FirstOrDefault() : null;
         }

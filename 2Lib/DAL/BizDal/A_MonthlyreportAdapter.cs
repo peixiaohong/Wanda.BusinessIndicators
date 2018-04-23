@@ -42,16 +42,16 @@ namespace LJTH.BusinessIndicators.DAL
         }
 
 
-        public A_MonthlyReport GetLatestAMonthlyReport(Guid SystemID, Guid SystemBatchID, int Year, int Month)
+        public A_MonthlyReport GetLatestAMonthlyReport(Guid SystemID, Guid AreaID, int Year, int Month)
         {
             string sql = ORMapping.GetSelectSql<A_MonthlyReport>(TSqlBuilder.Instance);
 
             sql += "WHERE " + base.NotDeleted;
-            sql += " AND SystemID=@SystemID AND SystemBatchID=@SystemBatchID AND FinYear=@Year AND FinMonth=@Month";
+            sql += " AND SystemID=@SystemID AND AreaID=@AreaID AND FinYear=@Year AND FinMonth=@Month";
             sql += " ORDER BY CreateTime DESC";
 
             SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
-            SqlParameter pSystemBatchID = CreateSqlParameter("@SystemBatchID", System.Data.DbType.Guid, SystemBatchID);
+            SqlParameter pSystemBatchID = CreateSqlParameter("@AreaID", System.Data.DbType.Guid, AreaID);
             SqlParameter pYear = CreateSqlParameter("@Year", System.Data.DbType.String, Year);
             SqlParameter pMonth = CreateSqlParameter("@Month", System.Data.DbType.String, Month);
             List<A_MonthlyReport> list = ExecuteQuery(sql, pSystemID, pSystemBatchID, pYear, pMonth);

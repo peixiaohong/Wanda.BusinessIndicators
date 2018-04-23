@@ -1,6 +1,7 @@
 ﻿using System;
 using Lib.Core;
 using System.Text;
+using System.Collections.Generic;
 
 namespace Lib.Data
 {
@@ -24,19 +25,19 @@ namespace Lib.Data
 
             foreach (SqlClauseBuilderItemIUW item in List)
             {
-                if (item.Data != null && item.Data != DBNull.Value )
+                if (item.Data != null && item.Data != DBNull.Value)
                 {
-                    if(item.Data.ToString() !="00000000-0000-0000-0000-000000000000" || item.DataField== "SystemBatchID")
+                    if (item.Data.ToString() != "00000000-0000-0000-0000-000000000000" || new List<string> { "SystemBatchID", "AreaID" }.Contains(item.DataField))
                     {
-                    if (strBFields.Length > 0)
-                        strBFields.Append(", ");
+                        if (strBFields.Length > 0)
+                            strBFields.Append(", ");
 
-                    strBFields.Append(item.DataField);
+                        strBFields.Append(item.DataField);
 
-                    if (strBValues.Length > 0)
-                        strBValues.Append(", ");
+                        if (strBValues.Length > 0)
+                            strBValues.Append(", ");
 
-                    strBValues.Append(item.GetDataDesp(sqlBuilder));
+                        strBValues.Append(item.GetDataDesp(sqlBuilder));
                     }
                 }
             }

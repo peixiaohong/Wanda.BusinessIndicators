@@ -109,13 +109,13 @@ namespace LJTH.BusinessIndicators.BLL
         /// <param name="Year"></param>
         /// <param name="Month"></param>
         /// <returns></returns>
-        public B_MonthlyReport GetMonthlyReportDraft(Guid SystemID,Guid SystemBatchID, int Year, int Month)
+        public B_MonthlyReport GetMonthlyReportDraft(Guid SystemID,Guid AreaID, int Year, int Month)
         {
             ExceptionHelper.TrueThrow<ArgumentNullException>(SystemID == null ? true : false, "Argument SystemID is Empty");
-            ExceptionHelper.TrueThrow<ArgumentNullException>(SystemBatchID == null ? true : false, "Argument SystemID is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(AreaID == null ? true : false, "Argument SystemID is Empty");
             ExceptionHelper.TrueThrow<ArgumentNullException>(Year <= 0 ? true : false, "Argument Year is Empty");
             ExceptionHelper.TrueThrow<ArgumentNullException>(Month <= 0 ? true : false, "Argument Month is Empty");
-            return _bMonthlyreportAdapter.GetMonthlyReportDraftList(SystemID, SystemBatchID, Year, Month);
+            return _bMonthlyreportAdapter.GetMonthlyReportDraftList(SystemID, AreaID, Year, Month);
         }
 
         /// <summary>
@@ -174,14 +174,14 @@ namespace LJTH.BusinessIndicators.BLL
         /// <param name="Month"></param>
         /// <param name="MonthlyReportID"></param>
         /// <returns></returns>
-        public B_MonthlyReport GetMonthlyReport(Guid SystemID,Guid SystemBatchID, int Year, int Month, Guid MonthlyReportID)
+        public B_MonthlyReport GetMonthlyReport(Guid SystemID,Guid AreaID, int Year, int Month, Guid MonthlyReportID)
         {
             ExceptionHelper.TrueThrow<ArgumentNullException>(SystemID == null ? true : false, "Argument SystemID is Empty");
-            ExceptionHelper.TrueThrow<ArgumentNullException>(SystemBatchID == null ? true : false, "Argument SystemID is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(AreaID == null ? true : false, "Argument SystemID is Empty");
             ExceptionHelper.TrueThrow<ArgumentNullException>(Year <= 0 ? true : false, "Argument Year is Empty");
             ExceptionHelper.TrueThrow<ArgumentNullException>(Month <= 0 ? true : false, "Argument Month is Empty");
             ExceptionHelper.TrueThrow<ArgumentNullException>(MonthlyReportID == null ? true : false, "Argument MonthlyReportID is Empty");
-            return _bMonthlyreportAdapter.GetLatestMonthlyReport(SystemID, SystemBatchID, Year, Month, MonthlyReportID);
+            return _bMonthlyreportAdapter.GetLatestMonthlyReport(SystemID, AreaID, Year, Month, MonthlyReportID);
         }
         /// <summary>
         ///获取最新的数据(审批中和审批完成)

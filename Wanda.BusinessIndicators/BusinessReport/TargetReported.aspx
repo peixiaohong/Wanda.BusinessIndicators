@@ -22,7 +22,7 @@
     <div class="main">
         <div class="form_name mb8 form_name_build" style="border-bottom-color: #ececec; text-align: center; border-bottom-style: solid;">
             <asp:DropDownList ID="ddlSystem" ClientIDMode="Static" AutoPostBack="true" OnTextChanged="ddlSystem_TextChanged" runat="server" Style="width: 150px; height: 25px;"></asp:DropDownList>
-            <asp:DropDownList ID="ddlSystemBatchID" ClientIDMode="Static" AutoPostBack="true" OnTextChanged="ddlSystemBatchID_TextChanged" runat="server" Style="width: 150px; height: 25px;"></asp:DropDownList>
+            <asp:DropDownList ID="ddlAreaID" ClientIDMode="Static" AutoPostBack="true" OnTextChanged="ddlAreaID_TextChanged" runat="server" Style="width: 150px; height: 25px;"></asp:DropDownList>
             <asp:Label ID="lblName" Style="font-size: 18px; text-indent: 3px; height: 26px; line-height: 26px; border: none; width: 200px;" runat="server" Text="月度经营报告上报 "></asp:Label>
             <asp:HiddenField runat="server" ID="hideMonthReportID" ClientIDMode="Static" />
             <asp:HiddenField runat="server" ID="HidSystemText" ClientIDMode="Static" />
@@ -200,7 +200,7 @@
 
         
         <input type="text" class="TClassHide" id="HidSystemID" runat="server" />
-        <input type="text" class="TClassHide" id="HidSystemBatchID" runat="server" />
+        <input type="text" class="TClassHide" id="HidAreaID" runat="server" />
     </div>
 
 
