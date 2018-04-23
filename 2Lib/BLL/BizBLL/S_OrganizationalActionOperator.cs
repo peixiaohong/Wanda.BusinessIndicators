@@ -141,6 +141,18 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         {
             return _s_OrganizationalAdapter.GetUserRegional(systemID, loginName);
         }
+
+        /// <summary>
+        /// 根据板块ID，获取所有有效的组织架构信息
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetAllDataBySystemID(Guid systemID)
+        {
+            return _s_OrganizationalAdapter.GetAllDataBySystemID(systemID);
+        }
+
         #endregion
     }
 }

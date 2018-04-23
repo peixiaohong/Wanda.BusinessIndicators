@@ -36,7 +36,7 @@ namespace LJTH.BusinessIndicators.Engine
         /// <param name="strOrderType">排序字段：在经营系统中用到，在项目系统中被当作IsPlan字段来用</param>
         /// <param name="IncludeHaveDetail">是否包含明细：在经营系统中用到，在项目系统中被当作IsLatestVersion用</param>
         /// <returns></returns>
-        List<DictionaryVmodel> GetManageDetailRptDataSource(ReportInstance RptModel, string strCompanyProperty, string strOrderType, bool IncludeHaveDetail);
+        List<DictionaryVmodel> GetManageDetailRptDataSource(ReportInstance RptModel, string strCompanyProperty, string strOrderType, bool IncludeHaveDetail,string currentLoginName);
     }
     /// <summary>
     /// 月报说明接口

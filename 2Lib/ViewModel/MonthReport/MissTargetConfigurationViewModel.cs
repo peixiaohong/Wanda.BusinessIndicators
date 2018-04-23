@@ -260,6 +260,8 @@ namespace LJTH.BusinessIndicators.ViewModel
         public int Senquence { get; set; }
         //是否包含区域
         public bool IsHaveArea { get; set; }
+        //区域层级
+        public int Level { get; set; }
     }
 
     public class TargetMonthlyReportDetail

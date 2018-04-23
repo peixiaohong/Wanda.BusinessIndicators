@@ -32,6 +32,24 @@ namespace LJTH.BusinessIndicators.Engine
             DataSource = _DataSource;
             InitialData(IsLatestVersion);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="SystemID"></param>
+        /// <param name="Year"></param>
+        /// <param name="Month"></param>
+        /// <param name="IsLatestVersion">是否是最新的版本，true：从B表中获取，false：从A表中获取 </param>
+        /// <param name="_DataSource">当从B表中获取时，这里有Draft：草稿状态， 或者是审批中状态 </param>
+        /// <param name="_DataSource">当从B表中获取时，这里有Draft：草稿状态， 或者是审批中状态 </param>
+        public ReportInstance(Guid SystemID, int Year, int Month, string currentLoginName, bool IsLatestVersion = false, string _DataSource = "Draft")
+        {
+            _SystemID = SystemID;
+            FinYear = Year;
+            FinMonth = Month;
+            DataSource = _DataSource;
+            CurrentLoginName = currentLoginName;
+            InitialData(IsLatestVersion);
+        }
 
 
 
@@ -54,6 +72,7 @@ namespace LJTH.BusinessIndicators.Engine
         }
 
         private string DataSource = string.Empty;
+        public string CurrentLoginName { get; set; }
 
         public Guid _SystemID { get; set; }
         public int FinYear { get; set; }
@@ -195,6 +214,17 @@ namespace LJTH.BusinessIndicators.Engine
                 ReportDetails = A_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Result(_System.ID, FinYear, FinMonth);
 
                 //ValidatedMonthlyReportDetails.ForEach(P => ReportDetails.Add(P.ToVModel()));
+            }
+
+            //筛选当前用户有权限的项目公司信息(因为权限数据缺失暂时注释)
+            var companyIDArray = BLL.BizBLL.S_OrganizationalActionOperator.Instance.GetUserCompanyData(_System.ID, CurrentLoginName).Select(m => m.ID).ToArray();
+            if (companyIDArray.Length > 0)
+            {
+                ReportDetails = ReportDetails.Where(m => companyIDArray.Contains(m.CompanyID)).ToList();
+            }
+            else
+            {
+                ReportDetails = new List<MonthlyReportDetail>();
             }
         }
         #endregion Private Method

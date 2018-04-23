@@ -46,10 +46,29 @@ namespace LJTH.BusinessIndicators.Engine
             List<B_Attachment> listAtt = GetListAtt(_System.ID);
             List<DictionaryVmodel> listMonthReportSummary = new List<DictionaryVmodel>();
             string strReportDescription = "";
-            if (Report != null)
+            #region 月报说明
+            if (RptModel.ReportDetails.Any())
             {
-                strReportDescription = Report.Description;
+                XElement element = _System.Configuration;
+                if (element.Elements("Report").Elements("Rgroup") != null)
+                {
+                    strReportDescription = element.Element("Report").GetElementValue("Rgroup", "");
+                    if (!string.IsNullOrEmpty(strReportDescription))
+                    {
+                        System.Collections.Hashtable p = MonthDescriptionValueEngine.MonthDescriptionValueService.GetMonthDescriptionValue(RptModel.ReportDetails, _System.ID);
+                        foreach (string key in p.Keys)
+                        {
+                            strReportDescription = strReportDescription.Replace("【" + key + "】", p[key].ToString());
+                        }
+                    }
+                }
             }
+            #endregion
+
+            //if (Report != null)
+            //{
+            //    strReportDescription = Report.Description;
+            //}
             listMonthReportSummary.Add(new DictionaryVmodel("ReportInstance", RptModel));
             listMonthReportSummary.Add(new DictionaryVmodel("月报说明", strReportDescription));
             listMonthReportSummary.Add(new DictionaryVmodel("月度经营报告", listMRSVM, "", GetSummaryMonthlyReportHtmlTemplate(_System.Configuration)));

@@ -11,7 +11,8 @@ using LJTH.BusinessIndicators.ViewModel;
 using Lib.Xml;
 using Lib.Expression;
 using System.Collections;
-
+using LJTH.BusinessIndicators.ViewModel.Common;
+using LJTH.BusinessIndicators.Model.BizModel;
 
 namespace LJTH.BusinessIndicators.Engine
 {
@@ -21,6 +22,7 @@ namespace LJTH.BusinessIndicators.Engine
         string strMonthReportOrderType;
         string strCompanyPropertys = "";
         bool IncludeHaveDetail = true;
+        string CurrentLoginName = string.Empty;
 
         List<MonthlyReportDetail> ReportDetails = new List<MonthlyReportDetail>();
         int FinMonth = 0;
@@ -28,7 +30,7 @@ namespace LJTH.BusinessIndicators.Engine
         C_System _System = null;
         List<C_Target> _Target = null;
 
-        public List<DictionaryVmodel> GetManageDetailRptDataSource(ReportInstance RptModel, string strCompanyProperty, string strOrderType, bool IncludeHaveDetail)
+        public List<DictionaryVmodel> GetManageDetailRptDataSource(ReportInstance RptModel, string strCompanyProperty, string strOrderType, bool IncludeHaveDetail,string currentLoginName)
         {
             _System = RptModel._System;
             FinMonth = RptModel.FinMonth;
@@ -37,7 +39,7 @@ namespace LJTH.BusinessIndicators.Engine
             ReportDetails = RptModel.ReportDetails;
             this.IncludeHaveDetail = IncludeHaveDetail;
             strMonthReportOrderType = strOrderType;
-
+            CurrentLoginName = currentLoginName;
             //这里strCompanyProperty参数，不仅是公司属性，同时也是判断：调用的来源(strCompanyProperty=="Reported"),表示是从上报页面调用，反之不是则是从查询页面调用的
             if (!string.IsNullOrEmpty(strCompanyProperty))
             {
@@ -86,7 +88,8 @@ namespace LJTH.BusinessIndicators.Engine
         /// <returns>ViewModel</returns>
         private List<DictionaryVmodel> FromatData(List<VTarget> lstVTarget, List<VItemCompanyProperty> lstVCompanyProperty)
         {
-            List<C_Company> listCompany = SearchCompanyData();//根据条件获取公司
+
+            List<S_Organizational> listOrganizational = StaticResource.Instance.GetAllDataBySystemID(_System.ID);//根据条件获取有效的组织架构信息（含区域和项目）
             List<DictionaryVmodel> listDictionaryVModel = new List<DictionaryVmodel>();
             List<DictionaryVmodel> ItemCompanyPropertyViewModel = null;
             List<C_Target> listTempC_target = _Target;
@@ -108,52 +111,11 @@ namespace LJTH.BusinessIndicators.Engine
                     //根据当前指标获取数据
                     List<MonthlyReportDetail> listm = ReportDetails.Where(p => p.TargetID == CurrentTarget.ID && (p.Display == true)).ToList();
 
-                    //判断是否是明细项考核数据
-                    if (CurrentTarget.HaveDetail == true && CurrentTarget.NeedEvaluation == true)
-                    {
-                        //判断当前指标是否存在分组，如果存在使用指标中的分组，否则使用系统的分组。
-                        if (SpliteCompanyPropertyXml("List", CurrentTarget.Configuration).Count > 0)
-                        {
-                            lstVCompanyProperty = SpliteCompanyPropertyXml("List", CurrentTarget.Configuration)[0].listCP.ToList();
-                        }
-                        if (lstVCompanyProperty != null)
-                        {
-                            foreach (VItemCompanyProperty vcp in lstVCompanyProperty)
-                            {
-                                //根据分组筛选出公司
-                                List<C_Company> lstCompany = listCompany.Where(p => p.CompanyProperty1 == vcp.ItemCompanyPropertyValue).ToList();
-                                //根据筛选出的公司筛选数据
-                                List<MonthlyReportDetail> listCompanyPertyMRD = SetMonthlyReportDetail(listm, lstCompany);
-                                listMRD.AddRange(listCompanyPertyMRD);
-                                //如果当前分组没有数据，则跳出当前循环。
-                                if (listCompanyPertyMRD.Count == 0)
-                                {
-                                    continue;
-                                }
-                                ItemCompanyPropertyViewModel.Add(new DictionaryVmodel(vcp.ItemCompanyPropertyName, EditData(listCompanyPertyMRD, vtarget, listC_target[0], listCompany, vcp), "CompanyProperty"));
 
-                            }
-                            //把当前分组制空，以便于下个指标分组
-                            if (SpliteCompanyPropertyXml("List", CurrentTarget.Configuration).Count > 0)
-                            {
-                                lstVCompanyProperty = null;
-                            }
-                        }
-                        else
-                        {
-                            //根据公司筛选数据
-                            listMRD = SetMonthlyReportDetail(listm, listCompany);
-                            ItemCompanyPropertyViewModel.Add(new DictionaryVmodel("", EditData(listMRD, vtarget, listC_target[0], listCompany, null), "CompanyProperty"));
-                        }
-                    }
-                    else
-                    {
-                        //根据公司筛选数据
-                        listMRD = SetMonthlyReportDetail(listm, listCompany);
-                        listMRD = SequenceEngine.SequenceService.GetSequence(_System.ID, strMonthReportOrderType, listMRD, null); //strMonthReportOrderType这是个参数前台传递过来
+                    //根据公司筛选数据
+                    listMRD = SetMonthlyReportDetail(listm, listOrganizational);
+                    ItemCompanyPropertyViewModel.Add(new DictionaryVmodel("", EditData(listMRD, vtarget, listC_target[0], listOrganizational, null), "CompanyProperty"));
 
-                        ItemCompanyPropertyViewModel.Add(new DictionaryVmodel("HaveDetail", listMRD, "Counter"));
-                    }
                     ItemCompanyPropertyViewModel.Add(new DictionaryVmodel("SummaryData", GetSummaryDate(listMRD, listC_target[0]), "Counter"));
 
                     #region 判断当前指标是否存在自己的表头、Tmpl模板、Excle模板
@@ -220,13 +182,11 @@ namespace LJTH.BusinessIndicators.Engine
         /// <param name="vt">指标项</param>
         /// <returns></returns>
 
-        private List<DictionaryVmodel> EditData(List<MonthlyReportDetail> listMRD, VTarget vt, C_Target CTarget, List<C_Company> listCompany, VItemCompanyProperty vcp)
+        private List<DictionaryVmodel> EditData(List<MonthlyReportDetail> listMRD, VTarget vt, C_Target CTarget, List<S_Organizational> listOrganizational, VItemCompanyProperty vcp)
         {
             #region 声明变量
             List<DictionaryVmodel> lstDVM = new List<DictionaryVmodel>();
             List<MonthlyReportDetail> VCounterListMonthlyReportDetailViewModel = null;
-            ExpressionParser _parser = null;
-            int rowSpanCount = 0;
             B_MonthlyReportDetail bmrd = null;
             List<VCounter> listVCounter = null;
             #endregion
@@ -242,103 +202,131 @@ namespace LJTH.BusinessIndicators.Engine
                 listVCounter = vt.CounterList;
             }
 
-            if (vcp != null)
+            //对项目公司数据按照区域分组获取区域信息
+            var areaList = listMRD.GroupBy(m => new { m.AreaID, m.AreaName,m.AreaLevel }).Select(n => new
             {
-                if (vcp.IsHideCounter)
-                {
-                    List<VCounter> lstVC = new List<VCounter>();
-                    VCounter vc = new VCounter();
-                    vc.Expression = "";
-                    vc.TextExpression = "";
-                    string senquence = "0";
-                    int t = 10000;
-                    int.TryParse(senquence, out t);
-                    vc.Senquence = t;
-                    vc.Title = vcp.ItemCompanyPropertyName;
-                    vc.Display = "true";
-                    vc.HaveDetail = "false";
-                    vc.DetailMonthlyExpression = "1==1";
-                    vc.DetailExpression = "1==1";
-                    vc.DetailExpression = "";
-                    lstVC.Add(vc);
-                    listVCounter = lstVC;
-                }
-            }
-
-            for (int i = 0; listVCounter.Count > i; i++)
+                AreaID = n.Key.AreaID,
+                AreaName = n.Key.AreaName,
+                AreaLevel = n.Key.AreaLevel,
+                Count = n.Count()
+            });
+            //从项目汇总到上一级区域
+            foreach (var item in areaList)
             {
                 DictionaryVmodel dv = dv = new DictionaryVmodel();
                 VCounterListMonthlyReportDetailViewModel = new List<MonthlyReportDetail>();
-                foreach (MonthlyReportDetail mrd in listMRD)
-                {
 
-                    Hashtable bizContext = BizContextEngine.BizContextService.GetBizContext(listMRD.FindAll(p => p.CompanyID == mrd.CompanyID), "MonthlyReportDetail");
-                    _parser = new ExpressionParser(bizContext);
-                    //区分月累计算式与年累计算式。
-                    string Expression = strMonthReportOrderType == "DetailMonthly" ? listVCounter.ToList()[i].DetailMonthlyExpression : listVCounter.ToList()[i].DetailExpression;
-                    if (_parser.CacluateCondition(Expression))
-                    {
-                        VCounterListMonthlyReportDetailViewModel.Add(mrd);
-                    }
-                }
-                //明细项数据排序
-                VCounterListMonthlyReportDetailViewModel = SequenceEngine.SequenceService.GetSequence(_System.ID, strMonthReportOrderType, VCounterListMonthlyReportDetailViewModel);
-                dv.Name = listVCounter.ToList()[i].Title;
-
-                //判断是否隐藏Counter明细项中数据
-                if (listVCounter[i].Display.ToLower() == "true")
-                {
-                    dv.Mark = "DetailShow";
-                    //计算隐藏的行数
-                    rowSpanCount = rowSpanCount + VCounterListMonthlyReportDetailViewModel.Count;
-                }
-                else
-                {
-
-                    dv.Mark = "DetailHide";
-                }
-                //判断Counter明细项中是否存在该数据。
-                if (listVCounter[i].HaveDetail.ToLower() == "false")
-                {
-                    dv.Mark = "DetailDelete";
-                }
-                //判断是否存在公司属性
-                if (vcp != null && i == 0)
-                {
-                    if (!vcp.IsHideCounter)
-                    {
-                        dv.Value = vcp.ItemCompanyPropertyName;
-                        dv.RowSpanCount = 0;
-                    }
-                }
-
-
-                #region 计算明细项项合计和小计
-
-                if (listVCounter.ToList()[i].Title != "小计" || listVCounter.ToList()[i].IsSummaryDetail.ToLower() == "true")
-                {
-                    bmrd = SummaryData(VCounterListMonthlyReportDetailViewModel, bmrd, CTarget);
-                }
-                else
-                {
-                    bmrd = SummaryData(listMRD, bmrd, CTarget);
-                }
-                #endregion
-
+                var currentAreaMrd = listMRD.Where(m => m.AreaID == item.AreaID).ToList();
+                dv.Name = item.AreaName;
+                dv.Mark = "LastArea";
+                bmrd = SummaryData(currentAreaMrd, dv.BMonthReportDetail, CTarget);
                 //调用计算完成率的方法
                 bmrd = TargetEvaluationEngine.TargetEvaluationService.Calculation(bmrd, false);
                 dv.BMonthReportDetail = bmrd;
-                dv.ObjValue = VCounterListMonthlyReportDetailViewModel;
+
+                //明细项数据排序
+                VCounterListMonthlyReportDetailViewModel = SequenceEngine.SequenceService.GetSequence(_System.ID, strMonthReportOrderType, currentAreaMrd);
+
+                dv.ObjValue = VCounterListMonthlyReportDetailViewModel;// EditDataChild(listMRD, CTarget, item.Nodes, ref dvList, ref br);
+                dv.RowSpanCount = VCounterListMonthlyReportDetailViewModel.Count;
+                //大于3表示当前区域上面还存在区域（level=1 组织架构顶级 level=2 板块）
+                if (item.AreaLevel > 3)
+                {
+                    //获取当前区域信息
+                    var currentAreaList = listOrganizational.Where(m => m.ID == item.AreaID).ToList();
+                    if (currentAreaList.Any() && currentAreaList.FirstOrDefault().ParentID != Guid.Empty)
+                    {
+                        //获取当前区域父级区域信息
+                        var parentArea = listOrganizational.Where(m => m.ID == currentAreaList.FirstOrDefault().ParentID);
+                        dv.Value = parentArea.FirstOrDefault().CnName.ToString();
+                        dv.GuoupID = parentArea.FirstOrDefault().ID.ToString();
+                        dv.Level = parentArea.FirstOrDefault().Level;
+                    }
+                }
                 lstDVM.Add(dv);
             }
-            //计算页面要通行数
-            if (vcp != null && lstDVM.Count() > 0)
+
+            //表示存在父级区域
+            if (lstDVM.Any() && !string.IsNullOrEmpty(lstDVM.FirstOrDefault().GuoupID))
             {
-                lstDVM[0].RowSpanCount = rowSpanCount + listVCounter.ToList().Count;
+                //最后一级区域的上面的所有区域信息
+                List<DictionaryVmodel> resultDVM = new List<DictionaryVmodel>();
+                resultDVM = EditDataParent(lstDVM, CTarget, listOrganizational);
+                return resultDVM;
+            }
+            else
+            {
+                return lstDVM;
             }
             #endregion
+        }
+        /// <summary>
+        /// 获取区域汇总信息
+        /// </summary>
+        /// <param name="listMRD"></param>
+        /// <param name="ChildDataPermissions"></param>
+        /// <returns></returns>
+        private  List<DictionaryVmodel> EditDataParent(List<DictionaryVmodel> dvList, C_Target CTarget, List<S_Organizational> listOrganizational)
+        {
+            #region 声明变量
+            List<DictionaryVmodel> lstDVM = new List<DictionaryVmodel>();
+            B_MonthlyReportDetail bmrd = null;
+            #endregion
+            
+            //对区域数据分组获取大区信息
+            var areaList = dvList.GroupBy(m => new { m.GuoupID, m.Value, m.Level }).Select(n => new
+            {
+                AreaID = n.Key.GuoupID,
+                AreaName = n.Key.Value,
+                Level = n.Key.Level,
+                Count = n.Count()
+            });
+            //大区
+            foreach (var item in areaList)
+            {
+                List<DictionaryVmodel> currentDVListGroup = dvList.Where(m => m.GuoupID == item.AreaID).ToList();
 
-            return lstDVM;
+                DictionaryVmodel dv =new DictionaryVmodel();
+
+                dv.Name = item.AreaName;
+                dv.Mark = "Area";
+                bmrd = SummaryAreaData(currentDVListGroup, dv.BMonthReportDetail, CTarget);
+                bmrd = TargetEvaluationEngine.TargetEvaluationService.Calculation(bmrd, false);
+                dv.BMonthReportDetail = bmrd;
+                dv.RowSpanCount = currentDVListGroup.Count;
+                dv.ObjValue = currentDVListGroup;
+
+                //大于3表示当前区域上面还存在区域（level=1 组织架构顶级 level=2 板块）
+                if (item.Level > 3)
+                {
+                    //获取当前区域信息
+                    var currentAreaList = listOrganizational.Where(m => m.ID == Guid.Parse(item.AreaID)).ToList();
+                    if (currentAreaList.Any() && currentAreaList.FirstOrDefault().ParentID != Guid.Empty)
+                    {
+                        //获取当前区域父级区域信息
+                        var parentArea = listOrganizational.Where(m => m.ID == currentAreaList.FirstOrDefault().ParentID);
+                        dv.Value = parentArea.FirstOrDefault().CnName.ToString();
+                        dv.GuoupID = parentArea.FirstOrDefault().ID.ToString();
+                        dv.Level = parentArea.FirstOrDefault().Level;
+                    }
+                }
+                lstDVM.Add(dv);
+            }
+
+            //表示存在父级区域
+            if (lstDVM.Any() && !string.IsNullOrEmpty(lstDVM.FirstOrDefault().GuoupID))
+            {
+                //最后一级区域的上面的所有区域信息
+                List<DictionaryVmodel> resultDVM = new List<DictionaryVmodel>();
+
+                resultDVM = EditDataParent(lstDVM, CTarget, listOrganizational);
+
+                return resultDVM;
+            }
+            else
+            {
+                return lstDVM;
+            }
         }
 
         /// <summary>
@@ -393,9 +381,65 @@ namespace LJTH.BusinessIndicators.Engine
 
                 bmrd.ODifference = bmrd.NDifference = listData.Where(p => p.NDifference <= 0).Sum(p => p.NDifference);
             }
+            return bmrd;
+        }
 
+        /// <summary>
+        /// 计算区域明细项项合计
+        /// </summary>
+        /// <param name="listData"></param>
+        /// <param name="bmrd"></param>
+        /// <param name="CTarget"></param>
+        /// <returns></returns>
+        private B_MonthlyReportDetail SummaryAreaData(List<DictionaryVmodel> dvList, B_MonthlyReportDetail bmrd, C_Target CTarget)
+        {
+            //特殊处理差额，针对指标
+            XElement element = null;
+            element = CTarget.Configuration;
+            XElement subElement = null;
+            List<B_MonthlyReportDetail> listData = new List<B_MonthlyReportDetail>();
+            bool IsDifferenceException = false;
 
+            if (element.Elements("IsDifferenceExceptionTarget").ToList().Count > 0)
+            {
+                subElement = element.Elements("IsDifferenceExceptionTarget").ToList()[0];
+                IsDifferenceException = subElement.GetAttributeValue("value", false);
+            }
+            foreach (var item in dvList)
+            {
+                listData.Add(item.BMonthReportDetail);
+            }
 
+            bmrd = new B_MonthlyReportDetail();
+            bmrd.ID = Guid.NewGuid();
+            bmrd.SystemID = _System.ID;
+            bmrd.FinYear = FinYear;
+            bmrd.FinMonth = FinMonth;
+            bmrd.TargetID = CTarget.ID;
+            bmrd.NPlanAmmount = listData.Sum(p => p.NPlanAmmount);
+            bmrd.NActualAmmount = listData.Sum(p => p.NActualAmmount);
+            bmrd.NDifference = listData.Sum(p => p.NDifference);
+            bmrd.NAccumulativePlanAmmount = listData.Sum(p => p.NAccumulativePlanAmmount);
+            bmrd.NAccumulativeActualAmmount = listData.Sum(p => p.NAccumulativeActualAmmount);
+            bmrd.NAccumulativeDifference = listData.Sum(p => p.NAccumulativeDifference);
+            bmrd.NPlanAmmountByYear = listData.Sum(p => p.NPlanAmmountByYear);
+            if (bmrd.NPlanAmmountByYear != 0)
+            {
+                bmrd.NDisplayRateByYear = Math.Round((bmrd.NAccumulativeActualAmmount / bmrd.NPlanAmmountByYear), 5, MidpointRounding.AwayFromZero).ToString("P1");
+            }
+            else
+            {
+                bmrd.NDisplayRateByYear = "--";
+            }
+            if (IsDifferenceException) //异常
+            {
+                List<B_MonthlyReportDetail> aa = listData.Where(p => p.NAccumulativeDifference < 0).ToList();
+
+                //差额异常指标
+                bmrd.OAccumulativeDifference = bmrd.NAccumulativeDifference = aa.Sum(p => p.NAccumulativeDifference);
+
+                bmrd.ODifference = bmrd.NDifference = listData.Where(p => p.NDifference <= 0).Sum(p => p.NDifference);
+            }
             return bmrd;
         }
         /// <summary>
@@ -404,63 +448,24 @@ namespace LJTH.BusinessIndicators.Engine
         /// <param name="listm"></param>
         /// <param name="listCompany"></param>
         /// <returns></returns>
-        private List<MonthlyReportDetail> SetMonthlyReportDetail(List<MonthlyReportDetail> listm, List<C_Company> listCompany)
+        private List<MonthlyReportDetail> SetMonthlyReportDetail(List<MonthlyReportDetail> listm, List<S_Organizational> listOrganizational)
         {
 
-            listm = listm.Where(x => listCompany.Exists(c => c.ID == x.CompanyID)).ToList();
+            listm = listm.Where(x => listOrganizational.Exists(c => c.ID == x.CompanyID)).ToList();
 
             listm.ForEach(F =>
             {
-                F.Company = listCompany.Where(c => c.ID == F.CompanyID).FirstOrDefault();
+                F.AreaID = listOrganizational.Where(c => c.ID == F.CompanyID).FirstOrDefault().ParentID;
+                if (F.AreaID != Guid.Empty)
+                {
+                    var data = listOrganizational.Where(c => c.ID == F.AreaID).FirstOrDefault();
+                    F.AreaName = data.CnName;
+                    F.AreaLevel = data.Level;
+                }
             });
-
             return listm;
         }
-        /// <summary>
-        /// 根据查询条件找到公司
-        /// </summary>
-        /// <returns></returns>
-        private List<C_Company> SearchCompanyData()
-        {
-            List<C_Company> listCompany = StaticResource.Instance.CompanyList[_System.ID].ToList();
-            string[] strs = strCompanyPropertys.Split(';');
-            for (int i = 0; i < strs.Count(); i++)
-            {
-                if (!string.IsNullOrEmpty(strs[i]))
-                {
-                    string[] tempStrs = strs[i].Split(':');
-                    if (!string.IsNullOrEmpty(tempStrs[1]))
-                    {
-                        switch (tempStrs[0])
-                        {
-                            case "CompanyProperty1":
-                                listCompany = listCompany.Where(p => tempStrs[1].Contains(p.CompanyProperty1.Trim()) || p.CompanyProperty1 == null).ToList();
-                                break;
-                            case "CompanyProperty2":
-                                listCompany = listCompany.Where(p => tempStrs[1].Contains(p.CompanyProperty2.Trim()) || p.CompanyProperty2 == null).ToList();
-                                break;
-                            case "CompanyProperty3":
-                                listCompany = listCompany.Where(p => tempStrs[1].Contains(p.CompanyProperty3.Trim()) || p.CompanyProperty3 == null).ToList();
-                                break;
-                            case "CompanyProperty4":
-                                listCompany = listCompany.Where(p => tempStrs[1].Contains(p.CompanyProperty4.Trim()) || p.CompanyProperty4 == null).ToList();
-                                break;
-                            case "CompanyProperty5":
-                                listCompany = listCompany.Where(p => tempStrs[1].Contains(p.CompanyProperty5.Trim()) || p.CompanyProperty5 == null).ToList();
-                                break;
-                            case "CompanyProperty6":
-                                listCompany = listCompany.Where(p => tempStrs[1].Contains(p.CompanyProperty6.Trim()) || p.CompanyProperty6 == null).ToList();
-                                break;
-                            case "CompanyProperty7":
-                                listCompany = listCompany.Where(p => tempStrs[1].Contains(p.CompanyProperty7.Trim()) || p.CompanyProperty7 == null).ToList();
-                                break;
-                        }
-                    }
-
-                }
-            }
-            return listCompany;
-        }
+        
         /// <summary>
         /// 读取xml文件（ComplateTargetDetail.xml）
         /// </summary>

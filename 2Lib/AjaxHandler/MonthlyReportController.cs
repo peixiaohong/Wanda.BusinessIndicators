@@ -151,6 +151,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
 
             List<DictionaryVmodel> listSRDS = null;
 
+            string currentLoginName = base.CurrentUserName;
             if (!IsLatestVersion) // 是否从A表中获取数据
             {
                 //获取A表的数据
@@ -170,14 +171,14 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     }
                     else
                     {
-                        rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, IsLatestVersion, DataSource);
+                        rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, currentLoginName, IsLatestVersion, DataSource);
                         listSRDS = ReportInstanceSummaryEngine.ReportInstanceSummaryService.GetSummaryRptDataSource(rpt, false);
                         return listSRDS;
                     }
                 }
                 else {
 
-                    rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, IsLatestVersion, DataSource);
+                    rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, currentLoginName, IsLatestVersion, DataSource);
                     listSRDS = ReportInstanceSummaryEngine.ReportInstanceSummaryService.GetSummaryRptDataSource(rpt, false);
                     return listSRDS;
                 }
@@ -202,14 +203,14 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                         }
                         else
                         {
-                            rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, IsLatestVersion, DataSource);
+                            rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, currentLoginName, IsLatestVersion, DataSource);
                             listSRDS = ReportInstanceSummaryEngine.ReportInstanceSummaryService.GetSummaryRptDataSource(rpt, false);
                             return listSRDS;
                         }
                     }
                     else
                     {
-                        rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, IsLatestVersion, DataSource);
+                        rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, currentLoginName, IsLatestVersion, DataSource);
                         listSRDS = ReportInstanceSummaryEngine.ReportInstanceSummaryService.GetSummaryRptDataSource(rpt, false);
                         return listSRDS;
                     }
@@ -230,14 +231,14 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                         }
                         else
                         {
-                            rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, IsLatestVersion, DataSource);
+                            rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, currentLoginName, IsLatestVersion, DataSource);
                             listSRDS = ReportInstanceSummaryEngine.ReportInstanceSummaryService.GetSummaryRptDataSource(rpt, false);
                             return listSRDS;
                         }
                     }
                     else
                     {
-                        rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, IsLatestVersion, DataSource);
+                        rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, currentLoginName, IsLatestVersion, DataSource);
                         listSRDS = ReportInstanceSummaryEngine.ReportInstanceSummaryService.GetSummaryRptDataSource(rpt, false);
                         return listSRDS;
                     }
@@ -251,26 +252,27 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
 
         private List<DictionaryVmodel> GetJsonData(Guid MonthlyReportID)
         {
-            List<DictionaryVmodel> listSRDS = null;
+            return null;
+            //List<DictionaryVmodel> listSRDS = null;
 
-            B_MonthlyReportJsonData B_JsonData = new B_MonthlyReportJsonData();
+            //B_MonthlyReportJsonData B_JsonData = new B_MonthlyReportJsonData();
 
-            try
-            {
-                B_JsonData = B_MonthlyReportJsonDataOperator.Instance.GetMonthlyReportJsonData(MonthlyReportID);
-            }
-            catch (Exception)
-            {
-                B_JsonData = null;
-            }
+            //try
+            //{
+            //    B_JsonData = B_MonthlyReportJsonDataOperator.Instance.GetMonthlyReportJsonData(MonthlyReportID);
+            //}
+            //catch (Exception)
+            //{
+            //    B_JsonData = null;
+            //}
 
-            //获取 表中的JSon数据
-            if (B_JsonData != null && !string.IsNullOrEmpty( B_JsonData.QuerrySumJsonData))
-            {
-                listSRDS = JsonHelper.Deserialize<List<DictionaryVmodel>>(B_JsonData.QuerrySumJsonData);
-            }
+            ////获取 表中的JSon数据
+            //if (B_JsonData != null && !string.IsNullOrEmpty( B_JsonData.QuerrySumJsonData))
+            //{
+            //    listSRDS = JsonHelper.Deserialize<List<DictionaryVmodel>>(B_JsonData.QuerrySumJsonData);
+            //}
 
-            return listSRDS;
+            //return listSRDS;
         }
 
         /// <summary>
@@ -289,25 +291,25 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
 
             if (rpt._MonthReportID != Guid.Empty)
             {
-                B_MonthlyReportJsonData B_JsonData = new B_MonthlyReportJsonData();
-                try
-                {
-                    B_JsonData = B_MonthlyReportJsonDataOperator.Instance.GetMonthlyReportJsonData(rpt._MonthReportID);
-                }
-                catch (Exception)
-                {
-                    B_JsonData = null;
-                }
+                //B_MonthlyReportJsonData B_JsonData = new B_MonthlyReportJsonData();
+                //try
+                //{
+                //    B_JsonData = B_MonthlyReportJsonDataOperator.Instance.GetMonthlyReportJsonData(rpt._MonthReportID);
+                //}
+                //catch (Exception)
+                //{
+                //    B_JsonData = null;
+                //}
 
-                //获取 表中的JSon数据
-                if (B_JsonData != null && !string.IsNullOrEmpty(B_JsonData.QuerryDetaileJsonData) && strMonthReportOrderType == "Detail")
-                {
-                    AllData = JsonHelper.Deserialize<List<DictionaryVmodel>>(B_JsonData.QuerryDetaileJsonData);
-                }
-                else
-                {
+                ////获取 表中的JSon数据
+                //if (B_JsonData != null && !string.IsNullOrEmpty(B_JsonData.QuerryDetaileJsonData) && strMonthReportOrderType == "Detail")
+                //{
+                //    AllData = JsonHelper.Deserialize<List<DictionaryVmodel>>(B_JsonData.QuerryDetaileJsonData);
+                //}
+                //else
+                //{
                     AllData = ReportInstanceDetailEngine.ReportInstanceDetailService.GetDetailRptDataSource(rpt, strCompanyProperty, strMonthReportOrderType, IncludeHaveDetail);
-                }
+                //}
             }
             return AllData;
         }
@@ -328,28 +330,28 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         {
             ReportInstance rpt = JsonHelper.Deserialize<ReportInstance>(rpts);
             List<DictionaryVmodel> AllData = new List<DictionaryVmodel>();
-            
+            string currentLoginName = base.CurrentUserName;
             if (rpt._MonthReportID != Guid.Empty)
             {
-                B_MonthlyReportJsonData B_JsonData = new B_MonthlyReportJsonData();
-                try
-                {
-                    B_JsonData = B_MonthlyReportJsonDataOperator.Instance.GetMonthlyReportJsonData(rpt._MonthReportID);
-                }
-                catch (Exception)
-                {
-                    B_JsonData = null;
-                }
+                //B_MonthlyReportJsonData B_JsonData = new B_MonthlyReportJsonData();
+                //try
+                //{
+                //    B_JsonData = B_MonthlyReportJsonDataOperator.Instance.GetMonthlyReportJsonData(rpt._MonthReportID);
+                //}
+                //catch (Exception)
+                //{
+                //    B_JsonData = null;
+                //}
 
-                //获取 表中的JSon数据
-                if ( B_JsonData != null && !string.IsNullOrEmpty(B_JsonData.QuerryDetaileJsonData) && strMonthReportOrderType == "Detail")
-                {
-                    AllData = JsonHelper.Deserialize<List<DictionaryVmodel>>(B_JsonData.QuerryDetaileJsonData);
-                }
-                else
-                {
-                    AllData = ReportInstanceManageDetailEngine.ReportInstanceManageDetailService.GetManageDetailRptDataSource(rpt, strCompanyProperty, strMonthReportOrderType, IncludeHaveDetail);
-                }
+                ////获取 表中的JSon数据
+                //if ( B_JsonData != null && !string.IsNullOrEmpty(B_JsonData.QuerryDetaileJsonData) && strMonthReportOrderType == "Detail")
+                //{
+                //    AllData = JsonHelper.Deserialize<List<DictionaryVmodel>>(B_JsonData.QuerryDetaileJsonData);
+                //}
+                //else
+                //{
+                    AllData = ReportInstanceManageDetailEngine.ReportInstanceManageDetailService.GetManageDetailRptDataSource(rpt, strCompanyProperty, strMonthReportOrderType, IncludeHaveDetail, currentLoginName);
+                //}
             }
             return AllData;
         }
