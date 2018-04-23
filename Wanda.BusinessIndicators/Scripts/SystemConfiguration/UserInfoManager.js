@@ -55,7 +55,7 @@ function UsersLoadPage() {
                 });
             }
             else {
-                console.log(resultData.Message);
+                //console.log(resultData.Message);
             }
             Fake();
         }
@@ -112,10 +112,10 @@ function SaveRole() {
         "loginName": loginName
     }
     if (!roleIDs) {
-        $.MsgBox.Confirm("提示", "没有选中", "", function () {
+        $.MsgBox.Confirm("提示", "确认不设置任何角色？", "", function () {
             $("#mb_box,#mb_con").remove();
             S_Role.roleIDs = "";
-            console.log(S_Role);
+            //console.log(S_Role);
             SaveRoleFun(S_Role);
         })
     } else {
@@ -133,12 +133,12 @@ function SaveRoleFun(data) {
                 $(".user-model").css("display", "none");
                 $.MsgBox.Alert("提示", "添加成功");
                 LoadPage();
-                console.log("添加成功" + resultData.Message);
+                //console.log("添加成功" + resultData.Message);
             }
             else {
                 $(".user-model").css("display", "none");
                 $.MsgBox.Alert("提示", "添加失败");
-                console.log("添加失败:" + resultData.Message);
+                //console.log("添加失败:" + resultData.Message);
             }
             Fake();
         }
@@ -170,7 +170,7 @@ function SetUsersRole(el) {
                 loadTmpl('#UsersRolesDataTmpl').tmpl(resultData).appendTo('#UsersRolesData');
             }
             else {
-                console.log(resultData.Message);
+                //console.log(resultData.Message);
             }
             Fake();
         }
@@ -188,12 +188,12 @@ function SetOrgs(el) {
         url: "/UserInfoManagerControll/GetUserOrgs",
         args: { "loginName": loginName},
         successReturn: function (resultData) {
-            console.log(resultData);
+            //console.log(resultData);
             if (resultData.Success == 1) {
                 $(".set_orgs_sumbit").attr("name", loginName)
                 Ztree(resultData);
             } else {
-                console.log(resultData.Message);
+                //console.log(resultData.Message);
                 $.MsgBox.Alert("提示", "获取数据失败");
             }
         }
@@ -233,7 +233,7 @@ function SaveOrgs(name) {
     var treeObj = $.fn.zTree.getZTreeObj("tree");
     var nodes = treeObj.getCheckedNodes(true);
     if (!nodes.length) {
-        $.MsgBox.Confirm("提示", "没有选中", "", function () {
+        $.MsgBox.Confirm("提示", "确认取消所有权限？", "", function () {
             $("#mb_box,#mb_con").remove();
             SaveOrgsFun(nodes, name);
         })
@@ -255,7 +255,7 @@ function SaveOrgsFun(nodes,name) {
             if (resultData.Success == 1) {
                 $.MsgBox.Alert("提示", "保存成功");
             } else {
-                console.log(resultData.Message)
+                //console.log(resultData.Message)
                 $.MsgBox.Alert("提示", "保存失败");
             }
         }
