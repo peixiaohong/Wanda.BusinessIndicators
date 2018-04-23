@@ -47,11 +47,15 @@ namespace LJTH.BusinessIndicators.Model
         [ORFieldMapping("SystemBatchID")]
         public Guid SystemBatchID { get; set; }
 
+        /// <summary>
+        /// ´óÇøID
+        /// </summary>
+        [ORFieldMapping("AreaID")]
+        public Guid AreaID { get; set; }
+
+        #endregion
 
 
-		#endregion
-		
-		 
-	} 
+    } 
 }
 

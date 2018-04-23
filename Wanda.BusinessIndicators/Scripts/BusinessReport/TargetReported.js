@@ -10,7 +10,6 @@ var sysID;
 var FinYear;
 var FinMonth;
 var MonthReportID;
-var SystemBatchID;//大区ID
 
 var Monthsg;//从webconfig中读取的商管ID
 var Monthsgrent;//从webconfig中读取的商管租金收缴率的ID
@@ -84,7 +83,6 @@ $(function () {
     MonthReportID = $("#hideMonthReportID").attr("value");
     FinYear = $("#hideFinYear").attr("value");
     FinMonth = $("#hideFinMonth").attr("value");
-    SystemBatchID = $('#ddlSystemBatchID').attr("value"); //大区ID
     //获取ReportInstance实例，将此实例传回后台。
     GetReportInstance();
 
@@ -1411,7 +1409,7 @@ function MonthReportOrder(sender) {
 
 //下载计划指标模板
 function DownLoadTargetPlanExcel(sender) {
-    window.open("/AjaxHander/DownLoadTargetTemplate.ashx?FileType=DownTargetPlan&SysId=" + sysID + "&SystemBatchID=" + SystemBatchID + "&FinYear=" + FinYear + "&FinMonth=" + FinMonth + "&MonthReportID=" + MonthReportID);
+    window.open("/AjaxHander/DownLoadTargetTemplate.ashx?FileType=DownTargetPlan&SysId=" + sysID + "&FinYear=" + FinYear + "&FinMonth=" + FinMonth + "&MonthReportID=" + MonthReportID);
 
 }
 

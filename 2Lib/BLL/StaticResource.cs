@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using LJTH.BusinessIndicators.BLL.BizBLL;
-using LJTH.BusinessIndicators.DAL.BizDal;
 using LJTH.BusinessIndicators.Model;
 using LJTH.BusinessIndicators.Model.BizModel;
 
@@ -320,6 +319,16 @@ namespace LJTH.BusinessIndicators.BLL
             }
             return ReportDateTime.Value;
           
+        }
+        /// <summary>
+        /// 根据板块ID获取有效的组织架构信息
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetAllDataBySystemID(Guid systemID)
+        {
+            return S_OrganizationalActionOperator.Instance.GetAllDataBySystemID(systemID);
         }
     }
 }

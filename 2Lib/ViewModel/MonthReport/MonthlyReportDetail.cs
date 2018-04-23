@@ -121,7 +121,22 @@ namespace LJTH.BusinessIndicators.ViewModel
         /// 年度完成率
         /// </summary>
         public string NDisplayRateByYear { get; set; }
-        
+
+        /// <summary>
+        /// 项目公司上级区域ID
+        /// </summary>
+        public Guid AreaID { get; set; }
+
+        /// <summary>
+        /// 项目公司上级区域层级
+        /// </summary>
+        public int AreaLevel { get; set; }
+
+        /// <summary>
+        /// 项目公司上级区域Name
+        /// </summary>
+        public string AreaName { get; set; }
+
         /// <summary>
         /// 当月未完成说明
         /// </summary>
