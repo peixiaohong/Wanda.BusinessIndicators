@@ -30,18 +30,27 @@ function LoadPage() {
     Load();
     var roleData = {
         "RoleID": getQueryString("RoleId"),
-        "PageIndex": 1,
-        "PageSize":9999
+        "PageIndex": PageNumber,
+        "PageSize": PageSize
     }
     WebUtil.ajax({
         async: false,
         url: "/RoleManagerControll/GetAllUser",
         args: { data: JSON.stringify(roleData)},
         successReturn: function (resultData) {
-            console.log(resultData);
+            var totalCount = resultData.TotalCount;
             if (resultData.Success == 1) {           
                 $('#ShowMenuUsersData').empty();
                 loadTmpl('#ShowMenuUsersDataTmpl').tmpl(resultData).appendTo('#ShowMenuUsersData');
+                $("#InitPager").paginationex({
+                    current: PageNumber,
+                    pageSize: PageSize,
+                    totalCount: totalCount,
+                    navTo: function (pageIndex) {
+                        PageNumber = pageIndex;
+                        LoadPage();
+                    }
+                });
             }
             else {
                 console.log(resultData.Message);
@@ -127,19 +136,27 @@ function SaveRole() {
             LoginNames += name + ",";
         }
     }
-    if (!LoginNames.length) {
-        $.MsgBox.Alert("提示", "请选择用户");
-        return false;
-    }
-    console.log(LoginNames.slice(0, LoginNames.length - 1));
     var S_Role = {
         "PageLoginNames": LoginNames.slice(0, LoginNames.length-1),
         "RoleID": getQueryString("RoleId")
     }
+
+    if (!LoginNames.length) {
+        $.MsgBox.Confirm("提示", "没有选中", "", function () {
+            $("#mb_box,#mb_con").remove();
+            S_Role.PageLoginNames = "";
+            SaveRoleFun(S_Role);
+        })
+    } else {
+        SaveRoleFun(S_Role);
+    }
+    
+}
+function SaveRoleFun(data) {
     WebUtil.ajax({
         async: false,
         url: "/RoleManagerControll/SaveUser_Role",
-        args: S_Role,
+        args: data,
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
                 $(".user-model").css("display", "none");

@@ -32,7 +32,7 @@ function LoadPage() {
         args: {},
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
-                console.log(resultData);
+                //console.log(resultData);
                 Ztree(resultData);
             }
             else {
@@ -66,7 +66,7 @@ function CheckOrganization(type) {
     } else if (isCompany == "false") {
         isCompany = false;
     }
-    console.log(isCompany);
+    //console.log(isCompany);
     var level = el.attr("data-level");
     var id = el.attr("data-id");
     if (!val) {
@@ -142,7 +142,8 @@ function SaveOrganization(type) {
         pid = el.attr("data-pid");
         isCompany = el.attr("data-isCompany");
     }
-    if (isCompany) {
+    //console.log(isCompany);
+    if (isCompany == "true") {
         isCompany = true;
     } else {
         isCompany = false;
@@ -166,7 +167,7 @@ function SaveOrganization(type) {
         $.MsgBox.Alert("提示", "组织名称不能为空");
         return false;
     }
-    console.log(data);
+    //console.log(data);
     WebUtil.ajax({
         async: false,
         url: "/S_OrganizationalManagerControll/SaveData",
@@ -254,7 +255,7 @@ function Ztree(data) {
     zTree.setting.check.chkboxType = { "Y": "ps", "N": "ps" };
     Fake();
     function zTreeOnClick(event, treeId, treeNode) {
-        console.log(treeNode)
+        //console.log(treeNode)
         var el = $(".organization_name").find("input");
         el.attr({
             "data-id": treeNode.id,

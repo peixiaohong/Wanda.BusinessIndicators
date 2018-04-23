@@ -28,7 +28,7 @@ $(document).ready(function () {
 function UsersLoadPage() {
     Load();
     var keyword = $("#UsersName").val();
-    console.log(keyword)
+    //console.log(keyword)
     var roleData = {
         "keyWord": keyword,
         "PageIndex": PageNumber,
@@ -107,19 +107,27 @@ function SaveRole() {
             roleIDs += roleId + ",";
         }
     }
-    if (!roleIDs) {
-        $.MsgBox.Alert("提示", "角色不能为空");
-        return false;
-    }
     var S_Role = {
         "roleIDs": roleIDs.slice(0, roleIDs.length - 1),
         "loginName": loginName
     }
-    console.log(S_Role);
+    if (!roleIDs) {
+        $.MsgBox.Confirm("提示", "没有选中", "", function () {
+            $("#mb_box,#mb_con").remove();
+            S_Role.roleIDs = "";
+            console.log(S_Role);
+            SaveRoleFun(S_Role);
+        })
+    } else {
+        SaveRoleFun(S_Role);
+    }
+    //console.log(S_Role);
+}
+function SaveRoleFun(data) {
     WebUtil.ajax({
         async: false,
         url: "/UserInfoManagerControll/SaveUsesRoles",
-        args: S_Role,
+        args: data,
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
                 $(".user-model").css("display", "none");
@@ -157,7 +165,7 @@ function SetUsersRole(el) {
         args: { "cnName": RoleName, "loginName": LoginName},
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
-                console.log(resultData)
+                //console.log(resultData)
                 $('#UsersRolesData').empty();
                 loadTmpl('#UsersRolesDataTmpl').tmpl(resultData).appendTo('#UsersRolesData');
             }
@@ -173,13 +181,14 @@ function SetUsersRole(el) {
 function SetOrgs(el) {
     $(".organization-model").css("display", "block");
     var loginName = $(el).attr("data-login");
-    console.log(loginName);
+    //console.log(loginName);
     Load();
     WebUtil.ajax({
         async: false,
         url: "/UserInfoManagerControll/GetUserOrgs",
         args: { "loginName": loginName},
         successReturn: function (resultData) {
+            console.log(resultData);
             if (resultData.Success == 1) {
                 $(".set_orgs_sumbit").attr("name", loginName)
                 Ztree(resultData);
@@ -191,7 +200,7 @@ function SetOrgs(el) {
     });
 }
 function Ztree(data) {
-    console.log(data);
+    //console.log(data);
     var zNodes = [];
     data.Data.forEach(function (one) {
         var zNodesObj = { id: "", pId: "", name: "", checked: "", systemID: "" };
@@ -224,18 +233,26 @@ function SaveOrgs(name) {
     var treeObj = $.fn.zTree.getZTreeObj("tree");
     var nodes = treeObj.getCheckedNodes(true);
     if (!nodes.length) {
-        $.MsgBox.Alert("提示", "没有选择任何权限");
+        $.MsgBox.Confirm("提示", "没有选中", "", function () {
+            $("#mb_box,#mb_con").remove();
+            SaveOrgsFun(nodes, name);
+        })
+    } else {
+        SaveOrgsFun(nodes,name)
     }
+    
+}
+function SaveOrgsFun(nodes,name) {
     WebUtil.ajax({
         async: false,
         url: "/UserInfoManagerControll/SaveUser_org",
         args: {
             loginName: name,
-            data: FilterChecked(nodes,name)
+            data: FilterChecked(nodes, name)
         },
         successReturn: function (resultData) {
+            $(".organization-model").css("display", "none");
             if (resultData.Success == 1) {
-                $(".organization-model").css("display", "none");
                 $.MsgBox.Alert("提示", "保存成功");
             } else {
                 console.log(resultData.Message)
@@ -252,7 +269,7 @@ function FilterChecked(data,name) {
                 "SystemID": one.systemID,
                 "LoginName": name,
                 "CompanyID": one.id,
-                "IsChecked": one.checked
+                //"IsChecked": one.checked
             }
             match.push(obj);
         }

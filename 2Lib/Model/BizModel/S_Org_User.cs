@@ -31,11 +31,5 @@ namespace LJTH.BusinessIndicators.Model.BizModel
         /// </summary>
         [ORFieldMapping("CompanyID")]
         public Guid CompanyID { get; set; }
-
-        /// <summary>
-        /// 是否选中
-        /// </summary>
-        [NoMapping]
-        public int IsChecked { get; set; }
     }
 }

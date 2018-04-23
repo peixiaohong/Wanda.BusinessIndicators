@@ -64,6 +64,9 @@
                     </div>
                 </div>
             </div>
+            <div style="padding-bottom: 30px; padding-top: 10px;">
+                <div id="InitPager" style='text-align: right; font-size: 12px; float: right;'></div>
+            </div>
         </div>
 
     </div>

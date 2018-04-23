@@ -105,18 +105,26 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     };
                     entitys.Add(su);
                 }
-                int number = S_Role_UserActionOperator.Instance.InsertListData(entitys);
-                //清除缓存
-                WebHelper.InvalidAuthCache();
-                if (number > 0)
+                if (entitys.Count > 0)
                 {
-                    success = 1;
-                    message = "设置角色成功";
+                    int number = S_Role_UserActionOperator.Instance.InsertListData(entitys);
+                    //清除缓存
+                    WebHelper.InvalidAuthCache();
+                    if (number > 0)
+                    {
+                        success = 1;
+                        message = "设置角色成功";
+                    }
+                    else
+                    {
+                        success = 0;
+                        message = "设置角色失败";
+                    }
                 }
                 else
                 {
-                    success = 0;
-                    message = "设置角色失败";
+                    success = 1;
+                    message = "设置成功";
                 }
                 return new
                 {
@@ -213,18 +221,26 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     item.IsDeleted = false;
                     item.ID = Guid.NewGuid();
                 }
-                var number=S_Org_UserActionOperator.Instance.InsertListData(entitys);
-                //清除缓存
-                WebHelper.InvalidAuthCache();
-                if (number > 0)
+                if (entitys.Count > 0)
                 {
-                    success = 1;
-                    message = "设置组织成功";
+                    var number = S_Org_UserActionOperator.Instance.InsertListData(entitys);
+                    //清除缓存
+                    WebHelper.InvalidAuthCache();
+                    if (number > 0)
+                    {
+                        success = 1;
+                        message = "设置组织成功";
+                    }
+                    else
+                    {
+                        success = 0;
+                        message = "设置组织失败";
+                    }
                 }
                 else
                 {
-                    success = 0;
-                    message = "设置组织失败";
+                    success = 1;
+                    message = "设置组织成功";
                 }
                 return new
                 {
