@@ -100,6 +100,24 @@ namespace LJTH.BusinessIndicators.BLL
             return _bMonthlyreportAdapter.GetMonthlyReportDraftList(SystemID, Year, Month);
         }
 
+
+
+        /// <summary>
+        /// 获取B_MonthlyReport表中（草稿）
+        /// </summary>
+        /// <param name="SystemID"></param>
+        /// <param name="Year"></param>
+        /// <param name="Month"></param>
+        /// <returns></returns>
+        public B_MonthlyReport GetMonthlyReportDraft(Guid SystemID,Guid AreaID, int Year, int Month)
+        {
+            ExceptionHelper.TrueThrow<ArgumentNullException>(SystemID == null ? true : false, "Argument SystemID is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(AreaID == null ? true : false, "Argument SystemID is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(Year <= 0 ? true : false, "Argument Year is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(Month <= 0 ? true : false, "Argument Month is Empty");
+            return _bMonthlyreportAdapter.GetMonthlyReportDraftList(SystemID, AreaID, Year, Month);
+        }
+
         /// <summary>
         /// 获取B_MonthlyReport表中（审批中）
         /// </summary>
@@ -113,6 +131,21 @@ namespace LJTH.BusinessIndicators.BLL
             ExceptionHelper.TrueThrow<ArgumentNullException>(Year<=0 ? true : false, "Argument Year is Empty");
             ExceptionHelper.TrueThrow<ArgumentNullException>(Month<=0 ? true : false, "Argument Month is Empty");
             return _bMonthlyreportAdapter.GetMonthlyReportList(SystemID, Year, Month);
+        }
+        /// <summary>
+        /// 获取B_MonthlyReport表中（审批中）
+        /// </summary>
+        /// <param name="SystemID"></param>
+        /// <param name="Year"></param>
+        /// <param name="Month"></param>
+        /// <returns></returns>
+        public B_MonthlyReport GetMonthlyReport(Guid SystemID,Guid SystemBatchID, int Year, int Month)
+        {
+            ExceptionHelper.TrueThrow<ArgumentNullException>(SystemID == null ? true : false, "Argument SystemID is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(SystemBatchID == null ? true : false, "Argument SystemID is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(Year<=0 ? true : false, "Argument Year is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(Month<=0 ? true : false, "Argument Month is Empty");
+            return _bMonthlyreportAdapter.GetMonthlyReportList(SystemID,SystemBatchID, Year, Month);
         }
 
         /// <summary>
@@ -130,6 +163,25 @@ namespace LJTH.BusinessIndicators.BLL
             ExceptionHelper.TrueThrow<ArgumentNullException>(Month <= 0 ? true : false, "Argument Month is Empty");
             ExceptionHelper.TrueThrow<ArgumentNullException>(MonthlyReportID == null ? true : false, "Argument MonthlyReportID is Empty");
             return _bMonthlyreportAdapter.GetLatestMonthlyReport(SystemID, Year, Month, MonthlyReportID);
+        }
+
+
+        /// <summary>
+        /// 获取不包含MonthlyreportID的B_MonthlyReport集合
+        /// </summary>
+        /// <param name="SystemID"></param>
+        /// <param name="Year"></param>
+        /// <param name="Month"></param>
+        /// <param name="MonthlyReportID"></param>
+        /// <returns></returns>
+        public B_MonthlyReport GetMonthlyReport(Guid SystemID,Guid AreaID, int Year, int Month, Guid MonthlyReportID)
+        {
+            ExceptionHelper.TrueThrow<ArgumentNullException>(SystemID == null ? true : false, "Argument SystemID is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(AreaID == null ? true : false, "Argument SystemID is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(Year <= 0 ? true : false, "Argument Year is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(Month <= 0 ? true : false, "Argument Month is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(MonthlyReportID == null ? true : false, "Argument MonthlyReportID is Empty");
+            return _bMonthlyreportAdapter.GetLatestMonthlyReport(SystemID, AreaID, Year, Month, MonthlyReportID);
         }
         /// <summary>
         ///获取最新的数据(审批中和审批完成)

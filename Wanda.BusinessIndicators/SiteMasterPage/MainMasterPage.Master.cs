@@ -8,7 +8,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
 using LJTH.BusinessIndicators.Common;
-using Wanda.Platform.Permission.ClientComponent;
 using LJTH.BusinessIndicators.BLL.BizBLL;
 using LJTH.BusinessIndicators.Model.BizModel;
 
@@ -233,7 +232,7 @@ namespace LJTH.BusinessIndicators.Web
         private List<NavSiteMapNode> GetMenus()
         {
             bool isPageExist = false;
-            List<S_Menu> menus = S_MenuActionOperator.Instance.GetLoinNameMenu(HttpContext.Current.User.Identity.Name);
+            List<S_Menu> menus = S_MenuActionOperator.Instance.GetLoinNameMenu(WebHelper.GetCurrentLoginUser());
             if (menus.Count < 1)
             {
                 Response.Redirect("../NoPermission.aspx");
@@ -269,7 +268,7 @@ namespace LJTH.BusinessIndicators.Web
             }
             if (!isPageExist)
             {
-                Response.Redirect("../NoPermission.aspx");
+                //Response.Redirect("../NoPermission.aspx");
             }
             return list_node;
         }

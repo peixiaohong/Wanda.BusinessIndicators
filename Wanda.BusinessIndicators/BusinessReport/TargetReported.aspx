@@ -4,23 +4,25 @@
 <%@ Register Src="~/UserControl/TargetReportUserControl.ascx" TagPrefix="targetReportUC" TagName="TargetReportUserControl" %>
 <%@ Register Src="~/UserControl/MutipleUpload.ascx" TagPrefix="targetReportUC" TagName="MutipleUpload" %>
 
+<%@ Register Src="~/SiteMasterPage/wfCtrl.ascx" TagPrefix="uc1" TagName="wfCtrl" %>
+<%@ Register Src="~/SiteMasterPage/userSelectCtrl.ascx" TagPrefix="uc1" TagName="userSelectCtrl" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <%--<link href="http://zbgk.wf.wanda-dev.cn/RuntimeService/css/wanda-wf-client.css?version=1" type="text/css" rel="Stylesheet" />--%>
-    <%--<script src="http://zbgk.wf.wanda-dev.cn/RuntimeService/js/wanda-wf-client.js?version=1" type="text/javascript"></script>--%>
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
     <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported.js"></script>
     <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported1.js"></script>
     <script type="text/javascript" src="../Scripts/UpLoad/jquery.uploadify.min.js"></script>
 
-
-  
-
+    <uc1:wfCtrl runat="server" ID="wfCtrl" />
+    <uc1:userSelectCtrl runat="server" ID="userSelectCtrl" />
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="main">
         <div class="form_name mb8 form_name_build" style="border-bottom-color: #ececec; text-align: center; border-bottom-style: solid;">
             <asp:DropDownList ID="ddlSystem" ClientIDMode="Static" AutoPostBack="true" OnTextChanged="ddlSystem_TextChanged" runat="server" Style="width: 150px; height: 25px;"></asp:DropDownList>
+            <asp:DropDownList ID="ddlAreaID" ClientIDMode="Static" AutoPostBack="true" OnTextChanged="ddlAreaID_TextChanged" runat="server" Style="width: 150px; height: 25px;"></asp:DropDownList>
             <asp:Label ID="lblName" Style="font-size: 18px; text-indent: 3px; height: 26px; line-height: 26px; border: none; width: 200px;" runat="server" Text="月度经营报告上报 "></asp:Label>
             <asp:HiddenField runat="server" ID="hideMonthReportID" ClientIDMode="Static" />
             <asp:HiddenField runat="server" ID="HidSystemText" ClientIDMode="Static" />
@@ -30,6 +32,7 @@
 
             <asp:HiddenField runat="server" ID="Hide_sg" ClientIDMode="Static" />
             <asp:HiddenField runat="server" ID="Hide_sgrent" ClientIDMode="Static" />
+            <asp:HiddenField runat="server" ID="HiddenBatch" ClientIDMode="Static" />
 
             <br />
             <span style="color: red">注：上传excel后，若页面没有出现相应数据，请稍等几分钟再次刷新页面（数据正在后台进行计算），即可恢复正常。请勿因此重复上传数据。</span>
@@ -195,8 +198,9 @@
 
         <!--上报审批 结束-->
 
-
+        
         <input type="text" class="TClassHide" id="HidSystemID" runat="server" />
+        <input type="text" class="TClassHide" id="HidAreaID" runat="server" />
     </div>
 
 

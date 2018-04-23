@@ -205,7 +205,7 @@ $(function () {
         OnAfterExecute: afterAction,
         OnSaveApplicationData: saveApplicationData
     };
-    wanda_wf_client.initAjaxSetting("#process", false, otherSetting);
+    bpf_wf_client.initAjaxSetting("#process", false, otherSetting);
 })
 
 //业务系统保存数据
@@ -223,7 +223,7 @@ function afterAction(args) {
     } 
 }
 function GetProcess(instanceID) {
-    wanda_wf_client.getProcess(instanceID, function () {
+    bpf_wf_client.getProcess(instanceID, function () {
         $.unblockUI();
     });
 }

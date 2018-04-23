@@ -4,8 +4,6 @@
     <link rel="stylesheet" type="text/css" href="../Scripts/UpLoad/uploadify.css" />
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
     <script type="text/javascript" src="../Scripts/BusinessReport/TargetApprove.js"></script>
- <link href="http://zbgk.wf.wanda-dev.cn/RuntimeService/css/wanda-wf-client.css?version=1" type="text/css" rel="Stylesheet" />
-    <script src="http://zbgk.wf.wanda-dev.cn/RuntimeService/js/wanda-wf-client.js?version=1" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="main">

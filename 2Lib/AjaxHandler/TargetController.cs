@@ -19,8 +19,8 @@ using Lib.Xml;
 using Lib.Expression;
 using Wanda.Platform.WorkFlow.ClientComponent;
 using System.Web;
-using Wanda.Workflow.Object;
-using Wanda.Workflow.Client;
+using BPF.Workflow.Object;
+using BPF.Workflow.Client;
 using System.Data;
 using System.Web.Configuration;
 
@@ -677,7 +677,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             for (int i = 0; i < result.Count; i++)
             {
 
-                var a = Wanda.Workflow.Client.WFClientSDK.GetProcess(null, result[i].ID.ToString());
+                var a = BPF.Workflow.Client.WFClientSDK.GetProcess(null, result[i].ID.ToString());
                 Process Pro = WFClientSDK.GetProcess(null, result[i].ID.ToString()).ProcessInstance;//从工作流获取上报时间
                 if (Pro != null)
                 {

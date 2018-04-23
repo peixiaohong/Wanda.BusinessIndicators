@@ -16,7 +16,7 @@ namespace LJTH.Lib.AuthCenter.DAL
     {
         protected override string ConnectionName
         {
-            get { return "WandaTargetConnectionString"; }
+            get { return "WandaJYZBConnectionString"; }
         }
 
     }
@@ -25,7 +25,7 @@ namespace LJTH.Lib.AuthCenter.DAL
     {
         protected override string ConnectionName
         {
-            get { return "WandaTargetConnectionString"; }
+            get { return "WandaJYZBConnectionString"; }
         }
     }
 
@@ -34,7 +34,7 @@ namespace LJTH.Lib.AuthCenter.DAL
     {
         protected override string ConnectionName
         {
-            get { return "WandaTargetConnectionString"; }
+            get { return "WandaJYZBConnectionString"; }
         }
     }
 }

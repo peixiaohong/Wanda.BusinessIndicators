@@ -7,8 +7,8 @@
     <ProjectGuid>{FCCAD333-B48E-4A04-AD3C-8CB4CA17EF28}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Wanda.Lib.AuthCenter</RootNamespace>
-    <AssemblyName>Wanda.Lib.AuthCenter</AssemblyName>
+    <RootNamespace>LJTH.Lib.AuthCenter</RootNamespace>
+    <AssemblyName>LJTH.Lib.AuthCenter</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>

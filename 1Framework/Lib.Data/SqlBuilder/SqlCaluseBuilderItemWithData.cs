@@ -57,7 +57,7 @@ namespace Lib.Data
                 else if (this.data is System.Guid)
                 {
                     if ((Guid)this.data == Guid.Empty)
-                        result = "NULL";
+                        result = string.Format("'{0}'", Guid.Empty.ToString());// result = "NULL";
                     else
                         result = builder.CheckQuotationMark(this.data.ToString(), true);
                 }
@@ -92,8 +92,8 @@ namespace Lib.Data
                     else
                     {
 
-                        if (itemType.IsValueType  && itemType.IsPrimitive)
-                          //  && Convert.ChangeType(Activator.CreateInstance(itemType),  0)) // 存在类型匹配问题 (0.0).Equals(0)=false
+                        if (itemType.IsValueType && itemType.IsPrimitive)
+                        //  && Convert.ChangeType(Activator.CreateInstance(itemType),  0)) // 存在类型匹配问题 (0.0).Equals(0)=false
                         {
                             result = string.Format("({0})", JoinItems((IEnumerable)this.data, false, builder));
                         }
@@ -110,9 +110,9 @@ namespace Lib.Data
                         result = builder.CheckQuotationMark(this.data.ToString(), true);
                     else
                         if (this.data is bool)
-                            result = ((int)Convert.ChangeType(this.data, typeof(int))).ToString();
-                        else
-                            result = this.data.ToString();
+                        result = ((int)Convert.ChangeType(this.data, typeof(int))).ToString();
+                    else
+                        result = this.data.ToString();
                 }
             }
 

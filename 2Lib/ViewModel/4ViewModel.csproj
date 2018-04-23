@@ -84,7 +84,7 @@
       <Name>LJTH.Lib.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\1Framework\Lib.Data\LJTH.Lib.Data.csproj">
-      <Project>{442c318f-9d99-4a3f-972e-33e8a8c8be51}</Project>
+      <Project>{442C318F-9D99-4A3F-972E-33E8A8C8BE51}</Project>
       <Name>LJTH.Lib.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Common\9Common.csproj">

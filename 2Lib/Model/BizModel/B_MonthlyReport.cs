@@ -90,7 +90,7 @@ namespace LJTH.BusinessIndicators.Model
         [ORFieldMapping("AreaID")]
         public Guid AreaID { get; set; }
 
-    #endregion
+        #endregion
 
 
     }

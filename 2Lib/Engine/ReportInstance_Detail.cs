@@ -436,7 +436,12 @@ namespace LJTH.BusinessIndicators.Engine
 
             //得到当前系统的所有公司
             List<C_Company> listComPany = StaticResource.Instance.CompanyList[_System.ID];
-
+            if(AreaID!=Guid.Empty)
+            {
+                var ids = StaticResource.Instance.GetCompanyIds(_SystemID, AreaID);
+                var t = from p in listComPany join q in ids on p.ID equals q select p;
+                listComPany = t.ToList();
+            }
             List<DictionaryVmodel> listDV = new List<DictionaryVmodel>();
             List<TargetPlanViewModel> listTargetPlanViewModel = null;
             TargetPlanViewModel tpvm = null;

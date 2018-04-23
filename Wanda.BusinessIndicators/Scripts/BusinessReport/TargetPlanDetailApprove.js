@@ -222,7 +222,7 @@ function SplitData(result) {
 }
 
 function AddSumHead(result) {
-    var head = " <tr><th style=\"width: 12%\" rowspan=\"2\">月份</th> <th colspan=\"" + result.length + "\">当前数</th> <th colspan=\"" + result.length + "\">累计数</th>";
+    var head = " <tr><th style=\"width: 12%\" rowspan=\"2\">月份</th> <th colspan=\"" + result.length + "\">当月数</th> <th colspan=\"" + result.length + "\">累计数</th>";
     head += " </tr><tr id=\"TrTarget\">";
     for (var i = 0; i < result.length; i++) {
         head += "<th>" + result[i].Name + "</th>";
@@ -367,7 +367,7 @@ $(function () {
             AlwaysReturnToStart: true
         },
     };
-    wanda_wf_client.initAjaxSetting("#process", false, otherSetting);
+    bpf_wf_client.initAjaxSetting("#process", false, otherSetting);
 })
 function afterAction(args) {
     if (args.WorkflowContext.StatusCode == 0) {
@@ -378,7 +378,7 @@ function afterAction(args) {
     }
 }
 function GetTargetPlanDetailApproveProcess(instanceID) {
-    wanda_wf_client.getProcess(instanceID, function () {
+    bpf_wf_client.getProcess(instanceID, function () {
         $.unblockUI();
     });
 }

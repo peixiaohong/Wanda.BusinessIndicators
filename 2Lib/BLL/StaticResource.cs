@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using LJTH.BusinessIndicators.Model;
 using LJTH.BusinessIndicators.BLL.BizBLL;
-using LJTH.BusinessIndicators.Model.BizModel;
+using LJTH.BusinessIndicators.DAL.BizDal;
+using LJTH.BusinessIndicators.Model;
 
 namespace LJTH.BusinessIndicators.BLL
 {
@@ -77,6 +77,7 @@ namespace LJTH.BusinessIndicators.BLL
             {
                 if (_SystemList == null || _SystemList.Count <= 0)
                 {
+
                     DateTime CurrentDate = DateTime.Now;
                     _SystemList = C_SystemOperator.Instance.GetSystemList(CurrentDate).OrderBy(S => S.Sequence).ToList();
                 }
@@ -108,7 +109,20 @@ namespace LJTH.BusinessIndicators.BLL
                 return _CompanyList;
             }
         }
-
+        private Dictionary<Guid, List<S_Organizational>> _OrgList = new Dictionary<Guid, List<S_Organizational>>();
+        public Dictionary<Guid, List<S_Organizational>> OrgList
+        {
+            get
+            {
+                if (_OrgList == null || _OrgList.Count <= 0)
+                {
+                    IList<S_Organizational> list = S_OrganizationalActionOperator.Instance.GetAllData();
+                    var g = list.GroupBy(x => x.SystemID);
+                    g.ForEach(x => _OrgList.Add(x.Key, x.ToList()));
+                }
+                return _OrgList;
+            }
+        }
         /// <summary>
         /// 获取公司
         /// </summary>
@@ -126,7 +140,33 @@ namespace LJTH.BusinessIndicators.BLL
 
              return null;
         }
-
+        /// <summary>
+        /// 获取区域下所有的公司id
+        /// </summary>
+        /// <param name="systemid"></param>
+        /// <param name="areaId"></param>
+        /// <returns></returns>
+        public IList<Guid> GetCompanyIds(Guid systemid,Guid areaId)
+        {
+            var list = new List<Guid>();
+            GetChildren(systemid, areaId, list);
+            return list;
+        }
+        private void GetChildren(Guid systemid,Guid parentId,List<Guid> list)
+        {
+            var c= OrgList[systemid].Where(x => x.ParentID == parentId);
+            c.ForEach(x => {
+                if (x.IsCompany)
+                {
+                    list.Add(x.ID);
+                    return;
+                }
+                else
+                {
+                    GetChildren(systemid, x.ID, list);
+                }
+            });
+        }
 
 
         private Dictionary<Guid, List<C_Target>> _TargetList = new Dictionary<Guid, List<C_Target>>();

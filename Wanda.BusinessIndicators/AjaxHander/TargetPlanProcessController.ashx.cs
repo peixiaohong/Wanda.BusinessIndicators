@@ -75,10 +75,10 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             {
                 ReportModelA.CreateTime = DateTime.Now;
             }
-            var p = Wanda.Workflow.Client.WFClientSDK.GetProcess(null, ReportModelA.ID.ToString(), UserLonginID);
+            var p = BPF.Workflow.Client.WFClientSDK.GetProcess(null, ReportModelA.ID.ToString(), UserLonginID);
             List<NavigatActivity1> listna = new List<NavigatActivity1>();
             NavigatActivity1 na1 = null;
-            Dictionary<string, Wanda.Workflow.Object.Node> list = new Dictionary<string, Wanda.Workflow.Object.Node>();
+            Dictionary<string, BPF.Workflow.Object.Node> list = new Dictionary<string, BPF.Workflow.Object.Node>();
             string strNextNodeID = p.ProcessInstance.StartNodeID;
 
             if (p.NodeInstanceList != null)
@@ -201,7 +201,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             }
             B_TargetplanOperator.Instance.UpdateTargetplan(rpt);
 
-            //Wanda.Workflow.Object.WorkflowContext wc= Wanda.Workflow.Client.WFClientSDK.GetProcess(null,rpt.ID.ToString(), UserLonginID);
+            //BPF.Workflow.Object.WorkflowContext wc= BPF.Workflow.Client.WFClientSDK.GetProcess(null,rpt.ID.ToString(), UserLonginID);
             //if (wc.ProcessInstance.Status == 3) {
             //    OnProecssCompleted();
             //}

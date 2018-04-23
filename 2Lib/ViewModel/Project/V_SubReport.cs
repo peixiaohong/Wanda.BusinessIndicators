@@ -22,7 +22,7 @@ namespace LJTH.BusinessIndicators.ViewModel
         }
 
         /// <summary>
-        /// 系统ID
+        /// 系统ID,修改为区域id
         /// </summary>
         public Guid SystemID { get; set; }
 

@@ -9,11 +9,11 @@ using LJTH.BusinessIndicators.ViewModel;
 using Lib.Core;
 using LJTH.BusinessIndicators.Common;
 using System.Web;
-using Wanda.Workflow.Client;
-using Wanda.Workflow.Object;
+using BPF.Workflow.Client;
+using BPF.Workflow.Object;
 using Newtonsoft.Json;
 using Wanda.Platform.WorkFlow.ClientComponent;
-
+using System.Xml.Linq;
 
 namespace ScheduleService.Handler
 {
@@ -34,181 +34,185 @@ namespace ScheduleService.Handler
 
             finMonth = datetime.Month;
             finYear = datetime.Year;
-
-            Common.ScheduleService.Log.Instance.Info("项目系统合并流程服务，读取批次表里是否有合适的数据Stare!");
-
-            B_SystemBatch batchModel = B_SystemBatchOperator.Instance.GetSystemBatchByDraft("ProSystem", finYear, finMonth);
-
-            if (batchModel != null)
+            string[] array = System.Configuration.ConfigurationManager.AppSettings["GroupTypes"].Split(new char[] { ','},StringSplitOptions.RemoveEmptyEntries);
+            foreach (var groupType in array)
             {
-                Common.ScheduleService.Log.Instance.Info("读取数据成功!" + batchModel.FinYear + "年" + batchModel.FinMonth+"月");
+                Common.ScheduleService.Log.Instance.Info("项目系统合并流程服务，读取批次表里是否有合适的数据Stare!");
 
-                BatchRptList = JsonConvert.DeserializeObject<List<V_SubReport>>(batchModel.SubReport);
+                B_SystemBatch batchModel = B_SystemBatchOperator.Instance.GetSystemBatchByDraft(groupType, finYear, finMonth);
 
-                BatchRptList.ForEach(P =>
+                if (batchModel != null)
                 {
-                    bool a = true;
-                    if (P.IsReady == false)
+                    Common.ScheduleService.Log.Instance.Info("读取数据成功!" + batchModel.FinYear + "年" + batchModel.FinMonth + "月");
+
+                    BatchRptList = JsonConvert.DeserializeObject<List<V_SubReport>>(batchModel.SubReport);
+
+                    BatchRptList.ForEach(P =>
                     {
-                        _WFStarts = false;
-                        a = false;
-                    }
-                    Common.ScheduleService.Log.Instance.Info(P.SystemName+"系统"+a.ToString());
-
-                });
-
-            }
-            else
-            {
-                _WFStarts = false;
-            }
-
-            Common.ScheduleService.Log.Instance.Info("项目系统合并流程服务，读取批次表里是否有合适的数据End!");
-
-            if (_WFStarts)
-            {
-                Common.ScheduleService.Log.Instance.Info("项目系统合并流程服务，有符合条件的的数据!");
-
-                this.ProcessKey = "YY_WD-SYSTEM-JY-PRONEW";
-                this.BusinessID = batchModel.ID.ToString();
-
-                Common.ScheduleService.Log.Instance.Info("项目系统合并流程服务，有符合条件的的数据BusinessID=" + this.BusinessID + "!");
-
-                //添加日志
-                B_MonthlyReportAction _bMonthlyReportAction = new B_MonthlyReportAction();
-                _bMonthlyReportAction.SystemID = Guid.Empty;
-                _bMonthlyReportAction.MonthlyReportID = batchModel.ID;
-                _bMonthlyReportAction.FinYear = batchModel.FinYear;
-                _bMonthlyReportAction.FinMonth = batchModel.FinMonth;
-                _bMonthlyReportAction.Action = EnumHelper.GetEnumDescription(typeof(MonthlyReportLogActionType), (int)MonthlyReportLogActionType.Submit);
-                _bMonthlyReportAction.Operator = this.CurrentUser;
-                _bMonthlyReportAction.OperatorTime = DateTime.Now;
-                _bMonthlyReportAction.ModifierName = this.CurrentUser;
-                _bMonthlyReportAction.CreatorName = this.CurrentUser;
-                B_MonthlyReportActionOperator.Instance.AddMonthlyReportAction(_bMonthlyReportAction);
-
-
-                Common.ScheduleService.Log.Instance.Info("项目系统合并流程服务，准备启动合并流程数据!");
-
-                try
-                {
-
-                    if (!WFClientSDK.Exist(BusinessID)) //判断业务ID是否存在
-                    {//开启流程
-                        CallMethed("startprocess");
-                        Common.ScheduleService.Log.Instance.Info("项目系统合并流程服务，合并流程数据启动完成!");
-                    }
-                    else
-                    {
-                        Common.ScheduleService.Log.Instance.Info("项目系统合并流程服务，有错误！！！！！！");
-                        //当汇总后流程退回，再次发起用该方法
-                        if (batchModel.WFBatchStatus == "Draft")
+                        bool a = true;
+                        if (P.IsReady == false)
                         {
-                            #region 该方法只能在草稿状态的时候启动
+                            _WFStarts = false;
+                            a = false;
+                        }
+                        Common.ScheduleService.Log.Instance.Info(P.SystemName + "系统" + a.ToString());
 
-                            try
+                    });
+
+                }
+                else
+                {
+                    _WFStarts = false;
+                }
+
+                Common.ScheduleService.Log.Instance.Info("合并流程服务，读取批次表里是否有合适的数据End!");
+
+                if (_WFStarts)
+                {
+                    var c_System = StaticResource.Instance.SystemList.Where(x => x.GroupType == batchModel.BatchType).FirstOrDefault();
+                    string ProcessKey = c_System.Configuration.Element("ProcessCode").Value + "-HB";
+
+                    Common.ScheduleService.Log.Instance.Info(c_System.SystemName + "合并流程服务，有符合条件的的数据!");
+
+                    this.ProcessKey = ProcessKey;
+                    this.BusinessID = batchModel.ID.ToString();
+
+                    Common.ScheduleService.Log.Instance.Info(c_System.SystemName + "合并流程服务，有符合条件的的数据BusinessID=" + this.BusinessID + "!");
+
+                    //添加日志
+                    B_MonthlyReportAction _bMonthlyReportAction = new B_MonthlyReportAction();
+                    _bMonthlyReportAction.SystemID = Guid.Empty;
+                    _bMonthlyReportAction.MonthlyReportID = batchModel.ID;
+                    _bMonthlyReportAction.FinYear = batchModel.FinYear;
+                    _bMonthlyReportAction.FinMonth = batchModel.FinMonth;
+                    _bMonthlyReportAction.Action = EnumHelper.GetEnumDescription(typeof(MonthlyReportLogActionType), (int)MonthlyReportLogActionType.Submit);
+                    _bMonthlyReportAction.Operator = this.CurrentUser;
+                    _bMonthlyReportAction.OperatorTime = DateTime.Now;
+                    _bMonthlyReportAction.ModifierName = this.CurrentUser;
+                    _bMonthlyReportAction.CreatorName = this.CurrentUser;
+                    B_MonthlyReportActionOperator.Instance.AddMonthlyReportAction(_bMonthlyReportAction);
+
+
+                    Common.ScheduleService.Log.Instance.Info(c_System.SystemName + "合并流程服务，准备启动合并流程数据!");
+
+                    try
+                    {
+                        if (!WFClientSDK.Exist(BusinessID)) //判断业务ID是否存在
+                        {//开启流程
+                            CallMethed("startprocess",groupType);
+                            Common.ScheduleService.Log.Instance.Info(c_System.SystemName + "合并流程服务，合并流程数据启动完成!");
+                        }
+                        else
+                        {
+                            Common.ScheduleService.Log.Instance.Info(c_System.SystemName+"合并流程服务，有错误！！！！！！");
+                            //当汇总后流程退回，再次发起用该方法
+                            if (batchModel.WFBatchStatus == "Draft")
                             {
-                                string FinYear = batchModel.FinYear.ToString() + "年";
-                                string FinMonth = batchModel.FinMonth.ToString("D2");
+                                #region 该方法只能在草稿状态的时候启动
 
-                                string _Title = "项目系统(南、中、北、大项目)" + FinYear + FinMonth + "月度报告";
-                                Dictionary<string, string> Dic = new Dictionary<string, string>();
-                                Dic["ReportName"] = _Title;
-                                Dic["ProcessKey"] = "YY_WD-SYSTEM-JY-PRONEW";
-
-                                #region 记录审批日志的Json
-
-                                Common.ScheduleService.Log.Instance.Info("项目系统合并流程再次启动开始！");
-
-
-                                string opiniontext = string.Empty;
-
-
-                                //重新在批次表中，获取数据
-                                BatchRptList = JsonConvert.DeserializeObject<List<V_SubReport>>(batchModel.SubReport);
-                                List<Wanda.Workflow.Object.ProcessLog> _list = new List<ProcessLog>();
-                                if (BatchRptList.Count > 0)
+                                try
                                 {
-                                    BatchRptList.ForEach(BR =>
+                                    string FinYear = batchModel.FinYear.ToString() + "年";
+                                    string FinMonth = batchModel.FinMonth.ToString("D2");
+                                    //string _Title = "项目系统(南、中、北、大项目)" + FinYear + FinMonth + "月度报告";
+                                    string _Title = c_System.SystemName + FinYear + FinMonth + "汇总月度报告";
+                                    Dictionary<string, string> Dic = new Dictionary<string, string>();
+                                    Dic["ReportName"] = _Title;
+                                    Dic["ProcessKey"] = ProcessKey;
+
+                                    #region 记录审批日志的Json
+
+                                    Common.ScheduleService.Log.Instance.Info("合并流程再次启动开始！");
+
+
+                                    string opiniontext = string.Empty;
+
+
+                                    //重新在批次表中，获取数据
+                                    BatchRptList = JsonConvert.DeserializeObject<List<V_SubReport>>(batchModel.SubReport);
+                                    List<BPF.Workflow.Object.ProcessLog> _list = new List<ProcessLog>();
+                                    if (BatchRptList.Count > 0)
                                     {
+                                        BatchRptList.ForEach(BR =>
+                                        {
                                         //B_MonthlyReport bm = B_MonthlyreportOperator.Instance.GetMonthlyreport(BR.ReportID);
-                                        _list.AddRange(Wanda.Workflow.Client.WFClientSDK.GetProcessLogList(BR.ReportID.ToString()));
-                                    });
+                                        _list.AddRange(BPF.Workflow.Client.WFClientSDK.GetProcessLogList(BR.ReportID.ToString()));
+                                        });
+                                    }
+                                    batchModel.Opinions = JsonConvert.SerializeObject(_list.OrderByDescending(p => p.FinishDateTime));
+
+                                    #endregion
+
+                                    WorkflowContext workflow = WFClientSDK.GetProcess(null, this.BusinessID, new UserInfo() { UserCode = "$VirtualUserCode$项目汇总服务" });
+                                    Common.ScheduleService.Log.Instance.Info(c_System.SystemName + "合并流程,获取流程成功！");
+                                    //先启动流程，流程能启动了，在写入数据库流程审批日志
+                                    Dictionary<string, object> formParams = new Dictionary<string, object>();
+                                    formParams.Add("ReportName", _Title);
+                                    formParams.Add("ProcessKey", ProcessKey);
+
+                                    BizContext bizContext = new BizContext();
+                                    bizContext.NodeInstanceList = workflow.NodeInstanceList;
+                                    bizContext.ProcessRunningNodeID = workflow.ProcessInstance.RunningNodeID;
+                                    bizContext.BusinessID = BusinessID;
+                                    bizContext.FlowCode = ProcessKey;
+                                    bizContext.ApprovalContent = "各区域数据已经汇总完成，请领导审批";
+                                    bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$项目汇总服务" };
+                                    bizContext.ProcessURL = "/BusinessReport/TargetApprove.aspx?ProType=Batch";
+                                    bizContext.FormParams = formParams;
+                                    bizContext.ExtensionCommond = new Dictionary<string, string>();
+                                    bizContext.ExtensionCommond.Add("RejectNode", Guid.Empty.ToString());
+                                    Common.ScheduleService.Log.Instance.Info(c_System.SystemName+"合并流程,流程参数配置成功！");
+                                    WorkflowContext wfc = WFClientSDK.ExecuteMethod("SubmitProcess", bizContext);
+                                    Common.ScheduleService.Log.Instance.Info(c_System.SystemName + "合并流程,流程提交成功！");
+                                    OperationType = 1;
+                                    //ProcessExecute();
+
+
+                                    //先启动流程，流程能启动了，在写入数据库流程审批日志
+                                    //ProcessResponse r = ClientProcess.MoveTo(BusinessID, "南、北、中、文旅项目已经汇总完成，请领导审批", Dic, "", true);
+
+                                    //将批次的审批状态改变
+                                    ExceptionHelper.TrueThrow(batchModel == null, string.Format("cannot find the report data which id={0}", BusinessID));
+                                    batchModel.WFBatchStatus = "Progress";
+
+                                    //获取流程导航
+                                    List<NavigatActivity1> listna = GetProcessIntance(wfc);
+
+                                    if (listna.Count > 0)
+                                    {
+                                        batchModel.ReportApprove = JsonConvert.SerializeObject(listna);
+                                    }
+
+                                    B_SystemBatchOperator.Instance.UpdateSystemBatch(batchModel);
+
+
+
+                                    Common.ScheduleService.Log.Instance.Info(c_System.SystemName + "合并流程服务，再次合并流程数据启动完成!");
                                 }
-                                batchModel.Opinions = JsonConvert.SerializeObject(_list.OrderByDescending(p => p.FinishDateTime));
+                                catch (Exception ex)
+                                {
+                                    Common.ScheduleService.Log.Instance.Error(c_System.SystemName + "合并流程再次启动失败！，错误信息：" + ex.ToString());
+                                }
 
                                 #endregion
-
-                                WorkflowContext workflow = WFClientSDK.GetProcess(null, this.BusinessID, new UserInfo() { UserCode = "$VirtualUserCode$项目汇总服务" });
-                                Common.ScheduleService.Log.Instance.Info("项目系统合并流程,获取流程成功！");
-                                //先启动流程，流程能启动了，在写入数据库流程审批日志
-                                Dictionary<string, object> formParams = new Dictionary<string, object>();
-                                formParams.Add("ReportName", _Title);
-                                formParams.Add("ProcessKey", "YY_WD-SYSTEM-JY-PRONEW");
-
-                                BizContext bizContext = new BizContext();
-                                bizContext.NodeInstanceList = workflow.NodeInstanceList;
-                                bizContext.ProcessRunningNodeID = workflow.ProcessInstance.RunningNodeID;
-                                bizContext.BusinessID = BusinessID;
-                                bizContext.FlowCode = "YY_WD-SYSTEM-JY-PRONEW";
-                                bizContext.ApprovalContent = "南、中、北、大项目已经汇总完成，请领导审批";
-                                bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$项目汇总服务" };
-                                bizContext.ProcessURL = "/BusinessReport/ProTargetApprove.aspx?ProType=Batch";
-                                bizContext.FormParams = formParams;
-                                bizContext.ExtensionCommond = new Dictionary<string, string>();
-                                bizContext.ExtensionCommond.Add("RejectNode", Guid.Empty.ToString());
-                                Common.ScheduleService.Log.Instance.Info("项目系统合并流程,流程参数配置成功！");
-                                WorkflowContext wfc=WFClientSDK.ExecuteMethod("SubmitProcess", bizContext);
-                                Common.ScheduleService.Log.Instance.Info("项目系统合并流程,流程提交成功！");
-                                OperationType = 1;
-                                //ProcessExecute();
-
-
-                                //先启动流程，流程能启动了，在写入数据库流程审批日志
-                                //ProcessResponse r = ClientProcess.MoveTo(BusinessID, "南、北、中、文旅项目已经汇总完成，请领导审批", Dic, "", true);
-
-                                //将批次的审批状态改变
-                                ExceptionHelper.TrueThrow(batchModel == null, string.Format("cannot find the report data which id={0}", BusinessID));
-                                batchModel.WFBatchStatus = "Progress";
-
-                                //获取流程导航
-                                List<NavigatActivity1> listna = GetProcessIntance(wfc);
-
-                                if (listna.Count > 0)
-                                {
-                                    batchModel.ReportApprove = JsonConvert.SerializeObject(listna);
-                                }
-
-                                B_SystemBatchOperator.Instance.UpdateSystemBatch(batchModel);
-
-
-
-                                Common.ScheduleService.Log.Instance.Info("项目系统合并流程服务，再次合并流程数据启动完成!");
                             }
-                            catch (Exception ex)
-                            {
-                                Common.ScheduleService.Log.Instance.Error("项目系统合并流程再次启动失败！，错误信息：" + ex.ToString());
-                            }
-
-                            #endregion
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        Common.ScheduleService.Log.Instance.Error( "合并流程启动失败！，错误信息：" + ex.ToString());
+                    }
+
+
                 }
-                catch (Exception ex)
+                else
                 {
-                    Common.ScheduleService.Log.Instance.Error("项目系统合并流程启动失败！，错误信息：" + ex.ToString());
+                    Common.ScheduleService.Log.Instance.Info("项目系统合并流程服务，没有查找到符合条件合并流程!");
                 }
-
-
             }
-            else
-            {
-                Common.ScheduleService.Log.Instance.Info("项目系统合并流程服务，没有查找到符合条件合并流程!");
-            }
-
         }
 
-        protected void CallMethed(string methedName)
+        protected void CallMethed(string methedName,string groupType)
         {
             if (methedName == null)
             {
@@ -217,7 +221,7 @@ namespace ScheduleService.Handler
             switch (methedName.ToLower())
             {
                 case "startprocess":
-                    StartProcess();
+                    StartProcess(groupType);
                     break;
                 default:
                     throw new NotImplementedException();
@@ -225,11 +229,13 @@ namespace ScheduleService.Handler
         }
 
 
-        protected void StartProcess()
+        protected void StartProcess(string groupType)
         {
 
             
             Dictionary<string, object> formParams = new Dictionary<string, object>();
+            var c_System = StaticResource.Instance.SystemList.Where(x => x.GroupType == groupType).FirstOrDefault();
+            string ProcessKey = c_System.Configuration.Element("ProcessCode").Value + "-HB";
 
 
             //系统2014年7月月报
@@ -239,25 +245,23 @@ namespace ScheduleService.Handler
             // string SysName = "南北中文旅项目";
             string FinYear = batch.FinYear.ToString() + "年";
             string FinMonth = batch.FinMonth.ToString("D2");
-
-
-
-            string _Title = "项目系统(南、中、北、大项目)" + FinYear + FinMonth + "月度报告";
+            string _Title = c_System.SystemName + FinYear + FinMonth + "汇总月度报告";
+            //string _Title = "项目系统(南、中、北、大项目)" + FinYear + FinMonth + "月度报告";
             formParams.Add("ReportName", _Title);
-            formParams.Add("ProcessKey", "YY_WD-SYSTEM-JY-PRONEW");
+            formParams.Add("ProcessKey", ProcessKey);
 
-            Common.ScheduleService.Log.Instance.Info("项目系统合并流程服务，合并流程启动, 上报年：" + FinYear + ",上报月:" + FinMonth);
+            Common.ScheduleService.Log.Instance.Info(c_System.SystemName+"合并流程服务，合并流程启动, 上报年：" + FinYear + ",上报月:" + FinMonth);
 
             Dictionary<string, string> Dic = new Dictionary<string, string>();
             Dic["ReportName"] = _Title;
-            Dic["ProcessKey"] = "YY_WD-SYSTEM-JY-PRONEW";
+            Dic["ProcessKey"] = ProcessKey;
             WorkflowContext wfc = null;
             try
             {
-                Common.ScheduleService.Log.Instance.Info("项目系统合并流程启动开始！");
-                var starup = new Wanda.Workflow.Client.WFStartupParameter()
+                Common.ScheduleService.Log.Instance.Info(c_System.SystemName + "合并流程启动开始！");
+                var starup = new BPF.Workflow.Client.WFStartupParameter()
                 {
-                    FlowCode = "YY_WD-SYSTEM-JY-PRONEW",
+                    FlowCode = ProcessKey,
                     BusinessID = this.BusinessID,
                     CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$项目汇总服务" },
                     FormParams=formParams
@@ -267,29 +271,29 @@ namespace ScheduleService.Handler
 
                 //重新在批次表中，获取数据
                 BatchRptList = JsonConvert.DeserializeObject<List<V_SubReport>>(batch.SubReport);
-                List<Wanda.Workflow.Object.ProcessLog> _list = new List<ProcessLog>();
+                List<BPF.Workflow.Object.ProcessLog> _list = new List<ProcessLog>();
                 if (BatchRptList.Count > 0)
                 {
                     BatchRptList.ForEach(BR =>
                     {
                         //B_MonthlyReport bm = B_MonthlyreportOperator.Instance.GetMonthlyreport(BR.ReportID);
-                        _list.AddRange(Wanda.Workflow.Client.WFClientSDK.GetProcessLogList(BR.ReportID.ToString()));
+                        _list.AddRange(BPF.Workflow.Client.WFClientSDK.GetProcessLogList(BR.ReportID.ToString()));
                     });
                 }
                 batch.Opinions = JsonConvert.SerializeObject(_list);
 
 
                 WorkflowContext workflow = WFClientSDK.CreateProcess(null, starup);
-                Common.ScheduleService.Log.Instance.Info("项目系统合并流程启动中！");
+                Common.ScheduleService.Log.Instance.Info(c_System.SystemName + "项目系统合并流程启动中！");
 
                 BizContext bizContext = new BizContext();
                 bizContext.NodeInstanceList = workflow.NodeInstanceList;
                 bizContext.ProcessRunningNodeID = workflow.ProcessInstance.RunningNodeID;
                 bizContext.BusinessID = BusinessID;
-                bizContext.FlowCode = "YY_WD-SYSTEM-JY-PRONEW";
-                bizContext.ApprovalContent = "南、中、北、大项目已经汇总完成，请领导审批";
+                bizContext.FlowCode = ProcessKey;
+                bizContext.ApprovalContent = c_System.SystemName + "各区域数据已经汇总完成，请领导审批";
                 bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$项目汇总服务" };
-                bizContext.ProcessURL = "/BusinessReport/ProTargetApprove.aspx?ProType=Batch";
+                bizContext.ProcessURL = "/BusinessReport/TargetApprove.aspx?ProType=Batch";
                 bizContext.FormParams = formParams;
                 bizContext.ExtensionCommond = new Dictionary<string, string>();
                 bizContext.ExtensionCommond.Add("RejectNode", Guid.Empty.ToString());
@@ -304,12 +308,12 @@ namespace ScheduleService.Handler
                 //提交操作状态为1
                 OperationType = 1;
 
-                Common.ScheduleService.Log.Instance.Info("项目系统合并流程启动结束！");
+                Common.ScheduleService.Log.Instance.Info(c_System.SystemName + "合并流程启动结束！");
 
             }
             catch (Exception ex)
             {
-                Common.ScheduleService.Log.Instance.Error("项目系统合并流程启动失败！，错误信息：" + ex.ToString());
+                Common.ScheduleService.Log.Instance.Error(c_System.SystemName + "合并流程启动失败！，错误信息：" + ex.ToString());
                 batch = null;
             }
 
@@ -343,12 +347,12 @@ namespace ScheduleService.Handler
         {
 
             List<NavigatActivity1> listna = new List<NavigatActivity1>();
-            if (Wanda.Workflow.Client.WFClientSDK.Exist(BusinessID))
+            if (BPF.Workflow.Client.WFClientSDK.Exist(BusinessID))
             {
                 try
                 {
                     NavigatActivity1 na1 = null;
-                    Dictionary<string, Wanda.Workflow.Object.Node> list = new Dictionary<string, Node>();
+                    Dictionary<string, BPF.Workflow.Object.Node> list = new Dictionary<string, Node>();
                     string strNextNodeID = p.ProcessInstance.StartNodeID;
                     foreach (var p1 in p.NodeInstanceList)
                     {
@@ -406,7 +410,7 @@ namespace ScheduleService.Handler
                 }
                 catch (Exception ex)
                 {
-                    Common.ScheduleService.Log.Instance.Error("项目系统合并流程获取流程导航出错！，错误信息：" + ex.ToString());
+                    Common.ScheduleService.Log.Instance.Error("合并流程获取流程导航出错！，错误信息：" + ex.ToString());
                 }
             }
             return listna;

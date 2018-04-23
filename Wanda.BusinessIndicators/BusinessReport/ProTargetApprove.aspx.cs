@@ -9,7 +9,7 @@ using LJTH.BusinessIndicators.BLL;
 using LJTH.BusinessIndicators.Model;
 using LJTH.BusinessIndicators.ViewModel;
 using Newtonsoft.Json;
-using Wanda.Workflow.Object;
+using BPF.Workflow.Object;
 namespace LJTH.BusinessIndicators.Web.BusinessReport
 {
     public partial class ProTargetApprove : System.Web.UI.Page//,IActivityHost
@@ -57,11 +57,11 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 bs = B_SystemBatchOperator.Instance.GetSystemBatch(bmonthReport.SystemBatchID);
                 if (bs != null) 
                 {
-                    lstBatchProcess = Wanda.Workflow.Client.WFClientSDK.GetProcessLogList(bs.ID.ToString()); //JsonConvert.DeserializeObject<List<ProcessLog>>(bs.Batch_Opinions);
+                    lstBatchProcess = BPF.Workflow.Client.WFClientSDK.GetProcessLogList(bs.ID.ToString()); //JsonConvert.DeserializeObject<List<ProcessLog>>(bs.Batch_Opinions);
                 }
             }
             List<ProcessLog> lstProcess = new List<ProcessLog>();
-            lstProcess = Wanda.Workflow.Client.WFClientSDK.GetProcessLogList(bmonthReport.ID.ToString());
+            lstProcess = BPF.Workflow.Client.WFClientSDK.GetProcessLogList(bmonthReport.ID.ToString());
 
 
             if (lstBatchProcess != null)
@@ -177,15 +177,15 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             List<V_SubReport> BatchRptList = JsonConvert.DeserializeObject<List<V_SubReport>>(_BatchModel.SubReport);
             for (int i = 0; i < BatchRptList.Count; i++)
             {
-                if (Wanda.Workflow.Client.WFClientSDK.Exist(BatchRptList[i].ReportID.ToString()))
+                if (BPF.Workflow.Client.WFClientSDK.Exist(BatchRptList[i].ReportID.ToString()))
                 {
-                    listProLog.AddRange(Wanda.Workflow.Client.WFClientSDK.GetProcessLogList(BatchRptList[i].ReportID.ToString()));
+                    listProLog.AddRange(BPF.Workflow.Client.WFClientSDK.GetProcessLogList(BatchRptList[i].ReportID.ToString()));
                 }
             }
             List<ProcessLog> listBatchProLog = null;
-            if (Wanda.Workflow.Client.WFClientSDK.Exist(_BatchModel.ID.ToString()))
+            if (BPF.Workflow.Client.WFClientSDK.Exist(_BatchModel.ID.ToString()))
             {
-                listBatchProLog = Wanda.Workflow.Client.WFClientSDK.GetProcessLogList(_BatchModel.ID.ToString()); //JsonConvert.DeserializeObject<List<ProcessLog>>(_BatchModel.Batch_Opinions);
+                listBatchProLog = BPF.Workflow.Client.WFClientSDK.GetProcessLogList(_BatchModel.ID.ToString()); //JsonConvert.DeserializeObject<List<ProcessLog>>(_BatchModel.Batch_Opinions);
             }
             if (listBatchProLog != null)
                 listALLProLog.AddRange(listBatchProLog);

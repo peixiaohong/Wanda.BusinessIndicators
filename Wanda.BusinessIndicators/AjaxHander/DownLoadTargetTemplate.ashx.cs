@@ -441,6 +441,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 listTargetPlanView = rpt.GetTagetPlanViewModel();  // 其他系统
 
 
+
             if (listTargetPlanView.Count > 0)
             {
                 string[] strHtmlTemplates = listTargetPlanView[0].HtmlTemplate.Split(',');
@@ -517,6 +518,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         excel.SetCustomProperty(worksheets[z], "TragertID", listTarget[0].ID.ToString());
                         excel.SetCustomProperty(worksheets[z], "TragertName", listTarget[0].TargetName);
                         excel.SetCustomProperty(worksheets[z], "SheetName", "MonthReportDetail");
+                        excel.SetCustomProperty(worksheets[z], "AreaID", rpt.AreaID.ToString());
+
                     }
                     worksheets[z].Cells[0, 1].PutValue(rpt._System.SystemName + listTargetPlanView[z].Name);
                     worksheets[z].Cells[1, 3].PutValue(FinYear.ToString() + "年" + FinMonth + "月");
@@ -769,6 +772,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         excel.SetCustomProperty(worksheets[z + 1], "TragertID", listTarget[0].ID.ToString());
                         excel.SetCustomProperty(worksheets[z + 1], "TragertName", listTarget[0].TargetName);
                         excel.SetCustomProperty(worksheets[z + 1], "SheetName", "MonthReportDetail");
+                        excel.SetCustomProperty(worksheets[z + 1], "AreaID", rpt.AreaID.ToString());
                     }
                     worksheets[z + 1].Cells[0, 1].PutValue(rpt._System.SystemName + otherListTargetPlanView[z].Name);
                     worksheets[z + 1].Cells[1, 3].PutValue(FinYear.ToString() + "年" + FinMonth + "月");
@@ -937,6 +941,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             excel.SetCustomProperty(ws, "TragertName", blendTargetList[0].TargetName);
             excel.SetCustomProperty(ws, "TragertTwoID", blendTargetList[1].ID.ToString());
             excel.SetCustomProperty(ws, "TragertTwoName", blendTargetList[1].TargetName);
+            excel.SetCustomProperty(ws, "AreaID", rpt.AreaID.ToString());
             excel.SetCustomProperty(ws, "SheetName", "MonthReportDetail");
             ws.Cells[0, 1].PutValue(string.Format(@"{0}年度{1}{2}", FinYear, rpt._System.SystemName, fileName));
             ws.Cells[1, 4].PutValue(string.Format(@"{0}月情况", FinMonth));

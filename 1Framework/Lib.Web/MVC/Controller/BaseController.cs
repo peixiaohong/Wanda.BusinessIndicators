@@ -172,7 +172,7 @@ namespace Lib.Web.MVC.Controller
         public string CurrentUserName
         {
             get {
-                if (ConfigurationManager.AppSettings["EnableLogin"] == "false")
+                if (ConfigurationManager.AppSettings["EnabledSSO"] == "false")
                 {
                     return ConfigurationManager.AppSettings["virtualUser"];
                 }

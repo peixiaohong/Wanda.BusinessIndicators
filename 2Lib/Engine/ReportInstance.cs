@@ -64,6 +64,8 @@ namespace LJTH.BusinessIndicators.Engine
             _MonthReportID = MonthReportID;
             B_MonthlyReport report = B_MonthlyreportOperator.Instance.GetMonthlyreport(_MonthReportID);
             _SystemID = report.SystemID;
+            _SystemBatchID = report.SystemBatchID;
+            AreaID = report.AreaID;
             FinYear = report.FinYear;
             FinMonth = report.FinMonth;
             DataSource = _DataSource;
@@ -75,6 +77,9 @@ namespace LJTH.BusinessIndicators.Engine
         public string CurrentLoginName { get; set; }
 
         public Guid _SystemID { get; set; }
+
+        public Guid _SystemBatchID { get; set; }
+
         public int FinYear { get; set; }
         public int FinMonth { get; set; }
         public string SummaryTemplate { get; set; }
@@ -88,6 +93,7 @@ namespace LJTH.BusinessIndicators.Engine
         public List<C_Target> _Target { get { return StaticResource.Instance.GetTargetList(_SystemID,DateTime.Now).ToList(); } }
 
         public Guid _MonthReportID { get; set; }
+        public Guid AreaID { get; set; }
 
 
 

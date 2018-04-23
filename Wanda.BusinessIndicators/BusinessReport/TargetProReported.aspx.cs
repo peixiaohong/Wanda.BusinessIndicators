@@ -12,7 +12,7 @@ using LJTH.BusinessIndicators.Engine;
 using LJTH.BusinessIndicators.Model;
 using LJTH.BusinessIndicators.ViewModel;
 using Wanda.Platform.Permission.ClientComponent;
-using Wanda.Workflow.Client;
+using BPF.Workflow.Client;
 using Newtonsoft.Json;
 
 
@@ -188,9 +188,9 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                             var host = new LJTH.BusinessIndicators.Web.AjaxHander.ProProcessController();
                             host.BusinessID = model.ReportID.ToString();
 
-                            if (Wanda.Workflow.Client.WFClientSDK.Exist(host.BusinessID))
+                            if (BPF.Workflow.Client.WFClientSDK.Exist(host.BusinessID))
                             {
-                                Wanda.Workflow.Object.WorkflowContext wc = Wanda.Workflow.Client.WFClientSDK.GetProcess(null, host.BusinessID);
+                                BPF.Workflow.Object.WorkflowContext wc = BPF.Workflow.Client.WFClientSDK.GetProcess(null, host.BusinessID);
                                 if (!wc.CurrentUserHasTodoTask)
                                 {
                                     Server.Transfer("~/BusinessReport/ProTargetApprove.aspx?BusinessID=" + host.BusinessID);
@@ -289,8 +289,6 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             {
 
                 #region 没有包含在批次里系统
-
-
                 if (string.IsNullOrEmpty(Request["BusinessID"])) //正常上报
                 {
                     //添加月报说明
@@ -333,16 +331,16 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             
             }
             if (bmr != null) {
-                List<Wanda.Workflow.Object.ProcessLog> lstBatchProcessLog=new List<Wanda.Workflow.Object.ProcessLog>();
+                List<BPF.Workflow.Object.ProcessLog> lstBatchProcessLog=new List<BPF.Workflow.Object.ProcessLog>();
                 if (bmr.SystemBatchID != Guid.Empty)
                 {
 
-                    //if (Wanda.Workflow.Client.WFClientSDK.Exist(bmr.SystemBatchID.ToString()))
+                    //if (BPF.Workflow.Client.WFClientSDK.Exist(bmr.SystemBatchID.ToString()))
                     //{
-                    //    lstBatchProcessLog = Wanda.Workflow.Client.WFClientSDK.GetProcessLogList(bmr.SystemBatchID.ToString());
+                    //    lstBatchProcessLog = BPF.Workflow.Client.WFClientSDK.GetProcessLogList(bmr.SystemBatchID.ToString());
                     //}
                 }
-                //List<Wanda.Workflow.Object.ProcessLog> lstCurrentProcessLog = Wanda.Workflow.Client.WFClientSDK.GetProcessLogList(bmr.ID.ToString());
+                //List<BPF.Workflow.Object.ProcessLog> lstCurrentProcessLog = BPF.Workflow.Client.WFClientSDK.GetProcessLogList(bmr.ID.ToString());
                 
                 //if (lstBatchProcessLog!=null)
                 //{
@@ -488,9 +486,9 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 {
                     var host = new LJTH.BusinessIndicators.Web.AjaxHander.ProProcessController();
                     host.BusinessID = Request["BusinessID"];
-                    if (Wanda.Workflow.Client.WFClientSDK.Exist(host.BusinessID))
+                    if (BPF.Workflow.Client.WFClientSDK.Exist(host.BusinessID))
                     {
-                        Wanda.Workflow.Object.WorkflowContext wc = Wanda.Workflow.Client.WFClientSDK.GetProcess(null, host.BusinessID);
+                        BPF.Workflow.Object.WorkflowContext wc = BPF.Workflow.Client.WFClientSDK.GetProcess(null, host.BusinessID);
                         if (!wc.CurrentUserHasTodoTask)
                         Server.Transfer("~/BusinessReport/ProTargetApprove.aspx?BusinessID=" + host.BusinessID);
                     }

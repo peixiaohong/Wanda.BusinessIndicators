@@ -174,7 +174,7 @@ $(function () {
             AlwaysReturnToStart:true
         },
     };
-    //wanda_wf_client.initAjaxSetting("process", false, otherSetting);
+    //bpf_wf_client.initAjaxSetting("process", false, otherSetting);
 })
 
 
@@ -182,19 +182,19 @@ var Month
 function GetProcess(key, instanceID) {
     Month = $("#hideFinMonth").val() * 1 > 9 ? $("#hideFinMonth").val() : "0" + $("#hideFinMonth").val();
     FlowCode = key;
-    var businessID = wanda_wf_tool.getQueryString("BusinessID");
+    var businessID = bpf_wf_tool.getQueryString("BusinessID");
     if (businessID != "") {
-        wanda_wf_client.getProcess(businessID, function () {
+        bpf_wf_client.getProcess(businessID, function () {
             $.unblockUI();
         });
     }
     else {
-        wanda_wf_client.exist(instanceID, function () {
-            wanda_wf_client.getProcess(instanceID, function () {
+        bpf_wf_client.exist(instanceID, function () {
+            bpf_wf_client.getProcess(instanceID, function () {
                 $.unblockUI();
             })
         }, function () {
-            wanda_wf_client.createProcess({
+            bpf_wf_client.createProcess({
                 FlowCode: FlowCode,
                 BusinessID: instanceID,
                 ProcessTitle: ($('select#ddlSystem').find('option:selected').text() != "境外项目" ? "项目系统" : $('select#ddlSystem').find('option:selected').text()) + $("#hideFinYear").val() + "年" + Month + "月度报告",

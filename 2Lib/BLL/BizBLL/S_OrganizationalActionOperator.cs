@@ -85,6 +85,50 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
             return _s_OrganizationalAdapter.GetChildDataByID(id);
         }
 
+        /// <summary>
+        /// 根据板块拿到所有的大区
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetSystem_Regional(Guid systemID)
+        {
+            return _s_OrganizationalAdapter.GetSystem_Regional(systemID);
+        }
+
+        /// <summary>
+        /// 根据板块ID,大区Id获取项目，如果大区下没有，就拿板块下的项目
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="regionalID"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetCompanyByRegionalID(Guid systemID, Guid regionalID)
+        {
+            return _s_OrganizationalAdapter.GetCompanyByRegionalID(systemID, regionalID);
+        }
+
+
+        /// <summary>
+        /// 根据板块ID,名称查询已有数据
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="cnName"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetSystemsubsetCnName(Guid systemID, string cnName)
+        {
+            return _s_OrganizationalAdapter.GetSystemsubsetCnName(systemID, cnName);
+        }
+
+        /// <summary>
+        /// 获取组织架构【用户设置组织】
+        /// </summary>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetDataByLoginName(string loginName)
+        {
+            return _s_OrganizationalAdapter.GetDataByLoginName(loginName);
+        }
+
+
         #endregion
 
 
@@ -101,7 +145,7 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         }
 
         /// <summary>
-        /// 根据登陆人拿所有的授权组织
+        /// 根据登陆人拿所有授权的组织架构数据
         /// </summary>
         /// <param name="loginName"></param>
         /// <returns></returns>
@@ -111,7 +155,7 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         }
 
         /// <summary>
-        /// 根据登陆人拿到所有的板块
+        /// 根据登陆人拿到所有授权的板块
         /// </summary>
         /// <param name="loginName"></param>
         /// <returns></returns>
@@ -121,18 +165,18 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         }
 
         /// <summary>
-        /// 根据登陆人，板块ID拿到所有的项目
+        /// 根据登陆人，板块ID拿到所有授权的项目
         /// </summary>
         /// <param name="systemID"></param>
         /// <param name="loginName"></param>
         /// <returns></returns>
         public List<S_Organizational> GetUserCompanyData(Guid systemID, string loginName)
         {
-            return _s_OrganizationalAdapter.GetUserCompanyData(systemID,loginName);
+            return _s_OrganizationalAdapter.GetUserCompanyData(systemID, loginName);
         }
 
         /// <summary>
-        /// 根据登陆人，获取板块下第一个大区
+        /// 根据登陆人，获取板块下第一层授权的大区
         /// </summary>
         /// <param name="systemID"></param>
         /// <param name="loginName"></param>

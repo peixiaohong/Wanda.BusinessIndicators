@@ -1,6 +1,8 @@
 ﻿using LJTH.BusinessIndicators.Model.BizModel;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +21,12 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
         /// <returns></returns>
         public List<string> GetDataByRoleID(Guid RoleID)
         {
-            string sql = string.Format(@"Select * From [dbo].[S_Role_User] Where [IsDeleted]=0 And [RoleID]='{0}'", RoleID);
-
-            return ExecuteQuery(sql).Select(o => o.LoginName).ToList<string>();
+            string sql = "Select * From [dbo].[S_Role_User] Where [IsDeleted]=0 And [RoleID]=@RoleID";
+            DbParameter[] parameters = new DbParameter[]
+            {
+                 CreateSqlParameter("@RoleID",DbType.Guid,RoleID),
+            };
+            return ExecuteQuery(sql,parameters).Select(o => o.LoginName).ToList<string>();
         }
 
         /// <summary>
@@ -32,8 +37,13 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
         /// <returns></returns>
         public int DeleteDataByRoleID_LoginName(Guid roleID, string loginName)
         {
-            string sql = string.Format(@"Delete [dbo].[S_Role_User] Where [RoleID]='{0}' And [LoginName]='{1}'", roleID, loginName);
-            return ExecuteSql(sql);
+            string sql = string.Format(@"Delete [dbo].[S_Role_User] Where [RoleID]='{0}' And [LoginName]=@LoginName", roleID, loginName);
+            DbParameter[] parameters = new DbParameter[]
+            {
+                 CreateSqlParameter("@RoleID",DbType.Guid,roleID),
+                 CreateSqlParameter("@LoginName",DbType.String,loginName)
+            };
+            return ExecuteSql(sql,parameters);
         }
 
         /// <summary>
@@ -43,8 +53,12 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
         /// <returns></returns>
         public int DeleteDatasByLoginName(string loginName)
         {
-            string sql = string.Format(@"Delete [dbo].[S_Role_User] Where [LoginName]='{0}'",loginName);
-            return ExecuteSql(sql);
+            string sql = "Delete [dbo].[S_Role_User] Where [LoginName]=@LoginName";
+            DbParameter[] parameters = new DbParameter[]
+            {
+                 CreateSqlParameter("@LoginName",DbType.String,loginName)
+            };
+            return ExecuteSql(sql,parameters);
         }
     }
 }

@@ -68,7 +68,7 @@ function operateNav(sender) {
             $("#process").show();
             $.blockUI({ message: "<div style='width:200px'><img src='../../images/ajax-loader.gif' alt='waiting'><span style='font-size:20px;padding-left:20px;color:#3f3f3f'>数据请求中...</span></div>" });
             //后续加上 BusinessID
-            //GetProcess($("#HideProcessCode").val(), $("#hideMonthReportID").val());
+            GetProcess($("#HideProcessCode").val(), $("#hideMonthReportID").val());
 
             $("#T2,#UpLoadDataDiv,#DownLoadModel,#T3,#T3_1,#Down1,#T4,#RptAttachments,#divMonthLyReportAction").hide();
             break;
@@ -105,7 +105,7 @@ $(function () {
             AlwaysReturnToStart: true
         },
     };
-    //wanda_wf_client.initAjaxSetting("process", false, otherSetting);
+    bpf_wf_client.initAjaxSetting("process", false, otherSetting);
 })
 
 
@@ -113,19 +113,19 @@ var Month;
 function GetProcess(key, instanceID) {
     Month = $("#hideFinMonth").val() * 1 > 9 ? $("#hideFinMonth").val() : "0" + $("#hideFinMonth").val();
     FlowCode = key;
-    var businessID = wanda_wf_tool.getQueryString("BusinessID");
+    var businessID = bpf_wf_tool.getQueryString("BusinessID");
     if (businessID != "") {
-        wanda_wf_client.getProcess(businessID, function () {
+        bpf_wf_client.getProcess(businessID, function () {
             $.unblockUI();
         });
     }
     else {
-        wanda_wf_client.exist(instanceID, function () {
-            wanda_wf_client.getProcess(instanceID, function () {
+        bpf_wf_client.exist(instanceID, function () {
+            bpf_wf_client.getProcess(instanceID, function () {
                 $.unblockUI();
             })
         }, function () {
-            wanda_wf_client.createProcess({
+            bpf_wf_client.createProcess({
                 FlowCode: FlowCode,
                 BusinessID: instanceID,
                 ProcessTitle: $('select#ddlSystem').find('option:selected').text() + $("#hideFinYear").val() + "年" + Month + "月度报告",
