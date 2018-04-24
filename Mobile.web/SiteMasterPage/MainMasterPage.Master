@@ -1,0 +1,35 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMasterPage.master.cs" Inherits="Mobile.web.SiteMasterPage.MainMasterPage" %>
+<%@ Register Src="~/SiteMasterPage/bsCtrl.ascx" TagPrefix="uc1" TagName="bsCtrl" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <uc1:bsCtrl runat="server" ID="bsCtrl" />
+    <link href="<%=ResolveUrl("~/Assets/vendors/bootstrap/css/bootstrap.min.css") %>" rel="stylesheet" />
+    <link href="<%=ResolveUrl("~/Assets/vendors/bootstrap/css/bootstrap-theme.min.css") %>" rel="stylesheet" />
+    <link href="<%=ResolveUrl("~/Assets/styles/main.css") %>" rel="stylesheet" />
+    <link href="<%=ResolveUrl("~/Assets/styles/site.css") %>" rel="stylesheet" />
+    <link href="<%=ResolveUrl("~/Assets/styles/content.css") %>" rel="stylesheet" />
+    <link href="<%=ResolveUrl("~/Assets/styles/page.css") %>" rel="stylesheet" />
+    <link href="<%=ResolveUrl("~/Assets/styles/common.css") %>" rel="stylesheet" />
+    <script src="<%=ResolveUrl("~/Assets/vendors/jquery/jquery.min.js") %>"></script>
+    <script src="<%=ResolveUrl("~/Assets/vendors/bootstrap/js/bootstrap.min.js") %>"></script>
+    
+<%--<script src="<%=ResolveUrl("~/Assets/vendors/workflow/js/Workflow.js?v=") + ConfigurationManager.AppSettings[""] %>"></script>--%>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+ 
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>

@@ -300,10 +300,10 @@ namespace LJTH.BusinessIndicators.Engine
 
 
                         //当月项目计划数
-                        CurrPlanNum = (double)targetPDetail.Where(p => p.TargetID == item.ID && p.FinYear == RptList[0].FinYear && p.FinMonth == RptList[0].FinMonth).Sum(s => s.Target);
+                        CurrPlanNum = (double)targetPDetail.Where(p => p.TargetID == item.ID && companyIDArray.Contains(p.CompanyID) && p.FinYear == RptList[0].FinYear && p.FinMonth == RptList[0].FinMonth).Sum(s => s.Target);
 
                         //累计项目计划数
-                        AccPlanNum = (double)targetPDetail.Where(p => p.TargetID == item.ID && p.FinYear == RptList[0].FinYear && p.FinMonth <= RptList[0].FinMonth).Sum(s => s.Target);
+                        AccPlanNum = (double)targetPDetail.Where(p => p.TargetID == item.ID && companyIDArray.Contains(p.CompanyID) && p.FinYear == RptList[0].FinYear && p.FinMonth <= RptList[0].FinMonth).Sum(s => s.Target);
 
                     }
 

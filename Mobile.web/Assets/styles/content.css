@@ -1,0 +1,386 @@
+@charset "utf-8";
+body {
+   background-color: #fff;
+   font-family: "Microsoft YaHei";
+}
+
+ul,ol {
+    list-style: none;
+    margin: 0;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.clear {
+    clear: both;
+    *zoom:1;
+}
+
+.clear:after  {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+:before,
+:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.white-bg,
+.container,
+#content,
+.row {
+    background: #fff;
+}
+
+.white-wrap {
+    background: #fff;
+}
+
+.collection-top {
+    padding: 24px 0 10px;
+}
+
+.collection-t {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 8px;
+}
+
+.collection-top .collection-time {
+    font-size: 14px;
+    color: #666;
+}
+
+.collection-top .collection-time .title-key {
+    white-space: nowrap;
+}
+
+.collection-top .collection-time .title-val {
+    color: #878787;
+}
+
+.collection-top .collection-time .title-val:first-child {
+    margin-right: 16px;
+}
+
+.collection-cont,
+.collection-cont ul {
+    padding: 0;
+}
+
+.collection-cont {
+    padding-bottom: 15px;
+}
+
+.collection-pdb {
+    padding-bottom: 62px;
+}
+
+.collection-cont ul {
+    border-top: 1px solid #ced6e0;
+}
+
+.collection-cont ul li {
+    border-bottom: 1px solid #ced6e0;
+    position: relative;
+}
+
+.collection-cont ul li h3 {
+    background: #fff;
+    font-size: 16px;
+    padding: 15px;
+    padding-right: 36px;
+    position: relative;
+    margin: 0;
+}
+
+.collection-cont ul li h3 .collection-updown-icon {
+    background: url(../images/icon_arr_down.png) left center no-repeat;
+    background-size: 18px;
+    display: block;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -15px;
+}
+
+.collection-cont ul .active h3 .collection-updown-icon {
+    background: url(../images/icon_arr_up.png) left center no-repeat;
+    background-size: 18px;
+}
+
+.collection-result {
+    background: #f9f9f9;
+    border: 1px solid #ced6e0;
+    border-bottom: none;
+    display: none;
+    padding: 10px;
+    position: relative;
+}
+
+.collection-cont ul .active .collection-result {
+    display: block;
+}
+
+.collection-result p {
+    margin-bottom: 0;
+    white-space: pre-line;
+}
+
+.collection-result .attachment-t,
+.tips-con .attachment-t {
+    color: #068eec;
+    text-decoration: underline;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.attachment-img {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+.attachment-info {
+    padding-left: 60px;
+    margin-bottom: 10px;
+}
+
+.attachment-info p {
+    margin-bottom: 5px;
+}
+
+.attachment-info p .val {
+    color: #666;
+    word-wrap: word-break;
+    word-break: break-all;
+}
+
+.attachment-view {
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid #0785dc;
+    background: #068eec;
+    color: #fff;
+    display: block;
+    width: 95%;
+    padding: 6px 12px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.des-attachment {
+    background: #f5f6f8;
+    border: 1px solid #eaeff5;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding: 6px;
+    margin-top: 8px;
+    position: relative;
+}
+
+.des-attachment > span {
+    position: absolute;
+    left: 6px;
+    top: 6px;
+}
+
+.des-attachment-info {
+    padding-left: 66px;
+}
+
+.des-attachment-info p {
+    margin-bottom: 5px;
+}
+
+.des-attachment-info p:last-child {
+    margin-bottom: 0;
+}
+
+.collections {
+    padding: 16px 0;
+    border-bottom: 1px solid #ced6e0;
+}
+
+.collections dl dt,
+.collections dl dd {
+    margin-bottom: 8px;
+}
+
+.collections dl:last-child,
+.collections dl dd:last-child {
+    margin-bottom: 0;
+}
+
+.collections .btn-template {
+    background: #fff;
+    border: 1px solid #ced6e0;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 60%;
+    height: 50px;
+    margin: 0 auto;
+}
+
+.collections .btn-template:focus,
+.collections .btn-template:active,
+.upload input:focus,
+.upload input:active {
+    outline: none;
+}
+
+.collections .line-template {
+    color: #999;
+    border: 1px solid #ededed;
+}
+
+.collection-step-desc p {
+    color: #8d8d8d;
+    font-size: 12px;
+    margin-bottom: 3px;
+} 
+
+.collection-step-desc p:last-child {
+    margin-bottom: 0;
+}
+
+.tipsbox {
+    padding: 15px;
+}
+
+.tipsbox p {
+    color: #068eec;
+    margin-bottom: 3px;
+    text-indent: 2em;
+}
+
+.tipsbox .sheet-length {
+    color: #333;
+    text-indent: 0;
+}
+
+.tipsbox .tips-t {
+    font-weight: bold;
+    text-indent: 0;
+}
+
+.tipsbox p:last-child {
+    margin-bottom: 0;
+}
+
+.mask {
+    background: rgba(255,255,255,0.8);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 19;
+    display: block;
+}
+
+.mask p {
+    color: #666;
+    font-size: 26px;
+    white-space: nowrap;
+    margin-bottom: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+}
+
+.fill-des p {
+    color: #878787;
+    font-size: 12px;
+}
+
+.fill-des textarea {
+    height: 60px;
+    margin-bottom: 3px;
+}
+
+.upload-attachment > span {
+    line-height: 30px;
+}
+
+.upload {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-left: 66px;
+    margin-bottom: 5px;
+}
+
+.upload.upload-template {
+    line-height: 48px;
+}
+
+.upload input {
+    font-size: 1000px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.des-attachment-info p span {
+    background: url(../images/icon-attachment-del.png) center bottom no-repeat;
+    background-size: 14px;
+    display: inline-block;
+    width: 30px;
+    height: 16px;
+    margin-bottom: -3px;
+}
+
+.collection-action {
+    background: rgba(0,0,0,0.8);
+    padding: 8px 10px;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 29;
+}
+
+.collection-action .collection-btn {
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    color: #fff;
+    display: inline-block;
+    width: 26%;
+    margin: 0 2%;
+    font-size: 16px;
+    padding: 5px 12px;
+}
+
+.collection-action .btn-save,
+.collection-action .btn-add-tag {
+    background: #39b3d7;
+}
+
+.collection-action .btn-submit {
+    background: #e77c27;
+}
