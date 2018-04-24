@@ -9,6 +9,6 @@ namespace LJTH.BusinessIndicators.Engine
 {
     public interface IGetMonthDescriptionValue
     {
-        Hashtable GetMonthDescriptionValue(object Vmodel);
+        Hashtable GetMonthDescriptionValue(object Vmodel,string CurrentLoginName);
     }
 }

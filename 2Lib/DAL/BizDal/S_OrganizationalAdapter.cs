@@ -249,27 +249,17 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
         {
 
             string sql = @"With getSystemData
-                            As
-                             (Select
-		                            A.*
-	                          From  [dbo].[S_Organizational] As A
-	                          Inner Join [dbo].[S_Org_User] As B
-			                             On A.[ID]=B.[CompanyID]
-				                            And [B].[IsDeleted]=0
-	                          Inner Join [dbo].[Employee] As C
-			                             On B.[LoginName]=C.[LoginName]
-				                            And C.[IsDeleted]=0
-	                          Where A.[IsDeleted]=0
-		                            And B.[LoginName]=@LoginName And A.[ParentID]='00000000-0000-0000-0000-000000000000'
-	                          Union All
-	                          Select
-		                            A.*
-	                          From  [dbo].[S_Organizational] As A
-	                          Inner Join getSystemData As B
-			                             On A.[ParentID]=B.[ID]
-	                          Where A.[IsDeleted]=0
-                             )
-                          Select * From getSystemData As A Where A.[IsDeleted]=0 And A.[Level]=2;";
+                                As 
+                                (
+	                                Select A.* From [dbo].[S_Organizational] As A 
+	                                Inner Join [S_Org_User] As B On A.[ID]=B.[CompanyID] And B.[IsDeleted]=0 And B.[LoginName]=@LoginName
+	                                Inner Join [dbo].[Employee] As C On B.[LoginName]=C.[LoginName] And C.[IsDeleted]=0
+	                                Union All
+                                    Select A.* From [dbo].[S_Organizational] As A
+	                                Inner Join [getSystemData] As B On A.[ID]=B.[ParentID] And B.[IsDeleted]=0
+	                                Where A.[IsDeleted]=0
+                                )
+                                Select Distinct * From [getSystemData] Where [Level]=2";
             DbParameter[] parameters = new DbParameter[]
             {
                 CreateSqlParameter("@LoginName",DbType.String,loginName)

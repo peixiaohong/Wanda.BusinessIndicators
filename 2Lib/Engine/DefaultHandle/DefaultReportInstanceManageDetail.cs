@@ -30,7 +30,7 @@ namespace LJTH.BusinessIndicators.Engine
         C_System _System = null;
         List<C_Target> _Target = null;
 
-        public List<DictionaryVmodel> GetManageDetailRptDataSource(ReportInstance RptModel, string strCompanyProperty, string strOrderType, bool IncludeHaveDetail,string currentLoginName)
+        public List<DictionaryVmodel> GetManageDetailRptDataSource(ReportInstance RptModel, string strCompanyProperty, string strOrderType, bool IncludeHaveDetail)
         {
             _System = RptModel._System;
             FinMonth = RptModel.FinMonth;
@@ -39,7 +39,7 @@ namespace LJTH.BusinessIndicators.Engine
             ReportDetails = RptModel.ReportDetails;
             this.IncludeHaveDetail = IncludeHaveDetail;
             strMonthReportOrderType = strOrderType;
-            CurrentLoginName = currentLoginName;
+            CurrentLoginName = RptModel.CurrentLoginName;
             //这里strCompanyProperty参数，不仅是公司属性，同时也是判断：调用的来源(strCompanyProperty=="Reported"),表示是从上报页面调用，反之不是则是从查询页面调用的
             if (!string.IsNullOrEmpty(strCompanyProperty))
             {

@@ -100,7 +100,7 @@ namespace LJTH.BusinessIndicators.Engine
         /// <param name="strOrderType">排序字段：在经营系统中用到，在项目系统中被当作IsPlan字段来用</param>
         /// <param name="IncludeHaveDetail">是否包含明细：在经营系统中用到，在项目系统中被当作IsLatestVersion用</param>
         /// <returns></returns>
-        public List<DictionaryVmodel> GetManageDetailRptDataSource(ReportInstance RptModel, string strCompanyProperty, string strOrderType, bool IncludeHaveDetail, string currentLoginName)
+        public List<DictionaryVmodel> GetManageDetailRptDataSource(ReportInstance RptModel, string strCompanyProperty, string strOrderType, bool IncludeHaveDetail)
         {
             //默认是走经营系统
             string InterfaceName = "*";
@@ -110,21 +110,21 @@ namespace LJTH.BusinessIndicators.Engine
                 if (sys.Category == 2)
                 {
                     InterfaceName = "ProRptDetail";
-                    return this[InterfaceName].GetManageDetailRptDataSource(RptModel, strCompanyProperty, strOrderType, IncludeHaveDetail, currentLoginName);
+                    return this[InterfaceName].GetManageDetailRptDataSource(RptModel, strCompanyProperty, strOrderType, IncludeHaveDetail);
                 }
                 else if (sys.Category == 3)
                 {
                     InterfaceName = "GroupRptDetail";
-                    return this[InterfaceName].GetManageDetailRptDataSource(RptModel, strCompanyProperty, strOrderType, IncludeHaveDetail, currentLoginName);
+                    return this[InterfaceName].GetManageDetailRptDataSource(RptModel, strCompanyProperty, strOrderType, IncludeHaveDetail);
                 }
                 else if (sys.Category == 4)
                 {
                     InterfaceName = "DirectlyRptDetail";
-                    return this[InterfaceName].GetManageDetailRptDataSource(RptModel, strCompanyProperty, strOrderType, IncludeHaveDetail, currentLoginName);
+                    return this[InterfaceName].GetManageDetailRptDataSource(RptModel, strCompanyProperty, strOrderType, IncludeHaveDetail);
                 }
 
             }
-            return this[InterfaceName].GetManageDetailRptDataSource(RptModel, strCompanyProperty, strOrderType, IncludeHaveDetail, currentLoginName);
+            return this[InterfaceName].GetManageDetailRptDataSource(RptModel, strCompanyProperty, strOrderType, IncludeHaveDetail);
         }
     }
 }

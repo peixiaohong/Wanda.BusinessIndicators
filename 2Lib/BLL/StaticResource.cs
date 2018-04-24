@@ -324,11 +324,20 @@ namespace LJTH.BusinessIndicators.BLL
         /// 根据板块ID获取有效的组织架构信息
         /// </summary>
         /// <param name="systemID"></param>
-        /// <param name="loginName"></param>
         /// <returns></returns>
         public List<S_Organizational> GetAllDataBySystemID(Guid systemID)
         {
             return S_OrganizationalActionOperator.Instance.GetAllDataBySystemID(systemID);
+        }
+        /// <summary>
+        /// 根据板块ID获取是否包含区域
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <returns>true存在区域false不存在区域</returns>
+        public bool GetSystem_Regional(Guid systemID)
+        {
+            var result = S_OrganizationalActionOperator.Instance.GetSystem_Regional(systemID);
+            return result != null && result.Any() ? true : false;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace LJTH.BusinessIndicators.Engine
     /// </summary>
     public class DefaultGetMonthDescriptionValue : IGetMonthDescriptionValue
     {
-        public Hashtable GetMonthDescriptionValue(object Vmodel)
+        public Hashtable GetMonthDescriptionValue(object Vmodel, string CurrentLoginName)
         {
             List<MonthlyReportDetail> RptList = (List<MonthlyReportDetail>)Vmodel;
 
@@ -138,7 +138,7 @@ namespace LJTH.BusinessIndicators.Engine
                     monthRptSum.NActualAmmount = (double)(RptList.Where(p => p.TargetID == item.ID).Sum(e => e.NActualAmmount));
                     monthRptSum.NAccumulativePlanAmmount = (double)(RptList.Where(p => p.TargetID == item.ID).Sum(e => e.NAccumulativePlanAmmount));
                     monthRptSum.NAccumulativeActualAmmount = (double)(RptList.Where(p => p.TargetID == item.ID).Sum(e => e.NAccumulativeActualAmmount));
-                    monthRptSum.MeasureRate ="0"; // 这个值是为了计算当月或者是累计完成率,如果想计算全年的,请将该字段的值赋值成全年的完成率
+                    monthRptSum.MeasureRate = "0"; // 这个值是为了计算当月或者是累计完成率,如果想计算全年的,请将该字段的值赋值成全年的完成率
                     monthRptSum = TargetEvaluationEngine.TargetEvaluationService.SummaryCalculation(monthRptSum);
 
                     if (hastable.ContainsKey(item.TargetName + ".当月计划总数") == false)
@@ -148,7 +148,7 @@ namespace LJTH.BusinessIndicators.Engine
 
 
                     if (hastable.ContainsKey(item.TargetName + ".当月实际总数") == false)
-                        hastable.Add(item.TargetName + ".当月实际总数", Math.Round(RptList.Where(p => p.TargetID == item.ID).Sum(s => s.NActualAmmount),0,MidpointRounding.AwayFromZero).ToString("N0"));
+                        hastable.Add(item.TargetName + ".当月实际总数", Math.Round(RptList.Where(p => p.TargetID == item.ID).Sum(s => s.NActualAmmount), 0, MidpointRounding.AwayFromZero).ToString("N0"));
                     else
                         hastable[item.TargetName + ".当月实际总数"] = Math.Round(RptList.Where(p => p.TargetID == item.ID).Sum(s => s.NActualAmmount), 0, MidpointRounding.AwayFromZero).ToString("N0");
 
@@ -180,7 +180,7 @@ namespace LJTH.BusinessIndicators.Engine
                         hastable[item.TargetName + ".当月有差额公司数量"] = (int)RptList.Where(p => p.TargetID == item.ID && p.NDifference != 0).Count();
 
                     //商管专用
-                    if (hastable.ContainsKey( item.TargetName + ".当月绝对值亏损总数") == false)
+                    if (hastable.ContainsKey(item.TargetName + ".当月绝对值亏损总数") == false)
                         hastable.Add(item.TargetName + ".当月绝对值亏损总数", Math.Abs(Math.Round(RptList.Where(p => p.TargetID == item.ID).Sum(s => s.NDifference), 0, MidpointRounding.AwayFromZero)).ToString("N0"));
                     else
                         hastable[item.TargetName + ".当月绝对值亏损总数"] = Math.Abs(Math.Round(RptList.Where(p => p.TargetID == item.ID).Sum(s => s.NDifference), 0, MidpointRounding.AwayFromZero)).ToString("N0");
@@ -250,14 +250,14 @@ namespace LJTH.BusinessIndicators.Engine
             List<C_Company> CompanyList = C_CompanyOperator.Instance.GetCompanyList(_SysId).ToList();
             C_Company company = CompanyList.Where(p => p.CompanyName.IndexOf("总计") > 0).FirstOrDefault();
 
-           if (company != null)
-           {
-               return company.ID;
-           }
-           else
-           {
-               return Guid.Empty;
-           }
+            if (company != null)
+            {
+                return company.ID;
+            }
+            else
+            {
+                return Guid.Empty;
+            }
 
         }
 
@@ -268,7 +268,7 @@ namespace LJTH.BusinessIndicators.Engine
         /// <param name="RptList">明细列表</param>
         /// <param name="hastable"></param>
         /// <returns></returns>
-        public Hashtable ForTaeget_Pro(List<C_Target> targetList, List<MonthlyReportDetail> RptList, ref Hashtable hastable)
+        public Hashtable ForTaeget_Pro(List<C_Target> targetList, List<MonthlyReportDetail> RptList, ref Hashtable hastable, string CurrentLoginName)
         {
             //每个系统相对应的指标
 
@@ -282,7 +282,7 @@ namespace LJTH.BusinessIndicators.Engine
                 if (item.NeedReport == true) //指标必须为上报
                 {
                     //项目的计划指标需要单独获取
-                    Guid companyID = Guid.Empty;
+                    //Guid companyID = Guid.Empty;
 
                     double CurrPlanNum = 0;
                     double AccPlanNum = 0;
@@ -294,17 +294,18 @@ namespace LJTH.BusinessIndicators.Engine
                         targetPDetail = new List<A_TargetPlanDetail>();
                         targetPDetail = A_TargetplandetailOperator.Instance.GetTargetplandetailList(RptList[0].TargetPlanID).ToList();
 
-                        companyID = GetCompanyID(RptList[0].SystemID);
+                        //companyID = GetCompanyID(RptList[0].SystemID);
+
+                        var companyIDArray = BLL.BizBLL.S_OrganizationalActionOperator.Instance.GetUserCompanyData(RptList[0].SystemID, CurrentLoginName).Select(m => m.ID).ToArray();
+
 
                         //当月项目计划数
-                        CurrPlanNum = (double)targetPDetail.Where(p => p.TargetID == item.ID && p.CompanyID == companyID && p.FinYear == RptList[0].FinYear && p.FinMonth == RptList[0].FinMonth).Sum(s => s.Target);
+                        CurrPlanNum = (double)targetPDetail.Where(p => p.TargetID == item.ID && companyIDArray.Contains(p.CompanyID) && p.FinYear == RptList[0].FinYear && p.FinMonth == RptList[0].FinMonth).Sum(s => s.Target);
 
                         //累计项目计划数
-                        AccPlanNum = (double)targetPDetail.Where(p => p.TargetID == item.ID && p.CompanyID == companyID && p.FinYear == RptList[0].FinYear && p.FinMonth <= RptList[0].FinMonth).Sum(s => s.Target);
+                        AccPlanNum = (double)targetPDetail.Where(p => p.TargetID == item.ID && companyIDArray.Contains(p.CompanyID) && p.FinYear == RptList[0].FinYear && p.FinMonth <= RptList[0].FinMonth).Sum(s => s.Target);
 
                     }
-
-
 
                     monthRptSum = new MonthReportSummaryViewModel();
                     monthRptSum.ID = i;
@@ -321,13 +322,13 @@ namespace LJTH.BusinessIndicators.Engine
                     monthRptSum.MeasureRate = "0"; // 这个值是为了计算当月或者是累计完成率,如果想计算全年的,请将该字段的值赋值成全年的完成率
                     monthRptSum = TargetEvaluationEngine.TargetEvaluationService.SummaryCalculation(monthRptSum);
 
-                  
+
 
                     if (hastable.ContainsKey(item.TargetName + ".当月计划总数") == false)
                         hastable.Add(item.TargetName + ".当月计划总数", Math.Round(CurrPlanNum, 0, MidpointRounding.AwayFromZero).ToString("N0"));
                     else
                         hastable[item.TargetName + ".当月计划总数"] = ((int)Math.Round(CurrPlanNum, 0, MidpointRounding.AwayFromZero)).ToString("N0");
-                        
+
 
 
                     if (hastable.ContainsKey(item.TargetName + ".当月实际总数") == false)
@@ -711,7 +712,7 @@ namespace LJTH.BusinessIndicators.Engine
             {
                 if (item.NeedReport == true) //指标必须为上报
                 {
-                    string TargetTypeDescription=EnumHelper.GetEnumDescription(typeof(EnumTargetType), item.TargetType);
+                    string TargetTypeDescription = EnumHelper.GetEnumDescription(typeof(EnumTargetType), item.TargetType);
                     monthRptSum = new MonthReportSummaryViewModel();
                     monthRptSum.ID = i;
 
@@ -738,8 +739,8 @@ namespace LJTH.BusinessIndicators.Engine
                         hastable[TargetTypeDescription + ".当月实际总数"] = Math.Round(RptList.Where(p => p.TargetType == item.TargetType).Sum(s => s.NActualAmmount), 0, MidpointRounding.AwayFromZero).ToString("N0");
 
 
-                    decimal SumActualAmmount = RptList.Where(p =>p.TargetType == item.TargetType).Sum(s => s.NActualAmmount);
-                    decimal SumPlanAmmount = RptList.Where(p =>p.TargetType == item.TargetType).Sum(s => s.NActualAmmount);
+                    decimal SumActualAmmount = RptList.Where(p => p.TargetType == item.TargetType).Sum(s => s.NActualAmmount);
+                    decimal SumPlanAmmount = RptList.Where(p => p.TargetType == item.TargetType).Sum(s => s.NActualAmmount);
                     if (SumPlanAmmount == 0) SumPlanAmmount = 1;
 
                     if (hastable.ContainsKey(TargetTypeDescription + ".当月累计完成率") == false)
@@ -748,9 +749,9 @@ namespace LJTH.BusinessIndicators.Engine
                         hastable[TargetTypeDescription + ".当月累计完成率"] = monthRptSum.NActualRate;
 
                     if (hastable.ContainsKey(TargetTypeDescription + ".当月未完成公司数量") == false)
-                        hastable.Add(TargetTypeDescription + ".当月未完成公司数量", RptList.Where(p =>p.TargetType == item.TargetType && p.IsMissTargetCurrent == true).ToList().Count);
+                        hastable.Add(TargetTypeDescription + ".当月未完成公司数量", RptList.Where(p => p.TargetType == item.TargetType && p.IsMissTargetCurrent == true).ToList().Count);
                     else
-                        hastable[TargetTypeDescription + ".当月未完成公司数量"] = RptList.Where(p =>p.TargetType == item.TargetType && p.IsMissTargetCurrent == true).ToList().Count;
+                        hastable[TargetTypeDescription + ".当月未完成公司数量"] = RptList.Where(p => p.TargetType == item.TargetType && p.IsMissTargetCurrent == true).ToList().Count;
 
                     //这个是给商管用的标签
                     if (hastable.ContainsKey(TargetTypeDescription + ".当月亏损总数") == false)
@@ -760,9 +761,9 @@ namespace LJTH.BusinessIndicators.Engine
 
                     //这个是给商管用的标签
                     if (hastable.ContainsKey(TargetTypeDescription + ".当月有差额公司数量") == false)
-                        hastable.Add(TargetTypeDescription + ".当月有差额公司数量", (int)RptList.Where(p =>p.TargetType == item.TargetType && p.NDifference != 0).Count());
+                        hastable.Add(TargetTypeDescription + ".当月有差额公司数量", (int)RptList.Where(p => p.TargetType == item.TargetType && p.NDifference != 0).Count());
                     else
-                        hastable[TargetTypeDescription + ".当月有差额公司数量"] = (int)RptList.Where(p =>p.TargetType == item.TargetType && p.NDifference != 0).Count();
+                        hastable[TargetTypeDescription + ".当月有差额公司数量"] = (int)RptList.Where(p => p.TargetType == item.TargetType && p.NDifference != 0).Count();
 
                     if (hastable.ContainsKey(TargetTypeDescription + ".当月亏损率") == false)
                         hastable.Add(TargetTypeDescription + ".当月亏损率", Math.Round(RptList.Where(p => p.TargetType == item.TargetType).Sum(s => s.NDifference), 0, MidpointRounding.AwayFromZero).ToString("N0"));
@@ -791,9 +792,9 @@ namespace LJTH.BusinessIndicators.Engine
                         hastable[TargetTypeDescription + ".累计累计完成率"] = monthRptSum.NAccumulativeActualRate;
 
                     if (hastable.ContainsKey(TargetTypeDescription + ".累计未完成公司数量") == false)
-                        hastable.Add(TargetTypeDescription + ".累计未完成公司数量", (int)RptList.Where(p =>p.TargetType == item.TargetType && p.IsMissTarget == true).ToList().Count);
+                        hastable.Add(TargetTypeDescription + ".累计未完成公司数量", (int)RptList.Where(p => p.TargetType == item.TargetType && p.IsMissTarget == true).ToList().Count);
                     else
-                        hastable[TargetTypeDescription + ".累计未完成公司数量"] = (int)RptList.Where(p =>p.TargetType == item.TargetType && p.IsMissTarget == true).ToList().Count;
+                        hastable[TargetTypeDescription + ".累计未完成公司数量"] = (int)RptList.Where(p => p.TargetType == item.TargetType && p.IsMissTarget == true).ToList().Count;
 
                     if (hastable.ContainsKey(TargetTypeDescription + ".累计亏损总数") == false)
                         hastable.Add(TargetTypeDescription + ".累计亏损总数", Math.Round(RptList.Where(p => p.TargetType == item.TargetType).Sum(s => s.NAccumulativeDifference), 0, MidpointRounding.AwayFromZero).ToString("N0"));
@@ -802,9 +803,9 @@ namespace LJTH.BusinessIndicators.Engine
 
                     //这个是给商管用的标签
                     if (hastable.ContainsKey(TargetTypeDescription + ".累计有差额公司数量") == false)
-                        hastable.Add(TargetTypeDescription + ".累计有差额公司数量", (int)RptList.Where(p =>p.TargetType == item.TargetType && p.NAccumulativeDifference < 0).Count());
+                        hastable.Add(TargetTypeDescription + ".累计有差额公司数量", (int)RptList.Where(p => p.TargetType == item.TargetType && p.NAccumulativeDifference < 0).Count());
                     else
-                        hastable[TargetTypeDescription + ".累计有差额公司数量"] = (int)RptList.Where(p =>p.TargetType == item.TargetType && p.NAccumulativeDifference < 0).Count();
+                        hastable[TargetTypeDescription + ".累计有差额公司数量"] = (int)RptList.Where(p => p.TargetType == item.TargetType && p.NAccumulativeDifference < 0).Count();
 
                     if (hastable.ContainsKey(TargetTypeDescription + ".累计亏损率") == false)
                         hastable.Add(TargetTypeDescription + ".累计亏损率", Math.Round(RptList.Where(p => p.TargetType == item.TargetType).Sum(s => s.NAccumulativeDifference), 0, MidpointRounding.AwayFromZero).ToString("N0"));
@@ -823,7 +824,7 @@ namespace LJTH.BusinessIndicators.Engine
     /// </summary>
     public class BH_GetMonthDescriptionValue : IGetMonthDescriptionValue
     {
-        public Hashtable GetMonthDescriptionValue(object Vmodel)
+        public Hashtable GetMonthDescriptionValue(object Vmodel, string CurrentLoginName)
         {
             List<MonthlyReportDetail> RptList = (List<MonthlyReportDetail>)Vmodel;
 
@@ -899,7 +900,7 @@ namespace LJTH.BusinessIndicators.Engine
     /// </summary>
     public class DGX_GetMonthDescriptionValue : IGetMonthDescriptionValue
     {
-        public Hashtable GetMonthDescriptionValue(object Vmodel)
+        public Hashtable GetMonthDescriptionValue(object Vmodel, string CurrentLoginName)
         {
             List<MonthlyReportDetail> RptList = (List<MonthlyReportDetail>)Vmodel;
 
@@ -917,7 +918,7 @@ namespace LJTH.BusinessIndicators.Engine
                 ReportDate = DateTime.Parse(RptList[0].FinYear + "-" + Convert.ToInt32(RptList[0].FinMonth + 1) + "-01").AddDays(-1);
             }
             DateTime CurrentDate = DateTime.Now;
-            C_System sysModel = StaticResource.Instance[RptList[0].SystemID,CurrentDate];
+            C_System sysModel = StaticResource.Instance[RptList[0].SystemID, CurrentDate];
 
             List<C_Target> targetList = StaticResource.Instance.TargetList[RptList[0].SystemID];
 
@@ -946,7 +947,7 @@ namespace LJTH.BusinessIndicators.Engine
     /// </summary>
     public class Pro_Centre_GetMonthDescriptionValue : IGetMonthDescriptionValue
     {
-        public Hashtable GetMonthDescriptionValue(object Vmodel)
+        public Hashtable GetMonthDescriptionValue(object Vmodel, string CurrentLoginName)
         {
             List<MonthlyReportDetail> RptList = (List<MonthlyReportDetail>)Vmodel;
 
@@ -964,7 +965,7 @@ namespace LJTH.BusinessIndicators.Engine
                 ReportDate = DateTime.Parse(RptList[0].FinYear + "-" + Convert.ToInt32(RptList[0].FinMonth + 1) + "-01").AddDays(-1);
             }
             DateTime CurrentDate = DateTime.Now;
-            C_System sysModel = StaticResource.Instance[RptList[0].SystemID,CurrentDate];
+            C_System sysModel = StaticResource.Instance[RptList[0].SystemID, CurrentDate];
 
             List<C_Target> targetList = StaticResource.Instance.TargetList[RptList[0].SystemID];
 
@@ -974,7 +975,7 @@ namespace LJTH.BusinessIndicators.Engine
 
             GetMonthDescriptionTool tools = new GetMonthDescriptionTool();
 
-            tools.ForTaeget_Pro(targetList, RptList, ref hastable);
+            tools.ForTaeget_Pro(targetList, RptList, ref hastable, CurrentLoginName);
 
             hastable.Add("当前月", RptList[0].FinMonth);
             return hastable;
@@ -987,7 +988,7 @@ namespace LJTH.BusinessIndicators.Engine
     /// </summary>
     public class Group_Centre_GetMonthDescriptionValue : IGetMonthDescriptionValue
     {
-        public Hashtable GetMonthDescriptionValue(object Vmodel)
+        public Hashtable GetMonthDescriptionValue(object Vmodel, string CurrentLoginName)
         {
             List<MonthlyReportDetail> RptList = (List<MonthlyReportDetail>)Vmodel;
 
@@ -1006,7 +1007,7 @@ namespace LJTH.BusinessIndicators.Engine
             }
             DateTime CurrentDate = DateTime.Now;
 
-            C_System sysModel = StaticResource.Instance[RptList[0].SystemID,CurrentDate];
+            C_System sysModel = StaticResource.Instance[RptList[0].SystemID, CurrentDate];
 
             List<C_Target> targetList = StaticResource.Instance.TargetList[RptList[0].SystemID];
 

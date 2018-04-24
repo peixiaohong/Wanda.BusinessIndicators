@@ -367,7 +367,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     Description = element.Element("Report").GetElementValue("Rgroup", "");
                     if (!string.IsNullOrEmpty(Description))
                     {
-                        Hashtable p = MonthDescriptionValueEngine.MonthDescriptionValueService.GetMonthDescriptionValue(RptList, rpt._System.ID);
+                        Hashtable p = MonthDescriptionValueEngine.MonthDescriptionValueService.GetMonthDescriptionValue(RptList, rpt._System.ID, base.CurrentUserName);
                         foreach (string key in p.Keys)
                         {
                             Description = Description.Replace("【" + key + "】", p[key].ToString());
@@ -416,7 +416,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     Description = element.Element("Report").GetElementValue("Rgroup", "");
                     if (!string.IsNullOrEmpty(Description))
                     {
-                        Hashtable p = MonthDescriptionValueEngine.MonthDescriptionValueService.GetMonthDescriptionValue(RptList, rpt._System.ID);
+                        Hashtable p = MonthDescriptionValueEngine.MonthDescriptionValueService.GetMonthDescriptionValue(RptList, rpt._System.ID, base.CurrentUserName);
                         foreach (string key in p.Keys)
                         {
                             Description = Description.Replace("【" + key + "】", p[key].ToString());

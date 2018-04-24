@@ -89,7 +89,7 @@
             <div class="tabs_m">
                 <ul id="Ul3">
                     <li class="selected m_1"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>月度经营报告</span></a></li>
-                    <li><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>经营报告明细</span></a></li>
+                    <li class="jybgmx hide"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>经营报告明细</span></a></li>
                     <li><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>完成情况明细</span></a></li>
                     <li><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>当月未完成</span></a></li>
                     <li><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>累计未完成</span></a></li>

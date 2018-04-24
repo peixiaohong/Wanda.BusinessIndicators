@@ -55,7 +55,7 @@ namespace LJTH.BusinessIndicators.Engine
                     strReportDescription = element.Element("Report").GetElementValue("Rgroup", "");
                     if (!string.IsNullOrEmpty(strReportDescription))
                     {
-                        System.Collections.Hashtable p = MonthDescriptionValueEngine.MonthDescriptionValueService.GetMonthDescriptionValue(RptModel.ReportDetails, _System.ID);
+                        System.Collections.Hashtable p = MonthDescriptionValueEngine.MonthDescriptionValueService.GetMonthDescriptionValue(RptModel.ReportDetails, _System.ID, RptModel.CurrentLoginName);
                         foreach (string key in p.Keys)
                         {
                             strReportDescription = strReportDescription.Replace("【" + key + "】", p[key].ToString());
@@ -74,6 +74,7 @@ namespace LJTH.BusinessIndicators.Engine
             listMonthReportSummary.Add(new DictionaryVmodel("月度经营报告", listMRSVM, "", GetSummaryMonthlyReportHtmlTemplate(_System.Configuration)));
             listMonthReportSummary.Add(new DictionaryVmodel("附件", listAtt));
             listMonthReportSummary.Add(new DictionaryVmodel("完成情况明细查询条件", SpliteCompanyPropertyXml("Search", _System.Configuration)));
+            listMonthReportSummary.Add(new DictionaryVmodel("是否包含区域", StaticResource.Instance.GetSystem_Regional(_System.ID)));
             return listMonthReportSummary;
         }
 
