@@ -88,9 +88,9 @@ namespace LJTH.BusinessIndicators.Engine
         public List<MonthlyReportDetail> ReportDetails { get; set; }
 
         [ScriptIgnore]
-        public C_System _System { get { return StaticResource.Instance[_SystemID,DateTime.Now]; } }
+        public C_System _System { get { return StaticResource.Instance[_SystemID, DateTime.Now]; } }
         [ScriptIgnore]
-        public List<C_Target> _Target { get { return StaticResource.Instance.GetTargetList(_SystemID,DateTime.Now).ToList(); } }
+        public List<C_Target> _Target { get { return StaticResource.Instance.GetTargetList(_SystemID, DateTime.Now).ToList(); } }
 
         public Guid _MonthReportID { get; set; }
         public Guid AreaID { get; set; }
@@ -114,7 +114,8 @@ namespace LJTH.BusinessIndicators.Engine
                 }
                 return _LastestMonthlyReportDetails;
             }
-        }private List<B_MonthlyReportDetail> _LastestMonthlyReportDetails = null;
+        }
+        private List<B_MonthlyReportDetail> _LastestMonthlyReportDetails = null;
 
         public B_MonthlyReport LastestMonthlyReport
         {
@@ -129,7 +130,7 @@ namespace LJTH.BusinessIndicators.Engine
                         else // 获取审批中状态下的（修改为审批中和已完成两种状态的）
                             //_LastestMonthlyReport = B_MonthlyreportOperator.Instance.GetMonthlyReport(_System.ID, FinYear, FinMonth);
                             _LastestMonthlyReport = B_MonthlyreportOperator.Instance.GetMonthlyReporNew(_System.ID, FinYear, FinMonth);
-                        
+
                         if (_LastestMonthlyReport != null)
                             _MonthReportID = _LastestMonthlyReport.ID;
                     }
@@ -140,7 +141,8 @@ namespace LJTH.BusinessIndicators.Engine
                 }
                 return _LastestMonthlyReport;
             }
-        }private B_MonthlyReport _LastestMonthlyReport = null;
+        }
+        private B_MonthlyReport _LastestMonthlyReport = null;
 
         public List<A_MonthlyReportDetail> ValidatedMonthlyReportDetails
         {
@@ -152,7 +154,8 @@ namespace LJTH.BusinessIndicators.Engine
                 }
                 return _ValidatedMonthlyReportDetails;
             }
-        }private List<A_MonthlyReportDetail> _ValidatedMonthlyReportDetails = null;
+        }
+        private List<A_MonthlyReportDetail> _ValidatedMonthlyReportDetails = null;
 
         public A_MonthlyReport ValidatedMonthlyReport
         {
@@ -175,7 +178,8 @@ namespace LJTH.BusinessIndicators.Engine
                 }
                 return _ValidatedMonthlyReport;
             }
-        }private A_MonthlyReport _ValidatedMonthlyReport = null;
+        }
+        private A_MonthlyReport _ValidatedMonthlyReport = null;
 
         #region Private Method
         /// <summary>
@@ -234,6 +238,5 @@ namespace LJTH.BusinessIndicators.Engine
             }
         }
         #endregion Private Method
-
     }
 }

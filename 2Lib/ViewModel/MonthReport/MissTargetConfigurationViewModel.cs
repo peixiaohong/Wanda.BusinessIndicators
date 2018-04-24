@@ -258,8 +258,6 @@ namespace LJTH.BusinessIndicators.ViewModel
         public bool IsBlendTarget { get; set; }
         //排序
         public int Senquence { get; set; }
-        //是否包含区域
-        public bool IsHaveArea { get; set; }
         //区域层级
         public int Level { get; set; }
     }

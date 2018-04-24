@@ -539,7 +539,7 @@ var ReportInstance = {};
 function SplitData(resultData) {
     // GetMonthReportID(resultData);
 
-    //MonthlyReportID = 'C5A4E3BA-727C-4DC0-A83D-503F3D1FC2D5';//开发用
+    //MonthlyReportID = 'C5A4E3BA-727C-4DC0-A83D-503F3D1FC2D5';//开发用   
     MonthReportData = resultData
     if (resultData) {
         ReportInstance = resultData[0].ObjValue;
@@ -600,7 +600,11 @@ function SplitData(resultData) {
             }
             );
         }
-
+        if (resultData[5] != null) {
+            if (resultData[5].ObjValue) {
+                $(".jybgmx").removeClass("hide");
+            }
+        }
     }
 }
 //加载上报日志
@@ -1136,9 +1140,11 @@ function showManageMonthReprotDetail(companyId, areaName, targetName) {
                 //2、取指标下的完成与未完成信息
                 if (ManageReportDetailData[i].ObjValue[j].ObjValue[0].ObjValue[0].Mark == "Area") {
                     var areaObj = Enumerable.From(ManageReportDetailData[i].ObjValue[j].ObjValue[0].ObjValue).Where("$.Name=='" + areaName + "'").ToArray();
-                    var companyData = Enumerable.From(areaObj[0].ObjValue[0].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
-                    if (companyData.length > 0) {
-                        targetData.push(companyData[0]);
+                    for (var k = 0; k < areaObj[0].ObjValue.length; k++) {
+                        var companyData = Enumerable.From(areaObj[0].ObjValue[k].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
+                        if (companyData.length > 0) {
+                            targetData.push(companyData[0]);
+                        }
                     }
                 }
                 else {
@@ -1156,9 +1162,11 @@ function showManageMonthReprotDetail(companyId, areaName, targetName) {
                 //2、取指标下的完成与未完成信息
                 if (ManageReportDetailData[i].ObjValue[j].ObjValue[0].Mark == "Area") {
                     var areaObj = Enumerable.From(ManageReportDetailData[i].ObjValue[j].ObjValue).Where("$.Name=='" + areaName + "'").ToArray();
-                    var companyData = Enumerable.From(areaObj[0].ObjValue[0].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
-                    if (companyData.length > 0) {
-                        targetData.push(companyData[0]);
+                    for (var k = 0; k < areaObj[0].ObjValue.length; k++) {
+                        var companyData = Enumerable.From(areaObj[0].ObjValue[k].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
+                        if (companyData.length > 0) {
+                            targetData.push(companyData[0]);
+                        }
                     }
                 }
                 else {

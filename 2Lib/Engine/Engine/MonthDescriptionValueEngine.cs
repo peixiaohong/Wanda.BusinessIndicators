@@ -96,8 +96,9 @@ namespace LJTH.BusinessIndicators.Engine
         /// </summary>
         /// <param name="ViewModel"></param>
         /// <param name="SystemID"></param>
+        /// <param name="CurrentLoginName"></param>
         /// <returns></returns>
-        public Hashtable GetMonthDescriptionValue(object ViewModel, Guid SystemID)
+        public Hashtable GetMonthDescriptionValue(object ViewModel, Guid SystemID,string CurrentLoginName)
         {
             string InterfaceName = "*";
 
@@ -121,7 +122,7 @@ namespace LJTH.BusinessIndicators.Engine
                 }
             }
 
-            return this[InterfaceName].GetMonthDescriptionValue(ViewModel);
+            return this[InterfaceName].GetMonthDescriptionValue(ViewModel, CurrentLoginName);
         }
 
 

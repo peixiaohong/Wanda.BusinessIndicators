@@ -330,8 +330,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         {
             ReportInstance rpt = JsonHelper.Deserialize<ReportInstance>(rpts);
             List<DictionaryVmodel> AllData = new List<DictionaryVmodel>();
-            string currentLoginName = base.CurrentUserName;
-            if (rpt._MonthReportID != Guid.Empty)
+             if (rpt._MonthReportID != Guid.Empty)
             {
                 //B_MonthlyReportJsonData B_JsonData = new B_MonthlyReportJsonData();
                 //try
@@ -350,7 +349,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 //}
                 //else
                 //{
-                    AllData = ReportInstanceManageDetailEngine.ReportInstanceManageDetailService.GetManageDetailRptDataSource(rpt, strCompanyProperty, strMonthReportOrderType, IncludeHaveDetail, currentLoginName);
+                    AllData = ReportInstanceManageDetailEngine.ReportInstanceManageDetailService.GetManageDetailRptDataSource(rpt, strCompanyProperty, strMonthReportOrderType, IncludeHaveDetail);
                 //}
             }
             return AllData;
