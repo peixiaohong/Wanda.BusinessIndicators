@@ -87,10 +87,6 @@
     <Reference Include="Wanda.Platform.Permission.Contract">
       <HintPath>..\..\WFSDK\Wanda.Platform.Permission.Contract.dll</HintPath>
     </Reference>
-    <Reference Include="Wanda.Platform.WorkFlow.ClientComponent, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\SourceCode-2015-10-15流程服务迁移\JYZB\Wanda.BusinessIndicators\Wanda.BusinessIndicators\DllReference\Wanda.Platform.WorkFlow.ClientComponent.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="BusinessReport\ChildrenCompanyRpt.aspx" />
@@ -215,13 +211,9 @@
     <Content Include="DepartmentStoreReport\DSTargetSumReport.aspx" />
     <Content Include="DllReference\Newtonsoft.Json.dll" />
     <Content Include="DllReference\Wanda.Platform.Permission.ClientComponent.dll" />
-    <Content Include="DllReference\Wanda.Platform.Permission.ClientComponent.pdb" />
     <Content Include="DllReference\Wanda.Platform.Permission.Common.dll" />
-    <Content Include="DllReference\Wanda.Platform.Permission.Common.pdb" />
     <Content Include="DllReference\Wanda.Platform.Permission.Contract.dll" />
-    <Content Include="DllReference\Wanda.Platform.Permission.Contract.pdb" />
     <Content Include="DllReference\Wanda.Platform.WorkFlow.ClientComponent.dll" />
-    <Content Include="DllReference\Wanda.Platform.WorkFlow.ClientComponent.pdb" />
     <Content Include="DllReference\Wanda.Workflow.Client.dll" />
     <Content Include="DllReference\Wanda.Workflow.Object.dll" />
     <Content Include="Error.aspx" />

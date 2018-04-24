@@ -8,7 +8,6 @@ using LJTH.BusinessIndicators.Model;
 using LJTH.BusinessIndicators.Engine;
 using LJTH.BusinessIndicators.Common;
 using Lib.Web.Json;
-using Wanda.Platform.WorkFlow.ClientComponent;
 
 namespace LJTH.BusinessIndicators.Web.AjaxHander
 {
@@ -100,8 +99,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         na1 = new NavigatActivity1();
                         na1.ActivityID = p1.Value.NodeID;
                         na1.ActivityName = p1.Value.NodeName;
-                        na1.ActivityType = (ActivityType)p1.Value.NodeType;
-                        na1.RunningStatus = (WFRunningStatus)(p1.Value.Status > 1 ? 3 : p1.Value.Status);
+                        na1.ActivityType = p1.Value.NodeType;
+                        na1.RunningStatus = (p1.Value.Status > 1 ? 3 : p1.Value.Status);
                         List<ClientOpinion1> listclientOp = new List<ClientOpinion1>();
                         listclientOp.Add(new ClientOpinion1()
                         {

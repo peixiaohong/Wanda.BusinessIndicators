@@ -1,0 +1,18 @@
+﻿{
+  "YY_ZBGK-FDCHZ": {
+    "D001": [ { "UserLoginID": "fanbing" } ],
+    "D002": [ { "UserLoginID": "zhengguilong" } ],
+    "D003": [ { "UserLoginID": "hanzhao" } ]
+  },
+  "YY_ZBGK-WL-HB": {
+    "D001": [ { "UserLoginID": "fanbing" } ],
+    "D002": [ { "UserLoginID": "zhengguilong" } ],
+    "D003": [ { "UserLoginID": "hanzhao" } ]
+  },
+  "YY_ZBGK-CYFZ-HB": {
+    "D001": [ { "UserLoginID": "fanbing" } ],
+    "D002": [ { "UserLoginID": "zhengguilong" } ],
+    "D003": [ { "UserLoginID": "hanzhao" } ]
+  }
+
+}

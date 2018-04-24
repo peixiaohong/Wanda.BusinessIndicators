@@ -285,16 +285,8 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         {
             if (ddlSystem.SelectedValue != Guid.Empty.ToString())
             {
-                var list = S_OrganizationalActionOperator.Instance.GetUserRegional(ddlSystem.SelectedValue.ToGuid(),WebHelper.GetCurrentLoginUser());
-                //list.Add(new Model.BizModel.S_Organizational {
-                //    ID = Guid.Parse("D8483CEA-1C7C-4C22-9969-BD7051D79E86"),
-                //    CnName="东北"
-                //});
-                //list.Add(new Model.BizModel.S_Organizational
-                //{
-                //    ID = Guid.Parse("228C5228-3495-444C-AC82-B0E08716D0B0"),
-                //    CnName = "西南"
-                //});
+                var list = StaticResource.Instance.OrgList[ddlSystem.SelectedValue.ToGuid()].Where(x => x.Level == 3).ToList();
+                //var list = S_OrganizationalActionOperator.Instance.GetUserRegional(ddlSystem.SelectedValue.ToGuid(),WebHelper.GetCurrentLoginUser());
                 if (list != null && list.Count > 0)
                 {
                     ddlAreaID.Visible = true;

@@ -10,7 +10,10 @@ var Year;
 var Month;
 var SystemID;
 var MonthReportID;
+var BatchID;
 var IsLatestVersion;
+var ProcessCode
+var ProType
 
 var IsNewDataIndex = "";
 var MonthReportOrderType = "Detail";
@@ -68,13 +71,21 @@ $(document).ready(function () {
     //月度经营报告
     SystemID = $("#hideSystemID").attr("value");
     MonthReportID = $("#hideMonthReportID").attr("value");
+    BatchID = $("#hideBatchID").val();
     Year = $("#hideFinYear").attr("value");
     Month = $("#hideFinMonth").attr("value");
+    ProType = $("#hideProType").val();
+    ProcessCode = $("#ProcessCode").val();
+
     IsLatestVersion = true;
     ChangeTabelHead("MonthReportSummaryHead", "JY");
     ChangeTabelHead("CompleteDetailHead", "JY");
     $.blockUI({ message: "<div style='width:200px'><img src='../../images/ajax-loader.gif' alt='waiting'><span style='font-size:20px;padding-left:20px;color:#3f3f3f'>数据请求中...</span></div>" });
-    GetProcess(MonthReportID);
+    if (BatchID != '') {
+        GetProcess(BatchID);
+    } else {
+        GetProcess(MonthReportID)
+    }
     //第一次加载时需要等待流程加载，不解除屏幕锁定
     getMonthReportSummaryData(false);
 });
@@ -109,7 +120,12 @@ $(function () {
 })
 function afterAction(args) {
     if (args.WorkflowContext.StatusCode == 0) {
-        BusinessDataHandle($("#hideMonthReportID").attr("value"), args)
+        if (BatchID != '') {
+            BusinessDataHandle("afterAction", BatchID, args)
+        }
+        else {
+            BusinessDataHandle("afterAction", MonthReportID, args)
+        }
        
     }
 }
@@ -120,7 +136,7 @@ function GetProcess(instanceID) {
 }
 
 
-function BusinessDataHandle(instanceID, args) {
+function BusinessDataHandle(ExecuteType,instanceID, args) {
     var strPrcessStatus = "";
     if (args.WorkflowContext.ProcessInstance.Status == 2 && args.WorkflowContext.ProcessInstance.RunningNodeID == args.WorkflowContext.ProcessInstance.StartNodeID) {
         strPrcessStatus = "Draft";
@@ -151,8 +167,10 @@ function BusinessDataHandle(instanceID, args) {
             async: true,
             data: {
                 BusinessID: instanceID,
+                ExecuteType: ExecuteType,
                 OperatorType: args.OperatorType,
-                PrcessStatus: strPrcessStatus
+                PrcessStatus: strPrcessStatus,
+                strProType: ProType
             },
             success: function (result) {
                 $.unblockUI();

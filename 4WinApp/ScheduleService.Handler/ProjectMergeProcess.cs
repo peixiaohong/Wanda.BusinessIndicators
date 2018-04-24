@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LJTH.BusinessIndicators.BLL;
 using LJTH.BusinessIndicators.Model;
 using LJTH.BusinessIndicators.ViewModel;
 using Lib.Core;
 using LJTH.BusinessIndicators.Common;
-using System.Web;
 using BPF.Workflow.Client;
 using BPF.Workflow.Object;
 using Newtonsoft.Json;
-using Wanda.Platform.WorkFlow.ClientComponent;
-using System.Xml.Linq;
 
 namespace ScheduleService.Handler
 {
@@ -34,16 +29,17 @@ namespace ScheduleService.Handler
 
             finMonth = datetime.Month;
             finYear = datetime.Year;
-            string[] array = System.Configuration.ConfigurationManager.AppSettings["GroupTypes"].Split(new char[] { ','},StringSplitOptions.RemoveEmptyEntries);
-            foreach (var groupType in array)
+            //string[] array = System.Configuration.ConfigurationManager.AppSettings["GroupTypes"].Split(new char[] { ','},StringSplitOptions.RemoveEmptyEntries);
+            var array= StaticResource.Instance.SystemList.Where(x=>!string.IsNullOrEmpty(x.GroupType));
+            foreach (var c_System in array)
             {
-                Common.ScheduleService.Log.Instance.Info("项目系统合并流程服务，读取批次表里是否有合适的数据Stare!");
+                Common.ScheduleService.Log.Instance.Info(c_System.SystemName+"合并流程服务，读取批次表里是否有合适的数据Stare!");
 
-                B_SystemBatch batchModel = B_SystemBatchOperator.Instance.GetSystemBatchByDraft(groupType, finYear, finMonth);
+                B_SystemBatch batchModel = B_SystemBatchOperator.Instance.GetSystemBatchByDraft(c_System.GroupType, finYear, finMonth);
 
                 if (batchModel != null)
                 {
-                    Common.ScheduleService.Log.Instance.Info("读取数据成功!" + batchModel.FinYear + "年" + batchModel.FinMonth + "月");
+                    Common.ScheduleService.Log.Instance.Info(c_System.SystemName+"读取数据成功!" + batchModel.FinYear + "年" + batchModel.FinMonth + "月");
 
                     BatchRptList = JsonConvert.DeserializeObject<List<V_SubReport>>(batchModel.SubReport);
 
@@ -65,13 +61,12 @@ namespace ScheduleService.Handler
                     _WFStarts = false;
                 }
 
-                Common.ScheduleService.Log.Instance.Info("合并流程服务，读取批次表里是否有合适的数据End!");
+                Common.ScheduleService.Log.Instance.Info(c_System.SystemName+"合并流程服务，读取批次表里是否有合适的数据End!");
 
                 if (_WFStarts)
                 {
-                    var c_System = StaticResource.Instance.SystemList.Where(x => x.GroupType == batchModel.BatchType).FirstOrDefault();
                     string ProcessKey = c_System.Configuration.Element("ProcessCode").Value + "-HB";
-
+                    //string ProcessKey = "YY_ZBGK-FDCHZ";
                     Common.ScheduleService.Log.Instance.Info(c_System.SystemName + "合并流程服务，有符合条件的的数据!");
 
                     this.ProcessKey = ProcessKey;
@@ -99,7 +94,7 @@ namespace ScheduleService.Handler
                     {
                         if (!WFClientSDK.Exist(BusinessID)) //判断业务ID是否存在
                         {//开启流程
-                            CallMethed("startprocess",groupType);
+                            CallMethed("startprocess", c_System.GroupType);
                             Common.ScheduleService.Log.Instance.Info(c_System.SystemName + "合并流程服务，合并流程数据启动完成!");
                         }
                         else
@@ -156,7 +151,7 @@ namespace ScheduleService.Handler
                                     bizContext.BusinessID = BusinessID;
                                     bizContext.FlowCode = ProcessKey;
                                     bizContext.ApprovalContent = "各区域数据已经汇总完成，请领导审批";
-                                    bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$项目汇总服务" };
+                                    bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$"+this.CurrentUser };
                                     bizContext.ProcessURL = "/BusinessReport/TargetApprove.aspx?ProType=Batch";
                                     bizContext.FormParams = formParams;
                                     bizContext.ExtensionCommond = new Dictionary<string, string>();
@@ -207,7 +202,7 @@ namespace ScheduleService.Handler
                 }
                 else
                 {
-                    Common.ScheduleService.Log.Instance.Info("项目系统合并流程服务，没有查找到符合条件合并流程!");
+                    Common.ScheduleService.Log.Instance.Info(c_System.SystemName+"合并流程服务，没有查找到符合条件合并流程!");
                 }
             }
         }
@@ -236,17 +231,16 @@ namespace ScheduleService.Handler
             Dictionary<string, object> formParams = new Dictionary<string, object>();
             var c_System = StaticResource.Instance.SystemList.Where(x => x.GroupType == groupType).FirstOrDefault();
             string ProcessKey = c_System.Configuration.Element("ProcessCode").Value + "-HB";
-
+            //string ProcessKey = "YY_ZBGK-FDCHZ";
 
             //系统2014年7月月报
 
             B_SystemBatch batch = B_SystemBatchOperator.Instance.GetSystemBatch(Guid.Parse(BusinessID));
 
-            // string SysName = "南北中文旅项目";
             string FinYear = batch.FinYear.ToString() + "年";
             string FinMonth = batch.FinMonth.ToString("D2");
             string _Title = c_System.SystemName + FinYear + FinMonth + "汇总月度报告";
-            //string _Title = "项目系统(南、中、北、大项目)" + FinYear + FinMonth + "月度报告";
+
             formParams.Add("ReportName", _Title);
             formParams.Add("ProcessKey", ProcessKey);
 
@@ -259,12 +253,14 @@ namespace ScheduleService.Handler
             try
             {
                 Common.ScheduleService.Log.Instance.Info(c_System.SystemName + "合并流程启动开始！");
+                var dynamicRoleUserList = JsonUser.GetDynamicRoleUserList(ProcessKey);
                 var starup = new BPF.Workflow.Client.WFStartupParameter()
                 {
                     FlowCode = ProcessKey,
                     BusinessID = this.BusinessID,
-                    CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$项目汇总服务" },
-                    FormParams=formParams
+                    CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$"+this.CurrentUser },
+                    FormParams = formParams,
+                    DynamicRoleUserList = dynamicRoleUserList,
                 };
 
                 string opiniontext = string.Empty;
@@ -292,11 +288,13 @@ namespace ScheduleService.Handler
                 bizContext.BusinessID = BusinessID;
                 bizContext.FlowCode = ProcessKey;
                 bizContext.ApprovalContent = c_System.SystemName + "各区域数据已经汇总完成，请领导审批";
-                bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$项目汇总服务" };
+                // bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$项目汇总服务" };
+                bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$"+this.CurrentUser };
                 bizContext.ProcessURL = "/BusinessReport/TargetApprove.aspx?ProType=Batch";
                 bizContext.FormParams = formParams;
                 bizContext.ExtensionCommond = new Dictionary<string, string>();
                 bizContext.ExtensionCommond.Add("RejectNode", Guid.Empty.ToString());
+                bizContext.DynamicRoleUserList = dynamicRoleUserList;
 
                 wfc = WFClientSDK.ExecuteMethod("SubmitProcess", bizContext);
 
@@ -371,8 +369,8 @@ namespace ScheduleService.Handler
                             na1 = new NavigatActivity1();
                             na1.ActivityID = p1.Value.NodeID;
                             na1.ActivityName = p1.Value.NodeName;
-                            na1.ActivityType = (ActivityType)p1.Value.NodeType;
-                            na1.RunningStatus = (WFRunningStatus)(p1.Value.Status > 1 ? 3 : p1.Value.Status);
+                            //na1.ActivityType = (ActivityType)p1.Value.NodeType;
+                            //na1.RunningStatus = (WFRunningStatus)(p1.Value.Status > 1 ? 3 : p1.Value.Status);
                             List<ClientOpinion1> listclientOp = new List<ClientOpinion1>();
                             listclientOp.Add(new ClientOpinion1() { CreateDate = p1.Value.FinishDateTime });
                             na1.Opinions = listclientOp;
@@ -549,7 +547,7 @@ namespace ScheduleService.Handler
 
         public string CurrentUser
         {
-            get { return "虚拟用户"; }//PermissionHelper.GetCurrentUser
+            get { return "虚拟"; }//PermissionHelper.GetCurrentUser
         }
 
         public int OperationType
@@ -621,9 +619,9 @@ namespace ScheduleService.Handler
             get { return activityName; }
             set { activityName = value; }
         }
-        private ActivityType activityType;
+        private int activityType;
 
-        public ActivityType ActivityType
+        public int ActivityType
         {
             get { return activityType; }
             set { activityType = value; }
@@ -656,9 +654,9 @@ namespace ScheduleService.Handler
             get { return opinions; }
             set { opinions = value; }
         }
-        private WFRunningStatus runningStatus;
+        private int runningStatus;
 
-        public WFRunningStatus RunningStatus
+        public int RunningStatus
         {
             get { return runningStatus; }
             set { runningStatus = value; }

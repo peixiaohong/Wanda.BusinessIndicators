@@ -1,20 +1,13 @@
 ﻿using Lib.Core;
-using Lib.Web;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
 using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Xml.Linq;
 using LJTH.BusinessIndicators.BLL;
-using LJTH.BusinessIndicators.Engine;
 using LJTH.BusinessIndicators.Model;
-using LJTH.BusinessIndicators.ViewModel;
-using Wanda.Platform.Permission.ClientComponent;
 
 namespace LJTH.BusinessIndicators.Web.BusinessReport
 {

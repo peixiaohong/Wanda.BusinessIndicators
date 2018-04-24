@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using ScheduleService.Handler;
 using System.ServiceProcess;
-using System.Text;
 
 namespace Common.ScheduleService
 {
@@ -13,12 +10,16 @@ namespace Common.ScheduleService
         /// </summary>
         static void Main()
         {
-#if DEBUG
-            DebugRun();
-#else
-            ServiceBase[] ServicesToRun = new ServiceBase[] { new ScheduleService() };
+
+            //#if DEBUG
+            //            DebugRun();
+            //#else
+            ServiceBase[] ServicesToRun = new ServiceBase[] {
+                new ScheduleService()
+            };
             ServiceBase.Run(ServicesToRun);
-#endif
+            //#endif
+
         }
 
         private static void DebugRun()
