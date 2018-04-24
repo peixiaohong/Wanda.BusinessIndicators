@@ -1,0 +1,35 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMasterApprove.master.cs" Inherits="Mobile.web.SiteMasterPage.MainMasterApprove" %>
+<%@ Register Src="~/SiteMasterPage/bsCtrl.ascx" TagPrefix="uc1" TagName="bsCtrl" %>
+<%@ Register Src="~/SiteMasterPage/wfCtrl.ascx" TagPrefix="uc1" TagName="wfCtrl" %>
+<%@ Register Src="~/SiteMasterPage/userSelectCtrl.ascx" TagPrefix="uc1" TagName="userSelectCtrl" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title></title>
+    <uc1:bsCtrl runat="server" ID="bsCtrl" />
+    <link href="<%=ResolveUrl("~/Assets/vendors/bootstrap/css/bootstrap.min.css") %>" rel="stylesheet" />
+    <link href="<%=ResolveUrl("~/Assets/styles/content.css") %>" rel="stylesheet" />
+    <link href="<%=ResolveUrl("~/Assets/styles/common.css") %>" rel="stylesheet" />
+
+    <script src="<%=ResolveUrl("~/Assets/scripts/vue.min.js") %>"></script>
+    <script src="<%=ResolveUrl("~/Assets/scripts/vue-resource.min.js") %>"></script>
+    <script src="<%=ResolveUrl("~/Assets/vendors/jquery/jquery.min.js") %>"></script>
+    <script src="<%=ResolveUrl("~/Assets/scripts/common/base.utils.js") %>"></script>
+    <uc1:userSelectCtrl runat="server" ID="userSelectCtrl" />
+    <uc1:wfctrl runat="server" id="wfCtrl" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>

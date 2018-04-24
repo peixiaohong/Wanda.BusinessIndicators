@@ -1,0 +1,135 @@
+﻿
+/*全局样式*/
+.wanda-wfclient, .wanda-wf-content { font-family: 'Microsoft YaHei'; font-size: 14px; background-color: white; background-color: white; }
+    .wanda-wfclient, .wanda-wf-content * { vertical-align: middle; }
+.spmarginright { margin-right: 15px; float: left; }
+.wanda-wfclient-deleteuser, .wanda-wfclient-deletenav { color: red; cursor: pointer; }
+.wanda-wfclient-deleteimg { margin-left: 3px; }
+#jqContextMenu { font-family: 'Microsoft YaHei'; font-size: 14px; }
+
+/*表格样式*/
+table.wanda-wfclient-table { width: 100%; color: #000; font-size: 14px; border-collapse: collapse; clear: both; /*float: left;*/ margin-left: auto; margin-right: auto; margin-bottom: 0px; }
+    table.wanda-wfclient-table tr { background-color: expression((this.sectionRowIndex%2==0)?"#ffffff":"#FAFAFA"); }
+    table.wanda-wfclient-table td { border: 1px solid #CCCCCC; border-image: none; height: 28px; border-collapse: collapse; padding: 2px 3px 2px 3px; }
+    table.wanda-wfclient-table th { background: rgb(243, 243, 243); border-width: 1px; border-style: solid; border-color: #CCCCCC #CCCCCC #CCCCCC; color: #000; line-height: 24px; font-weight: 300; border-collapse: collapse; text-align: center; }
+    table.wanda-wfclient-table tbody tr td { word-break: break-all; word-wrap: break-word; }
+    table.wanda-wfclient-table tfoot tr td { text-align: center; }
+.wanda-wfclient-table * { vertical-align: middle; }
+
+/*审批日志*/
+#wanda-wfclient-log-textarea { border: 1px solid #cccccc; height: 120px; width: 99%; margin: 2px; }
+.wanda-wfclient-log-quicklog { font-size: 14px; cursor: pointer; border-bottom: 1px solid #3776f7; color: #3776f7; float: left; }
+#wanda-wfclient-log-content { width: 100%; margin-bottom: 50px; }
+    #wanda-wfclient-log-content pre { white-space: pre-wrap; word-wrap: break-word; }
+#wanda-wfclient-log-showmore { width: 100%; height: 40px; text-align: center; vertical-align: middle; display: none; }
+    #wanda-wfclient-log-showmore a { padding-left: 2px; margin-top: 10px; margin-bottom: 10px; cursor: pointer; }
+    #wanda-wfclient-log-showmore img { cursor: pointer; }
+#wanda-wfclient-log-logtable { margin-top: 5px; border: 1px solid rgb(238, 238, 238); width: 100%; border-spacing: 0; line-height: 25px; }
+    #wanda-wfclient-log-logtable tr th { }
+        #wanda-wfclient-log-logtable tr th.wanda-wfclient-log-logtable-thnode { width: 150px; }
+        #wanda-wfclient-log-logtable tr th.wanda-wfclient-log-logtable-approver { width: 230px; }
+        #wanda-wfclient-log-logtable tr th.wanda-wfclient-log-logtable-approvedate { width: 100px; }
+        #wanda-wfclient-log-logtable tr th.wanda-wfclient-log-logtable-operator { width: 50px; }
+    #wanda-wfclient-log-logtable tr td { height: 40px; padding: 7px; }
+        #wanda-wfclient-log-logtable tr td div { text-align: center; font-weight: normal; }
+        #wanda-wfclient-log-logtable tr td span { }
+
+/*审批导航*/
+#wanda-wfclient-nav-content { width: 100%; border-spacing: 0; margin: 3px; }
+#wanda-wfclient-nav-div { vertical-align: middle; border-bottom-color: currentColor; border-bottom-width: medium; border-bottom-style: none; line-height: 25px; }
+    #wanda-wfclient-nav-div .wanda-wfclient-nav-item { word-break: break-all; word-wrap: break-word; }
+        #wanda-wfclient-nav-div .wanda-wfclient-nav-item span { height: 19px; line-height: 19px; }
+        #wanda-wfclient-nav-div .wanda-wfclient-nav-item img { }
+    #wanda-wfclient-nav-div .wanda-wfclient-nav-node-autoinform { color: #999; }
+    #wanda-wfclient-nav-div .wanda-wfclient-nav-arrrow { padding-top: 2px; padding-left: 2px; }
+    #wanda-wfclient-nav-div .wanda-wfclient-nav-select { width: auto; margin-left: 4px; }
+    #wanda-wfclient-nav-div * { vertical-align: middle; margin: 0px; padding: 0px; }
+    #wanda-wfclient-nav-div .wanda-wfclient-nav-sparrrow { margin-right: 4px; }
+    #wanda-wfclient-nav-div .wanda-wfclient-nav-select { margin-right: 4px; }
+
+/*转发*/
+#wanda-wfclient-cc-content { }
+    #wanda-wfclient-cc-content .wanda-wfclient-cc-selectuser { color: rgb(55, 118, 247); padding-left: 0px; cursor: pointer; margin-right: 5px; }
+    #wanda-wfclient-cc-content .wanda-wfclient-cc-deleteuser { color: red; cursor: pointer; }
+
+
+/*审批按钮*/
+#wanda-wfclient-button-content { }
+/*通用审批按钮样式*/
+.wanda-wfclient-button-middle { width: 100%; height: 50px; text-align: center; margin-top: 10px; }
+/*新的审批按钮样式*/
+.wanda-wfclient-button-default { width: 100%; position: fixed; right: 0; left: 0; z-index: 9999; bottom: 0; margin-bottom: 0; height: 50px; text-align: center; background-color: rgb(67, 67, 67); }
+
+#wanda-wfclient-button-table { width: 100%; margin-top: 4px; text-align: center; vertical-align: middle; }
+#wanda-wfclient-button-div { position: relative; float: left; left: 50%; }
+.wanda-wfclient-button-btn { background-image: url('http://tools.wf.wanda-dev.cn/RuntimeService/Img/workflow_button_bg.png'); height: 30px; width: 106px; line-height: 30px; color: white; cursor: pointer; background-repeat: round; padding-bottom: 3px; font-size: 18px; float: left; margin-right: 30px; position: relative; right: 50%; }
+.wanda-wfclient-button-save { background-image: url('http://tools.wf.wanda-dev.cn/RuntimeService/Img/SaveButton.png'); }
+.wanda-wfclient-button-submit { background-image: url('http://tools.wf.wanda-dev.cn/RuntimeService/Img/SubmitButton.png'); }
+
+/*加签样式*/
+#wanda-wfclient-addnode-content { height: 120px; min-width: 500px; max-width: 1000px; }
+#wanda-wfclient-forward-content, #wanda-wfclient-return-content { height: 100px; min-width: 500px; max-width: 1000px; }
+#wanda-wfclient-forward-aselect, #wanda-wfclient-addnode-aselect { color: rgb(55, 118, 247); cursor: pointer; margin-right: 5px; }
+#wanda-wfclient-forward-logtextarea, #wanda-wfclient-return-logtextarea, #wanda-wfclient-addnode-logtextarea { width: 99%; height: 50px; }
+#wanda-wfclient-addnode-currentnode { }
+
+/*退回样式*/
+#wanda-wfclient-return-select { max-width: 600px; }
+
+.wanda_workflow_btn_blue01 a { /*background: url(../images/btn_blue_l.png) left no-repeat !important;*/ height: 24px !important; /*line-height: 24px !important;*/ font-size: 12px !important; font-weight: bold !important; text-decoration: none !important; display: inline-block !important; cursor: pointer !important; padding: 0 !important; }
+    .wanda_workflow_btn_blue01 a span { /*background: url(../images/btn_blue_r.png) right no-repeat !important;*/ height: 24px !important; line-height: 24px !important; margin-left: 5px !important; padding: 0 20px 0 15px !important; display: inline-block !important; color: #fff !important; cursor: pointer !important; }
+
+/*弹窗样式*/
+.wanda_user_popup { overflow: hidden; position: absolute; /*width: 1000px;*/ margin: auto auto; padding: 7px; background: #fff; z-index: 10001; background: #fff; }
+.wanda_user_t_l, .wanda_user_t_m, .wanda_user_t_r { position: absolute; top: 0; z-index: 2; height: 7px; font-size: 0%; }
+.wanda_user_t_l { left: 0; width: 7px; }
+.wanda_user_t_m { z-index: 1; width: 100%; }
+.wanda_user_t_r { right: 0; width: 7px; }
+.wanda_user_m_l, .wanda_user_m_r { position: absolute; z-index: 2; width: 7px; }
+.wanda_user_m_l { top: 0px; left: 0; z-index: 1; }
+.wanda_user_m_r { top: 0px; right: 0; z-index: 1; }
+.wanda_user_b_l, .wanda_user_b_m, .wanda_user_b_r { position: absolute; bottom: 0; z-index: 2; height: 7px; font-size: 0%; }
+.wanda_user_b_l { left: 0; width: 7px; }
+.wanda_user_b_m { z-index: 1; width: 100%; }
+.wanda_user_b_r { right: 0; width: 7px; }
+.wanda_user_m_m { width: 100%; font-size: 12px; }
+.wanda_user_pop_titile { color: #015aa5; font-size: 14px; margin: 0; position: relative; background: #009DD9; /*#999*/ }
+.wanda_user_pop_tx_titile { }
+.wanda_user_pop_txt { margin-left: 16px; margin-right: 10px; height: 35px; line-height: 35px; font-size: 14px; font-weight: bold; color: #fff; border-bottom: 0px dashed #015aa5; }
+.wanda_user_pop_titile .wanda_user_help { position: absolute; right: 20px; top: 5px; padding-right: 10px; cursor: pointer; }
+.wanda_user_pop_titile .wanda_user_exit { position: absolute; right: 0; top: 3px; padding-right: 10px; cursor: pointer; }
+.wanda_user_pop_bottom { height: 50px; line-height: 50px; margin: 0; text-align: right; padding-right: 5px; border-top: 1px solid #ccc; clear: both; }
+.wanda_user_pop_icon { width: 38px; height: 54px; display: inline-block; position: absolute; left: 8px; top: -10px; z-index: 1; }
+.wanda_user_pop_icon_02 { /*background: url(/images/popup/pop_icon02.png) no-repeat;*/ height: 64px; }
+.wanda_user_pop_icon_03 { /*background: url(/images/popup/pop_icon03.png) no-repeat;*/ height: 72px; }
+.wanda_user_popup_content { max-height: 680px; padding: 10px; /*border: 1px solid #dcdcdc;*/ }
+.wanda_user_pop_btn { margin: 0 10px; }
+.wanda_user_btn_fr { display: inline; float: right; margin: 0px 10px 10px 10px; }
+.wanda_user_btn_fr01 { display: inline !important; margin: 0px !important; }
+/*.wanda_user_btn01 { color: #fff; width: 90px; background: rgb(213,0,12); margin: 0px 3px; padding: 0px; border-radius: 3px; line-height: 26px; border: 1px solid rgb(158,0,0); border-image: none; height: 26px; text-align: center; color: rgb(255,255,255); text-indent: 0px; font-family: "Microsoft YaHei"; font-size: 14px; display: inline-block; cursor: pointer; }
+            .wanda_user_btn01 a { color: #fff; font-size: 14px; font-weight: bold; text-decoration: none; display: inline-block; cursor: pointer; }*/
+.wanda_user_btn01 a { background: url(http://tools.wf.wanda-dev.cn/RuntimeService/Img/btn_blue_l.png) left no-repeat !important; height: 24px !important; line-height: 24px !important; font-size: 12px !important; font-weight: bold !important; text-decoration: none !important; display: inline-block !important; cursor: pointer !important; padding: 0 !important; }
+    .wanda_user_btn01 a span { background: url(http://tools.wf.wanda-dev.cn/RuntimeService/Img/btn_blue_r.png) right no-repeat !important; height: 24px !important; line-height: 24px !important; margin-left: 5px !important; padding: 0 20px 0 15px !important; display: inline-block !important; color: #fff !important; cursor: pointer !important; }
+.wanda_user_input205 { width: 120px; height: 15px; }
+.wanda_user_btn_search { text-decoration: none; color: #333; }
+div.wanda_user_maskDiv { position: absolute; top: 0; left: 0; background-color: #111; filter: Alpha(opacity=30); opacity: 0.3; z-index: 10000; }
+.wanda_user_chkItemRole { TEXT-ALIGN: left; WIDTH: 400px; DISPLAY: inline; FLOAT: left; }
+.wanda_user_dnrHandler { cursor: move; }
+.wanda_user_resizeHandler { cursor: se-resize; }
+.wanda_user_clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.wanda_user_overflow { overflow-y: scroll; }
+.wanda_user_clearfix { display: inline-block; }
+
+/* ======================button related END====================== */
+/*提示框*/
+.preloader-modal { position: fixed; top: 50%; left: 50%; width: 150px; height: 80px; line-height: 80px; border-radius: 5px; margin-top: -40px; margin-left: -75px; text-align: center; background: rgba(0,0,0,.6); color: #fff; z-index: 9999999; }
+.alert-msg { position: fixed; top: 50%; left: 50%; width: 100%; max-width: 90%; -webkit-transform: translate(-50%,-50%); -ms-transform: translate(-50%,-50%); transform: translate(-50%,-50%); z-index: 99999999; -webkit-transition: opacity .5s ease-in-out; transition: opacity .5s ease-in-out; text-align: center; }
+.alert-msg-content { display: inline-block; padding: .8em 1em; border-radius: .3em; background-color: rgba(51,51,51,.8); word-break: break-all; color: #fff; text-align: left; }
+
+/*全屏背景遮罩层*/
+.loadingPage_bg1 { background: none repeat scroll 0 0 #000; height: 100%; left: 0; /*:rgba(0,0,0,0.5);*/ opacity: 0.3; filter: alpha(opacity=70); width: 100%; position: absolute; top: 0px; z-index: 1100000; }
+/*局部背景遮罩*/
+.loadingPage_bg { background: none repeat scroll 0 0 #fff; height: 100%; left: 0; /*:rgba(0,0,0,0.5);*/ opacity: 0.6; filter: alpha(opacity=100); width: 100%; z-index: 1100000; }
+#loadingPage { display: block; font-weight: bold; font-size: 12px; color: #595959; left: 50%; line-height: 27px; margin-left: -74px; margin-top: -14px; padding: 10px 10px 10px 50px; position: absolute; text-align: left; top: 50%; width: 168px; z-index: 1110000; background: url(http://tools.wf.wanda-dev.cn/RuntimeService/Img/loading.gif) no-repeat scroll 12px center #FFFFFF; border: 2px solid #86A5AD; }
+/*删除图片的样式*/
+.imgDelete { background-image: url('http://tools.wf.wanda-dev.cn/RuntimeService/Img/delete.png'); width: 16px; height: 16px; border: 0px; }
