@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="ReportTarget.aspx.cs" Inherits="Mobile.web.Report.ReportTarget" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="<%=ResolveUrl("~/Assets/Report/ReportTarget.js") %>"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <header id="header">
@@ -29,8 +30,7 @@
             </div>
         </div>
     </header>
-
-    <section id="content" style="padding-top: 70px;">
+    <section id="ReportTargetContent" style="padding-top: 70px;">
         <div class="container">
             <div class="row">
                 <div class="page-content col-lg-9 col-md-9 col-sm-9 col-xs-9">
@@ -87,14 +87,63 @@
                                         <li class="active">
                                             <h3>指标分解(单位:万元)<span class="collection-updown-icon"></span></h3>
                                             <!--<div class="collection-result">-->
-                                            <div class="showBox">
-                                                <table class="from-table alignCenter">
+                                            <div class="showBox" style="overflow:hidden;">
+                                                <div style="width:25%;position:absolute">
+                                                   <table class="from-table alignCenter" style="width:100%;">
                                                     <thead>
                                                         <tr>
                                                             <th>月份</th>
-                                                            <th>销售</th>
-                                                            <th>回款</th>
-                                                            <th>利润额</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>1月</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2月</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3月</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>4月</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>5月</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>6月</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>7月</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>8月</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>9月</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>10月</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>11月</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>12月</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                </div>
+                                                <table class="from-table alignCenter" style="width:117.8%;word-break: keep-all;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width:25%">月份</th>
+                                                            <th style="width:25%">销售</th>
+                                                            <th style="width:25%">回款</th>
+                                                            <th style="width:25%">利润额</th>
+                                                            <th style="width:25%">利润额</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>

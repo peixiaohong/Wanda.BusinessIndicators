@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="Assets\Report\ReportTarget.js" />
     <Content Include="Assets\scripts\common\base.utils.js" />
     <Content Include="Assets\scripts\vue-resource.min.js" />
     <Content Include="Assets\scripts\vue.min.js" />
