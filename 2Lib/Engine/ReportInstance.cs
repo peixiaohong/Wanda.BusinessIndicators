@@ -227,15 +227,15 @@ namespace LJTH.BusinessIndicators.Engine
             }
 
             //筛选当前用户有权限的项目公司信息(因为权限数据缺失暂时注释)
-            var companyIDArray = BLL.BizBLL.S_OrganizationalActionOperator.Instance.GetUserCompanyData(_System.ID, CurrentLoginName).Select(m => m.ID).ToArray();
-            if (companyIDArray.Length > 0)
-            {
-                ReportDetails = ReportDetails.Where(m => companyIDArray.Contains(m.CompanyID)).ToList();
-            }
-            else
-            {
-                ReportDetails = new List<MonthlyReportDetail>();
-            }
+            //var companyIDArray = BLL.BizBLL.S_OrganizationalActionOperator.Instance.GetUserCompanyData(_System.ID, CurrentLoginName).Select(m => m.ID).ToArray();
+            //if (companyIDArray.Length > 0)
+            //{
+            //    ReportDetails = ReportDetails.Where(m => companyIDArray.Contains(m.CompanyID)).ToList();
+            //}
+            //else
+            //{
+            //    ReportDetails = new List<MonthlyReportDetail>();
+            //}
         }
         #endregion Private Method
     }
