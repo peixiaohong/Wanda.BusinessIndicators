@@ -14,6 +14,7 @@ using LJTH.BusinessIndicators.ViewModel;
 using Wanda.Platform.Permission.ClientComponent;
 using LJTH.BusinessIndicators.BLL.BizBLL;
 using LJTH.BusinessIndicators.Common;
+using LJTH.BusinessIndicators.Model.BizModel;
 
 namespace LJTH.BusinessIndicators.Web.BusinessReport
 {
@@ -50,51 +51,62 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             if (!IsPostBack)
             {
 
-                List<C_System> sysList = new List<C_System>();
-                if (PermissionList != null && PermissionList.Count > 0)
+                #region 原来的获取方法
+                //List<C_System> sysList = new List<C_System>();
+                //if (PermissionList != null && PermissionList.Count > 0)
+                //{
+                //    foreach (var item in PermissionList)
+                //    {
+                //        sysList.AddRange(StaticResource.Instance.SystemList.Where(p => p.SystemName == item.ToString()).Distinct().ToList());
+                //    }
+                //}
+
+
+                //if (sysList.Count > 0)
+                //{
+                //    //Category ==1 代表的是经营系统
+                //    List<C_System> listSys = sysList.Where(or => or.Category == 1).Distinct().ToList().OrderBy(or => or.Sequence).ToList();
+                //    ddlSystem.DataSource = listSys;
+                //    if (string.IsNullOrEmpty(Request.QueryString["BusinessID"]))
+                //    {
+                //        if (listSys.Count == 0 && sysList.Count > 0)
+                //        {
+                //            C_System cs = sysList.FirstOrDefault();
+                //            if (cs.Category == 2)
+                //            {
+                //                Server.Transfer("~/BusinessReport/TargetProReported.aspx");
+                //            }
+                //            else if (cs.Category == 3)
+                //            {
+                //                Server.Transfer("~/BusinessReport/TargetGroupReported.aspx");
+                //            }
+                //            else if (cs.Category == 4)
+                //            {
+                //                Server.Transfer("~/BusinessReport/TargetDirectlyReported.aspx");
+                //            }
+                //        }
+                //    }
+                //}
+                //else
+                //    ddlSystem.DataSource = StaticResource.Instance.SystemList.Where(p => p.Category == 1).OrderBy(x => x.Sequence).ToList();
+                #endregion
+
+
+                List<S_Organizational> c_SystemList = S_OrganizationalActionOperator.Instance.GetUserSystemData(WebHelper.GetCurrentLoginUser());
+
+                if (c_SystemList == null || c_SystemList.Count == 0)
                 {
-                    foreach (var item in PermissionList)
-                    {
-                        sysList.AddRange(StaticResource.Instance.SystemList.Where(p => p.SystemName == item.ToString()).Distinct().ToList());
-                    }
+                    Response.Redirect("~/NoPermission.aspx");
+                    return;
                 }
-
-
-                if (sysList.Count > 0)
-                {
-                    //Category ==1 代表的是经营系统
-                    List<C_System> listSys = sysList.Where(or => or.Category == 1).Distinct().ToList().OrderBy(or => or.Sequence).ToList();
-                    ddlSystem.DataSource = listSys;
-                    if (string.IsNullOrEmpty(Request.QueryString["BusinessID"]))
-                    {
-                        if (listSys.Count == 0 && sysList.Count > 0)
-                        {
-                            C_System cs = sysList.FirstOrDefault();
-                            if (cs.Category == 2)
-                            {
-                                Server.Transfer("~/BusinessReport/TargetProReported.aspx");
-                            }
-                            else if (cs.Category == 3)
-                            {
-                                Server.Transfer("~/BusinessReport/TargetGroupReported.aspx");
-                            }
-                            else if (cs.Category == 4)
-                            {
-                                Server.Transfer("~/BusinessReport/TargetDirectlyReported.aspx");
-                            }
-                        }
-                    }
-                }
-                else
-                    ddlSystem.DataSource = StaticResource.Instance.SystemList.Where(p => p.Category == 1).OrderBy(x => x.Sequence).ToList();
-
-                ddlSystem.DataTextField = "SystemName";
-                ddlSystem.DataValueField = "ID";
+                ddlSystem.DataSource = c_SystemList;
+                ddlSystem.DataTextField = "CnName";
+                ddlSystem.DataValueField = "SystemID";
                 ddlSystem.DataBind();
 
-
                 lblName.Text = FinYear + "-" + FinMonth + "月度经营报告上报";
-
+                //加载区域
+                LoadAreaData();
                 if (string.IsNullOrEmpty(Request.QueryString["BusinessID"])) //如果BusinessID是Null，代表不是从OA进来的
                 {
                     HidSystemID.Value = ddlSystem.SelectedValue;
@@ -110,12 +122,14 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
 
                     ddlAreaID.SelectedValue = bmr.AreaID.ToString();
                     HidAreaID.Value = ddlAreaID.SelectedValue;
+
+                    ddlSystem.Enabled = false;
+                    ddlAreaID.Enabled = false;
                 }
 
                 HideProcessCode.Value = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(), DateTime.Now].Configuration.Element("ProcessCode").Value;
                 //AddMonthlyReport();//如果当前月不存在月度报告数据，添加一条数据
-                InitSystemBatch();
-
+                InitAreaData();
             }
         }
         /// <summary>
@@ -125,7 +139,8 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         /// <param name="e"></param>
         protected void ddlSystem_TextChanged(object sender, EventArgs e)
         {
-            InitSystemBatch();
+            ChangeSystem();
+            InitAreaData();
         }
         /// <summary>
         /// 添加月度报告数据
@@ -276,16 +291,35 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             }// ExceptionHelper.TrueThrow<ArgumentNullException>(PermissionList.Count == 0, "Argument GetStartProcessList is Count = 0");
         }
 
+
+        /// <summary>
+        /// 更改区域
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void ddlAreaID_TextChanged(object sender, EventArgs e)
         {
             AddMonthlyReport();
         }
 
-        private void InitSystemBatch()
+        /// <summary>
+        /// 加载区域并执行AddMonthlyReport
+        /// </summary>
+        private void InitAreaData()
+        {
+            LoadAreaData();
+            AddMonthlyReport();
+        }
+
+
+        /// <summary>
+        /// 加载区域
+        /// </summary>
+        private void LoadAreaData()
         {
             if (ddlSystem.SelectedValue != Guid.Empty.ToString())
             {
-                var list = S_OrganizationalActionOperator.Instance.GetUserRegional(ddlSystem.SelectedValue.ToGuid(),WebHelper.GetCurrentLoginUser());
+                var list = S_OrganizationalActionOperator.Instance.GetUserRegional(ddlSystem.SelectedValue.ToGuid(), WebHelper.GetCurrentLoginUser());
                 //list.Add(new Model.BizModel.S_Organizational {
                 //    ID = Guid.Parse("D8483CEA-1C7C-4C22-9969-BD7051D79E86"),
                 //    CnName="东北"
@@ -302,6 +336,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     ddlAreaID.DataTextField = "CnName";
                     ddlAreaID.DataValueField = "ID";
                     ddlAreaID.DataBind();
+
                 }
                 else
                 {
@@ -312,7 +347,26 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             {
                 ddlAreaID.Visible = false;
             }
-            AddMonthlyReport();
+        }
+
+        /// <summary>
+        /// 根据更改的板块加载不通页面
+        /// </summary>
+        private void ChangeSystem()
+        {
+            C_System cs = C_SystemOperator.Instance.GetSystem(Guid.Parse(ddlSystem.SelectedValue));
+            if (cs.Category == 2)
+            {
+                Server.Transfer("~/BusinessReport/TargetProReported.aspx");
+            }
+            else if (cs.Category == 3)
+            {
+                Server.Transfer("~/BusinessReport/TargetGroupReported.aspx");
+            }
+            else if (cs.Category == 4)
+            {
+                Server.Transfer("~/BusinessReport/TargetDirectlyReported.aspx");
+            }
         }
     }
 }
