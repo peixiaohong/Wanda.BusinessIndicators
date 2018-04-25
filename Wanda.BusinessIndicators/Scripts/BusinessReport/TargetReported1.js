@@ -97,7 +97,7 @@ $(function () {
         IsShowContextMenu: true,
         PageContextMenu: true,
         EnableDebug: true,
-        ShowNodeName: ShowProecessNodeName ==  false,
+        ShowNodeName: ShowProecessNodeName,
         ButtonCssType: "middle",
         CustomerSceneSetting: {
             ShowCc: false,//是否显示抄送

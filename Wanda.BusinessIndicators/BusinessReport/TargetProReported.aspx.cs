@@ -145,9 +145,6 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
 
                     BatchModel = B_SystemBatchOperator.Instance.GetSystemBatch("ProSystem", FinYear, FinMonth);
 
-                  
-
-
                     //判断批次表中是否有数据
                     if (BatchModel == null)
                     {
