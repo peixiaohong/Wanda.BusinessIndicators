@@ -84,16 +84,18 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 #endregion
 
 
-                List<S_Organizational> c_SystemList = S_OrganizationalActionOperator.Instance.GetUserSystemData(WebHelper.GetCurrentLoginUser());
+                var _SystemIds = S_OrganizationalActionOperator.Instance.GetUserSystemData(WebHelper.GetCurrentLoginUser()).Select(v => v.SystemID).ToList();
 
-                if (c_SystemList == null || c_SystemList.Count == 0)
+                if (_SystemIds == null || _SystemIds.Count == 0)
                 {
                     Response.Redirect("~/NoPermission.aspx");
                     return;
                 }
+                List<C_System> c_SystemList = StaticResource.Instance.SystemList.Where(p => _SystemIds.Contains(p.ID)).OrderBy(x => x.Sequence).ToList();
+
                 ddlSystem.DataSource = c_SystemList;
-                ddlSystem.DataTextField = "CnName";
-                ddlSystem.DataValueField = "SystemID";
+                ddlSystem.DataTextField = "SystemName";
+                ddlSystem.DataValueField = "ID";
                 ddlSystem.DataBind();
 
                 lblName.Text = FinYear + "-" + FinMonth + "月度经营报告上报";
