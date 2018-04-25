@@ -49,7 +49,6 @@
                                                                     <select class="form-control select-item mobile-select repeort-select">
                                                                         <option value="1">房地产事业部</option>
                                                                     </select>
-                                                                    <span class="icon-select"></span>
                                                                 </div>
                                                             </td>
                                                             <td style="width: 30%">
@@ -66,7 +65,6 @@
                                                                         <option value="9">2021年</option>
                                                                         <option value="10">2022年</option>
                                                                     </select>
-                                                                    <span class="icon-select"></span>
                                                                 </div>
                                                             </td>
                                                             <td style="width: 30%">
@@ -75,7 +73,6 @@
                                                                         <option value="1">考核版</option>
                                                                         <option value="2">内控版</option>
                                                                     </select>
-                                                                    <span class="icon-select"></span>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -87,141 +84,41 @@
                                         <li class="active">
                                             <h3>指标分解(单位:万元)<span class="collection-updown-icon"></span></h3>
                                             <!--<div class="collection-result">-->
-                                            <div class="showBox" style="overflow:hidden;">
-                                                <div style="width:25%;position:absolute">
-                                                   <table class="from-table alignCenter" style="width:100%;">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>月份</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>1月</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2月</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3月</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4月</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>5月</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>6月</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>7月</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>8月</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>9月</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>10月</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>11月</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>12月</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                            <div class="target" v-cloak>
+                                                <img src="../Assets/images/arrow-right.png" class="target-allow" data-allow="right" v-if="result[0].TargetDetailList.length > 3"/>
+                                                <div class="target-main">
+                                                    <div>
+                                                        <table class="from-table alignCenter target-name">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>{{result[0].FinMonth}}</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr v-for="(item,index) in result" v-if="index > 0">
+                                                                    <td>{{item.FinMonth}}月</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
 
+                                                    </div>
+                                                    <table class="from-table alignCenter target-content">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>{{result[0].FinMonth}}</th>
+                                                                <th v-for="item in result[0].TargetDetailList">{{item.TargetName}}</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr v-for="(item,index) in result" v-if="index > 0">
+                                                                <td>{{item.FinMonth}}月</td>
+                                                                <td v-for="target in item.TargetDetailList">{{target.SumTarget}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    </
                                                 </div>
-                                                <table class="from-table alignCenter" style="width:117.8%;word-break: keep-all;">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="width:25%">月份</th>
-                                                            <th style="width:25%">销售</th>
-                                                            <th style="width:25%">回款</th>
-                                                            <th style="width:25%">利润额</th>
-                                                            <th style="width:25%">利润额</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>1月</td>
-                                                            <td>8,900</td>
-                                                            <td>17,800</td>
-                                                            <td>4,450</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2月</td>
-                                                            <td>17,800</td>
-                                                            <td>35,600</td>
-                                                            <td>8,900</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3月</td>
-                                                            <td>26,700</td>
-                                                            <td>53,400</td>
-                                                            <td>13,350</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4月</td>
-                                                            <td>35,600</td>
-                                                            <td>71,200</td>
-                                                            <td>17,800</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>5月</td>
-                                                            <td>44,500</td>
-                                                            <td>89,000</td>
-                                                            <td>22,250</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>6月</td>
-                                                            <td>53,400</td>
-                                                            <td>106,800</td>
-                                                            <td>26,700</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>7月</td>
-                                                            <td>62,300</td>
-                                                            <td>124,600</td>
-                                                            <td>31,150</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>8月</td>
-                                                            <td>71,200</td>
-                                                            <td>142,400</td>
-                                                            <td>35,600</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>9月</td>
-                                                            <td>80,100</td>
-                                                            <td>160,200</td>
-                                                            <td>40,050</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>10月</td>
-                                                            <td>89,000</td>
-                                                            <td>178,000</td>
-                                                            <td>44,550</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>11月</td>
-                                                            <td>97,900</td>
-                                                            <td>195,800</td>
-                                                            <td>48,950</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>12月</td>
-                                                            <td>106,800</td>
-                                                            <td>213,360</td>
-                                                            <td>53,400</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                </
+
                                             </div>
                                         </li>
                                     </ul>
