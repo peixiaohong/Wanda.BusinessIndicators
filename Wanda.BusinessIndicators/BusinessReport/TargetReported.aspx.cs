@@ -7,6 +7,7 @@ using LJTH.BusinessIndicators.Model;
 using LJTH.BusinessIndicators.BLL.BizBLL;
 using LJTH.BusinessIndicators.Common;
 using LJTH.BusinessIndicators.Model.BizModel;
+using System.Linq;
 
 namespace LJTH.BusinessIndicators.Web.BusinessReport
 {
