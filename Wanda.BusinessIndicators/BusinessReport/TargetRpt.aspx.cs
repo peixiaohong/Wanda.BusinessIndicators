@@ -1,20 +1,13 @@
 ﻿using Lib.Core;
-using Lib.Web;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
 using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Xml.Linq;
 using LJTH.BusinessIndicators.BLL;
-using LJTH.BusinessIndicators.Engine;
 using LJTH.BusinessIndicators.Model;
-using LJTH.BusinessIndicators.ViewModel;
-using Wanda.Platform.Permission.ClientComponent;
 
 namespace LJTH.BusinessIndicators.Web.BusinessReport
 {
@@ -184,40 +177,40 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
 
 
 
-            PermissionHelper.GetPermission();
-            if (PermissionHelper.EnablePermission)
-            {
-                list = PermissionHelper.GetStartProcessList();
-                list1 = PermissionHelper.Getsubmanage();
-                ExceptionHelper.TrueThrow<ArgumentNullException>(list == null, "Argument GetStartProcessList is Empty");
-                if (list.Count > 0)
-                {
-                    if (string.IsNullOrEmpty(Request.QueryString["_sysid"]))
-                    {
-                        C_System cSystem = StaticResource.Instance.SystemList.Where(p => p.SystemName == list.FirstOrDefault()).FirstOrDefault();
-                        if (cSystem != null)
-                        {
-                            TransferOtherPage(cSystem.ID);
-                        }
-                    }
-                }
-            }
+            //PermissionHelper.GetPermission();
+            //if (PermissionHelper.EnablePermission)
+            //{
+            //    list = PermissionHelper.GetStartProcessList();
+            //    list1 = PermissionHelper.Getsubmanage();
+            //    ExceptionHelper.TrueThrow<ArgumentNullException>(list == null, "Argument GetStartProcessList is Empty");
+            //    if (list.Count > 0)
+            //    {
+            //        if (string.IsNullOrEmpty(Request.QueryString["_sysid"]))
+            //        {
+            //            C_System cSystem = StaticResource.Instance.SystemList.Where(p => p.SystemName == list.FirstOrDefault()).FirstOrDefault();
+            //            if (cSystem != null)
+            //            {
+            //                TransferOtherPage(cSystem.ID);
+            //            }
+            //        }
+            //    }
+            //}
 
 
-            var li = PermissionHelper.GetFuncPermission();
+            //var li = PermissionHelper.GetFuncPermission();
 
-            if (!string.IsNullOrEmpty(Request.QueryString["v"]) && Request.QueryString["v"] == "default")
-            {
-                if (li != null && li.Count > 0)
-                {
-                    bool IsTransferRequest = li.Any(p => p.FuncCode == "GQ_ReportStatManager");
+            //if (!string.IsNullOrEmpty(Request.QueryString["v"]) && Request.QueryString["v"] == "default")
+            //{
+            //    if (li != null && li.Count > 0)
+            //    {
+            //        bool IsTransferRequest = li.Any(p => p.FuncCode == "GQ_ReportStatManager");
 
-                    if (IsTransferRequest)
-                    {
-                        Server.TransferRequest("/SystemConfiguration/ReportApproveStatistical.aspx");
-                    }
-                }
-            }
+            //        if (IsTransferRequest)
+            //        {
+            //            Server.TransferRequest("/SystemConfiguration/ReportApproveStatistical.aspx");
+            //        }
+            //    }
+            //}
            
 
 

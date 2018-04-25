@@ -14,11 +14,12 @@ namespace ScheduleService.Handler
 {
     [Quartz.DisallowConcurrentExecution]
     [Quartz.PersistJobDataAfterExecution]
-    class ProjectCompleteProcess: Quartz.IJob
+    public class ProjectCompleteProcess: Quartz.IJob
     {
+        private string userName = "虚拟";
         public void Execute(Quartz.IJobExecutionContext context)
         {
-            Common.ScheduleService.Log.Instance.Info("项目系统子流程处理开始！");
+            Common.ScheduleService.Log.Instance.Info("子流程处理开始！");
             bool IsChildrenSubmit=false;
             List<B_SystemBatch> listBSB= B_SystemBatchOperator.Instance.GetSystemBatchList().ToList();
             try
@@ -27,7 +28,8 @@ namespace ScheduleService.Handler
                 {
                     if (BPF.Workflow.Client.WFClientSDK.Exist(Bsystembatch.ID.ToString()))
                     {
-                        WorkflowContext SummaryProcessWorkflow = WFClientSDK.GetProcess(null, Bsystembatch.ID.ToString(), new UserInfo() { UserCode = "$VirtualUserCode$项目汇总服务" });
+                        WorkflowContext SummaryProcessWorkflow = WFClientSDK.GetProcess(null, Bsystembatch.ID.ToString(), new UserInfo() { UserCode = "$VirtualUserCode$"+userName });
+                        //WorkflowContext SummaryProcessWorkflow = WFClientSDK.GetProcess(null, Bsystembatch.ID.ToString(), new UserInfo() { UserLoginID = "fanbing" });
                         if (SummaryProcessWorkflow.ProcessInstance.Status == 3)
                         {
                             List<V_SubReport> listVs = JsonConvert.DeserializeObject<List<V_SubReport>>(Bsystembatch.SubReport);
@@ -35,7 +37,8 @@ namespace ScheduleService.Handler
                             {
                                 if (BPF.Workflow.Client.WFClientSDK.Exist(vs.ReportID.ToString()))
                                 {
-                                    WorkflowContext ChildrenWorkflow = WFClientSDK.GetProcess(null, vs.ReportID.ToString(), new UserInfo() { UserCode = "$VirtualUserCode$虚拟汇总人" });
+                                     WorkflowContext ChildrenWorkflow = WFClientSDK.GetProcess(null, vs.ReportID.ToString(), new UserInfo() { UserCode = "$VirtualUserCode$"+userName });
+                                    // WorkflowContext ChildrenWorkflow = WFClientSDK.GetProcess(null, vs.ReportID.ToString(), new UserInfo() { UserLoginID = "fanbing" });
                                     if (ChildrenWorkflow.ProcessInstance.Status != 3)
                                     {
                                         Common.ScheduleService.Log.Instance.Info("项目系统子流程,流程开始提交！ID="+vs.ReportID.ToString());
@@ -48,8 +51,8 @@ namespace ScheduleService.Handler
                                         bizContext.BusinessID = vs.ReportID.ToString();
                                         bizContext.FlowCode = ChildrenWorkflow.ProcessInstance.FlowCode;
                                         bizContext.ApprovalContent = "同意";
-                                        bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$虚拟汇总人" };
-                                        bizContext.ProcessURL = "/BusinessReport/ProTargetApprove.aspx";
+                                        bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$等待汇总" };
+                                        bizContext.ProcessURL = "/BusinessReport/TargetApprove.aspx";
                                         bizContext.FormParams = formParams;
                                         bizContext.ExtensionCommond = new Dictionary<string, string>();
                                         bizContext.ExtensionCommond.Add("RejectNode", Guid.Empty.ToString());

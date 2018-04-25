@@ -14,10 +14,15 @@
                 runat="server" Text="月度经营报告"></asp:Label>
         </div>
         <asp:HiddenField runat="server" ID="hideMonthReportID" ClientIDMode="Static" />
-        <asp:HiddenField runat="server" ID="hideSystemID" ClientIDMode="Static" />
-        <asp:HiddenField runat="server" ID="hideFinYear" ClientIDMode="Static" />
+        <asp:HiddenField runat="server" ID="hideBusinessID" ClientIDMode="Static" />
         <asp:HiddenField runat="server" ID="hideFinMonth" ClientIDMode="Static" />
-        <asp:HiddenField runat="server" ID="HideProcessCode" ClientIDMode="Static" />
+        <asp:HiddenField runat="server" ID="hideProType" ClientIDMode="Static" />
+        <asp:HiddenField runat="server" ID="HideOpinions" ClientIDMode="Static" />
+        <asp:HiddenField runat="server" ID="hideProcessCode" ClientIDMode="Static" />
+        <asp:HiddenField runat="server" ID="hideFinYear" ClientIDMode="Static" />
+        <asp:HiddenField runat="server" ID="hideSystemID" ClientIDMode="Static" />
+        <asp:HiddenField runat="server" ID="hideBatchID" ClientIDMode="Static" />
+
         <!--月报说明 开始-->
         <div class="margin_t10" id="MonthReportExplainDiv">
             <div class="content_t_l">

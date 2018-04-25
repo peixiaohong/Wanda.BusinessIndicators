@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Wanda.Platform.WorkFlow.ClientComponent;
 using BPF.Workflow.Object;
 using BPF.Workflow.Client;
 using LJTH.BusinessIndicators.BLL;
@@ -59,8 +58,8 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                             na1 = new NavigatActivity1();
                             na1.ActivityID = p1.Value.NodeID;
                             na1.ActivityName = p1.Value.NodeName;
-                            na1.ActivityType = (ActivityType)p1.Value.NodeType;
-                            na1.RunningStatus = (WFRunningStatus)(p1.Value.Status > 1 ? 3 : p1.Value.Status);
+                            na1.ActivityType = p1.Value.NodeType;
+                            na1.RunningStatus = (p1.Value.Status > 1 ? 3 : p1.Value.Status);
                             List<ClientOpinion1> listclientOp = new List<ClientOpinion1>();
                             listclientOp.Add(new ClientOpinion1()
                             {
@@ -126,9 +125,9 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             get { return activityName; }
             set { activityName = value; }
         }
-        private ActivityType activityType;
+        private int activityType;
 
-        public ActivityType ActivityType
+        public int ActivityType
         {
             get { return activityType; }
             set { activityType = value; }
@@ -161,9 +160,9 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             get { return opinions; }
             set { opinions = value; }
         }
-        private WFRunningStatus runningStatus;
+        private int runningStatus;
 
-        public WFRunningStatus RunningStatus
+        public int RunningStatus
         {
             get { return runningStatus; }
             set { runningStatus = value; }

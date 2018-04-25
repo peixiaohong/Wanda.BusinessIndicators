@@ -1,20 +1,11 @@
 ﻿using Lib.Core;
-using Newtonsoft.Json;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Web;
-using System.Web.Services;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Xml.Linq;
 using LJTH.BusinessIndicators.BLL;
-using LJTH.BusinessIndicators.Engine;
 using LJTH.BusinessIndicators.Model;
-using LJTH.BusinessIndicators.ViewModel;
-using Wanda.Platform.Permission.ClientComponent;
 namespace LJTH.BusinessIndicators.Web
 {
     public partial class CompanyList : System.Web.UI.Page

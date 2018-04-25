@@ -314,11 +314,11 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
 	                           Where A.[IsDeleted]=0 And A.[SystemID]=@SystemID And B.[LoginName]=@LoginName
 	                           Union All
                                Select A.* From [dbo].[S_Organizational] As A 
-	                           Inner Join [GetOrgRegional] As B On A.[ParentID]=B.[ID]
+	                           Inner Join [GetOrgRegional] As B On A.[ID]=B.[ParentID]
 	                           Where A.[IsDeleted]=0
                            )
 
-                           Select * From [GetOrgRegional] As A Where A.[IsDeleted]=0 And A.[IsCompany]=0 And A.[Level]=3";
+                           Select Distinct * From [GetOrgRegional] As A Where A.[IsDeleted]=0 And A.[IsCompany]=0 And A.[Level]=3";
             DbParameter[] parameters = new DbParameter[]
             {
                 CreateSqlParameter("@SystemID",DbType.Guid,systemID),

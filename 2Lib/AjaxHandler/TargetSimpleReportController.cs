@@ -12,6 +12,7 @@ using LJTH.BusinessIndicators.Engine;
 using LJTH.BusinessIndicators.Model;
 using LJTH.BusinessIndicators.ViewModel;
 using LJTH.BusinessIndicators.Web;
+using LJTH.BusinessIndicators.BLL.BizBLL;
 
 namespace LJTH.BusinessIndicators.Web.AjaxHandler
 {
@@ -53,18 +54,6 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 return new List<string>();
         }
 
-        [LibAction]
-        public List<int> GetYear()
-        {
-            List<int> Year = new List<int>();
-            for (int i = -10; i < 5; i++)
-            {
-                Year.Add(DateTime.Now.Year + i);
-            }
-
-            return Year;
-
-        }
 
 
         [LibAction]
@@ -118,7 +107,93 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         }
 
 
+        /// <summary>
+        /// 上报系统下拉框数据加载
+        /// </summary>
+        /// <returns></returns>
+        [LibAction]
+        public Object GetSystemInfo()
+        {
+            try
+            {
+                var data = S_OrganizationalActionOperator.Instance.GetUserSystemData(base.CurrentUserName);
+                var success = 1;
+                return new
+                {
+                    Data = data,
+                    Success = success,
+                    Message = "查询数据没有问题"
+                };
+            }
+            catch (Exception e)
+            {
+                return new
+                {
+                    Data = "",
+                    Success = 0,
+                    Message = e.Message
+                };
+            }
+        }
 
+        /// <summary>
+        /// 获取上边年下拉框
+        /// </summary>
+        /// <returns></returns>
+        [LibAction]
+        public object GetYear()
+        {
+            List<int> Year = new List<int>();
+            for (int i = -10; i < 5; i++)
+            {
+                Year.Add(DateTime.Now.Year + i);
+            }
+            return new
+            {
+                Data = Year,
+                Success = 1,
+                NowYear = DateTime.Now.Year,
+                NowMonth = DateTime.Now.Month,
+                Message = "查询数据没有问题"
+            };
+        }
 
+        /// <summary>
+        /// 获取页面列表数据
+        /// </summary>
+        /// <returns></returns>
+        [LibAction]
+        public object GetListData(string systemID,string year,string month)
+        {
+            int finYear = DateTime.Now.Year, finMonth = DateTime.Now.Month;
+            if (year != "0")
+            {
+                finYear = Convert.ToInt32(year);
+            }
+            if (month != "0")
+            {
+                finMonth = Convert.ToInt32(month);
+            }
+            try
+            {
+                var data = V_ComprehensiveReportFormsOperator.Instance.GetComprehensiveReportData(systemID, finYear, finMonth, base.CurrentUserName);
+                return new
+                {
+                    Data=data,
+                    Success=1,
+                    Message="查询成功"
+                };
+            }
+            catch (Exception ex)
+            {
+
+                return new
+                {
+                    Data = "",
+                    Success = 0,
+                    Message =ex.Message
+                };
+            }
+        }
     }
 }

@@ -21,32 +21,56 @@
     <script type="text/x-jquery-tmpl" id="Tmpl_ComprehensiveReportInfo">
         <tr>
             {{if SrowSpan_str!=undefined &&SrowSpan_str!=null && SrowSpan_str>0 }}
-            <td class="Td_Center"   rowspan="${SrowSpan_str}" >${SystemName} </td>
+            <td class="Td_Center" rowspan="${SrowSpan_str}">${SystemName} </td>
             {{/if}}
 
             {{if TrowSpan_str!=undefined &&TrowSpan_str!=null && TrowSpan_str>0 }}
-            <td class="Td_Center" rowspan="${TrowSpan_str}" >${TargetName}</td>
+            <td class="Td_Center" rowspan="${TrowSpan_str}">${TargetName}</td>
             {{/if}}
 
-            <td class="Td_Center" >${FinYear}年 {{if TType ==0}}实际{{else}}指标{{/if}}  </td>
-            <td class="Td_Center"  title="${_1}">${_1.thousandize0OrEmpty(0)}</td>
-            <td class="Td_Center"  title="${_2}">${_2.thousandize0OrEmpty(0)}</td>
-            <td class="Td_Center"  title="${_3}">${_3.thousandize0OrEmpty(0)}</td>
-            <td class="Td_Center"  title="${_4}"> ${_4.thousandize0OrEmpty(0)}</td>
-            <td class="Td_Center"  title="${_5}">${_5.thousandize0OrEmpty(0)}</td>
-            <td class="Td_Center"  title="${_6}">${_6.thousandize0OrEmpty(0)}</td>
-            <td class="Td_Center"  title="${_7}">${_7.thousandize0OrEmpty(0)}</td>
-            <td class="Td_Center"  title="${_8}">${_8.thousandize0OrEmpty(0)}</td>
-            <td class="Td_Center"  title="${_9}">${_9.thousandize0OrEmpty(0)}</td>
-            <td class="Td_Center"  title="${_10}">${_10.thousandize0OrEmpty(0)}</td>
-            <td class="Td_Center"  title="${_11}">${_11.thousandize0OrEmpty(0)}</td>
-            <td class="Td_Center"  title="${_12}">${_12.thousandize0OrEmpty(0)}</td>
-            <td class="Td_Center" title="${(_1 + _2 + _3 + _4 + _5 + _6 + _7 + _8 + _9 + _10 + _11 + _12)}" >${(_1 + _2 + _3 + _4 + _5 + _6 + _7 + _8 + _9 + _10 + _11 + _12).thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center">${FinYear}年 {{if TType ==0}}实际{{else}}指标{{/if}}  </td>
+            <td class="Td_Center" title="${_1}">${_1.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center" title="${_2}">${_2.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center" title="${_3}">${_3.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center" title="${_4}"> ${_4.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center" title="${_5}">${_5.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center" title="${_6}">${_6.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center" title="${_7}">${_7.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center" title="${_8}">${_8.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center" title="${_9}">${_9.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center" title="${_10}">${_10.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center" title="${_11}">${_11.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center" title="${_12}">${_12.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Center" title="${(_1 + _2 + _3 + _4 + _5 + _6 + _7 + _8 + _9 + _10 + _11 + _12)}">${(_1 + _2 + _3 + _4 + _5 + _6 + _7 + _8 + _9 + _10 + _11 + _12).thousandize0OrEmpty(0)}</td>
         </tr>
 
     </script>
 
 
+    <script type="text/x-jquery-tmpl" id="systemInfo_Tmpl">
+        <option data-ID="${ID}">${CnName}</option>
+    </script>
+    <script type="text/x-jquery-tmpl" id="selectYears_Tmpl">
+        <option data-ID="${$data}">${$data}</option>
+    </script>
+    <script type="text/x-jquery-tmpl" id="showReportData_Tmpl">
+        {{each(i,item) Data}}
+        <tr style="text-align: center">
+            {{if i==0||Data[i-1].CnName!=item.CnName}}
+            <td rowspan="${item.Number}" class="Td_Right">{{= item.CnName}}</td>
+            {{/if}}
+            <td class="Td_Right">${item.TargetName}</td>
+            <td class="Td_Right">${item.NPlanAmmount}</td>
+            <td class="Td_Right">${item.NActualAmmount}</td>
+            <td class="Td_Right">${item.NDifference}</td>
+            <td class="Td_Right">${item.NDisplayRate}</td>
+            <td class="Td_Right">${item.NAccumulativePlanAmmount}</td>
+            <td class="Td_Right">${item.NAccumulativeActualAmmount}</td>
+            <td class="Td_Right">${item.NAccumulativeDifference}</td>
+            <td class="Td_Right">${item.NAccumulativeDisplayRate}</td>
+        </tr>
+        {{/each}}
+    </script>
 </head>
 <body>
 </body>

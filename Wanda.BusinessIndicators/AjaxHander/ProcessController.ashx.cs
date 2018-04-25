@@ -7,7 +7,6 @@ using LJTH.BusinessIndicators.BLL;
 using LJTH.BusinessIndicators.Model;
 using LJTH.BusinessIndicators.Engine;
 using LJTH.BusinessIndicators.Common;
-using Wanda.Platform.WorkFlow.ClientComponent;
 using BPF.Workflow.Object;
 using BPF.Workflow.Client;
 using LJTH.BusinessIndicators.ViewModel;
@@ -25,6 +24,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         public void ProcessRequest(HttpContext context)
         {
             this.BusinessID = context.Request["BusinessID"];
+            this.ProType = context.Request["strProType"];
+            this.ExecType = context.Request["ExecuteType"];
             if (!string.IsNullOrEmpty(context.Request["OperatorType"]))
             {
                 OperatorType = int.Parse(context.Request["OperatorType"]);
@@ -34,23 +35,24 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             {
                 strPrcessStatus = context.Request["PrcessStatus"];
             }
-            if (string.IsNullOrEmpty(this.BusinessID))
-            {
-                throw new Exception("BusinessID is null!");
-            }
-            else
-            {
-                //添加谁点击了提交审批按钮,加入了获取流程信息json
-                B_MonthlyReport ReportModel = B_MonthlyreportOperator.Instance.GetMonthlyreport(BusinessID.ToGuid());
+            #region 原有逻辑，注释
+            //if (string.IsNullOrEmpty(this.BusinessID))
+            //{
+            //    throw new Exception("BusinessID is null!");
+            //}
+            //else
+            //{
+            //    //添加谁点击了提交审批按钮,加入了获取流程信息json
+            //    B_MonthlyReport ReportModel = B_MonthlyreportOperator.Instance.GetMonthlyreport(BusinessID.ToGuid());
 
-                if (string.IsNullOrEmpty(ReportModel.ProcessOwn))
-                {
-                    ReportModel.ProcessOwn = this.CurrentUser;
+            //    if (string.IsNullOrEmpty(ReportModel.ProcessOwn))
+            //    {
+            //        ReportModel.ProcessOwn = this.CurrentUser;
 
-                    B_MonthlyreportOperator.Instance.UpdateMonthlyreport(ReportModel);
-                }
+            //        B_MonthlyreportOperator.Instance.UpdateMonthlyreport(ReportModel);
+            //    }
 
-            }
+            //}
             //if (strPrcessStatus != "Approved")
             //{
             //    OnProcessExecuteBusinessData(strPrcessStatus, OperatorType);
@@ -65,6 +67,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             ////处理本系统的数据
             //DisposeBusinessData();
             //==========================
+            #endregion
 
             //业务处理
             DisposeBusinessData();
@@ -196,12 +199,11 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     }
                     else
                     {
-                        B_SystemBatch SystemBatchA = B_SystemBatchOperator.Instance.GetSystemBatch(BusinessID.ToGuid());
-
-                        List<NavigatActivity1> lstna = GetProcessIntance(SystemBatchA.ID.ToString(), UserLonginID);
+                        var BacthModel = B_SystemBatchOperator.Instance.GetSystemBatch(BusinessID.ToGuid());
+                        List<NavigatActivity1> lstna = GetProcessIntance(BacthModel.ID.ToString(), UserLonginID);
                         string Json = Newtonsoft.Json.JsonConvert.SerializeObject(lstna);
-                        SystemBatchA.ReportApprove = Json;
-                        B_SystemBatchOperator.Instance.UpdateSystemBatch(SystemBatchA);
+                        BacthModel.ReportApprove = Json;
+                        B_SystemBatchOperator.Instance.UpdateSystemBatch(BacthModel);
                     }
                     break;
                 case "beforeAction":
@@ -624,8 +626,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     na1 = new NavigatActivity1();
                     na1.ActivityID = p1.Value.NodeID;
                     na1.ActivityName = p1.Value.NodeName;
-                    na1.ActivityType = (ActivityType)p1.Value.NodeType;
-                    na1.RunningStatus = (WFRunningStatus)(p1.Value.Status > 1 ? 3 : p1.Value.Status);
+                    na1.ActivityType = p1.Value.NodeType;
+                    na1.RunningStatus = (p1.Value.Status > 1 ? 3 : p1.Value.Status);
                     List<ClientOpinion1> listclientOp = new List<ClientOpinion1>();
                     listclientOp.Add(new ClientOpinion1()
                     {
@@ -721,18 +723,9 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
                             if (BatchModel != null)
                             {
-                                //批次是草稿状态
+                                //批次是草稿状态,
                                 V_SubReportList = JsonConvert.DeserializeObject<List<V_SubReport>>(BatchModel.SubReport);
-                                foreach (var item in V_SubReportList)
-                                {
-                                    //选择的是那个系统？
-                                    if (item.SystemID == bmr.AreaID)
-                                    {
-                                        //根据选择的系统
-                                        item.IsReady = true;
-                                    }
-
-                                }
+                                V_SubReportList.Where(x => x.SystemID == bmr.AreaID).ForEach(x => x.IsReady = true);
                                 BatchModel.SubReport = JsonConvert.SerializeObject(V_SubReportList);
                             }
 
@@ -757,9 +750,6 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         B_SystemBatchOperator.Instance.UpdateSystemBatch(_batchModel);
                     }
                 }
-
-                //var p = BPF.Workflow.Client.WFClientSDK.GetProcess(null, this.BusinessID);
-
                 //
                 //汇总流程审批完成。执行listB TO listA ,对最后的审批做了更加严谨的判断
                 if (p.ProcessInstance.Status == 3)
@@ -947,9 +937,9 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             get { return activityName; }
             set { activityName = value; }
         }
-        private ActivityType activityType;
+        private int activityType;
 
-        public ActivityType ActivityType
+        public int ActivityType
         {
             get { return activityType; }
             set { activityType = value; }
@@ -982,9 +972,9 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             get { return opinions; }
             set { opinions = value; }
         }
-        private WFRunningStatus runningStatus;
+        private int runningStatus;
 
-        public WFRunningStatus RunningStatus
+        public int RunningStatus
         {
             get { return runningStatus; }
             set { runningStatus = value; }

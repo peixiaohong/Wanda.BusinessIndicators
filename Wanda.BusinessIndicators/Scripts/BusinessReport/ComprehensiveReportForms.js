@@ -1,253 +1,131 @@
-﻿
-var selID = ""; // 选择的系统ID
-
-
-
-//加载模版项
+﻿//加载模版项
 function loadTmpl(selector) {
-    return WebUtil.loadTmpl("../BusinessReport/ComprehensiveReportForms.html", selector);
+    return WebUtil.loadTmpl("../BusinessReport/ComprehensiveReportForms.html?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>", selector);
 }
-
+//加载动画开始
+function Load() {
+    $.blockUI({ message: "<div style='width:200px'><img src='../../images/ajax-loader.gif' alt='waiting'><span style='font-size:20px;padding-left:20px;color:#3f3f3f'>数据请求中...</span></div>" });
+}
+//加载动画结束
+function Fake() {
+    $.unblockUI();
+}
 
 $(function () {
+    //页面效果配置
+    PageEffect();
 
-    InitSysTree(); //初始化数控件数据
-    InitYear();
-    InitddlTarget('');
+    //页面数据初始化加载
+    PageLoad();
 
-    GetReportTime();
+    //页面事件加载
+    EventLoad();
 });
 
-
-//初始化指标
-function InitddlTarget(objstr) {
-
-    WebUtil.ajax({
-        async: false,
-        url: "/TargetSimpleReportController/GetTargetList",
-        args: { SysID: objstr },
-        successReturn: function (dateresult) {
-            $("#ddlTarget").empty();
-            loadTmpl("#Tmpl_ddlTargetInfo").tmpl(dateresult).appendTo("#ddlTarget");
-        }
-    });
-
-
-    $("#ddlTarget").change(function () {
-    }).multipleSelect({
-        width: 210,
-        multiple: true,
-        multipleWidth: 180,
-        selectAllText: "全选",
-        allSelected: ""
-    });
-
-}
-
-
-function InitYear() {
-    WebUtil.ajax({
-        async: false,
-        url: "/TargetSimpleReportController/GetYear",
-        successReturn: function (dateresult) {
-            loadTmpl("#Tmpl_ddlYearInfo").tmpl(dateresult).appendTo("#ddlYear");
-
-            loadTmpl("#Tmpl_ddlYearInfo").tmpl(dateresult).appendTo("#ddlYears");
-        }
-    });
-
-    $("#ddlYear").change(function () {
-    }).multipleSelect({
-        width: 100,
-        multiple: true,
-        multipleWidth: 80,
-        maxHeight:270,
-        selectAllText: "全选",
-        allSelected: ""
-        });
-    
-}
-
-//初始化Ztree的数据
-function InitSysTree() {
-    //Ztree的初始化设置
-    var setting = {
-        view: {
-            dblClickExpand: false
-        },
-        callback: {
-            beforeClick: beforeClick,
-            onCheck: onCheck
-        },
-        check: {
-            enable: true,
-            chkboxType: { "Y": "", "N": "" }
-        },
-        data: {
-            key: { name: "TreeNodeName" },
-            simpleData: {
-                enable: true,
-                idKey: "ID",
-                pIdKey: "ParentID",
-                rootPId: '99999999-9999-9999-9999-FFFFFFFFFFFF'
+//页面效果配置
+function PageEffect()
+{
+    var ie6 = document.all;
+    var dv = $('.table-head'), st;
+    dv.attr('otop', dv.offset().top); //存储原来的距离顶部的距离
+    $(window).scroll(function () {
+        st = Math.max(document.body.scrollTop || document.documentElement.scrollTop);
+        if (st > parseInt(dv.attr('otop'))) {
+            if (ie6) {//IE6不支持fixed属性，所以只能靠设置position为absolute和top实现此效果
+                dv.css({ position: 'absolute', top: st });
+            }
+            else if (dv.css('position') != 'fixed') {
+                dv.css({ 'position': 'fixed', top: 0 });
             }
         }
-    };
-
-
-    //对Json 做下处理
-    for (var i = 0; i < TreeDataJson.length; i++) {
-        if (TreeDataJson[i].Category == 0)
-            TreeDataJson[i].nocheck = true;
-    }
-
-
-    $.fn.zTree.init($("#SysTree"), setting, TreeDataJson);
-
-    var treeObj = $.fn.zTree.getZTreeObj("SysTree");
-    var nodes = treeObj.getNodes();
-    for (var i = 0; i < nodes.length; i++) { //设置节点展开
-        treeObj.expandNode(nodes[i], true, false, true);
-    }
-
+        else if (dv.css('position') != 'static') {
+            dv.css({ 'position': 'static' });
+        }
+        $(".table-head").width($(".table-body").width());
+    });
 }
 
-function GetReportTime()
+//页面数据初始化加载
+function PageLoad()
+{
+    //上报系统下拉框数据加载
+    SystemInfoLoad();
+    //上报年份数据加载
+    SelectYearsInfoLoad();
+    //页面列表数据加载
+    ShowReportDataLoad('00000000-0000-0000-0000-000000000000',0,0);
+}
+
+
+//页面事件加载
+function EventLoad()
+{
+    //查询按钮单击事件
+    $(".btn_search").off('click').on('click', function () {
+        var systemID = $("#systemInfo").find("option:selected").attr("data-id");
+        var year = $("#selectYears").find("option:selected").attr("data-id");
+        var month = $("#selectMonth").find("option:selected").attr("data-value");
+        ShowReportDataLoad(systemID, year, month);
+    });
+}
+
+
+//上报系统下拉框数据加载
+function SystemInfoLoad()
 {
     WebUtil.ajax({
         async: false,
-        url: "/TargetSimpleReportController/GetReportTime",
-        successReturn: function (dateresult) {
-
-            var Report = dateresult;
-            var MMM = new Date(dateresult.ReportTime).getMonth() + 1;
-
-            var YYY = new Date(dateresult.ReportTime).getFullYear();
-            
-            $("#ddlYear").multipleSelect("setSelects", [YYY]);
-
-            $("#ddlYears").val(YYY);
-            
-            $("#ddlMonths").val(MMM);
-
-        }
-    });
-}
-
-
-
-
-// 树控件只能点击最末级子节点
-function beforeClick(treeId, treeNode) {
-
-
-    var zTree = $.fn.zTree.getZTreeObj("SysTree");
-    zTree.checkNode(treeNode, !treeNode.checked, null, true);
-    return false;
-}
-
-function onCheck(e, treeId, treeNode) {
-
-    var zTree = $.fn.zTree.getZTreeObj("SysTree"),
-        nodes = zTree.getCheckedNodes(true),
-        v = "", vId = "";
-
-    for (var i = 0, l = nodes.length; i < l; i++) {
-        v += nodes[i].TreeNodeName + ",";
-        vId += nodes[i].ID + ",";
-    }
-    if (v.length > 0) v = v.substring(0, v.length - 1);
-    var cityObj = $("#TxtSystem");
-    cityObj.attr("value", v);
-
-    if (vId.length > 0) vId = vId.substring(0, vId.length - 1);
-    selID = vId;
-
-
-    InitddlTarget(selID);// 这里控制指标的个数
-
-}
-
-function showMenu() {
-    var cityObj = $("#TxtSystem");
-    var cityOffset = $("#TxtSystem").offset();
-    $("#menuContent").css({ left: cityOffset.left + "px", top: cityOffset.top + cityObj.outerHeight() + "px" }).slideDown("fast");
-
-    $("body").bind("mousedown", onBodyDown);
-}
-
-function hideMenu() {
-    $("#menuContent").fadeOut("fast");
-    $("body").unbind("mousedown", onBodyDown);
-}
-
-function onBodyDown(event) {
-    if (!(event.target.id == "menuBtn" || event.target.id == "TxtSystem" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length > 0)) {
-        hideMenu();
-    }
-}
-
-
-//查询数据
-function SearchData() {
-    var TargetStr = $('#ddlTarget').multipleSelect('getSelects', 'text');
-    var FinYear = $('#ddlYear').multipleSelect('getSelects', 'text');
-
-    var _M = WebUtil.jsonToString(FinYear);
-    var _N = WebUtil.jsonToString(TargetStr);
-
-    if (TargetStr.length == 0 && selID.length == 0)
-    {
-        alert("请先选择,系统名称和系统指标!");
-        return false;
-    }
-
-    WebUtil.ajax({
-        async: true,
-        url: "/TargetSimpleReportController/GetComprehensiveReport",
-        args: { SysIDs: selID, FinYears: _M, Targets: _N, DataType: $("#ddlDataType").val(), IsCurrent: $("#ddlCumulativ_Month").val() },
-        successReturn: function (result) {
-
-            $("#CR_body").empty();
-
-            if (result != null && result != undefined) {
-               
-                loadTmpl("#Tmpl_ComprehensiveReportInfo").tmpl(result).appendTo("#CR_body");
-
+        url: "/TargetSimpleReportController/GetSystemInfo",
+        args: {},
+        successReturn: function (resultData) {
+            if (resultData.Success == 1) {
+                loadTmpl('#systemInfo_Tmpl').tmpl(resultData.Data).appendTo('#systemInfo');
+            }
+            else {
             }
         }
-
     });
+} 
 
-
-
-
-
-
-
-
-
+//上报年份数据加载
+function SelectYearsInfoLoad()
+{
+    WebUtil.ajax({
+        async: false,
+        url: "/TargetSimpleReportController/GetYear",
+        args: {},
+        successReturn: function (resultData) {
+            if (resultData.Success == 1) {
+                loadTmpl('#selectYears_Tmpl').tmpl(resultData.Data).appendTo('#selectYears');
+                //设定当前年默认选中
+                $("#selectYears").find("option[data-Id='" + resultData.NowYear + "'").attr("selected", "selected");
+                //设定当前月默认选中
+                $("#selectMonth").find("option[data-value='" + resultData.NowMonth + "'").attr("selected", "selected");
+            }
+            else {
+            }
+        }
+    });
 }
 
-function DownExcelReport(sender) {
-    var TargetStr = $('#ddlTarget').multipleSelect('getSelects', 'text');
-    var FinYear = $('#ddlYear').multipleSelect('getSelects', 'text');
-    var FinMonth = $("#ddlMonths").val();
-    var G_FinYear = $("#ddlYears").val();
-
-    var _M = WebUtil.jsonToString(FinYear);
-    var _N = WebUtil.jsonToString(TargetStr);
-
-    var _F = WebUtil.jsonToString([G_FinYear]);
-
-    if (sender == 'DownExcel')
-        window.open("/AjaxHander/DownLoadComprehensiveReportForms.ashx?_SysIDs=" + selID + "&_FinYears=" + _M + "&_Targets=" + _N + "&_DataType=" + $("#ddlDataType").val() + "&_IsCurrent=" + $("#ddlCumulativ_Month").val() + "&_RptType=DownExcel");
-    else if (sender == 'Movie')
-        window.open("/AjaxHander/DownLoadComprehensiveReportForms.ashx?_RptType=Movie&_FinYears=" + _F + "&_FinMonths=" + FinMonth);
-    else if (sender == 'Children')
-        window.open("/AjaxHander/DownLoadComprehensiveReportForms.ashx?_RptType=Children&_FinYears=" + _F + "&_FinMonths=" + FinMonth);
-    else if (sender == 'Business')
-        window.open("/AjaxHander/DownLoadComprehensiveReportForms.ashx?_RptType=Business&_FinYears=" + _F + "&_FinMonths=" + FinMonth);
-    else if (sender == 'Culture')
-        window.open("/AjaxHander/DownLoadComprehensiveReportForms.ashx?_RptType=Culture&_FinYears=" + _F + "&_FinMonths=" + FinMonth);
+//页面列表数据加载
+function ShowReportDataLoad(systemID, year, month)
+{
+    //加载动画
+    Load();
+    WebUtil.ajax({
+        async: false,
+        url: "/TargetSimpleReportController/GetListData",
+        args: { systemID: systemID, year: year, month: month },
+        successReturn: function (resultData) {
+            if (resultData.Success == 1) {
+                $('#ShowReportData').empty();
+                loadTmpl('#showReportData_Tmpl').tmpl(resultData).appendTo('#ShowReportData');
+            }
+            else {
+            }
+            Fake();
+        }
+    });
 }
+
