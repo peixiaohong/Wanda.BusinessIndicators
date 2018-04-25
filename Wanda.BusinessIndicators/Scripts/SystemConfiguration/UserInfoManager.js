@@ -207,6 +207,9 @@ function Ztree(data) {
         if (one.ID == "00000000-0000-0000-0000-000000000000") {
             zNodesObj.open = true;
         }
+        if (one.Level >= 4) {
+            zNodesObj.doCheck = false;
+        }
         zNodesObj.id = one.ID;
         zNodesObj.pId = one.ParentID;
         zNodesObj.name = one.CnName;
@@ -222,8 +225,16 @@ function Ztree(data) {
             simpleData: {
                 enable: true
             }
+        },
+        callback: {
+            beforeCheck: beforeCheck,
         }
     };
+    var className = "dark"
+    function beforeCheck(treeId, treeNode) {
+        className = (className === "dark" ? "" : "dark");
+        return (treeNode.doCheck !== false);
+    }
     $.fn.zTree.init($("#tree"), setting, zNodes);
     var zTree = $.fn.zTree.getZTreeObj("tree");
     zTree.setting.check.chkboxType = { "Y": "ps", "N": "ps" };

@@ -182,7 +182,7 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
         /// <returns></returns>
         public List<DataPermissions> GetUserAuthorizationArea(Guid systemID, string loginName)
         {
-            string sql =@"With noCompanyData
+            string sql = @"With noCompanyData
                           As
                           (
 	                          Select A.* From [dbo].[S_Organizational] As A
@@ -191,11 +191,11 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
 	                          Where A.[IsDeleted]=0 And A.[SystemID]=@SystemID And B.[LoginName]=@LoginName
 	                          Union All
                               Select A.* From [dbo].[S_Organizational] As A 
-	                          Inner Join [noCompanyData] As B On A.[ParentID]=B.[ID]
+	                          Inner Join [noCompanyData] As B On A.[ID]=B.[ParentID]
 	                          Where A.[IsDeleted]=0
                           )
 
-                          Select * From [noCompanyData] As A Where A.[IsDeleted]=0 And A.[IsCompany]=0 And A.[Level]>2";
+                          Select Distinct * From [noCompanyData] As A Where A.[IsDeleted]=0 And A.[IsCompany]=0 And A.[Level]>2";
             DbParameter[] parameters = new DbParameter[]
             {
                 CreateSqlParameter("@SystemID",DbType.Guid,systemID),
@@ -229,10 +229,10 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
 		                             A.*
 	                           From  [dbo].[S_Organizational] As A
 	                           Inner Join getAllData As B
-			                              On A.[ParentID]=B.[ID]
+			                              On A.[ID]=B.[ParentID]
 	                           Where A.[IsDeleted]=0
                               )
-                           Select * From getAllData As A Where A.[IsDeleted]=0;";
+                           Select Distinct * From getAllData As A Where A.[IsDeleted]=0;";
             DbParameter[] parameters = new DbParameter[]
             {
                 CreateSqlParameter("@LoginName",DbType.String,loginName)
@@ -276,19 +276,10 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
         /// <returns></returns>
         public List<S_Organizational> GetUserCompanyData(Guid systemID, string loginName)
         {
-            string sql = @"With userCompanyData
-                           As
-                           (
-	                           Select A.* From [dbo].[S_Organizational] As A
-	                           Inner Join [dbo].[S_Org_User] As B On A.[ID]=B.[CompanyID] And [B].[IsDeleted]=0
-	                           Inner Join [dbo].[Employee] As C On B.[LoginName]=C.[LoginName] And C.[IsDeleted]=0
-	                           Where A.[IsDeleted]=0 And A.[SystemID]=@SystemID And B.[LoginName]=@LoginName
-	                           Union All
-                               Select A.* From [dbo].[S_Organizational] As A 
-	                           Inner Join userCompanyData As B On A.[ParentID]=B.[ID]
-	                           Where A.[IsDeleted]=0
-                           )
-                           Select * From userCompanyData As A Where A.[IsDeleted]=0 And A.[IsCompany]=1";
+            string sql = @"Select Distinct A.* From [dbo].[S_Organizational] As A
+	                       Inner Join [dbo].[S_Org_User] As B On A.[ID]=B.[CompanyID] And [B].[IsDeleted]=0
+	                       Inner Join [dbo].[Employee] As C On B.[LoginName]=C.[LoginName] And C.[IsDeleted]=0
+	                       Where A.[IsDeleted]=0 And A.[SystemID]=@SystemID And B.[LoginName]=@LoginName And A.[IsCompany]=1";
             DbParameter[] parameters = new DbParameter[]
             {
                 CreateSqlParameter("@SystemID",DbType.Guid,systemID),

@@ -106,8 +106,8 @@ function CheckOrganization(type) {
         $(".add_submit").css("display", "none");
         $(".edit_submit").css("display", "block");
     } else if (type == "Delete") {
-        if (!val) {
-            $.MsgBox.Alert("提示", "请选择板块");
+        if (level == 1 || level == 2) {
+            $.MsgBox.Alert("提示", "系统板块不能删除");
             return false;
         }
         DeleteOrganizationData(id, isCompany);
