@@ -1,0 +1,20 @@
+﻿<Root>
+	<ProcessCode ShowProcessNodeName="true"> YY_ZBGK-RZ </ProcessCode>
+	<ProcessCode ShowProcessNodeName="true"> YY_ZBGK-RZ-ZB </ProcessCode>
+	<Interfaces>
+		<ISequence TemplateType="MissTarget" InterfaceName="MissTargetSequence" />
+		<ISequence TemplateType="Return" InterfaceName="ReturnSequence" />
+		<ISequence TemplateType="DetailMonthly" InterfaceName="CurrentMonthSequence" />
+	</Interfaces>
+	<ReportMonthlyDetail>
+		<TableTemplate />
+	</ReportMonthlyDetail>
+	<SummaryMonthlyReport>
+		<TableTemplate />
+	</SummaryMonthlyReport>
+	<Report>
+		<Rgroup Name="融资部">
+			全年费用预算指标为【融资转款额.累计计划总数】万元，1-【当前月】月实际发生【融资转款额.累计实际总数】万元，差额【融资转款额.累计亏损率】万元，占全年计划比【融资转款额.累计累计完成率】
+		</Rgroup>
+	</Report>
+</Root>

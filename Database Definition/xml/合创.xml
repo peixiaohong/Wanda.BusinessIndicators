@@ -1,0 +1,43 @@
+﻿<Root>
+  <ProcessCode ShowProcessNodeName="true">YY_ZBGK-HC</ProcessCode>
+	<ProcessCode ShowProcessNodeName="true">YY_ZBGK-HC-ZB</ProcessCode>
+  <Interfaces>
+    <ISequence TemplateType="MissTarget" InterfaceName="MissTargetSequence" />
+    <ISequence TemplateType="Return" InterfaceName="ReturnSequence" />
+    <ISequence TemplateType="DetailMonthly" InterfaceName="CurrentMonthSequence" />
+  </Interfaces>
+  <ReportMonthlyDetail>
+    <TableTemplate />
+  </ReportMonthlyDetail>
+  <SummaryMonthlyReport>
+    <TableTemplate />
+  </SummaryMonthlyReport>
+  <MisstargetReturn Name="补回情况">
+    <Group TargetName="补回情况" Senquence="1" TargetValue="8505C798-21ED-47E1-80BF-C871E8D99F15,DB9BF0FB-8D9A-4B46-A08D-13A4F80E3D0E,DF6D6B6A-0DC2-45E2-B642-15D03BC2BF2C">
+      <Counter Title="一、到期未补回项目" Senquence="1" Expression="GetValue(&quot;营业收入.ReturnType&quot;)==2||GetValue(&quot;税后经营净利润.ReturnType&quot;)==2||GetValue(&quot;回款额.ReturnType&quot;)==2" />
+      <Counter Title="二、未到期项目" Senquence="2" Expression="(GetValue(&quot;营业收入.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;营业收入.ReturnType&quot;)&lt;&gt;0)||(GetValue(&quot;税后经营净利润.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;税后经营净利润.ReturnType&quot;)&lt;&gt;0)||(GetValue(&quot;回款额.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;回款额.ReturnType&quot;)&lt;&gt;0)" />
+      <Counter Title="三、已补回项目" Senquence="3" Expression="(GetValue(&quot;营业收入.ReturnType&quot;)&gt;=6||GetValue(&quot;营业收入.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;税后经营净利润.ReturnType&quot;)&gt;=6||GetValue(&quot;税后经营净利润.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;回款额.ReturnType&quot;)&gt;=6||GetValue(&quot;回款额.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;营业收入.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;税后经营净利润.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;回款额.ReturnType&quot;)&lt;&gt;0)" />
+    </Group>
+  </MisstargetReturn>
+  <Misstarget Name="未完成">
+    <Group TargetName="" Senquence="1" TargetValue="8505C798-21ED-47E1-80BF-C871E8D99F15,DB9BF0FB-8D9A-4B46-A08D-13A4F80E3D0E,DF6D6B6A-0DC2-45E2-B642-15D03BC2BF2C">
+      <Counter Title="营业收入" Senquence="1" Expression="GetStringValue(&quot;营业收入.IsMissTarget&quot;)==&quot;True&quot;" />
+      <Counter Title="税后经营净利润" Senquence="2" Expression="GetStringValue(&quot;税后经营净利润.IsMissTarget&quot;)==&quot;True&quot;" />
+      <Counter Title="回款额" Senquence="3" Expression="GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;" />
+    </Group>
+  </Misstarget>
+  <CurrentMisstarget Name="当月未完成">
+    <Group TargetName="" Senquence="1" TargetValue="8505C798-21ED-47E1-80BF-C871E8D99F15,DB9BF0FB-8D9A-4B46-A08D-13A4F80E3D0E,DF6D6B6A-0DC2-45E2-B642-15D03BC2BF2C">
+      <Counter Title="营业收入" Senquence="1" Expression="GetStringValue(&quot;营业收入.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+      <Counter Title="税后经营净利润" Senquence="2" Expression="GetStringValue(&quot;税后经营净利润.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+      <Counter Title="回款额" Senquence="3" Expression="GetStringValue(&quot;回款额.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+    </Group>
+  </CurrentMisstarget>
+  <Report>
+    <Rgroup Name="合创公司">
+			1、1-【当前月】月营业收入指标为【营业收入.累计计划总数】万元，实际完成【营业收入.累计实际总数】万元，差额【营业收入.累计亏损率】万元，累计完成【营业收入.累计累计完成率】
+			2、1-【当前月】月税后经营净利润指标为【税后经营净利润.累计计划总数】万元，实际完成【税后经营净利润.累计实际总数】万元，差额【税后经营净利润.累计亏损率】万元，累计完成【税后经营净利润.累计累计完成率】
+			3、1-【当前月】月回款额指标为【回款额.累计计划总数】万元，实际完成【回款额.累计实际总数】万元，差额【回款额.累计亏损率】万元，累计完成【回款额.累计累计完成率】
+		</Rgroup>
+  </Report>
+</Root>

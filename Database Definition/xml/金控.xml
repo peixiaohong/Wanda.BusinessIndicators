@@ -1,0 +1,115 @@
+﻿<Root>
+	<ProcessCode ShowProcessNodeName="true">YY_ZBGK-JK</ProcessCode>
+	<ProcessCode ShowProcessNodeName="true">YY_ZBGK-JK-ZB</ProcessCode>
+	<Interfaces>
+		<ISequence TemplateType="MissTarget" InterfaceName="MissTargetSequence" />
+		<ISequence TemplateType="Return" InterfaceName="ReturnSequence" />
+		<ISequence TemplateType="DetailMonthly" InterfaceName="CurrentMonthSequence" />
+	</Interfaces>
+	<ComplateTargetDetail Name="完成情况明细">
+		<Target TargetName="融资收入" TargetValue="329D1F91-AC28-4070-B175-E54176BF4E61">
+			<Counter Title="总部" Senquence="1" Display="false" HaveDetail="false" DetailMonthlyExpression="GetStringValue(&quot;融资收入.CompanyName&quot;)==&quot;总部&quot;" DetailExpression="GetStringValue(&quot;融资收入.CompanyName&quot;)==&quot;总部&quot;" />
+			<Counter Title="门店完成部分" Senquence="2" Display="false" DetailMonthlyExpression="GetStringValue(&quot;融资收入.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;融资收入.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;融资收入.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;融资收入.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+			<Counter Title="门店未完成部分" Senquence="3" Display="true" DetailMonthlyExpression="GetStringValue(&quot;融资收入.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;融资收入.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;融资收入.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;融资收入.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+		</Target>
+		<Target TargetName="营业收入" TargetValue="A08BA291-F4E1-423D-9EB1-B74BD5A28BCB">
+			<Counter Title="总部" Senquence="1" Display="false" HaveDetail="false" DetailMonthlyExpression="GetStringValue(&quot;营业收入.CompanyName&quot;)==&quot;总部&quot;" DetailExpression="GetStringValue(&quot;营业收入.CompanyName&quot;)==&quot;总部&quot;" />
+			<Counter Title="门店完成部分" Senquence="2" Display="false" DetailMonthlyExpression="GetStringValue(&quot;营业收入.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;营业收入.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;营业收入.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;营业收入.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+			<Counter Title="门店未完成部分" Senquence="3" Display="true" DetailMonthlyExpression="GetStringValue(&quot;营业收入.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;营业收入.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;营业收入.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;营业收入.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+		</Target>
+		<Target TargetName="利润额" TargetValue="4B78833E-87AE-4C91-860A-2A6730BEA295">
+			<Counter Title="总部" Senquence="1" Display="false" HaveDetail="false" DetailMonthlyExpression="GetStringValue(&quot;利润额.CompanyName&quot;)==&quot;总部&quot;" DetailExpression="GetStringValue(&quot;利润额.CompanyName&quot;)==&quot;总部&quot;" />
+			<Counter Title="门店完成部分" Senquence="2" Display="false" DetailMonthlyExpression="GetStringValue(&quot;利润额.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;利润额.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;利润额.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;利润额.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+			<Counter Title="门店未完成部分" Senquence="3" Display="true" DetailMonthlyExpression="GetStringValue(&quot;利润额.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;利润额.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;利润额.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;利润额.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+		</Target>
+		<Target TargetName="历史欠款追缴" TargetValue="0BB5FDCD-1E87-4590-8BE3-6814956C24DE">
+			<Counter Title="总部" Senquence="1" Display="false" HaveDetail="false" DetailMonthlyExpression="GetStringValue(&quot;历史欠款追缴.CompanyName&quot;)==&quot;总部&quot;" DetailExpression="GetStringValue(&quot;历史欠款追缴.CompanyName&quot;)==&quot;总部&quot;" />
+			<Counter Title="门店完成部分" Senquence="2" Display="false" DetailMonthlyExpression="GetStringValue(&quot;历史欠款追缴.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;历史欠款追缴.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;历史欠款追缴.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;历史欠款追缴.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+			<Counter Title="门店未完成部分" Senquence="3" Display="true" DetailMonthlyExpression="GetStringValue(&quot;历史欠款追缴.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;历史欠款追缴.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;历史欠款追缴.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;历史欠款追缴.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+		</Target>
+		<Target TargetName="基金管理规模" TargetValue="5ED7DBEE-B35C-4644-A0A2-4847F3FDF40C">
+			<Counter Title="总部" Senquence="1" Display="false" HaveDetail="false" DetailMonthlyExpression="GetStringValue(&quot;基金管理规模.CompanyName&quot;)==&quot;总部&quot;" DetailExpression="GetStringValue(&quot;基金管理规模.CompanyName&quot;)==&quot;总部&quot;" />
+			<Counter Title="门店完成部分" Senquence="2" Display="false" DetailMonthlyExpression="GetStringValue(&quot;基金管理规模.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;基金管理规模.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;基金管理规模.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;基金管理规模.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+			<Counter Title="门店未完成部分" Senquence="3" Display="true" DetailMonthlyExpression="GetStringValue(&quot;基金管理规模.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;基金管理规模.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;基金管理规模.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;基金管理规模.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+		</Target>
+	</ComplateTargetDetail>
+	<MisstargetReturn Name="补回情况">
+		<Group TargetName="融资收入" Senquence="1" TargetValue="329D1F91-AC28-4070-B175-E54176BF4E61">
+			<Counter Title="一、到期未补回公司" Senquence="1" Expression="GetValue(&quot;融资收入.ReturnType&quot;)==2&amp;&amp;GetValue(&quot;融资收入.LastNAccumulativeDifference&quot;)&lt;0" />
+			<Counter Title="二、未到期公司" Senquence="2" Expression="GetValue(&quot;融资收入.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;融资收入.LastNAccumulativeDifference&quot;)&lt;0" />
+			<Counter Title="三、已补回公司" Senquence="3" Expression="GetValue(&quot;融资收入.ReturnType&quot;)&gt;=6" />
+		</Group>
+		<Group TargetName="营业收入" Senquence="2" TargetValue="A08BA291-F4E1-423D-9EB1-B74BD5A28BCB">
+			<Counter Title="一、到期未补回公司" Senquence="1" Expression="GetValue(&quot;营业收入.ReturnType&quot;)==2&amp;&amp;GetValue(&quot;营业收入.LastNAccumulativeDifference&quot;)&lt;0" />
+			<Counter Title="二、未到期公司" Senquence="2" Expression="GetValue(&quot;营业收入.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;营业收入.LastNAccumulativeDifference&quot;)&lt;0" />
+			<Counter Title="三、已补回公司" Senquence="3" Expression="GetValue(&quot;营业收入.ReturnType&quot;)&gt;=6" />
+		</Group>
+		<Group TargetName="利润额" Senquence="3" TargetValue="4B78833E-87AE-4C91-860A-2A6730BEA295">
+			<Counter Title="一、到期未补回公司" Senquence="1" Expression="GetValue(&quot;利润额.ReturnType&quot;)==2&amp;&amp;GetValue(&quot;利润额.LastNAccumulativeDifference&quot;)&lt;0" />
+			<Counter Title="二、未到期公司" Senquence="2" Expression="GetValue(&quot;利润额.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;利润额.LastNAccumulativeDifference&quot;)&lt;0" />
+			<Counter Title="三、已补回公司" Senquence="3" Expression="GetValue(&quot;利润额.ReturnType&quot;)&gt;=6" />
+		</Group>
+		<Group TargetName="历史欠款追缴" Senquence="4" TargetValue="0BB5FDCD-1E87-4590-8BE3-6814956C24DE">
+			<Counter Title="一、到期未补回公司" Senquence="1" Expression="GetValue(&quot;历史欠款追缴.ReturnType&quot;)==2&amp;&amp;GetValue(&quot;历史欠款追缴.LastNAccumulativeDifference&quot;)&lt;0" />
+			<Counter Title="二、未到期公司" Senquence="2" Expression="GetValue(&quot;历史欠款追缴.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;历史欠款追缴.LastNAccumulativeDifference&quot;)&lt;0" />
+			<Counter Title="三、已补回公司" Senquence="3" Expression="GetValue(&quot;历史欠款追缴.ReturnType&quot;)&gt;=6" />
+		</Group>
+		<Group TargetName="基金管理规模" Senquence="5" TargetValue="5ED7DBEE-B35C-4644-A0A2-4847F3FDF40C">
+			<Counter Title="一、到期未补回公司" Senquence="1" Expression="GetValue(&quot;基金管理规模.ReturnType&quot;)==2&amp;&amp;GetValue(&quot;基金管理规模.LastNAccumulativeDifference&quot;)&lt;0" />
+			<Counter Title="二、未到期公司" Senquence="2" Expression="GetValue(&quot;基金管理规模.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;基金管理规模.LastNAccumulativeDifference&quot;)&lt;0" />
+			<Counter Title="三、已补回公司" Senquence="3" Expression="GetValue(&quot;基金管理规模.ReturnType&quot;)&gt;=6" />
+		</Group>
+	</MisstargetReturn>
+	<Misstarget Name="未完成">
+		<Group TargetName="融资收入" Senquence="1" TargetValue="329D1F91-AC28-4070-B175-E54176BF4E61">
+			<Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;融资收入.IsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;融资收入.IsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;融资收入.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;融资收入.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;融资收入.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;融资收入.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;融资收入.IsMissTarget&quot;)==&quot;True&quot; " />
+		</Group>
+		<Group TargetName="营业收入" Senquence="2" TargetValue="A08BA291-F4E1-423D-9EB1-B74BD5A28BCB">
+			<Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;营业收入.IsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;营业收入.IsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;营业收入.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;营业收入.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;营业收入.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;营业收入.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;营业收入.IsMissTarget&quot;)==&quot;True&quot; " />
+		</Group>
+		<Group TargetName="利润额" Senquence="3" TargetValue="4B78833E-87AE-4C91-860A-2A6730BEA295">
+			<Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;利润额.IsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;利润额.IsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;利润额.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;利润额.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;利润额.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;利润额.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;利润额.IsMissTarget&quot;)==&quot;True&quot; " />
+		</Group>
+		<Group TargetName="历史欠款追缴" Senquence="4" TargetValue="0BB5FDCD-1E87-4590-8BE3-6814956C24DE">
+			<Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;历史欠款追缴.IsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;历史欠款追缴.IsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;历史欠款追缴.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;历史欠款追缴.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;历史欠款追缴.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;历史欠款追缴.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;历史欠款追缴.IsMissTarget&quot;)==&quot;True&quot; " />
+		</Group>
+		<Group TargetName="基金管理规模" Senquence="5" TargetValue="5ED7DBEE-B35C-4644-A0A2-4847F3FDF40C">
+			<Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;基金管理规模.IsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;基金管理规模.IsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;基金管理规模.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;基金管理规模.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;基金管理规模.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;基金管理规模.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;基金管理规模.IsMissTarget&quot;)==&quot;True&quot; " />
+		</Group>
+	</Misstarget>
+	<CurrentMisstarget Name="当月未完成">
+		<Group TargetName="融资收入" Senquence="1" TargetValue="329D1F91-AC28-4070-B175-E54176BF4E61">
+			<Counter Title="融资收入未完成公司【当月未完成{本月GetStringValue(&quot;融资收入.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;融资收入.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;融资收入.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+		</Group>
+		<Group TargetName="营业收入" Senquence="2" TargetValue="A08BA291-F4E1-423D-9EB1-B74BD5A28BCB">
+			<Counter Title="营业收入未完成公司【当月未完成{本月GetStringValue(&quot;营业收入.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;营业收入.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;营业收入.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+		</Group>
+		<Group TargetName="利润额" Senquence="3" TargetValue="4B78833E-87AE-4C91-860A-2A6730BEA295">
+			<Counter Title="利润额未完成公司【当月未完成{本月GetStringValue(&quot;利润额.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;利润额.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;利润额.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+		</Group>
+		<Group TargetName="历史欠款追缴" Senquence="4" TargetValue="0BB5FDCD-1E87-4590-8BE3-6814956C24DE">
+			<Counter Title="历史欠款追缴未完成公司【当月未完成{本月GetStringValue(&quot;历史欠款追缴.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;历史欠款追缴.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;历史欠款追缴.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+		</Group>
+		<Group TargetName="基金管理规模" Senquence="5" TargetValue="5ED7DBEE-B35C-4644-A0A2-4847F3FDF40C">
+			<Counter Title="基金管理规模未完成公司【当月未完成{本月GetStringValue(&quot;基金管理规模.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;基金管理规模.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;基金管理规模.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+		</Group>
+	</CurrentMisstarget>
+	<Report>
+		<Rgroup Name="金控">
+			一、1-【当前月】月累计经营指标完成情况：
+			1、融资收入： 计划【融资收入.累计计划总数】万元，实际完成 【融资收入.累计实际总数】万元，累计完成率【融资收入.累计累计完成率】，【融资收入.累计未完成公司数量】家门店未完成累计融资收入指标
+			2、营业收入： 计划【营业收入.累计计划总数】万元，实际完成 【营业收入.累计实际总数】万元，累计完成率【营业收入.累计累计完成率】，【营业收入.累计未完成公司数量】家门店未完成累计营业收入指标
+			3、利润额： 计划【利润额.累计计划总数】万元，实际完成 【利润额.累计实际总数】万元，累计完成率【利润额.累计累计完成率】，【利润额.累计未完成公司数量】家门店未完成累计利润额指标
+			4、历史欠款追缴： 计划【历史欠款追缴.累计计划总数】万元，实际完成 【历史欠款追缴.累计实际总数】万元，累计完成率【历史欠款追缴.累计累计完成率】，【历史欠款追缴.累计未完成公司数量】家门店未完成累计历史欠款追缴指标
+			5、基金管理规模： 计划【基金管理规模.累计计划总数】万元，实际完成 【基金管理规模.累计实际总数】万元，累计完成率【基金管理规模.累计累计完成率】，【基金管理规模.累计未完成公司数量】家门店未完成累计基金管理规模指标
+
+			二、【当前月】月当月经营指标完成情况：
+			1、融资收入： 计划【融资收入.当月计划总数】万元，实际完成 【融资收入.当月实际总数】万元，当月完成率【融资收入.当月累计完成率】，【融资收入.当月未完成公司数量】家门店未完成当月融资收入指标
+			2、营业收入： 计划【营业收入.当月计划总数】万元，实际完成 【营业收入.当月实际总数】万元，当月完成率【营业收入.当月累计完成率】，【营业收入.当月未完成公司数量】家门店未完成当月营业收入指标
+			3、利润额： 计划【利润额.当月计划总数】万元，实际完成 【利润额.当月实际总数】万元，当月完成率【利润额.当月累计完成率】，【利润额.当月未完成公司数量】家门店未完成当月利润额指标
+			4、历史欠款追缴： 计划【历史欠款追缴.当月计划总数】万元，实际完成 【历史欠款追缴.当月实际总数】万元，当月完成率【历史欠款追缴.当月累计完成率】，【历史欠款追缴.当月未完成公司数量】家门店未完成当月历史欠款追缴指标
+			5、基金管理规模： 计划【基金管理规模.当月计划总数】万元，实际完成 【基金管理规模.当月实际总数】万元，当月完成率【基金管理规模.当月累计完成率】，【基金管理规模.当月未完成公司数量】家门店未完成当月基金管理规模指标
+
+		</Rgroup>
+	</Report>
+</Root>
