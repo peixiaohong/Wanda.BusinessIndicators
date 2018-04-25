@@ -163,6 +163,7 @@ function GetSumList() {
         url: "/CompanyController/GetVerTargetList",
         args: { SysID: SysID, FinYear: FinYear },
         successReturn: function (result) {
+            
             TargetList = result; //绑定 指标
             BangTabs(); //绑定历史查询
             BangHead(result); // 汇总的表头
@@ -329,6 +330,7 @@ function BangDetail(SysID) {
         url: "/TargetController/GetSumMonthTargetDetail",
         args: { FinYear: FinYear, SystemID: SysID },
         successReturn: function (view) {
+            console.log(JSON.stringify(view));
             SumMonthTargetList = view;
         }
     });

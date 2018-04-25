@@ -179,3 +179,28 @@ select::-ms-expand {
 	background:url(../images/icon_arr_down.png) left center no-repeat;
 	background-size: 18px;
 }
+
+/*Ö¸±ê²éÑ¯*/
+.target {
+    position:relative;
+}
+.target-main {
+    position: relative;
+    overflow: hidden;
+}
+.target-main>div{
+    position:absolute;
+    top: 0;
+    left:0;
+}
+.target-allow {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 0px;
+    right: -10px;
+    z-index:2;
+}
+[v-cloak] {
+    display:none;
+}

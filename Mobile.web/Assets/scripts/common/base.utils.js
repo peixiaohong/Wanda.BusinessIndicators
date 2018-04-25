@@ -313,6 +313,62 @@ var utils = {
     mobileBrower: function () {
         var u = navigator.userAgent;
         return !!u.match(/AppleWebKit.*Mobile.*/);//是否为移动终端
+    },
+    // 初始指标样式
+    initTarget: function (main, content, name, allow, length) {
+        var elMain = $(".target-main");
+        var elContent = $(".target-content");
+        var width = $(main).width();
+        var rate = "";
+        if (length == 2) {
+            rate = (1 / 2).toFixed(2);
+        } else if (length == 3) {
+            rate = (1 / 3).toFixed(2);
+        } else if (length >= 4) {
+            rate = (1 / 4).toFixed(2);
+        }
+        var tdWidth = width * rate;
+        var tableWidth = tdWidth * length;
+        $(main).find("th").css("width", tdWidth);
+        $(main).find("td").css("width", tdWidth);
+        $(content).css("width", tableWidth);
+        var tdHeight = $(content).find("thead").height();
+        $(name).find("th").css("height", tdHeight);
+        var top = tdHeight / 2 - $(allow).height() / 2;
+        $(allow).css("top", top);
+        var num = 0;
+        var marginLeft = 0;
+        $(allow).off("click").on("click", function () {
+            var numLength = parseInt((length - 1) / 3);
+            var numRem = (length - 1) % 3
+            var dataAllow = $(allow).attr("data-allow");
+            if (dataAllow == "right") {
+                num++;
+            } else if (dataAllow == "left") {
+                num--;
+                if (num <= 0) {
+                    num = 0;
+                    $(allow).attr({
+                        "src": "../Assets/images/arrow-right.png",
+                        "data-allow": "right"
+                    });
+                }
+            }
+            if (num < numLength) {
+                marginLeft = - num * 3 * tdWidth + "px";
+                $(content).animate({ "margin-left": marginLeft }, 300);
+            } else if (num == numLength) {
+                marginLeft = -((numLength - 1) * 3 * tdWidth + numRem * tdWidth) + "px"
+                $(content).animate({ "margin-left": marginLeft }, 300, function () {
+                    if (dataAllow == "right") {
+                        $(allow).attr({
+                            "src": "../Assets/images/arrow-left.png",
+                            "data-allow": "left"
+                        });
+                    }                 
+                });
+            }
+        })
     }
 };
 String.prototype.formatBy = function () {
