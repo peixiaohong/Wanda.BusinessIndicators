@@ -1,12 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TargetConfiguration.aspx.cs" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" Inherits="LJTH.BusinessIndicators.Web.SystemConfiguration.TargetConfiguration" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="../Scripts/Layer/skin/layer.css" rel="stylesheet" />
-    <link href="../Scripts/Layer/skin/layer.ext.css" rel="stylesheet" />
-    <script src="../Scripts/Layer/layer.min.js"></script>
-    <script src="../Scripts/Layer/extend/layer.ext.js"></script>
-    <script type="text/javascript" src="../Scripts/My97DatePicker/WdatePicker.js"></script>
-    <script src="../Scripts/BusinessReport/TargetConfiguration.js"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/TargetConfiguration.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="main">

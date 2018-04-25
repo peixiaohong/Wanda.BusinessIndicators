@@ -1,0 +1,120 @@
+﻿<Root>
+  <ProcessCode ShowProcessNodeName="true">YY_ZBGK-WL</ProcessCode>
+	<ProcessCode ShowProcessNodeName="true">YY_ZBGK-WL-ZB</ProcessCode>
+  <Interfaces>
+    <ISequence TemplateType="MissTarget" InterfaceName="MissTargetSequence" />
+    <ISequence TemplateType="Return" InterfaceName="ReturnSequence" />
+    <ISequence TemplateType="DetailMonthly" InterfaceName="CurrentMonthSequence" />
+  </Interfaces>
+  <ReportMonthlyDetail>
+    <TableTemplate />
+  </ReportMonthlyDetail>
+  <SummaryMonthlyReport>
+    <TableTemplate TableHeadTmplName="MonthReportSummaryHeadTemplate_DZSW" TableDataTmplName="" TableExcelTemplateName="月度经营报告_大众电影V1.xlsx" />
+  </SummaryMonthlyReport>
+  <ManageTargetDetail Name="经营报告明细">
+    <BlendTargets IsBlendTarget="True" Senquence="1" TargetName="经营收入+EBITDA" TargetValue="EEDFCD97-1129-4364-8FF8-D1EB68B85E8B,9181E2A7-ABD6-46B2-86D1-7FE14F0E1B66">
+      <Target TargetName="经营收入" Senquence="1" IsBlendTarget="True" TargetValue="EEDFCD97-1129-4364-8FF8-D1EB68B85E8B" />
+      <Target TargetName="EBITDA" Senquence="2" IsBlendTarget="True" TargetValue="9181E2A7-ABD6-46B2-86D1-7FE14F0E1B66" />
+    </BlendTargets>
+    <Target TargetName="土地收储（租地）" Senquence="3" IsBlendTarget="False" TargetValue="D6754C2B-BBAE-432D-86E2-9AAFCDC7267A" />
+    <Target TargetName="土地收储（征地）" Senquence="4" IsBlendTarget="False" TargetValue="85F69AE6-4355-42A4-8FC0-C92831633BDC" />
+    <Target TargetName="重点事项达成率" Senquence="5" IsBlendTarget="False" TargetValue="A791A760-F44A-47F6-996C-1ACE55A4F953" />
+  </ManageTargetDetail>
+  <ComplateTargetDetail Name="完成情况明细">
+    <BlendTargets IsBlendTarget="True" Senquence="1" TargetName="经营收入+EBITDA" TargetValue="EEDFCD97-1129-4364-8FF8-D1EB68B85E8B,9181E2A7-ABD6-46B2-86D1-7FE14F0E1B66">
+      <Target TargetName="经营收入" Senquence="1" IsBlendTarget="True" TargetValue="EEDFCD97-1129-4364-8FF8-D1EB68B85E8B">
+        <Counter Title="完成部分" Senquence="1" Display="false" DetailMonthlyExpression="GetStringValue(&quot;经营收入.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;经营收入.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;经营收入.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;经营收入.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+        <Counter Title="未完成部分" Senquence="2" Display="true" DetailMonthlyExpression="GetStringValue(&quot;经营收入.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;经营收入.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;经营收入.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;经营收入.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+      </Target>
+      <Target TargetName="EBITDA" Senquence="2" IsBlendTarget="True" TargetValue="9181E2A7-ABD6-46B2-86D1-7FE14F0E1B66">
+        <Counter Title="完成部分" Senquence="1" Display="false" DetailMonthlyExpression="GetStringValue(&quot;EBITDA.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;EBITDA.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;EBITDA.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;EBITDA.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+        <Counter Title="未完成部分" Senquence="2" Display="true" DetailMonthlyExpression="GetStringValue(&quot;EBITDA.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;EBITDA.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;EBITDA.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;EBITDA.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+      </Target>
+    </BlendTargets>
+    <Target TargetName="土地收储（租地）" Senquence="3" IsBlendTarget="False" TargetValue="D6754C2B-BBAE-432D-86E2-9AAFCDC7267A">
+      <Counter Title="完成部分" Senquence="1" Display="false" DetailMonthlyExpression="GetStringValue(&quot;土地收储（租地）.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;土地收储（租地）.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;土地收储（租地）.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;土地收储（租地）.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+      <Counter Title="未完成部分" Senquence="2" Display="true" DetailMonthlyExpression="GetStringValue(&quot;土地收储（租地）.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;土地收储（租地）.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;土地收储（租地）.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;土地收储（租地）.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+    </Target>
+    <Target TargetName="土地收储（征地）" Senquence="4" IsBlendTarget="False" TargetValue="85F69AE6-4355-42A4-8FC0-C92831633BDC">
+      <Counter Title="完成部分" Senquence="1" Display="false" DetailMonthlyExpression="GetStringValue(&quot;土地收储（征地）.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;土地收储（征地）.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;土地收储（征地）.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;土地收储（征地）.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+      <Counter Title="未完成部分" Senquence="2" Display="true" DetailMonthlyExpression="GetStringValue(&quot;土地收储（征地）.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;土地收储（征地）.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;土地收储（征地）.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;土地收储（征地）.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+    </Target>
+    <Target TargetName="重点事项达成率" Senquence="5" IsBlendTarget="False" TargetValue="A791A760-F44A-47F6-996C-1ACE55A4F953">
+      <Counter Title="完成部分" Senquence="1" Display="false" DetailMonthlyExpression="GetStringValue(&quot;重点事项达成率.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;重点事项达成率.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;重点事项达成率.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;重点事项达成率.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+      <Counter Title="未完成部分" Senquence="2" Display="true" DetailMonthlyExpression="GetStringValue(&quot;重点事项达成率.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;重点事项达成率.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;重点事项达成率.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;重点事项达成率.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+    </Target>
+    <TableTemplate TableHeadTmplName="TmplCompleteDetail_Head" TableDataTmplName="TmplCompleteDetail_Data" TableExcelTemplateName="" />
+  </ComplateTargetDetail>
+  <CurrentMisstarget Name="当月未完成">
+    <Group TargetName="经营收入+EBITDA" Senquence="1" TargetValue="EEDFCD97-1129-4364-8FF8-D1EB68B85E8B,9181E2A7-ABD6-46B2-86D1-7FE14F0E1B66">
+      <Counter Title="一、EBITDA、经营收入均未完成公司【当月未完成{本月GetStringValue(&quot;经营收入.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;EBITDA.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;经营收入.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;EBITDA.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="1" Expression="GetStringValue(&quot;经营收入.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;EBITDA.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+      <Counter Title="二、仅经营收入未完成公司【当月未完成{本月GetStringValue(&quot;经营收入.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;经营收入.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="2" Expression="GetStringValue(&quot;经营收入.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+      <Counter Title="三、仅EBITDA未完成公司【当月未完成{本月GetStringValue(&quot;EBITDA.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;EBITDA.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;EBITDA.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+    </Group>
+    <Group TargetName="土地收储（租地）" Senquence="2" TargetValue="D6754C2B-BBAE-432D-86E2-9AAFCDC7267A">
+      <Counter Title="土地收储（租地）未完成公司【当月未完成{本月GetStringValue(&quot;土地收储（租地）.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;土地收储（租地）.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;土地收储（租地）.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+    </Group>
+    <Group TargetName="土地收储（征地）" Senquence="3" TargetValue="85F69AE6-4355-42A4-8FC0-C92831633BDC">
+      <Counter Title="土地收储（征地）未完成公司【当月未完成{本月GetStringValue(&quot;土地收储（征地）.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;土地收储（征地）.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;土地收储（征地）.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+    </Group>
+    <Group TargetName="重点事项达成率" Senquence="4" TargetValue="A791A760-F44A-47F6-996C-1ACE55A4F953">
+      <Counter Title="重点事项达成率未完成公司【当月未完成{本月GetStringValue(&quot;重点事项达成率.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;重点事项达成率.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;重点事项达成率.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+    </Group>
+  </CurrentMisstarget>
+  <Misstarget Name="累计未完成">
+    <Group TargetName="经营收入+EBITDA" Senquence="1" TargetValue="EEDFCD97-1129-4364-8FF8-D1EB68B85E8B,9181E2A7-ABD6-46B2-86D1-7FE14F0E1B66">
+      <Counter Title="一、EBITDA、经营收入均未完成公司【上月累计未完成{上双GetStringValue(&quot;经营收入.LastIsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;EBITDA.LastIsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上双(GetValue(&quot;EBITDA.LastIsCommitDate&quot;)==1&amp;&amp;GetValue(&quot;经营收入.LastIsCommitDate&quot;)==1)||(GetValue(&quot;EBITDA.LastIsCommitDate&quot;)==1&amp;&amp;GetValue(&quot;经营收入.ReturnType&quot;)==5)||(GetValue(&quot;经营收入.LastIsCommitDate&quot;)==1&amp;&amp;GetValue(&quot;EBITDA.ReturnType&quot;)==5)}家，实际补回{上双GetValue(&quot;经营收入.ReturnType&quot;)&gt;=6&amp;&amp;GetValue(&quot;EBITDA.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;经营收入.ReturnType&quot;)==5&amp;&amp;GetValue(&quot;EBITDA.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;经营收入.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;EBITDA.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="1" Expression="GetStringValue(&quot;经营收入.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;EBITDA.IsMissTarget&quot;)==&quot;True&quot;" />
+      <Counter Title="二、仅经营收入未完成公司【上月累计未完成{上单(GetStringValue(&quot;经营收入.LastIsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;EBITDA.LastIsMissTarget&quot;)==&quot;True&quot;)&amp;&amp;(GetStringValue(&quot;经营收入.IsMissTarget&quot;)==&quot;True&quot;||(GetValue(&quot;经营收入.ReturnType&quot;)&gt;=6&amp;&amp;GetValue(&quot;EBITDA.ReturnType&quot;)==0))}家（要求本月补回{上单(GetValue(&quot;经营收入.LastIsCommitDate&quot;)==1&amp;&amp;GetValue(&quot;EBITDA.LastIsCommitDate&quot;)==1)||(GetValue(&quot;经营收入.LastIsCommitDate&quot;)==1&amp;&amp;GetValue(&quot;EBITDA.ReturnType&quot;)==0)||(GetValue(&quot;经营收入.ReturnType&quot;)==5&amp;&amp;GetValue(&quot;EBITDA.LastIsCommitDate&quot;)==1)}家，实际补回{上单GetValue(&quot;经营收入.ReturnType&quot;)&gt;=6&amp;&amp;GetValue(&quot;EBITDA.ReturnType&quot;)==0}家）；本月新增{本月GetValue(&quot;经营收入.ReturnType&quot;)==5&amp;&amp;GetValue(&quot;EBITDA.ReturnType&quot;)==0}家，累计未完成{本月GetStringValue(&quot;经营收入.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="2" Expression="GetStringValue(&quot;经营收入.IsMissTarget&quot;)==&quot;True&quot;" />
+      <Counter Title="三、仅EBITDA未完成公司【上月累计未完成{上单(GetStringValue(&quot;EBITDA.LastIsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;经营收入.LastIsMissTarget&quot;)==&quot;True&quot;)&amp;&amp;(GetStringValue(&quot;EBITDA.IsMissTarget&quot;)==&quot;True&quot;||(GetValue(&quot;EBITDA.ReturnType&quot;)&gt;=6&amp;&amp;GetValue(&quot;经营收入.ReturnType&quot;)==0))}家（要求本月补回{上单(GetValue(&quot;经营收入.LastIsCommitDate&quot;)==1&amp;&amp;GetValue(&quot;EBITDA.LastIsCommitDate&quot;)==1)||(GetValue(&quot;经营收入.ReturnType&quot;)==0&amp;&amp;GetValue(&quot;EBITDA.LastIsCommitDate&quot;)==1)||(GetValue(&quot;EBITDA.ReturnType&quot;)==5&amp;&amp;GetValue(&quot;经营收入.LastIsCommitDate&quot;)==1)}家，实际补回{上单GetValue(&quot;EBITDA.ReturnType&quot;)&gt;=6&amp;&amp;GetValue(&quot;经营收入.ReturnType&quot;)==0}家）；本月新增{本月GetValue(&quot;EBITDA.ReturnType&quot;)==5&amp;&amp;GetValue(&quot;经营收入.ReturnType&quot;)==0}家，累计未完成{本月GetStringValue(&quot;EBITDA.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;EBITDA.IsMissTarget&quot;)==&quot;True&quot;" />
+      <Counter Title="四、本月补回公司【{本月(GetValue(&quot;经营收入.ReturnType&quot;)&gt;=6||GetValue(&quot;经营收入.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;EBITDA.ReturnType&quot;)&gt;=6||GetValue(&quot;EBITDA.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;EBITDA.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;经营收入.ReturnType&quot;)&lt;&gt;0)}家】" Senquence="3" Expression="(GetValue(&quot;EBITDA.ReturnType&quot;)&gt;=6||GetValue(&quot;EBITDA.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;经营收入.ReturnType&quot;)&gt;=6||GetValue(&quot;经营收入.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;EBITDA.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;经营收入.ReturnType&quot;)&lt;&gt;0)" TextExpression="Return" />
+    </Group>
+    <Group TargetName="土地收储（租地）" Senquence="2" TargetValue="D6754C2B-BBAE-432D-86E2-9AAFCDC7267A">
+      <Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;土地收储（租地）.IsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;土地收储（租地）.IsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;土地收储（租地）.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;土地收储（租地）.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;土地收储（租地）.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;土地收储（租地）.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;土地收储（租地）.IsMissTarget&quot;)==&quot;True&quot; " />
+    </Group>
+    <Group TargetName="土地收储（征地）" Senquence="3" TargetValue="85F69AE6-4355-42A4-8FC0-C92831633BDC">
+      <Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;土地收储（征地）.IsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;土地收储（征地）.IsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;土地收储（征地）.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;土地收储（征地）.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;土地收储（征地）.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;土地收储（征地）.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;土地收储（征地）.IsMissTarget&quot;)==&quot;True&quot; " />
+    </Group>
+    <Group TargetName="重点事项达成率" Senquence="4" TargetValue="A791A760-F44A-47F6-996C-1ACE55A4F953">
+      <Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;重点事项达成率.IsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;重点事项达成率.IsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;重点事项达成率.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;重点事项达成率.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;重点事项达成率.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;重点事项达成率.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;重点事项达成率.IsMissTarget&quot;)==&quot;True&quot; " />
+    </Group>
+  </Misstarget>
+  <MisstargetReturn Name="补回情况">
+    <Group TargetName="经营收入+EBITDA" Senquence="1" TargetValue="EEDFCD97-1129-4364-8FF8-D1EB68B85E8B,9181E2A7-ABD6-46B2-86D1-7FE14F0E1B66,D6754C2B-BBAE-432D-86E2-9AAFCDC7267A">
+      <Counter Title="一、到期未补回" Senquence="1" Expression="GetValue(&quot;EBITDA.ReturnType&quot;)==2||GetValue(&quot;经营收入.ReturnType&quot;)==2" />
+      <Counter Title="二、未到期" Senquence="2" Expression="(GetStringValue(&quot;EBITDA.LastIsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;经营收入.LastIsMissTarget&quot;)==&quot;True&quot;)&amp;&amp;(GetStringValue(&quot;EBITDA.IsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;经营收入.IsMissTarget&quot;)==&quot;True&quot;)">
+        <Counter Title="1. 经营收入、EBITDA均未完成" Senquence="1" Expression="GetStringValue(&quot;EBITDA.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;经营收入.IsMissTarget&quot;)==&quot;True&quot;" />
+        <Counter Title="2. 仅经营收入未完成" Senquence="2" Expression="GetStringValue(&quot;经营收入.IsMissTarget&quot;)==&quot;True&quot;" />
+        <Counter Title="3. 仅EBITDA未完成" Senquence="3" Expression="GetStringValue(&quot;EBITDA.IsMissTarget&quot;)==&quot;True&quot;" />
+      </Counter>
+      <Counter Title="三、已补回" Senquence="3" Expression="(GetValue(&quot;EBITDA.ReturnType&quot;)&gt;=6||GetValue(&quot;EBITDA.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;经营收入.ReturnType&quot;)&gt;=6||GetValue(&quot;经营收入.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;EBITDA.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;经营收入.ReturnType&quot;)&lt;&gt;0)" />
+    </Group>
+    <Group TargetName="土地收储（租地）" Senquence="2" TargetValue="D6754C2B-BBAE-432D-86E2-9AAFCDC7267A">
+      <Counter Title="一、到期未补回公司" Senquence="1" Expression="GetValue(&quot;土地收储（租地）.ReturnType&quot;)==2&amp;&amp;GetValue(&quot;土地收储（租地）.LastNAccumulativeDifference&quot;)&lt;0" />
+      <Counter Title="二、未到期公司" Senquence="2" Expression="GetValue(&quot;土地收储（租地）.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;土地收储（租地）.LastNAccumulativeDifference&quot;)&lt;0" />
+      <Counter Title="三、已补回公司" Senquence="3" Expression="GetValue(&quot;土地收储（租地）.ReturnType&quot;)&gt;=6" />
+    </Group>
+    <Group TargetName="土地收储（征地）" Senquence="3" TargetValue="85F69AE6-4355-42A4-8FC0-C92831633BDC">
+      <Counter Title="一、到期未补回公司" Senquence="1" Expression="GetValue(&quot;土地收储（征地）.ReturnType&quot;)==2&amp;&amp;GetValue(&quot;土地收储（征地）.LastNAccumulativeDifference&quot;)&lt;0" />
+      <Counter Title="二、未到期公司" Senquence="2" Expression="GetValue(&quot;土地收储（征地）.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;土地收储（征地）.LastNAccumulativeDifference&quot;)&lt;0" />
+      <Counter Title="三、已补回公司" Senquence="3" Expression="GetValue(&quot;土地收储（征地）.ReturnType&quot;)&gt;=6" />
+    </Group>
+    <Group TargetName="重点事项达成率" Senquence="4" TargetValue="A791A760-F44A-47F6-996C-1ACE55A4F953">
+      <Counter Title="一、到期未补回公司" Senquence="1" Expression="GetValue(&quot;重点事项达成率.ReturnType&quot;)==2&amp;&amp;GetValue(&quot;重点事项达成率.LastNAccumulativeDifference&quot;)&lt;0" />
+      <Counter Title="二、未到期公司" Senquence="2" Expression="GetValue(&quot;重点事项达成率.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;重点事项达成率.LastNAccumulativeDifference&quot;)&lt;0" />
+      <Counter Title="三、已补回公司" Senquence="3" Expression="GetValue(&quot;重点事项达成率.ReturnType&quot;)&gt;=6" />
+    </Group>
+  </MisstargetReturn>
+  <Report>
+    <Rgroup Name="文旅">
+		1-【当前月】月累计经营指标完成情况：
+
+		1、1-【当前月】月经营收入指标为【经营收入.累计计划总数】万元，实际完成【经营收入.累计实际总数】万元，差额【经营收入.累计亏损率】万元，累计完成【经营收入.累计累计完成率】
+		2、1-【当前月】月EBITDA指标为【EBITDA.累计计划总数】万元，实际完成【EBITDA.累计实际总数】万元，差额【EBITDA.累计亏损率】万元，累计完成【EBITDA.累计累计完成率】
+		3、1-【当前月】月土地收储（租地）指标为【土地收储（租地）.累计计划总数】，实际完成【土地收储（租地）.累计实际总数】，差额【土地收储（租地）.累计亏损率】，累计完成【土地收储（租地）.累计累计完成率】
+		4、1-【当前月】月土地收储（征地）指标为【土地收储（征地）.累计计划总数】，实际完成【土地收储（征地）.累计实际总数】，差额【土地收储（征地）.累计亏损率】，累计完成【土地收储（征地）.累计累计完成率】
+		5、1-【当前月】月重点事项达成率指标为【重点事项达成率.累计计划总数】个，实际完成【重点事项达成率.累计实际总数】万元，差额【重点事项达成率.累计亏损率】个，累计完成【重点事项达成率.累计累计完成率】
+
+	</Rgroup>
+  </Report>
+</Root>

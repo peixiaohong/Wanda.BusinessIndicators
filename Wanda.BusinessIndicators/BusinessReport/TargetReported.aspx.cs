@@ -2,16 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Web;
-using System.Web.Services;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using LJTH.BusinessIndicators.BLL;
-using LJTH.BusinessIndicators.Engine;
 using LJTH.BusinessIndicators.Model;
-using LJTH.BusinessIndicators.ViewModel;
-using Wanda.Platform.Permission.ClientComponent;
 using LJTH.BusinessIndicators.BLL.BizBLL;
 using LJTH.BusinessIndicators.Common;
 using LJTH.BusinessIndicators.Model.BizModel;

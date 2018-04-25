@@ -81,12 +81,6 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Wanda.Platform.Permission.ClientComponent">
-      <HintPath>..\..\WFSDK\Wanda.Platform.Permission.ClientComponent.dll</HintPath>
-    </Reference>
-    <Reference Include="Wanda.Platform.Permission.Contract">
-      <HintPath>..\..\WFSDK\Wanda.Platform.Permission.Contract.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="BusinessReport\ChildrenCompanyRpt.aspx" />
