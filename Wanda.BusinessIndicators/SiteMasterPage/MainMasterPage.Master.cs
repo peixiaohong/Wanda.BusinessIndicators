@@ -196,35 +196,35 @@ namespace LJTH.BusinessIndicators.Web
         private bool GetEnable(NavSiteMapNode node)
         {
             // 在此做用户的权限判断
-            var auth = PermissionHelper.GetFuncPermission();            ////功能权限
-            if (PermissionHelper.EnablePermission)
-                if (Request.Url.AbsolutePath == node.Url)
-                {
-                    if (auth != null && !auth.Any(p => p.FuncCode == "GQ_" + node.ResourceKey))
-                    {
-                        //throw new Exception("无效的资源访问");
-                        Response.Redirect("../NoPermission.aspx");
-                    }
-                }
-            Uri uri;
-            if (node.Url.StartsWith("/"))
-            {
-                uri = new Uri("http://domain" + node.Url);
-            }
-            else if (node.Url.StartsWith("http://", StringComparison.InvariantCultureIgnoreCase))
-            {
-                uri = new Uri(node.Url);
-            }
-            else if (node.Url.StartsWith("#"))
-            {
-                return true;
-            }
-            else
-            {
-                throw new ApplicationException("无效的导航配置节点。 Node.url=" + node.Url);
-            }
-            if (PermissionHelper.EnablePermission)
-                return auth != null && auth.Count > 0 && auth.Any(p => p.FuncCode == "GQ_" + node.ResourceKey);
+            //var auth = PermissionHelper.GetFuncPermission();            ////功能权限
+            //if (PermissionHelper.EnablePermission)
+            //    if (Request.Url.AbsolutePath == node.Url)
+            //    {
+            //        if (auth != null && !auth.Any(p => p.FuncCode == "GQ_" + node.ResourceKey))
+            //        {
+            //            //throw new Exception("无效的资源访问");
+            //            Response.Redirect("../NoPermission.aspx");
+            //        }
+            //    }
+            //Uri uri;
+            //if (node.Url.StartsWith("/"))
+            //{
+            //    uri = new Uri("http://domain" + node.Url);
+            //}
+            //else if (node.Url.StartsWith("http://", StringComparison.InvariantCultureIgnoreCase))
+            //{
+            //    uri = new Uri(node.Url);
+            //}
+            //else if (node.Url.StartsWith("#"))
+            //{
+            //    return true;
+            //}
+            //else
+            //{
+            //    throw new ApplicationException("无效的导航配置节点。 Node.url=" + node.Url);
+            //}
+            //if (PermissionHelper.EnablePermission)
+            //    return auth != null && auth.Count > 0 && auth.Any(p => p.FuncCode == "GQ_" + node.ResourceKey);
             return true;
         }
 

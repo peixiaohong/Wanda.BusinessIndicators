@@ -127,6 +127,7 @@ function operateNav(sender) {
 
 var FlowCode = "";
 $(function () {
+    sysID = $("#HidSystemID").val();
     var ShowProecessNodeName = false;
     $.blockUI({ message: "<div style='width:200px'><img src='../../images/ajax-loader.gif' alt='waiting'><span style='font-size:20px;padding-left:20px;color:#3f3f3f'>数据请求中...</span></div>" });
     WebUtil.ajax({

@@ -63,8 +63,8 @@ namespace LJTH.BusinessIndicators.BLL
             {
                 if (SystemList != null && SystemList.Count > 0)
                 {
-                    //return SystemList.ToList().Find(S => S.ID == Key);
-                    return C_SystemOperator.Instance.GetSystemList(CurrentDate).ToList().Find(S => S.ID == Key);
+                    return SystemList.ToList().Find(S => S.ID == Key);
+                    //return C_SystemOperator.Instance.GetSystemList(CurrentDate).ToList().Find(S => S.ID == Key);
 
                 }
                 return null;
@@ -85,6 +85,19 @@ namespace LJTH.BusinessIndicators.BLL
             }
         }private IList<C_System> _SystemList = null;
 
+        private IList<C_Company> _companyList = null;
+        private IList<C_Company> ALLCompanyList
+        {
+            get
+            {
+                if(_companyList==null)
+                {
+                    IList<C_Company> list = C_CompanyOperator.Instance.GetCompanyList();
+                    _companyList = list;
+                }
+                return _companyList;
+            }
+        }
 
         private Dictionary<Guid, List<C_Company>> _CompanyList = new Dictionary<Guid, List<C_Company>>();
         public Dictionary<Guid, List<C_Company>> CompanyList
@@ -93,18 +106,10 @@ namespace LJTH.BusinessIndicators.BLL
             {
                 if (_CompanyList == null || _CompanyList.Count <= 0)
                 {
-                    IList<C_Company> list = C_CompanyOperator.Instance.GetCompanyList();
-                    if (list != null && list.Count > 0)
-                    {
-                        foreach (var c in list)
-                        {
-                            if (!_CompanyList.ContainsKey(c.SystemID))
-                            {
-                                _CompanyList.Add(c.SystemID, new List<C_Company>());
-                            }
-                            _CompanyList[c.SystemID].Add(c);
-                        }
-                    }
+                    var g = ALLCompanyList.GroupBy(x => x.SystemID);
+                    g.ForEach(x => {
+                        _CompanyList.Add(x.Key, x.ToList());
+                    });
                 }
                 return _CompanyList;
             }
@@ -130,14 +135,12 @@ namespace LJTH.BusinessIndicators.BLL
         /// <returns></returns>
         public C_Company GetCompanyModel(Guid CompanyID)
         {
-            
-             C_Company _Model = C_CompanyOperator.Instance.GetCompany(CompanyID);
-
-             if (_Model != null)
-             {
-                 return _Model;
-             }
-
+            C_Company _Model = ALLCompanyList.Where(X => X.ID == CompanyID).First();
+            // C_Company _Model = C_CompanyOperator.Instance.GetCompany(CompanyID);
+            if (_Model != null || !string.IsNullOrEmpty(_Model.CompanyName))
+            {
+                return _Model;
+            }
              return null;
         }
         /// <summary>
@@ -155,16 +158,9 @@ namespace LJTH.BusinessIndicators.BLL
         private void GetChildren(Guid systemid,Guid parentId,List<Guid> list)
         {
             var c= OrgList[systemid].Where(x => x.ParentID == parentId);
-            c.ForEach(x => {
-                if (x.IsCompany)
-                {
-                    list.Add(x.ID);
-                    return;
-                }
-                else
-                {
-                    GetChildren(systemid, x.ID, list);
-                }
+            list.AddRange(c.Where(x => x.IsCompany).Select(x=>x.ID));
+            c.Where(x => !x.IsCompany).ForEach(x => {
+                GetChildren(systemid, x.ID, list);
             });
         }
 
@@ -177,17 +173,11 @@ namespace LJTH.BusinessIndicators.BLL
                 if (_TargetList == null || _TargetList.Count <= 0)
                 {
                     IList<C_Target> list = C_TargetOperator.Instance.GetTargetList();
-                    if (list != null && list.Count > 0)
+                    var g = list.GroupBy(x => x.SystemID);
+                    g.ForEach(x =>
                     {
-                        foreach (var t in list)
-                        {
-                            if (!_TargetList.ContainsKey(t.SystemID))
-                            {
-                                _TargetList.Add(t.SystemID, new List<C_Target>());
-                            }
-                            _TargetList[t.SystemID].Add(t);
-                        }
-                    }
+                        _TargetList.Add(x.Key, x.ToList());
+                    });
                 }
                 return _TargetList;
             }

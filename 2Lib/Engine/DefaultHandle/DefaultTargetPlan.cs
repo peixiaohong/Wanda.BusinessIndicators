@@ -28,20 +28,6 @@ namespace LJTH.BusinessIndicators.Engine
             List<DictionaryVmodel> lstDictionaryVmodel = new List<DictionaryVmodel>();
 
             List<C_Company> listCompany = StaticResource.Instance.CompanyList[SystemID];
-            //DateTime t = DateTime.Now;
-            //B_TargetPlan Bt = new B_TargetPlan();
-            //if (TargetPlanID!=Guid.Empty)
-            //{
-            //    Bt = B_TargetplanOperator.Instance.GetTargetplan(TargetPlanID);
-            //    if (Bt!=null)
-            //    {
-            //        t = Bt.CreateTime;
-            //    }
-            //}
-
-
-
-            //List<C_Target> lstTarget = StaticResource.Instance.GetTargetList(SystemID, t).ToList();
             List<C_Target> lstTarget = StaticResource.Instance.GetTargetList(SystemID, DateTime.Now).ToList();
             C_System _cSystem = StaticResource.Instance[SystemID,DateTime.Now];
                 
