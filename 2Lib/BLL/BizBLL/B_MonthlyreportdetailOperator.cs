@@ -46,21 +46,21 @@ namespace LJTH.BusinessIndicators.BLL
         /// <returns></returns>
         public IList<B_MonthlyReportDetail> GetMonthlyreportdetailList(Guid SystemID, int Year, int Month, Guid MonthReportID)
         {
-            B_MonthlyReport report = null;
+            //if (MonthReportID == Guid.Empty)
+            //{
+            //    B_MonthlyReport report = B_MonthlyreportOperator.Instance.GetMonthlyReport(SystemID, Year, Month);
+            //    MonthReportID = report.ID;
+            //}
+            //if (MonthReportID != Guid.Empty)
+            //{
+            //    IList<B_MonthlyReportDetail> result = _bMonthlyreportdetailAdapter.GetMonthlyreportdetailList(MonthReportID);
+            //    return result;
+            //}
+            //return new List<B_MonthlyReportDetail>();
             if (MonthReportID == Guid.Empty)
-            {
-                report = B_MonthlyreportOperator.Instance.GetMonthlyReport(SystemID, Year, Month);
-            }
+                return _bMonthlyreportdetailAdapter.GetMonthlyreportdetailList(SystemID, Year, Month);
             else
-            {
-                report = B_MonthlyreportOperator.Instance.GetMonthlyreport(MonthReportID);
-            }
-            if (report != null)
-            {
-                IList<B_MonthlyReportDetail> result = _bMonthlyreportdetailAdapter.GetMonthlyreportdetailList(report.ID);
-                return result;
-            }
-            return new List<B_MonthlyReportDetail>();
+                return _bMonthlyreportdetailAdapter.GetMonthlyreportdetailList(MonthReportID);
         }
 
         public IList<B_MonthlyReportDetail> GetMonthlyreportdetailList(Guid MonthReportID)
@@ -203,21 +203,22 @@ namespace LJTH.BusinessIndicators.BLL
         /// <returns></returns>
         public List<MonthlyReportDetail> GetMonthlyReportDetailList_Draft(Guid SystemID, int Year, int Month, Guid MonthReportID)
         {
-            B_MonthlyReport report = null;
-            if (MonthReportID == Guid.Empty)
-            {
-                report = B_MonthlyreportOperator.Instance.GetLastMonthlyReportList(SystemID, Year, Month);
-            }
-            else
-            {
-                report = B_MonthlyreportOperator.Instance.GetMonthlyreport(MonthReportID);
-            }
-            if (report != null)
-            {
-                List<MonthlyReportDetail> result = _bMonthlyreportdetailAdapter.GetMonthlyReportDetailList(report.ID);
-                return result;
-            }
-            return new List<MonthlyReportDetail>();
+            //B_MonthlyReport report = null;
+            //if (MonthReportID == Guid.Empty)
+            //{
+            //    report = B_MonthlyreportOperator.Instance.GetLastMonthlyReportList(SystemID, Year, Month);
+            //}
+            //else
+            //{
+            //    report = B_MonthlyreportOperator.Instance.GetMonthlyreport(MonthReportID);
+            //}
+            //if (report != null)
+            //{
+            //    List<MonthlyReportDetail> result = _bMonthlyreportdetailAdapter.GetMonthlyReportDetailList(report.ID);
+            //    return result;
+            //}
+            //return new List<MonthlyReportDetail>();
+            return _bMonthlyreportdetailAdapter.GetMonthlyReportDetailList(MonthReportID,SystemID);
         }
 
         /// <summary>
@@ -241,7 +242,7 @@ namespace LJTH.BusinessIndicators.BLL
             }
             if (report != null)
             {
-                List<MonthlyReportDetail> result = _bMonthlyreportdetailAdapter.GetMonthlyReportDetailList(report.ID);
+                List<MonthlyReportDetail> result = _bMonthlyreportdetailAdapter.GetMonthlyReportDetailList(SystemID);
                 return result;
             }
             return new List<MonthlyReportDetail>();

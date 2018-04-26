@@ -110,6 +110,23 @@ namespace LJTH.BusinessIndicators.DAL
             return ExecuteQuery(sql, pMonthlyReportID);
         }
 
+        internal IList<B_MonthlyReportDetail> GetMonthlyreportdetailList(Guid systemId,int year,int month)
+        {
+            string sql = ORMapping.GetSelectSql<B_MonthlyReportDetail>(TSqlBuilder.Instance);
+
+            sql += "WHERE " + base.NotDeleted;
+            sql += " AND SystemID=@SystemID and FinYear=@FinYear and FinMonth=@FinMonth";
+
+            SqlParameter[] parameters = {
+                new SqlParameter{ ParameterName= "@SystemID", Value=systemId },
+                new SqlParameter{ ParameterName="@FinYear",Value=year},
+                new SqlParameter{ ParameterName="@FinMonth",Value=month}
+            };
+            
+
+            return ExecuteQuery(sql, parameters);
+        }
+
 
         /// <summary>
         /// 判断明细表中是否含有数据
@@ -119,7 +136,7 @@ namespace LJTH.BusinessIndicators.DAL
         internal bool GetMonthlyReportDetailCount(Guid MonthlyReportID)
         {
 
-            string sql = @" SELECT  TOP 10 * FROM  dbo.B_MonthlyReportDetail "; //WHERE MonthlyReportID='291E72F7-3176-496B-99C0-D6A15F8F7795'
+            string sql = @" SELECT  TOP 1 ID FROM  dbo.B_MonthlyReportDetail "; //WHERE MonthlyReportID='291E72F7-3176-496B-99C0-D6A15F8F7795'
 
             sql += " WHERE " + base.NotDeleted;
             sql += " AND MonthlyReportID=@MonthlyReportID";
@@ -219,12 +236,16 @@ WHERE   MonthlyReportID = @MonthlyReportID
             return data;
         }
 
-        internal List<MonthlyReportDetail> GetMonthlyReportDetailList(Guid MonthlyReportID)
+        internal List<MonthlyReportDetail> GetMonthlyReportDetailList(Guid MonthlyReportID, Guid SystemID)
         {
-
-
             string sql = "GetMonthlyReportDetailList ";
-            SqlParameter p1 = new SqlParameter("@MonthlyReportID", MonthlyReportID);
+            SqlParameter p1 = new SqlParameter("@SystemID", SystemID);
+            if(MonthlyReportID!=Guid.Empty)
+            {
+                sql = "GetMonthlyReportDetailListMonthID";
+                p1 = new SqlParameter("@MonthlyReportID", MonthlyReportID);
+            }
+            //SqlParameter p1 = new SqlParameter("@MonthlyReportID", MonthlyReportID);
             DataSet ds = DbHelper.RunSPReturnDS(sql, ConnectionName, p1);
 
             List<MonthlyReportDetail> data = new List<MonthlyReportDetail>();
