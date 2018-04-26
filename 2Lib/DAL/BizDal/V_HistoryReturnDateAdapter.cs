@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LJTH.BusinessIndicators.ViewModel;
+using LJTH.BusinessIndicators.ViewModel.MonthReport;
+using System.Data.Common;
+using System.Reflection;
 
 namespace LJTH.BusinessIndicators.DAL
 {
@@ -501,6 +504,58 @@ namespace LJTH.BusinessIndicators.DAL
             }
             return data;
 
+        }
+
+
+
+        /// <summary>
+        /// 获取综合列表数据（新)
+        /// </summary>
+        /// <param name="systemID">板块ID</param>
+        /// <param name="finYear">年</param>
+        /// <param name="finMonth">月</param>
+        /// <param name="loginName">登陆人</param>
+        /// <returns></returns>
+        public List<ComprehensiveReportViewModel> GetComprehensiveReportData(string systemID,int finYear,int finMonth,string loginName)
+        {
+            string sql = string.Format("Exec [dbo].[Pro_SystemReport] @SystemID,@Years,@Month,@LoginName");
+
+            DbParameter[] parameters = new DbParameter[]{
+                CreateSqlParameter("@SystemID",DbType.String,systemID),
+                CreateSqlParameter("@Years",DbType.Int32,finYear),
+                CreateSqlParameter("@Month",DbType.Int32,finMonth),
+                CreateSqlParameter("@LoginName",DbType.String,loginName)
+            };
+            DataSet ds = ExecuteReturnDataSet(sql, parameters);
+            List<ComprehensiveReportViewModel> list = new List<ComprehensiveReportViewModel>();
+            if (ds != null)
+            {
+                DataTable returnTable = ds.Tables[0];
+                string tempName = string.Empty;
+                if (returnTable != null)
+                {
+                    foreach (DataRow dr in returnTable.Rows)
+                    {
+                        ComprehensiveReportViewModel obj = new ComprehensiveReportViewModel();
+                        System.Reflection.PropertyInfo[] propertys = obj.GetType().GetProperties();
+                        foreach (PropertyInfo pi in propertys)
+                        {
+                            tempName = pi.Name;
+                            if (returnTable.Columns.Contains(tempName))
+                            {
+                                if (!pi.CanWrite) continue;
+                                object value = dr[tempName];
+                                if (value != DBNull.Value)
+                                {
+                                    pi.SetValue(obj, value, null);
+                                }
+                            }
+                        }
+                        list.Add(obj);
+                    }
+                }
+            }
+            return list;
         }
 
     }

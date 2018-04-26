@@ -1,18 +1,11 @@
 ﻿using Lib.Core;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Web;
-using System.Web.Services;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using LJTH.BusinessIndicators.BLL;
-using LJTH.BusinessIndicators.Engine;
 using LJTH.BusinessIndicators.Model;
 using LJTH.BusinessIndicators.ViewModel;
-using Wanda.Platform.Permission.ClientComponent;
-using BPF.Workflow.Client;
 using Newtonsoft.Json;
 
 
@@ -151,9 +144,6 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     B_MonthlyReport _statreRpt = null; //-状态B_MonthlyReport -
 
                     BatchModel = B_SystemBatchOperator.Instance.GetSystemBatch("ProSystem", FinYear, FinMonth);
-
-                  
-
 
                     //判断批次表中是否有数据
                     if (BatchModel == null)

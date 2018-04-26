@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using ScheduleService.Handler;
 using System.ServiceProcess;
-using System.Text;
 
 namespace Common.ScheduleService
 {
@@ -13,12 +10,21 @@ namespace Common.ScheduleService
         /// </summary>
         static void Main()
         {
-#if DEBUG
-            DebugRun();
-#else
-            ServiceBase[] ServicesToRun = new ServiceBase[] { new ScheduleService() };
+            string systemid = "DB3E4D6E-A272-48D8-9CE9-AA1DBD4472F2";
+            int year = 2018;
+            int month = 3;
+            new ProjectMergeProcess().AddMonthlyReport(new System.Guid(systemid), year, month);
+            return;
+
+            //#if DEBUG
+            //            DebugRun();
+            //#else
+            ServiceBase[] ServicesToRun = new ServiceBase[] {
+                new ScheduleService()
+            };
             ServiceBase.Run(ServicesToRun);
-#endif
+            //#endif
+
         }
 
         private static void DebugRun()

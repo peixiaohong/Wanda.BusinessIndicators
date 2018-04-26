@@ -128,12 +128,29 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
         }
 
+        #region 根据是不是混合指标来确定导出的excel
+
         public void DownExcelMonthReportDetail(HttpContext context)
+        {
+            ReportInstance rpt = new ReportInstance(MonthReportID, true);
+
+            var blendResult = GetBlendTargets(rpt);
+            //item1等于true 时，表示是混合指标
+            if (blendResult.Item1)
+                DownExcelMonthReportDetailForBlend(context, rpt, blendResult.Item2);
+            else
+                DownExcelMonthReportDetailForOrigina(context, rpt);
+        }
+        /// <summary>
+        /// 指标excel 导出(原来的)
+        /// </summary>
+        /// <param name="context"></param>
+        private void DownExcelMonthReportDetailForOrigina(HttpContext context, ReportInstance rpt)
         {
             string templeteName = "指标上报模版V1.xlsx";
             string fileName = "指标上报";
 
-            ReportInstance rpt = new ReportInstance(MonthReportID, true);
+            // ReportInstance rpt = new ReportInstance(MonthReportID, true);
             string str;
             bool IncludeHaveDetail = true;
             List<DictionaryVmodel> listMonthReportDetail = ReportInstanceDetailEngine.ReportInstanceDetailService.GetDetailRptDataSource(rpt, "Reported", "Detail", IncludeHaveDetail);
@@ -217,6 +234,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         excel.SetCustomProperty(worksheets[z], "TragertID", listTarget[0].ID.ToString());
                         excel.SetCustomProperty(worksheets[z], "TragertName", listTarget[0].TargetName);
                         excel.SetCustomProperty(worksheets[z], "SheetName", "MonthReportDetail");
+                        excel.SetCustomProperty(worksheets[z], "AreaID", rpt.AreaID.ToString());
                     }
                     worksheets[z].Cells[0, 1].PutValue(rpt._System.SystemName + listMonthReportDetail[z].Name);
                     worksheets[z].Cells[1, 3].PutValue(FinYear.ToString() + "年" + FinMonth + "月");
@@ -403,6 +421,440 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 context.Response.Write("The file could not be found");
             }
         }
+
+        /// <summary>
+        ///  指标excel 导出(混合指标)
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="rpt"></param>
+        /// <param name="blendTargetList"></param>
+        private void DownExcelMonthReportDetailForBlend(HttpContext context, ReportInstance rpt, List<C_Target> blendTargetList)
+        {
+            string templeteName = "指标上报模版_混合V1.xlsx";
+            string fileName = "指标上报";
+            bool IncludeHaveDetail = true;
+            // ReportInstance rpt = new ReportInstance(MonthReportID, true);
+            //List<DictionaryVmodel> listTargetPlanView = new List<DictionaryVmodel>();
+            List<DictionaryVmodel> listMonthReportDetail = ReportInstanceDetailEngine.ReportInstanceDetailService.GetDetailRptDataSource(rpt, "Reported", "Detail", IncludeHaveDetail);
+            //判断下是否是 国内院线
+            //string _sysMovie = AppSettingConfig.GetSetting("MovieCN", "");
+            //if (rpt._SystemID == Guid.Parse(_sysMovie))
+            //    listTargetPlanView = rpt.GetTagetPlanViewModel(Guid.Parse(_sysMovie));  //院线同步数据
+            //else
+            //    listTargetPlanView = rpt.GetTagetPlanViewModel();  // 其他系统
+
+
+            if (listMonthReportDetail.Count > 0)
+            {
+                string[] strHtmlTemplates = listMonthReportDetail[0].HtmlTemplate.Split(',');
+                if (strHtmlTemplates.Count() > 4)
+                {
+                    if (!string.IsNullOrEmpty(strHtmlTemplates[4]))
+                        templeteName = strHtmlTemplates[4];
+                }
+            }
+
+
+            string templetePath = Path.Combine(ExcelTempletePath, templeteName);
+            if (System.IO.File.Exists(templetePath))
+            {
+                ExcelEngine excel = new ExcelEngine();
+                WorkbookDesigner designer = new WorkbookDesigner();
+                FileStream fileStream = new FileStream(templetePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+                designer.Workbook = new Workbook(fileStream);
+                WorksheetCollection worksheets = designer.Workbook.Worksheets;
+                Style style1 = designer.Workbook.Styles[designer.Workbook.Styles.Add()];
+                Style style2 = designer.Workbook.Styles[designer.Workbook.Styles.Add()];
+                Style style3 = designer.Workbook.Styles[designer.Workbook.Styles.Add()];
+
+                #region style1 样式
+                style1.Font.Size = 12;
+                #endregion
+                #region style2 样式 无加粗
+                style2.Font.Size = 12;
+
+                style2.HorizontalAlignment = Aspose.Cells.TextAlignmentType.Center;
+                style2.Borders[BorderType.TopBorder].LineStyle = CellBorderType.Thin;
+                style2.Borders[BorderType.TopBorder].Color = System.Drawing.Color.Black;
+                style2.Borders[BorderType.BottomBorder].LineStyle = CellBorderType.Thin; ;
+                style2.Borders[BorderType.BottomBorder].Color = System.Drawing.Color.Black;
+                style2.Borders[BorderType.LeftBorder].LineStyle = CellBorderType.Thin; ;
+                style2.Borders[BorderType.LeftBorder].Color = System.Drawing.Color.Black;
+                style2.Borders[BorderType.RightBorder].LineStyle = CellBorderType.Thin;
+                style2.Borders[BorderType.RightBorder].Color = System.Drawing.Color.Black;
+                style2.ForegroundColor = System.Drawing.Color.LightGray;
+                style2.Pattern = BackgroundType.Solid;
+
+                #endregion
+                #region style3 样式
+                style3.Font.Size = 12;
+                style3.Font.Name = "Arial";
+                style3.Font.IsBold = true;
+                style3.ForegroundColor = System.Drawing.Color.FromArgb(184, 204, 228);
+                style3.Pattern = BackgroundType.Solid;
+
+
+                style3.HorizontalAlignment = Aspose.Cells.TextAlignmentType.Center;
+                style3.Borders[BorderType.TopBorder].LineStyle = CellBorderType.Thin;
+                style3.Borders[BorderType.TopBorder].Color = System.Drawing.Color.Black;
+                style3.Borders[BorderType.BottomBorder].LineStyle = CellBorderType.Thin; ;
+                style3.Borders[BorderType.BottomBorder].Color = System.Drawing.Color.Black;
+                style3.Borders[BorderType.LeftBorder].LineStyle = CellBorderType.Thin; ;
+                style3.Borders[BorderType.LeftBorder].Color = System.Drawing.Color.Black;
+                style3.Borders[BorderType.RightBorder].LineStyle = CellBorderType.Thin;
+                style3.Borders[BorderType.RightBorder].Color = System.Drawing.Color.Black;
+                #endregion
+
+                int rowStart = 4;  //开始行
+                int colStart = 1; // 开始列
+
+                //插入混合指标
+                InsertBlendTargetToExcelForDownload(excel, worksheets[0], rpt, listMonthReportDetail, blendTargetList, fileName, rowStart, colStart, style2);
+
+                var otherListTargetPlanView = listMonthReportDetail.Where(v => !blendTargetList.Select(x => x.TargetName).ToList().Contains(v.Name)).ToList();
+                //如果只有混合指标，则删除模板中的Sheet2
+                if (otherListTargetPlanView == null || otherListTargetPlanView.Count == 0)
+                {
+                    worksheets.RemoveAt("Sheet2");
+                }
+
+                #region 复制sheet
+                for (int z = 0; z < otherListTargetPlanView.Count; z++)
+                {
+                    if (z > 0 && templeteName == "指标上报模版_混合V1.xlsx")
+                    {
+                        worksheets.AddCopy(1);
+                    }
+                    List<C_Target> listTarget = rpt._Target.Where(p => p.TargetName == otherListTargetPlanView[z].Name).ToList();
+                    if (listTarget != null && listTarget.Count > 0)
+                    {
+                        excel.SetCustomProperty(worksheets[z + 1], "SystemID", listTarget[0].SystemID.ToString());
+                        excel.SetCustomProperty(worksheets[z + 1], "TragertID", listTarget[0].ID.ToString());
+                        excel.SetCustomProperty(worksheets[z + 1], "TragertName", listTarget[0].TargetName);
+                        excel.SetCustomProperty(worksheets[z + 1], "SheetName", "MonthReportDetail");
+                        excel.SetCustomProperty(worksheets[z + 1], "AreaID", rpt.AreaID.ToString());
+                    }
+                    worksheets[z + 1].Cells[0, 1].PutValue(rpt._System.SystemName + otherListTargetPlanView[z].Name);
+                    worksheets[z + 1].Cells[1, 3].PutValue(FinYear.ToString() + "年" + FinMonth + "月");
+                    worksheets[z + 1].Cells[1, 3].SetStyle(style1);
+                    if (templeteName == "指标上报模版_混合V1.xlsx")
+                    {
+                        worksheets[z + 1].Name = otherListTargetPlanView[z].Name;
+                    }
+
+                }
+
+                #endregion
+
+                for (int i = 0; i < otherListTargetPlanView.Count; i++)
+                {
+                    rowStart = 4;
+                    List<DictionaryVmodel> listCompanyProperty = (List<DictionaryVmodel>)otherListTargetPlanView[i].ObjValue;
+
+                    #region 判断指标是否可以编辑
+                    bool IsModifyTargetPlanDetail = false; //指标是否可以编辑
+                    bool IsHaveAccumulativePlanDetail = false;
+                    List<C_Target> listTarget = rpt._Target.Where(p => p.TargetName == otherListTargetPlanView[i].Name).ToList();
+                    if (listTarget.Count > 0)
+                    {
+                        XElement xmlTarget = listTarget[0].Configuration;
+                        if (xmlTarget != null)
+                        {
+                            IsModifyTargetPlanDetail = (bool)rpt.GetIsModifyTargetPlanDetail(xmlTarget)[0].ObjValue;
+                            IsHaveAccumulativePlanDetail = (bool)rpt.GetIsModifyTargetPlanDetail(xmlTarget)[1].ObjValue;
+                        }
+                    }
+                    #endregion
+                    int MonthReportDetailCount = 0;
+                    for (int j = 0; j < listCompanyProperty.Count; j++)
+                    {
+                        if (listCompanyProperty[j].Name == "HaveDetail")
+                        {
+                            List<MonthlyReportDetail> listHaveDetail = (List<MonthlyReportDetail>)listCompanyProperty[j].ObjValue;
+                            MonthReportDetailCount += listHaveDetail.Count;
+                            for (int k = 0; k < listHaveDetail.Count; k++)
+                            {
+                                MonthlyReportDetail mrd = listHaveDetail[k];
+                                worksheets[i + 1].Cells[rowStart, colStart].SetStyle(style2);
+                                worksheets[i + 1].Cells[rowStart, colStart + 1].SetStyle(style2);
+                                worksheets[i + 1].Cells[rowStart, colStart + 2].SetStyle(style2);
+                                worksheets[i + 1].Cells[rowStart, colStart + 3].SetStyle(style2);
+                                worksheets[i + 1].Cells[rowStart, colStart + 4].SetStyle(style2);
+                                worksheets[i + 1].Cells[rowStart, colStart].PutValue(rowStart - 3);
+                                worksheets[i + 1].Cells[rowStart, colStart + 1].PutValue(mrd.CompanyID);
+                                worksheets[i + 1].Cells[rowStart, colStart + 2].PutValue(mrd.CompanyName);
+                                worksheets[i + 1].Cells[rowStart, colStart + 3].PutValue(mrd.NPlanAmmount);
+                                worksheets[i + 1].Cells[rowStart, colStart + 4].PutValue(mrd.NActualAmmount);
+
+                                #region 仅商管系统用
+                                if (IsHaveAccumulativePlanDetail)
+                                {
+                                    worksheets[i + 1].Cells[rowStart, colStart + 5].PutValue(mrd.NAccumulativePlanAmmount);
+                                    worksheets[i + 1].Cells[rowStart, colStart + 6].PutValue(mrd.NAccumulativeActualAmmount);
+                                }
+                                #endregion
+                                style2 = worksheets[i + 1].Cells[rowStart, colStart + 3].GetStyle();
+                                style2.Number = 3;
+                                worksheets[i + 1].Cells[rowStart, colStart + 3].SetStyle(style2);
+                                worksheets[i + 1].Cells[rowStart, colStart + 4].SetStyle(style2);
+
+                                #region 仅商管系统用
+                                if (IsHaveAccumulativePlanDetail)
+                                {
+                                    worksheets[i + 1].Cells[rowStart, colStart + 5].SetStyle(style2);
+                                    worksheets[i + 1].Cells[rowStart, colStart + 6].SetStyle(style2);
+                                }
+                                #endregion
+
+                                rowStart = rowStart + 1;
+                            }
+                        }
+                        else if (listCompanyProperty[j].Name == "SummaryData")
+                        {
+                        }
+                        else
+                        {
+                            List<DictionaryVmodel> listCounter = (List<DictionaryVmodel>)listCompanyProperty[j].ObjValue;
+                            for (int z = 0; z < listCounter.Count; z++)
+                            {
+                                List<MonthlyReportDetail> listMonthReportDetil = (List<MonthlyReportDetail>)listCounter[z].ObjValue;
+                                MonthReportDetailCount += listMonthReportDetil.Count;
+                                if (listMonthReportDetil != null)
+                                {
+                                    for (int a = 0; a < listMonthReportDetil.Count; a++)
+                                    {
+                                        MonthlyReportDetail mrd = listMonthReportDetil[a];
+                                        worksheets[i + 1].Cells[rowStart, colStart].SetStyle(style2);
+                                        worksheets[i + 1].Cells[rowStart, colStart + 1].SetStyle(style2);
+                                        worksheets[i + 1].Cells[rowStart, colStart + 2].SetStyle(style2);
+                                        worksheets[i + 1].Cells[rowStart, colStart + 3].SetStyle(style2);
+                                        worksheets[i + 1].Cells[rowStart, colStart + 4].SetStyle(style2);
+                                        worksheets[i + 1].Cells[rowStart, colStart].PutValue(rowStart - 3);
+                                        worksheets[i + 1].Cells[rowStart, colStart + 1].PutValue(mrd.CompanyID);
+                                        worksheets[i + 1].Cells[rowStart, colStart + 2].PutValue(mrd.CompanyName);
+                                        worksheets[i + 1].Cells[rowStart, colStart + 3].PutValue(mrd.NPlanAmmount);
+                                        worksheets[i + 1].Cells[rowStart, colStart + 4].PutValue(mrd.NActualAmmount);
+
+                                        #region 仅商管系统用
+                                        if (IsHaveAccumulativePlanDetail)
+                                        {
+                                            worksheets[i + 1].Cells[rowStart, colStart + 5].PutValue(mrd.NAccumulativePlanAmmount);
+                                            worksheets[i + 1].Cells[rowStart, colStart + 6].PutValue(mrd.NAccumulativeActualAmmount);
+                                        }
+                                        #endregion
+
+                                        style2 = worksheets[i + 1].Cells[rowStart, colStart + 3].GetStyle();
+                                        style2.Number = 3;
+                                        worksheets[i + 1].Cells[rowStart, colStart + 3].SetStyle(style2);
+                                        worksheets[i + 1].Cells[rowStart, colStart + 4].SetStyle(style2);
+
+                                        #region 仅商管系统用
+                                        if (IsHaveAccumulativePlanDetail)
+                                        {
+                                            worksheets[i + 1].Cells[rowStart, colStart + 5].SetStyle(style2);
+                                            worksheets[i + 1].Cells[rowStart, colStart + 6].SetStyle(style2);
+                                        }
+                                        #endregion
+
+                                        rowStart = rowStart + 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    #region 设置保护单元格
+                    Style style;
+                    StyleFlag styleflag;
+                    rowStart = 4;
+                    for (int x = 0; x <= 255; x++)
+                    {
+                        style = worksheets[i + 1].Cells.Columns[(byte)x].Style;
+                        style.IsLocked = true;
+                        styleflag = new StyleFlag();
+                        styleflag.Locked = true;
+
+                        worksheets[i + 1].Cells.Columns[(byte)x].ApplyStyle(style, styleflag);
+                    }
+                    for (int j = 0; j < MonthReportDetailCount; j++)
+                    {
+                        style = worksheets[i + 1].Cells[rowStart, colStart + 3].GetStyle();
+                        style.IsLocked = false;
+                        style.ForegroundColor = System.Drawing.Color.White;
+                        worksheets[i + 1].Cells[rowStart, colStart + 4].SetStyle(style);
+                        rowStart = rowStart + 1;
+                    }
+
+                    worksheets[i + 1].Protect(ProtectionType.All);
+                    #endregion
+                }
+
+                MemoryStream stream = designer.Workbook.SaveToStream();
+                fileStream.Close();
+                fileStream.Dispose();
+                //设置基本信息   
+                HttpContext.Current.Response.Clear();
+                HttpContext.Current.Response.Buffer = true;
+                HttpContext.Current.Response.Charset = "utf-8";
+                string dateNow = DateTime.Now.ToString("HHmmss");
+                HttpContext.Current.Response.AppendHeader("Content-Disposition", "attachment;filename=" + HttpUtility.UrlEncode(rpt._System.SystemName + fileName, System.Text.Encoding.UTF8) + FinYear.ToString() + FinMonth.ToString("D2") + "_" + dateNow + ".xls");
+                HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.Default;
+                HttpContext.Current.Response.ContentType = "application/ms-excel";
+                HttpContext.Current.Response.BinaryWrite(stream.ToArray());
+                HttpContext.Current.Response.End();
+            }
+            else
+            {
+                context.Response.ContentType = "text/plain";
+                context.Response.Write("The file could not be found");
+            }
+        }
+
+        /// <summary>
+        /// 只导出混合指标的
+        /// </summary>
+        /// <param name="excel"></param>
+        /// <param name="ws"></param>
+        /// <param name="rpt"></param>
+        /// <param name="listTargetPlanView"></param>
+        /// <param name="blendTargetList"></param>
+        /// <param name="fileName"></param>
+        /// <param name="rowStart"></param>
+        /// <param name="colStart"></param>
+        /// <param name="style2"></param>
+        private void InsertBlendTargetToExcelForDownload(ExcelEngine excel, Worksheet ws, ReportInstance rpt,
+            List<DictionaryVmodel> listMonthReportDetail, List<C_Target> blendTargetList, string fileName,
+            int rowStart, int colStart, Style style2)
+        {
+            #region 混合指标
+            ws.Name = string.Format(@"{0}+{1}", blendTargetList[0].TargetName, blendTargetList[1].TargetName);
+            excel.SetCustomProperty(ws, "IsBlendTager", "1");
+            excel.SetCustomProperty(ws, "SystemID", blendTargetList[0].SystemID.ToString());
+            excel.SetCustomProperty(ws, "TragertID", blendTargetList[0].ID.ToString());
+            excel.SetCustomProperty(ws, "TragertName", blendTargetList[0].TargetName);
+            excel.SetCustomProperty(ws, "TragertTwoID", blendTargetList[1].ID.ToString());
+            excel.SetCustomProperty(ws, "TragertTwoName", blendTargetList[1].TargetName);
+            excel.SetCustomProperty(ws, "AreaID", rpt.AreaID.ToString());
+            excel.SetCustomProperty(ws, "SheetName", "MonthReportDetail");
+            ws.Cells[0, 1].PutValue(string.Format(@"{0}年度{1}{2}", FinYear, rpt._System.SystemName, fileName));
+            ws.Cells[1, 4].PutValue(string.Format(@"{0}月情况", FinMonth));
+            ws.Cells[2, 4].PutValue(string.Format(@"{0}月计划", FinMonth));
+            ws.Cells[2, 6].PutValue(string.Format(@"{0}月完成（金额）", FinMonth));
+            ws.Cells[3, 4].PutValue(string.Format(@"{0}", blendTargetList[0].TargetName));
+            ws.Cells[3, 5].PutValue(string.Format(@"{0}", blendTargetList[1].TargetName));
+            ws.Cells[3, 6].PutValue(string.Format(@"{0}", blendTargetList[0].TargetName));
+            ws.Cells[3, 7].PutValue(string.Format(@"{0}", blendTargetList[1].TargetName));
+            List<DictionaryVmodel> oneBlendTarget = (List<DictionaryVmodel>)listMonthReportDetail.Where(v => v.Name == blendTargetList[0].TargetName).FirstOrDefault().ObjValue;
+            List<DictionaryVmodel> twoBlendTarget = (List<DictionaryVmodel>)listMonthReportDetail.Where(v => v.Name == blendTargetList[1].TargetName).FirstOrDefault().ObjValue;
+
+            List<MonthlyReportDetail> oneListMonthReportDetil = new List<MonthlyReportDetail>();
+            List<MonthlyReportDetail> twoListMonthReportDetil = new List<MonthlyReportDetail>();
+
+            //第一个指标
+            for (int i = 0; i < oneBlendTarget.Count; i++)
+            {
+                if (oneBlendTarget[i].Name == "HaveDetail" && ((List<MonthlyReportDetail>)oneBlendTarget[i].ObjValue).Count > 0)
+                    oneListMonthReportDetil.AddRange((List<MonthlyReportDetail>)oneBlendTarget[i].ObjValue);
+                else if (oneBlendTarget[i].Name == "SummaryData")
+                {
+                }
+                else
+                {
+                    List<DictionaryVmodel> oneListHaveDetail = (List<DictionaryVmodel>)oneBlendTarget[i].ObjValue;
+                    for (int z = 0; z < oneListHaveDetail.Count; z++)
+                    {
+                        if (((List<MonthlyReportDetail>)oneListHaveDetail[z].ObjValue).Count > 0)
+                            oneListMonthReportDetil.AddRange((List<MonthlyReportDetail>)oneListHaveDetail[z].ObjValue);
+                    }
+
+                }
+            }
+
+            //第二个指标
+            for (int i = 0; i < twoBlendTarget.Count; i++)
+            {
+                if (twoBlendTarget[i].Name == "HaveDetail" && ((List<MonthlyReportDetail>)twoBlendTarget[i].ObjValue).Count > 0)
+                {
+                    twoListMonthReportDetil.AddRange((List<MonthlyReportDetail>)twoBlendTarget[i].ObjValue);
+                }
+                else if (twoBlendTarget[i].Name == "SummaryData")
+                {
+                }
+                else
+                {
+                    List<DictionaryVmodel> twoListHaveDetail = (List<DictionaryVmodel>)twoBlendTarget[i].ObjValue;
+                    for (int z = 0; z < twoListHaveDetail.Count; z++)
+                    {
+                        if (((List<MonthlyReportDetail>)twoListHaveDetail[z].ObjValue).Count > 0)
+                            twoListMonthReportDetil.AddRange((List<MonthlyReportDetail>)twoListHaveDetail[z].ObjValue);
+                    }
+
+                }
+            }
+
+            if (oneListMonthReportDetil != null)
+            {
+                for (int a = 0; a < oneListMonthReportDetil.Count; a++)
+                {
+                    MonthlyReportDetail oneMrd = oneListMonthReportDetil[a];
+                    MonthlyReportDetail twoMrd = twoListMonthReportDetil.Where(v => v.CompanyID == oneMrd.CompanyID).FirstOrDefault();
+                    #region 设置样式
+                    ws.Cells[rowStart, colStart].SetStyle(style2);
+                    ws.Cells[rowStart, colStart + 1].SetStyle(style2);
+                    ws.Cells[rowStart, colStart + 2].SetStyle(style2);
+                    ws.Cells[rowStart, colStart + 3].SetStyle(style2);
+                    ws.Cells[rowStart, colStart + 4].SetStyle(style2);
+                    ws.Cells[rowStart, colStart + 5].SetStyle(style2);
+                    ws.Cells[rowStart, colStart + 6].SetStyle(style2);
+                    #endregion
+                    ws.Cells[rowStart, colStart].PutValue(rowStart - 3);
+                    ws.Cells[rowStart, colStart + 1].PutValue(oneMrd.ID);
+                    ws.Cells[rowStart, colStart + 2].PutValue(oneMrd.CompanyName);
+                    ws.Cells[rowStart, colStart + 3].PutValue(oneMrd.NPlanAmmount);
+                    ws.Cells[rowStart, colStart + 4].PutValue(twoMrd.NPlanAmmount);
+                    ws.Cells[rowStart, colStart + 5].PutValue(oneMrd.NActualAmmount);// 同步的数据
+                    ws.Cells[rowStart, colStart + 6].PutValue(twoMrd.NActualAmmount); // 同步的数据
+                    #region 设置千分位
+                    Style tempstyle;
+                    tempstyle = ws.Cells[rowStart, colStart + 4].GetStyle();
+                    tempstyle.Number = 3;
+                    ws.Cells[rowStart, colStart + 3].SetStyle(tempstyle);
+                    ws.Cells[rowStart, colStart + 4].SetStyle(tempstyle);
+                    ws.Cells[rowStart, colStart + 5].SetStyle(tempstyle);
+                    ws.Cells[rowStart, colStart + 6].SetStyle(tempstyle);
+                    #endregion
+                    rowStart = rowStart + 1;
+                }
+            }
+
+
+            #region 设置保护单元格
+            Style style;
+            StyleFlag styleflag;
+            for (int x = 0; x <= 255; x++)
+            {
+                style = ws.Cells.Columns[(byte)x].Style;
+                style.IsLocked = true;
+                styleflag = new StyleFlag();
+                styleflag.Locked = true;
+
+                ws.Cells.Columns[(byte)x].ApplyStyle(style, styleflag);
+            }
+            for (int j = 4; j < rowStart; j++)
+            {
+                style = ws.Cells[j, colStart + 4].GetStyle();
+                style.IsLocked = false;
+                style.ForegroundColor = System.Drawing.Color.White;
+                ws.Cells[j, colStart + 5].SetStyle(style);
+                ws.Cells[j, colStart + 6].SetStyle(style);
+            }
+
+            ws.Protect(ProtectionType.All);
+            #endregion
+
+            #endregion
+        }
+        #endregion
 
         #region 根据具体是不是混合指标来确定调用具体方法
 
@@ -1115,7 +1567,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 #endregion
 
                 int rowStart = 4;  //开始行
-                //int colStart = 1; // 开始列
+                                   //int colStart = 1; // 开始列
 
                 ReportInstance rpt = new ReportInstance(MonthReportID, true);
                 List<DictionaryVmodel> ProCompanyList = ReportInstanceDetailEngine.ReportInstanceDetailService.GetDetailRptDataSource(rpt, "Reported", "", true);
@@ -1331,7 +1783,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 #endregion
 
                 int rowStart = 4;  //开始行
-                //int colStart = 1; // 开始列
+                                   //int colStart = 1; // 开始列
 
                 ReportInstance rpt = new ReportInstance(SysId, FinYear, FinMonth, true);
                 List<DictionaryVmodel> ProCompanyList = ReportInstanceDetailEngine.ReportInstanceDetailService.GetDetailRptDataSource(rpt, "Reported", "ProPlan", true);
@@ -1976,15 +2428,11 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             try
             {
                 XElement xml = rpt._System.Configuration;
-                XElement isBlendTarget = xml.Elements("BlendTargets").FirstOrDefault();
+                XElement isBlendTarget = xml.Elements("ComplateTargetDetail").Elements("BlendTargets").FirstOrDefault();
                 if (isBlendTarget != null && isBlendTarget.GetAttributeValue("IsBlendTarget", false))
                 {
-                    var _TargetList = new List<Guid>();
-                    List<XElement> targetListXML = xml.Elements("BlendTargets").Elements("Item").ToList();//取出混合指标xml
-                    foreach (var item in targetListXML)
-                    {
-                        _TargetList.Add(Guid.Parse(item.GetAttributeValue("TargetId", "")));
-                    }
+                    var _TargetList = Array.ConvertAll<string, Guid>(isBlendTarget.GetAttributeValue("TargetValue", "").Split(','), s => Guid.Parse(s)).ToList();
+
                     //混合指标只能是两个
                     if (_TargetList != null || _TargetList.Count == 2)
                     {

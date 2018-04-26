@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using LJTH.BusinessIndicators.DAL;
 using LJTH.BusinessIndicators.ViewModel;
 using LJTH.Lib.Data.AppBase;
+using LJTH.BusinessIndicators.ViewModel.MonthReport;
 
 namespace LJTH.BusinessIndicators.BLL
 {
@@ -89,7 +90,7 @@ namespace LJTH.BusinessIndicators.BLL
                 {
                     DataTypeStr = "NActualAmmount";
                 }
-                
+
             }
             else // 累计
             {
@@ -114,17 +115,18 @@ namespace LJTH.BusinessIndicators.BLL
                 {
                     DataTypeStr = "NAccumulativeActualAmmount";
                 }
-                
+
             }
 
             List<ComprehensiveReportVModel> list = new List<ComprehensiveReportVModel>();
             list = _comprehensiveReportDateAdapter.GetComprehensiveReportForms(SysIDs, FinYears, Targets, DataTypeStr, IsMonthlyReport, CurrentYear);
-            
-             var GList = list.GroupBy(G => G.SystemID).Select(p => new ComprehensiveReportGroupModel { SystemID = p.Key, sys_count=p.Count()}) ; // 分组获取数量
 
-            var TList = list.GroupBy(G => new {G.SystemID, G.TargetID}).Select(p => new ComprehensiveReportGroupModel { SystemID = p.FirstOrDefault().TargetID , sys_count = p.Count() }); // 分组获取数量
+            var GList = list.GroupBy(G => G.SystemID).Select(p => new ComprehensiveReportGroupModel { SystemID = p.Key, sys_count = p.Count() }); // 分组获取数量
 
-            GList.ForEach(p => {
+            var TList = list.GroupBy(G => new { G.SystemID, G.TargetID }).Select(p => new ComprehensiveReportGroupModel { SystemID = p.FirstOrDefault().TargetID, sys_count = p.Count() }); // 分组获取数量
+
+            GList.ForEach(p =>
+            {
                 list.Where(c => c.SystemID == p.SystemID).OrderBy(s => s.T_Sequence).First().SrowSpan_str = p.sys_count;
             });
 
@@ -133,7 +135,7 @@ namespace LJTH.BusinessIndicators.BLL
             {
                 list.Where(c => c.TargetID == T.SystemID).OrderBy(s => s.FinYear).First().TrowSpan_str = T.sys_count;
             });
-            
+
             return list;
         }
 
@@ -183,7 +185,7 @@ namespace LJTH.BusinessIndicators.BLL
                 //A表获取数据
                 return _comprehensiveReportDateAdapter.GetChildrenCompany(Year, FinMonth, "_A");
             }
-            
+
         }
 
         /// <summary>
@@ -215,7 +217,7 @@ namespace LJTH.BusinessIndicators.BLL
         /// </summary>
         /// <param name="Year"></param>
         /// <param name="FinMonth"></param>
-       
+
         /// <returns></returns>
         public List<MonthReportSummaryViewModel> GetWandaCulture(int Year, int FinMonth)
         {
@@ -234,5 +236,18 @@ namespace LJTH.BusinessIndicators.BLL
 
         }
 
+
+        /// <summary>
+        /// 获取综合列表数据（新)
+        /// </summary>
+        /// <param name="systemID">板块ID</param>
+        /// <param name="finYear">年</param>
+        /// <param name="finMonth">月</param>
+        /// <param name="loginName">登陆人</param>
+        /// <returns></returns>
+        public List<ComprehensiveReportViewModel> GetComprehensiveReportData(string systemID, int finYear, int finMonth, string loginName)
+        {
+            return _comprehensiveReportDateAdapter.GetComprehensiveReportData(systemID, finYear, finMonth, loginName);
+        }
     }
 }

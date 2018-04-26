@@ -56,10 +56,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Wanda.Platform.WorkFlow.ClientComponent, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Wanda.BusinessIndicators\DllReference\Wanda.Platform.WorkFlow.ClientComponent.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalculateMisssTargetScope.cs" />
@@ -67,6 +63,7 @@
     <Compile Include="GenerateQueryAttachments.cs" />
     <Compile Include="GenerateTargetPlanAttachments.cs" />
     <Compile Include="JobDemo.cs" />
+    <Compile Include="JsonUser.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="ProjectCompleteProcess.cs" />
     <Compile Include="ProjectMergeProcess.cs" />
@@ -127,6 +124,11 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="User.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

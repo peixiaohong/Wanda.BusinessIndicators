@@ -61,6 +61,7 @@
     <Compile Include="MonthReport\CompanyVModel.cs" />
     <Compile Include="MonthReport\CompleteTargetDetailViewModel.cs" />
     <Compile Include="MonthReport\ComprehensiveReportForm.cs" />
+    <Compile Include="MonthReport\ComprehensiveReportViewModel.cs" />
     <Compile Include="MonthReport\DSTargetCompleted.cs" />
     <Compile Include="MonthReport\ExceptionTargetVModel.cs" />
     <Compile Include="MonthReport\HistoryReturnDateVModel.cs" />

@@ -1,0 +1,206 @@
+.btn_search {
+	width: 60px;
+    height: auto;
+    border: 1px solid #cb5c61;
+    border-radius: 2px;
+    padding: 0 10px 0 10px;
+    margin: 0 auto;
+    background: #fff;
+    color: #cb5c61;
+    text-align: center;
+}
+.widget-body {
+	background:#fff;
+}
+.page-body {
+	margin-top:20px;
+}
+ul,li {
+	padding: 0;
+}
+.collection-cont ul li {
+	border-bottom: 0px solid;
+}
+table.from-table{
+	width: 100%;
+	padding: 0;
+}
+td, th , .report-state{
+	padding: 5px;
+	border: 1px solid #ced6e0;
+	background-color:#f9f9f9;
+}
+table.alignCenter tr td, table.alignCenter tr th{
+	width: 85px;
+	text-align: center;
+}
+table.table-list {
+	width: 25%;
+	float: left;
+	table-layout: fixed;
+}
+table.table-list tr td, table.table-list tr th{
+	text-align: center;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.left-box{
+	width:75%;
+	float: left;
+	overflow-x: scroll;
+}
+.left-box table{
+	min-width: 335%;
+	margin-left: -1px;
+}
+table.table-default {
+	width: 45%;
+}
+.table-info {
+	width: 55%;
+}
+.table-info table {
+	min-width: 400%;
+}
+.table-info table.table-more {
+	width: 700%;
+}
+.report-state {
+	padding: 10px;
+	line-height: 2em;
+}
+.collection-cont ul li h3.repeort-select-box{
+	padding: 15px 0;
+}
+.select-container .repeort-select {
+	outline: 0;
+	float: left;
+    position: relative;
+    margin: 0;
+    color: #444;
+    appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+  background:url("../images/icon_arr_down.png")no-repeat scroll right center transparent;
+  background-size: 12px;
+     box-shadow: none;
+    font-size: 14px !important;
+    padding-right: 18px;
+    padding-left: 8px;
+    height: 30px !important;
+    /*line-height: 1.42857143;*/
+    border-radius: 4px;
+    border: 0 solid !important;
+}
+select::-ms-expand { 
+	display: none; 
+	}
+.table-tem,.table-tem-box,.reports-info,.selectTwo{
+	display: none;
+}
+.table-tem table td,.table-tem table th{
+	border: 0px solid;
+	border-right: 1px solid #ced6e0;
+	border-top: 1px solid #ced6e0;
+	background: #fff;
+}
+.table-tem table tr td:last-child, .table-tem table tr th:last-child{
+	border-right: 0 solid;
+}
+
+.table-tem-content table td {
+	border-right: 1px solid transparent;
+	background: #fff;
+}
+.left-box table td{
+	border-right: 1px solid transparent;
+}
+/*.table-border-bottom td {
+	border-bottom: 1px solid transparent;
+}*/
+.table-tem-content table td:nth-child(4), .left-box table td:nth-child(8),.left-box table td:nth-child(4){
+	border-right: 1px solid #ced6e0;
+}
+.table-tem-content table td:last-child,.left-box table td:last-child{
+	border-right: 1px solid #ced6e0;
+}
+.table-info table.table-more td:nth-child(8),.table-info table.table-more td:nth-child(4){
+	border-right: 1px solid transparent;
+}
+.table-info table.table-more td:nth-child(6){
+	border-right: 1px solid #ced6e0;
+}
+.table-tem-content table{
+	min-width: 100%;
+}
+.tem-list table{
+	margin:0;
+}
+.tem-list table tr:first-child td, .table-tem-content table tbody tr:first-child td{
+	border-top: 0px solid transparent;
+}
+.tem-list-box table td:nth-child(0), .tem-list-box table td:nth-child(1) , .tem-list-box table td:nth-child(2) ,.tem-list-box table td:nth-child(3) ,.tem-list-box table td:nth-child(4) {
+	background: #f9f9f9;
+}
+.tem-list-title,.tem-list-box{
+	display: none;
+}
+.color-height{
+	background: #fabf8f !important;
+}.table-tem-new, .table-tem-new table{
+	width: 100%;
+	table-layout: fixed;
+}
+.table-tem-new td, .table-tem-new th{
+	border-left: 0 solid !important;
+	background: #fff;
+	box-sizing: border-box;
+	/*white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;*/
+}
+.table-tem-new tr:first-child td ,.table-tem-new tr:first-child th{
+	border-top: 0 solid !important;
+	border-bottom: 0px solid;
+}
+.table-tem-new td ,.table-tem-new th{
+	border-bottom: 0px solid;
+}
+
+.table-tem-new table td:last-child{
+	border-right: 0 solid !important;
+	border-bottom: 0 solid !important;
+}
+.from-table tbody td {
+	background: #fff;
+}
+.collection-cont ul .active h3 .collection-updown-icon.report-state-down {
+	background:url(../images/icon_arr_down.png) left center no-repeat;
+	background-size: 18px;
+}
+
+/*Ö¸±ê²éÑ¯*/
+.target {
+    position:relative;
+}
+.target-main {
+    position: relative;
+    overflow: hidden;
+}
+.target-main>div{
+    position:absolute;
+    top: 0;
+    left:0;
+}
+.target-allow {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 0px;
+    right: -10px;
+    z-index:2;
+}
+[v-cloak] {
+    display:none;
+}

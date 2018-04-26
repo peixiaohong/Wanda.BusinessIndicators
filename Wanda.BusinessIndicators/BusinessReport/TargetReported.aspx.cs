@@ -2,18 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Web;
-using System.Web.Services;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using LJTH.BusinessIndicators.BLL;
-using LJTH.BusinessIndicators.Engine;
 using LJTH.BusinessIndicators.Model;
-using LJTH.BusinessIndicators.ViewModel;
-using Wanda.Platform.Permission.ClientComponent;
 using LJTH.BusinessIndicators.BLL.BizBLL;
 using LJTH.BusinessIndicators.Common;
+using LJTH.BusinessIndicators.Model.BizModel;
+using System.Linq;
+using LJTH.BusinessIndicators.ViewModel;
+using Newtonsoft.Json;
 
 namespace LJTH.BusinessIndicators.Web.BusinessReport
 {
@@ -50,51 +46,64 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             if (!IsPostBack)
             {
 
-                List<C_System> sysList = new List<C_System>();
-                if (PermissionList != null && PermissionList.Count > 0)
+                #region 原来的获取方法
+                //List<C_System> sysList = new List<C_System>();
+                //if (PermissionList != null && PermissionList.Count > 0)
+                //{
+                //    foreach (var item in PermissionList)
+                //    {
+                //        sysList.AddRange(StaticResource.Instance.SystemList.Where(p => p.SystemName == item.ToString()).Distinct().ToList());
+                //    }
+                //}
+
+
+                //if (sysList.Count > 0)
+                //{
+                //    //Category ==1 代表的是经营系统
+                //    List<C_System> listSys = sysList.Where(or => or.Category == 1).Distinct().ToList().OrderBy(or => or.Sequence).ToList();
+                //    ddlSystem.DataSource = listSys;
+                //    if (string.IsNullOrEmpty(Request.QueryString["BusinessID"]))
+                //    {
+                //        if (listSys.Count == 0 && sysList.Count > 0)
+                //        {
+                //            C_System cs = sysList.FirstOrDefault();
+                //            if (cs.Category == 2)
+                //            {
+                //                Server.Transfer("~/BusinessReport/TargetProReported.aspx");
+                //            }
+                //            else if (cs.Category == 3)
+                //            {
+                //                Server.Transfer("~/BusinessReport/TargetGroupReported.aspx");
+                //            }
+                //            else if (cs.Category == 4)
+                //            {
+                //                Server.Transfer("~/BusinessReport/TargetDirectlyReported.aspx");
+                //            }
+                //        }
+                //    }
+                //}
+                //else
+                //    ddlSystem.DataSource = StaticResource.Instance.SystemList.Where(p => p.Category == 1).OrderBy(x => x.Sequence).ToList();
+                #endregion
+
+
+                var _SystemIds = S_OrganizationalActionOperator.Instance.GetUserSystemData(WebHelper.GetCurrentLoginUser()).Select(v => v.SystemID).ToList();
+
+                if (_SystemIds == null || _SystemIds.Count == 0)
                 {
-                    foreach (var item in PermissionList)
-                    {
-                        sysList.AddRange(StaticResource.Instance.SystemList.Where(p => p.SystemName == item.ToString()).Distinct().ToList());
-                    }
+                    Response.Redirect("~/NoPermission.aspx");
+                    return;
                 }
+                List<C_System> c_SystemList = StaticResource.Instance.SystemList.Where(p => _SystemIds.Contains(p.ID)).OrderBy(x => x.Sequence).ToList();
 
-
-                if (sysList.Count > 0)
-                {
-                    //Category ==1 代表的是经营系统
-                    List<C_System> listSys = sysList.Where(or => or.Category == 1).Distinct().ToList().OrderBy(or => or.Sequence).ToList();
-                    ddlSystem.DataSource = listSys;
-                    if (string.IsNullOrEmpty(Request.QueryString["BusinessID"]))
-                    {
-                        if (listSys.Count == 0 && sysList.Count > 0)
-                        {
-                            C_System cs = sysList.FirstOrDefault();
-                            if (cs.Category == 2)
-                            {
-                                Server.Transfer("~/BusinessReport/TargetProReported.aspx");
-                            }
-                            else if (cs.Category == 3)
-                            {
-                                Server.Transfer("~/BusinessReport/TargetGroupReported.aspx");
-                            }
-                            else if (cs.Category == 4)
-                            {
-                                Server.Transfer("~/BusinessReport/TargetDirectlyReported.aspx");
-                            }
-                        }
-                    }
-                }
-                else
-                    ddlSystem.DataSource = StaticResource.Instance.SystemList.Where(p => p.Category == 1).OrderBy(x => x.Sequence).ToList();
-
+                ddlSystem.DataSource = c_SystemList;
                 ddlSystem.DataTextField = "SystemName";
                 ddlSystem.DataValueField = "ID";
                 ddlSystem.DataBind();
 
-
                 lblName.Text = FinYear + "-" + FinMonth + "月度经营报告上报";
-
+                //加载区域
+                LoadAreaData();
                 if (string.IsNullOrEmpty(Request.QueryString["BusinessID"])) //如果BusinessID是Null，代表不是从OA进来的
                 {
                     HidSystemID.Value = ddlSystem.SelectedValue;
@@ -110,12 +119,14 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
 
                     ddlAreaID.SelectedValue = bmr.AreaID.ToString();
                     HidAreaID.Value = ddlAreaID.SelectedValue;
+
+                    ddlSystem.Enabled = false;
+                    ddlAreaID.Enabled = false;
                 }
 
                 HideProcessCode.Value = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(), DateTime.Now].Configuration.Element("ProcessCode").Value;
                 //AddMonthlyReport();//如果当前月不存在月度报告数据，添加一条数据
-                InitSystemBatch();
-
+                InitAreaData();
             }
         }
         /// <summary>
@@ -125,7 +136,8 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         /// <param name="e"></param>
         protected void ddlSystem_TextChanged(object sender, EventArgs e)
         {
-            InitSystemBatch();
+            ChangeSystem();
+            InitAreaData();
         }
         /// <summary>
         /// 添加月度报告数据
@@ -136,46 +148,236 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             HidAreaID.Value = ddlAreaID.Visible ? ddlAreaID.SelectedValue : Guid.Empty.ToString();
             HideProcessCode.Value = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(), DateTime.Now].Configuration.Element("ProcessCode").Value;
 
+            B_SystemBatch BatchModel = null; // 公用的批次 实体
+
             B_MonthlyReport bmr = null;
-            //判断当前URL是否存在BusinessID
-            if (string.IsNullOrEmpty(Request["BusinessID"]))
+            string Gtypt = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(), DateTime.Now].GroupType;
+            if (!string.IsNullOrEmpty(Gtypt))
             {
-                //添加月报说明
-                // bmr = B_MonthlyreportOperator.Instance.GetMonthlyReportDraft(Guid.Parse(ddlSystem.SelectedValue), FinYear, FinMonth);
-                bmr = B_MonthlyreportOperator.Instance.GetMonthlyReportDraft(Guid.Parse(ddlSystem.SelectedValue), Guid.Parse(HidAreaID.Value), FinYear, FinMonth);
-                if (bmr == null)
+                #region 包含在批次里的数据的业务系统
+
+                //判断当前URL是否存在BusinessID
+                if (string.IsNullOrEmpty(Request["BusinessID"]))
                 {
-                    bmr = AddMR();
+                    B_MonthlyReport _statreRpt = null; //-状态B_MonthlyReport -
+
+                    BatchModel = B_SystemBatchOperator.Instance.GetSystemBatch(Gtypt, FinYear, FinMonth);
+
+                    //判断批次表中是否有数据
+                    if (BatchModel == null)
+                    {
+                        BatchModel = AddSystemBatch(Gtypt);
+                    }
+                    else
+                    {
+                        //批次不为Null，且批次还是在审批中的。
+                        //批次是草稿状态
+                        List<V_SubReport> V_SubReportList = JsonConvert.DeserializeObject<List<V_SubReport>>(BatchModel.SubReport);
+
+                        //获取上报月报的ID
+                        var subRpt = V_SubReportList.Find(SR => SR.SystemID == ddlAreaID.SelectedValue.ToGuid());
+                        B_MonthlyReport monthRpt = B_MonthlyreportOperator.Instance.GetMonthlyreport(subRpt.ReportID);
+                        #region  批次存在
+
+                        //审批进行中,是要被跳转到审批页面的，但是审批完成就需要重新开启新的流程
+                        if (BatchModel.WFBatchStatus == "Progress" || monthRpt.WFStatus == "Progress")
+                        {
+                            //批次是草稿状态
+                            var model = V_SubReportList.Find(p => p.SystemID == ddlAreaID.SelectedValue.ToGuid());
+
+                            //---------------------------------------------------------------------------------------------------------------------------------------------
+                            //这里批次需要控制，每次审批的状态只能是唯一的
+                            // 暂时注销掉  BatchModel = AddSystemBatch();
+
+                            var host = new LJTH.BusinessIndicators.Web.AjaxHander.ProProcessController();
+                            host.BusinessID = model.ReportID.ToString();
+
+                            if (BPF.Workflow.Client.WFClientSDK.Exist(host.BusinessID))
+                            {
+                                BPF.Workflow.Object.WorkflowContext wc = BPF.Workflow.Client.WFClientSDK.GetProcess(null, host.BusinessID);
+                                if (!wc.CurrentUserHasTodoTask)
+                                {
+                                    Server.Transfer("~/BusinessReport/TargetApprove.aspx?BusinessID=" + host.BusinessID);
+                                }
+                                else
+                                {
+                                    bmr = monthRpt;
+                                    hideMonthReportID.Value = monthRpt.ID.ToString();
+                                }
+                            }
+                        }
+                        else if (BatchModel.WFBatchStatus == "Approved") //如果审批是完成状态，重新生产
+                        {
+                            BatchModel = AddSystemBatch(Gtypt);
+                        }
+                        else
+                        {
+                            //批次是草稿状态
+
+                            V_SubReportList.ForEach(p =>
+                            {   //选择的是那个系统？
+                                if (p.SystemID == Guid.Parse(ddlAreaID.SelectedValue))
+                                {  //根据选择的系统，将明细数据展示出来
+
+                                    _statreRpt = B_MonthlyreportOperator.Instance.GetMonthlyreport(p.ReportID);
+
+                                    if (_statreRpt.WFStatus == "Cancel") //如果当前月报是作废的状态，则重新生产一个新的ID   ( 这里针对作废后，重新起一个流程)
+                                    {
+
+                                        _statreRpt.ID = Guid.NewGuid();//替换实体ID
+                                        _statreRpt.WFStatus = "Draft";
+                                        _statreRpt.Status = 2;
+                                        Guid _BRptID = B_MonthlyreportOperator.Instance.AddMonthlyreport(_statreRpt);
+
+                                        p.ReportID = _BRptID;
+                                        HiddenBatch.Value = BatchModel.ID.ToString(); //批次ID不变
+                                        hideMonthReportID.Value = p.ReportID.ToString();
+                                    }
+                                    else
+                                    {
+                                        //注意这里
+                                        hideMonthReportID.Value = p.ReportID.ToString();
+                                        HiddenBatch.Value = p.ReportID.ToString();
+                                    }
+
+                                    AddBMRD(_statreRpt);
+                                    bmr = _statreRpt;
+                                    MutipleUpload.LoadByBusinessID(_statreRpt.ID.ToString());
+                                }
+                            });
+
+
+                            //这里重新序列，将作废后，重新生成的新ID 序列化到批次里
+                            BatchModel.SubReport = JsonConvert.SerializeObject(V_SubReportList);
+                            B_SystemBatchOperator.Instance.UpdateSystemBatch(BatchModel);
+
+                        }
+
+                        #endregion
+                    }
+
                 }
                 else
                 {
-                    if (bmr.WFStatus == "Progress" || bmr.WFStatus == "Approved")
-                    {
-                        bmr = AddMR();
+                    //如果是传过来的BusinessID，就直接去查询，不做操作
+                    //通过BusinessID，首先获取批次的实体，根据权限，然后在批次中寻找
+                    HiddenBatch.Value = Request["BusinessID"];
+                    bmr = B_MonthlyreportOperator.Instance.GetMonthlyreport(Request["BusinessID"].ToGuid());
+                    ExceptionHelper.TrueThrow<ArgumentNullException>(bmr == null ? true : false, "Argument B_MonthlyReport is Null");
 
+                    if (bmr.SystemBatchID != Guid.Empty)
+                    {
+                        BatchModel = B_SystemBatchOperator.Instance.GetSystemBatch(bmr.SystemBatchID);
+                        List<V_SubReport> rptLsit = JsonConvert.DeserializeObject<List<V_SubReport>>(BatchModel.SubReport);
+                        V_SubReport rptModel = rptLsit.Find(f => f.SystemID == ddlSystem.SelectedValue.ToGuid());
+                        hideMonthReportID.Value = rptModel.ReportID.ToString();
+                        bmr = B_MonthlyreportOperator.Instance.GetMonthlyreport(rptModel.ReportID);
+                        ExceptionHelper.TrueThrow<ArgumentNullException>(bmr == null ? true : false, "Argument B_MonthlyReport is Null");
+                        MutipleUpload.LoadByBusinessID(bmr.ID.ToString());
+                        UserControl.SetButtonSpanStyle(bmr.Status);
                     }
                 }
-                //为当前月度经营报告（bmr），插入月度经营明细数据
-                AddBMRD(bmr);
-                hideMonthReportID.Value = bmr.ID.ToString();
+
+                #endregion
             }
             else
             {
-                hideMonthReportID.Value = Request["BusinessID"];
-                bmr = B_MonthlyreportOperator.Instance.GetMonthlyreport(Request["BusinessID"].ToGuid());
-                ddlSystem.SelectedValue = bmr.SystemID.ToString();
-                ddlAreaID.SelectedValue = bmr.AreaID.ToString();
-                FinYear = bmr.FinYear;
-                FinMonth = bmr.FinMonth;
-                lblName.Text = "";
-                lblName.Text = FinYear + "-" + FinMonth + "月度经营报告上报";
+
+                //判断当前URL是否存在BusinessID
+                if (string.IsNullOrEmpty(Request["BusinessID"]))
+                {
+                    //添加月报说明
+                    // bmr = B_MonthlyreportOperator.Instance.GetMonthlyReportDraft(Guid.Parse(ddlSystem.SelectedValue), FinYear, FinMonth);
+                    bmr = B_MonthlyreportOperator.Instance.GetMonthlyReportDraft(Guid.Parse(ddlSystem.SelectedValue), Guid.Parse(HidAreaID.Value), FinYear, FinMonth);
+                    if (bmr == null)
+                    {
+                        bmr = AddMR();
+                    }
+                    else
+                    {
+                        if (bmr.WFStatus == "Progress" || bmr.WFStatus == "Approved")
+                        {
+                            bmr = AddMR();
+
+                        }
+                    }
+                    //为当前月度经营报告（bmr），插入月度经营明细数据
+                    AddBMRD(bmr);
+                    hideMonthReportID.Value = bmr.ID.ToString();
+                }
+                else
+                {
+                    hideMonthReportID.Value = Request["BusinessID"];
+                    bmr = B_MonthlyreportOperator.Instance.GetMonthlyreport(Request["BusinessID"].ToGuid());
+                    ddlSystem.SelectedValue = bmr.SystemID.ToString();
+                    ddlAreaID.SelectedValue = bmr.AreaID.ToString();
+                    FinYear = bmr.FinYear;
+                    FinMonth = bmr.FinMonth;
+                    lblName.Text = "";
+                    lblName.Text = FinYear + "-" + FinMonth + "月度经营报告上报";
+                }
+
+                if (bmr != null)
+                {
+                    MutipleUpload.LoadByBusinessID(bmr.ID.ToString());
+                    UserControl.SetButtonSpanStyle(bmr.Status);
+                }
+            }
+        }
+        /// <summary>
+        /// 添加批次Model
+        /// </summary>
+        /// <returns></returns>
+        public B_SystemBatch AddSystemBatch(string groupType)
+        {
+            B_SystemBatch BatchModel = new B_SystemBatch();
+            BatchModel.BatchType = groupType;
+            BatchModel.FinMonth = FinMonth;
+            BatchModel.FinYear = FinYear;
+            BatchModel.WFBatchStatus = "Draft";
+            BatchModel.ID = Guid.NewGuid();
+
+            List<V_SubReport> SubReportList = new List<V_SubReport>();
+            //获取项目系统的公司
+            //List<C_System> ProSysList = StaticResource.Instance.SystemList.Where(p => p.GroupType == groupType).OrderBy(PR => PR.Sequence).ToList();
+            var orgList = StaticResource.Instance.OrgList[ddlSystem.SelectedValue.ToGuid()].Where(x => x.Level == 3);
+            //循环添加B_MonthlyReport表数据
+            foreach (var item in orgList)
+            {
+                B_MonthlyReport BatchMonthlyReport = new B_MonthlyReport();
+                BatchMonthlyReport.SystemID = ddlSystem.SelectedValue.ToGuid();
+                BatchMonthlyReport.AreaID = item.ID;
+                BatchMonthlyReport.FinMonth = FinMonth;
+                BatchMonthlyReport.FinYear = FinYear;
+                BatchMonthlyReport.Status = 2;
+                BatchMonthlyReport.WFStatus = "Draft";
+                BatchMonthlyReport.SystemBatchID = BatchModel.ID;
+                BatchMonthlyReport.CreateTime = DateTime.Now;
+                BatchMonthlyReport.ID = B_MonthlyreportOperator.Instance.AddMonthlyreport(BatchMonthlyReport);
+
+                //添加数据 ,如果是当前选择的系统，isreaday==true
+                if (ddlAreaID.SelectedValue == item.ID.ToString())
+                {
+                    SubReportList.Add(new V_SubReport(item.ID, item.CnName, BatchMonthlyReport.ID, false));
+                    AddBMRD(BatchMonthlyReport); // 添加明细数据
+                    hideMonthReportID.Value = BatchMonthlyReport.ID.ToString(); //将新增的月报ID，存在影藏控件中
+                    HiddenBatch.Value = BatchMonthlyReport.ID.ToString();
+                    MutipleUpload.LoadByBusinessID(BatchMonthlyReport.ID.ToString()); //添加附件ID
+                    UserControl.SetButtonSpanStyle(BatchMonthlyReport.Status); //设置第几步的状态
+                }
+                else
+                {
+                    //判断其它系统的提交状态
+                    SubReportList.Add(new V_SubReport(item.ID, item.CnName, BatchMonthlyReport.ID, false));
+                }
             }
 
-            if (bmr != null)
-            {
-                MutipleUpload.LoadByBusinessID(bmr.ID.ToString());
-                UserControl.SetButtonSpanStyle(bmr.Status);
-            }
+            BatchModel.SubReport = JsonConvert.SerializeObject(SubReportList);
+
+            BatchModel.ID = B_SystemBatchOperator.Instance.AddSystemBatch(BatchModel);
+
+
+            return BatchModel;
         }
 
         public B_MonthlyReport AddMR()
@@ -276,16 +478,35 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             }// ExceptionHelper.TrueThrow<ArgumentNullException>(PermissionList.Count == 0, "Argument GetStartProcessList is Count = 0");
         }
 
+
+        /// <summary>
+        /// 更改区域
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void ddlAreaID_TextChanged(object sender, EventArgs e)
         {
             AddMonthlyReport();
         }
 
-        private void InitSystemBatch()
+        /// <summary>
+        /// 加载区域并执行AddMonthlyReport
+        /// </summary>
+        private void InitAreaData()
+        {
+            LoadAreaData();
+            AddMonthlyReport();
+        }
+
+
+        /// <summary>
+        /// 加载区域
+        /// </summary>
+        private void LoadAreaData()
         {
             if (ddlSystem.SelectedValue != Guid.Empty.ToString())
             {
-                var list = S_OrganizationalActionOperator.Instance.GetUserRegional(ddlSystem.SelectedValue.ToGuid(),WebHelper.GetCurrentLoginUser());
+                var list = S_OrganizationalActionOperator.Instance.GetUserRegional(ddlSystem.SelectedValue.ToGuid(), WebHelper.GetCurrentLoginUser());
                 //list.Add(new Model.BizModel.S_Organizational {
                 //    ID = Guid.Parse("D8483CEA-1C7C-4C22-9969-BD7051D79E86"),
                 //    CnName="东北"
@@ -302,6 +523,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     ddlAreaID.DataTextField = "CnName";
                     ddlAreaID.DataValueField = "ID";
                     ddlAreaID.DataBind();
+
                 }
                 else
                 {
@@ -312,7 +534,26 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             {
                 ddlAreaID.Visible = false;
             }
-            AddMonthlyReport();
+        }
+
+        /// <summary>
+        /// 根据更改的板块加载不通页面
+        /// </summary>
+        private void ChangeSystem()
+        {
+            C_System cs = C_SystemOperator.Instance.GetSystem(Guid.Parse(ddlSystem.SelectedValue));
+            if (cs.Category == 2)
+            {
+                Server.Transfer("~/BusinessReport/TargetProReported.aspx");
+            }
+            else if (cs.Category == 3)
+            {
+                Server.Transfer("~/BusinessReport/TargetGroupReported.aspx");
+            }
+            else if (cs.Category == 4)
+            {
+                Server.Transfer("~/BusinessReport/TargetDirectlyReported.aspx");
+            }
         }
     }
 }

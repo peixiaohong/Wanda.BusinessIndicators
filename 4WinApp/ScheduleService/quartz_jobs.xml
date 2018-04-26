@@ -29,7 +29,7 @@
     </trigger>-->
 
     <!--SendMessage Service, 每1小时执行一次 -->
-    <job>
+    <!--<job>
       <name>SendMessage</name>
       <group>SendMessage</group>
       <description>SendMessage</description>
@@ -46,20 +46,20 @@
         <job-group>SendMessage</job-group>
         <cron-expression>0 0 * * * ?</cron-expression>
       </cron>
-    </trigger>
+    </trigger>-->
 
     
     <!--Recalculation Service, 每半个小时执行一次 -->
-    <job>
+    <!--<job>
       <name>Recalculation</name>
       <group>Recalculation</group>
       <description>Recalculation</description>
       <job-type>ScheduleService.Handler.Recalculation, ScheduleService.Handler</job-type>
       <durable>true</durable>
       <recover>false</recover>
-    </job>
+    </job>-->
 
-    <trigger>
+    <!--<trigger>
       <cron>
         <name>Recalculation_Trigger</name>
         <group>Recalculation</group>
@@ -67,10 +67,9 @@
         <job-group>Recalculation</job-group>
         <cron-expression>0 0/30 * * * ?</cron-expression>
       </cron>
-    </trigger>
+    </trigger>-->
 
-    <!--SystemOpenDay Server ,每天早上3点15执行一次-->
-    <job>
+    <!--<job>
       <name>SystemOpenDay</name>
       <group>SystemOpenDay</group>
       <description>SystemOpenDay</description>
@@ -87,7 +86,7 @@
         <job-group>SystemOpenDay</job-group>
         <cron-expression>0 15 3 * * ?</cron-expression>
       </cron>
-    </trigger>
+    </trigger>-->
 
 
     <!--ProjectMergeProcess Server ,每9分钟执行一次-->
@@ -106,12 +105,13 @@
         <group>ProjectMergeProcess</group>
         <job-name>ProjectMergeProcess</job-name>
         <job-group>ProjectMergeProcess</job-group>
-        <cron-expression>0 0/9 * * * ?</cron-expression>
+        <cron-expression>0 0/1 * * * ?</cron-expression>
+        <!--[秒] [分] [小时] [日] [月] [周] [年]-->
       </cron>
     </trigger>
 
     <!--ProjectCompleteProcess Server ,每天早上3点30执行一次-->
-    <job>
+    <!--<job>
       <name>ProjectCompleteProcess</name>
       <group>ProjectCompleteProcess</group>
       <description>ProjectCompleteProcess</description>
@@ -128,12 +128,12 @@
         <job-group>ProjectCompleteProcess</job-group>
         <cron-expression>0 30 3 * * ?</cron-expression>
       </cron>
-    </trigger>
+    </trigger>-->
 
 
 
     <!--CalculateMisssTargetScope Server ,每10分钟执行一次-->
-    <job>
+    <!--<job>
       <name>CalculateMisssTargetScope</name>
       <group>CalculateMisssTargetScope</group>
       <description>CalculateMisssTargetScope</description>
@@ -150,7 +150,7 @@
         <job-group>CalculateMisssTargetScope</job-group>
         <cron-expression>0 0/10 * * * ?</cron-expression>
       </cron>
-    </trigger>
+    </trigger>-->
 
     <!--ProjectCompleteProcess Server ,每9分钟执行一次-->
     <job>
@@ -168,14 +168,14 @@
         <group>ProjectCompleteProcess</group>
         <job-name>ProjectCompleteProcess</job-name>
         <job-group>ProjectCompleteProcess</job-group>
-        <cron-expression>0 15 3 * * ?</cron-expression>
+        <cron-expression>0 0/9 * * * ?</cron-expression>
       </cron>
     </trigger>
 
 
 
     <!--GenerateQueryAttachments Server ,每1分钟执行一次-->
-    <job>
+    <!--<job>
       <name>GenerateQueryAttachments</name>
       <group>GenerateQueryAttachments</group>
       <description>GenerateQueryAttachments</description>
@@ -192,11 +192,11 @@
         <job-group>GenerateQueryAttachments</job-group>
         <cron-expression>0 0/10 * * * ?</cron-expression>
       </cron>
-    </trigger>
+    </trigger>-->
 
 
     <!--GenerateQueryAttachments Server ,每1分钟执行一次-->
-    <job>
+    <!--<job>
       <name>GenerateTargetPlanAttachments</name>
       <group>GenerateTargetPlanAttachments</group>
       <description>GenerateTargetPlanAttachments</description>
@@ -213,11 +213,11 @@
         <job-group>GenerateTargetPlanAttachments</job-group>
         <cron-expression>0 0/10 * * * ?</cron-expression>
       </cron>
-    </trigger>
+    </trigger>-->
 
     
     <!--GenerateQuerryJsonData Server ,每1分钟执行一次-->
-    <job>
+    <!--<job>
       <name>GenerateQuerryJsonData</name>
       <group>GenerateQuerryJsonData</group>
       <description>GenerateQuerryJsonData</description>
@@ -234,7 +234,7 @@
         <job-group>GenerateQuerryJsonData</job-group>
         <cron-expression>0 0/1 * * * ?</cron-expression>
       </cron>
-    </trigger>
+    </trigger>-->
 
   </schedule>
 
