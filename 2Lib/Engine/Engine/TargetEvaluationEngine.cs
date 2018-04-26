@@ -124,7 +124,8 @@ namespace LJTH.BusinessIndicators.Engine
 
             C_Target T = StaticResource.Instance.TargetList[RptDetail.SystemID].Find(t => t.ID == RptDetail.TargetID);
             bool IsBaseline = false;
-            if (T.BaseLine.Year == rpt.FinYear && T.BaseLine.Month == rpt.FinMonth)
+
+            if (T != null && T.BaseLine.Year == rpt.FinYear && T.BaseLine.Month == rpt.FinMonth)
             {
                 IsBaseline = true;
             }
@@ -183,7 +184,7 @@ namespace LJTH.BusinessIndicators.Engine
                     IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear).FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID && P.FinMonth <= rpt.FinMonth);
                     rpt.NAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
                     rpt.OAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
-                    
+
                 }
 
             }
@@ -201,12 +202,13 @@ namespace LJTH.BusinessIndicators.Engine
 
             //特殊处理差额，针对指标
             XElement element = null;
-            element = T.Configuration;
+            if (T != null)
+                element = T.Configuration;
             XElement subElement = null;
 
             bool IsDifferenceException = false;
 
-            if ( element.Element("IsDifferenceExceptionTarget") != null)
+            if (element != null && element.Element("IsDifferenceExceptionTarget") != null)
             {
                 subElement = element.Elements("IsDifferenceExceptionTarget").ToList()[0];
                 IsDifferenceException = subElement.GetAttributeValue("value", false);
@@ -220,11 +222,11 @@ namespace LJTH.BusinessIndicators.Engine
                 rpt.NDifference = rpt.NActualAmmount - rpt.NPlanAmmount;
                 rpt.ODifference = rpt.OActualAmmount - rpt.OPlanAmmount;
             }
-          
+
             rpt = (B_MonthlyReportDetail)this[T.TargetType.ToString()].Calculation(RptDetail);
 
-            if (T.NeedEvaluation)
-            {
+            if (T != null && T.NeedEvaluation)
+            {   
 
                 DateTime ReportDate = DateTime.MinValue;
                 DateTime.TryParse(rpt.FinYear + "-" + rpt.FinMonth + "-1 00:00:00", out ReportDate);
@@ -242,7 +244,7 @@ namespace LJTH.BusinessIndicators.Engine
                             if (lastMonthData.CurrentMonthCommitDate >= ReportDate)
                             {
                                 rpt.ReturnType = (int)EnumReturnType.Returning;
-                                if (lastMonthData.ReturnType_Sub == EnumHelper.GetEnumDescription(typeof(EnumReturnType_Sub), (int)EnumReturnType_Sub.Sub_UnableReturnByYear) )
+                                if (lastMonthData.ReturnType_Sub == EnumHelper.GetEnumDescription(typeof(EnumReturnType_Sub), (int)EnumReturnType_Sub.Sub_UnableReturnByYear))
                                 {
                                     rpt.ReturnDescription = lastMonthData.ReturnDescription;
                                 }

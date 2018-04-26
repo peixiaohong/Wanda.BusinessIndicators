@@ -90,6 +90,9 @@ namespace LJTH.BusinessIndicators.Engine
         {
 
             List<S_Organizational> listOrganizational = StaticResource.Instance.GetAllDataBySystemID(_System.ID);//根据条件获取有效的组织架构信息（含区域和项目）
+
+            List<C_Company> listCompany = SearchCompanyData();
+
             List<DictionaryVmodel> listDictionaryVModel = new List<DictionaryVmodel>();
             List<DictionaryVmodel> ItemCompanyPropertyViewModel = null;
             List<C_Target> listTempC_target = _Target;
@@ -113,7 +116,7 @@ namespace LJTH.BusinessIndicators.Engine
 
 
                     //根据公司筛选数据
-                    listMRD = SetMonthlyReportDetail(listm, listOrganizational);
+                    listMRD = SetMonthlyReportDetail(listm, listOrganizational,listCompany);
                     ItemCompanyPropertyViewModel.Add(new DictionaryVmodel("", EditData(listMRD, vtarget, listC_target[0], listOrganizational, null), "CompanyProperty"));
 
                     ItemCompanyPropertyViewModel.Add(new DictionaryVmodel("SummaryData", GetSummaryDate(listMRD, listC_target[0]), "Counter"));
@@ -203,13 +206,13 @@ namespace LJTH.BusinessIndicators.Engine
             }
 
             //对项目公司数据按照区域分组获取区域信息
-            var areaList = listMRD.GroupBy(m => new { m.AreaID, m.AreaName,m.AreaLevel }).Select(n => new
+            var areaList = listMRD.GroupBy(m => new { m.AreaID, m.AreaName, m.AreaLevel }).Select(n => new
             {
                 AreaID = n.Key.AreaID,
                 AreaName = n.Key.AreaName,
                 AreaLevel = n.Key.AreaLevel,
                 Count = n.Count()
-            });
+            }).OrderBy(m => m.AreaID);
             //从项目汇总到上一级区域
             foreach (var item in areaList)
             {
@@ -448,7 +451,7 @@ namespace LJTH.BusinessIndicators.Engine
         /// <param name="listm"></param>
         /// <param name="listCompany"></param>
         /// <returns></returns>
-        private List<MonthlyReportDetail> SetMonthlyReportDetail(List<MonthlyReportDetail> listm, List<S_Organizational> listOrganizational)
+        private List<MonthlyReportDetail> SetMonthlyReportDetail(List<MonthlyReportDetail> listm, List<S_Organizational> listOrganizational, List<C_Company> listCompany)
         {
 
             listm = listm.Where(x => listOrganizational.Exists(c => c.ID == x.CompanyID)).ToList();
@@ -462,6 +465,7 @@ namespace LJTH.BusinessIndicators.Engine
                     F.AreaName = data.CnName;
                     F.AreaLevel = data.Level;
                 }
+                F.Company = listCompany.Where(m => m.ID == F.CompanyID).FirstOrDefault();
             });
             return listm;
         }
@@ -622,6 +626,51 @@ namespace LJTH.BusinessIndicators.Engine
                 }
             }
             return targetList;
+        }
+        /// <summary>
+        /// 根据查询条件找到公司
+        /// </summary>
+        /// <returns></returns>
+        private List<C_Company> SearchCompanyData()
+        {
+            List<C_Company> listCompany = StaticResource.Instance.CompanyList[_System.ID].ToList();
+            string[] strs = strCompanyPropertys.Split(';');
+            for (int i = 0; i < strs.Count(); i++)
+            {
+                if (!string.IsNullOrEmpty(strs[i]))
+                {
+                    string[] tempStrs = strs[i].Split(':');
+                    if (!string.IsNullOrEmpty(tempStrs[1]))
+                    {
+                        switch (tempStrs[0])
+                        {
+                            case "CompanyProperty1":
+                                listCompany = listCompany.Where(p => tempStrs[1].Contains(p.CompanyProperty1.Trim()) || p.CompanyProperty1 == null).ToList();
+                                break;
+                            case "CompanyProperty2":
+                                listCompany = listCompany.Where(p => tempStrs[1].Contains(p.CompanyProperty2.Trim()) || p.CompanyProperty2 == null).ToList();
+                                break;
+                            case "CompanyProperty3":
+                                listCompany = listCompany.Where(p => tempStrs[1].Contains(p.CompanyProperty3.Trim()) || p.CompanyProperty3 == null).ToList();
+                                break;
+                            case "CompanyProperty4":
+                                listCompany = listCompany.Where(p => tempStrs[1].Contains(p.CompanyProperty4.Trim()) || p.CompanyProperty4 == null).ToList();
+                                break;
+                            case "CompanyProperty5":
+                                listCompany = listCompany.Where(p => tempStrs[1].Contains(p.CompanyProperty5.Trim()) || p.CompanyProperty5 == null).ToList();
+                                break;
+                            case "CompanyProperty6":
+                                listCompany = listCompany.Where(p => tempStrs[1].Contains(p.CompanyProperty6.Trim()) || p.CompanyProperty6 == null).ToList();
+                                break;
+                            case "CompanyProperty7":
+                                listCompany = listCompany.Where(p => tempStrs[1].Contains(p.CompanyProperty7.Trim()) || p.CompanyProperty7 == null).ToList();
+                                break;
+                        }
+                    }
+
+                }
+            }
+            return listCompany;
         }
     }
 }

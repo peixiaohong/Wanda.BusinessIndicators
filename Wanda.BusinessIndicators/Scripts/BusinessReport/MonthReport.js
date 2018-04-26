@@ -28,6 +28,7 @@ var FinMonths;
 var detailhiden = "";
 var currentDetailTarget = null;
 var currentManageReportDetailTarget = null;
+var unit = "";
 function SearchData() {
     var temp;
     ColumnAmount = 0;
@@ -859,7 +860,7 @@ function SetComplateTargetDetailData(sender, Type) {
     if (strComplateMonthReportDetilHtmlTemplate[0] != "" && strComplateMonthReportDetilHtmlTemplate[0] != undefined) {
         loadTmpl('#' + strComplateMonthReportDetilHtmlTemplate[0]).tmpl(sender).appendTo('#CompleteDetailHead');
     } else {
-        loadTmpl('#TmplCompleteDetail_Head').tmpl().appendTo('#CompleteDetailHead');
+        loadTmpl('#TmplCompleteDetail_Head').tmpl(sender).appendTo('#CompleteDetailHead');
     }
     //tmpl模板名称
     if (strComplateMonthReportDetilHtmlTemplate[1] != "" && strComplateMonthReportDetilHtmlTemplate[1] != undefined) {
@@ -1022,7 +1023,7 @@ function SetManageMonthReprotDetailData(sender, Type) {
     if (strManageMonthReprotDetailHtmlTemplate[0] != "" && strManageMonthReprotDetailHtmlTemplate[0] != undefined) {
         loadTmpl('#' + strManageMonthReprotDetailHtmlTemplate[0]).tmpl(sender).appendTo('#CompleteDetailHead_1');
     } else {
-        loadTmpl('#TmplCompleteDetail_Head').tmpl().appendTo('#CompleteDetailHead_1');
+        loadTmpl('#TmplCompleteDetail_Head').tmpl(sender).appendTo('#CompleteDetailHead_1');
     }
     //tmpl模板名称
     if (strManageMonthReprotDetailHtmlTemplate[1] != "" && strManageMonthReprotDetailHtmlTemplate[1] != undefined) {
@@ -1076,7 +1077,7 @@ function ManageMonthReprotDetailLiaddCss(sender) {
     if (strManageReportDetailTargetHtmlTemplate[0] != "" && strManageReportDetailTargetHtmlTemplate[0] != undefined) {
         loadTmpl('#' + strManageReportDetailTargetHtmlTemplate[0]).tmpl(TemplData).appendTo('#CompleteDetailHead_1');
     } else {
-        loadTmpl('#CompleteDetailHeadTemplate').tmpl().appendTo('#CompleteDetailHead_1');
+        loadTmpl('#CompleteDetailHeadTemplate').tmpl(TemplData).appendTo('#CompleteDetailHead_1');
     }
 
     //tmpl模板名称
@@ -1862,6 +1863,7 @@ function ClickCounter(sender, val) {
             $(this).show();
         });
         var rowSpanVal = 0;
+        val = (val == "" ? "99999BBBB" : val);
         rowSpanVal = $("." + val).attr("rowspan");
         if (rowSpanVal == undefined)
             rowSpanVal = 0;
@@ -1873,6 +1875,7 @@ function ClickCounter(sender, val) {
             $(this).hide();
         });
         var rowSpanVal = 0;
+        val = (val == "" ? "99999BBBB" : val);
         rowSpanVal = $("." + val).attr("rowspan");
         if (rowSpanVal == undefined)
             rowSpanVal = 0;
@@ -2646,7 +2649,7 @@ function shrinkageTitle() {
         var data = { "data": TemplData };
         dataArray.push(data);
 
-        loadTmpl('#TmplCompleteDetail_Data').tmpl(dataArray).appendTo('#tab2_rows_1');
+        loadTmpl('#TmplManageTargetDetail_Data').tmpl(dataArray).appendTo('#tab2_rows_1');
 
         $("#importedDataTable2_1").css("width", "100%");
         var obj = $("#CompleteDetailHead_1");
@@ -2693,4 +2696,7 @@ function AddBackGroundColor() {
         $(".DetailCss").addClass("tabOrderBackground");
 
     }
+}
+function GetUnit() {
+    return "万元";
 }
