@@ -35,12 +35,12 @@ namespace LJTH.BusinessIndicators.Engine
             ReportDetails = RptModel.ReportDetails;
 
             //这里对系统和指标再次做一次验证
-            if (ReportDetails != null && ReportDetails.Count() > 0)
-            {
-                B_MonthlyReport bm = B_MonthlyreportOperator.Instance.GetMonthlyreport(RptModel.ReportDetails[0].MonthlyReportID);
-                _System = StaticResource.Instance[_System.ID, bm.CreateTime];
-                _Target = StaticResource.Instance.GetTargetList(_System.ID, bm.CreateTime).ToList();
-            }
+            //if (ReportDetails != null && ReportDetails.Count() > 0)
+            //{
+            //    B_MonthlyReport bm = B_MonthlyreportOperator.Instance.GetMonthlyreport(RptModel.ReportDetails[0].MonthlyReportID);
+            //    _System = StaticResource.Instance[_System.ID, bm.CreateTime];
+            //    _Target = StaticResource.Instance.GetTargetList(_System.ID, bm.CreateTime).ToList();
+            //}
 
             List<MonthReportSummaryViewModel> listMRSVM = GetMonthlyReportDetailSummaryList(IsTargetPlan);
             List<B_Attachment> listAtt = GetListAtt(_System.ID);

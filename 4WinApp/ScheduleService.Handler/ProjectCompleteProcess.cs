@@ -16,7 +16,7 @@ namespace ScheduleService.Handler
     [Quartz.PersistJobDataAfterExecution]
     public class ProjectCompleteProcess: Quartz.IJob
     {
-        private string userName = "虚拟";
+        private string userName = System.Configuration.ConfigurationManager.AppSettings["virtualUser"];
         public void Execute(Quartz.IJobExecutionContext context)
         {
             Common.ScheduleService.Log.Instance.Info("子流程处理开始！");

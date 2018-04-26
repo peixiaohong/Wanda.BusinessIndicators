@@ -114,10 +114,12 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     //从OA进来的
                     hideMonthReportID.Value = Request["BusinessID"];
                     var bmr = B_MonthlyreportOperator.Instance.GetMonthlyreport(Request["BusinessID"].ToGuid());
-                    ddlSystem.SelectedValue = bmr.SystemID.ToString();
+                    //ddlSystem.SelectedValue = bmr.SystemID.ToString();
+                    ddlSystem.SelectedIndex = ddlSystem.Items.IndexOf(ddlSystem.Items.FindByValue(bmr.SystemID.ToString()));
                     HidSystemID.Value = ddlSystem.SelectedValue;
 
-                    ddlAreaID.SelectedValue = bmr.AreaID.ToString();
+                    //ddlAreaID.SelectedValue = bmr.AreaID.ToString();
+                    ddlAreaID.SelectedIndex = ddlAreaID.Items.IndexOf(ddlAreaID.Items.FindByValue(bmr.AreaID.ToString()));
                     HidAreaID.Value = ddlAreaID.SelectedValue;
 
                     ddlSystem.Enabled = false;

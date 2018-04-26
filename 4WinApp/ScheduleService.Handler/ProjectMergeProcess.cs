@@ -23,8 +23,6 @@ namespace ScheduleService.Handler
         int finMonth = 0;
         int finYear = 0;
 
-        bool _WFStarts = true;
-
         List<V_SubReport> BatchRptList = null;
 
         public void Execute(Quartz.IJobExecutionContext context)
@@ -37,6 +35,8 @@ namespace ScheduleService.Handler
             var array= StaticResource.Instance.SystemList.Where(x=>!string.IsNullOrEmpty(x.GroupType));
             foreach (var c_System in array)
             {
+                bool _WFStarts = true;
+
                 Common.ScheduleService.Log.Instance.Info(c_System.SystemName+"合并流程服务，读取批次表里是否有合适的数据Stare!");
 
                 B_SystemBatch batchModel = B_SystemBatchOperator.Instance.GetSystemBatchByDraft(c_System.GroupType, finYear, finMonth);
@@ -46,23 +46,8 @@ namespace ScheduleService.Handler
                     Common.ScheduleService.Log.Instance.Info(c_System.SystemName+"读取数据成功!" + batchModel.FinYear + "年" + batchModel.FinMonth + "月");
 
                     BatchRptList = JsonConvert.DeserializeObject<List<V_SubReport>>(batchModel.SubReport);
-
-                    BatchRptList.ForEach(P =>
-                    {
-                        bool a = true;
-                        if (P.IsReady == false)
-                        {
-                            _WFStarts = false;
-                            a = false;
-                        }
-                        Common.ScheduleService.Log.Instance.Info(P.SystemName + "系统" + a.ToString());
-
-                    });
-
-                }
-                else
-                {
-                    _WFStarts = false;
+                    int n = BatchRptList.Count(x => !x.IsReady);
+                    _WFStarts = n == 0;
                 }
 
                 Common.ScheduleService.Log.Instance.Info(c_System.SystemName+"合并流程服务，读取批次表里是否有合适的数据End!");
@@ -142,13 +127,14 @@ namespace ScheduleService.Handler
 
                                     #endregion
 
-                                    WorkflowContext workflow = WFClientSDK.GetProcess(null, this.BusinessID, new UserInfo() { UserCode = "$VirtualUserCode$项目汇总服务" });
+                                    WorkflowContext workflow = WFClientSDK.GetProcess(null, this.BusinessID, new UserInfo() { UserCode = "$VirtualUserCode$"+this.CurrentUser });
                                     Common.ScheduleService.Log.Instance.Info(c_System.SystemName + "合并流程,获取流程成功！");
                                     //先启动流程，流程能启动了，在写入数据库流程审批日志
                                     Dictionary<string, object> formParams = new Dictionary<string, object>();
                                     formParams.Add("ReportName", _Title);
                                     formParams.Add("ProcessKey", ProcessKey);
 
+                                    var DynamicRoleUserList = JsonUser.GetDynamicRoleUserList(ProcessKey);
                                     BizContext bizContext = new BizContext();
                                     bizContext.NodeInstanceList = workflow.NodeInstanceList;
                                     bizContext.ProcessRunningNodeID = workflow.ProcessInstance.RunningNodeID;
@@ -158,6 +144,7 @@ namespace ScheduleService.Handler
                                     bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$"+this.CurrentUser };
                                     bizContext.ProcessURL = "/BusinessReport/TargetApprove.aspx?ProType=Batch";
                                     bizContext.FormParams = formParams;
+                                    bizContext.DynamicRoleUserList = DynamicRoleUserList;
                                     bizContext.ExtensionCommond = new Dictionary<string, string>();
                                     bizContext.ExtensionCommond.Add("RejectNode", Guid.Empty.ToString());
                                     Common.ScheduleService.Log.Instance.Info(c_System.SystemName+"合并流程,流程参数配置成功！");
@@ -173,7 +160,7 @@ namespace ScheduleService.Handler
                                     //将批次的审批状态改变
                                     ExceptionHelper.TrueThrow(batchModel == null, string.Format("cannot find the report data which id={0}", BusinessID));
                                     batchModel.WFBatchStatus = "Progress";
-
+                                    batchModel.Description = GetDescription(c_System.ID, batchModel.FinYear, batchModel.FinMonth);
                                     //获取流程导航
                                     List<NavigatActivity1> listna = GetProcessIntance(wfc);
 
@@ -226,24 +213,12 @@ namespace ScheduleService.Handler
                     throw new NotImplementedException();
             }
         }
-
-        public void AddMonthlyReport(Guid systemtId,int year,int month)
+        protected string GetDescription(Guid systemtId, int year, int month)
         {
-            B_MonthlyReport model = new B_MonthlyReport();
-            model.SystemID = systemtId;
-            model.AreaID = Guid.Empty;
-            model.FinMonth = month;
-            model.FinYear = year;
-            model.Status = 2;
-            model.WFStatus = "Draft";
-            model.CreateTime = DateTime.Now;
-            
-
             string Description = string.Empty;
             C_System sysModel = StaticResource.Instance[systemtId, DateTime.Now];
             XElement element = sysModel.Configuration;
-            var List = B_MonthlyreportdetailOperator.Instance.GetMonthlyreportdetailList(systemtId, year, month, Guid.Empty);
-            var RptList = new List<MonthlyReportDetail>();
+            var RptList = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Approve(systemtId, year, month, Guid.Empty);
 
             if (element.Elements("Report").Elements("Rgroup") != null)
             {
@@ -255,17 +230,27 @@ namespace ScheduleService.Handler
                     {
                         Description = Description.Replace("【" + key + "】", p[key].ToString());
                     }
-
-                    model.Description = Description;
-                    model.ID = B_MonthlyreportOperator.Instance.AddMonthlyreport(model);
                 }
             }
+            return Description;
         }
-
-
+        public void AddMonthlyReport(B_SystemBatch batch,C_System c_System,string description)
+        {
+            B_MonthlyReport bmr = new B_MonthlyReport();
+            bmr.ID = batch.ID;
+            bmr.SystemID = c_System.ID;
+            bmr.AreaID = Guid.Empty;
+            bmr.FinMonth = batch.FinMonth;
+            bmr.FinYear = batch.FinYear;
+            bmr.Status = 2;
+            bmr.WFStatus = "Progress";
+            bmr.CreateTime = DateTime.Now;
+            bmr.Description = description;
+            bmr.ID = B_MonthlyreportOperator.Instance.AddMonthlyreport(bmr);
+           
+        }
         protected void StartProcess(string groupType)
         {
-
             
             Dictionary<string, object> formParams = new Dictionary<string, object>();
             var c_System = StaticResource.Instance.SystemList.Where(x => x.GroupType == groupType).FirstOrDefault();
@@ -371,9 +356,9 @@ namespace ScheduleService.Handler
             {
                 batch.ReportApprove = JsonConvert.SerializeObject(listna);
             }
+            batch.Description = GetDescription(c_System.ID, batch.FinYear, batch.FinMonth);
             //修改批次数据
             B_SystemBatchOperator.Instance.UpdateSystemBatch(batch);
-
         }
         /// <summary>
         /// 获取流程导航
@@ -586,7 +571,8 @@ namespace ScheduleService.Handler
 
         public string CurrentUser
         {
-            get { return "虚拟"; }//PermissionHelper.GetCurrentUser
+            //get { return "虚拟"; }
+            get { return System.Configuration.ConfigurationManager.AppSettings["virtualUser"]; }
         }
 
         public int OperationType

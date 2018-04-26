@@ -43,6 +43,7 @@ namespace LJTH.BusinessIndicators.Model
 
         [ORFieldMapping("ReportApprove")]
         public string ReportApprove { get; set; }
-
+        [ORFieldMapping("Description")]
+        public string Description { get; set; }
     }
 }
