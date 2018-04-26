@@ -10,6 +10,11 @@ namespace Common.ScheduleService
         /// </summary>
         static void Main()
         {
+            string systemid = "DB3E4D6E-A272-48D8-9CE9-AA1DBD4472F2";
+            int year = 2018;
+            int month = 3;
+            new ProjectMergeProcess().AddMonthlyReport(new System.Guid(systemid), year, month);
+            return;
 
             //#if DEBUG
             //            DebugRun();

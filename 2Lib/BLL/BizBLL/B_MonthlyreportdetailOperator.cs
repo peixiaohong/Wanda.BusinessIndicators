@@ -231,21 +231,23 @@ namespace LJTH.BusinessIndicators.BLL
         /// <returns></returns>
         public List<MonthlyReportDetail> GetMonthlyReportDetailList_Approve(Guid SystemID, int Year, int Month, Guid MonthReportID)
         {
-            B_MonthlyReport report = null;
-            if (MonthReportID == Guid.Empty)
-            {
-                report = B_MonthlyreportOperator.Instance.GetMonthlyReport(SystemID, Year, Month);
-            }
-            else
-            {
-                report = B_MonthlyreportOperator.Instance.GetMonthlyreport(MonthReportID);
-            }
-            if (report != null)
-            {
-                List<MonthlyReportDetail> result = _bMonthlyreportdetailAdapter.GetMonthlyReportDetailList(SystemID);
-                return result;
-            }
-            return new List<MonthlyReportDetail>();
+            //B_MonthlyReport report = null;
+            //if (MonthReportID == Guid.Empty)
+            //{
+            //    report = B_MonthlyreportOperator.Instance.GetMonthlyReport(SystemID, Year, Month);
+            //}
+            //else
+            //{
+            //    report = B_MonthlyreportOperator.Instance.GetMonthlyreport(MonthReportID);
+            //}
+            //if (report != null)
+            //{
+            //    List<MonthlyReportDetail> result = _bMonthlyreportdetailAdapter.GetMonthlyReportDetailList(SystemID);
+            //    return result;
+            //}
+            //return new List<MonthlyReportDetail>();
+            return _bMonthlyreportdetailAdapter.GetMonthlyReportDetailList(MonthReportID, SystemID);
+
         }
 
         /// <summary>
