@@ -260,3 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 /Wanda.BusinessIndicators/App_Data
+/Wanda.BusinessIndicators/Excel/完成情况明细模板-房地产事业部V1.xlsx

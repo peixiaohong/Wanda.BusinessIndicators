@@ -9,6 +9,10 @@ using LJTH.BusinessIndicators.Common;
 using BPF.Workflow.Client;
 using BPF.Workflow.Object;
 using Newtonsoft.Json;
+using System.Xml.Linq;
+using Lib.Xml;
+using System.Collections;
+using LJTH.BusinessIndicators.Engine;
 
 namespace ScheduleService.Handler
 {
@@ -220,6 +224,41 @@ namespace ScheduleService.Handler
                     break;
                 default:
                     throw new NotImplementedException();
+            }
+        }
+
+        public void AddMonthlyReport(Guid systemtId,int year,int month)
+        {
+            B_MonthlyReport model = new B_MonthlyReport();
+            model.SystemID = systemtId;
+            model.AreaID = Guid.Empty;
+            model.FinMonth = month;
+            model.FinYear = year;
+            model.Status = 2;
+            model.WFStatus = "Draft";
+            model.CreateTime = DateTime.Now;
+            
+
+            string Description = string.Empty;
+            C_System sysModel = StaticResource.Instance[systemtId, DateTime.Now];
+            XElement element = sysModel.Configuration;
+            var List = B_MonthlyreportdetailOperator.Instance.GetMonthlyreportdetailList(systemtId, year, month, Guid.Empty);
+            var RptList = new List<MonthlyReportDetail>();
+
+            if (element.Elements("Report").Elements("Rgroup") != null)
+            {
+                Description = element.Element("Report").GetElementValue("Rgroup", "");
+                if (!string.IsNullOrEmpty(Description))
+                {
+                    Hashtable p = MonthDescriptionValueEngine.MonthDescriptionValueService.GetMonthDescriptionValue(RptList, systemtId, "");
+                    foreach (string key in p.Keys)
+                    {
+                        Description = Description.Replace("【" + key + "】", p[key].ToString());
+                    }
+
+                    model.Description = Description;
+                    model.ID = B_MonthlyreportOperator.Instance.AddMonthlyreport(model);
+                }
             }
         }
 

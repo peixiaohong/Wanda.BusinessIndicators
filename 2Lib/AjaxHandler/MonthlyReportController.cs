@@ -150,8 +150,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             ReportInstance rpt = null;
 
             List<DictionaryVmodel> listSRDS = null;
+            string aa = base.CurrentUserName;
 
-            string currentLoginName = base.CurrentUserName;
             if (!IsLatestVersion) // 是否从A表中获取数据
             {
                 //获取A表的数据
@@ -159,7 +159,6 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 B_MonthlyReportJsonData B_JsonData = new B_MonthlyReportJsonData();
 
                 var A_Rpt = A_MonthlyreportOperator.Instance.GetAMonthlyReport(SystemID.ToGuid(), Year, Month);
-
 
                 if (A_Rpt != null)
                 {
@@ -171,14 +170,14 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     }
                     else
                     {
-                        rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, currentLoginName, IsLatestVersion, DataSource);
+                        rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, IsLatestVersion, DataSource);
                         listSRDS = ReportInstanceSummaryEngine.ReportInstanceSummaryService.GetSummaryRptDataSource(rpt, false);
                         return listSRDS;
                     }
                 }
                 else {
 
-                    rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, currentLoginName, IsLatestVersion, DataSource);
+                    rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, IsLatestVersion, DataSource);
                     listSRDS = ReportInstanceSummaryEngine.ReportInstanceSummaryService.GetSummaryRptDataSource(rpt, false);
                     return listSRDS;
                 }
@@ -203,14 +202,14 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                         }
                         else
                         {
-                            rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, currentLoginName, IsLatestVersion, DataSource);
+                            rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, IsLatestVersion, DataSource);
                             listSRDS = ReportInstanceSummaryEngine.ReportInstanceSummaryService.GetSummaryRptDataSource(rpt, false);
                             return listSRDS;
                         }
                     }
                     else
                     {
-                        rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, currentLoginName, IsLatestVersion, DataSource);
+                        rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, IsLatestVersion, DataSource);
                         listSRDS = ReportInstanceSummaryEngine.ReportInstanceSummaryService.GetSummaryRptDataSource(rpt, false);
                         return listSRDS;
                     }
@@ -231,14 +230,14 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                         }
                         else
                         {
-                            rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, currentLoginName, IsLatestVersion, DataSource);
+                            rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, IsLatestVersion, DataSource);
                             listSRDS = ReportInstanceSummaryEngine.ReportInstanceSummaryService.GetSummaryRptDataSource(rpt, false);
                             return listSRDS;
                         }
                     }
                     else
                     {
-                        rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, currentLoginName, IsLatestVersion, DataSource);
+                        rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, IsLatestVersion, DataSource);
                         listSRDS = ReportInstanceSummaryEngine.ReportInstanceSummaryService.GetSummaryRptDataSource(rpt, false);
                         return listSRDS;
                     }

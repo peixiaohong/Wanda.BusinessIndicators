@@ -15,7 +15,6 @@ namespace LJTH.BusinessIndicators.Engine
         {
         }
 
-
         /// <summary>
         /// 
         /// </summary>
@@ -32,26 +31,6 @@ namespace LJTH.BusinessIndicators.Engine
             DataSource = _DataSource;
             InitialData(IsLatestVersion);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="SystemID"></param>
-        /// <param name="Year"></param>
-        /// <param name="Month"></param>
-        /// <param name="IsLatestVersion">是否是最新的版本，true：从B表中获取，false：从A表中获取 </param>
-        /// <param name="_DataSource">当从B表中获取时，这里有Draft：草稿状态， 或者是审批中状态 </param>
-        /// <param name="_DataSource">当从B表中获取时，这里有Draft：草稿状态， 或者是审批中状态 </param>
-        public ReportInstance(Guid SystemID, int Year, int Month, string currentLoginName, bool IsLatestVersion = false, string _DataSource = "Draft")
-        {
-            _SystemID = SystemID;
-            FinYear = Year;
-            FinMonth = Month;
-            DataSource = _DataSource;
-            CurrentLoginName = currentLoginName;
-            InitialData(IsLatestVersion);
-        }
-
-
 
         /// <summary>
         /// 仅上报和审批页面调用
@@ -74,8 +53,22 @@ namespace LJTH.BusinessIndicators.Engine
         }
 
         private string DataSource = string.Empty;
-        public string CurrentLoginName { get; set; }
-
+        private string currentLoginName;
+        public string CurrentLoginName
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(this.currentLoginName))
+                {
+                    this.currentLoginName = Common.WebHelper.GetCurrentLoginUser();
+                }
+                return this.currentLoginName;
+            }
+            set
+            {
+                this.currentLoginName = value;
+            }
+        }
         public Guid _SystemID { get; set; }
 
         public Guid _SystemBatchID { get; set; }

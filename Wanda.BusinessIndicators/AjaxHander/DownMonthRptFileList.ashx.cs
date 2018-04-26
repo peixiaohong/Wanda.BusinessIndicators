@@ -79,7 +79,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         string[] strID = new string[1];//接多个系统ID
         string OrderStr = "Detail";//明细下载排序字段,默认是按照累计排序的
         string OrderStrTwo = "DetailMonthly";//明细下载排序字段,默认是按照当月排序的
-
+        bool IsBlendTargets = false;//是否混合指标
+        bool isHaveArea = false;//板块下是否存在区域
         string DataSource = string.Empty; //B表数据源
 
         public void ProcessRequest(HttpContext context)
@@ -131,6 +132,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             List<StreamModel> Models = new List<StreamModel>();
             var datetime = DateTime.Now;
             C_System Sys = C_SystemOperator.Instance.GetSystem(SysId, datetime);
+            IsBlendTargets = GetIsBlendTargets(Sys.Configuration);
             for (int i = 0; i < 1; i++)
             {
                 if (MonthlyReportID == Guid.Empty)
@@ -148,6 +150,14 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 rpt_Sum = rpt;
                 ReportInstance rpt_Detail = new ReportInstance();
                 rpt_Detail = rpt;
+
+                //经营报告明细
+                ReportInstance rpt_ManageDetailTarget = null;
+                isHaveArea = StaticResource.Instance.GetSystem_Regional(SysId);
+                if (isHaveArea)
+                {
+                    rpt_ManageDetailTarget = rpt;
+                }
 
                 //这里的未完成和 补回不能用一个 ReportInstance 对象，引用会把集合的对象删除，导致数据错误。
                 ReportInstance rpt_MissTarget = new ReportInstance();
@@ -253,10 +263,27 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     }
                     else
                     {
-                        Models.Add(DownTarget_Summary(rpt_Sum));   //下载月度报告模版
-                        Models.Add(DownMissTarget(rpt_MissTarget)); //下载未完成说明模版
+                        //if (isHaveArea)
+                        //{
+                        //    //经营报告明细
+                        //   // Models.Add(DownTarget_BlendManageReportTargetDetail(rpt_Detail));      //下载指标明细模版
+                        //}
+
+                        ////混合指标
+                        //if (IsBlendTargets)
+                        //{
+                        //    Models.Add(DownTarget_BlendTargetDetail(rpt_Detail));      //下载指标明细模版
+                        //}
+                        //else
+                        //{
+                        //    Models.Add(DownTarget_Detail(rpt_Detail));      //下载指标明细模版
+                        //    Models.Add(DownTarget_DetailMonthly(rpt_Detail)); //下载指标明细（当月）模板
+                        //}
                         Models.Add(DownTarget_Detail(rpt_Detail));      //下载指标明细模版
                         Models.Add(DownTarget_DetailMonthly(rpt_Detail)); //下载指标明细（当月）模板
+
+                        Models.Add(DownTarget_Summary(rpt_Sum));   //下载月度报告模版
+                        Models.Add(DownMissTarget(rpt_MissTarget)); //下载未完成说明模版
                         Models.Add(DownTarget_Return(rpt_Return)); //下载补回明细模版
                         Models.Add(DownCurrentMissTarget(rpt_CurrentMissTarget)); //下载当月未完成说明模版
                     }
@@ -415,7 +442,21 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         }
 
 
+        /// <summary>
+        /// 读取xml文件（ComplateTargetDetail.xml）
+        /// </summary>
+        /// <returns>是否为混合指标</returns>
+        private bool GetIsBlendTargets(XElement xelement)
+        {
+            List<VTarget> targetList = new List<VTarget>();
 
+            XElement elementCTD = xelement;
+            if (elementCTD.Elements("ComplateTargetDetail").Elements("BlendTargets").Count() > 0)
+            {
+                return true;
+            }
+            return false;
+        }
 
         #region 百货系统其它情况下载
         /// <summary>
@@ -1763,6 +1804,175 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             }
             return stream;
         }
+
+
+        /// <summary>
+        /// 混合指标-下载完成情况明细报表
+        /// </summary>
+        private StreamModel DownTarget_BlendTargetDetail(ReportInstance rpt)
+        {
+            //系统类型, 1:经营系统 2：项目公司系统 3：集团直属部门 4：集团直属公司
+            string templetePath = string.Empty;
+            string templeteName = string.Empty;
+            string fileName = string.Empty;
+            StreamModel stream = new StreamModel();
+            switch (rpt._System.Category)
+            {
+                case 1:
+                    templetePath = ExcelTempletePath;
+                    templeteName = "完成情况明细模板-混合指标V1.xlsx";
+                    fileName = "完成情况明细";
+                    stream.Streams = DownExcelMonthReportBlendTargetDetail_JY(templetePath, templeteName, fileName, SysId, FinYear, FinMonth, IsLatestVersion);
+                    stream.FileName = fileName;
+                    stream.FileExt = "xlsx";
+                    break;
+                case 2:
+                    templetePath = ExcelTempletePath;
+                    templeteName = "项目公司完成明细模版V1.xlsx";
+                    fileName = "完成情况明细";
+
+                    stream.Streams = DownExcelMonthReportDetail_XM(rpt, templetePath, templeteName, fileName, SysId, FinYear, FinMonth, IsLatestVersion);
+                    stream.FileName = fileName;
+                    stream.FileExt = "xlsx";
+                    break;
+                case 3:
+                    templetePath = ExcelTempletePath;
+                    templeteName = "完成情况明细模板-集团总部V1.xlsx";
+                    fileName = "完成情况明细";
+                    stream.Streams = DownExcelMonthReportDetail_Group(templetePath, templeteName, fileName, SysId, FinYear, FinMonth, IsLatestVersion);
+                    stream.FileName = fileName;
+                    stream.FileExt = "xlsx";
+                    break;
+                case 4:
+                    templetePath = ExcelTempletePath;
+                    templeteName = "完成情况明细模板-混合指标V1.xlsx";
+                    fileName = "完成情况明细";
+                    stream.Streams = DownExcelMonthReportDetail_JY(templetePath, templeteName, fileName, SysId, FinYear, FinMonth, IsLatestVersion);
+                    stream.FileName = fileName;
+                    stream.FileExt = "xlsx";
+                    break;
+            }
+            return stream;
+        }
+
+
+        /// <summary>
+        /// 混合指标-下载完成情况明细报表（当月）
+        /// </summary>
+        private StreamModel DownTarget_BlendDetailMonthly(ReportInstance rpt)
+        {
+            //系统类型, 1:经营系统 2：项目公司系统 3：集团直属部门 4：集团直属公司
+            //仅经营系统需要当月和累计。此方法只为经营系统添加一个当月完成情况明细报表
+            string templetePath = string.Empty;
+            string templeteName = string.Empty;
+            string fileName = string.Empty;
+            StreamModel stream = new StreamModel();
+            switch (rpt._System.Category)
+            {
+                case 1:
+                    templetePath = ExcelTempletePath;
+                    templeteName = "完成情况明细模板-混合指标V1.xlsx";
+                    fileName = "完成情况明细（当月）";
+                    stream.Streams = DownExcelMonthReportDetailMonthly_JY(templetePath, templeteName, fileName, SysId, FinYear, FinMonth, IsLatestVersion);
+                    stream.FileName = fileName;
+                    stream.FileExt = "xlsx";
+                    break;
+                case 4:
+                    templetePath = ExcelTempletePath;
+                    templeteName = "完成情况明细模板-混合指标V1.xlsx";
+                    fileName = "完成情况明细（当月）";
+                    stream.Streams = DownExcelMonthReportDetailMonthly_JY(templetePath, templeteName, fileName, SysId, FinYear, FinMonth, IsLatestVersion);
+                    stream.FileName = fileName;
+                    stream.FileExt = "xlsx";
+                    break;
+            }
+            return stream;
+        }
+
+        /// <summary>
+        /// 混合指标-下载经营报告明细报表
+        /// </summary>
+        private StreamModel DownTarget_BlendManageReportTargetDetail(ReportInstance rpt)
+        {
+            //系统类型, 1:经营系统 2：项目公司系统 3：集团直属部门 4：集团直属公司
+            string templetePath = string.Empty;
+            string templeteName = string.Empty;
+            string fileName = string.Empty;
+            StreamModel stream = new StreamModel();
+            switch (rpt._System.Category)
+            {
+                case 1:
+                    templetePath = ExcelTempletePath;
+                    templeteName = "完成情况明细模板-混合指标V1.xlsx";
+                    fileName = "经营报告明细";
+                    stream.Streams = DownExcelManageReportBlendTargetDetail_JY(templetePath, templeteName, fileName, SysId, FinYear, FinMonth, IsLatestVersion);
+                    stream.FileName = fileName;
+                    stream.FileExt = "xlsx";
+                    break;
+                case 2:
+                    templetePath = ExcelTempletePath;
+                    templeteName = "项目公司完成明细模版V1.xlsx";
+                    fileName = "经营报告明细";
+
+                    stream.Streams = DownExcelMonthReportDetail_XM(rpt, templetePath, templeteName, fileName, SysId, FinYear, FinMonth, IsLatestVersion);
+                    stream.FileName = fileName;
+                    stream.FileExt = "xlsx";
+                    break;
+                case 3:
+                    templetePath = ExcelTempletePath;
+                    templeteName = "完成情况明细模板-集团总部V1.xlsx";
+                    fileName = "经营报告明细";
+                    stream.Streams = DownExcelMonthReportDetail_Group(templetePath, templeteName, fileName, SysId, FinYear, FinMonth, IsLatestVersion);
+                    stream.FileName = fileName;
+                    stream.FileExt = "xlsx";
+                    break;
+                case 4:
+                    templetePath = ExcelTempletePath;
+                    templeteName = "完成情况明细模板-混合指标V1.xlsx";
+                    fileName = "经营报告明细";
+                    stream.Streams = DownExcelMonthReportDetail_JY(templetePath, templeteName, fileName, SysId, FinYear, FinMonth, IsLatestVersion);
+                    stream.FileName = fileName;
+                    stream.FileExt = "xlsx";
+                    break;
+            }
+            return stream;
+        }
+
+
+
+        /// <summary>
+        /// 混合指标-下载完成情况明细报表（当月）
+        /// </summary>
+        private StreamModel DownTarget_BlendTargetDetailMonthly(ReportInstance rpt)
+        {
+            //系统类型, 1:经营系统 2：项目公司系统 3：集团直属部门 4：集团直属公司
+            //仅经营系统需要当月和累计。此方法只为经营系统添加一个当月完成情况明细报表
+            string templetePath = string.Empty;
+            string templeteName = string.Empty;
+            string fileName = string.Empty;
+            StreamModel stream = new StreamModel();
+            switch (rpt._System.Category)
+            {
+                case 1:
+                    templetePath = ExcelTempletePath;
+                    templeteName = "完成情况明细模板V1.xlsx";
+                    fileName = "完成情况明细（当月）";
+                    stream.Streams = DownExcelMonthReportDetailBlendMonthly_JY(templetePath, templeteName, fileName, SysId, FinYear, FinMonth, IsLatestVersion);
+                    stream.FileName = fileName;
+                    stream.FileExt = "xlsx";
+                    break;
+                case 4:
+                    templetePath = ExcelTempletePath;
+                    templeteName = "完成情况明细模板V1.xlsx";
+                    fileName = "完成情况明细（当月）";
+                    stream.Streams = DownExcelMonthReportDetailMonthly_JY(templetePath, templeteName, fileName, SysId, FinYear, FinMonth, IsLatestVersion);
+                    stream.FileName = fileName;
+                    stream.FileExt = "xlsx";
+                    break;
+            }
+            return stream;
+        }
+
 
 
         /// <summary>
@@ -3743,6 +3953,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
 
         }
+
+
         //读取webconfig的值
         private string siteUrl = ConfigurationManager.AppSettings["SiteURL"];
         /// <summary>
@@ -5519,6 +5731,913 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         }
 
         /// <summary>
+        /// 下载Excel混合指标-完成情况明细--经营系统
+        /// </summary>
+        /// <param name="templetePath">模板路径</param>
+        /// <param name="templeteName">模板名称</param>
+        /// <param name="fileName">下载文件名称</param>
+        /// <param name="sytemID">系统ID</param>
+        /// <param name="Year">年度</param>
+        /// <param name="Month">月份</param>
+        /// <param name="IsLatestVersion">是否包含审批中</param>
+        public MemoryStream DownExcelMonthReportBlendTargetDetail_JY(string templetePath, string templeteName, string fileName, Guid sytemID, int Year, int Month, bool IsLatestVersion)
+        {
+            ExcelEngine excel = new ExcelEngine();
+            WorkbookDesigner designer = new WorkbookDesigner();
+            StreamModel stream = new StreamModel();
+
+            if (rpt._System.Configuration.Elements("ComplateTargetDetail").Elements("TableTemplate").ToList().Count > 0)
+            {
+                string strXml = rpt.GetComplateMonthReportDetailHtmlTemplate(rpt._System.Configuration);
+                string[] strXmls = strXml.Split(',');
+                if (strXmls.Length > 1)
+                {
+                    templeteName = !string.IsNullOrEmpty(strXmls[3]) ? strXmls[3] : "完成情况明细模板-混合指标V1.xlsx";
+                }
+            }
+
+            string path = System.IO.Path.Combine(templetePath, templeteName);//合并路径
+
+            //FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+
+            designer.Workbook = new Workbook(path);
+            WorksheetCollection worksheets = designer.Workbook.Worksheets;
+
+
+            Aspose.Cells.Style style1 = designer.Workbook.Styles[designer.Workbook.Styles.Add()];
+            Aspose.Cells.Style style2 = designer.Workbook.Styles[designer.Workbook.Styles.Add()];
+            Style style3 = designer.Workbook.Styles[designer.Workbook.Styles.Add()];
+            Aspose.Cells.Style style4 = designer.Workbook.Styles[designer.Workbook.Styles.Add()];
+            Aspose.Cells.Style style5 = designer.Workbook.Styles[designer.Workbook.Styles.Add()];
+            #region style1 样式
+            style1.Font.Size = 12;
+            #endregion
+            #region style2 样式 无加粗
+            style2.Font.Size = 12;
+
+
+            style2.HorizontalAlignment = Aspose.Cells.TextAlignmentType.Center;
+            style2.Borders[BorderType.TopBorder].LineStyle = CellBorderType.Thin;
+            style2.Borders[BorderType.TopBorder].Color = System.Drawing.Color.Black;
+            style2.Borders[BorderType.BottomBorder].LineStyle = CellBorderType.Thin; ;
+            style2.Borders[BorderType.BottomBorder].Color = System.Drawing.Color.Black;
+            style2.Borders[BorderType.LeftBorder].LineStyle = CellBorderType.Thin; ;
+            style2.Borders[BorderType.LeftBorder].Color = System.Drawing.Color.Black;
+            style2.Borders[BorderType.RightBorder].LineStyle = CellBorderType.Thin;
+            style2.Borders[BorderType.RightBorder].Color = System.Drawing.Color.Black;
+            #endregion
+
+            #region style3 样式
+            style3.Font.Size = 12;
+            style3.Font.Name = "Arial";
+            style3.Font.IsBold = true;
+            style3.ForegroundColor = System.Drawing.Color.FromArgb(184, 204, 228);
+            style3.Pattern = BackgroundType.Solid;
+
+
+            style3.HorizontalAlignment = Aspose.Cells.TextAlignmentType.Center;
+            style3.Borders[BorderType.TopBorder].LineStyle = CellBorderType.Thin;
+            style3.Borders[BorderType.TopBorder].Color = System.Drawing.Color.Black;
+            style3.Borders[BorderType.BottomBorder].LineStyle = CellBorderType.Thin; ;
+            style3.Borders[BorderType.BottomBorder].Color = System.Drawing.Color.Black;
+            style3.Borders[BorderType.LeftBorder].LineStyle = CellBorderType.Thin; ;
+            style3.Borders[BorderType.LeftBorder].Color = System.Drawing.Color.Black;
+            style3.Borders[BorderType.RightBorder].LineStyle = CellBorderType.Thin;
+            style3.Borders[BorderType.RightBorder].Color = System.Drawing.Color.Black;
+
+            #endregion
+
+            #region style4 样式
+            style4.HorizontalAlignment = TextAlignmentType.Center;
+            style4.VerticalAlignment = TextAlignmentType.Center;
+
+            #endregion
+
+            #region style5样式
+            style5.Font.Size = 12;
+            style5.Font.Name = "Arial";
+            #endregion
+            bool IncludeHaveDetail = false;
+            List<DictionaryVmodel> listMonthReportDetail = null;
+            if (rpt != null)
+            {
+                listMonthReportDetail = ReportInstanceDetailEngine.ReportInstanceDetailService.GetDetailRptDataSource(rpt, "", OrderStr, IncludeHaveDetail);
+            }
+
+            int rowStart = 5;  //开始行
+            int colStart = 2; // 开始列
+
+            //系统指标类，需要读取XML
+            List<C_Target> _targetList = StaticResource.Instance.TargetList[sytemID].ToList();
+
+            for (int i = 0; i < listMonthReportDetail.Count; i++)
+            {
+                #region 生成Excel中的页签
+                if (listMonthReportDetail[i].IsBlendTarget)
+                {
+
+                    worksheets[0].Name = listMonthReportDetail[i].Name;
+                    worksheets[0].Cells[0, 1].PutValue(rpt._System.SystemName + listMonthReportDetail[i].Name);
+                    worksheets[0].Cells[1, 2].PutValue(FinYear.ToString() + "年" + FinMonth + "月");
+                    worksheets[0].Cells[1, 2].SetStyle(style1);
+                    var thisdv = ((List<DictionaryVmodel>)listMonthReportDetail[i].ObjValue);
+                    C_Target _target = _targetList.Where(p => p.TargetName == thisdv[0].Name).ToList()[0];
+                    worksheets[0].Cells[1, 21].PutValue("单位：" + _target.Unit);
+                    worksheets[0].Cells[1, 21].SetStyle(style5);
+                    worksheets[0].Replace("$targetName1", thisdv[0].Name);
+                    worksheets[0].Replace("$targetName2", thisdv[1].Name);
+                }
+                else
+                {
+                    C_Target _target = _targetList.Where(p => p.TargetName == listMonthReportDetail[i].Name).ToList()[0];
+
+                    if (worksheets[1].Name == "单指标")
+                    {
+                        worksheets[1].Name = listMonthReportDetail[i].Name;
+                        worksheets[1].Cells[0, 1].PutValue(rpt._System.SystemName + listMonthReportDetail[i].Name);
+                        worksheets[1].Cells[1, 2].PutValue(FinYear.ToString() + "年" + FinMonth + "月");
+                        worksheets[i].Cells[1, 12].PutValue("单位：" + _target.Unit);
+                        worksheets[i].Cells[1, 12].SetStyle(style5);
+                        worksheets[1].Cells[1, 2].SetStyle(style1);
+                    }
+                    else
+                    {
+                        worksheets.AddCopy(1);
+                        worksheets[worksheets.Count - 1].Name = listMonthReportDetail[i].Name;
+                        worksheets[worksheets.Count - 1].Cells[0, 1].PutValue(rpt._System.SystemName + listMonthReportDetail[i].Name);
+                        worksheets[worksheets.Count - 1].Cells[1, 2].PutValue(FinYear.ToString() + "年" + FinMonth + "月");
+                        worksheets[worksheets.Count - 1].Cells[1, 12].PutValue("单位：" + _target.Unit);
+                        worksheets[worksheets.Count - 1].Cells[1, 12].SetStyle(style5);
+                        worksheets[worksheets.Count - 1].Cells[1, 2].SetStyle(style1);
+                    }
+                }
+                #endregion
+            }
+
+            bool IsDifferenceException = false; //商管的差额特殊处理
+
+            int DataDisplayMode = 0; //针对旅业下载客流量保留2位小数
+
+            //创建指标Sheet,
+            for (int sheetIndex = 0; sheetIndex < listMonthReportDetail.Count; sheetIndex++)
+            {
+                Worksheet worksheet = worksheets[listMonthReportDetail[sheetIndex].Name];
+                string _targetName = string.Empty;
+
+                if (listMonthReportDetail[sheetIndex].IsBlendTarget)
+                {
+                    #region 多指标
+                    var thisdv = (List<DictionaryVmodel>)listMonthReportDetail[sheetIndex].ObjValue;
+                    _targetName = thisdv[0].Name;// listMonthReportDetail[sheetIndex].Name;
+
+                    C_Target _target = _targetList.Where(p => p.TargetName == _targetName).ToList()[0];
+
+                    //特殊处理差额，针对指标
+                    XElement element = null;
+                    element = _target.Configuration;
+                    XElement subElement = null; //商管的节点
+
+                    XElement displayModeElement = null; //万达旅业的客流量下载，变成2位小数
+
+                    if (element.Elements("IsDifferenceExceptionTarget").ToList().Count > 0)
+                    {
+                        subElement = element.Elements("IsDifferenceExceptionTarget").ToList()[0];
+                        IsDifferenceException = subElement.GetAttributeValue("value", false);
+                    }
+                    else
+                    {
+                        IsDifferenceException = false;
+                    }
+
+                    if (element.Elements("DataDisplayMode").ToList().Count > 0)
+                    {
+                        displayModeElement = element.Elements("DataDisplayMode").ToList()[0];
+                        DataDisplayMode = displayModeElement.GetAttributeValue("value", 0);
+                    }
+                    else
+                    {
+                        DataDisplayMode = 0;
+                    }
+                    rowStart = 5;
+                    StyleFlag flag = new StyleFlag();
+                    flag.All = true;
+                    List<DictionaryVmodel> listCompanyProperty = (List<DictionaryVmodel>)thisdv[0].ObjValue;
+                    List<DictionaryVmodel> listCompanyProperty2 = (List<DictionaryVmodel>)thisdv[1].ObjValue;
+
+                    for (int j = 0; j < listCompanyProperty.Count; j++)
+                    {
+                        if (listCompanyProperty[j].Name == "SummaryData")
+                        {
+                            List<B_MonthlyReportDetail> ListItem = ((List<B_MonthlyReportDetail>)listCompanyProperty[j].ObjValue);
+                            List<B_MonthlyReportDetail> ListItem2 = ((List<B_MonthlyReportDetail>)listCompanyProperty2[j].ObjValue);
+                            for (int k = 0; k < ListItem.Count; k++)
+                            {
+                                #region 设置样式
+                                Range range = worksheet.Cells.CreateRange(rowStart, 1, 1, 3);
+                                range.Merge();
+                                range.ApplyStyle(style3, flag);
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 3].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 4].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 5].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 6].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 9].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 10].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 11].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 12].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 13].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 14].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 15].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 16].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 17].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 18].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 19].SetStyle(style3);
+                                #endregion
+
+                                #region 为单元格赋值
+                                worksheet.Cells[rowStart, colStart - 1].PutValue("合计");
+                                worksheet.Cells[rowStart, colStart + 2].PutValue(ListItem[k].NPlanAmmountByYear);
+                                worksheet.Cells[rowStart, colStart + 3].PutValue(ListItem2[k].NPlanAmmountByYear);
+                                worksheet.Cells[rowStart, colStart + 4].PutValue(ListItem[k].NPlanAmmountByYear == 0 ? "--" : ListItem[k].NDisplayRateByYear);
+                                worksheet.Cells[rowStart, colStart + 5].PutValue(ListItem2[k].NPlanAmmountByYear == 0 ? "--" : ListItem2[k].NDisplayRateByYear);
+                                worksheet.Cells[rowStart, colStart + 6].PutValue(ListItem[k].NPlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 7].PutValue(ListItem2[k].NPlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 8].PutValue(ListItem[k].NActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 9].PutValue(ListItem2[k].NActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 10].PutValue(ListItem[k].NDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 11].PutValue(ListItem2[k].NDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 12].PutValue(ListItem[k].NAccumulativePlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 13].PutValue(ListItem2[k].NAccumulativePlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 14].PutValue(ListItem[k].NAccumulativeActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 15].PutValue(ListItem2[k].NAccumulativeActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 16].PutValue(ListItem[k].NAccumulativeDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 17].PutValue(ListItem2[k].NAccumulativeDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 18].PutValue("");
+                                worksheet.Cells[rowStart, colStart + 19].PutValue("");
+
+                                //特殊差额指标，这里显示绝对值--商管系统
+                                if (IsDifferenceException)
+                                {
+                                    worksheet.Cells[rowStart, colStart + 4].PutValue(Math.Abs(ListItem[k].NDifference));
+                                    worksheet.Cells[rowStart, colStart + 8].PutValue(Math.Abs(ListItem[k].NAccumulativeDifference));
+                                }
+
+                                #endregion
+
+                                #region 设置Number = 3 :千分位,Number = 4 保留2位小数
+                                style3 = worksheet.Cells[rowStart, colStart + 2].GetStyle();
+                                if (DataDisplayMode == 0)
+                                    style3.Number = 3;
+                                else
+                                    style3.Number = 4;
+
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 3].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 6].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 9].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 12].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 13].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 14].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 15].SetStyle(style3);
+                                #endregion
+                                rowStart = rowStart + 1;
+                            }
+                        }
+                        else if (listCompanyProperty[j].Name == "HaveDetail")
+                        {
+                            List<MonthlyReportDetail> listMRDVM = (List<MonthlyReportDetail>)listCompanyProperty[j].ObjValue;
+                            List<MonthlyReportDetail> listMRDVM2 = (List<MonthlyReportDetail>)listCompanyProperty2[j].ObjValue;
+                            for (int k = 0; k < listMRDVM.Count; k++)
+                            {
+                                Range range = worksheet.Cells.CreateRange(rowStart, 2, 1, 2);
+                                range.Merge();
+                                range.ApplyStyle(style2, flag);
+                                #region 设置样式
+                                worksheet.Cells[rowStart, colStart - 1].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 3].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 4].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 5].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 6].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 9].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 10].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 11].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 12].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 13].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 14].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 15].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 16].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 17].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 18].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 19].SetStyle(style2);
+                                #endregion
+
+                                #region 为单元格赋值
+                                worksheet.Cells[rowStart, colStart - 1].PutValue((k + 1).ToString());
+                                worksheet.Cells[rowStart, colStart].PutValue(listMRDVM[k].CompanyName.ToString());
+                                worksheet.Cells[rowStart, colStart + 2].PutValue(listMRDVM[k].NPlanAmmountByYear);
+                                worksheet.Cells[rowStart, colStart + 3].PutValue(listMRDVM2[k].NPlanAmmountByYear);
+                                worksheet.Cells[rowStart, colStart + 4].PutValue(listMRDVM[k].NDisplayRateByYear);
+                                worksheet.Cells[rowStart, colStart + 5].PutValue(listMRDVM2[k].NDisplayRateByYear);
+                                worksheet.Cells[rowStart, colStart + 6].PutValue(listMRDVM[k].NPlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 7].PutValue(listMRDVM2[k].NPlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 8].PutValue(listMRDVM[k].NActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 9].PutValue(listMRDVM2[k].NActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 10].PutValue(listMRDVM[k].NDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 11].PutValue(listMRDVM2[k].NDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 12].PutValue(listMRDVM[k].NAccumulativePlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 13].PutValue(listMRDVM2[k].NAccumulativePlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 14].PutValue(listMRDVM[k].NAccumulativeActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 15].PutValue(listMRDVM2[k].NAccumulativeActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 16].PutValue(listMRDVM[k].NAccumulativeDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 17].PutValue(listMRDVM2[k].NAccumulativeDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 18].PutValue("");
+                                worksheet.Cells[rowStart, colStart + 19].PutValue("");
+
+                                //特殊差额指标，这里显示绝对值--商管系统
+                                if (IsDifferenceException)
+                                {
+                                    worksheet.Cells[rowStart, colStart + 4].PutValue(Math.Abs(listMRDVM[k].NDifference));
+                                    worksheet.Cells[rowStart, colStart + 8].PutValue(Math.Abs(listMRDVM[k].NAccumulativeDifference));
+                                }
+
+                                #endregion
+
+                                #region 设置Number = 3 :千分位,Number = 4 保留2位小数
+                                style2 = worksheet.Cells[rowStart, colStart + 2].GetStyle();
+                                if (DataDisplayMode == 0)
+                                    style2.Number = 3;
+                                else
+                                    style2.Number = 4;
+
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 3].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 6].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 9].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 12].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 13].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 14].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 15].SetStyle(style2);
+                                #endregion
+                                rowStart = rowStart + 1;
+                            }
+                        }
+                        else
+                        {
+                            List<DictionaryVmodel> ListItem = ((List<DictionaryVmodel>)listCompanyProperty[j].ObjValue);
+                            List<DictionaryVmodel> ListItem2 = ((List<DictionaryVmodel>)listCompanyProperty2[j].ObjValue);
+                            int count = 0;
+                            for (int zz = 0; zz < ListItem.Count; zz++)
+                            {
+                                if (ListItem[zz].ObjValue != null)
+                                {
+                                    count = count + ((List<MonthlyReportDetail>)ListItem[zz].ObjValue).Count();
+                                }
+                            }
+                            int tmpcolStart = 2;
+                            int tempTotalColumns = 2;
+                            if (!string.IsNullOrEmpty(listCompanyProperty[j].Name) && listCompanyProperty[j].Name != "SummaryData")
+                            {
+                                Range range = worksheet.Cells.CreateRange(rowStart, 1, ListItem.Count + count, 1);
+                                range.Merge();
+                                range.ApplyStyle(style2, flag);
+
+                                worksheet.Cells[rowStart, 1].PutValue(listCompanyProperty[j].Name);
+                            }
+                            else
+                            {
+                                tmpcolStart = colStart - 1;
+                                tempTotalColumns = tempTotalColumns + 1;
+                            }
+                            for (int z = 0; z < ListItem.Count; z++)
+                            {
+                                Range itemRange = worksheet.Cells.CreateRange(rowStart, tmpcolStart, 1, tempTotalColumns);
+                                itemRange.Merge();
+                                itemRange.ApplyStyle(style3, flag);
+                                worksheet.Cells[rowStart, tmpcolStart].PutValue(ListItem[z].Name);
+                                #region 设置样式
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 3].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 4].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 5].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 6].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 9].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 10].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 11].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 12].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 13].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 14].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 15].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 16].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 17].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 18].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 19].SetStyle(style3);
+
+                                #endregion
+
+                                #region 为单元格赋值
+                                worksheet.Cells[rowStart, colStart + 2].PutValue(ListItem[z].BMonthReportDetail.NPlanAmmountByYear);
+                                worksheet.Cells[rowStart, colStart + 3].PutValue(ListItem2[z].BMonthReportDetail.NPlanAmmountByYear);
+                                worksheet.Cells[rowStart, colStart + 4].PutValue(ListItem[z].BMonthReportDetail.NDisplayRateByYear);
+                                worksheet.Cells[rowStart, colStart + 5].PutValue(ListItem2[z].BMonthReportDetail.NDisplayRateByYear);
+                                worksheet.Cells[rowStart, colStart + 6].PutValue(ListItem[z].BMonthReportDetail.NPlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 7].PutValue(ListItem2[z].BMonthReportDetail.NPlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 8].PutValue(ListItem[z].BMonthReportDetail.NActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 9].PutValue(ListItem2[z].BMonthReportDetail.NActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 10].PutValue(ListItem[z].BMonthReportDetail.NDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 11].PutValue(ListItem2[z].BMonthReportDetail.NDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 12].PutValue(ListItem[z].BMonthReportDetail.NAccumulativePlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 13].PutValue(ListItem2[z].BMonthReportDetail.NAccumulativePlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 14].PutValue(ListItem[z].BMonthReportDetail.NAccumulativeActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 15].PutValue(ListItem2[z].BMonthReportDetail.NAccumulativeActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 16].PutValue(ListItem[z].BMonthReportDetail.NAccumulativeDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 17].PutValue(ListItem2[z].BMonthReportDetail.NAccumulativeDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 18].PutValue("");
+                                worksheet.Cells[rowStart, colStart + 19].PutValue("");
+
+
+                                //特殊差额指标，这里显示绝对值--商管系统
+                                if (IsDifferenceException)
+                                {
+                                    worksheet.Cells[rowStart, colStart + 4].PutValue(Math.Abs(ListItem[z].BMonthReportDetail.NDifference));
+                                    worksheet.Cells[rowStart, colStart + 8].PutValue(Math.Abs(ListItem[z].BMonthReportDetail.NAccumulativeDifference));
+                                }
+
+                                #endregion
+
+                                #region 设置Number = 3 :千分位,Number = 4 保留2位小数
+                                style3 = worksheet.Cells[rowStart, colStart + 2].GetStyle();
+                                if (DataDisplayMode == 0)
+                                    style3.Number = 3;
+                                else
+                                    style3.Number = 4;
+
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 3].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 6].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 9].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 12].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 13].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 14].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 15].SetStyle(style3);
+
+                                #endregion
+
+                                rowStart = rowStart + 1;
+                                int tempRowStart = rowStart;
+                                if (ListItem[z].ObjValue == null)
+                                { continue; }
+                                List<MonthlyReportDetail> listMRDVM = (List<MonthlyReportDetail>)ListItem[z].ObjValue;
+                                List<MonthlyReportDetail> listMRDVM2 = (List<MonthlyReportDetail>)ListItem2[z].ObjValue;
+                                for (int k = 0; k < listMRDVM.Count; k++)
+                                {
+                                    if (tmpcolStart != colStart)
+                                    {
+                                        itemRange = worksheet.Cells.CreateRange(rowStart, tmpcolStart + 1, 1, 2);
+                                        itemRange.Merge();
+                                        itemRange.ApplyStyle(style3, flag);
+                                    }
+                                    #region 设置样式
+                                    worksheet.Cells[rowStart, tmpcolStart].SetStyle(style2);
+                                    worksheet.Cells[rowStart, tmpcolStart + 1].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 2].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 3].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 4].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 5].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 6].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 7].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 8].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 9].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 10].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 11].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 12].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 13].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 14].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 15].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 16].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 17].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 18].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 19].SetStyle(style2);
+                                    #endregion
+
+                                    #region 为单元格赋值
+                                    worksheet.Cells[rowStart, tmpcolStart].PutValue((k + 1).ToString());
+                                    worksheet.Cells[rowStart, tmpcolStart + 1].PutValue(listMRDVM[k].CompanyName.ToString());
+                                    worksheet.Cells[rowStart, colStart + 2].PutValue(listMRDVM[k].NPlanAmmountByYear);
+                                    worksheet.Cells[rowStart, colStart + 3].PutValue(listMRDVM2[k].NPlanAmmountByYear);
+                                    worksheet.Cells[rowStart, colStart + 4].PutValue(listMRDVM[k].NDisplayRateByYear);
+                                    worksheet.Cells[rowStart, colStart + 5].PutValue(listMRDVM2[k].NDisplayRateByYear);
+                                    worksheet.Cells[rowStart, colStart + 6].PutValue(listMRDVM[k].NPlanAmmount);
+                                    worksheet.Cells[rowStart, colStart + 7].PutValue(listMRDVM2[k].NPlanAmmount);
+                                    worksheet.Cells[rowStart, colStart + 8].PutValue(listMRDVM[k].NActualAmmount);
+                                    worksheet.Cells[rowStart, colStart + 9].PutValue(listMRDVM2[k].NActualAmmount);
+                                    worksheet.Cells[rowStart, colStart + 10].PutValue(listMRDVM[k].NDisplayRate);
+                                    worksheet.Cells[rowStart, colStart + 11].PutValue(listMRDVM2[k].NDisplayRate);
+                                    worksheet.Cells[rowStart, colStart + 12].PutValue(listMRDVM[k].NAccumulativePlanAmmount);
+                                    worksheet.Cells[rowStart, colStart + 13].PutValue(listMRDVM2[k].NAccumulativePlanAmmount);
+                                    worksheet.Cells[rowStart, colStart + 14].PutValue(listMRDVM[k].NAccumulativeActualAmmount);
+                                    worksheet.Cells[rowStart, colStart + 15].PutValue(listMRDVM2[k].NAccumulativeActualAmmount);
+                                    worksheet.Cells[rowStart, colStart + 16].PutValue(listMRDVM[k].NAccumulativeDisplayRate);
+                                    worksheet.Cells[rowStart, colStart + 17].PutValue(listMRDVM2[k].NAccumulativeDisplayRate);
+                                    worksheet.Cells[rowStart, colStart + 18].PutValue("");
+                                    worksheet.Cells[rowStart, colStart + 19].PutValue("");
+
+                                    //特殊差额指标，这里显示绝对值--商管系统
+                                    if (IsDifferenceException)
+                                    {
+                                        worksheet.Cells[rowStart, colStart + 4].PutValue(Math.Abs(listMRDVM[k].NDifference));
+                                        worksheet.Cells[rowStart, colStart + 8].PutValue(Math.Abs(listMRDVM[k].NAccumulativeDifference));
+                                    }
+
+                                    #endregion
+
+                                    #region 设置千分位
+                                    if (listMRDVM[k].Counter > 0)
+                                    {
+                                        int pictureIndex = worksheet.Pictures.Add(rowStart, colStart + 18, ImageFilePath + "\\image" + listMRDVM[k].Counter + ".png");
+                                        int pictureIndex2 = worksheet.Pictures.Add(rowStart, colStart + 19, ImageFilePath + "\\image" + listMRDVM2[k].Counter + ".png");
+                                        Aspose.Cells.Drawing.Picture picture = worksheet.Pictures[pictureIndex];
+                                        picture.Left = 60;
+                                        picture.Top = 10;
+
+                                        Aspose.Cells.Drawing.Picture picture2 = worksheet.Pictures[pictureIndex2];
+                                        picture2.Left = 60;
+                                        picture2.Top = 10;
+
+                                    }
+                                    style2 = worksheet.Cells[rowStart, colStart + 2].GetStyle();
+                                    if (DataDisplayMode == 0)
+                                        style2.Number = 3;
+                                    else
+                                        style2.Number = 4;
+
+                                    worksheet.Cells[rowStart, colStart + 2].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 3].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 6].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 7].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 8].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 9].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 12].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 13].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 14].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 15].SetStyle(style2);
+
+                                    #endregion
+                                    rowStart = rowStart + 1;
+                                }
+                                //为当前sheet分组
+                                if (listMRDVM.Count > 0 && z == 0)
+                                {
+                                    worksheet.Cells.GroupRows(tempRowStart, tempRowStart - 1 + listMRDVM.Count, true);
+                                }
+                            }
+                        }
+                    }
+                    #endregion
+                }
+                else
+                {
+                    #region 单指标
+
+                    _targetName = listMonthReportDetail[sheetIndex].Name;
+                    C_Target _target = _targetList.Where(p => p.TargetName == _targetName).ToList()[0];
+
+                    //特殊处理差额，针对指标
+                    XElement element = null;
+                    element = _target.Configuration;
+                    XElement subElement = null; //商管的节点
+
+                    XElement displayModeElement = null; //万达旅业的客流量下载，变成2位小数
+
+                    if (element.Elements("IsDifferenceExceptionTarget").ToList().Count > 0)
+                    {
+                        subElement = element.Elements("IsDifferenceExceptionTarget").ToList()[0];
+                        IsDifferenceException = subElement.GetAttributeValue("value", false);
+                    }
+                    else
+                    {
+                        IsDifferenceException = false;
+                    }
+
+                    if (element.Elements("DataDisplayMode").ToList().Count > 0)
+                    {
+                        displayModeElement = element.Elements("DataDisplayMode").ToList()[0];
+                        DataDisplayMode = displayModeElement.GetAttributeValue("value", 0);
+                    }
+                    else
+                    {
+                        DataDisplayMode = 0;
+                    }
+
+
+                    rowStart = 4;
+                    StyleFlag flag = new StyleFlag();
+                    flag.All = true;
+                    List<DictionaryVmodel> listCompanyProperty = (List<DictionaryVmodel>)listMonthReportDetail[sheetIndex].ObjValue;
+                    for (int j = 0; j < listCompanyProperty.Count; j++)
+                    {
+                        if (listCompanyProperty[j].Name == "SummaryData")
+                        {
+                            List<B_MonthlyReportDetail> ListItem = ((List<B_MonthlyReportDetail>)listCompanyProperty[j].ObjValue);
+                            for (int k = 0; k < ListItem.Count; k++)
+                            {
+                                #region 设置样式
+                                Range range = worksheet.Cells.CreateRange(rowStart, 1, 1, 3);
+                                range.Merge();
+                                range.ApplyStyle(style3, flag);
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 3].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 4].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 5].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 6].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 9].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 10].SetStyle(style3);
+                                #endregion
+
+                                #region 为单元格赋值
+                                worksheet.Cells[rowStart, colStart - 1].PutValue("合计");
+                                worksheet.Cells[rowStart, colStart + 2].PutValue(ListItem[k].NPlanAmmountByYear);
+                                worksheet.Cells[rowStart, colStart + 3].PutValue(ListItem[k].NDisplayRateByYear);
+                                worksheet.Cells[rowStart, colStart + 4].PutValue(ListItem[k].NPlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 5].PutValue(ListItem[k].NActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 6].PutValue(ListItem[k].NDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 7].PutValue(ListItem[k].NAccumulativePlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 8].PutValue(ListItem[k].NAccumulativeActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 9].PutValue(ListItem[k].NAccumulativeDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 10].PutValue("");
+
+                                //特殊差额指标，这里显示绝对值--商管系统
+                                if (IsDifferenceException)
+                                {
+                                    worksheet.Cells[rowStart, colStart + 4].PutValue(Math.Abs(ListItem[k].NDifference));
+                                    worksheet.Cells[rowStart, colStart + 8].PutValue(Math.Abs(ListItem[k].NAccumulativeDifference));
+                                }
+
+                                #endregion
+
+                                #region 设置Number = 3 :千分位,Number = 4 保留2位小数
+                                style3 = worksheet.Cells[rowStart, colStart + 2].GetStyle();
+                                if (DataDisplayMode == 0)
+                                    style3.Number = 3;
+                                else
+                                    style3.Number = 4;
+
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 4].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 5].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style3);
+                                #endregion
+                                rowStart = rowStart + 1;
+                            }
+                        }
+                        else if (listCompanyProperty[j].Name == "HaveDetail")
+                        {
+                            List<MonthlyReportDetail> listMRDVM = (List<MonthlyReportDetail>)listCompanyProperty[j].ObjValue;
+                            for (int k = 0; k < listMRDVM.Count; k++)
+                            {
+                                Range range = worksheet.Cells.CreateRange(rowStart, 2, 1, 2);
+                                range.Merge();
+                                range.ApplyStyle(style2, flag);
+                                #region 设置样式
+                                worksheet.Cells[rowStart, colStart - 1].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 3].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 4].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 5].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 6].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 9].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 10].SetStyle(style2);
+                                #endregion
+
+                                #region 为单元格赋值
+                                worksheet.Cells[rowStart, colStart - 1].PutValue((k + 1).ToString());
+                                worksheet.Cells[rowStart, colStart].PutValue(listMRDVM[k].CompanyName.ToString());
+                                worksheet.Cells[rowStart, colStart + 2].PutValue(listMRDVM[k].NPlanAmmountByYear);
+                                worksheet.Cells[rowStart, colStart + 3].PutValue(listMRDVM[k].NDisplayRateByYear);
+                                worksheet.Cells[rowStart, colStart + 4].PutValue(listMRDVM[k].NPlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 5].PutValue(listMRDVM[k].NActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 6].PutValue(listMRDVM[k].NDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 7].PutValue(listMRDVM[k].NAccumulativePlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 8].PutValue(listMRDVM[k].NAccumulativeActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 9].PutValue(listMRDVM[k].NAccumulativeDisplayRate);
+
+                                //特殊差额指标，这里显示绝对值--商管系统
+                                if (IsDifferenceException)
+                                {
+                                    worksheet.Cells[rowStart, colStart + 4].PutValue(Math.Abs(listMRDVM[k].NDifference));
+                                    worksheet.Cells[rowStart, colStart + 8].PutValue(Math.Abs(listMRDVM[k].NAccumulativeDifference));
+                                }
+
+                                #endregion
+
+                                #region 设置Number = 3 :千分位,Number = 4 保留2位小数
+                                style2 = worksheet.Cells[rowStart, colStart + 2].GetStyle();
+                                if (DataDisplayMode == 0)
+                                    style2.Number = 3;
+                                else
+                                    style2.Number = 4;
+
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 4].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 5].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style2);
+                                #endregion
+                                rowStart = rowStart + 1;
+                            }
+                        }
+                        else
+                        {
+                            List<DictionaryVmodel> ListItem = ((List<DictionaryVmodel>)listCompanyProperty[j].ObjValue);
+                            int count = 0;
+                            for (int zz = 0; zz < ListItem.Count; zz++)
+                            {
+                                if (ListItem[zz].ObjValue != null)
+                                {
+                                    count = count + ((List<MonthlyReportDetail>)ListItem[zz].ObjValue).Count();
+                                }
+                            }
+                            int tmpcolStart = 2;
+                            int tempTotalColumns = 2;
+                            if (!string.IsNullOrEmpty(listCompanyProperty[j].Name) && listCompanyProperty[j].Name != "SummaryData")
+                            {
+                                Range range = worksheet.Cells.CreateRange(rowStart, 1, ListItem.Count + count, 1);
+                                range.Merge();
+                                range.ApplyStyle(style2, flag);
+
+
+                                worksheet.Cells[rowStart, 1].PutValue(listCompanyProperty[j].Name);
+                            }
+                            else
+                            {
+                                tmpcolStart = colStart - 1;
+                                tempTotalColumns = tempTotalColumns + 1;
+                            }
+                            for (int z = 0; z < ListItem.Count; z++)
+                            {
+                                Range itemRange = worksheet.Cells.CreateRange(rowStart, tmpcolStart, 1, tempTotalColumns);
+                                itemRange.Merge();
+                                itemRange.ApplyStyle(style3, flag);
+                                worksheet.Cells[rowStart, tmpcolStart].PutValue(ListItem[z].Name);
+                                #region 设置样式
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 3].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 4].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 5].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 6].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 9].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 10].SetStyle(style3);
+                                #endregion
+
+                                #region 为单元格赋值
+                                worksheet.Cells[rowStart, colStart + 2].PutValue(ListItem[z].BMonthReportDetail.NPlanAmmountByYear);
+                                worksheet.Cells[rowStart, colStart + 3].PutValue(ListItem[z].BMonthReportDetail.NDisplayRateByYear);
+                                worksheet.Cells[rowStart, colStart + 4].PutValue(ListItem[z].BMonthReportDetail.NPlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 5].PutValue(ListItem[z].BMonthReportDetail.NActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 6].PutValue(ListItem[z].BMonthReportDetail.NDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 7].PutValue(ListItem[z].BMonthReportDetail.NAccumulativePlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 8].PutValue(ListItem[z].BMonthReportDetail.NAccumulativeActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 9].PutValue(ListItem[z].BMonthReportDetail.NAccumulativeDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 10].PutValue("");
+
+                                //特殊差额指标，这里显示绝对值--商管系统
+                                if (IsDifferenceException)
+                                {
+                                    worksheet.Cells[rowStart, colStart + 4].PutValue(Math.Abs(ListItem[z].BMonthReportDetail.NDifference));
+                                    worksheet.Cells[rowStart, colStart + 8].PutValue(Math.Abs(ListItem[z].BMonthReportDetail.NAccumulativeDifference));
+                                }
+
+                                #endregion
+
+                                #region 设置Number = 3 :千分位,Number = 4 保留2位小数
+                                style3 = worksheet.Cells[rowStart, colStart + 2].GetStyle();
+                                if (DataDisplayMode == 0)
+                                    style3.Number = 3;
+                                else
+                                    style3.Number = 4;
+
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 4].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 5].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style3);
+                                #endregion
+
+                                rowStart = rowStart + 1;
+                                int tempRowStart = rowStart;
+                                if (ListItem[z].ObjValue == null)
+                                { continue; }
+                                List<MonthlyReportDetail> listMRDVM = (List<MonthlyReportDetail>)ListItem[z].ObjValue;
+                                for (int k = 0; k < listMRDVM.Count; k++)
+                                {
+                                    if (tmpcolStart != colStart)
+                                    {
+                                        itemRange = worksheet.Cells.CreateRange(rowStart, tmpcolStart + 1, 1, 2);
+                                        itemRange.Merge();
+                                        itemRange.ApplyStyle(style3, flag);
+                                    }
+                                    #region 设置样式
+                                    worksheet.Cells[rowStart, tmpcolStart].SetStyle(style2);
+                                    worksheet.Cells[rowStart, tmpcolStart + 1].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 2].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 3].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 4].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 5].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 6].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 7].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 8].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 9].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 10].SetStyle(style2);
+                                    #endregion
+
+                                    #region 为单元格赋值
+                                    worksheet.Cells[rowStart, tmpcolStart].PutValue((k + 1).ToString());
+                                    worksheet.Cells[rowStart, tmpcolStart + 1].PutValue(listMRDVM[k].CompanyName.ToString());
+                                    worksheet.Cells[rowStart, colStart + 2].PutValue(listMRDVM[k].NPlanAmmountByYear);
+                                    worksheet.Cells[rowStart, colStart + 3].PutValue(listMRDVM[k].NDisplayRateByYear);
+                                    worksheet.Cells[rowStart, colStart + 4].PutValue(listMRDVM[k].NPlanAmmount);
+                                    worksheet.Cells[rowStart, colStart + 5].PutValue(listMRDVM[k].NActualAmmount);
+                                    worksheet.Cells[rowStart, colStart + 6].PutValue(listMRDVM[k].NDisplayRate);
+                                    worksheet.Cells[rowStart, colStart + 7].PutValue(listMRDVM[k].NAccumulativePlanAmmount);
+                                    worksheet.Cells[rowStart, colStart + 8].PutValue(listMRDVM[k].NAccumulativeActualAmmount);
+                                    worksheet.Cells[rowStart, colStart + 9].PutValue(listMRDVM[k].NAccumulativeDisplayRate);
+
+                                    //特殊差额指标，这里显示绝对值--商管系统
+                                    if (IsDifferenceException)
+                                    {
+                                        worksheet.Cells[rowStart, colStart + 4].PutValue(Math.Abs(listMRDVM[k].NDifference));
+                                        worksheet.Cells[rowStart, colStart + 8].PutValue(Math.Abs(listMRDVM[k].NAccumulativeDifference));
+                                    }
+
+                                    #endregion
+
+                                    #region 设置千分位
+                                    if (listMRDVM[k].Counter > 0)
+                                    {
+                                        int pictureIndex = worksheet.Pictures.Add(rowStart, colStart + 10, ImageFilePath + "\\image" + listMRDVM[k].Counter + ".png");
+                                        Aspose.Cells.Drawing.Picture picture = worksheet.Pictures[pictureIndex];
+                                        picture.Left = 60;
+                                        picture.Top = 10;
+                                    }
+                                    style2 = worksheet.Cells[rowStart, colStart + 2].GetStyle();
+                                    if (DataDisplayMode == 0)
+                                        style2.Number = 3;
+                                    else
+                                        style2.Number = 4;
+
+                                    worksheet.Cells[rowStart, colStart + 2].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 4].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 5].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 7].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 8].SetStyle(style2);
+                                    #endregion
+                                    rowStart = rowStart + 1;
+                                }
+                                //为当前sheet分组
+                                if (listMRDVM.Count > 0 && z == 0)
+                                {
+                                    worksheet.Cells.GroupRows(tempRowStart, tempRowStart - 1 + listMRDVM.Count, true);
+                                }
+                            }
+                        }
+                    }
+                    #endregion
+                }
+            }
+            stream.Streams = new MemoryStream();
+            XlsSaveOptions xls = new XlsSaveOptions();
+            xls.SaveFormat = SaveFormat.Xlsx;
+            designer.Workbook.Save(stream.Streams, xls);
+            //MemoryStream stream = designer.Workbook.SaveToStream();
+            //fileStream.Close();
+            //fileStream.Dispose();
+            return stream.Streams;
+
+        }
+
+
+        /// <summary>
         /// 下载Excel完成情况明细--经营系统(参数默认当月)
         /// </summary>
         /// <param name="templetePath">模板路径</param>
@@ -5978,6 +7097,497 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
         }
 
+        /// <summary>
+        /// 混合指标--下载Excel完成情况明细--经营系统(参数默认当月)
+        /// </summary>
+        /// <param name="templetePath">模板路径</param>
+        /// <param name="templeteName">模板名称</param>
+        /// <param name="fileName">下载文件名称</param>
+        /// <param name="sytemID">系统ID</param>
+        /// <param name="Year">年度</param>
+        /// <param name="Month">月份</param>
+        /// <param name="IsLatestVersion">是否包含审批中</param>
+        public MemoryStream DownExcelMonthReportDetailBlendMonthly_JY(string templetePath, string templeteName, string fileName, Guid sytemID, int Year, int Month, bool IsLatestVersion)
+        {
+            ExcelEngine excel = new ExcelEngine();
+            WorkbookDesigner designer = new WorkbookDesigner();
+            StreamModel stream = new StreamModel();
+
+            if (rpt._System.Configuration.Elements("ComplateTargetDetail").Elements("TableTemplate").ToList().Count > 0)
+            {
+                string strXml = rpt.GetComplateMonthReportDetailHtmlTemplate(rpt._System.Configuration);
+                string[] strXmls = strXml.Split(',');
+                if (strXmls.Length > 1)
+                {
+                    templeteName = !string.IsNullOrEmpty(strXmls[3]) ? strXmls[3] : "完成情况明细模板-混合指标V1.xlsx";
+                }
+            }
+
+            string path = System.IO.Path.Combine(templetePath, templeteName);//合并路径
+
+            //FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+
+            designer.Workbook = new Workbook(path);
+            WorksheetCollection worksheets = designer.Workbook.Worksheets;
+
+
+            Aspose.Cells.Style style1 = designer.Workbook.Styles[designer.Workbook.Styles.Add()];
+            Aspose.Cells.Style style2 = designer.Workbook.Styles[designer.Workbook.Styles.Add()];
+            Style style3 = designer.Workbook.Styles[designer.Workbook.Styles.Add()];
+            Aspose.Cells.Style style4 = designer.Workbook.Styles[designer.Workbook.Styles.Add()];
+            Aspose.Cells.Style style5 = designer.Workbook.Styles[designer.Workbook.Styles.Add()];
+            #region style1 样式
+            style1.Font.Size = 12;
+            #endregion
+            #region style2 样式 无加粗
+            style2.Font.Size = 12;
+
+
+            style2.HorizontalAlignment = Aspose.Cells.TextAlignmentType.Center;
+            style2.Borders[BorderType.TopBorder].LineStyle = CellBorderType.Thin;
+            style2.Borders[BorderType.TopBorder].Color = System.Drawing.Color.Black;
+            style2.Borders[BorderType.BottomBorder].LineStyle = CellBorderType.Thin; ;
+            style2.Borders[BorderType.BottomBorder].Color = System.Drawing.Color.Black;
+            style2.Borders[BorderType.LeftBorder].LineStyle = CellBorderType.Thin; ;
+            style2.Borders[BorderType.LeftBorder].Color = System.Drawing.Color.Black;
+            style2.Borders[BorderType.RightBorder].LineStyle = CellBorderType.Thin;
+            style2.Borders[BorderType.RightBorder].Color = System.Drawing.Color.Black;
+            #endregion
+
+            #region style3 样式
+            style3.Font.Size = 12;
+            style3.Font.Name = "Arial";
+            style3.Font.IsBold = true;
+            style3.ForegroundColor = System.Drawing.Color.FromArgb(184, 204, 228);
+            style3.Pattern = BackgroundType.Solid;
+
+
+            style3.HorizontalAlignment = Aspose.Cells.TextAlignmentType.Center;
+            style3.Borders[BorderType.TopBorder].LineStyle = CellBorderType.Thin;
+            style3.Borders[BorderType.TopBorder].Color = System.Drawing.Color.Black;
+            style3.Borders[BorderType.BottomBorder].LineStyle = CellBorderType.Thin; ;
+            style3.Borders[BorderType.BottomBorder].Color = System.Drawing.Color.Black;
+            style3.Borders[BorderType.LeftBorder].LineStyle = CellBorderType.Thin; ;
+            style3.Borders[BorderType.LeftBorder].Color = System.Drawing.Color.Black;
+            style3.Borders[BorderType.RightBorder].LineStyle = CellBorderType.Thin;
+            style3.Borders[BorderType.RightBorder].Color = System.Drawing.Color.Black;
+
+            #endregion
+
+            #region style4 样式
+            style4.HorizontalAlignment = TextAlignmentType.Center;
+            style4.VerticalAlignment = TextAlignmentType.Center;
+
+            #endregion
+
+            #region style5样式
+            style5.Font.Size = 12;
+            style5.Font.Name = "Arial";
+            #endregion
+
+            bool IncludeHaveDetail = false;
+            List<DictionaryVmodel> listMonthReportDetail = null;
+            if (rpt != null)
+            {
+                listMonthReportDetail = ReportInstanceDetailEngine.ReportInstanceDetailService.GetDetailRptDataSource(rpt, "", OrderStrTwo, IncludeHaveDetail);
+            }
+
+            int rowStart = 5;  //开始行
+            int colStart = 2; // 开始列
+
+            //系统指标类，需要读取XML
+            List<C_Target> _targetList = StaticResource.Instance.TargetList[sytemID].ToList();
+            
+            for (int i = 0; i < listMonthReportDetail.Count; i++)
+            {
+                #region 生成Excel中的页签
+                if (listMonthReportDetail[i].IsBlendTarget)
+                {
+
+                    worksheets[0].Name = listMonthReportDetail[i].Name;
+                    worksheets[0].Cells[0, 1].PutValue(rpt._System.SystemName + listMonthReportDetail[i].Name);
+                    worksheets[0].Cells[1, 2].PutValue(FinYear.ToString() + "年" + FinMonth + "月");
+                    worksheets[0].Cells[1, 2].SetStyle(style1);
+                    var thisdv = ((List<DictionaryVmodel>)listMonthReportDetail[i].ObjValue);
+                    C_Target _target = _targetList.Where(p => p.TargetName == thisdv[0].Name).ToList()[0];
+                    worksheets[0].Cells[1, 21].PutValue("单位：" + _target.Unit);
+                    worksheets[0].Cells[1, 21].SetStyle(style5);
+                    worksheets[0].Replace("$targetName1", thisdv[0].Name);
+                    worksheets[0].Replace("$targetName2", thisdv[1].Name);
+                }
+                else
+                {
+                    C_Target _target = _targetList.Where(p => p.TargetName == listMonthReportDetail[i].Name).ToList()[0];
+
+                    if (worksheets[1].Name == "单指标")
+                    {
+                        worksheets[1].Name = listMonthReportDetail[i].Name;
+                        worksheets[1].Cells[0, 1].PutValue(rpt._System.SystemName + listMonthReportDetail[i].Name);
+                        worksheets[1].Cells[1, 2].PutValue(FinYear.ToString() + "年" + FinMonth + "月");
+                        worksheets[i].Cells[1, 12].PutValue("单位：" + _target.Unit);
+                        worksheets[i].Cells[1, 12].SetStyle(style5);
+                        worksheets[1].Cells[1, 2].SetStyle(style1);
+                    }
+                    else
+                    {
+                        worksheets.AddCopy(1);
+                        worksheets[worksheets.Count - 1].Name = listMonthReportDetail[i].Name;
+                        worksheets[worksheets.Count - 1].Cells[0, 1].PutValue(rpt._System.SystemName + listMonthReportDetail[i].Name);
+                        worksheets[worksheets.Count - 1].Cells[1, 2].PutValue(FinYear.ToString() + "年" + FinMonth + "月");
+                        worksheets[worksheets.Count - 1].Cells[1, 12].PutValue("单位：" + _target.Unit);
+                        worksheets[worksheets.Count - 1].Cells[1, 12].SetStyle(style5);
+                        worksheets[worksheets.Count - 1].Cells[1, 2].SetStyle(style1);
+                    }
+                }
+                #endregion
+            }
+
+            bool IsDifferenceException = false; //商管的差额特殊处理
+
+            int DataDisplayMode = 0; //针对旅业下载客流量保留2位小数
+
+            //创建指标Sheet,
+            for (int sheetIndex = 0; sheetIndex < listMonthReportDetail.Count; sheetIndex++)
+            {
+                Worksheet worksheet = worksheets[sheetIndex];
+
+                string _targetName = string.Empty;
+
+                if (templeteName != "完成情况明细模板V1.xlsx")
+                {
+                    if (worksheets[listMonthReportDetail[sheetIndex].Name] != null)
+                    {
+                        worksheet = worksheets[listMonthReportDetail[sheetIndex].Name];
+                    }
+                }
+
+                _targetName = listMonthReportDetail[sheetIndex].Name;
+
+                C_Target _target = _targetList.Where(p => p.TargetName == _targetName).ToList()[0];
+
+                //特殊处理差额，针对指标
+                XElement element = null;
+                element = _target.Configuration;
+                XElement subElement = null; //商管的节点
+
+                XElement displayModeElement = null; //万达旅业的客流量下载，变成2位小数
+
+                if (element.Elements("IsDifferenceExceptionTarget").ToList().Count > 0)
+                {
+                    subElement = element.Elements("IsDifferenceExceptionTarget").ToList()[0];
+                    IsDifferenceException = subElement.GetAttributeValue("value", false);
+                }
+                else
+                {
+                    IsDifferenceException = false;
+                }
+
+                if (element.Elements("DataDisplayMode").ToList().Count > 0)
+                {
+                    displayModeElement = element.Elements("DataDisplayMode").ToList()[0];
+                    DataDisplayMode = displayModeElement.GetAttributeValue("value", 0);
+                }
+                else
+                {
+                    DataDisplayMode = 0;
+                }
+
+
+                rowStart = 4;
+                StyleFlag flag = new StyleFlag();
+                flag.All = true;
+                List<DictionaryVmodel> listCompanyProperty = (List<DictionaryVmodel>)listMonthReportDetail[sheetIndex].ObjValue;
+                for (int j = 0; j < listCompanyProperty.Count; j++)
+                {
+                    if (listCompanyProperty[j].Name == "SummaryData")
+                    {
+                        List<B_MonthlyReportDetail> ListItem = ((List<B_MonthlyReportDetail>)listCompanyProperty[j].ObjValue);
+                        for (int k = 0; k < ListItem.Count; k++)
+                        {
+                            #region 设置样式
+                            Range range = worksheet.Cells.CreateRange(rowStart, 1, 1, 3);
+                            range.Merge();
+                            range.ApplyStyle(style3, flag);
+                            worksheet.Cells[rowStart, colStart + 2].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 3].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 4].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 5].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 6].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 7].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 8].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 9].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 10].SetStyle(style3);
+                            #endregion
+
+                            #region 为单元格赋值
+                            worksheet.Cells[rowStart, colStart - 1].PutValue("合计");
+                            worksheet.Cells[rowStart, colStart + 2].PutValue(ListItem[k].NPlanAmmount);
+                            worksheet.Cells[rowStart, colStart + 3].PutValue(ListItem[k].NActualAmmount);
+                            worksheet.Cells[rowStart, colStart + 4].PutValue(ListItem[k].NDifference);
+                            worksheet.Cells[rowStart, colStart + 5].PutValue(ListItem[k].NDisplayRate);
+                            worksheet.Cells[rowStart, colStart + 6].PutValue(ListItem[k].NAccumulativePlanAmmount);
+                            worksheet.Cells[rowStart, colStart + 7].PutValue(ListItem[k].NAccumulativeActualAmmount);
+                            worksheet.Cells[rowStart, colStart + 8].PutValue(ListItem[k].NAccumulativeDifference);
+                            worksheet.Cells[rowStart, colStart + 9].PutValue(ListItem[k].NAccumulativeDisplayRate);
+                            worksheet.Cells[rowStart, colStart + 10].PutValue("");
+
+                            //特殊差额指标，这里显示绝对值--商管系统
+                            if (IsDifferenceException)
+                            {
+                                worksheet.Cells[rowStart, colStart + 4].PutValue(Math.Abs(ListItem[k].NDifference));
+                                worksheet.Cells[rowStart, colStart + 8].PutValue(Math.Abs(ListItem[k].NAccumulativeDifference));
+                            }
+
+                            #endregion
+
+                            #region 设置Number = 3 :千分位,Number = 4 保留2位小数
+                            style3 = worksheet.Cells[rowStart, colStart + 2].GetStyle();
+                            if (DataDisplayMode == 0)
+                                style3.Number = 3;
+                            else
+                                style3.Number = 4;
+
+                            worksheet.Cells[rowStart, colStart + 2].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 3].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 4].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 6].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 7].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 8].SetStyle(style3);
+                            #endregion
+                            rowStart = rowStart + 1;
+                        }
+                    }
+                    else if (listCompanyProperty[j].Name == "HaveDetail")
+                    {
+                        List<MonthlyReportDetail> listMRDVM = (List<MonthlyReportDetail>)listCompanyProperty[j].ObjValue;
+                        for (int k = 0; k < listMRDVM.Count; k++)
+                        {
+                            Range range = worksheet.Cells.CreateRange(rowStart, 2, 1, 2);
+                            range.Merge();
+                            range.ApplyStyle(style2, flag);
+                            #region 设置样式
+                            worksheet.Cells[rowStart, colStart - 1].SetStyle(style2);
+                            worksheet.Cells[rowStart, colStart].SetStyle(style2);
+                            worksheet.Cells[rowStart, colStart + 2].SetStyle(style2);
+                            worksheet.Cells[rowStart, colStart + 3].SetStyle(style2);
+                            worksheet.Cells[rowStart, colStart + 4].SetStyle(style2);
+                            worksheet.Cells[rowStart, colStart + 5].SetStyle(style2);
+                            worksheet.Cells[rowStart, colStart + 6].SetStyle(style2);
+                            worksheet.Cells[rowStart, colStart + 7].SetStyle(style2);
+                            worksheet.Cells[rowStart, colStart + 8].SetStyle(style2);
+                            worksheet.Cells[rowStart, colStart + 9].SetStyle(style2);
+                            worksheet.Cells[rowStart, colStart + 10].SetStyle(style2);
+                            #endregion
+
+                            #region 为单元格赋值
+                            worksheet.Cells[rowStart, colStart - 1].PutValue((k + 1).ToString());
+                            worksheet.Cells[rowStart, colStart].PutValue(listMRDVM[k].CompanyName.ToString());
+                            worksheet.Cells[rowStart, colStart + 2].PutValue(listMRDVM[k].NPlanAmmount);
+                            worksheet.Cells[rowStart, colStart + 3].PutValue(listMRDVM[k].NActualAmmount);
+                            worksheet.Cells[rowStart, colStart + 4].PutValue(listMRDVM[k].NDifference);
+                            worksheet.Cells[rowStart, colStart + 5].PutValue(listMRDVM[k].NDisplayRate);
+                            worksheet.Cells[rowStart, colStart + 6].PutValue(listMRDVM[k].NAccumulativePlanAmmount);
+                            worksheet.Cells[rowStart, colStart + 7].PutValue(listMRDVM[k].NAccumulativeActualAmmount);
+                            worksheet.Cells[rowStart, colStart + 8].PutValue(listMRDVM[k].NAccumulativeDifference);
+                            worksheet.Cells[rowStart, colStart + 9].PutValue(listMRDVM[k].NAccumulativeDisplayRate);
+
+                            //特殊差额指标，这里显示绝对值--商管系统
+                            if (IsDifferenceException)
+                            {
+                                worksheet.Cells[rowStart, colStart + 4].PutValue(Math.Abs(listMRDVM[k].NDifference));
+                                worksheet.Cells[rowStart, colStart + 8].PutValue(Math.Abs(listMRDVM[k].NAccumulativeDifference));
+                            }
+
+                            #endregion
+
+                            #region 设置Number = 3 :千分位,Number = 4 保留2位小数
+                            style2 = worksheet.Cells[rowStart, colStart + 2].GetStyle();
+                            if (DataDisplayMode == 0)
+                                style2.Number = 3;
+                            else
+                                style2.Number = 4;
+
+                            worksheet.Cells[rowStart, colStart + 2].SetStyle(style2);
+                            worksheet.Cells[rowStart, colStart + 3].SetStyle(style2);
+                            worksheet.Cells[rowStart, colStart + 4].SetStyle(style2);
+                            worksheet.Cells[rowStart, colStart + 6].SetStyle(style2);
+                            worksheet.Cells[rowStart, colStart + 7].SetStyle(style2);
+                            worksheet.Cells[rowStart, colStart + 8].SetStyle(style2);
+                            #endregion
+                            rowStart = rowStart + 1;
+                        }
+                    }
+                    else
+                    {
+                        List<DictionaryVmodel> ListItem = ((List<DictionaryVmodel>)listCompanyProperty[j].ObjValue);
+                        int count = 0;
+                        for (int zz = 0; zz < ListItem.Count; zz++)
+                        {
+                            if (ListItem[zz].ObjValue != null)
+                            {
+                                count = count + ((List<MonthlyReportDetail>)ListItem[zz].ObjValue).Count();
+                            }
+                        }
+                        int tmpcolStart = 2;
+                        int tempTotalColumns = 2;
+                        if (!string.IsNullOrEmpty(listCompanyProperty[j].Name) && listCompanyProperty[j].Name != "SummaryData")
+                        {
+                            Range range = worksheet.Cells.CreateRange(rowStart, 1, ListItem.Count + count, 1);
+                            range.Merge();
+                            range.ApplyStyle(style2, flag);
+
+
+                            worksheet.Cells[rowStart, 1].PutValue(listCompanyProperty[j].Name);
+                        }
+                        else
+                        {
+                            tmpcolStart = colStart - 1;
+                            tempTotalColumns = tempTotalColumns + 1;
+                        }
+                        for (int z = 0; z < ListItem.Count; z++)
+                        {
+                            Range itemRange = worksheet.Cells.CreateRange(rowStart, tmpcolStart, 1, tempTotalColumns);
+                            itemRange.Merge();
+                            itemRange.ApplyStyle(style3, flag);
+                            worksheet.Cells[rowStart, tmpcolStart].PutValue(ListItem[z].Name);
+                            #region 设置样式
+                            worksheet.Cells[rowStart, colStart + 2].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 3].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 4].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 5].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 6].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 7].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 8].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 9].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 10].SetStyle(style3);
+                            #endregion
+
+                            #region 为单元格赋值
+                            worksheet.Cells[rowStart, colStart + 2].PutValue(ListItem[z].BMonthReportDetail.NPlanAmmount);
+                            worksheet.Cells[rowStart, colStart + 3].PutValue(ListItem[z].BMonthReportDetail.NActualAmmount);
+                            worksheet.Cells[rowStart, colStart + 4].PutValue(ListItem[z].BMonthReportDetail.NDifference);
+                            worksheet.Cells[rowStart, colStart + 5].PutValue(ListItem[z].BMonthReportDetail.NDisplayRate);
+                            worksheet.Cells[rowStart, colStart + 6].PutValue(ListItem[z].BMonthReportDetail.NAccumulativePlanAmmount);
+                            worksheet.Cells[rowStart, colStart + 7].PutValue(ListItem[z].BMonthReportDetail.NAccumulativeActualAmmount);
+                            worksheet.Cells[rowStart, colStart + 8].PutValue(ListItem[z].BMonthReportDetail.NAccumulativeDifference);
+                            worksheet.Cells[rowStart, colStart + 9].PutValue(ListItem[z].BMonthReportDetail.NAccumulativeDisplayRate);
+                            worksheet.Cells[rowStart, colStart + 10].PutValue("");
+
+                            //特殊差额指标，这里显示绝对值--商管系统
+                            if (IsDifferenceException)
+                            {
+                                worksheet.Cells[rowStart, colStart + 4].PutValue(Math.Abs(ListItem[z].BMonthReportDetail.NDifference));
+                                worksheet.Cells[rowStart, colStart + 8].PutValue(Math.Abs(ListItem[z].BMonthReportDetail.NAccumulativeDifference));
+                            }
+
+                            #endregion
+
+                            #region 设置Number = 3 :千分位,Number = 4 保留2位小数
+                            style3 = worksheet.Cells[rowStart, colStart + 2].GetStyle();
+                            if (DataDisplayMode == 0)
+                                style3.Number = 3;
+                            else
+                                style3.Number = 4;
+
+                            worksheet.Cells[rowStart, colStart + 2].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 3].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 4].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 6].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 7].SetStyle(style3);
+                            worksheet.Cells[rowStart, colStart + 8].SetStyle(style3);
+                            #endregion
+
+                            rowStart = rowStart + 1;
+                            int tempRowStart = rowStart;
+                            if (ListItem[z].ObjValue == null)
+                            { continue; }
+                            List<MonthlyReportDetail> listMRDVM = (List<MonthlyReportDetail>)ListItem[z].ObjValue;
+                            for (int k = 0; k < listMRDVM.Count; k++)
+                            {
+                                if (tmpcolStart != colStart)
+                                {
+                                    itemRange = worksheet.Cells.CreateRange(rowStart, tmpcolStart + 1, 1, 2);
+                                    itemRange.Merge();
+                                    itemRange.ApplyStyle(style3, flag);
+                                }
+                                #region 设置样式
+                                worksheet.Cells[rowStart, tmpcolStart].SetStyle(style2);
+                                worksheet.Cells[rowStart, tmpcolStart + 1].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 3].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 4].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 5].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 6].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 9].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 10].SetStyle(style2);
+                                #endregion
+
+                                #region 为单元格赋值
+                                worksheet.Cells[rowStart, tmpcolStart].PutValue((k + 1).ToString());
+                                worksheet.Cells[rowStart, tmpcolStart + 1].PutValue(listMRDVM[k].CompanyName.ToString());
+                                worksheet.Cells[rowStart, colStart + 2].PutValue(listMRDVM[k].NPlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 3].PutValue(listMRDVM[k].NActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 4].PutValue(listMRDVM[k].NDifference);
+                                worksheet.Cells[rowStart, colStart + 5].PutValue(listMRDVM[k].NDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 6].PutValue(listMRDVM[k].NAccumulativePlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 7].PutValue(listMRDVM[k].NAccumulativeActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 8].PutValue(listMRDVM[k].NAccumulativeDifference);
+                                worksheet.Cells[rowStart, colStart + 9].PutValue(listMRDVM[k].NAccumulativeDisplayRate);
+
+                                //特殊差额指标，这里显示绝对值--商管系统
+                                if (IsDifferenceException)
+                                {
+                                    worksheet.Cells[rowStart, colStart + 4].PutValue(Math.Abs(listMRDVM[k].NDifference));
+                                    worksheet.Cells[rowStart, colStart + 8].PutValue(Math.Abs(listMRDVM[k].NAccumulativeDifference));
+                                }
+
+                                #endregion
+
+                                #region 设置千分位
+                                if (listMRDVM[k].Counter > 0)
+                                {
+                                    int pictureIndex = worksheet.Pictures.Add(rowStart, colStart + 10, ImageFilePath + "\\image" + listMRDVM[k].Counter + ".png");
+                                    Aspose.Cells.Drawing.Picture picture = worksheet.Pictures[pictureIndex];
+                                    picture.Left = 60;
+                                    picture.Top = 10;
+                                }
+                                style2 = worksheet.Cells[rowStart, colStart + 2].GetStyle();
+                                if (DataDisplayMode == 0)
+                                    style2.Number = 3;
+                                else
+                                    style2.Number = 4;
+
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 3].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 4].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 6].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style2);
+                                #endregion
+                                rowStart = rowStart + 1;
+                            }
+                            //为当前sheet分组
+                            if (listMRDVM.Count > 0 && z == 0)
+                            {
+                                worksheet.Cells.GroupRows(tempRowStart, tempRowStart - 1 + listMRDVM.Count, true);
+                            }
+                        }
+                    }
+                }
+
+            }
+            stream.Streams = new MemoryStream();
+            XlsSaveOptions xls = new XlsSaveOptions();
+            xls.SaveFormat = SaveFormat.Xlsx;
+            designer.Workbook.Save(stream.Streams, xls);
+            //MemoryStream stream = designer.Workbook.SaveToStream();
+            //fileStream.Close();
+            //fileStream.Dispose();
+            return stream.Streams;
+
+        }
 
         /// <summary>
         /// 下载Excel完成情况明细--项目公司系统
@@ -6306,6 +7916,917 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             return stream.Streams;
 
         }
+
+        /// <summary>
+        /// 下载Excel混合指标-经营报告明细--经营系统
+        /// </summary>
+        /// <param name="templetePath">模板路径</param>
+        /// <param name="templeteName">模板名称</param>
+        /// <param name="fileName">下载文件名称</param>
+        /// <param name="sytemID">系统ID</param>
+        /// <param name="Year">年度</param>
+        /// <param name="Month">月份</param>
+        /// <param name="IsLatestVersion">是否包含审批中</param>
+        public MemoryStream DownExcelManageReportBlendTargetDetail_JY(string templetePath, string templeteName, string fileName, Guid sytemID, int Year, int Month, bool IsLatestVersion)
+        {
+            ExcelEngine excel = new ExcelEngine();
+            WorkbookDesigner designer = new WorkbookDesigner();
+            StreamModel stream = new StreamModel();
+
+            if (rpt._System.Configuration.Elements("ComplateTargetDetail").Elements("TableTemplate").ToList().Count > 0)
+            {
+                string strXml = rpt.GetComplateMonthReportDetailHtmlTemplate(rpt._System.Configuration);
+                string[] strXmls = strXml.Split(',');
+                if (strXmls.Length > 1)
+                {
+                    templeteName = !string.IsNullOrEmpty(strXmls[3]) ? strXmls[3] : "完成情况明细模板-混合指标V1.xlsx";
+                }
+            }
+
+            string path = System.IO.Path.Combine(templetePath, templeteName);//合并路径
+
+            //FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+
+            designer.Workbook = new Workbook(path);
+            WorksheetCollection worksheets = designer.Workbook.Worksheets;
+
+
+            Aspose.Cells.Style style1 = designer.Workbook.Styles[designer.Workbook.Styles.Add()];
+            Aspose.Cells.Style style2 = designer.Workbook.Styles[designer.Workbook.Styles.Add()];
+            Style style3 = designer.Workbook.Styles[designer.Workbook.Styles.Add()];
+            Aspose.Cells.Style style4 = designer.Workbook.Styles[designer.Workbook.Styles.Add()];
+            Aspose.Cells.Style style5 = designer.Workbook.Styles[designer.Workbook.Styles.Add()];
+            #region style1 样式
+            style1.Font.Size = 12;
+            #endregion
+            #region style2 样式 无加粗
+            style2.Font.Size = 12;
+
+
+            style2.HorizontalAlignment = Aspose.Cells.TextAlignmentType.Center;
+            style2.Borders[BorderType.TopBorder].LineStyle = CellBorderType.Thin;
+            style2.Borders[BorderType.TopBorder].Color = System.Drawing.Color.Black;
+            style2.Borders[BorderType.BottomBorder].LineStyle = CellBorderType.Thin; ;
+            style2.Borders[BorderType.BottomBorder].Color = System.Drawing.Color.Black;
+            style2.Borders[BorderType.LeftBorder].LineStyle = CellBorderType.Thin; ;
+            style2.Borders[BorderType.LeftBorder].Color = System.Drawing.Color.Black;
+            style2.Borders[BorderType.RightBorder].LineStyle = CellBorderType.Thin;
+            style2.Borders[BorderType.RightBorder].Color = System.Drawing.Color.Black;
+            #endregion
+
+            #region style3 样式
+            style3.Font.Size = 12;
+            style3.Font.Name = "Arial";
+            style3.Font.IsBold = true;
+            style3.ForegroundColor = System.Drawing.Color.FromArgb(184, 204, 228);
+            style3.Pattern = BackgroundType.Solid;
+
+
+            style3.HorizontalAlignment = Aspose.Cells.TextAlignmentType.Center;
+            style3.Borders[BorderType.TopBorder].LineStyle = CellBorderType.Thin;
+            style3.Borders[BorderType.TopBorder].Color = System.Drawing.Color.Black;
+            style3.Borders[BorderType.BottomBorder].LineStyle = CellBorderType.Thin; ;
+            style3.Borders[BorderType.BottomBorder].Color = System.Drawing.Color.Black;
+            style3.Borders[BorderType.LeftBorder].LineStyle = CellBorderType.Thin; ;
+            style3.Borders[BorderType.LeftBorder].Color = System.Drawing.Color.Black;
+            style3.Borders[BorderType.RightBorder].LineStyle = CellBorderType.Thin;
+            style3.Borders[BorderType.RightBorder].Color = System.Drawing.Color.Black;
+
+            #endregion
+
+            #region style4 样式
+            style4.HorizontalAlignment = TextAlignmentType.Center;
+            style4.VerticalAlignment = TextAlignmentType.Center;
+
+            #endregion
+
+            #region style5样式
+            style5.Font.Size = 12;
+            style5.Font.Name = "Arial";
+            #endregion
+            bool IncludeHaveDetail = false;
+            List<DictionaryVmodel> listMonthReportDetail = null;
+            if (rpt != null)
+            {
+                listMonthReportDetail = ReportInstanceManageDetailEngine.ReportInstanceManageDetailService.GetManageDetailRptDataSource(rpt, "", OrderStr, IncludeHaveDetail);
+            }
+
+            int rowStart = 5;  //开始行
+            int colStart = 2; // 开始列
+
+            //系统指标类，需要读取XML
+            List<C_Target> _targetList = StaticResource.Instance.TargetList[sytemID].ToList();
+
+
+            for (int i = 0; i < listMonthReportDetail.Count; i++)
+            {
+                #region 生成Excel中的页签
+                if (listMonthReportDetail[i].IsBlendTarget)
+                {
+
+                    worksheets[0].Name = listMonthReportDetail[i].Name;
+                    worksheets[0].Cells[0, 1].PutValue(rpt._System.SystemName + listMonthReportDetail[i].Name);
+                    worksheets[0].Cells[1, 2].PutValue(FinYear.ToString() + "年" + FinMonth + "月");
+                    worksheets[0].Cells[1, 2].SetStyle(style1);
+                    var thisdv = ((List<DictionaryVmodel>)listMonthReportDetail[i].ObjValue);
+                    C_Target _target = _targetList.Where(p => p.TargetName == thisdv[0].Name).ToList()[0];
+                    worksheets[0].Cells[1, 21].PutValue("单位：" + _target.Unit);
+                    worksheets[0].Cells[1, 21].SetStyle(style5);
+                    worksheets[0].Replace("$targetName1", thisdv[0].Name);
+                    worksheets[0].Replace("$targetName2", thisdv[1].Name);
+                }
+                else
+                {
+                    C_Target _target = _targetList.Where(p => p.TargetName == listMonthReportDetail[i].Name).ToList()[0];
+
+                    if (worksheets[1].Name == "单指标")
+                    {
+                        worksheets[1].Name = listMonthReportDetail[i].Name;
+                        worksheets[1].Cells[0, 1].PutValue(rpt._System.SystemName + listMonthReportDetail[i].Name);
+                        worksheets[1].Cells[1, 2].PutValue(FinYear.ToString() + "年" + FinMonth + "月");
+                        worksheets[i].Cells[1, 12].PutValue("单位：" + _target.Unit);
+                        worksheets[i].Cells[1, 12].SetStyle(style5);
+                        worksheets[1].Cells[1, 2].SetStyle(style1);
+                    }
+                    else
+                    {
+                        worksheets.AddCopy(1);
+                        worksheets[worksheets.Count - 1].Name = listMonthReportDetail[i].Name;
+                        worksheets[worksheets.Count - 1].Cells[0, 1].PutValue(rpt._System.SystemName + listMonthReportDetail[i].Name);
+                        worksheets[worksheets.Count - 1].Cells[1, 2].PutValue(FinYear.ToString() + "年" + FinMonth + "月");
+                        worksheets[worksheets.Count - 1].Cells[1, 12].PutValue("单位：" + _target.Unit);
+                        worksheets[worksheets.Count - 1].Cells[1, 12].SetStyle(style5);
+                        worksheets[worksheets.Count - 1].Cells[1, 2].SetStyle(style1);
+                    }
+                }
+                #endregion
+            }
+
+            bool IsDifferenceException = false; //商管的差额特殊处理
+
+            int DataDisplayMode = 0; //针对旅业下载客流量保留2位小数
+
+            //创建指标Sheet,
+            for (int sheetIndex = 0; sheetIndex < listMonthReportDetail.Count; sheetIndex++)
+            {
+                Worksheet worksheet = worksheets[listMonthReportDetail[sheetIndex].Name];
+                string _targetName = string.Empty;
+
+                if (listMonthReportDetail[sheetIndex].IsBlendTarget)
+                {
+                    #region 多指标
+                    var thisdv = (List<DictionaryVmodel>)listMonthReportDetail[sheetIndex].ObjValue;
+                    _targetName = thisdv[0].Name;// listMonthReportDetail[sheetIndex].Name;
+
+                    C_Target _target = _targetList.Where(p => p.TargetName == _targetName).ToList()[0];
+
+                    //特殊处理差额，针对指标
+                    XElement element = null;
+                    element = _target.Configuration;
+                    XElement subElement = null; //商管的节点
+
+                    XElement displayModeElement = null; //万达旅业的客流量下载，变成2位小数
+
+                    if (element.Elements("IsDifferenceExceptionTarget").ToList().Count > 0)
+                    {
+                        subElement = element.Elements("IsDifferenceExceptionTarget").ToList()[0];
+                        IsDifferenceException = subElement.GetAttributeValue("value", false);
+                    }
+                    else
+                    {
+                        IsDifferenceException = false;
+                    }
+
+                    if (element.Elements("DataDisplayMode").ToList().Count > 0)
+                    {
+                        displayModeElement = element.Elements("DataDisplayMode").ToList()[0];
+                        DataDisplayMode = displayModeElement.GetAttributeValue("value", 0);
+                    }
+                    else
+                    {
+                        DataDisplayMode = 0;
+                    }
+                    rowStart = 5;
+                    StyleFlag flag = new StyleFlag();
+                    flag.All = true;
+                    List<DictionaryVmodel> listCompanyProperty = (List<DictionaryVmodel>)thisdv[0].ObjValue;
+                    List<DictionaryVmodel> listCompanyProperty2 = (List<DictionaryVmodel>)thisdv[1].ObjValue;
+
+                    for (int j = 0; j < listCompanyProperty.Count; j++)
+                    {
+                        if (listCompanyProperty[j].Name == "SummaryData")
+                        {
+                            List<B_MonthlyReportDetail> ListItem = ((List<B_MonthlyReportDetail>)listCompanyProperty[j].ObjValue);
+                            List<B_MonthlyReportDetail> ListItem2 = ((List<B_MonthlyReportDetail>)listCompanyProperty2[j].ObjValue);
+                            for (int k = 0; k < ListItem.Count; k++)
+                            {
+                                #region 设置样式
+                                Range range = worksheet.Cells.CreateRange(rowStart, 1, 1, 3);
+                                range.Merge();
+                                range.ApplyStyle(style3, flag);
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 3].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 4].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 5].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 6].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 9].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 10].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 11].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 12].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 13].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 14].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 15].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 16].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 17].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 18].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 19].SetStyle(style3);
+                                #endregion
+
+                                #region 为单元格赋值
+                                worksheet.Cells[rowStart, colStart - 1].PutValue("合计");
+                                worksheet.Cells[rowStart, colStart + 2].PutValue(ListItem[k].NPlanAmmountByYear);
+                                worksheet.Cells[rowStart, colStart + 3].PutValue(ListItem2[k].NPlanAmmountByYear);
+                                worksheet.Cells[rowStart, colStart + 4].PutValue(ListItem[k].NPlanAmmountByYear == 0 ? "--" : ListItem[k].NDisplayRateByYear);
+                                worksheet.Cells[rowStart, colStart + 5].PutValue(ListItem2[k].NPlanAmmountByYear == 0 ? "--" : ListItem2[k].NDisplayRateByYear);
+                                worksheet.Cells[rowStart, colStart + 6].PutValue(ListItem[k].NPlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 7].PutValue(ListItem2[k].NPlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 8].PutValue(ListItem[k].NActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 9].PutValue(ListItem2[k].NActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 10].PutValue(ListItem[k].NDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 11].PutValue(ListItem2[k].NDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 12].PutValue(ListItem[k].NAccumulativePlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 13].PutValue(ListItem2[k].NAccumulativePlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 14].PutValue(ListItem[k].NAccumulativeActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 15].PutValue(ListItem2[k].NAccumulativeActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 16].PutValue(ListItem[k].NAccumulativeDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 17].PutValue(ListItem2[k].NAccumulativeDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 18].PutValue("");
+                                worksheet.Cells[rowStart, colStart + 19].PutValue("");
+
+                                //特殊差额指标，这里显示绝对值--商管系统
+                                if (IsDifferenceException)
+                                {
+                                    worksheet.Cells[rowStart, colStart + 4].PutValue(Math.Abs(ListItem[k].NDifference));
+                                    worksheet.Cells[rowStart, colStart + 8].PutValue(Math.Abs(ListItem[k].NAccumulativeDifference));
+                                }
+
+                                #endregion
+
+                                #region 设置Number = 3 :千分位,Number = 4 保留2位小数
+                                style3 = worksheet.Cells[rowStart, colStart + 2].GetStyle();
+                                if (DataDisplayMode == 0)
+                                    style3.Number = 3;
+                                else
+                                    style3.Number = 4;
+
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 3].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 6].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 9].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 12].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 13].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 14].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 15].SetStyle(style3);
+                                #endregion
+                                rowStart = rowStart + 1;
+                            }
+                        }
+                        else if (listCompanyProperty[j].Name == "HaveDetail")
+                        {
+                            List<MonthlyReportDetail> listMRDVM = (List<MonthlyReportDetail>)listCompanyProperty[j].ObjValue;
+                            List<MonthlyReportDetail> listMRDVM2 = (List<MonthlyReportDetail>)listCompanyProperty2[j].ObjValue;
+                            for (int k = 0; k < listMRDVM.Count; k++)
+                            {
+                                Range range = worksheet.Cells.CreateRange(rowStart, 2, 1, 2);
+                                range.Merge();
+                                range.ApplyStyle(style2, flag);
+                                #region 设置样式
+                                worksheet.Cells[rowStart, colStart - 1].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 3].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 4].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 5].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 6].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 9].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 10].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 11].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 12].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 13].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 14].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 15].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 16].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 17].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 18].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 19].SetStyle(style2);
+                                #endregion
+
+                                #region 为单元格赋值
+                                worksheet.Cells[rowStart, colStart - 1].PutValue((k + 1).ToString());
+                                worksheet.Cells[rowStart, colStart].PutValue(listMRDVM[k].CompanyName.ToString());
+                                worksheet.Cells[rowStart, colStart + 2].PutValue(listMRDVM[k].NPlanAmmountByYear);
+                                worksheet.Cells[rowStart, colStart + 3].PutValue(listMRDVM2[k].NPlanAmmountByYear);
+                                worksheet.Cells[rowStart, colStart + 4].PutValue(listMRDVM[k].NDisplayRateByYear);
+                                worksheet.Cells[rowStart, colStart + 5].PutValue(listMRDVM2[k].NDisplayRateByYear);
+                                worksheet.Cells[rowStart, colStart + 6].PutValue(listMRDVM[k].NPlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 7].PutValue(listMRDVM2[k].NPlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 8].PutValue(listMRDVM[k].NActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 9].PutValue(listMRDVM2[k].NActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 10].PutValue(listMRDVM[k].NDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 11].PutValue(listMRDVM2[k].NDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 12].PutValue(listMRDVM[k].NAccumulativePlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 13].PutValue(listMRDVM2[k].NAccumulativePlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 14].PutValue(listMRDVM[k].NAccumulativeActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 15].PutValue(listMRDVM2[k].NAccumulativeActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 16].PutValue(listMRDVM[k].NAccumulativeDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 17].PutValue(listMRDVM2[k].NAccumulativeDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 18].PutValue("");
+                                worksheet.Cells[rowStart, colStart + 19].PutValue("");
+
+                                //特殊差额指标，这里显示绝对值--商管系统
+                                if (IsDifferenceException)
+                                {
+                                    worksheet.Cells[rowStart, colStart + 4].PutValue(Math.Abs(listMRDVM[k].NDifference));
+                                    worksheet.Cells[rowStart, colStart + 8].PutValue(Math.Abs(listMRDVM[k].NAccumulativeDifference));
+                                }
+
+                                #endregion
+
+                                #region 设置Number = 3 :千分位,Number = 4 保留2位小数
+                                style2 = worksheet.Cells[rowStart, colStart + 2].GetStyle();
+                                if (DataDisplayMode == 0)
+                                    style2.Number = 3;
+                                else
+                                    style2.Number = 4;
+
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 3].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 6].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 9].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 12].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 13].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 14].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 15].SetStyle(style2);
+                                #endregion
+                                rowStart = rowStart + 1;
+                            }
+                        }
+                        else
+                        {
+                            List<DictionaryVmodel> ListItem = ((List<DictionaryVmodel>)listCompanyProperty[j].ObjValue);
+                            List<DictionaryVmodel> ListItem2 = ((List<DictionaryVmodel>)listCompanyProperty2[j].ObjValue);
+                            int count = 0;
+                            for (int zz = 0; zz < ListItem.Count; zz++)
+                            {
+                                if (ListItem[zz].ObjValue != null)
+                                {
+                                    count = count + ((List<MonthlyReportDetail>)ListItem[zz].ObjValue).Count();
+                                }
+                            }
+                            int tmpcolStart = 2;
+                            int tempTotalColumns = 2;
+                            if (!string.IsNullOrEmpty(listCompanyProperty[j].Name) && listCompanyProperty[j].Name != "SummaryData")
+                            {
+                                Range range = worksheet.Cells.CreateRange(rowStart, 1, ListItem.Count + count, 1);
+                                range.Merge();
+                                range.ApplyStyle(style2, flag);
+
+                                worksheet.Cells[rowStart, 1].PutValue(listCompanyProperty[j].Name);
+                            }
+                            else
+                            {
+                                tmpcolStart = colStart - 1;
+                                tempTotalColumns = tempTotalColumns + 1;
+                            }
+                            for (int z = 0; z < ListItem.Count; z++)
+                            {
+                                Range itemRange = worksheet.Cells.CreateRange(rowStart, tmpcolStart, 1, tempTotalColumns);
+                                itemRange.Merge();
+                                itemRange.ApplyStyle(style3, flag);
+                                worksheet.Cells[rowStart, tmpcolStart].PutValue(ListItem[z].Name);
+                                #region 设置样式
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 3].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 4].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 5].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 6].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 9].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 10].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 11].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 12].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 13].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 14].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 15].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 16].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 17].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 18].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 19].SetStyle(style3);
+
+                                #endregion
+
+                                #region 为单元格赋值
+                                worksheet.Cells[rowStart, colStart + 2].PutValue(ListItem[z].BMonthReportDetail.NPlanAmmountByYear);
+                                worksheet.Cells[rowStart, colStart + 3].PutValue(ListItem2[z].BMonthReportDetail.NPlanAmmountByYear);
+                                worksheet.Cells[rowStart, colStart + 4].PutValue(ListItem[z].BMonthReportDetail.NDisplayRateByYear);
+                                worksheet.Cells[rowStart, colStart + 5].PutValue(ListItem2[z].BMonthReportDetail.NDisplayRateByYear);
+                                worksheet.Cells[rowStart, colStart + 6].PutValue(ListItem[z].BMonthReportDetail.NPlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 7].PutValue(ListItem2[z].BMonthReportDetail.NPlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 8].PutValue(ListItem[z].BMonthReportDetail.NActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 9].PutValue(ListItem2[z].BMonthReportDetail.NActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 10].PutValue(ListItem[z].BMonthReportDetail.NDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 11].PutValue(ListItem2[z].BMonthReportDetail.NDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 12].PutValue(ListItem[z].BMonthReportDetail.NAccumulativePlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 13].PutValue(ListItem2[z].BMonthReportDetail.NAccumulativePlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 14].PutValue(ListItem[z].BMonthReportDetail.NAccumulativeActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 15].PutValue(ListItem2[z].BMonthReportDetail.NAccumulativeActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 16].PutValue(ListItem[z].BMonthReportDetail.NAccumulativeDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 17].PutValue(ListItem2[z].BMonthReportDetail.NAccumulativeDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 18].PutValue("");
+                                worksheet.Cells[rowStart, colStart + 19].PutValue("");
+
+
+                                //特殊差额指标，这里显示绝对值--商管系统
+                                if (IsDifferenceException)
+                                {
+                                    worksheet.Cells[rowStart, colStart + 4].PutValue(Math.Abs(ListItem[z].BMonthReportDetail.NDifference));
+                                    worksheet.Cells[rowStart, colStart + 8].PutValue(Math.Abs(ListItem[z].BMonthReportDetail.NAccumulativeDifference));
+                                }
+
+                                #endregion
+
+                                #region 设置Number = 3 :千分位,Number = 4 保留2位小数
+                                style3 = worksheet.Cells[rowStart, colStart + 2].GetStyle();
+                                if (DataDisplayMode == 0)
+                                    style3.Number = 3;
+                                else
+                                    style3.Number = 4;
+
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 3].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 6].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 9].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 12].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 13].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 14].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 15].SetStyle(style3);
+
+                                #endregion
+
+                                rowStart = rowStart + 1;
+                                int tempRowStart = rowStart;
+                                if (ListItem[z].ObjValue == null)
+                                { continue; }
+                                List<MonthlyReportDetail> listMRDVM = (List<MonthlyReportDetail>)ListItem[z].ObjValue;
+                                List<MonthlyReportDetail> listMRDVM2 = (List<MonthlyReportDetail>)ListItem2[z].ObjValue;
+                                for (int k = 0; k < listMRDVM.Count; k++)
+                                {
+                                    if (tmpcolStart != colStart)
+                                    {
+                                        itemRange = worksheet.Cells.CreateRange(rowStart, tmpcolStart + 1, 1, 2);
+                                        itemRange.Merge();
+                                        itemRange.ApplyStyle(style3, flag);
+                                    }
+                                    #region 设置样式
+                                    worksheet.Cells[rowStart, tmpcolStart].SetStyle(style2);
+                                    worksheet.Cells[rowStart, tmpcolStart + 1].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 2].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 3].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 4].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 5].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 6].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 7].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 8].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 9].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 10].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 11].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 12].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 13].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 14].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 15].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 16].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 17].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 18].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 19].SetStyle(style2);
+                                    #endregion
+
+                                    #region 为单元格赋值
+                                    worksheet.Cells[rowStart, tmpcolStart].PutValue((k + 1).ToString());
+                                    worksheet.Cells[rowStart, tmpcolStart + 1].PutValue(listMRDVM[k].CompanyName.ToString());
+                                    worksheet.Cells[rowStart, colStart + 2].PutValue(listMRDVM[k].NPlanAmmountByYear);
+                                    worksheet.Cells[rowStart, colStart + 3].PutValue(listMRDVM2[k].NPlanAmmountByYear);
+                                    worksheet.Cells[rowStart, colStart + 4].PutValue(listMRDVM[k].NDisplayRateByYear);
+                                    worksheet.Cells[rowStart, colStart + 5].PutValue(listMRDVM2[k].NDisplayRateByYear);
+                                    worksheet.Cells[rowStart, colStart + 6].PutValue(listMRDVM[k].NPlanAmmount);
+                                    worksheet.Cells[rowStart, colStart + 7].PutValue(listMRDVM2[k].NPlanAmmount);
+                                    worksheet.Cells[rowStart, colStart + 8].PutValue(listMRDVM[k].NActualAmmount);
+                                    worksheet.Cells[rowStart, colStart + 9].PutValue(listMRDVM2[k].NActualAmmount);
+                                    worksheet.Cells[rowStart, colStart + 10].PutValue(listMRDVM[k].NDisplayRate);
+                                    worksheet.Cells[rowStart, colStart + 11].PutValue(listMRDVM2[k].NDisplayRate);
+                                    worksheet.Cells[rowStart, colStart + 12].PutValue(listMRDVM[k].NAccumulativePlanAmmount);
+                                    worksheet.Cells[rowStart, colStart + 13].PutValue(listMRDVM2[k].NAccumulativePlanAmmount);
+                                    worksheet.Cells[rowStart, colStart + 14].PutValue(listMRDVM[k].NAccumulativeActualAmmount);
+                                    worksheet.Cells[rowStart, colStart + 15].PutValue(listMRDVM2[k].NAccumulativeActualAmmount);
+                                    worksheet.Cells[rowStart, colStart + 16].PutValue(listMRDVM[k].NAccumulativeDisplayRate);
+                                    worksheet.Cells[rowStart, colStart + 17].PutValue(listMRDVM2[k].NAccumulativeDisplayRate);
+                                    worksheet.Cells[rowStart, colStart + 18].PutValue("");
+                                    worksheet.Cells[rowStart, colStart + 19].PutValue("");
+
+                                    //特殊差额指标，这里显示绝对值--商管系统
+                                    if (IsDifferenceException)
+                                    {
+                                        worksheet.Cells[rowStart, colStart + 4].PutValue(Math.Abs(listMRDVM[k].NDifference));
+                                        worksheet.Cells[rowStart, colStart + 8].PutValue(Math.Abs(listMRDVM[k].NAccumulativeDifference));
+                                    }
+
+                                    #endregion
+
+                                    #region 设置千分位
+                                    if (listMRDVM[k].Counter > 0)
+                                    {
+                                        int pictureIndex = worksheet.Pictures.Add(rowStart, colStart + 18, ImageFilePath + "\\image" + listMRDVM[k].Counter + ".png");
+                                        int pictureIndex2 = worksheet.Pictures.Add(rowStart, colStart + 19, ImageFilePath + "\\image" + listMRDVM2[k].Counter + ".png");
+                                        Aspose.Cells.Drawing.Picture picture = worksheet.Pictures[pictureIndex];
+                                        picture.Left = 60;
+                                        picture.Top = 10;
+
+                                        Aspose.Cells.Drawing.Picture picture2 = worksheet.Pictures[pictureIndex2];
+                                        picture2.Left = 60;
+                                        picture2.Top = 10;
+
+                                    }
+                                    style2 = worksheet.Cells[rowStart, colStart + 2].GetStyle();
+                                    if (DataDisplayMode == 0)
+                                        style2.Number = 3;
+                                    else
+                                        style2.Number = 4;
+
+                                    worksheet.Cells[rowStart, colStart + 2].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 3].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 6].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 7].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 8].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 9].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 12].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 13].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 14].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 15].SetStyle(style2);
+
+                                    #endregion
+                                    rowStart = rowStart + 1;
+                                }
+                                //为当前sheet分组
+                                if (listMRDVM.Count > 0 && z == 0)
+                                {
+                                    worksheet.Cells.GroupRows(tempRowStart, tempRowStart - 1 + listMRDVM.Count, true);
+                                }
+                            }
+                        }
+                    }
+                    #endregion
+                }
+                else
+                {
+                    #region 单指标
+
+                    _targetName = listMonthReportDetail[sheetIndex].Name;
+                    C_Target _target = _targetList.Where(p => p.TargetName == _targetName).ToList()[0];
+
+                    //特殊处理差额，针对指标
+                    XElement element = null;
+                    element = _target.Configuration;
+                    XElement subElement = null; //商管的节点
+
+                    XElement displayModeElement = null; //万达旅业的客流量下载，变成2位小数
+
+                    if (element.Elements("IsDifferenceExceptionTarget").ToList().Count > 0)
+                    {
+                        subElement = element.Elements("IsDifferenceExceptionTarget").ToList()[0];
+                        IsDifferenceException = subElement.GetAttributeValue("value", false);
+                    }
+                    else
+                    {
+                        IsDifferenceException = false;
+                    }
+
+                    if (element.Elements("DataDisplayMode").ToList().Count > 0)
+                    {
+                        displayModeElement = element.Elements("DataDisplayMode").ToList()[0];
+                        DataDisplayMode = displayModeElement.GetAttributeValue("value", 0);
+                    }
+                    else
+                    {
+                        DataDisplayMode = 0;
+                    }
+
+
+                    rowStart = 4;
+                    StyleFlag flag = new StyleFlag();
+                    flag.All = true;
+                    List<DictionaryVmodel> listCompanyProperty = (List<DictionaryVmodel>)listMonthReportDetail[sheetIndex].ObjValue;
+                    for (int j = 0; j < listCompanyProperty.Count; j++)
+                    {
+                        if (listCompanyProperty[j].Name == "SummaryData")
+                        {
+                            List<B_MonthlyReportDetail> ListItem = ((List<B_MonthlyReportDetail>)listCompanyProperty[j].ObjValue);
+                            for (int k = 0; k < ListItem.Count; k++)
+                            {
+                                #region 设置样式
+                                Range range = worksheet.Cells.CreateRange(rowStart, 1, 1, 3);
+                                range.Merge();
+                                range.ApplyStyle(style3, flag);
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 3].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 4].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 5].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 6].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 9].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 10].SetStyle(style3);
+                                #endregion
+
+                                #region 为单元格赋值
+                                worksheet.Cells[rowStart, colStart - 1].PutValue("合计");
+                                worksheet.Cells[rowStart, colStart + 2].PutValue(ListItem[k].NPlanAmmountByYear);
+                                worksheet.Cells[rowStart, colStart + 3].PutValue(ListItem[k].NDisplayRateByYear);
+                                worksheet.Cells[rowStart, colStart + 4].PutValue(ListItem[k].NPlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 5].PutValue(ListItem[k].NActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 6].PutValue(ListItem[k].NDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 7].PutValue(ListItem[k].NAccumulativePlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 8].PutValue(ListItem[k].NAccumulativeActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 9].PutValue(ListItem[k].NAccumulativeDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 10].PutValue("");
+
+                                //特殊差额指标，这里显示绝对值--商管系统
+                                if (IsDifferenceException)
+                                {
+                                    worksheet.Cells[rowStart, colStart + 4].PutValue(Math.Abs(ListItem[k].NDifference));
+                                    worksheet.Cells[rowStart, colStart + 8].PutValue(Math.Abs(ListItem[k].NAccumulativeDifference));
+                                }
+
+                                #endregion
+
+                                #region 设置Number = 3 :千分位,Number = 4 保留2位小数
+                                style3 = worksheet.Cells[rowStart, colStart + 2].GetStyle();
+                                if (DataDisplayMode == 0)
+                                    style3.Number = 3;
+                                else
+                                    style3.Number = 4;
+
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 4].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 5].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style3);
+                                #endregion
+                                rowStart = rowStart + 1;
+                            }
+                        }
+                        else if (listCompanyProperty[j].Name == "HaveDetail")
+                        {
+                            List<MonthlyReportDetail> listMRDVM = (List<MonthlyReportDetail>)listCompanyProperty[j].ObjValue;
+                            for (int k = 0; k < listMRDVM.Count; k++)
+                            {
+                                Range range = worksheet.Cells.CreateRange(rowStart, 2, 1, 2);
+                                range.Merge();
+                                range.ApplyStyle(style2, flag);
+                                #region 设置样式
+                                worksheet.Cells[rowStart, colStart - 1].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 3].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 4].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 5].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 6].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 9].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 10].SetStyle(style2);
+                                #endregion
+
+                                #region 为单元格赋值
+                                worksheet.Cells[rowStart, colStart - 1].PutValue((k + 1).ToString());
+                                worksheet.Cells[rowStart, colStart].PutValue(listMRDVM[k].CompanyName.ToString());
+                                worksheet.Cells[rowStart, colStart + 2].PutValue(listMRDVM[k].NPlanAmmountByYear);
+                                worksheet.Cells[rowStart, colStart + 3].PutValue(listMRDVM[k].NDisplayRateByYear);
+                                worksheet.Cells[rowStart, colStart + 4].PutValue(listMRDVM[k].NPlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 5].PutValue(listMRDVM[k].NActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 6].PutValue(listMRDVM[k].NDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 7].PutValue(listMRDVM[k].NAccumulativePlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 8].PutValue(listMRDVM[k].NAccumulativeActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 9].PutValue(listMRDVM[k].NAccumulativeDisplayRate);
+
+                                //特殊差额指标，这里显示绝对值--商管系统
+                                if (IsDifferenceException)
+                                {
+                                    worksheet.Cells[rowStart, colStart + 4].PutValue(Math.Abs(listMRDVM[k].NDifference));
+                                    worksheet.Cells[rowStart, colStart + 8].PutValue(Math.Abs(listMRDVM[k].NAccumulativeDifference));
+                                }
+
+                                #endregion
+
+                                #region 设置Number = 3 :千分位,Number = 4 保留2位小数
+                                style2 = worksheet.Cells[rowStart, colStart + 2].GetStyle();
+                                if (DataDisplayMode == 0)
+                                    style2.Number = 3;
+                                else
+                                    style2.Number = 4;
+
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 4].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 5].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style2);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style2);
+                                #endregion
+                                rowStart = rowStart + 1;
+                            }
+                        }
+                        else
+                        {
+                            List<DictionaryVmodel> ListItem = ((List<DictionaryVmodel>)listCompanyProperty[j].ObjValue);
+                            int count = 0;
+                            for (int zz = 0; zz < ListItem.Count; zz++)
+                            {
+                                if (ListItem[zz].ObjValue != null)
+                                {
+                                    count = count + ((List<MonthlyReportDetail>)ListItem[zz].ObjValue).Count();
+                                }
+                            }
+                            int tmpcolStart = 2;
+                            int tempTotalColumns = 2;
+                            if (!string.IsNullOrEmpty(listCompanyProperty[j].Name) && listCompanyProperty[j].Name != "SummaryData")
+                            {
+                                Range range = worksheet.Cells.CreateRange(rowStart, 1, ListItem.Count + count, 1);
+                                range.Merge();
+                                range.ApplyStyle(style2, flag);
+
+
+                                worksheet.Cells[rowStart, 1].PutValue(listCompanyProperty[j].Name);
+                            }
+                            else
+                            {
+                                tmpcolStart = colStart - 1;
+                                tempTotalColumns = tempTotalColumns + 1;
+                            }
+                            for (int z = 0; z < ListItem.Count; z++)
+                            {
+                                Range itemRange = worksheet.Cells.CreateRange(rowStart, tmpcolStart, 1, tempTotalColumns);
+                                itemRange.Merge();
+                                itemRange.ApplyStyle(style3, flag);
+                                worksheet.Cells[rowStart, tmpcolStart].PutValue(ListItem[z].Name);
+                                #region 设置样式
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 3].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 4].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 5].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 6].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 9].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 10].SetStyle(style3);
+                                #endregion
+
+                                #region 为单元格赋值
+                                worksheet.Cells[rowStart, colStart + 2].PutValue(ListItem[z].BMonthReportDetail.NPlanAmmountByYear);
+                                worksheet.Cells[rowStart, colStart + 3].PutValue(ListItem[z].BMonthReportDetail.NDisplayRateByYear);
+                                worksheet.Cells[rowStart, colStart + 4].PutValue(ListItem[z].BMonthReportDetail.NPlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 5].PutValue(ListItem[z].BMonthReportDetail.NActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 6].PutValue(ListItem[z].BMonthReportDetail.NDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 7].PutValue(ListItem[z].BMonthReportDetail.NAccumulativePlanAmmount);
+                                worksheet.Cells[rowStart, colStart + 8].PutValue(ListItem[z].BMonthReportDetail.NAccumulativeActualAmmount);
+                                worksheet.Cells[rowStart, colStart + 9].PutValue(ListItem[z].BMonthReportDetail.NAccumulativeDisplayRate);
+                                worksheet.Cells[rowStart, colStart + 10].PutValue("");
+
+                                //特殊差额指标，这里显示绝对值--商管系统
+                                if (IsDifferenceException)
+                                {
+                                    worksheet.Cells[rowStart, colStart + 4].PutValue(Math.Abs(ListItem[z].BMonthReportDetail.NDifference));
+                                    worksheet.Cells[rowStart, colStart + 8].PutValue(Math.Abs(ListItem[z].BMonthReportDetail.NAccumulativeDifference));
+                                }
+
+                                #endregion
+
+                                #region 设置Number = 3 :千分位,Number = 4 保留2位小数
+                                style3 = worksheet.Cells[rowStart, colStart + 2].GetStyle();
+                                if (DataDisplayMode == 0)
+                                    style3.Number = 3;
+                                else
+                                    style3.Number = 4;
+
+                                worksheet.Cells[rowStart, colStart + 2].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 4].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 5].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 7].SetStyle(style3);
+                                worksheet.Cells[rowStart, colStart + 8].SetStyle(style3);
+                                #endregion
+
+                                rowStart = rowStart + 1;
+                                int tempRowStart = rowStart;
+                                if (ListItem[z].ObjValue == null)
+                                { continue; }
+                                List<MonthlyReportDetail> listMRDVM = (List<MonthlyReportDetail>)ListItem[z].ObjValue;
+                                for (int k = 0; k < listMRDVM.Count; k++)
+                                {
+                                    if (tmpcolStart != colStart)
+                                    {
+                                        itemRange = worksheet.Cells.CreateRange(rowStart, tmpcolStart + 1, 1, 2);
+                                        itemRange.Merge();
+                                        itemRange.ApplyStyle(style3, flag);
+                                    }
+                                    #region 设置样式
+                                    worksheet.Cells[rowStart, tmpcolStart].SetStyle(style2);
+                                    worksheet.Cells[rowStart, tmpcolStart + 1].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 2].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 3].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 4].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 5].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 6].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 7].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 8].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 9].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 10].SetStyle(style2);
+                                    #endregion
+
+                                    #region 为单元格赋值
+                                    worksheet.Cells[rowStart, tmpcolStart].PutValue((k + 1).ToString());
+                                    worksheet.Cells[rowStart, tmpcolStart + 1].PutValue(listMRDVM[k].CompanyName.ToString());
+                                    worksheet.Cells[rowStart, colStart + 2].PutValue(listMRDVM[k].NPlanAmmountByYear);
+                                    worksheet.Cells[rowStart, colStart + 3].PutValue(listMRDVM[k].NDisplayRateByYear);
+                                    worksheet.Cells[rowStart, colStart + 4].PutValue(listMRDVM[k].NPlanAmmount);
+                                    worksheet.Cells[rowStart, colStart + 5].PutValue(listMRDVM[k].NActualAmmount);
+                                    worksheet.Cells[rowStart, colStart + 6].PutValue(listMRDVM[k].NDisplayRate);
+                                    worksheet.Cells[rowStart, colStart + 7].PutValue(listMRDVM[k].NAccumulativePlanAmmount);
+                                    worksheet.Cells[rowStart, colStart + 8].PutValue(listMRDVM[k].NAccumulativeActualAmmount);
+                                    worksheet.Cells[rowStart, colStart + 9].PutValue(listMRDVM[k].NAccumulativeDisplayRate);
+
+                                    //特殊差额指标，这里显示绝对值--商管系统
+                                    if (IsDifferenceException)
+                                    {
+                                        worksheet.Cells[rowStart, colStart + 4].PutValue(Math.Abs(listMRDVM[k].NDifference));
+                                        worksheet.Cells[rowStart, colStart + 8].PutValue(Math.Abs(listMRDVM[k].NAccumulativeDifference));
+                                    }
+
+                                    #endregion
+
+                                    #region 设置千分位
+                                    if (listMRDVM[k].Counter > 0)
+                                    {
+                                        int pictureIndex = worksheet.Pictures.Add(rowStart, colStart + 10, ImageFilePath + "\\image" + listMRDVM[k].Counter + ".png");
+                                        Aspose.Cells.Drawing.Picture picture = worksheet.Pictures[pictureIndex];
+                                        picture.Left = 60;
+                                        picture.Top = 10;
+                                    }
+                                    style2 = worksheet.Cells[rowStart, colStart + 2].GetStyle();
+                                    if (DataDisplayMode == 0)
+                                        style2.Number = 3;
+                                    else
+                                        style2.Number = 4;
+
+                                    worksheet.Cells[rowStart, colStart + 2].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 4].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 5].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 7].SetStyle(style2);
+                                    worksheet.Cells[rowStart, colStart + 8].SetStyle(style2);
+                                    #endregion
+                                    rowStart = rowStart + 1;
+                                }
+                                //为当前sheet分组
+                                if (listMRDVM.Count > 0 && z == 0)
+                                {
+                                    worksheet.Cells.GroupRows(tempRowStart, tempRowStart - 1 + listMRDVM.Count, true);
+                                }
+                            }
+                        }
+                    }
+                    #endregion
+                }
+            }
+            stream.Streams = new MemoryStream();
+            XlsSaveOptions xls = new XlsSaveOptions();
+            xls.SaveFormat = SaveFormat.Xlsx;
+            designer.Workbook.Save(stream.Streams, xls);
+            //MemoryStream stream = designer.Workbook.SaveToStream();
+            //fileStream.Close();
+            //fileStream.Dispose();
+            return stream.Streams;
+
+        }
+
+
+
+
 
         /// <summary>
         /// 下载Excel完成情况明细--集团总部系统
