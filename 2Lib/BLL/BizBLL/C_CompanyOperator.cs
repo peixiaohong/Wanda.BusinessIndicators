@@ -216,9 +216,9 @@ namespace LJTH.BusinessIndicators.BLL
         /// </summary>
         /// <param name="Name"></param>
         /// <returns></returns>
-        public List<C_Company> GetCompanyInfoByName(string name)
+        public List<C_Company> GetCompanyInfoByName(string name, Guid systemID)
         {
-            return _cCompanyAdapter.GetCompanyInfoByName(name);
+            return _cCompanyAdapter.GetCompanyInfoByName(name,systemID);
         }
         #endregion
     }

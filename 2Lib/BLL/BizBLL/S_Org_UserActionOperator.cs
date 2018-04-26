@@ -60,6 +60,17 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         {
             return _s_Org_UserAdapter.InsertList(listData);
         }
+
+        /// <summary>
+        /// 根据当前是项目的父级ID,得到 当前同批项目已经授权的人
+        /// </summary>
+        /// <param name="orgParentID">项目的父级ID</param>
+        /// <returns></returns>
+        public List<S_Org_User> GetRegionalPermissions(Guid orgParentID)
+        {
+            return _s_Org_UserAdapter.GetRegionalPermissions(orgParentID);
+        }
+
         #endregion
     }
 }

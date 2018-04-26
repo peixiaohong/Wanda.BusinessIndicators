@@ -2,6 +2,7 @@
 using Lib.Web.MVC.Controller;
 using LJTH.BusinessIndicators.BLL;
 using LJTH.BusinessIndicators.BLL.BizBLL;
+using LJTH.BusinessIndicators.Model;
 using LJTH.BusinessIndicators.Model.BizModel;
 using Newtonsoft.Json;
 using System;
@@ -71,7 +72,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 if (IsCompany)
                 {
                     //得到用户保存的项目名称在company中存在的数量
-                    oldCompanys = C_CompanyOperator.Instance.GetCompanyInfoByName(entity.CnName);
+                    oldCompanys = C_CompanyOperator.Instance.GetCompanyInfoByName(entity.CnName,entity.SystemID);
                     companyNameNumbers = oldCompanys.Count();
                 }
                 //新增数据
@@ -112,8 +113,29 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                         company.CreateTime = company.ModifyTime = company.OpeningTime = DateTime.Now;
                         company.CreatorName = company.ModifierName = base.CurrentUserName;
                         company.IsDeleted = false;
+                        company.VersionStart = DateTime.Now;
+                        company.VersionEnd = Convert.ToDateTime("9999-12-31 00:00:00.000");
+                        company.OpeningTime = DateTime.Now;
                         entity.ID = C_CompanyOperator.Instance.AddCompany(company);
                         entity.IsCompany = true;
+
+                        //插入相同的权限
+                        //1.得到 这个大区授权的人
+                        List<S_Org_User> orgUserEntitys = S_Org_UserActionOperator.Instance.GetRegionalPermissions(entity.ParentID);
+                        if (orgUserEntitys != null && orgUserEntitys.Count > 0)
+                        {
+                            foreach (var item in orgUserEntitys)
+                            {
+                                item.CreateTime = item.ModifyTime = DateTime.Now;
+                                item.CreatorName = item.ModifierName = base.CurrentUserName;
+                                item.IsDeleted = false;
+                                item.ID = Guid.NewGuid();
+                                item.SystemID = entity.SystemID;
+                                item.CompanyID = entity.ID;
+                            }
+                            //2 批量插入权限数据
+                            S_Org_UserActionOperator.Instance.InsertListData(orgUserEntitys);
+                        }
                     }
                     //插入组织架构数据
                     int number = S_OrganizationalActionOperator.Instance.InsertData(entity);
@@ -228,18 +250,21 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                         Message = "已经拥有子目录的节点不允许删除"
                     };
                 }
-                if (S_Org_UserActionOperator.Instance.GetDataByOrgID(id.ToGuid()).Count > 0)
-                {
-                    return new
-                    {
-                        Data = "",
-                        Success = 0,
-                        Message = "已经授权的组织不能删除"
-                    };
-                }
+                //if (S_Org_UserActionOperator.Instance.GetDataByOrgID(id.ToGuid()).Count > 0)
+                //{
+                //    return new
+                //    {
+                //        Data = "",
+                //        Success = 0,
+                //        Message = "已经授权的组织不能删除"
+                //    };
+                //}
                 if (isCompany)
                 {
-                    C_CompanyOperator.Instance.RemoveCompany(id.ToGuid());
+                    C_Company company= C_CompanyOperator.Instance.GetCompany(id.ToGuid());
+                    company.IsDeleted = true;
+                    company.VersionEnd = DateTime.Now;
+                    C_CompanyOperator.Instance.UpdateCompany(company);
                 }
                 var number = S_OrganizationalActionOperator.Instance.DeleteData(id.ToGuid());
                 if (number > 0)
