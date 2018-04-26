@@ -2,8 +2,6 @@
 	<ProcessCode ShowProcessNodeName="true">YY_ZBGK-FDC</ProcessCode>
 	<ProcessCode ShowProcessNodeName="true">YY_ZBGK-FDC-ZB</ProcessCode>
 	<Interfaces>
-		<ISequence TemplateType="MissTarget" InterfaceName="MissTargetSequence" />
-		<ISequence TemplateType="Return" InterfaceName="ReturnSequence" />
 		<IGetMonthDescriptionValue TemplateType="PRO_Centre_GetMonthDescriptionValue" InterfaceName="PRO_Centre_GetMonthDescriptionValue" />
 		<ICalculationEvaluation TemplateType="ProCalculationEvation" InterfaceName="ProCalculationEvation" />
 	</Interfaces>

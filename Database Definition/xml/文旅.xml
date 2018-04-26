@@ -10,7 +10,7 @@
     <TableTemplate />
   </ReportMonthlyDetail>
   <SummaryMonthlyReport>
-    <TableTemplate TableHeadTmplName="MonthReportSummaryHeadTemplate_DZSW" TableDataTmplName="" TableExcelTemplateName="月度经营报告_大众电影V1.xlsx" />
+    <TableTemplate TableHeadTmplName="MonthReportSummaryHeadTemplate" TableDataTmplName=""  />
   </SummaryMonthlyReport>
   <ManageTargetDetail Name="经营报告明细">
     <BlendTargets IsBlendTarget="True" Senquence="1" TargetName="经营收入+EBITDA" TargetValue="EEDFCD97-1129-4364-8FF8-D1EB68B85E8B,9181E2A7-ABD6-46B2-86D1-7FE14F0E1B66">
