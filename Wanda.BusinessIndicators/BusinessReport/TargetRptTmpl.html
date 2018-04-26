@@ -1697,7 +1697,7 @@
     <tr>
         <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
         <td class="Td_Left" style="text-align: left !important;">
-            <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','single')">${CompanyName}</a>
+            <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','single')" data-name="forMonthlyReport">${CompanyName}</a>
         <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
         <td class="Td_TopAndBottom DetailMonthlyCss" title="${NActualAmmount}">${(NActualAmmount).thousandize0OrEmpty(0)}</td>
         <td class="Td_TopAndBottom DetailMonthlyCss" title="${NDifference}">${(NDifference).thousandize0OrEmpty(0)}</td>
@@ -1765,9 +1765,9 @@
         <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
         <td class="Td_Left" style="text-align: left !important;">
             {{if SystemID=='15ee2c18-5c7a-402e-92b8-277cff78e210'&&(TargetID=='a79a8351-89e0-4f1a-b05e-70ff12209bcb'||TargetID=='d45f147a-0bd5-4ca7-85b1-13a954fc38b2') }}
-            <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','all')">${CompanyName}</a>
+            <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','all')" data-name="forMonthlyReport">${CompanyName}</a>
             {{else}}
-            <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','single')">${CompanyName}</a>
+            <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','single')" data-name="forMonthlyReport">${CompanyName}</a>
             {{/if}}
         </td>
         <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
@@ -1793,9 +1793,9 @@
         <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
         <td class="Td_Left" style="text-align: left !important;">
             {{if SystemID=='15ee2c18-5c7a-402e-92b8-277cff78e210'&&(TargetID=='a79a8351-89e0-4f1a-b05e-70ff12209bcb'||TargetID=='d45f147a-0bd5-4ca7-85b1-13a954fc38b2') }}
-            <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','all')">${CompanyName}</a>
+            <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','all')" data-name="forMonthlyReport">${CompanyName}</a>
             {{else}}
-            <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','single')">${CompanyName}</a>
+            <a href="javascript:void(0);" onclick="EditMonthReportDetail('${ID}','single')" data-name="forMonthlyReport">${CompanyName}</a>
             {{/if}}
         </td>
         <td class="Td_Left align_right DetailMonthlyCss" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>

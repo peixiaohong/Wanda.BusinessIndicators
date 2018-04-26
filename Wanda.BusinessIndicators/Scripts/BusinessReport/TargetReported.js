@@ -43,7 +43,6 @@ function GetReportInstance() {
 
 function SplitData(resultData) {
     if (resultData != null) {
-        ComplateDetailData = resultData;
         if (resultData[0] != null) {
             ReportInstance = resultData[0].ObjValue;
         }
@@ -422,8 +421,13 @@ function ComplateDetailLiaddCss(sender) {
     //为了配合混合指标展示，外面包装了一层data
     //loadTmpl('#' + ComplateTargetDetailTemplate).tmpl(sender).appendTo('#tab2_rows');
     var dataArray = [];
-    var data = { "data": TemplData };
-    dataArray.push(data);
+    if (ComplateTargetDetailTemplate == "TargetReportedComplateTargetDetailTemplate") {
+        dataArray = TemplData;
+    }
+    else {
+        var data = { "data": TemplData };
+        dataArray.push(data);
+    }
 
     loadTmpl('#' + ComplateTargetDetailTemplate).tmpl(dataArray).appendTo('#tab2_rows');
 
@@ -463,8 +467,13 @@ function SetComplateTargetDetailData(sender, Type) {
         //为了配合混合指标展示，外面包装了一层data
         //loadTmpl('#' + ComplateTargetDetailTemplate).tmpl(sender).appendTo('#tab2_rows');
         var dataArray = [];
-        var data = { "data": sender };
-        dataArray.push(data);
+        if (ComplateTargetDetailTemplate == "TargetReportedComplateTargetDetailTemplate") {
+            dataArray = sender;
+        }
+        else {
+            var data = { "data": sender };
+            dataArray.push(data);
+        }
 
         loadTmpl('#' + ComplateTargetDetailTemplate).tmpl(dataArray).appendTo('#tab2_rows');
 
