@@ -133,6 +133,8 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
 
 
         #region 数据权限
+
+        #region 有判断项目 IsDelete=0
         /// <summary>
         /// 根据板块拿授权的区域
         /// </summary>
@@ -196,6 +198,63 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         {
             return _s_OrganizationalAdapter.GetAllDataBySystemID(systemID);
         }
+        #endregion
+
+        #region 没有判断项目 IsDelete=0
+        /// <summary>
+        /// 根据板块拿授权的区域
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<DataPermissions> GetUserAuthorizationAreaNoIsDelete(Guid systemID, string loginName)
+        {
+            return _s_OrganizationalAdapter.GetUserAuthorizationAreaNoIsDelete(systemID, loginName);
+        }
+
+        /// <summary>
+        /// 根据登陆人拿所有授权的组织架构数据
+        /// </summary>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetUserAuthorizationOrgNoIsDelete(string loginName)
+        {
+            return _s_OrganizationalAdapter.GetUserAuthorizationOrgNoIsDelete(loginName);
+        }
+
+        /// <summary>
+        /// 根据登陆人拿到所有授权的板块
+        /// </summary>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetUserSystemDataNoIsDelete(string loginName)
+        {
+            return _s_OrganizationalAdapter.GetUserSystemDataNoIsDelete(loginName);
+        }
+
+        /// <summary>
+        /// 根据登陆人，板块ID拿到所有授权的项目
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetUserCompanyDataNoIsDelete(Guid systemID, string loginName)
+        {
+            return _s_OrganizationalAdapter.GetUserCompanyDataNoIsDelete(systemID, loginName);
+        }
+
+        /// <summary>
+        /// 根据登陆人，获取板块下第一层授权的大区
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetUserRegionalNoIsDelete(Guid systemID, string loginName)
+        {
+            return _s_OrganizationalAdapter.GetUserRegionalNoIsDelete(systemID, loginName);
+        }
+
+        #endregion 
 
         #endregion
     }

@@ -98,7 +98,7 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
 	                          Where A.[IsDeleted]=0
                           )
                         Select * From tempData As A Where A.[IsDeleted]=0 And A.[IsCompany]=1 And A.[Level]>3";
-            DbParameter[] parameters1 = new DbParameter[] 
+            DbParameter[] parameters1 = new DbParameter[]
             {
                 CreateSqlParameter("@SystemID",DbType.Guid,systemID),
                 CreateSqlParameter("@RegionalID",DbType.Guid,regionalID)
@@ -135,7 +135,7 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
 	                            Where A.[IsDeleted]=0
                             )
                             Select * From [GetSystem_subset] Where [CnName]=@CnName";
-            DbParameter[] parameters = new DbParameter[] 
+            DbParameter[] parameters = new DbParameter[]
             {
                 CreateSqlParameter("@SystemID",DbType.Guid,systemID),
                 CreateSqlParameter("@CnName",DbType.String,cnName)
@@ -174,6 +174,8 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
 
 
         #region 数据权限
+
+        #region 有判断项目 IsDelete=0
         /// <summary>
         /// 根据板块拿授权的区域
         /// </summary>
@@ -237,7 +239,7 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
             {
                 CreateSqlParameter("@LoginName",DbType.String,loginName)
             };
-            return ExecuteQuery(sql,parameters);
+            return ExecuteQuery(sql, parameters);
         }
 
         /// <summary>
@@ -264,7 +266,7 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
             {
                 CreateSqlParameter("@LoginName",DbType.String,loginName)
             };
-            return ExecuteQuery(sql,parameters);
+            return ExecuteQuery(sql, parameters);
 
         }
 
@@ -285,7 +287,7 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
                 CreateSqlParameter("@SystemID",DbType.Guid,systemID),
                 CreateSqlParameter("@LoginName",DbType.String,loginName)
             };
-            return ExecuteQuery(sql,parameters);
+            return ExecuteQuery(sql, parameters);
         }
 
         /// <summary>
@@ -315,8 +317,157 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
                 CreateSqlParameter("@SystemID",DbType.Guid,systemID),
                 CreateSqlParameter("@LoginName",DbType.String,loginName)
             };
-            return ExecuteQuery(sql,parameters);
+            return ExecuteQuery(sql, parameters);
         }
+
+
+
+        #endregion
+
+        #region 没有判断项目,IsDelete=0
+
+        /// <summary>
+        /// 根据板块拿授权的区域
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<DataPermissions> GetUserAuthorizationAreaNoIsDelete(Guid systemID, string loginName)
+        {
+            string sql = @"With noCompanyData
+                          As
+                          (
+	                          Select A.* From [dbo].[S_Organizational] As A
+	                          Inner Join [dbo].[S_Org_User] As B On A.[ID]=B.[CompanyID] And [B].[IsDeleted]=0
+	                          Inner Join [dbo].[Employee] As C On B.[LoginName]=C.[LoginName] And C.[IsDeleted]=0
+	                          Where A.[SystemID]=@SystemID And B.[LoginName]=@LoginName
+	                          Union All
+                              Select A.* From [dbo].[S_Organizational] As A 
+	                          Inner Join [noCompanyData] As B On A.[ID]=B.[ParentID]
+	                          
+                          )
+                          Select Distinct * From [noCompanyData] As A Where A.[IsCompany]=0 And A.[Level]>2";
+            DbParameter[] parameters = new DbParameter[]
+            {
+                CreateSqlParameter("@SystemID",DbType.Guid,systemID),
+                CreateSqlParameter("@LoginName",DbType.String,loginName)
+            };
+            return FormattedData(ExecuteQuery(sql, parameters));
+        }
+
+        /// <summary>
+        /// 根据登陆人拿所有的授权的组织架构
+        /// </summary>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetUserAuthorizationOrgNoIsDelete(string loginName)
+        {
+            string sql = @"With getAllData
+                             As
+                              (Select
+		                             A.*
+	                           From  [dbo].[S_Organizational] As A
+	                           Inner Join [dbo].[S_Org_User] As B
+			                              On A.[ID]=B.[CompanyID]
+				                             And [B].[IsDeleted]=0
+	                           Inner Join [dbo].[Employee] As C
+			                              On B.[LoginName]=C.[LoginName]
+				                             And C.[IsDeleted]=0
+	                           Where B.[LoginName]=@LoginName And A.[ParentID]='00000000-0000-0000-0000-000000000000'
+	                           Union All
+	                           Select
+		                             A.*
+	                           From  [dbo].[S_Organizational] As A
+	                           Inner Join getAllData As B
+			                              On A.[ID]=B.[ParentID]
+                              )
+                           Select Distinct * From getAllData As A ;";
+            DbParameter[] parameters = new DbParameter[]
+            {
+                CreateSqlParameter("@LoginName",DbType.String,loginName)
+            };
+            return ExecuteQuery(sql, parameters);
+        }
+
+        /// <summary>
+        /// 根据登陆人拿到所有的授权的板块
+        /// </summary>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetUserSystemDataNoIsDelete(string loginName)
+        {
+
+            string sql = @"With getSystemData
+                                As 
+                                (
+	                                Select A.* From [dbo].[S_Organizational] As A 
+	                                Inner Join [S_Org_User] As B On A.[ID]=B.[CompanyID] And B.[IsDeleted]=0 And B.[LoginName]=@LoginName
+	                                Inner Join [dbo].[Employee] As C On B.[LoginName]=C.[LoginName] And C.[IsDeleted]=0
+	                                Union All
+                                    Select A.* From [dbo].[S_Organizational] As A
+	                                Inner Join [getSystemData] As B On A.[ID]=B.[ParentID] And B.[IsDeleted]=0
+                                )
+                                Select Distinct * From [getSystemData] Where [Level]=2";
+            DbParameter[] parameters = new DbParameter[]
+            {
+                CreateSqlParameter("@LoginName",DbType.String,loginName)
+            };
+            return ExecuteQuery(sql, parameters);
+
+        }
+
+        /// <summary>
+        /// 根据登陆人，板块ID拿到所有授权的项目
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetUserCompanyDataNoIsDelete(Guid systemID, string loginName)
+        {
+            string sql = @"Select Distinct A.* From [dbo].[S_Organizational] As A
+	                       Inner Join [dbo].[S_Org_User] As B On A.[ID]=B.[CompanyID] And [B].[IsDeleted]=0
+	                       Inner Join [dbo].[Employee] As C On B.[LoginName]=C.[LoginName] And C.[IsDeleted]=0
+	                       Where A.[SystemID]=@SystemID And B.[LoginName]=@LoginName And A.[IsCompany]=1";
+            DbParameter[] parameters = new DbParameter[]
+            {
+                CreateSqlParameter("@SystemID",DbType.Guid,systemID),
+                CreateSqlParameter("@LoginName",DbType.String,loginName)
+            };
+            return ExecuteQuery(sql, parameters);
+        }
+
+        /// <summary>
+        /// 根据登陆人，获取板块下第一层授权的大区
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetUserRegionalNoIsDelete(Guid systemID, string loginName)
+        {
+            string sql = @"With GetOrgRegional
+                           As
+                           (
+	                           Select A.* From [dbo].[S_Organizational] As A
+	                           Inner Join [dbo].[S_Org_User] As B On A.[ID]=B.[CompanyID] And [B].[IsDeleted]=0
+	                           Inner Join [dbo].[Employee] As C On B.[LoginName]=C.[LoginName] And C.[IsDeleted]=0
+	                           Where A.[SystemID]=@SystemID And B.[LoginName]=@LoginName
+	                           Union All
+                               Select A.* From [dbo].[S_Organizational] As A 
+	                           Inner Join [GetOrgRegional] As B On A.[ID]=B.[ParentID]
+                           )
+
+                           Select Distinct * From [GetOrgRegional] As A Where A.[IsCompany]=0 And A.[Level]=3";
+            DbParameter[] parameters = new DbParameter[]
+            {
+                CreateSqlParameter("@SystemID",DbType.Guid,systemID),
+                CreateSqlParameter("@LoginName",DbType.String,loginName)
+            };
+            return ExecuteQuery(sql, parameters);
+        }
+
+
+
+        #endregion
 
         private List<DataPermissions> FormattedData(List<S_Organizational> data)
         {
@@ -353,6 +504,7 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
             }
             return resultData;
         }
+
         #endregion
     }
 }

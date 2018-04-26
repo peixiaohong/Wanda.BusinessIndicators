@@ -143,7 +143,7 @@ function SaveOrganization(type) {
         isCompany = el.attr("data-isCompany");
     }
     //console.log(isCompany);
-    if (isCompany == "true") {
+    if (isCompany == "true" || isCompany == "checked") {
         isCompany = true;
     } else {
         isCompany = false;

@@ -58,7 +58,23 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
             {
                 CreateSqlParameter("@LoginName",DbType.String,loginName)
             };
-            return ExecuteSql(sql,parameters);
+            return ExecuteSql(sql, parameters);
+        }
+
+        /// <summary>
+        /// 根据当前是项目的父级ID,得到 当前同批项目已经授权的人
+        /// </summary>
+        /// <param name="orgParentID">项目的父级ID</param>
+        /// <returns></returns>
+        public List<S_Org_User> GetRegionalPermissions(Guid orgParentID)
+        {
+            string sql = @" Select LoginName From GetRegional(@OrgParentID)";
+            DbParameter[] parameters = new DbParameter[]
+            {
+                CreateSqlParameter("@OrgParentID",DbType.Guid,orgParentID)
+            };
+
+            return ExecuteQuery(sql,parameters);
         }
     }
 }
