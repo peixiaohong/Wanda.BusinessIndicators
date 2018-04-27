@@ -114,25 +114,40 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         /// <param name="IsLatestVersion"></param>
         /// <returns></returns>
         [LibAction]
-        public List<DictionaryVmodel> GetReportInstance(string strMonthReportID)
+        public List<DictionaryVmodel> GetReportInstance(string strMonthReportID, string strSystemId, string strProType)
         {
-            ReportInstance rpt = new ReportInstance(strMonthReportID.ToGuid(), true);
-            List<DictionaryVmodel> listSRDS = new List<DictionaryVmodel>();
-            
-            B_MonthlyReportJsonData B_JsonData = new B_MonthlyReportJsonData();
-            
-            listSRDS = GetJsonData(strMonthReportID.ToGuid());
-
-            if (listSRDS != null)
+            ReportInstance rpt = null;
+            if (string.IsNullOrEmpty(strProType))
             {
-                return listSRDS;
+                rpt = new ReportInstance(strMonthReportID.ToGuid(), true);
             }
             else
             {
-                rpt =  new ReportInstance(strMonthReportID.ToGuid(), true);
-                listSRDS = ReportInstanceSummaryEngine.ReportInstanceSummaryService.GetSummaryRptDataSource(rpt, false);
-                return listSRDS;
+                var time = StaticResource.Instance.GetReportDateTime();
+                rpt = new ReportInstance()
+                {
+                    _SystemID = strSystemId.ToGuid(),
+                    FinYear = time.Year,
+                    FinMonth=time.Month,
+                };
+                rpt.GetReportDetail();
             }
+            List<DictionaryVmodel> listSRDS = new List<DictionaryVmodel>();
+
+            //B_MonthlyReportJsonData B_JsonData = new B_MonthlyReportJsonData();
+
+            //listSRDS = GetJsonData(strMonthReportID.ToGuid());
+
+            //if (listSRDS != null)
+            //{
+            //    return listSRDS;
+            //}
+            //else
+            //{
+            // rpt =  new ReportInstance(strMonthReportID.ToGuid(), true);
+            listSRDS = ReportInstanceSummaryEngine.ReportInstanceSummaryService.GetSummaryRptDataSource(rpt, false);
+            return listSRDS;
+            //}
         }
 
 

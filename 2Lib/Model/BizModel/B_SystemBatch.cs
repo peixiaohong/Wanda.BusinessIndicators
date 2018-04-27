@@ -43,6 +43,8 @@ namespace LJTH.BusinessIndicators.Model
         public string Batch_Opinions { get; set; }
         [ORFieldMapping("ReportApprove")]
         public string ReportApprove { get; set; }
+        [ORFieldMapping("Description")]
+        public string Description { get; set; }
         
     }
 }

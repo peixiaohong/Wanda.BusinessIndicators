@@ -231,6 +231,14 @@ namespace LJTH.BusinessIndicators.Engine
                 ReportDetails = new List<MonthlyReportDetail>();
             }
         }
+
+        /// <summary>
+        /// 获取版块下所有的详细数据(B表数据)，合并审批版块使用，裴晓红新增
+        /// </summary>
+        public void GetReportDetail()
+        {
+            ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Draft(_System.ID, FinYear, FinMonth, _MonthReportID);
+        }
         #endregion Private Method
     }
 }

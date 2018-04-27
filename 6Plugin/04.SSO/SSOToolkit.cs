@@ -337,5 +337,54 @@ namespace Plugin.SSO
             }
             return pwd;
         }
+
+
+        /// <summary>
+        /// 从手机端应用跳转过来进任务列表
+        /// </summary>
+        /// <param name="errorMsg"></param>
+        /// <returns></returns>
+        public bool ValidationWithMobileAppMainSSO(out string errorMsg)
+        {
+            var request = HttpContext.Current.Request;
+            var param1 = request.Cookies["user"].Value;
+            if (string.IsNullOrEmpty(param1) || param1.Length < 11)
+            {
+                errorMsg = "获取登陆人信息失败";
+                return false;
+            }
+            param1 = DecryptBase64(param1.Substring(10));
+            //if (request.UrlReferrer == null)
+            //{
+            //    errorMsg = "请求来源不正确";
+            //    return false;
+            //}
+            //var refer = request.UrlReferrer.Host;
+            //if (refer.IndexOf(ConfigurationManager.AppSettings["OA.Host"], StringComparison.CurrentCultureIgnoreCase) < 0)
+            //{
+            //    errorMsg = "请求来源不正确";
+            //    return false;
+            //}
+
+
+            var loginTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+            var expiryMinutes = (24 * 60).ToString();
+
+            var accessToken = Guid.NewGuid().ToString() + "_t";
+
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            dict.Add("accessToken", accessToken);
+            dict.Add("loginId", param1);
+            dict.Add("loginTime", loginTime);
+            dict.Add("expiryMinutes", expiryMinutes);
+
+            WriteCookie("accessToken", accessToken);
+            WriteCookie("loginId", param1);
+            WriteCookie("loginTime", loginTime);
+            WriteCookie("expiryMinutes", expiryMinutes);
+            WriteCookie("signature", GetSignature(dict));
+            errorMsg = null;
+            return true;
+        }
     }
 }

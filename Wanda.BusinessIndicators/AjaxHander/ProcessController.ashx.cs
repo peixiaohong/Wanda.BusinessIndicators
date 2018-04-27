@@ -21,6 +21,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
     {
         protected string Content { get; set; }
         int OperatorType = 0;
+        string VirtualUser = System.Configuration.ConfigurationManager.AppSettings["WF.VirtualUser"];
         public void ProcessRequest(HttpContext context)
         {
             this.BusinessID = context.Request["BusinessID"];
@@ -186,7 +187,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
                         List<NavigatActivity1> lstna = GetProcessIntance(ReportModelA.ID.ToString(), UserLonginID);
                         string Json = Newtonsoft.Json.JsonConvert.SerializeObject(lstna);
-                        if (ReportModelA.WFStatus == "Draft" && OperaionTypes == 7)
+                        if (ReportModelA.WFStatus == "Draft" && OperatorType == 7)
                         {
                             ReportModelA.ReportApprove = null;
                         }
@@ -231,7 +232,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 #region 子流程虚拟审批人提交,是流程走完。
                 try
                 {
-                    WorkflowContext workflow = WFClientSDK.GetProcess(null, tempModel.ID.ToString(), new UserInfo() { UserCode = "$VirtualUserCode$虚拟汇总人" });
+                    WorkflowContext workflow = WFClientSDK.GetProcess(null, tempModel.ID.ToString(), new UserInfo() { UserCode = "$VirtualUserCode$"+VirtualUser });
                     if (workflow.ProcessInstance.Status != 3)
                     {
                         Dictionary<string, object> formParams = new Dictionary<string, object>();
@@ -243,7 +244,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         bizContext.BusinessID = tempModel.ID.ToString();
                         bizContext.FlowCode = workflow.ProcessInstance.FlowCode;
                         bizContext.ApprovalContent = "同意";
-                        bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$虚拟汇总人" };
+                        bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$"+VirtualUser };
                         bizContext.ProcessURL = "/BusinessReport/TargetApprove.aspx";
                         bizContext.FormParams = formParams;
                         bizContext.ExtensionCommond = new Dictionary<string, string>();
@@ -477,7 +478,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     WorkFlowStatus(_rpt, true);
 
                     //针对退回，单独做了处理
-                    if (OperaionType == 6)
+                    if (OperatorType == 6)
                     {
                         item.IsReady = false;
                     }
@@ -491,21 +492,21 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
                 #region 这个是整个批次的审批流程
 
-                if (OperaionType == 6 || OperaionType == 7)
+                if (OperatorType == 6 || OperatorType == 7)
                 {
                     BacthModel.WFBatchStatus = "Draft";
-                    if (OperaionType == 6)
+                    if (OperatorType == 6)
                     {
                         BacthModel.SubReport = JsonConvert.SerializeObject(monthRpt);
 
                         new MonthlyReportLog().AddMonthlyReportAction((int)MonthlyReportLogActionType.Return, tempRPT.SystemID, tempRPT.FinYear, tempRPT.FinMonth, BusinessID.ToGuid());
                     }
-                    else if (OperaionType == 7)
+                    else if (OperatorType == 7)
                     {
                         new MonthlyReportLog().AddMonthlyReportAction((int)MonthlyReportLogActionType.Withdraw, tempRPT.SystemID, tempRPT.FinYear, tempRPT.FinMonth, BusinessID.ToGuid());
                     }
                 }
-                else if (OperaionType == 9)//9, cancel
+                else if (OperatorType == 9)//9, cancel
                 {
                     BacthModel.WFBatchStatus = "Cancel";
                     new MonthlyReportLog().AddMonthlyReportAction((int)MonthlyReportLogActionType.Cancel, tempRPT.SystemID, tempRPT.FinYear, tempRPT.FinMonth, BusinessID.ToGuid());
@@ -543,21 +544,21 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
             //有效流程状态：Progress, Approved
             //4-return, 9 -withdraw
-            if (OperaionType == 6 || OperaionType == 7)
+            if (OperatorType == 6 || OperatorType == 7)
             {
                 rpt.WFStatus = "Draft";
-                if (OperaionType == 6) //退回操作
+                if (OperatorType == 6) //退回操作
                 {
 
                     if (IsProBatch)
                     {
-                        WorkflowContext wfc = WFClientSDK.GetProcess(null, rpt.ID.ToString(), new UserInfo() { UserCode = "$VirtualUserCode$虚拟汇总人" });
+                        WorkflowContext wfc = WFClientSDK.GetProcess(null, rpt.ID.ToString(), new UserInfo() { UserCode = "$VirtualUserCode$"+VirtualUser });
                         BizContext bizContext = new BizContext();
                         bizContext.NodeInstanceList = wfc.NodeInstanceList;
                         bizContext.ProcessRunningNodeID = wfc.ProcessInstance.RunningNodeID;
                         bizContext.BusinessID = rpt.ID.ToString();
                         bizContext.ApprovalContent = "项目汇总退回服务发起";
-                        bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$虚拟汇总人" };
+                        bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$"+VirtualUser };
                         bizContext.ExtensionCommond = new Dictionary<string, string>();
                         bizContext.ExtensionCommond.Add("RejectNode", Guid.Empty.ToString());
                         WorkflowContext wf = WFClientSDK.ExecuteMethod("RejectProcess", bizContext);
@@ -574,14 +575,14 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
                     new MonthlyReportLog().AddMonthlyReportAction((int)MonthlyReportLogActionType.Return, rpt.SystemID, rpt.FinYear, rpt.FinMonth, BusinessID.ToGuid());
                 }
-                else if (OperaionType == 7)
+                else if (OperatorType == 7)
                 {
                     new MonthlyReportLog().AddMonthlyReportAction((int)MonthlyReportLogActionType.Withdraw, rpt.SystemID, rpt.FinYear, rpt.FinMonth, BusinessID.ToGuid());
 
                     rpt.WFStatus = "Draft";
                 }
             }
-            else if (OperaionType == 9)//9, cancel
+            else if (OperatorType == 9)//9, cancel
             {
                 rpt.WFStatus = "Cancel";
                 new MonthlyReportLog().AddMonthlyReportAction((int)MonthlyReportLogActionType.Cancel, rpt.SystemID, rpt.FinYear, rpt.FinMonth, BusinessID.ToGuid());
@@ -905,9 +906,6 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         protected string ProcessJSON { get; set; }
         public string ProType { get; private set; }
         public string ExecType { get; private set; }
-        public int OperaionTypes { get; private set; }
-        public int OperaionType { get; private set; }
-
         public virtual string Recovery()
         {
             return ProcessJSON;

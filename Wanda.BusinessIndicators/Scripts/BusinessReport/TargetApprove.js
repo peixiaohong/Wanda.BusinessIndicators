@@ -18,7 +18,7 @@ var ProType
 var IsNewDataIndex = "";
 var MonthReportOrderType = "Detail";
 var CompanyProperty = "";
-var IncludeHaveDetail = false;
+var IncludeHaveDetail = true;
 //加载模版项
 function loadTmpl(selector) {
     return WebUtil.loadTmpl("../BusinessReport/TargetRptTmpl.html", selector);
@@ -66,9 +66,7 @@ function ChangeTabelHead(TabelHeadID, val) {
     }
 }
 
-//初始化数据方法
-$(document).ready(function () {
-    //月度经营报告
+function setValue() {
     SystemID = $("#hideSystemID").attr("value");
     MonthReportID = $("#hideMonthReportID").attr("value");
     BatchID = $("#hideBatchID").val();
@@ -76,7 +74,11 @@ $(document).ready(function () {
     Month = $("#hideFinMonth").attr("value");
     ProType = $("#hideProType").val();
     ProcessCode = $("#ProcessCode").val();
-
+}
+//初始化数据方法
+$(document).ready(function () {
+    //月度经营报告
+    setValue();
     IsLatestVersion = true;
     ChangeTabelHead("MonthReportSummaryHead", "JY");
     ChangeTabelHead("CompleteDetailHead", "JY");
@@ -415,8 +417,13 @@ function getMonthReportSummaryData(asyncBlock) {
     WebUtil.ajax({
         async: true,
         asyncBlock: block,
-        url: "/TargetApproveController/GetReportInstance",
-        args: { strSystemID: SystemID, strMonthReportID: MonthReportID, IsLatestVersion: IsLatestVersion },
+        url: "/MonthlyReportController/GetReportInstance",
+        args: {
+            strSystemID: SystemID,
+            strMonthReportID: MonthReportID,
+            IsLatestVersion: IsLatestVersion,
+            strProType: ProType
+        },
         successReturn: SplitData
     });
     if (IsNewDataIndex.indexOf("A") < 0) {
@@ -437,8 +444,15 @@ function getMonthReprotDetailData() {
 
     WebUtil.ajax({
         async: true,
-        url: "/TargetApproveController/GetDetailRptDataSource",
-        args: { rpts: WebUtil.jsonToString(ReportInstance), strCompanyProperty: CompanyProperty, strMonthReportOrderType: MonthReportOrderType, IncludeHaveDetail: IncludeHaveDetail },
+        //url: "/TargetApproveController/GetDetailRptDataSource",
+        url:"MonthlyReportController/GetDetailRptDataSource",
+        args: {
+            rpts: WebUtil.jsonToString(ReportInstance),
+            strCompanyProperty: CompanyProperty,
+            strMonthReportOrderType: MonthReportOrderType,
+            IncludeHaveDetail: IncludeHaveDetail,
+            IsLatestVersion: IsLatestVersion
+        },
         successReturn: function (ResultData) {
             ComplateDetailData = ResultData;
             SetComplateTargetDetailData(ComplateDetailData[0], 1);
@@ -572,8 +586,12 @@ function getMonthReportReturnData() {
     }
     WebUtil.ajax({
         async: true,
-        url: "/TargetApproveController/GetTargetReturnList",
-        args: { rpts: WebUtil.jsonToString(ReportInstance) },
+        //url: "/TargetApproveController/GetTargetReturnList",
+        url: "/MonthlyReportController/GetTargetReturnList",
+        args: {
+            rpts: WebUtil.jsonToString(ReportInstance),
+            IsLatestVersion: IsLatestVersion,
+            strProType: ProType},
         successReturn: function (result) {
             ReturnData = result;
             //先影藏其它标签
@@ -696,8 +714,11 @@ function getMonthReportMissTargetData() {
     //未完成说明
     WebUtil.ajax({
         async: true,
-        url: "/TargetApproveController/GetMissTargetList",
-        args: { rpts: WebUtil.jsonToString(ReportInstance) },
+        //url: "/TargetApproveController/GetMissTargetList",
+        url: "/MonthlyReportController/GetMissTargetList",
+        args: {
+            rpts: WebUtil.jsonToString(ReportInstance),
+            IsLatestVersion: IsLatestVersion },
         successReturn: function (result) {
             MissTargetData = result;
             //先影藏其它标签//首先指标先加载

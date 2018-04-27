@@ -94,8 +94,25 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     Response.Redirect("~/NoPermission.aspx");
                     return;
                 }
+                //获取当前人拥有的系统板块
                 List<C_System> c_SystemList = StaticResource.Instance.SystemList.Where(p => _SystemIds.Contains(p.ID)).OrderBy(x => x.Sequence).ToList();
 
+                if (string.IsNullOrEmpty(Request.QueryString["BusinessID"]))
+                {
+                    C_System cs = c_SystemList.FirstOrDefault();
+                    if (cs.Category == 2)
+                    {
+                        Server.Transfer("~/BusinessReport/TargetProReported.aspx");
+                    }
+                    else if (cs.Category == 3)
+                    {
+                        Server.Transfer("~/BusinessReport/TargetGroupReported.aspx");
+                    }
+                    else if (cs.Category == 4)
+                    {
+                        Server.Transfer("~/BusinessReport/TargetDirectlyReported.aspx");
+                    }
+                }
                 ddlSystem.DataSource = c_SystemList;
                 ddlSystem.DataTextField = "SystemName";
                 ddlSystem.DataValueField = "ID";
@@ -114,19 +131,23 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     //从OA进来的
                     hideMonthReportID.Value = Request["BusinessID"];
                     var bmr = B_MonthlyreportOperator.Instance.GetMonthlyreport(Request["BusinessID"].ToGuid());
-                    ddlSystem.SelectedValue = bmr.SystemID.ToString();
+                    //ddlSystem.SelectedValue = bmr.SystemID.ToString();
+                    ddlSystem.SelectedIndex = ddlSystem.Items.IndexOf(ddlSystem.Items.FindByValue(bmr.SystemID.ToString()));
                     HidSystemID.Value = ddlSystem.SelectedValue;
 
-                    ddlAreaID.SelectedValue = bmr.AreaID.ToString();
+                    //ddlAreaID.SelectedValue = bmr.AreaID.ToString();
+                    ddlAreaID.SelectedIndex = ddlAreaID.Items.IndexOf(ddlAreaID.Items.FindByValue(bmr.AreaID.ToString()));
                     HidAreaID.Value = ddlAreaID.SelectedValue;
 
                     ddlSystem.Enabled = false;
                     ddlAreaID.Enabled = false;
+                    //判断是否是是该类型下的板块
+                    ChangeSystem();
                 }
 
                 HideProcessCode.Value = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(), DateTime.Now].Configuration.Element("ProcessCode").Value;
                 //AddMonthlyReport();//如果当前月不存在月度报告数据，添加一条数据
-                InitAreaData();
+                AddMonthlyReport();
             }
         }
         /// <summary>
@@ -261,18 +282,19 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 {
                     //如果是传过来的BusinessID，就直接去查询，不做操作
                     //通过BusinessID，首先获取批次的实体，根据权限，然后在批次中寻找
-                    HiddenBatch.Value = Request["BusinessID"];
                     bmr = B_MonthlyreportOperator.Instance.GetMonthlyreport(Request["BusinessID"].ToGuid());
                     ExceptionHelper.TrueThrow<ArgumentNullException>(bmr == null ? true : false, "Argument B_MonthlyReport is Null");
+                    HiddenBatch.Value = bmr.SystemBatchID.ToString();
+                    hideMonthReportID.Value = bmr.ID.ToString();
 
                     if (bmr.SystemBatchID != Guid.Empty)
                     {
-                        BatchModel = B_SystemBatchOperator.Instance.GetSystemBatch(bmr.SystemBatchID);
-                        List<V_SubReport> rptLsit = JsonConvert.DeserializeObject<List<V_SubReport>>(BatchModel.SubReport);
-                        V_SubReport rptModel = rptLsit.Find(f => f.SystemID == ddlSystem.SelectedValue.ToGuid());
-                        hideMonthReportID.Value = rptModel.ReportID.ToString();
-                        bmr = B_MonthlyreportOperator.Instance.GetMonthlyreport(rptModel.ReportID);
-                        ExceptionHelper.TrueThrow<ArgumentNullException>(bmr == null ? true : false, "Argument B_MonthlyReport is Null");
+                        //BatchModel = B_SystemBatchOperator.Instance.GetSystemBatch(bmr.SystemBatchID);
+                        //List<V_SubReport> rptLsit = JsonConvert.DeserializeObject<List<V_SubReport>>(BatchModel.SubReport);
+                        //V_SubReport rptModel = rptLsit.Find(f => f.SystemID == ddlSystem.SelectedValue.ToGuid());
+                        //hideMonthReportID.Value = rptModel.ReportID.ToString();
+                        //bmr = B_MonthlyreportOperator.Instance.GetMonthlyreport(rptModel.ReportID);
+                        //ExceptionHelper.TrueThrow<ArgumentNullException>(bmr == null ? true : false, "Argument B_MonthlyReport is Null");
                         MutipleUpload.LoadByBusinessID(bmr.ID.ToString());
                         UserControl.SetButtonSpanStyle(bmr.Status);
                     }

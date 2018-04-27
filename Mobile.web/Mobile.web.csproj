@@ -69,8 +69,11 @@
     <None Include="packages.config" />
     <Content Include="Assets\images\arrow-left.png" />
     <Content Include="Assets\images\arrow-right.png" />
-    <Content Include="Assets\Report\ReportTarget.js" />
     <Content Include="Assets\scripts\common\base.utils.js" />
+    <Content Include="Assets\scripts\Report\ReportApprove.js" />
+    <Content Include="Assets\scripts\Report\ReportMonth.js" />
+    <Content Include="Assets\scripts\Report\ReportMonthTemplate.js" />
+    <Content Include="Assets\scripts\Report\ReportTarget.js" />
     <Content Include="Assets\scripts\vue-resource.min.js" />
     <Content Include="Assets\scripts\vue.min.js" />
     <Content Include="Assets\vendors\bpf\bpf-sdk-core.css" />

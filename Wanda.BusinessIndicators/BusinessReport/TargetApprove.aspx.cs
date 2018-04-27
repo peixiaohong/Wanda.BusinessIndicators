@@ -31,8 +31,6 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 else
                     LoadBatchData();
             }
-            hideProcessCode.Value = "YY_ZBGK-FDCHZ";
-
         }
 
         private void LoadData()
@@ -98,6 +96,8 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             hideFinMonth.Value = _BatchModel.FinMonth.ToString();
             hideProType.Value = Request.QueryString["ProType"];
             hideBatchID.Value = _BatchModel.ID.ToString() ;
+            //hideMonthReportID.Value = _BatchModel.ID.ToString();
+            hideMonthReportID.Value = Guid.Empty.ToString();
         }
 
 
