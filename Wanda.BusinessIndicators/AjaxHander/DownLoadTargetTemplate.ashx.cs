@@ -535,7 +535,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         excel.SetCustomProperty(worksheets[z + 1], "AreaID", rpt.AreaID.ToString());
                     }
                     worksheets[z + 1].Cells[0, 1].PutValue(rpt._System.SystemName + otherListTargetPlanView[z].Name);
-                    worksheets[z + 1].Cells[1, 3].PutValue(FinYear.ToString() + "年" + FinMonth + "月");
+                    worksheets[z + 1].Cells[2, 4].PutValue(string.Format(@"{0}月情况 ", FinMonth));
                     worksheets[z + 1].Cells[1, 3].SetStyle(style1);
                     if (templeteName == "指标上报模版_混合V1.xlsx")
                     {
@@ -1231,7 +1231,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         excel.SetCustomProperty(worksheets[z + 1], "AreaID", rpt.AreaID.ToString());
                     }
                     worksheets[z + 1].Cells[0, 1].PutValue(rpt._System.SystemName + otherListTargetPlanView[z].Name);
-                    worksheets[z + 1].Cells[1, 3].PutValue(FinYear.ToString() + "年" + FinMonth + "月");
+                    //worksheets[z + 1].Cells[1, 3].PutValue(FinYear.ToString() + "年" + FinMonth + "月");
+                    worksheets[z + 1].Cells[2, 4].PutValue(string.Format(@"{0}月情况 ", FinMonth));
                     worksheets[z + 1].Cells[1, 3].SetStyle(style1);
                     if (templeteName == "指标上报模版_混合V1.xlsx")
                     {
