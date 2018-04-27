@@ -152,7 +152,11 @@
                 "IsBlendTarget": false,
                 "Senquence": 0,
                 "Level": 0
-            }
+            },
+            reportState: false,
+            currentState: false,
+            totalState: false,
+            yearlyState: false,
         },
         mounted: function () {
             //console.log(1)

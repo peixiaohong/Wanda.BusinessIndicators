@@ -179,7 +179,18 @@ select::-ms-expand {
 	background:url(../images/icon_arr_down.png) left center no-repeat;
 	background-size: 18px;
 }
-
+/*月度报告*/
+h3.bottom {
+    border-bottom: 1px solid #ced6e0;
+}
+.collection-cont ul li h3 .collection-up-icon {
+    background: url(../images/icon_arr_up.png) left center no-repeat;
+    background-size: 18px;
+}
+.collection-cont ul .active h3 .collection-down-icon {
+    background: url(../images/icon_arr_down.png) left center no-repeat;
+    background-size: 18px;
+}
 /*指标查询*/
 .target {
     position:relative;

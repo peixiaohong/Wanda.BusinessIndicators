@@ -14,16 +14,6 @@ var Task = {
             created: function () {
                 var self = this;
                 if (!self.IsNeedApprove) {
-                    //if (Wanda_Workflow_Model.workflowContext.CurrentUserSceneSetting != null) {
-                    //    //Wanda_Workflow_Model.workflowContext.CurrentUserSceneSetting.ActionButtonList=false;
-                    //    Wanda_Workflow_Model.workflowContext.CurrentUserSceneSetting.AllowNewCC = false;
-                    //    Wanda_Workflow_Model.workflowContext.CurrentUserSceneSetting.ShowApprovalLog = false;
-                    //    Wanda_Workflow_Model.workflowContext.CurrentUserSceneSetting.ShowApprovalTextArea = false;
-                    //    Wanda_Workflow_Model.workflowContext.CurrentUserSceneSetting.ShowButtonBar = false;
-                    //    Wanda_Workflow_Model.workflowContext.CurrentUserSceneSetting.ShowCCBar = false;
-                    //    Wanda_Workflow_Model.workflowContext.CurrentUserSceneSetting.ShowNavigationBar = false;
-                    //    Wanda_Workflow_Model.approveText = "无需审批"
-                    //}
                     $('.bpf_workflow_result_list').hide();
                     var $container = $("#SJSJ_LC").closest(".approval-process");
                     $container.find("#bpf-wfclient-log-textarea").val("无需审批");
