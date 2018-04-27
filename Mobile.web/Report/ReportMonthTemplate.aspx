@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="ReportMonthTemplate.aspx.cs" Inherits="Mobile.web.Report.ReportMonthTemplate" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="<%=ResolveUrl("~/Assets/scripts/Report/ReportMonthTemplate.js") %>"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <header id="header">
@@ -8,7 +9,7 @@
         <div class="mobile-header">
             <div id="navbar" role="navigation" class="navbar navbar-default">
                 <button type="button" data-toggle="collapse" data-target="#sm-navbar-collapse" class="navbar-toggle btn-toggle mobile-toggle collapsed" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span> 
+                    <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -28,7 +29,7 @@
             </div>
         </div>
     </header>
-    <section id="content" style="padding-top: 70px;">
+    <section id="ReportMonthTemplateContent" style="padding-top: 70px;" v-cloak>
         <div class="container">
             <div class="row">
                 <div class="page-content col-lg-9 col-md-9 col-sm-9 col-xs-9">
@@ -51,7 +52,7 @@
                                             </div>
                                         </li>
                                         <li class="active">
-                                            <h3>销售额(本月 单位:万元)<span class="collection-updown-icon"></span></h3>
+                                            <h3>{{result.Name}}(本月 单位:万元)<span class="collection-updown-icon"></span></h3>
                                             <div class="showBox">
                                                 <table class="from-table alignCenter">
                                                     <thead>
@@ -63,36 +64,32 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        <template v-for="list in result.ObjValue[0].ObjValue" v-if="result.ObjValue && result.ObjValue[0]">
                                                         <tr>
-                                                            <td>总部</td>
-                                                            <td>2,000</td>
-                                                            <td>2,000</td>
-                                                            <td>100%</td>
+                                                            <td v-on:click="list.IsShow = !list.IsShow">{{list.Name}}</td>
+                                                            <td>{{list.BMonthReportDetail.NPlanAmmount}}</td>
+                                                            <td>{{list.BMonthReportDetail.NActualAmmount}}</td>
+                                                            <td class="color-height">{{list.BMonthReportDetail.NDisplayRate}}</td>
                                                         </tr>
-                                                        <tr>
-                                                            <td>环京区域</td>
-                                                            <td>4,400</td>
-                                                            <td>3,861</td>
-                                                            <td class="color-height">88%</td>
-                                                        </tr>
-                                                        <tr class="new-tem">
+                                                        <tr class="new-tem" v-if="list.ObjValue.length && list.IsShow">
                                                             <td colspan="4" style="padding: 0;">
                                                                 <div class="clear table-tem-new">
                                                                     <table>
-                                                                        <tr>
+                                                                        <template v-for="(items,index) in list.ObjValue">
+                                                                           <tr>
                                                                             <th style="padding: 0; width: 33.8%">
                                                                                 <table>
                                                                                     <tr>
-                                                                                        <td style="width: 20%">1</td>
-                                                                                        <td style="width: 80%">涿州区域</td>
+                                                                                        <td style="width: 20%">{{index + 1}}</td>
+                                                                                        <td style="width: 80%">{{items.CompanyName}}</td>
                                                                                     </tr>
                                                                                 </table>
                                                                             </th>
-                                                                            <td style="width: 22.1%">2,900</td>
-                                                                            <td style="width: 22.1%">2,361</td>
-                                                                            <td style="width: 22%" class="color-height">82%</td>
+                                                                            <td style="width: 22.1%">{{items.NPlanAmmount}}</td>
+                                                                            <td style="width: 22.1%">{{items.NActualAmmount}}</td>
+                                                                            <td style="width: 22%">{{items.NDisplayRate}}</td>
                                                                         </tr>
-                                                                        <tr class="tem-item">
+                                                                        <tr class="tem-item" v-if="false">
                                                                             <td colspan="4" style="padding: 0;">
                                                                                 <div class="clear tem-list">
                                                                                     <table>
@@ -142,36 +139,13 @@
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
-                                                                        <tr>
-                                                                            <th style="padding: 0; width: 33.8%">
-                                                                                <table>
-                                                                                    <tr>
-                                                                                        <td style="width: 20%">2</td>
-                                                                                        <td style="width: 80%">廊坊区域</td>
-                                                                                    </tr>
-                                                                                </table>
-                                                                            </th>
-                                                                            <td>1,500</td>
-                                                                            <td>1,500</td>
-                                                                            <td>100%</td>
-                                                                        </tr>
+                                                                        </template>
                                                                     </table>
                                                                 </div>
                                                             </td>
                                                         </tr>
 
-                                                        <tr>
-                                                            <td>冀南区域</td>
-                                                            <td>3,500</td>
-                                                            <td>3,000</td>
-                                                            <td class="color-height">86%</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>合计</td>
-                                                            <td>8,900</td>
-                                                            <td>8,861</td>
-                                                            <td>99.6%</td>
-                                                        </tr>
+                                                        </template>
                                                     </tbody>
                                                 </table>
                                             </div>

@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="ReportMonth.aspx.cs" Inherits="Mobile.web.Report.ReportMonth" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
+    <script src="../Assets/scripts/Report/ReportMonth.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <header id="header">
@@ -28,8 +28,8 @@
             </div>
         </div>
     </header>
-    <section id="content">
-        <div class="container">
+    <section id="ReportMonthContent" v-cloak>
+        <div class="container" style="margin-top:70px">
             <div class="row">
                 <div class="page-content col-lg-9 col-md-9 col-sm-9 col-xs-9">
                     <div id="vue">
@@ -116,29 +116,12 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="./ReportMonthTemplate.aspx">销售</a>
-                                                                </td>
-                                                                <td>8,900</td>
-                                                                <td>8,861</td>
-                                                                <td>99.6%</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="./ReportMonthTemplate.aspx">回款</a>
-                                                                </td>
-                                                                <td>17,800</td>
-                                                                <td>17,758</td>
-                                                                <td>99.8%</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="./ReportMonthTemplate.aspx">利润额</a>
-                                                                </td>
-                                                                <td>4,450</td>
-                                                                <td>4,448</td>
-                                                                <td>100%</td>
+                                                            <tr v-for="item in result.ObjValue">
+                                                                
+                                                                <td>{{item.TargetName}}</td>
+                                                                <td>{{parseInt(item.NPlanAmmount)}}</td>
+                                                                <td>{{parseInt(item.NActualAmmount)}}</td>
+                                                                <td>{{parseInt(item.NActualRate)}}%</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -158,29 +141,12 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="./ReportMonthTemplate.aspx">销售</a>
-                                                                </td>
-                                                                <td>20,000</td>
-                                                                <td>22,600</td>
-                                                                <td>113%</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="./ReportMonthTemplate.aspx">回款</a>
-                                                                </td>
-                                                                <td>30,000</td>
-                                                                <td>24,500</td>
-                                                                <td>82%</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="./ReportMonthTemplate.aspx">利润额</a>
-                                                                </td>
-                                                                <td>9,000</td>
-                                                                <td>8,700</td>
-                                                                <td>97%</td>
+                                                            <tr v-for="item in result.ObjValue">
+                                                                
+                                                                <td>{{item.TargetName}}</td>
+                                                                <td>{{parseInt(item.NAccumulativePlanAmmount)}}</td>
+                                                                <td>{{parseInt(item.NAccumulativeActualAmmount)}}</td>
+                                                                <td>{{parseInt(item.NAccumulativeActualRate)}}%</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -200,29 +166,11 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="./ReportMonthTemplate.aspx">销售</a>
-                                                                </td>
-                                                                <td>110,000</td>
-                                                                <td>22,600</td>
-                                                                <td>21%</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="./ReportMonthTemplate.aspx">回款</a>
-                                                                </td>
-                                                                <td>180,000</td>
-                                                                <td>24,500</td>
-                                                                <td>14%</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="./ReportMonthTemplate.aspx">利润额</a>
-                                                                </td>
-                                                                <td>54,000</td>
-                                                                <td>8,700</td>
-                                                                <td>16%</td>
+                                                            <tr v-for="item in result.ObjValue">                                                             
+                                                                <td>{{item.TargetName}}</td>
+                                                                <td>{{parseInt(item.MeasureRate)}}</td>
+                                                                <td>{{parseInt(item.NAccumulativeActualAmmount)}}</td>
+                                                                <td>{{parseInt(item.NAnnualCompletionRate)}}%</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -232,10 +180,8 @@
 
                                 </div>
 
-                             
                             </div>
                         </div>
-
                         <!---->
                     </div>
 
