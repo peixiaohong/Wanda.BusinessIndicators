@@ -11,7 +11,7 @@
 
     <script type="text/javascript" src="/Scripts/jquery-1.7.1.js"></script>
     <script type="text/javascript" src="/Scripts/jquery.blockUI.js"></script>
-    <script type="text/javascript" src="/Scripts/base.js?ver=1"></script>
+    <script type="text/javascript" src="/Scripts/base.js?v=2"></script>
     <script type="text/javascript" src="/Scripts/BusinessReport/FloatTable.js"></script>
     <script type="text/javascript" src="../Scripts/jMenu.jquery.js"></script>
     <script type="text/javascript" src="/Scripts/artDialog/artDialog.js?skin=default"></script>
@@ -35,7 +35,6 @@
 
 </head>
 <body>
-
     <div>
         <div class="w1240 mauto pr" style="z-index: 99999; width: 100%; position: absolute; height: 20px;" id="wd-fm">
         </div>
@@ -87,6 +86,7 @@
         <!--header-->
         <div id="sitmap" class="breadcrumb_nav" runat="server" clientidmode="Static"></div>
         <form id="form1" runat="server">
+            <asp:HiddenField ID="hideLoginUser" runat="server"  ClientIDMode="Static"/>
             <div id="main" style="margin-left: 3px; margin-right: 3px;">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>

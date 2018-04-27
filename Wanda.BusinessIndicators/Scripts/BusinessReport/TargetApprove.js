@@ -18,7 +18,7 @@ var ProType
 var IsNewDataIndex = "";
 var MonthReportOrderType = "Detail";
 var CompanyProperty = "";
-var IncludeHaveDetail = true;
+var IncludeHaveDetail = false;
 //加载模版项
 function loadTmpl(selector) {
     return WebUtil.loadTmpl("../BusinessReport/TargetRptTmpl.html", selector);
@@ -410,6 +410,7 @@ function SplitData(resultData) {
 
 
 function getMonthReportSummaryData(asyncBlock) {
+    var IsAll = BatchID != "";
     var block = true;
     if (asyncBlock != undefined) { block = asyncBlock; }
     // if (MonthReportID != "") {
@@ -417,11 +418,15 @@ function getMonthReportSummaryData(asyncBlock) {
     WebUtil.ajax({
         async: true,
         asyncBlock: block,
-        url: "/TargetApproveController/GetReportInstance",
+        //url: "/TargetApproveController/GetReportInstance",
+        url: "/MonthlyReportController/GetReportInstance",
         args: {
-            strSystemID: SystemID,
+            SystemID: SystemID,
             strMonthReportID: MonthReportID,
             IsLatestVersion: IsLatestVersion,
+            Year: Year,
+            Month: Month,
+            IsAll: IsAll,
             strProType: ProType
         },
         successReturn: SplitData
@@ -444,8 +449,8 @@ function getMonthReprotDetailData() {
     
     WebUtil.ajax({
         async: true,
-        url: "/TargetApproveController/GetDetailRptDataSource",
-        //url:"MonthlyReportController/GetDetailRptDataSource",
+        //url: "/TargetApproveController/GetDetailRptDataSource",
+        url:"/MonthlyReportController/GetDetailRptDataSource",
         args: {
             rpts: WebUtil.jsonToString(ReportInstance),
             strCompanyProperty: CompanyProperty,
@@ -515,7 +520,7 @@ function SetComplateTargetDetailData(sender, Type) {
     $("#CompleteDetailHead").empty();
     //表头Tmpl名称
     if (strComplateMonthReportDetilHtmlTemplate[0] != "" && strComplateMonthReportDetilHtmlTemplate[0] != undefined) {
-        loadTmpl('#' + strComplateMonthReportDetilHtmlTemplate[0]).tmpl().appendTo('#CompleteDetailHead');
+        loadTmpl('#' + strComplateMonthReportDetilHtmlTemplate[0]).tmpl(sender).appendTo('#CompleteDetailHead');
     } else {
         loadTmpl('#CompleteDetailHeadTemplate').tmpl().appendTo('#CompleteDetailHead');
     }
