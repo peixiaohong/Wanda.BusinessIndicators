@@ -97,6 +97,22 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 //获取当前人拥有的系统板块
                 List<C_System> c_SystemList = StaticResource.Instance.SystemList.Where(p => _SystemIds.Contains(p.ID)).OrderBy(x => x.Sequence).ToList();
 
+                if (string.IsNullOrEmpty(Request.QueryString["BusinessID"]))
+                {
+                    C_System cs = c_SystemList.FirstOrDefault();
+                    if (cs.Category == 2)
+                    {
+                        Server.Transfer("~/BusinessReport/TargetProReported.aspx");
+                    }
+                    else if (cs.Category == 3)
+                    {
+                        Server.Transfer("~/BusinessReport/TargetGroupReported.aspx");
+                    }
+                    else if (cs.Category == 4)
+                    {
+                        Server.Transfer("~/BusinessReport/TargetDirectlyReported.aspx");
+                    }
+                }
                 ddlSystem.DataSource = c_SystemList;
                 ddlSystem.DataTextField = "SystemName";
                 ddlSystem.DataValueField = "ID";
@@ -125,6 +141,8 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
 
                     ddlSystem.Enabled = false;
                     ddlAreaID.Enabled = false;
+                    //判断是否是是该类型下的板块
+                    ChangeSystem();
                 }
 
                 HideProcessCode.Value = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(), DateTime.Now].Configuration.Element("ProcessCode").Value;

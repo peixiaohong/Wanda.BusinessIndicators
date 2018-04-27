@@ -511,7 +511,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 //插入混合指标
                 InsertBlendTargetToExcelForDownload(excel, worksheets[0], rpt, listMonthReportDetail, blendTargetList, fileName, rowStart, colStart, style2);
 
-                var otherListTargetPlanView = listMonthReportDetail.Where(v => !blendTargetList.Select(x => x.TargetName).ToList().Contains(v.Name)).ToList();
+                var otherListTargetPlanView = listMonthReportDetail.Where(v => !v.IsBlendTarget).ToList();
                 //如果只有混合指标，则删除模板中的Sheet2
                 if (otherListTargetPlanView == null || otherListTargetPlanView.Count == 0)
                 {
@@ -744,8 +744,12 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             ws.Cells[3, 5].PutValue(string.Format(@"{0}", blendTargetList[1].TargetName));
             ws.Cells[3, 6].PutValue(string.Format(@"{0}", blendTargetList[0].TargetName));
             ws.Cells[3, 7].PutValue(string.Format(@"{0}", blendTargetList[1].TargetName));
-            List<DictionaryVmodel> oneBlendTarget = (List<DictionaryVmodel>)listMonthReportDetail.Where(v => v.Name == blendTargetList[0].TargetName).FirstOrDefault().ObjValue;
-            List<DictionaryVmodel> twoBlendTarget = (List<DictionaryVmodel>)listMonthReportDetail.Where(v => v.Name == blendTargetList[1].TargetName).FirstOrDefault().ObjValue;
+            //List<DictionaryVmodel> oneBlendTarget = (List<DictionaryVmodel>)listMonthReportDetail.Where(v => v.Name == blendTargetList[0].TargetName).FirstOrDefault().ObjValue;
+            //List<DictionaryVmodel> twoBlendTarget = (List<DictionaryVmodel>)listMonthReportDetail.Where(v => v.Name == blendTargetList[1].TargetName).FirstOrDefault().ObjValue;
+
+            List<DictionaryVmodel> oneBlendTarget = (List<DictionaryVmodel>)((List<DictionaryVmodel>)listMonthReportDetail.Where(v => v.IsBlendTarget).FirstOrDefault().ObjValue).Where(v => v.Name == blendTargetList[0].TargetName).FirstOrDefault().ObjValue;
+            List<DictionaryVmodel> twoBlendTarget = (List<DictionaryVmodel>)((List<DictionaryVmodel>)listMonthReportDetail.Where(v => v.IsBlendTarget).FirstOrDefault().ObjValue).Where(v => v.Name == blendTargetList[1].TargetName).FirstOrDefault().ObjValue;
+
 
             List<MonthlyReportDetail> oneListMonthReportDetil = new List<MonthlyReportDetail>();
             List<MonthlyReportDetail> twoListMonthReportDetil = new List<MonthlyReportDetail>();
