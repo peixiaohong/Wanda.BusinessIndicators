@@ -94,6 +94,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     Response.Redirect("~/NoPermission.aspx");
                     return;
                 }
+                //获取当前人拥有的系统板块
                 List<C_System> c_SystemList = StaticResource.Instance.SystemList.Where(p => _SystemIds.Contains(p.ID)).OrderBy(x => x.Sequence).ToList();
 
                 ddlSystem.DataSource = c_SystemList;
@@ -128,7 +129,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
 
                 HideProcessCode.Value = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(), DateTime.Now].Configuration.Element("ProcessCode").Value;
                 //AddMonthlyReport();//如果当前月不存在月度报告数据，添加一条数据
-                InitAreaData();
+                AddMonthlyReport();
             }
         }
         /// <summary>
