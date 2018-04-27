@@ -237,7 +237,7 @@ namespace LJTH.BusinessIndicators.Engine
         /// </summary>
         public void GetReportDetail()
         {
-            ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Draft(_System.ID, FinYear, FinMonth, _MonthReportID);
+            ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Draft(_System.ID, FinYear, FinMonth, _MonthReportID,true);
         }
         #endregion Private Method
     }

@@ -417,7 +417,7 @@ function getMonthReportSummaryData(asyncBlock) {
     WebUtil.ajax({
         async: true,
         asyncBlock: block,
-        url: "/MonthlyReportController/GetReportInstance",
+        url: "/TargetApproveController/GetReportInstance",
         args: {
             strSystemID: SystemID,
             strMonthReportID: MonthReportID,
@@ -441,11 +441,11 @@ function getMonthReprotDetailData() {
         latest = true;
     }
     //加载月度报告说明
-
+    
     WebUtil.ajax({
         async: true,
-        //url: "/TargetApproveController/GetDetailRptDataSource",
-        url:"MonthlyReportController/GetDetailRptDataSource",
+        url: "/TargetApproveController/GetDetailRptDataSource",
+        //url:"MonthlyReportController/GetDetailRptDataSource",
         args: {
             rpts: WebUtil.jsonToString(ReportInstance),
             strCompanyProperty: CompanyProperty,
@@ -491,7 +491,18 @@ function ComplateDetailLiaddCss(sender) {
     }
 
     $("#tab2_rows").empty();
-    loadTmpl('#' + ComplateTargetDetailTemplate).tmpl(TemplData).appendTo('#tab2_rows');
+    //为了配合混合指标展示，外面包装了一层data
+    //loadTmpl('#' + ComplateTargetDetailTemplate).tmpl(sender).appendTo('#tab2_rows');
+    var dataArray = [];
+    if (ComplateTargetDetailTemplate == "TargetReportedComplateTargetDetailTemplate") {
+        dataArray = TemplData;
+    }
+    else {
+        var data = { "data": TemplData };
+        dataArray.push(data);
+    }
+
+    loadTmpl('#' + ComplateTargetDetailTemplate).tmpl(dataArray).appendTo('#tab2_rows');
     SetComplateTargetDetailData(TemplData, 2);
 }
 
@@ -519,7 +530,18 @@ function SetComplateTargetDetailData(sender, Type) {
         $("#Ul4").empty();
         loadTmpl('#ComplateTargetDetailHeadTemplate').tmpl(ComplateDetailData).appendTo('#Ul4');
         $("#tab2_rows").empty();
-        loadTmpl('#' + ComplateTargetDetailTemplate).tmpl(sender).appendTo('#tab2_rows');
+        //为了配合混合指标展示，外面包装了一层data
+        //loadTmpl('#' + ComplateTargetDetailTemplate).tmpl(sender).appendTo('#tab2_rows');
+        var dataArray = [];
+        if (ComplateTargetDetailTemplate == "TargetReportedComplateTargetDetailTemplate") {
+            dataArray = sender;
+        }
+        else {
+            var data = { "data": sender };
+            dataArray.push(data);
+        }
+
+        loadTmpl('#' + ComplateTargetDetailTemplate).tmpl(dataArray).appendTo('#tab2_rows');
         $("#Ul4 :first a").addClass("active_sub3");
     } else {
         if (Type == 1) {

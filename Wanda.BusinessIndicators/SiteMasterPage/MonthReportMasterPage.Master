@@ -11,15 +11,15 @@
 
     <script type="text/javascript" src="/Scripts/jquery-1.7.1.js"></script>
     <script type="text/javascript" src="/Scripts/jquery.blockUI.js"></script>
-    <script type="text/javascript" src="/Scripts/base.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
+    <script type="text/javascript" src="/Scripts/base.js?ver=1"></script>
     <script type="text/javascript" src="/Scripts/BusinessReport/FloatTable.js"></script>
     <script type="text/javascript" src="../Scripts/jMenu.jquery.js"></script>
     <script type="text/javascript" src="/Scripts/artDialog/artDialog.js?skin=default"></script>
-    <script type="text/javascript" src="/Scripts/jquery.cookie.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
-    <script type="text/javascript" src="/Scripts/jqueryControl.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
+    <script type="text/javascript" src="/Scripts/jquery.cookie.js?ver=1"></script>
+    <script type="text/javascript" src="/Scripts/jqueryControl.js?ver=1"></script>
     <script type="text/javascript" src="/Scripts/posfixed.js"></script>
     <script type="text/javascript" src="/Scripts/My97DatePicker/WdatePicker.js"></script>
-    <script type="text/javascript" src="/Scripts/jquery.tmpl.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
+    <script type="text/javascript" src="/Scripts/jquery.tmpl.js?ver=1"></script>
     <link href="/Styles/jmenu.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
