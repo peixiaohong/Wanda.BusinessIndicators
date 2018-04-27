@@ -23,13 +23,14 @@ namespace LJTH.BusinessIndicators.Engine
         /// <param name="Month"></param>
         /// <param name="IsLatestVersion">是否是最新的版本，true：从B表中获取，false：从A表中获取 </param>
         /// <param name="_DataSource">当从B表中获取时，这里有Draft：草稿状态， 或者是审批中状态 </param>
-        public ReportInstance(Guid SystemID, int Year, int Month, bool IsLatestVersion = false, string _DataSource = "Draft")
+        /// <param name="IsAll">是否获取全部月报数据，月报查询true,月报上报false </param>
+        public ReportInstance(Guid SystemID, int Year, int Month, bool IsLatestVersion = false, string _DataSource = "Draft", bool IsAll=false)
         {
             _SystemID = SystemID;
             FinYear = Year;
             FinMonth = Month;
             DataSource = _DataSource;
-            InitialData(IsLatestVersion);
+            InitialData(IsLatestVersion, IsAll);
         }
 
         /// <summary>
@@ -38,7 +39,8 @@ namespace LJTH.BusinessIndicators.Engine
         /// <param name="MonthReportID"></param>
         /// <param name="IsLatestVersion">是否是最新的版本，true：从B表中获取，false：从A表中获取</param>
         /// <param name="_DataSource">当从B表中获取时，这里有Draft：草稿状态， 或者是审批中状态 </param>
-        public ReportInstance(Guid MonthReportID, bool IsLatestVersion = false, string _DataSource = "Draft")
+        /// <param name="IsAll">是否获取全部月报数据，月报查询true,月报上报false </param>
+        public ReportInstance(Guid MonthReportID, bool IsLatestVersion = false, string _DataSource = "Draft", bool IsAll = false)
         {
             _MonthReportID = MonthReportID;
             B_MonthlyReport report = B_MonthlyreportOperator.Instance.GetMonthlyreport(_MonthReportID);
@@ -48,7 +50,7 @@ namespace LJTH.BusinessIndicators.Engine
             FinYear = report.FinYear;
             FinMonth = report.FinMonth;
             DataSource = _DataSource;
-            InitialData(IsLatestVersion);
+            InitialData(IsLatestVersion,IsAll);
 
         }
 
@@ -181,25 +183,24 @@ namespace LJTH.BusinessIndicators.Engine
         /// otherwise, the data source is A_ atble 
         /// </summary>
         /// <param name="IsLatestVersion">if the data source should be  B_ Table</param>
-        void InitialData(bool IsLatestVersion)
+        void InitialData(bool IsLatestVersion,bool IsAll)
         {
             if (IsLatestVersion)
             {
                 if (LastestMonthlyReport != null)
                 {
-                    //Report = LastestMonthlyReport.ToVModel();
-                    //if (_MonthReportID == Guid.Empty)
-                    //{
-                    //    _MonthReportID = Report.ID;
-                    //}
-                    _MonthReportID = LastestMonthlyReport.ID;
+                    Report = LastestMonthlyReport.ToVModel();
+                    if (_MonthReportID == Guid.Empty)
+                    {
+                        _MonthReportID = Report.ID;
+                    }
                 }
                 ReportDetails = new List<MonthlyReportDetail>();
 
                 if (DataSource == "Draft")
-                    ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Draft(_System.ID, FinYear, FinMonth, _MonthReportID);
+                    ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Draft(_System.ID, FinYear, FinMonth, _MonthReportID, IsAll);
                 else
-                    ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Approve(_System.ID, FinYear, FinMonth, _MonthReportID);
+                    ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Approve(_System.ID, FinYear, FinMonth, _MonthReportID, IsAll);
 
                 //LastestMonthlyReportDetails.ForEach(P => ReportDetails.Add(P.ToVModel()));
             }
@@ -220,15 +221,15 @@ namespace LJTH.BusinessIndicators.Engine
             }
 
             //筛选当前用户有权限的项目公司信息(因为权限数据缺失暂时注释)
-            //var companyIDArray = BLL.BizBLL.S_OrganizationalActionOperator.Instance.GetUserCompanyData(_System.ID, CurrentLoginName).Select(m => m.ID).ToArray();
-            //if (companyIDArray.Length > 0)
-            //{
-            //    ReportDetails = ReportDetails.Where(m => companyIDArray.Contains(m.CompanyID)).ToList();
-            //}
-            //else
-            //{
-            //    ReportDetails = new List<MonthlyReportDetail>();
-            //}
+            var companyIDArray = BLL.BizBLL.S_OrganizationalActionOperator.Instance.GetUserCompanyDataNoIsDelete(_System.ID, CurrentLoginName).Select(m => m.ID).ToArray();
+            if (companyIDArray.Length > 0)
+            {
+                ReportDetails = ReportDetails.Where(m => companyIDArray.Contains(m.CompanyID)).ToList();
+            }
+            else
+            {
+                ReportDetails = new List<MonthlyReportDetail>();
+            }
         }
 
         /// <summary>

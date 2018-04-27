@@ -81,6 +81,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         string OrderStrTwo = "DetailMonthly";//明细下载排序字段,默认是按照当月排序的
         bool IsBlendTargets = false;//是否混合指标
         bool isHaveArea = false;//板块下是否存在区域
+        bool IsAll = false;//是否获取全部数据（经营月报查询获取全部数据，月报上报获取非全部数据）
         string DataSource = string.Empty; //B表数据源
 
         public void ProcessRequest(HttpContext context)
@@ -122,6 +123,11 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 DataSource = HttpContext.Current.Request["DataSource"].ToString();
             }
 
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request["IsAll"]))
+            {
+                IsAll = bool.Parse(HttpContext.Current.Request["IsAll"].ToString());
+            }
+
             if (!string.IsNullOrEmpty(HttpContext.Current.Request["IsLatestVersion"]))
             {
                 if (HttpContext.Current.Request["IsLatestVersion"] == "true")
@@ -137,11 +143,11 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             {
                 if (MonthlyReportID == Guid.Empty)
                 {
-                    rpt = new ReportInstance(SysId, FinYear, FinMonth, IsLatestVersion, DataSource);
+                    rpt = new ReportInstance(SysId, FinYear, FinMonth, IsLatestVersion, DataSource, IsAll);
                 }
                 else
                 {
-                    rpt = new ReportInstance(MonthlyReportID, true, DataSource);
+                    rpt = new ReportInstance(MonthlyReportID, true, DataSource, IsAll);
                     FinMonth = rpt.FinMonth;
                     FinYear = rpt.FinYear;
                     SysId = rpt._SystemID;
@@ -166,8 +172,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 ReportInstance rpt_CurrentMissTarget = new ReportInstance();
                 if (rpt._MonthReportID != Guid.Empty)
                 {
-                    rpt_MissTarget = new ReportInstance(rpt._MonthReportID, true, "Progress");
-                    rpt_CurrentMissTarget = new ReportInstance(rpt._MonthReportID, true, "Progress");
+                    rpt_MissTarget = new ReportInstance(rpt._MonthReportID, true, "Progress", IsAll);
+                    rpt_CurrentMissTarget = new ReportInstance(rpt._MonthReportID, true, "Progress", IsAll);
                 }
                 else
                 {

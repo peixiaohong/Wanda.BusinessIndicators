@@ -106,6 +106,7 @@
     <Content Include="Public\Bridge.aspx" />
     <Content Include="Public\Login.aspx" />
     <Content Include="Public\Logout.aspx" />
+    <Content Include="Public\MobileAppBridge.aspx" />
     <Content Include="Public\OABridge.aspx" />
     <Content Include="Scripts\BusinessReport\ComprehensiveReportForms.js" />
     <Content Include="Scripts\BusinessReport\FixedRpt.js" />
@@ -1169,6 +1170,13 @@
     </Compile>
     <Compile Include="Public\Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Public\MobileAppBridge.aspx.cs">
+      <DependentUpon>MobileAppBridge.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\MobileAppBridge.aspx.designer.cs">
+      <DependentUpon>MobileAppBridge.aspx</DependentUpon>
     </Compile>
     <Compile Include="Public\OABridge.aspx.cs">
       <DependentUpon>OABridge.aspx</DependentUpon>
