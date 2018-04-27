@@ -282,18 +282,19 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 {
                     //如果是传过来的BusinessID，就直接去查询，不做操作
                     //通过BusinessID，首先获取批次的实体，根据权限，然后在批次中寻找
-                    HiddenBatch.Value = Request["BusinessID"];
                     bmr = B_MonthlyreportOperator.Instance.GetMonthlyreport(Request["BusinessID"].ToGuid());
                     ExceptionHelper.TrueThrow<ArgumentNullException>(bmr == null ? true : false, "Argument B_MonthlyReport is Null");
+                    HiddenBatch.Value = bmr.SystemBatchID.ToString();
+                    hideMonthReportID.Value = bmr.ID.ToString();
 
                     if (bmr.SystemBatchID != Guid.Empty)
                     {
-                        BatchModel = B_SystemBatchOperator.Instance.GetSystemBatch(bmr.SystemBatchID);
-                        List<V_SubReport> rptLsit = JsonConvert.DeserializeObject<List<V_SubReport>>(BatchModel.SubReport);
-                        V_SubReport rptModel = rptLsit.Find(f => f.SystemID == ddlSystem.SelectedValue.ToGuid());
-                        hideMonthReportID.Value = rptModel.ReportID.ToString();
-                        bmr = B_MonthlyreportOperator.Instance.GetMonthlyreport(rptModel.ReportID);
-                        ExceptionHelper.TrueThrow<ArgumentNullException>(bmr == null ? true : false, "Argument B_MonthlyReport is Null");
+                        //BatchModel = B_SystemBatchOperator.Instance.GetSystemBatch(bmr.SystemBatchID);
+                        //List<V_SubReport> rptLsit = JsonConvert.DeserializeObject<List<V_SubReport>>(BatchModel.SubReport);
+                        //V_SubReport rptModel = rptLsit.Find(f => f.SystemID == ddlSystem.SelectedValue.ToGuid());
+                        //hideMonthReportID.Value = rptModel.ReportID.ToString();
+                        //bmr = B_MonthlyreportOperator.Instance.GetMonthlyreport(rptModel.ReportID);
+                        //ExceptionHelper.TrueThrow<ArgumentNullException>(bmr == null ? true : false, "Argument B_MonthlyReport is Null");
                         MutipleUpload.LoadByBusinessID(bmr.ID.ToString());
                         UserControl.SetButtonSpanStyle(bmr.Status);
                     }

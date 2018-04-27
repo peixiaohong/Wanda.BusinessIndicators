@@ -1,13 +1,14 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMasterPage.master.cs" Inherits="Mobile.web.SiteMasterPage.MainMasterPage" %>
+
 <%@ Register Src="~/SiteMasterPage/bsCtrl.ascx" TagPrefix="uc1" TagName="bsCtrl" %>
 
 <!DOCTYPE html>
 
 <html>
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <uc1:bsCtrl runat="server" ID="bsCtrl" />
     <link href="<%=ResolveUrl("~/Assets/vendors/bootstrap/css/bootstrap.min.css") %>" rel="stylesheet" />
     <link href="<%=ResolveUrl("~/Assets/vendors/bootstrap/css/bootstrap-theme.min.css") %>" rel="stylesheet" />
@@ -22,18 +23,109 @@
     <script src="<%=ResolveUrl("~/Assets/vendors/jquery/jquery.min.js") %>"></script>
     <script src="<%=ResolveUrl("~/Assets/vendors/bootstrap/js/bootstrap.min.js") %>"></script>
     <script src="<%=ResolveUrl("~/Assets/scripts/common/base.utils.js") %>"></script>
-    
-<%--<script src="<%=ResolveUrl("~/Assets/vendors/workflow/js/Workflow.js?v=") + ConfigurationManager.AppSettings[""] %>"></script>--%>
+
+    <%--<script src="<%=ResolveUrl("~/Assets/vendors/workflow/js/Workflow.js?v=") + ConfigurationManager.AppSettings[""] %>"></script>--%>
     <asp:ContentPlaceHolder ID="head" runat="server">
- 
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
+        <a id="navigate-top" href="javascript:void(0)" class="back-top">
+            <img src="<%=ResolveUrl("~/Assets/images/icon-top.png") %>" alt="返回顶部" />
+        </a>
+        <header id="header" v-cloak>
+            <!---->
+            <div class="mobile-header">
+                <div id="navbar" role="navigation" class="navbar navbar-default">
+                    <button type="button" data-toggle="collapse" data-target="#sm-navbar-collapse" class="navbar-toggle btn-toggle mobile-toggle collapsed" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <h1 class="header-t">{{title}}</h1>
+                    <div id="sm-navbar-collapse" class="navbar-collapse mobile-navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+                        <ul id="navbar-menu" class="nav navbar-nav mobile-nav">
+                            <li v-bind:class="{'active': isMonth}">
+                                <a href="javascript:void(0)" class="clear" v-on:click="targetBlank('month')"><span>月度经营报告</span></a>
+                            </li>
+                            <li v-bind:class="{'active': isTarget}">
+                                <a href="javascript:void(0)" class="clear" v-on:click="targetBlank('target')"><span>分解指标查询</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
+        <script type="text/javascript">
+            $(function () {
+                new Vue({
+                    el: "#header",
+                    data: {
+                        title: "月度经营报告",
+                        isMonth: true,
+                        isTarget: false,
+                    },
+                    mounted: function () {
+                        var self = this;
+                        self.initTitle();
+                    },
+                    methods: {
+                        targetBlank: function (type) {
+                            var self = this;
+                            switch (type) {
+                                case "month":
+                                    if (self.isMonth) {
+                                        return false;
+                                    }
+                                    window.location.pathname = "/Report/ReportMonth.aspx";
+                                    break;
+                                case "target":
+                                    if (self.isTarget) {
+                                        return false;
+                                    }
+                                    window.location.pathname = "/Report/ReportTarget.aspx";
+                                    break;
+                            }
+                        },
+                        initTitle: function () {
+                            var self = this;
+                            var pathname = window.location.pathname;
+                            switch (pathname) {
+                                case "/Report/ReportMonth.aspx":
+                                    self.title = "月度经营报告";
+                                    self.isMonth = true;
+                                    self.isTarget = false;
+                                    break;
+                                case "/Report/ReportTarget.aspx":
+                                    self.title = "分解指标查询";
+                                    self.isMonth = false;
+                                    self.isTarget = true;
+                                    break;
+                            }
+                        }
+                    }
+                });
+                $(window).on("scroll resize", function (e) {
+                    var y = $(this).scrollTop();
+                    if (y == 0) {
+                        $('#navigate-top').removeClass("visible");
+                    }
+                    else {
+                        $('#navigate-top').addClass("visible");
+                    }
+                });
+
+                $("#navigate-top").click(function () {
+                    $('html, body').animate({ scrollTop: '0px' }, 300);
+                });
+            })
+        </script>
     </form>
 </body>
 </html>

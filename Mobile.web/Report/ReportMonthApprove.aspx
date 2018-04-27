@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-        <section id="content">
+        <section id="ApproveContent">
         <div class="container" style="padding-top:0;">
             <div class="row">
 
