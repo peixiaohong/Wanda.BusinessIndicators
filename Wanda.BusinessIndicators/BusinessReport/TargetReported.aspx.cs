@@ -257,7 +257,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
 
                         #endregion
                     }
-
+                    UserControl.SetButtonSpanStyle(bmr.Status);
                 }
                 else
                 {

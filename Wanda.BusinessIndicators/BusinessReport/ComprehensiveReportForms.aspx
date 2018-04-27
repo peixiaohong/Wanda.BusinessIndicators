@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MonthReportMasterPage.Master" AutoEventWireup="true" CodeBehind="ComprehensiveReportForms.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.BusinessReport.ComprehensiveReportForms" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <script type="text/javascript" src="../Scripts/BusinessReport/ComprehensiveReportForms.js"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/ComprehensiveReportForms.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 

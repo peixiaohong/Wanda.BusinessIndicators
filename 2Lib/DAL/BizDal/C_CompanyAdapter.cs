@@ -246,12 +246,13 @@ WHERE   SystemID = @SystemID
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public List<C_Company> GetCompanyInfoByName(string name) {
+        public List<C_Company> GetCompanyInfoByName(string name,Guid systemID) {
 
-            string sql = string.Format(@"Select * From [dbo].[C_Company] Where [CompanyName]=@CompanyName", name);
+            string sql = @"Select * From [dbo].[C_Company] Where [CompanyName]=@CompanyName And [SystemID]=@SystemID And [IsDeleted]=0";
             DbParameter[] parameters = new DbParameter[]
             {
-                 CreateSqlParameter("@CompanyName",DbType.String,name)
+                 CreateSqlParameter("@CompanyName",DbType.String,name),
+                 CreateSqlParameter("@SystemID",DbType.Guid,systemID)
             };
             return ExecuteQuery(sql,parameters);
         }
