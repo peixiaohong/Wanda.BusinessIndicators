@@ -236,11 +236,11 @@ WHERE   MonthlyReportID = @MonthlyReportID
             return data;
         }
 
-        internal List<MonthlyReportDetail> GetMonthlyReportDetailList(Guid MonthlyReportID, Guid SystemID)
+        internal List<MonthlyReportDetail> GetMonthlyReportDetailList(Guid MonthlyReportID, Guid SystemID, bool IsAll)
         {
             string sql = "GetMonthlyReportDetailList ";
             SqlParameter p1 = new SqlParameter("@SystemID", SystemID);
-            if(MonthlyReportID!=Guid.Empty)
+            if (!IsAll)
             {
                 sql = "GetMonthlyReportDetailListMonthID";
                 p1 = new SqlParameter("@MonthlyReportID", MonthlyReportID);
@@ -257,7 +257,6 @@ WHERE   MonthlyReportID = @MonthlyReportID
                 data.Add(item);
             });
             return data;
-
         }
 
         /// <summary>

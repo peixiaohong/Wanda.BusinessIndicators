@@ -9,9 +9,6 @@
   <ReportMonthlyDetail>
     <TableTemplate />
   </ReportMonthlyDetail>
-  <SummaryMonthlyReport>
-    <TableTemplate TableHeadTmplName="MonthReportSummaryHeadTemplate_DZSW" TableDataTmplName="" TableExcelTemplateName="月度经营报告_大众电影V1.xlsx" />
-  </SummaryMonthlyReport>
   <ManageTargetDetail Name="经营报告明细">
     <BlendTargets IsBlendTarget="True" Senquence="1" TargetName="经营收入+经营利润" TargetValue="558CF58E-66CB-4379-9CFF-12051F7436F6,CC4AA1EC-D374-4F15-83C9-8B7E15F3A8CD">
       <Target TargetName="经营收入" Senquence="1" IsBlendTarget="True" TargetValue="558CF58E-66CB-4379-9CFF-12051F7436F6" />

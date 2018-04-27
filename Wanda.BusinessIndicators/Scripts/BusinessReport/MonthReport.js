@@ -676,7 +676,7 @@ function getMonthReportSummaryData() {
     WebUtil.ajax({
         async: true,
         url: "/MonthlyReportController/GetReportInstance",
-        args: { SystemID: $("#ddlSystem").val(), Year: $("#ddlYear").val(), Month: $("#ddlMonth").val(), IsLatestVersion: latest, DataSource: dataSource },
+        args: { SystemID: $("#ddlSystem").val(), Year: $("#ddlYear").val(), Month: $("#ddlMonth").val(), IsLatestVersion: latest, DataSource: dataSource, IsAll: true },
         successReturn: SplitData
     });
     if (IsNewDataIndex.indexOf("A") < 0) {
@@ -1803,7 +1803,7 @@ function DownExcelReportList(sender) {
     if ($("#submana").is(":visible")) {
         dataSource = "Progress";
     }
-    window.open("/AjaxHander/DownMonthRptFileList.ashx?Param=" + latest + "&SysId=" + SysId + "&FinYear=" + FinYear + "&FinMonth=" + FinMonth + "&IsLatestVersion=" + IsLatestVersion + "&OrderStr=" + MonthReportOrderType + "&DataSource=" + dataSource);
+    window.open("/AjaxHander/DownMonthRptFileList.ashx?Param=" + latest + "&SysId=" + SysId + "&FinYear=" + FinYear + "&FinMonth=" + FinMonth + "&IsLatestVersion=" + IsLatestVersion + "&OrderStr=" + MonthReportOrderType + "&DataSource=" + dataSource + "&IsAll=true");
 }
 
 function LoadSearchConditions(strConditions) {

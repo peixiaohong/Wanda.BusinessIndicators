@@ -555,7 +555,7 @@ function getMonthReportSummaryData() {
     WebUtil.ajax({
         async: true,
         url: "/MonthlyReportController/GetReportInstance",
-        args: { SystemID: $("#ddlSystem").val(), Year: $("#ddlYear").val(), Month: $("#ddlMonth").val(), IsLatestVersion: latest, DataSource: dataSource },
+        args: { SystemID: $("#ddlSystem").val(), Year: $("#ddlYear").val(), Month: $("#ddlMonth").val(), IsLatestVersion: latest, DataSource: dataSource, IsAll: true },
         successReturn: SplitData
     });
     if (IsNewDataIndex.indexOf("A") < 0) {
