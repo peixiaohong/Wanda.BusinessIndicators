@@ -54,9 +54,11 @@ namespace LJTH.BusinessIndicators.Common
         {
             string cacheKey = null;
             LoginUserInfo result = null;
-
-            string ssoUsername = HttpContext.Current.Items["WD_SSO_UserName"] != null ? HttpContext.Current.Items["WD_SSO_UserName"].ToString() : string.Empty;
+            string ssoUsername = HttpContext.Current.Request["LoginUser"];
+            //string ssoUsername = HttpContext.Current.Items["WD_SSO_UserName"] != null ? HttpContext.Current.Items["WD_SSO_UserName"].ToString() : string.Empty;
             string strUserName = HttpContext.Current.User.Identity != null ? HttpContext.Current.User.Identity.Name : ssoUsername;
+            if (string.IsNullOrEmpty(strUserName))
+                strUserName = ssoUsername;
             if (!EnabledSSO)
             {
                 strUserName = ConfigurationManager.AppSettings["virtualUser"];

@@ -98,6 +98,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             hideBatchID.Value = _BatchModel.ID.ToString() ;
             //hideMonthReportID.Value = _BatchModel.ID.ToString();
             hideMonthReportID.Value = Guid.Empty.ToString();
+            hideFinYear.Value = _BatchModel.FinYear.ToString();
         }
 
 

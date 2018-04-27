@@ -10,8 +10,8 @@ namespace Common.ScheduleService
         /// </summary>
         static void Main()
         {
-            new ProjectMergeProcess().Execute(null);
-            return;
+            //new ProjectMergeProcess().Execute(null);
+            //return;
 
             //#if DEBUG
             //            DebugRun();

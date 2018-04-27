@@ -55,7 +55,7 @@ namespace LJTH.BusinessIndicators.Engine
 
             if (NPlanAmmount > 0 && NActualAmmount >= 0)//A>0,B≥0:B/A
             {
-                strRevenueDisplayRate = ((NActualAmmount / NPlanAmmount)*100).ToString();
+                strRevenueDisplayRate = ((NActualAmmount / NPlanAmmount) * 100).ToString();
             }
             else if (NPlanAmmount == 0 && NActualAmmount > 0)//A=0,B>0:超计划B万元
             {
@@ -63,7 +63,7 @@ namespace LJTH.BusinessIndicators.Engine
             }
             else if (NPlanAmmount > 0 && NActualAmmount < 0)//A>0,B<0:增亏|(B-A)/A|%
             {
-                strRevenueDisplayRate="增亏"+(Math.Abs((NActualAmmount - NPlanAmmount) / NPlanAmmount)*100).ToString()+"%";
+                strRevenueDisplayRate = "增亏" + (Math.Abs((NActualAmmount - NPlanAmmount) / NPlanAmmount) * 100).ToString() + "%";
             }
             else if (NPlanAmmount < 0 && NActualAmmount >= 0)//A<0,B≥0:减亏|(B-A)/A|%
             {
@@ -84,6 +84,10 @@ namespace LJTH.BusinessIndicators.Engine
             else if (NPlanAmmount == 0 && NActualAmmount < 0)//A=0,B<0:增亏B万元
             {
                 strRevenueDisplayRate = "增亏" + NActualAmmount + "万元";
+            }
+            else if (NPlanAmmount > 0 && NActualAmmount < 0) //A>0,B<0:退房B万元
+            {
+                strRevenueDisplayRate = "退房" + NActualAmmount + "万元";
             }
 
             return strRevenueDisplayRate;

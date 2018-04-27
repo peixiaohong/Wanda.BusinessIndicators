@@ -43,6 +43,8 @@ namespace LJTH.BusinessIndicators.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            hideLoginUser.Value = Common.WebHelper.GetCurrentLoginUser();
+
             //去掉Csr攻击
             //WebHelper.CheckCsrf();
             //if (AppSettingConfig.GetSetting("forceMenuShow", "false").ToLower() == "true")
