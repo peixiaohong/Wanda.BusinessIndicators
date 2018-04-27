@@ -84,7 +84,7 @@ namespace LJTH.BusinessIndicators.Engine
 
         [ScriptIgnore]
         public C_System _System { get { return StaticResource.Instance[_SystemID, DateTime.Now]; } }
-        [ScriptIgnore]
+
         public List<C_Target> _Target { get { return StaticResource.Instance.GetTargetList(_SystemID, DateTime.Now).ToList(); } }
 
         public Guid _MonthReportID { get; set; }

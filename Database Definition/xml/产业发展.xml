@@ -2,9 +2,6 @@
 	<ProcessCode ShowProcessNodeName="true">YY_ZBGK-CYFZ</ProcessCode>
 	<ProcessCode ShowProcessNodeName="true">YY_ZBGK-CYFZ-ZB</ProcessCode>
 	<Interfaces>
-		<ISequence TemplateType="MissTarget" InterfaceName="MissTargetSequence" />
-		<ISequence TemplateType="Return" InterfaceName="ReturnSequence" />
-		<ISequence TemplateType="DetailMonthly" InterfaceName="CurrentMonthSequence" />
 	</Interfaces>
 	<ReportMonthlyDetail>
 		<TableTemplate />
