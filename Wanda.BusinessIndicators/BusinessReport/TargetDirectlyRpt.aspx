@@ -1,5 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MonthReportMasterPage.Master" AutoEventWireup="true" CodeBehind="TargetDirectlyRpt.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.BusinessReport.DirectlyMonthReport" %>
 
+<%@ Register Src="~/SiteMasterPage/wfCtrl.ascx" TagPrefix="uc1" TagName="wfCtrl" %>
+<%@ Register Src="~/SiteMasterPage/userSelectCtrl.ascx" TagPrefix="uc1" TagName="userSelectCtrl" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" type="text/css" href="../Scripts/UpLoad/uploadify.css" />
     <script type="text/javascript" src="../Scripts/jquery.base64.js"></script>
@@ -14,6 +18,10 @@
      <script type="text/javascript">
          var TreeDataJson = <%=TreeDataJson%>;
     </script>
+
+    <uc1:wfCtrl runat="server" ID="wfCtrl" />
+    <uc1:userSelectCtrl runat="server" ID="userSelectCtrl" />
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="main">

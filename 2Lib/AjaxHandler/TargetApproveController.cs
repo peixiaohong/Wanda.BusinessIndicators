@@ -228,27 +228,28 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
 
             if (rpt._MonthReportID != Guid.Empty)
             {
-                B_MonthlyReportJsonData B_JsonData = new B_MonthlyReportJsonData();
-                try
-                {
-                    B_JsonData = B_MonthlyReportJsonDataOperator.Instance.GetMonthlyReportJsonData(rpt._MonthReportID);
-                }
-                catch (Exception)
-                {
-                    B_JsonData = null;
-                }
+                //B_MonthlyReportJsonData B_JsonData = new B_MonthlyReportJsonData();
+                //try
+                //{
+                //    B_JsonData = B_MonthlyReportJsonDataOperator.Instance.GetMonthlyReportJsonData(rpt._MonthReportID);
+                //}
+                //catch (Exception)
+                //{
+                //    B_JsonData = null;
+                //}
 
-                //获取 表中的JSon数据
-                if (B_JsonData != null && !string.IsNullOrEmpty(B_JsonData.QuerryDetaileJsonData))
-                {
-                    AllData = JsonHelper.Deserialize<List<DictionaryVmodel>>(B_JsonData.QuerryDetaileJsonData);
-                }
-                else
-                {
-                    AllData = ReportInstanceDetailEngine.ReportInstanceDetailService.GetDetailRptDataSource(rpt, strCompanyProperty, strMonthReportOrderType, IncludeHaveDetail);
-                }
+                ////获取 表中的JSon数据
+                //if (B_JsonData != null && !string.IsNullOrEmpty(B_JsonData.QuerryDetaileJsonData) && strMonthReportOrderType == "Detail")
+                //{
+                //    AllData = JsonHelper.Deserialize<List<DictionaryVmodel>>(B_JsonData.QuerryDetaileJsonData);
+                //}
+                //else
+                //{
+                AllData = ReportInstanceDetailEngine.ReportInstanceDetailService.GetDetailRptDataSource(rpt, strCompanyProperty, strMonthReportOrderType, IncludeHaveDetail);
+                //}
             }
             return AllData;
+
         }
     }
 }

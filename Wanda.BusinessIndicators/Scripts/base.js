@@ -337,7 +337,7 @@ Requirements:
             type: "post", //"get",//"post",
             dataType: "json", //默认使用json， 除非指定为html
             url: "", // /{controller}/{action}.jx 
-            args: {}, //*3 action arguments. It is suggested to use below 3 level json object. 
+            args: { }, //*3 action arguments. It is suggested to use below 3 level json object. 
             before: function (beforeOptions) {
                 // check data before ajax sending
                 if (CommonUtil.isNA(beforeOptions.url)) {
@@ -393,6 +393,7 @@ Requirements:
             }
         };
         $.extend(setting, options);
+        $.extend(setting.args, { LoginUser: $("#hideLoginUser").val() });
 
         if (typeof setting.before == 'function') {
             //setTimeout($.blockUI, 10, null);

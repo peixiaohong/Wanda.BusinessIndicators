@@ -171,13 +171,17 @@ namespace Lib.Web.MVC.Controller
 
         public string CurrentUserName
         {
-            get {
-                if (ConfigurationManager.AppSettings["EnabledSSO"] == "false")
-                {
-                    return ConfigurationManager.AppSettings["virtualUser"];
-                }
-                else
-                    return HttpContext.Current.User.Identity.Name;
+            //get {
+            //    if (ConfigurationManager.AppSettings["EnabledSSO"] == "false")
+            //    {
+            //        return ConfigurationManager.AppSettings["virtualUser"];
+            //    }
+            //    else
+            //        return HttpContext.Current.User.Identity.Name;
+            //}
+            get
+            {
+                return HttpContext.Current.Request["LoginUser"];
             }
         }
         

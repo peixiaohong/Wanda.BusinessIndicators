@@ -14,7 +14,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="text/javascript" src="/Scripts/jquery-1.7.1.js"></script>
     <script type="text/javascript" src="/Scripts/jquery.blockUI.js"></script>
-    <script type="text/javascript" src="/Scripts/base.js"></script>
+    <script type="text/javascript" src="/Scripts/base.js?v=2"></script>
     <script type="text/javascript" src="/Scripts/BusinessReport/FloatTable.js"></script>
     <script type="text/javascript" src="/Scripts/nav.js"></script>
     <script type="text/javascript" src="/Scripts/artDialog/artDialog.js?skin=default"></script>
@@ -39,6 +39,7 @@
 <body style="background:#fff;">
     <div class="Pagebox">
         <form id="form1" runat="server">
+            <asp:HiddenField ID="hideLoginUser" runat="server"  ClientIDMode="Static"/>
 
             <div id="main" style="margin-left: 3px; margin-right: 3px;">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

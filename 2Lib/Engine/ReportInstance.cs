@@ -84,7 +84,7 @@ namespace LJTH.BusinessIndicators.Engine
 
         [ScriptIgnore]
         public C_System _System { get { return StaticResource.Instance[_SystemID, DateTime.Now]; } }
-        [ScriptIgnore]
+
         public List<C_Target> _Target { get { return StaticResource.Instance.GetTargetList(_SystemID, DateTime.Now).ToList(); } }
 
         public Guid _MonthReportID { get; set; }
@@ -237,7 +237,7 @@ namespace LJTH.BusinessIndicators.Engine
         /// </summary>
         public void GetReportDetail()
         {
-            ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Draft(_System.ID, FinYear, FinMonth, _MonthReportID,false);
+            ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Draft(_System.ID, FinYear, FinMonth, _MonthReportID,true);
         }
         #endregion Private Method
     }

@@ -28,7 +28,9 @@ var FinMonths;
 var detailhiden = "";
 var currentDetailTarget = null;
 var currentManageReportDetailTarget = null;
-var unit = "";
+var unit = "";  //单位
+var unfoldTitleList = []; //折叠完成情况明细与经营报告明细三级表头
+var shrinkageTitleList = [];//展开完成情况明细与经营报告明细三级表头
 function SearchData() {
     var temp;
     ColumnAmount = 0;
@@ -809,6 +811,22 @@ function ComplateDetailLiaddCss(sender) {
             return;
         }
     });
+    //获取当前指标单位
+    $.each(MonthReportData[0].ObjValue._Target, function (i, item) {
+        if ($(sender).text().indexOf(item.TargetName) > -1) {
+            unit = item.Unit;
+            return;
+        }
+    });
+    //获取当前指标是否为为多指标
+    if (TemplData.IsBlendTarget && unfoldTitleList.length == 0) {
+        for (var i = 0; i < 9; i++) {
+            if (i < 7) {
+                unfoldTitleList.push({ "target1": TemplData.ObjValue[0].Name, "target2": TemplData.ObjValue[1].Name });
+            }
+            shrinkageTitleList.push({ "target1": TemplData.ObjValue[0].Name, "target2": TemplData.ObjValue[1].Name });
+        }
+    }
     $("#Ul4 .active_sub3").each(function () {
         $(this).removeClass("active_sub3");
     });
@@ -857,16 +875,25 @@ function SetComplateTargetDetailData(sender, Type) {
 
     $("#CompleteDetailHead").empty();
     //表头Tmpl名称
+    if (sender.IsBlendTarget && unfoldTitleList.length == 0) {
+        for (var i = 0; i < 9; i++) {
+            if (i < 7) {
+                unfoldTitleList.push({ "target1": sender.ObjValue[0].Name, "target2": sender.ObjValue[1].Name });
+            }
+            shrinkageTitleList.push({ "target1": sender.ObjValue[0].Name, "target2": sender.ObjValue[1].Name });
+        }
+    }
+
     if (strComplateMonthReportDetilHtmlTemplate[0] != "" && strComplateMonthReportDetilHtmlTemplate[0] != undefined) {
         loadTmpl('#' + strComplateMonthReportDetilHtmlTemplate[0]).tmpl(sender).appendTo('#CompleteDetailHead');
     } else {
-        loadTmpl('#TmplCompleteDetail_Head').tmpl(sender).appendTo('#CompleteDetailHead');
+        loadTmpl('#CompleteDetailHeadTemplate').tmpl(sender).appendTo('#CompleteDetailHead');
     }
     //tmpl模板名称
     if (strComplateMonthReportDetilHtmlTemplate[1] != "" && strComplateMonthReportDetilHtmlTemplate[1] != undefined) {
         ComplateTargetDetailTemplate = strComplateMonthReportDetilHtmlTemplate[1];
     } else {
-        ComplateTargetDetailTemplate = "TmplCompleteDetail_Data"
+        ComplateTargetDetailTemplate = "ComplateTargetDetailTemplate"
     }
 
     if (currentDetailTarget == null) {
@@ -898,6 +925,12 @@ function SetComplateTargetDetailData(sender, Type) {
         }
     }
     AddBackGroundColor();
+    $.each(MonthReportData[0].ObjValue._Target, function (i, item) {
+        if (sender.Name.indexOf(item.TargetName) > -1) {
+            unit = item.Unit;
+            return;
+        }
+    });
 }
 
 
@@ -1009,7 +1042,6 @@ function getManageReprotDetailData() {
 }
 //填充经营报告明细模板数据
 function SetManageMonthReprotDetailData(sender, Type) {
-
     var strManageMonthReprotDetailHtmlTemplate = new Array();
     var strManageMonthReprotDetailTemplate = "";
     if (sender != null || sender != undefined) {
@@ -1020,6 +1052,16 @@ function SetManageMonthReprotDetailData(sender, Type) {
 
     $("#CompleteDetailHead_1").empty();
     //表头Tmpl名称
+    if (sender.IsBlendTarget && unfoldTitleList.length == 0) {
+        for (var i = 0; i < 9; i++) {
+            if (i < 7) {
+                unfoldTitleList.push({ "target1": sender.ObjValue[0].Name, "target2": sender.ObjValue[1].Name });
+            }
+            shrinkageTitleList.push({
+                "target1": sender.ObjValue[0].Name, "target2": sender.ObjValue[1].Name
+            });
+        }
+    }
     if (strManageMonthReprotDetailHtmlTemplate[0] != "" && strManageMonthReprotDetailHtmlTemplate[0] != undefined) {
         loadTmpl('#' + strManageMonthReprotDetailHtmlTemplate[0]).tmpl(sender).appendTo('#CompleteDetailHead_1');
     } else {
@@ -1038,11 +1080,11 @@ function SetManageMonthReprotDetailData(sender, Type) {
         $("#tab2_rows_1").empty();
 
         if (ManageReportDetailData.length > 0) {
-
             var dataArray = [];
             var data = { "data": sender };
             dataArray.push(data);
             loadTmpl('#' + strManageMonthReprotDetailTemplate).tmpl(dataArray).appendTo('#tab2_rows_1');
+            //获取当前指标是否为为多指标
         }
         $("#Ul4_1 :first a").addClass("active_sub3");
     } else {
@@ -1050,6 +1092,13 @@ function SetManageMonthReprotDetailData(sender, Type) {
             ManageMonthReprotDetailLiaddCss(currentManageReportDetailTarget);
         }
     }
+    //获取当前指标单位
+    $.each(MonthReportData[0].ObjValue._Target, function (i, item) {
+        if (sender.Name.indexOf(item.TargetName) > -1) {
+            unit = item.Unit;
+            return;
+        }
+    });
     AddBackGroundColor();
 }
 function ManageMonthReprotDetailLiaddCss(sender) {
@@ -1060,6 +1109,22 @@ function ManageMonthReprotDetailLiaddCss(sender) {
             return;
         }
     });
+    //获取当前指标单位
+    $.each(MonthReportData[0].ObjValue._Target, function (i, item) {
+        if ($(sender).text().indexOf(item.TargetName) > -1) {
+            unit = item.Unit;
+            return;
+        }
+    });
+    //获取当前指标是否为为多指标
+    if (TemplData.IsBlendTarget && unfoldTitleList.length == 0) {
+        for (var i = 0; i < 9; i++) {
+            if (i < 7) {
+                unfoldTitleList.push({ "target1": TemplData.ObjValue[0].Name, "target2": TemplData.ObjValue[1].Name });
+            }
+            shrinkageTitleList.push({ "target1": TemplData.ObjValue[0].Name, "target2": TemplData.ObjValue[1].Name });
+        }
+    }
     $("#Ul4_1 .active_sub3").each(function () {
         $(this).removeClass("active_sub3");
     });
@@ -2698,5 +2763,12 @@ function AddBackGroundColor() {
     }
 }
 function GetUnit() {
-    return "万元";
+    return unit;
+}
+
+function GetunfoldTitleList(){
+    return unfoldTitleList;
+}
+function GetshrinkageTitleList() {
+    return shrinkageTitleList;
 }

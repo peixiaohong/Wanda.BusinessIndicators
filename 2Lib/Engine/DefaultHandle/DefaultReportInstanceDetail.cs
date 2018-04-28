@@ -603,43 +603,81 @@ namespace LJTH.BusinessIndicators.Engine
         public List<DictionaryVmodel> GetMergeComplateMonthReportDetail(List<DictionaryVmodel> dvCurrentList)
         {
             List<DictionaryVmodel> dvResult = new List<DictionaryVmodel>();
-            
+
             var completeBlendTargetDetailXml = SplitCompleteBlendTargetDetailXml(_System.Configuration);
             //遍历完成情况明细中包含几个混合指标（目前需求一个版块只允许有一个）
-            foreach (var item in completeBlendTargetDetailXml)
-            {
-                //合并混合指标为Object            
-                List<DictionaryVmodel> dvMergeList = new List<DictionaryVmodel>();
+            //合并混合指标为Object            
+            List<DictionaryVmodel> dvMergeList = new List<DictionaryVmodel>();
 
-                DictionaryVmodel dv = new DictionaryVmodel();
-                dv.Name = item.TargetName;
-                dv.IsBlendTarget = true;
-                dv.Mark = "Target";
-                dv.Senquence = item.Senquence;
-                foreach (var dvItem in dvCurrentList)
+            DictionaryVmodel dv = new DictionaryVmodel();
+            dv.Name = completeBlendTargetDetailXml[0].TargetName;
+            dv.IsBlendTarget = true;
+            dv.Mark = "Target";
+            dv.Senquence = completeBlendTargetDetailXml[0].Senquence;
+            //获取混合指标名称集合
+            var blendtargetArray = completeBlendTargetDetailXml[0].VTargetList.Select(m => m.TargetName).ToArray();
+            //混去混合指标数据集合
+            var blendTargetList = dvCurrentList.Where(m => blendtargetArray.Contains(m.Name)).ToList();
+            dv.HtmlTemplate = blendTargetList[0].HtmlTemplate;
+            List<DictionaryVmodel> dvlist = (List<DictionaryVmodel>)blendTargetList[0].ObjValue;
+            List<DictionaryVmodel> dvlist2 = (List<DictionaryVmodel>)blendTargetList[1].ObjValue;
+            if (dvlist.Count > 0)
+            {
+                //获取CompanyProperty
+                var companyPropertyList = (List<DictionaryVmodel>)dvlist.Where(m => m.Mark == "CompanyProperty").FirstOrDefault().ObjValue;
+                var companyPropertyList2 = (List<DictionaryVmodel>)dvlist2.Where(m => m.Mark == "CompanyProperty").FirstOrDefault().ObjValue;
+              
+                //完成部分
+                List<MonthlyReportDetail> brdComplete1 = (List<MonthlyReportDetail>)companyPropertyList.Where(m => m.Mark == "DetailHide").FirstOrDefault().ObjValue;
+                List<MonthlyReportDetail> brdComplete2 = (List<MonthlyReportDetail>)companyPropertyList2.Where(m => m.Mark == "DetailHide").FirstOrDefault().ObjValue;
+
+                //未完成部分
+                List<MonthlyReportDetail> brdNoComplete1 = (List<MonthlyReportDetail>)companyPropertyList.Where(m => m.Mark == "DetailShow").FirstOrDefault().ObjValue;
+                List<MonthlyReportDetail> brdNoComplete2 = (List<MonthlyReportDetail>)companyPropertyList2.Where(m => m.Mark == "DetailShow").FirstOrDefault().ObjValue;
+
+                //重组两个指标中的完成与未完成，如果同一公司下其中一个指标未完成，那么把另一个指标中已完成指标的公司也移动到未完成中
+                foreach (var item in brdNoComplete1)
                 {
-                    dv.HtmlTemplate = dvItem.HtmlTemplate;
-                    var TargetList = item.VTargetList.Where(m => m.TargetName == dvItem.Name).ToList();
-                    //判断当前指标是否为混合指标
-                    if (TargetList != null && TargetList.Count() > 0)
+                    //说明当前未完成指标的公司在另一个指标中是完成的；移除另一个指标完成，加入到未完成中
+                    if (!brdNoComplete2.Where(m => m.CompanyID == item.CompanyID).Any())
                     {
-                        dvMergeList.Add(dvItem);
-                    }
-                    else
-                    {
-                        //如果不存在单指标才重新添加
-                        if (dvResult.Where(m => m.Name == dvItem.Name).Count() == 0)
-                            dvResult.Add(dvItem);
+                        var mrd = brdComplete2.Where(m => m.CompanyID == item.CompanyID).ToList();
+                        if (mrd.Any())
+                        {
+                            brdComplete2.Remove(mrd.FirstOrDefault());
+                            brdNoComplete2.Add(mrd.FirstOrDefault());
+                        }
                     }
                 }
-                if (dvMergeList.Count > 0)
+                foreach (var item in brdNoComplete2)
                 {
-                    dv.ObjValue = dvMergeList;
-                    dvResult.Add(dv);
+                    //说明当前未完成指标的公司在另一个指标中是完成的；移除另一个指标完成，加入到未完成中
+                    if (!brdNoComplete1.Where(m => m.CompanyID == item.CompanyID).Any())
+                    {
+                        var mrd = brdComplete1.Where(m => m.CompanyID == item.CompanyID).ToList();
+                        if (mrd.Any())
+                        {
+                            brdComplete1.Remove(mrd.FirstOrDefault());
+                            brdNoComplete1.Add(mrd.FirstOrDefault());
+                        }
+                    }
                 }
+                //重新按照项目进行排序，保证前端用下标获取时数据能对应
+
+                //完成部分
+                companyPropertyList.Where(m => m.Mark == "DetailHide").FirstOrDefault().ObjValue = brdComplete1.OrderBy(m => m.Company.Sequence);
+                companyPropertyList2.Where(m => m.Mark == "DetailHide").FirstOrDefault().ObjValue =  brdComplete2.OrderBy(m => m.Company.Sequence);
+                //未完成部分
+                companyPropertyList.Where(m => m.Mark == "DetailShow").FirstOrDefault().ObjValue = brdNoComplete1.OrderBy(m => m.Company.Sequence);
+                companyPropertyList2.Where(m => m.Mark == "DetailShow").FirstOrDefault().ObjValue = brdNoComplete2.OrderBy(m => m.Company.Sequence);
             }
+
+            dv.ObjValue = blendTargetList;
+            dvResult.Add(dv);
+            //获取单指标数据集合
+            dvResult.AddRange(dvCurrentList.Where(m => !blendtargetArray.Contains(m.Name)).ToList());
             //重新排序
-            return dvResult.OrderBy(m=>m.Senquence).ToList();
+            return dvResult.OrderBy(m => m.Senquence).ToList();
         }
         /// <summary>
         /// 读取xml文件（ComplateTargetDetail.xml）

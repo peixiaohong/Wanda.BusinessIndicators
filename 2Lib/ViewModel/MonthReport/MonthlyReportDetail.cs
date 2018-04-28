@@ -36,62 +36,115 @@ namespace LJTH.BusinessIndicators.ViewModel
         [ORFieldMapping("TargetPlanID")]
         public Guid TargetPlanID { get; set; }
 
+        /// <summary>
+        /// 计划数
+        /// </summary>
         [ORFieldMapping("OPlanAmmount")]
         public decimal OPlanAmmount { get; set; }
 
+        /// <summary>
+        /// 实际数
+        /// </summary>
         [ORFieldMapping("OActualAmmount")]
         public decimal OActualAmmount { get; set; }
-
+        /// <summary>
+        /// 实际完成率
+        /// </summary>
         [ORFieldMapping("OActualRate")]
         public string OActualRate { get; set; }
 
+        /// <summary>
+        /// 显示完成率
+        /// </summary>
         [ORFieldMapping("ODisplayRate")]
         public string ODisplayRate { get; set; }
 
+        /// <summary>
+        /// 计划数
+        /// </summary>
         [ORFieldMapping("NPlanAmmount")]
         public decimal NPlanAmmount { get; set; }
-        
+        /// <summary>
+        /// 实际数
+        /// </summary>
         [ORFieldMapping("NActualAmmount")]
         public decimal NActualAmmount { get; set; }
 
-
+        /// <summary>
+        /// 是否考核
+        /// </summary>
         [ORFieldMapping("NeedEvaluation")]
         public int NeedEvaluation { get; set; }
 
+        /// <summary>
+        /// 实际完成率
+        /// </summary>
         [ORFieldMapping("NActualRate")]
         public string NActualRate { get; set; }
 
+        /// <summary>
+        /// 显示完成率
+        /// </summary>
         [ORFieldMapping("NDisplayRate")]
         public string NDisplayRate { get; set; }
 
+        /// <summary>
+        /// 累计计划数
+        /// </summary>
         [ORFieldMapping("OAccumulativePlanAmmount")]
         public decimal OAccumulativePlanAmmount { get; set; }
 
+        /// <summary>
+        /// 累计实际数
+        /// </summary>
         [ORFieldMapping("OAccumulativeActualAmmount")]
         public decimal OAccumulativeActualAmmount { get; set; }
 
+        /// <summary>
+        /// 累计完成率
+        /// </summary>
         [ORFieldMapping("OAccumulativeActualRate")]
         public string OAccumulativeActualRate { get; set; }
 
+        /// <summary>
+        /// 累计完成率显示
+        /// </summary>
         [ORFieldMapping("OAcccumulativeDisplayRate")]
         public string OAcccumulativeDisplayRate { get; set; }
 
+        /// <summary>
+        /// 累计计划数
+        /// </summary>
         [ORFieldMapping("NAccumulativePlanAmmount")]
         public decimal NAccumulativePlanAmmount { get; set; }
 
+        /// <summary>
+        /// 累计实际数
+        /// </summary>
         [ORFieldMapping("NAccumulativeActualAmmount")]
         public decimal NAccumulativeActualAmmount { get; set; }
 
-   
+        /// <summary>
+        /// 累计完成率
+        /// </summary>
         [ORFieldMapping("NAccumulativeActualRate")]
         public string NAccumulativeActualRate { get; set; }
 
+        /// <summary>
+        /// 累计完成率显示
+        /// </summary>
         [ORFieldMapping("NAccumulativeDisplayRate")]
         public string NAccumulativeDisplayRate { get; set; }
 
+        /// <summary>
+        /// 累计是否未完成
+        /// </summary>
         [ORFieldMapping("IsMissTarget")]
         public bool IsMissTarget { get; set; }
 
+        /// <summary>
+        /// 累计未完成月数
+        /// </summary>
         [ORFieldMapping("Counter")]
         public int Counter { get; set; }
 
@@ -104,9 +157,15 @@ namespace LJTH.BusinessIndicators.ViewModel
         [ORFieldMapping("CommitDate")]
         public DateTime? CommitDate { get; set; }
 
+        /// <summary>
+        /// 未完成原因
+        /// </summary>
         [ORFieldMapping("MIssTargetReason")]
         public string MIssTargetReason { get; set; }
 
+        /// <summary>
+        /// 未完成描述
+        /// </summary>
         [ORFieldMapping("MIssTargetDescription")]
         public string MIssTargetDescription { get; set; }
         /// <summary>

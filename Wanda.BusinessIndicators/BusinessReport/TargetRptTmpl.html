@@ -60,7 +60,7 @@
 <!------------------------------------------完成情况明细 通用模版 Title start------------------------------------------------------------------------->
 <script id="CompleteDetailHeadTemplate" type="text/x-jquery-tmpl">
     <tr class='tab_5_row_alt'>
-        <th colspan='2' rowspan='2' style='width: 275px;'>名称</th>
+        <th colspan='2' rowspan='3' style='width: 275px;'>名称</th>
         <th colspan='4' style='width: 35%'>
             <a href='javascript:MonthReportOrder(&quot;DetailMonthly&quot;)' style='text-decoration: none; color: #ffffff'>
                 本月发生(万元)
@@ -411,26 +411,10 @@
         <th colspan="2" style="width:11%;">完成率</th>
     </tr>
     <tr>
-        <th class="th_Sub">销售</th>
-        <th class="th_Sub2">回款</th>
-
-        <th class="th_Sub">销售</th>
-        <th class="th_Sub2">回款</th>
-
-        <th class="th_Sub">销售</th>
-        <th class="th_Sub2">回款</th>
-
-        <th class="th_Sub">销售</th>
-        <th class="th_Sub2">回款</th>
-
-        <th class="th_Sub">销售</th>
-        <th class="th_Sub2">回款</th>
-
-        <th class="th_Sub">销售</th>
-        <th class="th_Sub2">回款</th>
-
-        <th class="th_Sub">销售</th>
-        <th class="th_Sub2">回款</th>
+        {{each GetunfoldTitleList()}}
+        <th class="th_Sub">${target1}</th>
+        <th class="th_Sub2">${target2}</th>
+        {{/each}}
     </tr>
     {{else}}
     <tr>
@@ -475,32 +459,10 @@
         <th colspan="2" style="width:8%;">完成率</th>
     </tr>
     <tr class='tab_5_row_alt'>
-        <th class="th_Sub">销售</th>
-        <th class="th_Sub2">回款</th>
-
-        <th class="th_Sub">销售</th>
-        <th class="th_Sub2">回款</th>
-
-        <th class="th_Sub">销售</th>
-        <th class="th_Sub2">回款</th>
-
-        <th class="th_Sub">销售</th>
-        <th class="th_Sub2">回款</th>
-
-        <th class="th_Sub">销售</th>
-        <th class="th_Sub2">回款</th>
-
-        <th class="th_Sub">销售</th>
-        <th class="th_Sub2">回款</th>
-
-        <th class="th_Sub">销售</th>
-        <th class="th_Sub2">回款</th>
-
-        <th class="th_Sub">销售</th>
-        <th class="th_Sub2">回款</th>
-
-        <th class="th_Sub">销售</th>
-        <th class="th_Sub2">回款</th>
+        {{each GetshrinkageTitleList()}}
+        <th class="th_Sub">${target1}</th>
+        <th class="th_Sub2">${target2}</th>
+        {{/each}}
     </tr>
     {{else}}
     <tr>
@@ -679,13 +641,16 @@
                 <td class="Td_TopAndBottom DetailCss" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeActualAmmount}">${(data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
                 <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativeDisplayRate}">${itemDetailChild.NAccumulativePlanAmmount==0&&itemDetailChild.NAccumulativeActualAmmount==0?'--':itemDetailChild.NAccumulativeDisplayRate}</td>
                 <td class="Td_TopAndBottom DetailCss" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeDisplayRate}">${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativePlanAmmount==0&&data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeActualAmmount==0?'--':data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeDisplayRate}</td>
-                {{if Counter==0}}
-                <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
-                <td class="Td_Right" title="${Counter}" style="text-align: center !important"></td>
+                {{if itemDetailChild.Counter==0}}
+                <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important"></td>
                 {{else}}
                 <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important">
                     <img src="../Images/images1/image${itemDetailChild.Counter}.png" />
                 </td>
+                {{/if}}
+                {{if data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter==0}}
+                <td class="Td_Left" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter}" style="text-align: center !important"></td>
+                {{else}}
                 <td class="Td_Right" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter}" style="text-align: center !important">
                     <img src="../Images/images1/image${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter}.png" />
                 </td>
@@ -711,13 +676,16 @@
             <td class="Td_TopAndBottom DetailCss" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeActualAmmount}">${(data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
             <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativeDisplayRate}">${itemDetailChild.NAccumulativePlanAmmount==0&&itemDetailChild.NAccumulativeActualAmmount==0?'--':itemDetailChild.NAccumulativeDisplayRate}</td>
             <td class="Td_TopAndBottom DetailCss" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeDisplayRate}">${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativePlanAmmount==0&&data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeActualAmmount==0?'--':data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeDisplayRate}</td>
-            {{if Counter==0}}
-            <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
-            <td class="Td_Right" title="${Counter}" style="text-align: center !important"></td>
+            {{if itemDetailChild.Counter==0}}
+            <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important"></td>
             {{else}}
             <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important">
                 <img src="../Images/images1/image${itemDetailChild.Counter}.png" />
             </td>
+            {{/if}}
+            {{if data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter==0}}
+            <td class="Td_Left" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter}" style="text-align: center !important"></td>
+            {{else}}
             <td class="Td_Right" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter}" style="text-align: center !important">
                 <img src="../Images/images1/image${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter}.png" />
             </td>
@@ -775,8 +743,8 @@
                 <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativePlanAmmount}">${(itemDetailChild.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
                 <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativeActualAmmount}">${(itemDetailChild.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
                 <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativeDisplayRate}">${itemDetailChild.NAccumulativePlanAmmount==0&&itemDetailChild.NAccumulativeActualAmmount==0?'--':itemDetailChild.NAccumulativeDisplayRate}</td>
-                {{if Counter==0}}
-                <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                {{if itemDetailChild.Counter==0}}
+                <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important"></td>
                 {{else}}
                 <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important">
                     <img src="../Images/images1/image${itemDetailChild.Counter}.png" />
@@ -797,8 +765,8 @@
                 <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativePlanAmmount}">${(itemDetailChild.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
                 <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativeActualAmmount}">${(itemDetailChild.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
                 <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativeDisplayRate}">${itemDetailChild.NAccumulativePlanAmmount==0&&itemDetailChild.NAccumulativeActualAmmount==0?'--':itemDetailChild.NAccumulativeDisplayRate}</td>
-                {{if Counter==0}}
-                <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                {{if itemDetailChild.Counter==0}}
+                <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important"></td>
                 {{else}}
                 <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important">
                     <img src="../Images/images1/image${itemDetailChild.Counter}.png" />
@@ -925,14 +893,17 @@
         <td class="Td_TopAndBottom DetailCss" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeActualAmmount}">${(data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
         <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativeDisplayRate}">${itemDetailChild.NAccumulativePlanAmmount==0&&itemDetailChild.NAccumulativeActualAmmount==0?'--':itemDetailChild.NAccumulativeDisplayRate}</td>
         <td class="Td_TopAndBottom DetailCss" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeDisplayRate}">${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativePlanAmmount==0&&data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeActualAmmount==0?'--':data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeDisplayRate}</td>
-        {{if Counter==0}}
-        <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
-        <td class="Td_TopAndBottom" title="${Counter}" style="text-align: center !important"></td>
+        {{if itemDetailChild.Counter==0}}
+        <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important"></td>
         {{else}}
         <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important">
             <img src="../Images/images1/image${itemDetailChild.Counter}.png" />
         </td>
-        <td class="Td_TopAndBottom" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter}" style="text-align: center !important">
+        {{/if}}
+        {{if data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter==0}}
+        <td class="Td_Left" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter}" style="text-align: center !important"></td>
+        {{else}}
+        <td class="Td_Right" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter}" style="text-align: center !important">
             <img src="../Images/images1/image${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter}.png" />
         </td>
         {{/if}}
@@ -961,13 +932,16 @@
         <td class="Td_TopAndBottom DetailCss" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeActualAmmount}">${(data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
         <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativeDisplayRate}">${itemDetailChild.NAccumulativePlanAmmount==0&&itemDetailChild.NAccumulativeActualAmmount==0?'--':itemDetailChild.NAccumulativeDisplayRate}</td>
         <td class="Td_TopAndBottom DetailCss" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeDisplayRate}">${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativePlanAmmount==0&&data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeActualAmmount==0?'--':data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeDisplayRate}</td>
-        {{if Counter==0}}
-        <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
-        <td class="Td_Right" title="${Counter}" style="text-align: center !important"></td>
+        {{if itemDetailChild.Counter==0}}
+        <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important"></td>
         {{else}}
         <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important">
             <img src="../Images/images1/image${itemDetailChild.Counter}.png" />
         </td>
+        {{/if}}
+        {{if data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter==0}}
+        <td class="Td_Left" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter}" style="text-align: center !important"></td>
+        {{else}}
         <td class="Td_Right" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter}" style="text-align: center !important">
             <img src="../Images/images1/image${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter}.png" />
         </td>
@@ -1031,8 +1005,8 @@
         <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativePlanAmmount}">${(itemDetailChild.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
         <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativeActualAmmount}">${(itemDetailChild.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
         <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativeDisplayRate}">${itemDetailChild.NAccumulativePlanAmmount==0&&itemDetailChild.NAccumulativeActualAmmount==0?'--':itemDetailChild.NAccumulativeDisplayRate}</td>
-        {{if Counter==0}}
-        <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+        {{if itemDetailChild.Counter==0}}
+        <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important"></td>
         {{else}}
         <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important">
             <img src="../Images/images1/image${itemDetailChild.Counter}.png" />
@@ -1055,8 +1029,8 @@
         <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativePlanAmmount}">${(itemDetailChild.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
         <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativeActualAmmount}">${(itemDetailChild.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
         <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativeDisplayRate}">${itemDetailChild.NAccumulativePlanAmmount==0&&itemDetailChild.NAccumulativeActualAmmount==0?'--':itemDetailChild.NAccumulativeDisplayRate}</td>
-        {{if Counter==0}}
-        <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+        {{if itemDetailChild.Counter==0}}
+        <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important"></td>
         {{else}}
         <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important">
             <img src="../Images/images1/image${itemDetailChild.Counter}.png" />
@@ -1068,7 +1042,6 @@
     {{/each}}
     {{/if}}
     {{/each}}
-
     {{/if}}
 </script>
 
@@ -2704,14 +2677,17 @@
                     <td class="Td_TopAndBottom DetailCss" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].NAccumulativeActualAmmount}">${(data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
                     <td class="Td_Left DetailCss" title="${itemGrandChild.NAccumulativeDisplayRate}">${itemGrandChild.NAccumulativePlanAmmount==0&&itemGrandChild.NAccumulativeActualAmmount==0?'--':itemGrandChild.NAccumulativeDisplayRate}</td>
                     <td class="Td_TopAndBottom DetailCss" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].NAccumulativeDisplayRate}">${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].NAccumulativePlanAmmount==0&&data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].NAccumulativeActualAmmount==0?'--':data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].NAccumulativeDisplayRate}</td>
-                    {{if Counter==0}}
-                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
-                    <td class="Td_Right" title="${Counter}" style="text-align: center !important"></td>
+                    {{if itemGrandChild.Counter==0}}
+                    <td class="Td_Left" title="${itemGrandChild.Counter}" style="text-align: center !important"></td>
                     {{else}}
                     <td class="Td_Left" title="${itemGrandChild.Counter}" style="text-align: center !important">
                         <img src="../Images/images1/image${itemGrandChild.Counter}.png" />
                     </td>
-                    <td class="Td_Right" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].Counter}" style="text-align: center !important">
+                    {{/if}}
+                    {{if data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].Counter==0}}
+                    <td class="Td_Left" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].Counter}" style="text-align: center !important"></td>
+                    {{else}}
+                    <td class="Td_Left" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].Counter}" style="text-align: center !important">
                         <img src="../Images/images1/image${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].Counter}.png" />
                     </td>
                     {{/if}}
@@ -2758,14 +2734,17 @@
                     <td class="Td_TopAndBottom DetailCss" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeActualAmmount}">${(data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
                     <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativeDisplayRate}">${itemDetailChild.NAccumulativePlanAmmount==0&&itemDetailChild.NAccumulativeActualAmmount==0?'--':itemDetailChild.NAccumulativeDisplayRate}</td>
                     <td class="Td_TopAndBottom DetailCss" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeDisplayRate}">${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativePlanAmmount==0&&data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeActualAmmount==0?'--':data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeDisplayRate}</td>
-                    {{if Counter==0}}
-                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
-                    <td class="Td_Right" title="${Counter}" style="text-align: center !important"></td>
+                    {{if itemDetailChild.Counter==0}}
+                    <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important"></td>
                     {{else}}
                     <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important">
                         <img src="../Images/images1/image${itemDetailChild.Counter}.png" />
                     </td>
-                    <td class="Td_Right" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter}" style="text-align: center !important">
+                    {{/if}}
+                    {{if data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter==0}}
+                    <td class="Td_Left" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter}" style="text-align: center !important"></td>
+                    {{else}}
+                    <td class="Td_Left" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter}" style="text-align: center !important">
                         <img src="../Images/images1/image${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter}.png" />
                     </td>
                     {{/if}}
@@ -2831,8 +2810,8 @@
                             <td class="Td_Left DetailCss" title="${itemGrandChild.NAccumulativePlanAmmount}">${(itemGrandChild.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
                             <td class="Td_Left DetailCss" title="${itemGrandChild.NAccumulativeActualAmmount}">${(itemGrandChild.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
                             <td class="Td_Left DetailCss" title="${itemGrandChild.NAccumulativeDisplayRate}">${itemGrandChild.NAccumulativePlanAmmount==0&&itemGrandChild.NAccumulativeActualAmmount==0?'--':itemGrandChild.NAccumulativeDisplayRate}</td>
-                            {{if Counter==0}}
-                            <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                            {{if itemGrandChild.Counter==0}}
+                            <td class="Td_Left" title="${itemGrandChild.Counter}" style="text-align: center !important"></td>
                             {{else}}
                             <td class="Td_Left" title="${itemGrandChild.Counter}" style="text-align: center !important">
                                 <img src="../Images/images1/image${itemGrandChild.Counter}.png" />
@@ -2865,8 +2844,8 @@
                     <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativePlanAmmount}">${(itemDetailChild.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
                     <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativeActualAmmount}">${(itemDetailChild.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
                     <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativeDisplayRate}">${itemDetailChild.NAccumulativePlanAmmount==0&&itemDetailChild.NAccumulativeActualAmmount==0?'--':itemDetailChild.NAccumulativeDisplayRate}</td>
-                    {{if Counter==0}}
-                    <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+                    {{if itemDetailChild.Counter==0}}
+                    <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important"></td>
                     {{else}}
                     <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important">
                         <img src="../Images/images1/image${itemDetailChild.Counter}.png" />
@@ -2979,14 +2958,17 @@
             <td class="Td_TopAndBottom DetailCss" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].NAccumulativeActualAmmount}">${(data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
             <td class="Td_Left DetailCss" title="${itemGrandChild.NAccumulativeDisplayRate}">${itemGrandChild.NAccumulativePlanAmmount==0&&itemGrandChild.NAccumulativeActualAmmount==0?'--':itemGrandChild.NAccumulativeDisplayRate}</td>
             <td class="Td_TopAndBottom DetailCss" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].NAccumulativeDisplayRate}">${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].NAccumulativePlanAmmount==0&&data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].NAccumulativeActualAmmount==0?'--':data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].NAccumulativeDisplayRate}</td>
-            {{if Counter==0}}
-            <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
-            <td class="Td_Right" title="${Counter}" style="text-align: center !important"></td>
+            {{if itemGrandChild.Counter==0}}
+            <td class="Td_Left" title="${itemGrandChild.Counter}" style="text-align: center !important"></td>
             {{else}}
             <td class="Td_Left" title="${itemGrandChild.Counter}" style="text-align: center !important">
                 <img src="../Images/images1/image${itemGrandChild.Counter}.png" />
             </td>
-            <td class="Td_Right" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].Counter}" style="text-align: center !important">
+            {{/if}}
+            {{if data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].Counter==0}}
+            <td class="Td_Left" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].Counter}" style="text-align: center !important"></td>
+            {{else}}
+            <td class="Td_Left" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].Counter}" style="text-align: center !important">
                 <img src="../Images/images1/image${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].ObjValue[l].Counter}.png" />
             </td>
             {{/if}}
@@ -3038,14 +3020,17 @@
         <td class="Td_TopAndBottom DetailCss" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeActualAmmount}">${(data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
         <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativeDisplayRate}">${itemDetailChild.NAccumulativePlanAmmount==0&&itemDetailChild.NAccumulativeActualAmmount==0?'--':itemDetailChild.NAccumulativeDisplayRate}</td>
         <td class="Td_TopAndBottom DetailCss" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeDisplayRate}">${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativePlanAmmount==0&&data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeActualAmmount==0?'--':data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].NAccumulativeDisplayRate}</td>
-        {{if Counter==0}}
-        <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
-        <td class="Td_Right" title="${Counter}" style="text-align: center !important"></td>
+        {{if itemDetailChild.Counter==0}}
+        <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important"></td>
         {{else}}
         <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important">
             <img src="../Images/images1/image${itemDetailChild.Counter}.png" />
         </td>
-        <td class="Td_Right" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter}" style="text-align: center !important">
+        {{/if}}
+        {{if data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter==0}}
+        <td class="Td_Left" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter}" style="text-align: center !important"></td>
+        {{else}}
+        <td class="Td_Left" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter}" style="text-align: center !important">
             <img src="../Images/images1/image${data.ObjValue[1].ObjValue[i].ObjValue[j].ObjValue[k].Counter}.png" />
         </td>
         {{/if}}
@@ -3116,8 +3101,8 @@
             <td class="Td_Left DetailCss" title="${itemGrandChild.NAccumulativePlanAmmount}">${(itemGrandChild.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
             <td class="Td_Left DetailCss" title="${itemGrandChild.NAccumulativeActualAmmount}">${(itemGrandChild.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
             <td class="Td_Left DetailCss" title="${itemGrandChild.NAccumulativeDisplayRate}">${itemGrandChild.NAccumulativePlanAmmount==0&&itemGrandChild.NAccumulativeActualAmmount==0?'--':itemGrandChild.NAccumulativeDisplayRate}</td>
-            {{if Counter==0}}
-            <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+            {{if itemGrandChild.Counter==0}}
+            <td class="Td_Left" title="${itemGrandChild.Counter}" style="text-align: center !important"></td>
             {{else}}
             <td class="Td_Left" title="${itemGrandChild.Counter}" style="text-align: center !important">
                 <img src="../Images/images1/image${itemGrandChild.Counter}.png" />
@@ -3154,8 +3139,8 @@
             <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativePlanAmmount}">${(itemDetailChild.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
             <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativeActualAmmount}">${(itemDetailChild.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
             <td class="Td_Left DetailCss" title="${itemDetailChild.NAccumulativeDisplayRate}">${itemDetailChild.NAccumulativePlanAmmount==0&&itemDetailChild.NAccumulativeActualAmmount==0?'--':itemDetailChild.NAccumulativeDisplayRate}</td>
-            {{if Counter==0}}
-            <td class="Td_Left" title="${Counter}" style="text-align: center !important"></td>
+            {{if itemDetailChild.Counter==0}}
+            <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important"></td>
             {{else}}
             <td class="Td_Left" title="${itemDetailChild.Counter}" style="text-align: center !important">
                 <img src="../Images/images1/image${itemDetailChild.Counter}.png" />

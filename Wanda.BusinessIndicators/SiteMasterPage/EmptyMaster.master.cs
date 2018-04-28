@@ -14,7 +14,7 @@ namespace LJTH.BusinessIndicators.Web
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            hideLoginUser.Value = Common.WebHelper.GetCurrentLoginUser();
         }
     }
 }
