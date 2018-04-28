@@ -32,6 +32,19 @@ namespace LJTH.BusinessIndicators.Common
             }
         }
         /// <summary>
+        /// 未获取到用户时是否跳登陆页
+        /// </summary>
+        public static bool EnableLogin
+        {
+            get
+            {
+                string enabledLogin = System.Configuration.ConfigurationManager.AppSettings["EnableLogin"] ?? "true";
+                bool result = false;
+                bool.TryParse(enabledLogin, out result);
+                return result;
+            }
+        }
+        /// <summary>
         /// 操作权限模式
         /// </summary>
         public bool OperationMode
@@ -93,7 +106,7 @@ namespace LJTH.BusinessIndicators.Common
         /// 获得当前的登陆用户信息,如果当前登录用户失效， 则抛出异常
         /// </summary>
         /// <returns></returns>
-        public static LoginUserInfo GetCurrentUser() { return GetCurrentUser(true); }
+        public static LoginUserInfo GetCurrentUser() { return GetCurrentUser(EnableLogin); }
 
         public static string GetCurrentLoginUser() { return GetCurrentUser().LoginName; }
         /// <summary>

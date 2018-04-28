@@ -379,6 +379,22 @@ AND FinYear=2015 AND FinMonth=8 ORDER BY CreateTime DESC ";
             List<B_MonthlyReport> list = ExecuteQuery(sql, pSystemID, pYear, pMonth);
             return (list != null && list.Count > 0) ? list.FirstOrDefault() : null;
         }
+
+        /// <summary>
+        /// 获取上传年
+        /// </summary>
+        /// <param name="SystemID"></param>
+        /// <param name="Year"></param>
+        /// <returns></returns>
+        public List<B_MonthlyReport> GetMonthlyReportYearList()
+        {
+            string sql = "select distinct FinYear from dbo.B_MonthlyReport ";
+
+            sql += "WHERE " + base.NotDeleted;
+            sql += " ORDER BY FinYear DESC";
+
+            return ExecuteQuery(sql);
+        }
     }
 }
 
