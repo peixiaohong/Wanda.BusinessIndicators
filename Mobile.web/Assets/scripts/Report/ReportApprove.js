@@ -33,8 +33,6 @@ var Task = {
             methods: {
             }
         });
-
-
     },
     BeforeAction: function (args, func, data) {
         WFParam_SJSJ.DyRoleList = [data.ReceiveLoginName];
@@ -80,12 +78,49 @@ var Task = {
             });
     },
     LoadData: function (businessId, callback) {
-        var url = api_url + 'api/todos/load/' + businessId;
-        utils.ajax({
-            type: 'GET',
-            url: url,
-            success: function (data) {
+        //var url = api_url + 'api/todos/load/' + businessId;
+        //utils.ajax({
+        //    type: 'GET',
+        //    url: url,
+        //    success: function (data) {
                 //工作流操作开始
+        var data = {
+            "TaskAction": 0,
+            "TaskID": "184f7ccb-a133-edb4-1089-ab9251e680a7",
+            "BusinessID": "0c720c90-5f3c-44f4-9c49-756133de76c1",
+            "TaskTitle": "审批测试",
+            "CreatorLoginName": "zhengguilong",
+            "CreatorName": "郑桂 ",
+            "CreateDate": "2018-04-19T17:29:59.55+08:00",
+            "ReceiveDate": "2018-04-19T17:29:59.55+08:00",
+            "AssignLoginName": "zhengguilong",
+            "AssignName": "郑桂 ",
+            "AssignDate": "2018-04-19T17:29:59.52+08:00",
+            "TaskAttachment": {
+                "ID": "503694b8-0ac9-4bc1-8657-c6cd3a179f92",
+                "FileName": "审批测试-郑桂+（zhengguilong）-20180427095121.xlsx",
+                "FileSize": "31 KB",
+                "Name": "审批测试-郑桂+（zhengguilong）-20180427095121",
+                "FileCode": "\\\\192.168.50.72\\files\\d3f087c0-93ca-4b13-8a9a-bd33b1313df0",
+                "IsUseV1": false,
+                "CreateDate": "2018-04-27T09:51:35.38+08:00",
+                "BusinessID": "0c720c90-5f3c-44f4-9c49-756133de76c1",
+                "BusinessType": "UploadTaskData",
+                "CreateLoginName": "zhengguilong",
+                "CreateName": "郑桂 "
+            },
+            "TaskRemark": "",
+            "TaskReportRemark": "",
+            "TaskAttachments": [],
+            "TaskReportAttachments": [],
+            "TemplateID": "c22b0944-f778-48d4-93c5-aaa5d5e21d6e",
+            "IsNeedApprove": true,
+            "TaskStatus": 2,
+            "ReceiveName": "郑桂 ",
+            "ReceiveLoginName": "zhengguilong",
+            "WorkflowCode": "YY_SJSJ-Standard",
+            "EmployeeLoginName": "zhengguilong"
+        }
                 WFOperator_SJSJ.InitSetting({
                     UserSelectSetting: {
                         IsNeedHiddenNav: utils.mobileBrower(),
@@ -99,7 +134,7 @@ var Task = {
                         callback(data);
                     });
                 }
-            }
-        });
+        //    }
+        //});
     }
 };

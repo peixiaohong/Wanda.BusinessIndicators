@@ -220,7 +220,7 @@ namespace ScheduleService.Handler
             string Description = string.Empty;
             C_System sysModel = StaticResource.Instance[systemtId, DateTime.Now];
             XElement element = sysModel.Configuration;
-            var RptList = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Approve(systemtId, year, month, Guid.Empty);
+            var RptList = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Approve(systemtId, year, month, Guid.Empty,false);
 
             if (element.Elements("Report").Elements("Rgroup") != null)
             {

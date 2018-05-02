@@ -49,6 +49,17 @@ namespace LJTH.BusinessIndicators.BLL
             return result;
         }
 
+        /// <summary>
+        /// 获取多版本混合指标计划
+        /// </summary>
+        /// <param name="SystemID"></param>
+        /// <param name="FinYear"></param>
+        /// <returns></returns>
+        public IList<A_TargetPlan> GetTargetplanListForMulitiVersion(Guid SystemID, int FinYear)
+        {
+            IList<A_TargetPlan> result = _aTargetplanAdapter.GetTargetplanListForMulitiVersion(SystemID, FinYear);
+            return result;
+        }
         public Guid AddTargetplan(A_TargetPlan data)
         {
             ExceptionHelper.TrueThrow<ArgumentNullException>(data == null, "Argument data is Empty");

@@ -13,4 +13,13 @@ IF NOT EXISTS ( SELECT  1
     END;
 
 	
-	
+	--Ĭ�ϰ汾״̬
+IF NOT EXISTS ( SELECT  1
+                FROM    sysobjects T1
+                        INNER JOIN syscolumns T2 ON T1.id = T2.id
+                WHERE   T1.name = 'B_MonthlyReport'
+                        AND T2.name = 'DefaultVersionStatus' )
+    BEGIN
+        ALTER TABLE B_MonthlyReport
+        ADD  DefaultVersionStatus INT  NOT NULL DEFAULT 1;
+    END;

@@ -19,7 +19,12 @@
                     "TargetName": "统一收银额",
                     "Target": 1920,
                     "SumTarget": 1920
-                }]
+                    }, {
+                        "TargetID": "558cf58e-66cb-4379-9cff-12051f7436f6",
+                        "TargetName": "经营收入",
+                        "Target": 1600,
+                        "SumTarget": 1600
+                    }]
             },
                 {
                 "FinMonth": 1,
@@ -38,7 +43,12 @@
                     "TargetName": "统一收银额",
                     "Target": 1920,
                     "SumTarget": 1920
-                }]
+                    }, {
+                        "TargetID": "558cf58e-66cb-4379-9cff-12051f7436f6",
+                        "TargetName": "经营收入",
+                        "Target": 1600,
+                        "SumTarget": 1600
+                    } ]
             }, {
                 "FinMonth": 2,
                 "TargetDetailList": [{
@@ -56,7 +66,12 @@
                     "TargetName": "统一收银额",
                     "Target": 1920,
                     "SumTarget": 3840
-                }]
+                    }, {
+                        "TargetID": "558cf58e-66cb-4379-9cff-12051f7436f6",
+                        "TargetName": "经营收入",
+                        "Target": 1600,
+                        "SumTarget": 1600
+                    }]
             }, {
                 "FinMonth": 3,
                 "TargetDetailList": [{
@@ -74,7 +89,12 @@
                     "TargetName": "统一收银额",
                     "Target": 1920,
                     "SumTarget": 5760
-                }]
+                    }, {
+                        "TargetID": "558cf58e-66cb-4379-9cff-12051f7436f6",
+                        "TargetName": "经营收入",
+                        "Target": 1600,
+                        "SumTarget": 1600
+                    }]
             }, {
                 "FinMonth": 4,
                 "TargetDetailList": [{
@@ -92,7 +112,12 @@
                     "TargetName": "统一收银额",
                     "Target": 1920,
                     "SumTarget": 7680
-                }]
+                    }, {
+                        "TargetID": "558cf58e-66cb-4379-9cff-12051f7436f6",
+                        "TargetName": "经营收入",
+                        "Target": 1600,
+                        "SumTarget": 1600
+                    } ]
             }],
         },
         mounted: function () {
