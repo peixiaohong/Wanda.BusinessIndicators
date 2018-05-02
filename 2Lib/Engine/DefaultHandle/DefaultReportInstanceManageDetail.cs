@@ -227,9 +227,15 @@ namespace LJTH.BusinessIndicators.Engine
                 bmrd = TargetEvaluationEngine.TargetEvaluationService.Calculation(bmrd, false);
                 dv.BMonthReportDetail = bmrd;
 
-                //明细项数据排序
-                VCounterListMonthlyReportDetailViewModel = SequenceEngine.SequenceService.GetSequence(_System.ID, strMonthReportOrderType, currentAreaMrd);
-
+                //如果是混合指标按照公司排序 否则按照XML中配置进行排序
+                if (vt.IsBlendTarget)
+                {
+                    VCounterListMonthlyReportDetailViewModel = currentAreaMrd.OrderBy(m => m.Company.Sequence).ThenBy(m => m.Company).ToList();
+                }
+                else
+                {
+                    VCounterListMonthlyReportDetailViewModel =  SequenceEngine.SequenceService.GetSequence(_System.ID, strMonthReportOrderType, currentAreaMrd);
+                }
                 dv.ObjValue = VCounterListMonthlyReportDetailViewModel;// EditDataChild(listMRD, CTarget, item.Nodes, ref dvList, ref br);
                 dv.RowSpanCount = VCounterListMonthlyReportDetailViewModel.Count;
                 //大于3表示当前区域上面还存在区域（level=1 组织架构顶级 level=2 板块）

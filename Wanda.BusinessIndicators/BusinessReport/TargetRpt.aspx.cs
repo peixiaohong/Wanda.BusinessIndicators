@@ -86,36 +86,26 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             List<C_System> sysList = new List<C_System>();
             if (!IsPostBack)
             {
+                var organizationalList = BLL.BizBLL.S_OrganizationalActionOperator.Instance.GetUserSystemDataNoIsDelete(Common.WebHelper.GetCurrentLoginUser());
+
+                var systemIdList = organizationalList.Select(m => m.SystemID).ToArray();
                 if (!string.IsNullOrEmpty(Request.QueryString["IsLastestVersion"]))
                 {
                     chkIsLastestVersion.Checked = bool.Parse(HttpUtility.UrlDecode(Request.QueryString["IsLastestVersion"]));
                 }
 
+                var systemList = StaticResource.Instance.SystemList;
 
+                if (systemIdList != null && systemIdList.Length > 0)
+                {
+                    sysList.AddRange(systemList.Where(p => systemIdList.Contains(p.ID)).ToList());
 
-                if (list != null && list.Count > 0)
-                {
-                    foreach (var item in list)
-                    {
-                        sysList.AddRange(StaticResource.Instance.SystemList.Where(p => p.SystemName == item.ToString()).ToList());
-                    }
-                }
-                if (sysList.Count > 0)
-                {
                     ddlSystem.DataSource = sysList.Distinct().ToList().OrderBy(or => or.Sequence).ToList();
-                    
+
                     //获取Tree数据
-                    string Sys_str  = "'" + string.Join("','", sysList.Distinct().ToList().Select(S => S.ID).ToList())+ "'";
+                    string Sys_str = "'" + string.Join("','", sysList.Distinct().ToList().Select(S => S.ID).ToList()) + "'";
                     var TreeData = C_SystemTreeOperator.Instance.GetSystemTreeData(Sys_str);
 
-                    TreeDataJson = JsonConvert.SerializeObject(TreeData);
-                }
-                else
-                {
-                    ddlSystem.DataSource = StaticResource.Instance.SystemList.ToList();
-
-                    string Sys_str = "'" + string.Join("','", StaticResource.Instance.SystemList.ToList().Select(S => S.ID).ToList()) +"'";
-                    var TreeData = C_SystemTreeOperator.Instance.GetSystemTreeData(Sys_str);
                     TreeDataJson = JsonConvert.SerializeObject(TreeData);
                 }
 

@@ -75,7 +75,7 @@ namespace LJTH.BusinessIndicators.Engine
             List<DictionaryVmodel> listvmodel = FromatData(lstVTarget, lstVItemCompanyProperty);
             if (lstVTarget.Where(m => m.IsBlendTarget == true).Any())
             {
-                listvmodel = GetMergeComplateMonthReportDetail(listvmodel);
+                listvmodel = GetMergeComplateMonthReportDetail(listvmodel, _Target);
             }
             return listvmodel;
         }
@@ -600,7 +600,7 @@ namespace LJTH.BusinessIndicators.Engine
         /// </summary>
         /// <param name="dvCurrent">已计算的单项指标集合</param>
         /// <returns></returns>
-        public List<DictionaryVmodel> GetMergeComplateMonthReportDetail(List<DictionaryVmodel> dvCurrentList)
+        public List<DictionaryVmodel> GetMergeComplateMonthReportDetail(List<DictionaryVmodel> dvCurrentList,List<C_Target> _target)
         {
             List<DictionaryVmodel> dvResult = new List<DictionaryVmodel>();
 
@@ -626,7 +626,7 @@ namespace LJTH.BusinessIndicators.Engine
                 //获取CompanyProperty
                 var companyPropertyList = (List<DictionaryVmodel>)dvlist.Where(m => m.Mark == "CompanyProperty").FirstOrDefault().ObjValue;
                 var companyPropertyList2 = (List<DictionaryVmodel>)dvlist2.Where(m => m.Mark == "CompanyProperty").FirstOrDefault().ObjValue;
-              
+
                 //完成部分
                 List<MonthlyReportDetail> brdComplete1 = (List<MonthlyReportDetail>)companyPropertyList.Where(m => m.Mark == "DetailHide").FirstOrDefault().ObjValue;
                 List<MonthlyReportDetail> brdComplete2 = (List<MonthlyReportDetail>)companyPropertyList2.Where(m => m.Mark == "DetailHide").FirstOrDefault().ObjValue;
@@ -665,11 +665,20 @@ namespace LJTH.BusinessIndicators.Engine
                 //重新按照项目进行排序，保证前端用下标获取时数据能对应
 
                 //完成部分
-                companyPropertyList.Where(m => m.Mark == "DetailHide").FirstOrDefault().ObjValue = brdComplete1.OrderBy(m => m.Company.Sequence);
-                companyPropertyList2.Where(m => m.Mark == "DetailHide").FirstOrDefault().ObjValue =  brdComplete2.OrderBy(m => m.Company.Sequence);
+                companyPropertyList.Where(m => m.Mark == "DetailHide").FirstOrDefault().ObjValue = brdComplete1.OrderBy(m => m.Company.Sequence).ThenBy(m => m.TargetName).ToList();
+                companyPropertyList2.Where(m => m.Mark == "DetailHide").FirstOrDefault().ObjValue = brdComplete2.OrderBy(m => m.Company.Sequence).ThenBy(m => m.TargetName).ToList();
                 //未完成部分
-                companyPropertyList.Where(m => m.Mark == "DetailShow").FirstOrDefault().ObjValue = brdNoComplete1.OrderBy(m => m.Company.Sequence);
-                companyPropertyList2.Where(m => m.Mark == "DetailShow").FirstOrDefault().ObjValue = brdNoComplete2.OrderBy(m => m.Company.Sequence);
+                companyPropertyList.Where(m => m.Mark == "DetailShow").FirstOrDefault().ObjValue = brdNoComplete1.OrderBy(m => m.Company.Sequence).ThenBy(m => m.TargetName).ToList();
+                companyPropertyList2.Where(m => m.Mark == "DetailShow").FirstOrDefault().ObjValue = brdNoComplete2.OrderBy(m => m.Company.Sequence).ThenBy(m => m.TargetName).ToList();
+
+                //重算小计汇总信息
+                //完成部分
+                B_MonthlyReportDetail bmrd = new B_MonthlyReportDetail();
+                companyPropertyList.Where(m => m.Mark == "DetailHide").FirstOrDefault().BMonthReportDetail = TargetEvaluationEngine.TargetEvaluationService.Calculation(SummaryData(brdComplete1, bmrd, _target.Where(m => m.TargetName == blendTargetList[0].Name).FirstOrDefault()), false);
+                companyPropertyList2.Where(m => m.Mark == "DetailHide").FirstOrDefault().BMonthReportDetail = TargetEvaluationEngine.TargetEvaluationService.Calculation(SummaryData(brdComplete2, bmrd, _target.Where(m => m.TargetName == blendTargetList[1].Name).FirstOrDefault()), false);
+                //未完成部分
+                companyPropertyList.Where(m => m.Mark == "DetailShow").FirstOrDefault().BMonthReportDetail = TargetEvaluationEngine.TargetEvaluationService.Calculation(SummaryData(brdNoComplete1, bmrd, _target.Where(m => m.TargetName == blendTargetList[0].Name).FirstOrDefault()), false);
+                companyPropertyList2.Where(m => m.Mark == "DetailShow").FirstOrDefault().BMonthReportDetail = TargetEvaluationEngine.TargetEvaluationService.Calculation(SummaryData(brdNoComplete2, bmrd, _target.Where(m => m.TargetName == blendTargetList[1].Name).FirstOrDefault()), false);
             }
 
             dv.ObjValue = blendTargetList;

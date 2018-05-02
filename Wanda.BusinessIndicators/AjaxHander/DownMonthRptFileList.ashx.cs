@@ -273,7 +273,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         if (IsBlendTargets)
                         {
                             Models.Add(DownTarget_BlendTargetDetail(rpt_Detail));      //混合指标-下载指标明细模版
-                            Models.Add(DownTarget_BlendDetailMonthly(rpt_Detail)); //混合指标-下载指标明细（当月）模板
+                            //Models.Add(DownTarget_BlendDetailMonthly(rpt_Detail)); //混合指标-下载指标明细（当月）模板
                             if (isHaveArea)
                             {
                                 //经营报告明细
@@ -283,7 +283,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         else
                         {
                             Models.Add(DownTarget_Detail(rpt_Detail));      //下载指标明细模版
-                            Models.Add(DownTarget_DetailMonthly(rpt_Detail)); //下载指标明细（当月）模板
+                            //Models.Add(DownTarget_DetailMonthly(rpt_Detail)); //下载指标明细（当月）模板
                             if (isHaveArea)
                             {
                                 //经营报告明细
@@ -6326,11 +6326,13 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                                     if (listMRDVM[k].Counter > 0)
                                     {
                                         int pictureIndex = worksheet.Pictures.Add(rowStart, colStart + 18, ImageFilePath + "\\image" + listMRDVM[k].Counter + ".png");
-                                        int pictureIndex2 = worksheet.Pictures.Add(rowStart, colStart + 19, ImageFilePath + "\\image" + listMRDVM2[k].Counter + ".png");
                                         Aspose.Cells.Drawing.Picture picture = worksheet.Pictures[pictureIndex];
                                         picture.Left = 60;
                                         picture.Top = 10;
-
+                                    }
+                                    if (listMRDVM2[k].Counter > 0)
+                                    {
+                                        int pictureIndex2 = worksheet.Pictures.Add(rowStart, colStart + 19, ImageFilePath + "\\image" + listMRDVM2[k].Counter + ".png");
                                         Aspose.Cells.Drawing.Picture picture2 = worksheet.Pictures[pictureIndex2];
                                         picture2.Left = 60;
                                         picture2.Top = 10;
@@ -7693,15 +7695,16 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                                     if (listMRDVM[k].Counter > 0)
                                     {
                                         int pictureIndex = worksheet.Pictures.Add(rowStart, colStart + 18, ImageFilePath + "\\image" + listMRDVM[k].Counter + ".png");
-                                        int pictureIndex2 = worksheet.Pictures.Add(rowStart, colStart + 19, ImageFilePath + "\\image" + listMRDVM2[k].Counter + ".png");
                                         Aspose.Cells.Drawing.Picture picture = worksheet.Pictures[pictureIndex];
                                         picture.Left = 60;
                                         picture.Top = 10;
-
+                                    }
+                                    if (listMRDVM2[k].Counter > 0)
+                                    {
+                                        int pictureIndex2 = worksheet.Pictures.Add(rowStart, colStart + 19, ImageFilePath + "\\image" + listMRDVM2[k].Counter + ".png");
                                         Aspose.Cells.Drawing.Picture picture2 = worksheet.Pictures[pictureIndex2];
                                         picture2.Left = 60;
                                         picture2.Top = 10;
-
                                     }
                                     style2 = worksheet.Cells[rowStart, colStart + 2].GetStyle();
                                     if (DataDisplayMode == 0)

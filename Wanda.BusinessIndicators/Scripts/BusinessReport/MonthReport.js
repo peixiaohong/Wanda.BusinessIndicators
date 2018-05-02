@@ -883,7 +883,13 @@ function SetComplateTargetDetailData(sender, Type) {
             shrinkageTitleList.push({ "target1": sender.ObjValue[0].Name, "target2": sender.ObjValue[1].Name });
         }
     }
-
+    //获取指标单位
+    $.each(MonthReportData[0].ObjValue._Target, function (i, item) {
+        if (sender.Name.indexOf(item.TargetName) > -1) {
+            unit = item.Unit;
+            return;
+        }
+    });
     if (strComplateMonthReportDetilHtmlTemplate[0] != "" && strComplateMonthReportDetilHtmlTemplate[0] != undefined) {
         loadTmpl('#' + strComplateMonthReportDetilHtmlTemplate[0]).tmpl(sender).appendTo('#CompleteDetailHead');
     } else {
@@ -925,12 +931,6 @@ function SetComplateTargetDetailData(sender, Type) {
         }
     }
     AddBackGroundColor();
-    $.each(MonthReportData[0].ObjValue._Target, function (i, item) {
-        if (sender.Name.indexOf(item.TargetName) > -1) {
-            unit = item.Unit;
-            return;
-        }
-    });
 }
 
 
@@ -1062,6 +1062,13 @@ function SetManageMonthReprotDetailData(sender, Type) {
             });
         }
     }
+    //获取当前指标单位
+    $.each(MonthReportData[0].ObjValue._Target, function (i, item) {
+        if (sender.Name.indexOf(item.TargetName) > -1) {
+            unit = item.Unit;
+            return;
+        }
+    });
     if (strManageMonthReprotDetailHtmlTemplate[0] != "" && strManageMonthReprotDetailHtmlTemplate[0] != undefined) {
         loadTmpl('#' + strManageMonthReprotDetailHtmlTemplate[0]).tmpl(sender).appendTo('#CompleteDetailHead_1');
     } else {
@@ -1092,13 +1099,6 @@ function SetManageMonthReprotDetailData(sender, Type) {
             ManageMonthReprotDetailLiaddCss(currentManageReportDetailTarget);
         }
     }
-    //获取当前指标单位
-    $.each(MonthReportData[0].ObjValue._Target, function (i, item) {
-        if (sender.Name.indexOf(item.TargetName) > -1) {
-            unit = item.Unit;
-            return;
-        }
-    });
     AddBackGroundColor();
 }
 function ManageMonthReprotDetailLiaddCss(sender) {

@@ -347,7 +347,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 //}
                 //else
                 //{
-                    AllData = ReportInstanceManageDetailEngine.ReportInstanceManageDetailService.GetManageDetailRptDataSource(rpt, strCompanyProperty, strMonthReportOrderType, IncludeHaveDetail);
+                    //默认按照公司排序字段
+                    AllData = ReportInstanceManageDetailEngine.ReportInstanceManageDetailService.GetManageDetailRptDataSource(rpt, strCompanyProperty, "", IncludeHaveDetail);
                 //}
             }
             return AllData;

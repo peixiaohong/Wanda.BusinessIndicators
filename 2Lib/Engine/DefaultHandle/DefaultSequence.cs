@@ -26,7 +26,7 @@ namespace LJTH.BusinessIndicators.Engine
     {
         public List<MonthlyReportDetail> GetSequence(List<MonthlyReportDetail> RptDetailList, string Paramters)
         {
-            return RptDetailList.OrderBy(p => p.Company.Sequence).ToList(); ;
+            return RptDetailList.OrderBy(p => p.Company.Sequence).ThenBy(m => m.CompanyName).ToList();
         }
     }
 
