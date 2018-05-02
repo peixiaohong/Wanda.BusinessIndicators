@@ -9,6 +9,7 @@ using LJTH.BusinessIndicators.Web.AjaxHandler;
 using LJTH.BusinessIndicators.BLL;
 using LJTH.BusinessIndicators.Model;
 using WebApi.Models;
+using Newtonsoft.Json;
 
 namespace WebApi.Controllers
 {
@@ -157,12 +158,17 @@ namespace WebApi.Controllers
             }
             else
             {
-
+                B_SystemBatch _BatchModel = B_SystemBatchOperator.Instance.GetSystemBatch(Guid.Parse(BusinessID));
+                List<V_SubReport> BatchRptList = JsonConvert.DeserializeObject<List<V_SubReport>>(_BatchModel.SubReport);
+              
+                C_System c_System = StaticResource.Instance.SystemList.Where(x => x.GroupType == _BatchModel.BatchType).FirstOrDefault();
+                SystemID = c_System.ID.ToString();
+                Month = _BatchModel.FinMonth;
+                Year = _BatchModel.FinYear;
             }
             List<DictionaryVmodel> list = mr.GetReportInstance(SystemID, Year, Month, IsLatestVersion);
             return new ResultContext(list);
-
-            return new ResultContext(new { title = Dis, list = listS });
+            
         }
 
     }
