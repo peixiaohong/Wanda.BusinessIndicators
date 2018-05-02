@@ -68,12 +68,12 @@ namespace WebApi.Controllers
         /// <param name="Year"></param>
         /// <param name="Month"></param>
         /// <returns></returns>
-        public ResultContext GetMonthList(string SystemID, int Year, int Month)
+        public ResultContext GetMonthList(string SystemID, int Year, int Month, bool IsLatestVersion = false, string DataSource = "Draft", bool IsAll = false)
         {
             try
             {
                 MonthlyReportController ms = new MonthlyReportController();
-                List<DictionaryVmodel> listM = ms.GetReportInstance(SystemID, Year, Month);
+                List<DictionaryVmodel> listM = ms.GetReportInstance(SystemID, Year, Month, IsLatestVersion, DataSource, IsAll);
                 Guid result = Guid.Empty;
                 Guid.TryParse(SystemID, out result);
                 if (result == Guid.Empty)
@@ -99,14 +99,14 @@ namespace WebApi.Controllers
         /// <param name="Year"></param>
         /// <param name="Month"></param>
         /// <returns></returns>
-        public ResultContext GetMonthDetailList(string SystemID, int Year, int Month, string TargetName)
+        public ResultContext GetMonthDetailList(string SystemID, int Year, int Month, string TargetName, bool IncludeHaveDetail, bool IsLatestVersion = false, string DataSource = "Draft", bool IsAll = false)
         {
             try
             {
                 MonthlyReportController ms = new MonthlyReportController();
                 TargetApproveController ta = new TargetApproveController();
                 List<DictionaryVmodel> li = ms.GetReportInstance(SystemID, Year, Month);
-                List<DictionaryVmodel> listM = ms.GetDetailRptDataSource(li[0].ObjValue.ToString(), "", "Detail", false);
+                List<DictionaryVmodel> listM = ms.GetDetailRptDataSource(li[0].ObjValue.ToString(), "", "Detail", IncludeHaveDetail);
                 Guid result = Guid.Empty;
                 Guid.TryParse(SystemID, out result);
                 if (result == Guid.Empty)
@@ -131,7 +131,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// 获取月报审批初始化数据
+        /// 获取月报审批数据
         /// </summary>
         /// <param name="BusinessID"></param>
         /// <param name="ProType"></param>
@@ -240,5 +240,46 @@ namespace WebApi.Controllers
 
         }
         #endregion
+        /// <summary>
+        /// 获取指标分解审批页面展示数据
+        /// </summary>
+        /// <param name="BusinessID"></param>
+        /// <param name="IsLatestVersion"></param>
+        /// <returns></returns>
+        public ResultContext TargetPlanApprove(string BusinessID, bool IsLatestVersion)
+        {
+            try
+            {
+                B_TargetPlan _BTargetPlan = B_TargetplanOperator.Instance.GetTargetPlanByID(Guid.Parse(BusinessID));
+                string SystemID = string.Empty;
+                string Year = "";
+                C_System system = new C_System();
+                if (_BTargetPlan != null)
+                {
+                    SystemID = _BTargetPlan.SystemID.ToString();
+                    Year = _BTargetPlan.FinYear.ToString();
+                    system = StaticResource.Instance[_BTargetPlan.SystemID, DateTime.Now];
+
+                }
+                TargetPlanDetailController tp = new TargetPlanDetailController();
+
+                if (system != null && system.Category == 3)
+                {
+                    return new ResultContext(tp.GetTargetPlanDetail(SystemID, Year, BusinessID, IsLatestVersion));
+                }
+                else
+                {
+                    return new ResultContext(tp.GetVerTargetList(BusinessID));
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ResultContext((int)StatusCodeEnum.isCatch, ex.ToString());
+                throw;
+            }
+
+        }
+
+
     }
 }

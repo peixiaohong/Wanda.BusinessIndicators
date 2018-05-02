@@ -4,10 +4,7 @@ using LJTH.BusinessIndicators.Engine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using WebApi.Models;
 using LJTH.BusinessIndicators.Common;
 using Lib.Core;
 using BPF.Workflow.Object;
@@ -15,12 +12,15 @@ using Newtonsoft.Json;
 using LJTH.BusinessIndicators.ViewModel;
 
 using BPF.Workflow.Client;
+using WebApi.Models;
 
 namespace WebApi.Controllers
 {
     public class ApprovalController : ApiController
     {
         private string VirtualUser = System.Configuration.ConfigurationManager.AppSettings["WF.VirtualUser"];
+        private string CurrentUser = WebHelper.GetCurrentLoginUser();
+        #region 月报审批
         /// <summary>
         /// 入口
         /// </summary>
@@ -29,13 +29,23 @@ namespace WebApi.Controllers
         /// <param name="ExecuteType"></param>
         /// <param name="OperatorType"></param>
         /// <param name="PrcessStatus"></param>
-        public void ProcessRequest(string BusinessID, string strProType, string ExecuteType, int OperatorType, string PrcessStatus)
+        public ResultContext MonthProcessRequest(string BusinessID, string strProType, string ExecuteType, int OperatorType, string PrcessStatus)
         {
-            //业务处理
-            DisposeBusinessData(BusinessID, strProType);
+            try
+            {
+                //业务处理
+                DisposeBusinessData(BusinessID, strProType);
 
-            //执行按钮事件的处理
-            ExecutionBusinessData(BusinessID, strProType, ExecuteType, OperatorType);
+                //执行按钮事件的处理
+                ExecutionBusinessData(BusinessID, strProType, ExecuteType, OperatorType);
+                return new ResultContext();
+            }
+            catch (Exception ex)
+            {
+                return new ResultContext((int)StatusCodeEnum.isCatch, ex.ToString());
+                throw;
+            }
+           
 
         }
 
@@ -70,7 +80,7 @@ namespace WebApi.Controllers
                     //月报业务ID ，没有问题
                     if (string.IsNullOrEmpty(ReportModel.ProcessOwn))
                     {
-                        ReportModel.ProcessOwn = WebHelper.GetCurrentLoginUser();
+                        ReportModel.ProcessOwn = this.CurrentUser;
                         B_MonthlyreportOperator.Instance.UpdateMonthlyreport(ReportModel);
                     }
                     B_MonthlyReportAction _bMonthlyReportAction = new B_MonthlyReportAction();
@@ -79,10 +89,10 @@ namespace WebApi.Controllers
                     _bMonthlyReportAction.FinYear = ReportModel.FinYear;
                     _bMonthlyReportAction.FinMonth = ReportModel.FinMonth;
                     _bMonthlyReportAction.Action = EnumHelper.GetEnumDescription(typeof(MonthlyReportLogActionType), (int)MonthlyReportLogActionType.Submit);
-                    _bMonthlyReportAction.Operator = WebHelper.GetCurrentLoginUser();
+                    _bMonthlyReportAction.Operator = this.CurrentUser;
                     _bMonthlyReportAction.OperatorTime = DateTime.Now;
-                    _bMonthlyReportAction.ModifierName = WebHelper.GetCurrentLoginUser();
-                    _bMonthlyReportAction.CreatorName = WebHelper.GetCurrentLoginUser();
+                    _bMonthlyReportAction.ModifierName = this.CurrentUser;
+                    _bMonthlyReportAction.CreatorName = this.CurrentUser;
                     B_MonthlyReportActionOperator.Instance.AddMonthlyReportAction(_bMonthlyReportAction);
 
                 }
@@ -92,7 +102,7 @@ namespace WebApi.Controllers
 
                     _BatchModel = B_SystemBatchOperator.Instance.GetSystemBatch(ID);
 
-                    _BatchModel.ModifierName = WebHelper.GetCurrentLoginUser();
+                    _BatchModel.ModifierName = this.CurrentUser;
                     B_SystemBatchOperator.Instance.UpdateSystemBatch(_BatchModel);
 
                     B_MonthlyReportAction _bMonthlyReportAction = new B_MonthlyReportAction();
@@ -101,10 +111,10 @@ namespace WebApi.Controllers
                     _bMonthlyReportAction.FinYear = _BatchModel.FinYear;
                     _bMonthlyReportAction.FinMonth = _BatchModel.FinMonth;
                     _bMonthlyReportAction.Action = EnumHelper.GetEnumDescription(typeof(MonthlyReportLogActionType), (int)MonthlyReportLogActionType.Submit);
-                    _bMonthlyReportAction.Operator = WebHelper.GetCurrentLoginUser();
+                    _bMonthlyReportAction.Operator = this.CurrentUser;
                     _bMonthlyReportAction.OperatorTime = DateTime.Now;
-                    _bMonthlyReportAction.ModifierName = WebHelper.GetCurrentLoginUser();
-                    _bMonthlyReportAction.CreatorName = WebHelper.GetCurrentLoginUser();
+                    _bMonthlyReportAction.ModifierName = this.CurrentUser;
+                    _bMonthlyReportAction.CreatorName = this.CurrentUser;
                     B_MonthlyReportActionOperator.Instance.AddMonthlyReportAction(_bMonthlyReportAction);
                 }
 
@@ -545,7 +555,7 @@ namespace WebApi.Controllers
                 WFBatchStatus = _BatchModel.WFBatchStatus,
                 SubReport = _BatchModel.SubReport,
                 CreateTime = DateTime.Now,
-                CreatorName = WebHelper.GetCurrentLoginUser(),
+                CreatorName = this.CurrentUser,
                 Opinions = _BatchModel.Opinions,
                 Batch_Opinions = _BatchModel.Batch_Opinions
             });
@@ -577,7 +587,7 @@ namespace WebApi.Controllers
             //判断当月主表是否是null
             if (rptA == null)
             {
-                A_MonthlyreportOperator.Instance.AddMonthlyreport(new A_MonthlyReport() { ID = rpt.ID, FinYear = rpt.FinYear, FinMonth = rpt.FinMonth, Description = rpt.Description, SystemID = rpt.SystemID, Status = 5, SystemBatchID = rpt.SystemBatchID, CreatorName = WebHelper.GetCurrentLoginUser(), CreateTime = DateTime.Now });
+                A_MonthlyreportOperator.Instance.AddMonthlyreport(new A_MonthlyReport() { ID = rpt.ID, FinYear = rpt.FinYear, FinMonth = rpt.FinMonth, Description = rpt.Description, SystemID = rpt.SystemID, Status = 5, SystemBatchID = rpt.SystemBatchID, CreatorName = this.CurrentUser, CreateTime = DateTime.Now });
 
                 //判断A 明细
                 if (rptADetailList.Count == 0)
@@ -612,7 +622,7 @@ namespace WebApi.Controllers
                 A_MonthlyreportOperator.Instance.DeleteModel(rptA);
 
                 //新增B表的主表数据
-                A_MonthlyreportOperator.Instance.AddMonthlyreport(new A_MonthlyReport() { ID = rpt.ID, FinYear = rpt.FinYear, FinMonth = rpt.FinMonth, Description = rpt.Description, SystemID = rpt.SystemID, Status = 5, SystemBatchID = rpt.SystemBatchID, CreatorName = WebHelper.GetCurrentLoginUser(), CreateTime = DateTime.Now });
+                A_MonthlyreportOperator.Instance.AddMonthlyreport(new A_MonthlyReport() { ID = rpt.ID, FinYear = rpt.FinYear, FinMonth = rpt.FinMonth, Description = rpt.Description, SystemID = rpt.SystemID, Status = 5, SystemBatchID = rpt.SystemBatchID, CreatorName = this.CurrentUser, CreateTime = DateTime.Now });
 
                 //B表转换到A表
                 if (rptADetailList.Count == 0)
@@ -714,187 +724,12 @@ namespace WebApi.Controllers
             return listna;
         }
 
-        [Serializable]
-        private class NavigatActivity1
-        {
-            private string activityID;
-
-            public string ActivityID
-            {
-                get { return activityID; }
-                set { activityID = value; }
-            }
-            private string activityName;
-
-            public string ActivityName
-            {
-                get { return activityName; }
-                set { activityName = value; }
-            }
-            private int activityType;
-
-            public int ActivityType
-            {
-                get { return activityType; }
-                set { activityType = value; }
-            }
-            private bool canBeReturned;
-
-            public bool CanBeReturned
-            {
-                get { return canBeReturned; }
-                set { canBeReturned = value; }
-            }
-            private List<NavigatCandidate1> candidates;
-
-            public List<NavigatCandidate1> Candidates
-            {
-                get { return candidates; }
-                set { candidates = value; }
-            }
-            private bool compelPass;
-
-            public bool CompelPass
-            {
-                get { return compelPass; }
-                set { compelPass = value; }
-            }
-            private List<ClientOpinion1> opinions;
-
-            public List<ClientOpinion1> Opinions
-            {
-                get { return opinions; }
-                set { opinions = value; }
-            }
-            private int runningStatus;
-
-            public int RunningStatus
-            {
-                get { return runningStatus; }
-                set { runningStatus = value; }
-            }
-        }
-
-        [Serializable]
-        private class ClientOpinion1
-        {
-            private string activityID;
-
-            public string ActivityID
-            {
-                get { return activityID; }
-                set { activityID = value; }
-            }
-            private string activityName;
-
-            public string ActivityName
-            {
-                get { return activityName; }
-                set { activityName = value; }
-            }
-            private bool canEdit;
-
-            public bool CanEdit
-            {
-                get { return canEdit; }
-                set { canEdit = value; }
-            }
-            private DateTime createDate;
-
-            public DateTime CreateDate
-            {
-                get { return createDate; }
-                set { createDate = value; }
-            }
-
-            private string id;
-
-            public string Id
-            {
-                get { return id; }
-                set { id = value; }
-            }
-            private string operationType;
-
-            public string OperationType
-            {
-                get { return operationType; }
-                set { operationType = value; }
-            }
-            private string opinContent;
-
-            public string OpinContent
-            {
-                get { return opinContent; }
-                set { opinContent = value; }
-            }
-            private string taskID;
-
-            public string TaskID
-            {
-                get { return taskID; }
-                set { taskID = value; }
-            }
-            private string user;
-
-            public string User
-            {
-                get { return user; }
-                set { user = value; }
-            }
-            private string userID;
-
-            public string UserID
-            {
-                get { return userID; }
-                set { userID = value; }
-            }
-        }
-
-        [Serializable]
-        private class NavigatCandidate1
-        {
-            private bool completed;
-
-            public bool Completed
-            {
-                get { return completed; }
-                set { completed = value; }
-            }
-            private string deptName;
-
-            public string DeptName
-            {
-                get { return deptName; }
-                set { deptName = value; }
-            }
-            private string id;
-
-            public string Id
-            {
-                get { return id; }
-                set { id = value; }
-            }
-            private string name;
-
-            public string Name
-            {
-                get { return name; }
-                set { name = value; }
-            }
-            private string title;
-
-            public string Title
-            {
-                get { return title; }
-                set { title = value; }
-            }
-        }
+       
+        #endregion
         #endregion
 
 
-
-
+      
         #region 日志
         /// <summary>
         /// 操作记录日志
@@ -912,10 +747,10 @@ namespace WebApi.Controllers
             _bMonthlyReportAction.FinYear = FinYear;
             _bMonthlyReportAction.FinMonth = FinMonth;
             _bMonthlyReportAction.Action = EnumHelper.GetEnumDescription(typeof(MonthlyReportLogActionType), ActionType);
-            _bMonthlyReportAction.Operator = WebHelper.GetCurrentLoginUser();
+            _bMonthlyReportAction.Operator = this.CurrentUser;
             _bMonthlyReportAction.OperatorTime = DateTime.Now;
-            _bMonthlyReportAction.ModifierName = WebHelper.GetCurrentLoginUser();
-            _bMonthlyReportAction.CreatorName = WebHelper.GetCurrentLoginUser();
+            _bMonthlyReportAction.ModifierName = this.CurrentUser;
+            _bMonthlyReportAction.CreatorName = this.CurrentUser;
 
             B_MonthlyReportActionOperator.Instance.AddMonthlyReportAction(_bMonthlyReportAction);
         }

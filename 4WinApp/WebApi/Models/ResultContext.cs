@@ -7,6 +7,11 @@ namespace WebApi.Models
 {
     public class ResultContext
     {
+        public ResultContext()
+        {
+            this.IsSuccess = true;
+            this.StatusCode = (int)StatusCodeEnum.isTrue;
+        }
         public ResultContext(object Data)
         {
             this.Data = Data;
