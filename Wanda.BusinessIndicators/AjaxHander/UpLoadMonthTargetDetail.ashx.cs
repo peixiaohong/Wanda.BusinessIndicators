@@ -1696,7 +1696,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         }
 
 
-        #region 优化上传指标
+        #region 优化上传指标  ProcessMulitiVersionTarget 页面也有同样的方法，有时间记得整理到一起
 
         /// <summary>
         /// 整合数据（优化：改成删除后批量插入）
