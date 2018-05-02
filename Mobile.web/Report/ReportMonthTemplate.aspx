@@ -16,7 +16,7 @@
                                         <tr>
                                             <td style="width: 50%">房地产事业部</td>
                                             <td style="width: 30%">2018年</td>
-                                            <td style="width: 25%">2月</td>
+                                            <td style="width: 25%">{{getQueryString("name")}}月</td>
                                         </tr>
                                     </tbody>
                                 </table>

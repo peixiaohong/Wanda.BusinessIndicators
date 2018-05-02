@@ -82,8 +82,12 @@ namespace WebApi.Controllers
                 string Dis = "";
                 if (li.Count > 0)
                     Dis = li.FirstOrDefault().Description;
+                DictionaryVmodel dv = new DictionaryVmodel();
+                if (listM.Count > 0)
+                    dv = listM[2];
 
-                return new ResultContext(new { title = Dis, list = listM[2] });
+
+                return new ResultContext(new { title = Dis, list = dv });
             }
             catch (Exception ex)
             {

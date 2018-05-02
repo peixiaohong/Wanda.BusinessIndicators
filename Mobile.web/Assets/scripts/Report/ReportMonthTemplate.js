@@ -9,6 +9,34 @@
             }
         },   
         methods: {
+            initData: function () {
+                var self = this;
+                var url = api_url + 'api/Report/GetMonthDetailList';
+                utils.ajax({
+                    type: 'GET',
+                    url: url,
+                    args: {
+                        "SystemID": self.getQueryString("id"),
+                        "Year": 2018,
+                        "Month": 4,
+                        "TargetName": self.getQueryString("name")
+                    },
+                    success: function (res) {
+                        if (res.IsSuccess && res.StatusCode == 200) {
+                            console.log(res);
+                        } else {
+                            utils.alertMessage(res.StatusMessage)
+                        }
+                    }
+                });
+            },
+            getQueryString: function (name) {
+                var result = location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
+                if (result == null || result.length < 1) {
+                    return "";
+                }
+                return result[1];
+            },
             filterData: function (data) {
                 var match = [];
                     data.forEach(function (one) {
@@ -9627,7 +9655,8 @@
                 "Level": 0
             }]
             self.result = self.filterData(data);
-            console.log(self.filterData(data))
+            //self.initData();
+            console.log(decodeURI(self.getQueryString("name")))
         },
     })
 })

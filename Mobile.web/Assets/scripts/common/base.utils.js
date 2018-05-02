@@ -141,7 +141,7 @@ var utils = {
             success: function (result) {
                 utils.unblock();
                 if (setting.success != null && typeof setting.success === 'function') {
-                    setting.success(result.Result);
+                    setting.success(result);
                 }
             },
             error: function (XMLHttpRequest, textStatus) {
