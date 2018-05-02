@@ -27,6 +27,8 @@ namespace ScheduleService.Handler
 
         public void Execute(Quartz.IJobExecutionContext context)
         {
+            Common.ScheduleService.Log.Instance.Info("合并流程服务，开始执行");
+
             DateTime datetime = StaticResource.Instance.GetReportDateTime();
 
             finMonth = datetime.Month;

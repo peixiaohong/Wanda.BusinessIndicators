@@ -21,9 +21,10 @@ namespace ScheduleService.Handler
             {
                 if (string.IsNullOrEmpty(_userStr))
                 {
-                    if (File.Exists(fileName))
+                    string fullpath = AppDomain.CurrentDomain.BaseDirectory + fileName;
+                    if (File.Exists(fullpath))
                     {
-                        _userStr = File.ReadAllText(fileName);
+                        _userStr = File.ReadAllText(fullpath);
                     }
                     else
                         throw new Exception("缺少审批人配置文件");

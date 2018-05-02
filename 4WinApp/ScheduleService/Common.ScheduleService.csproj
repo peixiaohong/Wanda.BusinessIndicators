@@ -141,10 +141,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\6Plugin\BPF.Workflow.Object\BPF.Workflow.Object.csproj">
-      <Project>{3B2BB7DB-894F-4604-B720-BE5F017F77B6}</Project>
-      <Name>BPF.Workflow.Object</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ScheduleService.Handler\ScheduleService.Handler.csproj">
       <Project>{88ad4d85-ccf2-4e57-b27a-4df5a63301dc}</Project>
       <Name>ScheduleService.Handler</Name>
