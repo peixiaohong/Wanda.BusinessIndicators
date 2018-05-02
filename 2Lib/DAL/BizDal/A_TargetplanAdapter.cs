@@ -87,8 +87,22 @@ namespace LJTH.BusinessIndicators.DAL
             return ExecuteQuery(sql, new SqlParameter[] { temp_OperatorTime });
         }
 
+        /// <summary>
+        /// 获取已有上传年份
+        /// </summary>
+        /// <param name="SystemID"></param>
+        /// <param name="Year"></param>
+        /// <returns></returns>
+        public List<A_TargetPlan> GetPlanYearList()
+        {
+            string sql = "select distinct FinYear from dbo.A_TargetPlan ";
 
-		 
-	} 
+            sql += "WHERE " + base.NotDeleted;
+            sql += " ORDER BY FinYear DESC";
+
+            return ExecuteQuery(sql);
+        }
+
+    } 
 }
 

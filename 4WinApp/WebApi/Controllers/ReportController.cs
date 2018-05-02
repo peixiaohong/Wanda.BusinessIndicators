@@ -10,6 +10,8 @@ using LJTH.BusinessIndicators.BLL;
 using LJTH.BusinessIndicators.Model;
 using WebApi.Models;
 using Newtonsoft.Json;
+using Lib.Core;
+using LJTH.BusinessIndicators.Common;
 
 namespace WebApi.Controllers
 {
@@ -37,7 +39,7 @@ namespace WebApi.Controllers
             return new ResultContext(list);
         }
         /// <summary>
-        /// 获取年与业态列表
+        /// 获取月报的年与业态列表
         /// </summary>
         /// <returns></returns>
         public ResultContext GetSystemAndYearList()
@@ -187,5 +189,56 @@ namespace WebApi.Controllers
                 throw;
             }
         }
+
+
+
+        #region 分解指标查询
+
+        /// <summary>
+        /// 获取分解指标的年与业态列表
+        /// </summary>
+        /// <returns></returns>
+        public ResultContext GetTargetCollectInit()
+        {
+            try
+            {
+                List<string> Year = new List<string>();
+
+                A_TargetplanOperator.Instance.GetPlanYearList().ForEach(x => Year.Add(x.FinYear.ToString()));
+                List<C_System> System = new List<C_System>();
+                System = C_SystemOperator.Instance.GetSystemList(DateTime.Now).OrderBy(S => S.Sequence).ToList();
+
+                return new ResultContext(new { Year, System });
+            }
+            catch (Exception ex)
+            {
+                return new ResultContext((int)StatusCodeEnum.isCatch, ex.ToString());
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// 分解指标数据
+        /// </summary>
+        /// <param name="SysID"></param>
+        /// <param name="FinYear"></param>
+        /// <returns></returns>
+        public ResultContext GetVerTargetList(string SysID, string FinYear)
+        {
+            try
+            {
+                CompanyController cc = new CompanyController();
+                List<C_Target> result = cc.GetVerTargetList(SysID, FinYear);
+                return new ResultContext(result);
+            }
+            catch (Exception ex)
+            {
+                return new ResultContext((int)StatusCodeEnum.isCatch, ex.ToString());
+                throw;
+            }
+
+        }
+        #endregion
     }
 }

@@ -381,7 +381,7 @@ AND FinYear=2015 AND FinMonth=8 ORDER BY CreateTime DESC ";
         }
 
         /// <summary>
-        /// 获取上传年
+        /// 获取已有上传年份
         /// </summary>
         /// <param name="SystemID"></param>
         /// <param name="Year"></param>

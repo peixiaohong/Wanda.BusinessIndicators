@@ -107,6 +107,16 @@ namespace LJTH.BusinessIndicators.BLL
         }
 
         #endregion
-    } 
+        /// <summary>
+        /// 获取已审批通过的分解指标年份集合
+        /// </summary>
+        /// <returns></returns>
+        public List<A_TargetPlan> GetPlanYearList()
+        {
+            List<A_TargetPlan> result = _aTargetplanAdapter.GetPlanYearList();
+            return result;
+        }
+
+    }
 }
 
