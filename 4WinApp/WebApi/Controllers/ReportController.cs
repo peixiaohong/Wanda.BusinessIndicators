@@ -160,7 +160,7 @@ namespace WebApi.Controllers
             {
                 B_SystemBatch _BatchModel = B_SystemBatchOperator.Instance.GetSystemBatch(Guid.Parse(BusinessID));
                 List<V_SubReport> BatchRptList = JsonConvert.DeserializeObject<List<V_SubReport>>(_BatchModel.SubReport);
-              
+
                 C_System c_System = StaticResource.Instance.SystemList.Where(x => x.GroupType == _BatchModel.BatchType).FirstOrDefault();
                 SystemID = c_System.ID.ToString();
                 Month = _BatchModel.FinMonth;
@@ -168,8 +168,24 @@ namespace WebApi.Controllers
             }
             List<DictionaryVmodel> list = mr.GetReportInstance(SystemID, Year, Month, IsLatestVersion);
             return new ResultContext(list);
-            
+
         }
 
+
+
+        public ResultContext GetShowPrcessNodeName(string strSystemID, string strProcessCode)
+        {
+            try
+            {
+                TargetController tc = new TargetController();
+                bool ShowProecessNodeName = tc.GetShowPrcessNodeName(strSystemID, strProcessCode);
+                return new ResultContext(ShowProecessNodeName);
+            }
+            catch (Exception ex)
+            {
+                return new ResultContext((int)StatusCodeEnum.isCatch, ex.ToString());
+                throw;
+            }
+        }
     }
 }

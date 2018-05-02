@@ -177,6 +177,10 @@
       <Project>{FCCAD333-B48E-4A04-AD3C-8CB4CA17EF28}</Project>
       <Name>LJTH.Lib.AuthCenter</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\1Framework\Lib.Core\LJTH.Lib.Core.csproj">
+      <Project>{65839f36-193a-41d1-9e79-38bc84984de6}</Project>
+      <Name>LJTH.Lib.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\1Framework\Lib.Data\LJTH.Lib.Data.csproj">
       <Project>{442C318F-9D99-4A3F-972E-33E8A8C8BE51}</Project>
       <Name>LJTH.Lib.Data</Name>
@@ -197,6 +201,10 @@
       <Project>{1d81e774-65e8-43ff-8f8e-486d28a56275}</Project>
       <Name>9Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\2Lib\Engine\10Engine.csproj">
+      <Project>{8f011280-24e7-4ee5-8f81-737b7b887e3d}</Project>
+      <Name>10Engine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\2Lib\Model\3Model.csproj">
       <Project>{efa26ef0-4ba9-4563-8d63-554e884f56b7}</Project>
       <Name>3Model</Name>
@@ -204,6 +212,14 @@
     <ProjectReference Include="..\..\2Lib\ViewModel\4ViewModel.csproj">
       <Project>{AB142C57-A632-4958-9814-4F7C3EA9083A}</Project>
       <Name>4ViewModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\6Plugin\BPF.Workflow.Client\BPF.Workflow.Client.csproj">
+      <Project>{5bd5cc30-3bd6-4b83-af1a-cf62e7f67297}</Project>
+      <Name>BPF.Workflow.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\6Plugin\BPF.Workflow.Object\BPF.Workflow.Object.csproj">
+      <Project>{3b2bb7db-894f-4604-b720-be5f017f77b6}</Project>
+      <Name>BPF.Workflow.Object</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
