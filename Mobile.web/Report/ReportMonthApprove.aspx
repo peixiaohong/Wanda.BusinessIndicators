@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterApprove.Master" AutoEventWireup="true" CodeBehind="ReportMonthApprove.aspx.cs" Inherits="Mobile.web.Report.ReportMonthApprove" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+        <script src="<%=ResolveUrl("~/Assets/scripts/Report/ReportApprove.js") %>"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
         <section id="ApproveContent">
@@ -122,7 +123,7 @@
                 </div>
 
                 <div id="SJSJ_LC">
-                    <div class="inset_wrapper">
+                    <%--<div class="inset_wrapper">
                         <div class="bpf_workflow_approve_result">
                             <div class="bpf_workflow_approve_center">
                                 <a id="bpf_workflow_approve_top" href="http://192.168.50.72/Application/Task/TaskCollectionView.aspx?businessId=6ff06a0c-fd22-4b91-b0a6-79bd1b4ab848#" class="bpf_workflow_approve_top" style="bottom: 50px;"></a>
@@ -349,7 +350,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
 
                 </div>
             </div>
