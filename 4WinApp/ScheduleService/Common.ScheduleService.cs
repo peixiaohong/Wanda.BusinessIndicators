@@ -18,14 +18,14 @@ namespace Common.ScheduleService
 
         protected override void OnStart(string[] args)
         {
-            Log.Instance.Info("Wanda Common Schedule Service starting...");
+            Log.Instance.Info("LJTH Common Schedule Service starting...");
             scheduler.Start();
-            Log.Instance.Info("Wanda Common Schedule Service started");
+            Log.Instance.Info("LJTH Common Schedule Service started");
         }
 
         protected override void OnStop()
         {
-            Log.Instance.Info("Wanda Common Schedule Service Shutdowning...");
+            Log.Instance.Info("LJTH Common Schedule Service Shutdowning...");
             if (scheduler != null)
             {
                 //停止全部正在运行的调度任务
@@ -44,14 +44,14 @@ namespace Common.ScheduleService
                 //此处参数要选择false，否则本行代码会等待所有作业执行完成后才返回，导致服务停止操作报告失败
                 scheduler.Shutdown(false);
             }
-            Log.Instance.Info("Wanda Common Schedule Service Shutdown complete");
+            Log.Instance.Info("LJTH Common Schedule Service Shutdown complete");
         }
 
         protected override void OnPause()
         {
-            Log.Instance.Info("Wanda Common Schedule Service pausing...");
+            Log.Instance.Info("LJTH Common Schedule Service pausing...");
             scheduler.PauseAll();
-            Log.Instance.Info("Wanda Common Schedule Service paused...");
+            Log.Instance.Info("LJTH Common Schedule Service paused...");
         }
 
         protected override void OnContinue()

@@ -279,7 +279,14 @@ namespace LJTH.BusinessIndicators.BLL
             Guid result = base.RemoveObject(bMonthlyreportID);
             return result;
         }
-        
+        /// <summary>
+        /// 获取已上传月报数据年份
+        /// </summary>
+        /// <returns></returns>
+        public List<B_MonthlyReport> GetMonthlyReportYearList()
+        {
+            return _bMonthlyreportAdapter.GetMonthlyReportYearList();
+        }
         //#endregion
     } 
 }

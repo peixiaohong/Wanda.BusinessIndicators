@@ -14,7 +14,7 @@ using LJTH.BusinessIndicators.ViewModel;
 
 namespace LJTH.BusinessIndicators.Web.AjaxHandler
 {
-    class TargetApproveController : BaseController
+   public class TargetApproveController : BaseController
     {
         #region 变量
 

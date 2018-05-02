@@ -89,7 +89,7 @@
                                 <tbody>
                                     <tr v-for="item in result.ObjValue">
 
-                                        <td>{{item.TargetName}}</td>
+                                        <td><a v-bind:href="'/Report/ReportMonthTemplate.aspx?name=' + item.TargetName">{{item.TargetName}}</a></td>
                                         <td>{{parseInt(item.NPlanAmmount)}}</td>
                                         <td>{{parseInt(item.NActualAmmount)}}</td>
                                         <td>{{parseInt(item.NActualRate)}}%</td>

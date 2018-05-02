@@ -141,7 +141,7 @@ namespace LJTH.BusinessIndicators.DAL
             string sql = ORMapping.GetSelectSql<B_MonthlyReport>(TSqlBuilder.Instance);
 
             sql += "WHERE " + base.NotDeleted;
-            sql += " AND SystemID=@SystemID AND AreaID=@AreaID AND FinYear=@Year AND FinMonth=@Month AND WFStatus='Draft' ";
+            sql += " AND SystemID=@SystemID AND AreaID=@AreaID AND FinYear=@Year AND FinMonth=@Month AND WFStatus='Draft' AND DefaultVersionStatus=1 ";
             sql += " ORDER BY CreateTime DESC";
 
             SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
@@ -378,6 +378,22 @@ AND FinYear=2015 AND FinMonth=8 ORDER BY CreateTime DESC ";
             SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
             List<B_MonthlyReport> list = ExecuteQuery(sql, pSystemID, pYear, pMonth);
             return (list != null && list.Count > 0) ? list.FirstOrDefault() : null;
+        }
+
+        /// <summary>
+        /// 获取已有上传年份
+        /// </summary>
+        /// <param name="SystemID"></param>
+        /// <param name="Year"></param>
+        /// <returns></returns>
+        public List<B_MonthlyReport> GetMonthlyReportYearList()
+        {
+            string sql = "select distinct FinYear from dbo.B_MonthlyReport ";
+
+            sql += "WHERE " + base.NotDeleted;
+            sql += " ORDER BY FinYear DESC";
+
+            return ExecuteQuery(sql);
         }
     }
 }
