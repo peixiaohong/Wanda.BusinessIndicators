@@ -1,25 +1,16 @@
-﻿using Aspose.Cells;
-using Lib.Config;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Web;
-using System.Xml.Linq;
+﻿using Lib.Web.Json;
 using LJTH.BusinessIndicators.BLL;
-using LJTH.BusinessIndicators.Common;
-using LJTH.BusinessIndicators.Common.Web;
 using LJTH.BusinessIndicators.Engine;
-using LJTH.BusinessIndicators.Engine.Engine;
 using LJTH.BusinessIndicators.Model;
 using LJTH.BusinessIndicators.ViewModel;
 using LJTH.BusinessIndicators.Web.AjaxHandler;
-using Lib.Xml;
 using Newtonsoft.Json;
-using Lib.Web.Json;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Web;
 
 namespace LJTH.BusinessIndicators.Web.AjaxHander
 {
@@ -67,6 +58,10 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 var targetVersionList = A_TargetplanOperator.Instance.GetTargetplanListForMulitiVersion(MonthlyReport.SystemID, MonthlyReport.FinYear);
                 var targetList = C_TargetOperator.Instance.GetTargetList().Where(t => MonthlyReportDetailList.Select(v => v.TargetID).ToList().Contains(t.ID));
                 //循环多版本
+
+                //先删除现有的非默认下的月报
+                B_MonthlyreportOperator.Instance.DeleteNoDefaultVersionMonthlyReport(MonthlyReport);
+
                 foreach (var tagerPlanItem in targetVersionList)
                 {
                     List<DictionaryVmodel> ListDV = new List<DictionaryVmodel>();
@@ -92,6 +87,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                             //mrd.CompanyName = monthlyReportDetailItem.CompanyName;
                             mrd.NPlanAmmount = targetPlanDetailList.Where(v => v.CompanyID == mrd.CompanyID).FirstOrDefault().Target;
                             mrd.NActualAmmount = monthlyReportDetailItem.NActualAmmount;
+                            mrd.TargetPlanID = tagerPlanItem.ID;
                             listMrd.Add(mrd);
                         }
                         ListDV.AddRange(FormatTargetDetailNew(out error, listMrd, newMonthlyReport.SystemID, FinYear, FinMonth, targetItem.TargetName, new ReportInstance(newMonthlyReportGuid, true)));
@@ -100,7 +96,6 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     AddOrUpdateDataNew(ListDV, newMonthlyReportGuid);
 
                 }
-
 
             }
             catch (Exception ex)
@@ -137,20 +132,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 error = "请确认上传的指标是否是本系统的指标!";
                 return null;
             }
-
-            //获取当年指标计划ID
-            Guid targetPlanID = Guid.Empty;
-            List<A_TargetPlan> CurrentYearTargetPlan = LJTH.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetTargetplanList(SystemID, FinYear).ToList();
-            if (CurrentYearTargetPlan.Count > 0)
-            {
-                targetPlanID = CurrentYearTargetPlan[0].ID;
-            }
-
-
-            //获取当前月的数据
-            List<MonthlyReportDetail> listCurrentMonthReportDetail = CurrentRpt.ReportDetails.Where(p => p.TargetID == targetID).ToList();
-
-
+            
             MonthlyReportDetail monthlyReportDetail = null;
             //是否存在B_MonthlyReport
 
@@ -165,7 +147,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 monthlyReportDetail.FinYear = FinYear;//当前年
                 monthlyReportDetail.FinMonth = FinMonth;//当前月
                 monthlyReportDetail.TargetID = targetID;//指标ID
-                List<C_Company> listCompany = StaticResource.Instance.CompanyList[SystemID].ToList().Where(p => p.CompanyName == mrd.CompanyName).ToList();
+                List<C_Company> listCompany = StaticResource.Instance.CompanyList[SystemID].ToList().Where(p => p.ID == mrd.CompanyID).ToList();
                 if (listCompany.Count() == 0)
                 {
                     continue;
@@ -177,7 +159,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     monthlyReportDetail.CompanyProperty = JsonConvert.SerializeObject(listCompany[0]);
                 }
 
-                monthlyReportDetail.TargetPlanID = targetPlanID;//计划指标ID
+                monthlyReportDetail.TargetPlanID = mrd.TargetPlanID;//计划指标ID
                 monthlyReportDetail.MonthlyReportID = CurrentRpt._MonthReportID;//月度报告ID
                 monthlyReportDetail.NPlanAmmount = mrd.NPlanAmmount;//计划指标
                 monthlyReportDetail.NActualAmmount = mrd.NActualAmmount;// 实际数

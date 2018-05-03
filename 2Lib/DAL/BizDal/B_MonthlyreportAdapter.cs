@@ -8,7 +8,7 @@ using Lib.Data;
 using LJTH.BusinessIndicators.Model;
 using System.Data.SqlClient;
 using System.Data;
-
+using System.Transactions;
 
 namespace LJTH.BusinessIndicators.DAL
 {
@@ -394,6 +394,47 @@ AND FinYear=2015 AND FinMonth=8 ORDER BY CreateTime DESC ";
             sql += " ORDER BY FinYear DESC";
 
             return ExecuteQuery(sql);
+        }
+
+        public bool DeleteNoDefaultVersionMonthlyReport(B_MonthlyReport MonthlyReport)
+        {
+            var result = false;
+            try
+            {
+                string sql = string.Format(@"
+                    DELETE  B
+                    FROM    dbo.B_MonthlyReport AS A
+                            INNER JOIN dbo.B_MonthlyReportDetail AS B ON B.MonthlyReportID = A.ID
+                    WHERE   A.SystemID = '{0}'
+                            AND A.FinMonth = {1}
+                            AND A.FinYear = {2}
+                            AND A.ID <> '{3}'
+                            AND ISNULL(A.AreaID,'00000000-0000-0000-0000-000000000000') = '{4}';       
+		 
+                    DELETE  dbo.B_MonthlyReport
+                    WHERE   SystemID = '{0}'
+                            AND FinMonth = {1}
+                            AND FinYear = {2}
+                            AND ID <> '{3}'
+                            AND ISNULL(AreaID,'00000000-0000-0000-0000-000000000000') = '{4}'; ", MonthlyReport.SystemID,
+                            MonthlyReport.FinMonth, MonthlyReport.FinYear, MonthlyReport.ID, MonthlyReport.AreaID);
+                using (TransactionScope scope = TransactionScopeFactory.Create())
+                {
+                    var con = new SqlConnection(DbConnectionManager.GetConnectionString(base.ConnectionName));
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand(sql, con);
+                    result = cmd.ExecuteNonQuery() > 0;
+                    con.Close();
+                    scope.Complete();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                result = false;
+            }
+            return result;
         }
     }
 }

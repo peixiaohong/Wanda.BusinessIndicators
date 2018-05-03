@@ -14,7 +14,7 @@ namespace LJTH.BusinessIndicators.DAL
     /// Targetplan对象的数据访问适配器
     /// </summary>
     sealed class A_TargetplanAdapter : AppBaseAdapterT<A_TargetPlan>
-	{
+    {
 
         public IList<A_TargetPlan> GetTargetplanList()
         {
@@ -64,11 +64,13 @@ namespace LJTH.BusinessIndicators.DAL
         {
             string sql = ORMapping.GetSelectSql<A_TargetPlan>(TSqlBuilder.Instance);
 
-            sql += "WHERE " + base.NotDeleted;
+            sql += " WHERE " + base.NotDeleted;
 
-            sql += "AND Systemid=@SystemID ";
+            sql += " AND Systemid=@SystemID ";
 
-            sql += "AND FinYear=@FinYear";
+            sql += " AND FinYear=@FinYear";
+
+            sql += " AND a.VersionDefault=0";
 
             SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
             SqlParameter pFinYear = CreateSqlParameter("@FinYear", System.Data.DbType.Int32, FinYear);
@@ -103,6 +105,6 @@ namespace LJTH.BusinessIndicators.DAL
             return ExecuteQuery(sql);
         }
 
-    } 
+    }
 }
 
