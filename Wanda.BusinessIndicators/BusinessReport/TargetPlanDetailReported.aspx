@@ -11,13 +11,13 @@
     <script type="text/javascript" src="../Scripts/UpLoad/jquery.uploadify.min.js"></script>
     <script type="text/javascript" src="../Scripts/jquery.base64.js"></script>
 
-     <style type="text/css">
+    <style type="text/css">
         .Tishi {
             color: red;
             font-weight: 700;
         }
     </style>
-        <uc1:wfCtrl runat="server" ID="wfCtrl" />
+    <uc1:wfCtrl runat="server" ID="wfCtrl" />
     <uc1:userSelectCtrl runat="server" ID="userSelectCtrl" />
 
 </asp:Content>
@@ -27,14 +27,14 @@
         <div class="">
             <div class="form_name mb8 form_name_build" style="border-bottom-color: #ececec; text-align: center; border-bottom-style: solid;">
                 <asp:DropDownList ID="ddlSystem" ClientIDMode="Static" AutoPostBack="true" OnTextChanged="ddlSystem_TextChanged" runat="server" Style="width: 150px; height: 25px;"></asp:DropDownList>
-                <asp:Label ID="lblName" Style="font-size:18px; text-indent:3px; height:26px; line-height:26px; border:none; width:200px;" runat="server" Text="年计划指标上报 "></asp:Label>
+                <asp:Label ID="lblName" Style="font-size: 18px; text-indent: 3px; height: 26px; line-height: 26px; border: none; width: 200px;" runat="server" Text="年计划指标上报 "></asp:Label>
                 <asp:HiddenField runat="server" ID="hideTargetPlanID" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="HidSystemID" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="HidSystemText" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="HideProcessCode" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="HideFinYear" ClientIDMode="Static" />
             </div>
-        </div> 
+        </div>
         <!--查询条件 结束-->
 
 
@@ -42,31 +42,32 @@
         <div class="fnav">
             <div class="flow_nav">
                 <ul>
-                    <li class="qi1" id="downLoadTemplate" onclick="ClickItems('downLoadTemplate')">
+                    <li class="qi1" id="monthReportReady" onclick="ClickItems('monthReportReady')">
                         <div class="btn_l">
                             <div class="btn_r">
-                                <span class="postion_num" id="downLoadTemplateTitle">1</span>
+                                <span class="postion_num" id="monthReportReadyTitle">1</span>
+                                <span id="monthReportReadySpan" class="txtdisable">版本类型</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="qi2" id="downLoadTemplate" onclick="ClickItems('downLoadTemplate')">
+                        <div class="btn_l">
+                            <div class="btn_r">
+                                <span class="postion_num" id="downLoadTemplateTitle">2</span>
                                 <span id="downLoadTemplateSpan" class="txtdisable">模版下载</span>
                             </div>
                         </div>
                     </li>
-                    <li class="qi2" id="dataUpload" onclick="ClickItems('dataUpload')">
+                    <li class="qi3" id="dataUpload" onclick="ClickItems('dataUpload')">
                         <div class="btn_l">
                             <div class="btn_r">
-                                <span class="postion_num" id="dataUploadTitle">2</span>
+                                <span class="postion_num" id="dataUploadTitle">3</span>
                                 <span id="dataUploadSpan" class="txtdisable">数据导入</span>
                             </div>
                         </div>
                     </li>
 
-                    <li class="qi3" id="monthReportReady" onclick="ClickItems('monthReportReady')">
-                        <div class="btn_l">
-                            <div class="btn_r">
-                                <span class="postion_num" id="monthReportReadyTitle">3</span>
-                                <span id="monthReportReadySpan" class="txtdisable">指标保存</span>
-                            </div>
-                        </div>
-                    </li>
+
 
                     <li class="qi4" id="monthReportSubmit" onclick="ClickItems('monthReportSubmit')">
                         <div class="btn_l">
@@ -107,7 +108,7 @@
         <div id="weiwancheng1" style="margin-top: 10px;">
             <div id="DownLoadModel" class="">
                 <span style="font-size: 13px; height: 30px; line-height: 60px; display: block; top: -35px; right: 0; z-index: 100; padding-right: 0px;">
-                    <div class="uploadify-button " id="Div4" style="HEIGHT: 25px; LINE-HEIGHT: 25px; text-indent: 0px; WIDTH: 150px; cursor: pointer;"> 
+                    <div class="uploadify-button " id="Div4" style="height: 25px; line-height: 25px; text-indent: 0px; width: 150px; cursor: pointer;">
                         <span class="uploadify-button-text">
                             <a id="A4" style="text-decoration: none;" href="javascript:DownLoadTargetPlanExcel(this)">请点此下载填报模版</a></span>
                     </div>
@@ -160,8 +161,8 @@
         </div>
         <!--完成情况明细 end-->
 
-         <div id="process">
-            </div> 
+        <div id="process">
+        </div>
 
         <%--<!--上报审批 开始-->
         <div id="wanda_wf_nav_opin_content">

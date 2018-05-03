@@ -82,9 +82,22 @@ namespace LJTH.BusinessIndicators.Model
         /// </summary>
         [NoMapping]
         public bool IfCurrentTarget { get; set; }
-		#endregion
-		
-		 
-	} 
+
+        /// <summary>
+        /// 版本名称
+        /// </summary>
+        [ORFieldMapping("VersionName")]
+        public string VersionName { get; set; }
+
+
+        /// <summary>
+        /// 是否默认版本
+        /// </summary>
+        [ORFieldMapping("VersionDefault")]
+        public int VersionDefault { get; set; }
+        #endregion
+
+
+    } 
 }
 

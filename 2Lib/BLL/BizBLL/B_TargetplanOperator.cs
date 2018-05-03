@@ -111,6 +111,7 @@ namespace LJTH.BusinessIndicators.BLL
             ExceptionHelper.TrueThrow<ArgumentNullException>(Year <= 0 ? true : false, "Argument Year is Empty");
             return _bTargetplanAdapter.GetTargetPlanByApprovedAndApproved(SystemID, Year);
         }
+       
 
         /// <summary>
         /// 获取当年 所有的审批中和审批完成的指标
@@ -159,6 +160,18 @@ namespace LJTH.BusinessIndicators.BLL
         }
 
         #endregion
+
+        /// <summary>
+        /// 获取分解指标版本类型集合
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <returns></returns>
+        public Dictionary<Guid, string> GetTargetVersionType(string systemID, int year, int month)
+        {
+            return _bTargetplanAdapter.GetTargetVersionType(systemID, year, month);
+        }
     }
 }
 

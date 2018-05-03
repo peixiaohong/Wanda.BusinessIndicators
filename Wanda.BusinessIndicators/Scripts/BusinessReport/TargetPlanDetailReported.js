@@ -52,7 +52,8 @@ function setArrow_nLeft(sender) {
             break;
         case "monthReportReady":
             $(".arrow_n").css("left", "420px");
-            $("#PromptMessage").html("请保存数据，等待其它上报人员填报。");
+            //$("#PromptMessage").html("请保存数据，等待其它上报人员填报。");
+            $("#PromptMessage").html("请输入版本类型。");
             $("#PromptMessage").removeClass("Tishi");
             break;
 

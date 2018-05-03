@@ -16,7 +16,11 @@
     <script type="text/javascript">
         var TreeDataJson = <%=TreeDataJson%>;
     </script>
-
+    <style type="text/css">
+        .tab_search th {
+            width:5%!important;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="main">
@@ -45,8 +49,13 @@
                             <td>
                                 <asp:DropDownList ID="ddlMonth" ClientIDMode="Static" runat="server" Style="width: 120px;"></asp:DropDownList>
                             </td>
+                             <th>版本类型</th>
+                            <td>
+                                <asp:DropDownList ID="ddVersionType" ClientIDMode="Static" runat="server" Style="width: 120px;"></asp:DropDownList>
+                            </td>
                             <th style="text-align: center">
-                                <input id="submana" runat="server" clientidmode="Static" style="width: 80px; text-align: center; height: 27px; display: none" type="button" class="uploadify-button" value="" onclick="AddMessages()" /></th>
+                                <input id="submana" runat="server" clientidmode="Static" style="width: 80px; text-align: center; height: 27px; display: none" type="button" class="uploadify-button" value="" onclick="AddMessages()" />
+                            </th>
                             <td>
                                 <asp:CheckBox ID="chkIsLastestVersion" ClientIDMode="Static" runat="server" Text="包含审批中" />
                             </td>
@@ -309,7 +318,6 @@
     <div id="divDetail" class="popup" style="height: auto; display: none; padding-bottom: 10px">
         <table style="width: 600px;" class="tab02">
             <tbody id="tbCompanyDataDetail">
-                
             </tbody>
         </table>
         <div class="pop_operate" style="text-align: center; width: 100%; padding: 5px 0px;">

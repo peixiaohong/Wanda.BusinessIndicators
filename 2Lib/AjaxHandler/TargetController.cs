@@ -662,18 +662,19 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             return VPlanTargeList;
         }
 
+       
         [LibAction]
         public List<B_TargetPlan> GetTargetHistory(string SystemID, string Year)
         {
             List<B_TargetPlan> result = new List<B_TargetPlan>();
             result = B_TargetplanOperator.Instance.GetTargetPlanByApprovedAndApproved(Guid.Parse(SystemID), int.Parse(Year)).ToList();
             List<A_TargetPlanDetail> targetList = A_TargetplandetailOperator.Instance.GetTargetplandetailList(SystemID.ToGuid(), int.Parse(Year)).ToList();
-            Guid id = Guid.Empty;
-            if (targetList.Count > 0)
-            {
-                id = targetList[0].TargetPlanID;
+            //Guid id = Guid.Empty;
+            //if (targetList.Count > 0)
+            //{
+            //    id = targetList[0].TargetPlanID;
 
-            }
+            //}
             for (int i = 0; i < result.Count; i++)
             {
 
@@ -685,15 +686,13 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 }
 
                 result[i].IfCurrentTarget = false;
-                if (result[i].ID == id)
+                if (targetList.Where(x=>x.ID==result[i].ID).Count()>0)
                 {
                     result[i].IfCurrentTarget = true;
                 }
             }
             return result;
         }
-
-
         [LibAction]
         public List<ContrastDetailList> GetContrastDetailList(string FinYear, string FinMonth)
         {

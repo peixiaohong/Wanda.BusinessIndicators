@@ -156,7 +156,8 @@ $(document).ready(function () {
         //$("#BHhide3").hide();
         //$("#BHhide4").hide();
     }
-
+    //搜索条件切换事件
+    //FileChangeClick();
 });
 
 
@@ -2762,13 +2763,27 @@ function AddBackGroundColor() {
 
     }
 }
+//获取单位
 function GetUnit() {
     return unit;
 }
-
+//获取完成情况明细、经营月报明细三级收缩表头
 function GetunfoldTitleList(){
     return unfoldTitleList;
 }
+//获取完成情况明细、经营月报明细三级展开表头
 function GetshrinkageTitleList() {
     return shrinkageTitleList;
+}
+//搜索条件年份、月份、是否包含审批中添加切换版本类型事件
+function FileChangeClick() {
+    $("#ddlYear").change(function () {
+        alert(this.val());
+    });
+    $("#ddlMonth").change(function () {
+        alert(this.val());
+    });
+    $("#chkIsLastestVersion").click(function () {
+        alert(this.val());
+    });
 }
