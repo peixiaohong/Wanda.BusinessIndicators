@@ -20,6 +20,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         public string MonthSG;
         public string MonthSGRent;
         public string MonthSGBig;
+        public bool IsLastestVersion = false;
 
 
         public string TreeDataJson
@@ -73,6 +74,10 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
 
                  finYear = int.Parse(HttpUtility.UrlDecode(Request.QueryString["_finYear"]));
             }
+            if (!string.IsNullOrEmpty(Request.QueryString["IsLastestVersion"]))
+            {
+                IsLastestVersion = bool.Parse(HttpUtility.UrlDecode(Request.QueryString["IsLastestVersion"]));
+            }
             if (finMonth == 0 && finYear==0)
             {
                 DateTime datetime = StaticResource.Instance.GetReportDateTime();
@@ -89,10 +94,8 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 var organizationalList = BLL.BizBLL.S_OrganizationalActionOperator.Instance.GetUserSystemDataNoIsDelete(Common.WebHelper.GetCurrentLoginUser());
 
                 var systemIdList = organizationalList.Select(m => m.SystemID).ToArray();
-                if (!string.IsNullOrEmpty(Request.QueryString["IsLastestVersion"]))
-                {
-                    chkIsLastestVersion.Checked = bool.Parse(HttpUtility.UrlDecode(Request.QueryString["IsLastestVersion"]));
-                }
+
+                chkIsLastestVersion.Checked = IsLastestVersion;
 
                 var systemList = StaticResource.Instance.SystemList;
 
@@ -139,7 +142,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 }
                 ddlMonth.DataSource = Month;
                 ddlMonth.DataBind();
-        
+
                 ddlMonth.SelectedValue = finMonth.ToString();
 
 
@@ -149,6 +152,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 TransferOtherPage(ddlSystem.SelectedValue.ToGuid());
 
                 SubManage();
+                GetTargetVersionType(sysID, finYear, finMonth, IsLastestVersion);
             }
         }
 
@@ -298,6 +302,23 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             TransferOtherPage(ddlSystem.SelectedValue.ToGuid());
             SubManage();
         }
-
+        /// <summary>
+        /// 获取指标版本数据
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <param name="IsLatestVersion"></param>
+        private void GetTargetVersionType(string systemID, int year, int month,bool IsLatestVersion)
+        {
+            var result = StaticResource.Instance.GetTargetVersionType(sysID, year, month, IsLatestVersion);
+            if (result.Count > 0)
+            {
+                foreach (var item in result)
+                {
+                    ddVersionType.Items.Add(new ListItem(item.Value, item.Key.ToString()));
+                }
+            }
+        }
     }
 }
