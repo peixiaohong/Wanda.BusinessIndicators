@@ -287,6 +287,19 @@ namespace LJTH.BusinessIndicators.BLL
         {
             return _bMonthlyreportAdapter.GetMonthlyReportYearList();
         }
+
+
+        /// <summary>
+        /// 删除非当前默认指标下面的月报
+        /// </summary>
+        /// <param name="MonthlyReport"></param>
+        /// <returns></returns>
+        public bool DeleteNoDefaultVersionMonthlyReport(B_MonthlyReport MonthlyReport)
+        {
+            ExceptionHelper.TrueThrow<ArgumentNullException>(MonthlyReport == null ? true : false, "Argument MonthlyReport is Empty");
+            return _bMonthlyreportAdapter.DeleteNoDefaultVersionMonthlyReport(MonthlyReport);
+        }
+
         //#endregion
     } 
 }
