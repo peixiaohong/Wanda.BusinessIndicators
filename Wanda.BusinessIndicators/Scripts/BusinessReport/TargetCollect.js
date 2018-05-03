@@ -238,7 +238,7 @@ function BangHistoryTable() {
 function BangHistory() {
     $("#HistoryTr").html("");
     if (HistoryList.length > 0) {
-        loadTmplhistory('#TargetPlanHistory').tmpl(HistoryList).appendTo('#HistoryTr');
+        loadTmplhistory('#TargetPlanHistoryforVersion').tmpl(HistoryList).appendTo('#HistoryTr');
     }
 }
 function GetSumTargetPlanList() {
