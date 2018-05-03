@@ -15,34 +15,25 @@
                                     <tr>
                                         <td style="width: 50%">
                                             <div class="select-container">
-                                                <select class="form-control select-item mobile-select repeort-select">
-                                                    <option value="1">房地产事业部</option>
+                                                <select class="form-control select-item mobile-select repeort-select" v-model="systemID" v-on:change="ChangeData()">
+                                                    <option :value="system.ID" v-for="(system,index) in systemAndYearList.System" selected>{{system.SystemName}}</option>
                                                 </select>
                                             </div>
                                         </td>
                                         <td style="width: 30%">
                                             <div class="select-container clear">
-                                                <select class="form-control select-item mobile-select repeort-select">
-                                                    <option value="2">2013年</option>
-                                                    <option value="3">2014年</option>
-                                                    <option value="4">2015年</option>
-                                                    <option value="5">2016年</option>
-                                                    <option value="6">2017年</option>
-                                                    <option value="1" selected="selected">2018年</option>
-                                                    <option value="7">2019年</option>
-                                                    <option value="8">2020年</option>
-                                                    <option value="9">2021年</option>
-                                                    <option value="10">2022年</option>
+                                                <select class="form-control select-item mobile-select repeort-select" v-model="yearSelect" v-on:change="ChangeData()">
+                                                    <option :value="year" v-for="year in systemAndYearList.Year">{{year}}年</option>
                                                 </select>
                                             </div>
                                         </td>
                                         <td style="width: 25%">
                                             <div class="select-container">
-                                                <select id="taskType" class="form-control select-item mobile-select repeort-select">
+                                                <select id="taskType" class="form-control select-item mobile-select repeort-select" v-model="monthSelect" v-on:change="ChangeData()">
                                                     <option value="1">1月</option>
-                                                    <option value="4" selected="selected">2月</option>
+                                                    <option value="2">2月</option>
                                                     <option value="3">3月</option>
-                                                    <option value="2">4月</option>
+                                                    <option value="4">4月</option>
                                                     <option value="5">5月</option>
                                                     <option value="6">6月</option>
                                                     <option value="7">7月</option>
@@ -89,10 +80,10 @@
                                 <tbody>
                                     <tr v-for="item in result.ObjValue">
 
-                                        <td><a v-bind:href="'/Report/ReportMonthTemplate.aspx?name=' + item.TargetName">{{item.TargetName}}</a></td>
-                                        <td>{{parseInt(item.NPlanAmmount)}}</td>
-                                        <td>{{parseInt(item.NActualAmmount)}}</td>
-                                        <td>{{parseInt(item.NActualRate)}}%</td>
+                                        <td><a v-bind:href="'/Report/ReportMonthTemplate.aspx?id='+ item.SystemID + '&year=' + item.FinYear + '&month=' + item.FinMonth + '&name=' + encodeURI(item.TargetName)">{{item.TargetName}}</a></td>
+                                        <td>{{toThousands(item.NPlanAmmount)}}</td>
+                                        <td>{{toThousands(item.NActualAmmount)}}</td>
+                                        <td>{{item.NActualRate}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -113,11 +104,10 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="item in result.ObjValue">
-
                                         <td>{{item.TargetName}}</td>
-                                        <td>{{parseInt(item.NAccumulativePlanAmmount)}}</td>
-                                        <td>{{parseInt(item.NAccumulativeActualAmmount)}}</td>
-                                        <td>{{parseInt(item.NAccumulativeActualRate)}}%</td>
+                                        <td>{{toThousands(item.NAccumulativePlanAmmount)}}</td>
+                                        <td>{{toThousands(item.NAccumulativeActualAmmount)}}</td>
+                                        <td>{{item.NAccumulativeActualRate}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -139,9 +129,9 @@
                                 <tbody>
                                     <tr v-for="item in result.ObjValue">
                                         <td>{{item.TargetName}}</td>
-                                        <td>{{parseInt(item.MeasureRate)}}</td>
-                                        <td>{{parseInt(item.NAccumulativeActualAmmount)}}</td>
-                                        <td>{{parseInt(item.NAnnualCompletionRate)}}%</td>
+                                        <td>{{toThousands(item.MeasureRate)}}</td>
+                                        <td>{{toThousands(item.NAccumulativeActualAmmount)}}</td>
+                                        <td>{{item.NAnnualCompletionRate}}</td>
                                     </tr>
                                 </tbody>
                             </table>

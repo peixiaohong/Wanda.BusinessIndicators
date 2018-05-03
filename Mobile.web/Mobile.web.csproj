@@ -67,9 +67,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="Assets\images\action-icon.png" />
+    <Content Include="Assets\images\ajax-loader.gif" />
     <Content Include="Assets\images\arrow-left.png" />
     <Content Include="Assets\images\arrow-right.png" />
+    <Content Include="Assets\images\close-icon.png" />
     <Content Include="Assets\scripts\common\base.utils.js" />
+    <Content Include="Assets\scripts\common\vue.utils.js" />
     <Content Include="Assets\scripts\Report\ReportApprove.js" />
     <Content Include="Assets\scripts\Report\ReportMonth.js" />
     <Content Include="Assets\scripts\Report\ReportMonthTemplate.js" />
@@ -78,6 +82,7 @@
     <Content Include="Assets\scripts\vue.min.js" />
     <Content Include="Assets\vendors\bpf\bpf-sdk-core.css" />
     <Content Include="Assets\vendors\bpf\bpf-workflow-mobile.css" />
+    <Content Include="Assets\vendors\jquery-blockui\js\jquery.blockUI.js" />
     <Content Include="Assets\vendors\workflow\css\wanda-wf-client.css" />
     <Content Include="Assets\vendors\workflow\js\wanda-wf-client.js" />
     <Content Include="Assets\vendors\workflow\js\Workflow.js" />
@@ -189,7 +194,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>5072</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
