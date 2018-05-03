@@ -917,9 +917,6 @@
     <Content Include="Scripts\ueditor\lang\zh-cn\images\music.png" />
     <Content Include="Scripts\ueditor\lang\zh-cn\images\upload.png" />
     <Content Include="Scripts\ueditor\lang\zh-cn\zh-cn.js" />
-    <Content Include="Scripts\ueditor\net\Bin\Newtonsoft.Json.dll" />
-    <Content Include="Scripts\ueditor\net\Bin\Newtonsoft.Json.pdb" />
-    <Content Include="Scripts\ueditor\net\Bin\Newtonsoft.Json.xml" />
     <Content Include="Scripts\ueditor\net\net.sln" />
     <Content Include="Scripts\ueditor\themes\default\css\ueditor.css" />
     <Content Include="Scripts\ueditor\themes\default\css\ueditor.min.css" />
@@ -1946,6 +1943,7 @@
     <Folder Include="Images\help\" />
     <Folder Include="Scripts\json\" />
     <Folder Include="Scripts\ProtoType\" />
+    <Folder Include="Scripts\ueditor\net\Bin\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
