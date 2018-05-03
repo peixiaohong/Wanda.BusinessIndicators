@@ -152,7 +152,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 TransferOtherPage(ddlSystem.SelectedValue.ToGuid());
 
                 SubManage();
-                GetTargetVersionType(sysID, finYear, finMonth, IsLastestVersion);
+                GetTargetVersionType(ddlSystem.SelectedValue.ToString(), finYear, finMonth, IsLastestVersion);
             }
         }
 
@@ -309,14 +309,29 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         /// <param name="year"></param>
         /// <param name="month"></param>
         /// <param name="IsLatestVersion"></param>
-        private void GetTargetVersionType(string systemID, int year, int month,bool IsLatestVersion)
+        private void GetTargetVersionType(string sid, int year, int month,bool IsLatestVersion)
         {
-            var result = StaticResource.Instance.GetTargetVersionType(sysID, year, month, IsLatestVersion);
-            if (result.Count > 0)
+            //是否查询审批中数据
+            if (IsLatestVersion)
             {
-                foreach (var item in result)
+                var result= B_TargetplanOperator.Instance.GetTargetVersionType(sid, year, month);
+                if (result.Count > 0)
                 {
-                    ddVersionType.Items.Add(new ListItem(item.Value, item.Key.ToString()));
+                    foreach (var item in result)
+                    {
+                        ddlVersionType.Items.Add(new ListItem(item.VersionName, item.ID.ToString()));
+                    }
+                }
+            }
+            else
+            {
+                var result = A_TargetplanOperator.Instance.GetTargetVersionType(sid, year, month);
+                if (result.Count > 0)
+                {
+                    foreach (var item in result)
+                    {
+                        ddlVersionType.Items.Add(new ListItem(item.VersionName, item.ID.ToString()));
+                    }
                 }
             }
         }

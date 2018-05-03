@@ -14,7 +14,7 @@ namespace LJTH.BusinessIndicators.BLL
         public Int64 RemoveDot(decimal d)
         {
             decimal t = Math.Abs(d);
-            while (t%1> 0)
+            while (t % 1 > 0)
             {
                 t = t * 10;
             }
@@ -22,9 +22,9 @@ namespace LJTH.BusinessIndicators.BLL
             {
                 return Convert.ToInt64(t);
             }
-            catch (Exception exp) 
-            { 
-                Console.WriteLine( exp); 
+            catch (Exception exp)
+            {
+                Console.WriteLine(exp);
             }
             return Convert.ToInt64(d);
         }
@@ -46,7 +46,8 @@ namespace LJTH.BusinessIndicators.BLL
                 }
                 return _instance;
             }
-        }private static StaticResource _instance;
+        }
+        private static StaticResource _instance;
 
         void Reload()
         {
@@ -62,7 +63,7 @@ namespace LJTH.BusinessIndicators.BLL
             _TargetPlanDetail = new Dictionary<int, List<A_TargetPlanDetail>>();
         }
 
-        public C_System this[Guid Key,DateTime CurrentDate ]
+        public C_System this[Guid Key, DateTime CurrentDate]
         {
             get
             {
@@ -88,14 +89,15 @@ namespace LJTH.BusinessIndicators.BLL
                 }
                 return _SystemList;
             }
-        }private IList<C_System> _SystemList = null;
+        }
+        private IList<C_System> _SystemList = null;
 
         private IList<C_Company> _companyList = null;
         private IList<C_Company> ALLCompanyList
         {
             get
             {
-                if(_companyList == null)
+                if (_companyList == null)
                 {
                     IList<C_Company> list = C_CompanyOperator.Instance.GetCompanyList();
                     _companyList = list;
@@ -112,7 +114,8 @@ namespace LJTH.BusinessIndicators.BLL
                 if (_CompanyList == null || _CompanyList.Count <= 0)
                 {
                     var g = ALLCompanyList.GroupBy(x => x.SystemID);
-                    g.ForEach(x => {
+                    g.ForEach(x =>
+                    {
                         _CompanyList.Add(x.Key, x.ToList());
                     });
                 }
@@ -147,7 +150,7 @@ namespace LJTH.BusinessIndicators.BLL
             {
                 return _Model;
             }
-             return null;
+            return null;
         }
         /// <summary>
         /// 获取区域下所有的公司id
@@ -155,17 +158,18 @@ namespace LJTH.BusinessIndicators.BLL
         /// <param name="systemid"></param>
         /// <param name="areaId"></param>
         /// <returns></returns>
-        public IList<Guid> GetCompanyIds(Guid systemid,Guid areaId)
+        public IList<Guid> GetCompanyIds(Guid systemid, Guid areaId)
         {
             var list = new List<Guid>();
             GetChildren(systemid, areaId, list);
             return list;
         }
-        private void GetChildren(Guid systemid,Guid parentId,List<Guid> list)
+        private void GetChildren(Guid systemid, Guid parentId, List<Guid> list)
         {
-            var c= OrgList[systemid].Where(x => x.ParentID == parentId);
-            list.AddRange(c.Where(x => x.IsCompany).Select(x=>x.ID));
-            c.Where(x => !x.IsCompany).ForEach(x => {
+            var c = OrgList[systemid].Where(x => x.ParentID == parentId);
+            list.AddRange(c.Where(x => x.IsCompany).Select(x => x.ID));
+            c.Where(x => !x.IsCompany).ForEach(x =>
+            {
                 GetChildren(systemid, x.ID, list);
             });
         }
@@ -189,7 +193,7 @@ namespace LJTH.BusinessIndicators.BLL
             }
         }
 
-        public IList<C_Target> GetTargetList(Guid SystemID,DateTime CurrentDate )
+        public IList<C_Target> GetTargetList(Guid SystemID, DateTime CurrentDate)
         {
             IList<C_Target> list = null;
             if (CurrentDate.Year == DateTime.Now.Year && CurrentDate.Month == DateTime.Now.Month && CurrentDate.Day == DateTime.Now.Day)
@@ -218,17 +222,18 @@ namespace LJTH.BusinessIndicators.BLL
             }
             return list;
         }
-        
+
         public List<C_TargetKpi> GetKpiList(Guid SystemID, int FinYear)
         {
-            if (_KpiList == null || _KpiList.Count <= 0||!_KpiList.Keys.Contains(FinYear))
+            if (_KpiList == null || _KpiList.Count <= 0 || !_KpiList.Keys.Contains(FinYear))
             {
-                var kpis= C_TargetkpiOperator.Instance.GetTargetkpiList(FinYear).ToList();
+                var kpis = C_TargetkpiOperator.Instance.GetTargetkpiList(FinYear).ToList();
                 _KpiList[FinYear] = kpis;
             }
             return _KpiList[FinYear];
-        
-        } private Dictionary<int, List<C_TargetKpi>> _KpiList = new Dictionary<int, List<C_TargetKpi>>();
+
+        }
+        private Dictionary<int, List<C_TargetKpi>> _KpiList = new Dictionary<int, List<C_TargetKpi>>();
 
         //public List<B_TargetPlan> GetTargetPlan(Guid SystemID, int FinYear)
         //{
@@ -240,7 +245,7 @@ namespace LJTH.BusinessIndicators.BLL
         //}
         //private List<B_TargetPlan> _TargetPlan = new List<B_TargetPlan>();
 
-        private Dictionary<int,List<A_TargetPlanDetail>> _TargetPlanDetail = new Dictionary<int, List<A_TargetPlanDetail>>();
+        private Dictionary<int, List<A_TargetPlanDetail>> _TargetPlanDetail = new Dictionary<int, List<A_TargetPlanDetail>>();
         /// <summary>
         /// 获取计划指标
         /// </summary>
@@ -250,7 +255,7 @@ namespace LJTH.BusinessIndicators.BLL
         /// <returns>计划指标</returns>
         public List<A_TargetPlanDetail> GetTargetPlanList(Guid SystemID, int FinYear, int FinMonth)
         {
-            if (_TargetPlanDetail == null || _TargetPlanDetail.Count <= 0||!_TargetPlanDetail.Keys.Contains(FinYear))
+            if (_TargetPlanDetail == null || _TargetPlanDetail.Count <= 0 || !_TargetPlanDetail.Keys.Contains(FinYear))
             {
                 var list = A_TargetplandetailOperator.Instance.GetTargetplandetailList(FinYear).ToList();
                 _TargetPlanDetail[FinYear] = list;
@@ -301,7 +306,7 @@ namespace LJTH.BusinessIndicators.BLL
             return ExceptionTargetList.FindAll(P => P.CompanyID == _CompanyID && P.TargetID == _TargetID);
         }
 
-        public List<C_ExceptionTarget> GetExceptionTargetList() 
+        public List<C_ExceptionTarget> GetExceptionTargetList()
         {
             return ExceptionTargetList;
         }
@@ -320,7 +325,7 @@ namespace LJTH.BusinessIndicators.BLL
                     _ReportDateTime = DateTime.Now.AddMonths(-1);
             }
             return _ReportDateTime.Value;
-          
+
         }
         /// <summary>
         /// 根据板块ID获取有效的组织架构信息
@@ -339,31 +344,9 @@ namespace LJTH.BusinessIndicators.BLL
         /// <returns>true存在区域false不存在区域</returns>
         public bool GetSystem_Regional(Guid systemID)
         {
-            return OrgList[systemID].Count(x => !x.IsCompany && x.ParentID == systemID)>0;
+            return OrgList[systemID].Count(x => !x.IsCompany && x.ParentID == systemID) > 0;
             //var result = S_OrganizationalActionOperator.Instance.GetSystem_Regional(systemID);
             //return result != null && result.Any() ? true : false;
-        }
-
-        /// <summary>
-        /// 获取板块当前年、月指标版本信息
-        /// </summary>
-        /// <param name="systemID"></param>
-        /// <param name="year"></param>
-        /// <param name="month"></param>
-        /// <returns>true存在区域false不存在区域</returns>
-        public Dictionary<Guid,string> GetTargetVersionType(string systemID, int year, int month,bool IsLatestVersion)
-        {
-            Dictionary<Guid, string> dc = new Dictionary<Guid, string>();
-            //是否查询审批中数据
-            if (IsLatestVersion)
-            {
-                dc = B_TargetplanOperator.Instance.GetTargetVersionType(systemID, year, month);
-            }
-            else
-            {
-                dc = A_TargetplanOperator.Instance.GetTargetVersionType(systemID, year, month);
-            }
-            return dc;
         }
     }
 }

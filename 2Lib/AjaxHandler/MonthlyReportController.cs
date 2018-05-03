@@ -145,12 +145,15 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         /// <param name="IsLatestVersion"></param>
         /// <returns></returns>
         [LibAction]
-        public List<DictionaryVmodel> GetReportInstance(string SystemID, int Year, int Month, bool IsLatestVersion = false, string DataSource = "Draft",bool IsAll=false)
+        public List<DictionaryVmodel> GetReportInstance(string SystemID, int Year, int Month, string targetPlanID, bool IsLatestVersion = false, string DataSource = "Draft", bool IsAll = false)
         {
             ReportInstance rpt = null;
 
             List<DictionaryVmodel> listSRDS = null;
-
+            if (string.IsNullOrEmpty(targetPlanID))
+            {
+                targetPlanID = Guid.Empty.ToString();
+            }
             if (!IsLatestVersion) // 是否从A表中获取数据
             {
                 //获取A表的数据
@@ -169,7 +172,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     }
                     else
                     {
-                        rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, IsLatestVersion, DataSource, IsAll);
+                        rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, targetPlanID.ToGuid(), IsLatestVersion, DataSource, IsAll);
                         listSRDS = ReportInstanceSummaryEngine.ReportInstanceSummaryService.GetSummaryRptDataSource(rpt, false);
                         return listSRDS;
                     }
@@ -177,7 +180,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 else
                 {
 
-                    rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, IsLatestVersion, DataSource, IsAll);
+                    rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, targetPlanID.ToGuid(), IsLatestVersion, DataSource, IsAll);
                     listSRDS = ReportInstanceSummaryEngine.ReportInstanceSummaryService.GetSummaryRptDataSource(rpt, false);
                     return listSRDS;
                 }
@@ -202,14 +205,14 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                         }
                         else
                         {
-                            rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, IsLatestVersion, DataSource, IsAll);
+                            rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, targetPlanID.ToGuid(), IsLatestVersion, DataSource, IsAll);
                             listSRDS = ReportInstanceSummaryEngine.ReportInstanceSummaryService.GetSummaryRptDataSource(rpt, false);
                             return listSRDS;
                         }
                     }
                     else
                     {
-                        rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, IsLatestVersion, DataSource, IsAll);
+                        rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, targetPlanID.ToGuid(), IsLatestVersion, DataSource, IsAll);
                         listSRDS = ReportInstanceSummaryEngine.ReportInstanceSummaryService.GetSummaryRptDataSource(rpt, false);
                         return listSRDS;
                     }
@@ -230,21 +233,21 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                         }
                         else
                         {
-                            rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, IsLatestVersion, DataSource, IsAll);
+                            rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, targetPlanID.ToGuid(), IsLatestVersion, DataSource, IsAll);
                             listSRDS = ReportInstanceSummaryEngine.ReportInstanceSummaryService.GetSummaryRptDataSource(rpt, false);
                             return listSRDS;
                         }
                     }
                     else
                     {
-                        rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, IsLatestVersion, DataSource, IsAll);
+                        rpt = new ReportInstance(SystemID.ToGuid(), Year, Month, targetPlanID.ToGuid(), IsLatestVersion, DataSource, IsAll);
                         listSRDS = ReportInstanceSummaryEngine.ReportInstanceSummaryService.GetSummaryRptDataSource(rpt, false);
                         return listSRDS;
                     }
                 }
 
             }
-            
+
         }
 
 
@@ -558,6 +561,18 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             }
             return ID;
 
+        }
+        [LibAction]
+        public object GetTargetVersionType(string SystemID, int FinYear, int FinMonth,bool IsLatestVersion = false)
+        {
+            if (IsLatestVersion)
+            {
+                return B_TargetplanOperator.Instance.GetTargetVersionType(SystemID, FinYear, FinMonth);
+            }
+            else
+            {
+                return A_TargetplanOperator.Instance.GetTargetVersionType(SystemID, FinYear, FinMonth);
+            }
         }
     }
 }

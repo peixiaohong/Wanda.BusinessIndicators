@@ -24,7 +24,7 @@ namespace LJTH.BusinessIndicators.Engine
         /// <param name="IsLatestVersion">是否是最新的版本，true：从B表中获取，false：从A表中获取 </param>
         /// <param name="_DataSource">当从B表中获取时，这里有Draft：草稿状态， 或者是审批中状态 </param>
         /// <param name="IsAll">是否获取全部月报数据，月报查询true,月报上报false </param>
-        public ReportInstance(Guid SystemID, int Year, int Month, bool IsLatestVersion = false, string _DataSource = "Draft", bool IsAll=false)
+        public ReportInstance(Guid SystemID, int Year, int Month, bool IsLatestVersion = false, string _DataSource = "Draft", bool IsAll = false)
         {
             _SystemID = SystemID;
             FinYear = Year;
@@ -33,6 +33,25 @@ namespace LJTH.BusinessIndicators.Engine
             InitialData(IsLatestVersion, IsAll);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="SystemID"></param>
+        /// <param name="Year"></param>
+        /// <param name="Month"></param>
+        /// <param name="TargetPlanID">分解指标计划ID</param>
+        /// <param name="IsLatestVersion">是否是最新的版本，true：从B表中获取，false：从A表中获取 </param>
+        /// <param name="_DataSource">当从B表中获取时，这里有Draft：草稿状态， 或者是审批中状态 </param>
+        /// <param name="IsAll">是否获取全部月报数据，月报查询true,月报上报false </param>
+        public ReportInstance(Guid SystemID, int Year, int Month, Guid _TargetPlanID, bool IsLatestVersion = false, string _DataSource = "Draft", bool IsAll = false)
+        {
+            _SystemID = SystemID;
+            FinYear = Year;
+            FinMonth = Month;
+            DataSource = _DataSource;
+            TargetPlanID = _TargetPlanID;
+            InitialData(IsLatestVersion, IsAll);
+        }
         /// <summary>
         /// 仅上报和审批页面调用
         /// </summary>
@@ -50,7 +69,7 @@ namespace LJTH.BusinessIndicators.Engine
             FinYear = report.FinYear;
             FinMonth = report.FinMonth;
             DataSource = _DataSource;
-            InitialData(IsLatestVersion,IsAll);
+            InitialData(IsLatestVersion, IsAll);
 
         }
 
@@ -89,7 +108,10 @@ namespace LJTH.BusinessIndicators.Engine
 
         public Guid _MonthReportID { get; set; }
         public Guid AreaID { get; set; }
-
+        /// <summary>
+        /// 分解指标计划ID
+        /// </summary>
+        public Guid TargetPlanID { get; set; }
 
 
         public List<B_MonthlyReportDetail> LastestMonthlyReportDetails
@@ -183,7 +205,7 @@ namespace LJTH.BusinessIndicators.Engine
         /// otherwise, the data source is A_ atble 
         /// </summary>
         /// <param name="IsLatestVersion">if the data source should be  B_ Table</param>
-        void InitialData(bool IsLatestVersion,bool IsAll)
+        void InitialData(bool IsLatestVersion, bool IsAll)
         {
             if (IsLatestVersion)
             {
@@ -198,9 +220,9 @@ namespace LJTH.BusinessIndicators.Engine
                 ReportDetails = new List<MonthlyReportDetail>();
 
                 if (DataSource == "Draft")
-                    ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Draft(_System.ID, FinYear, FinMonth, _MonthReportID, IsAll);
+                    ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Draft(_System.ID, FinYear, FinMonth, _MonthReportID, TargetPlanID, IsAll);
                 else
-                    ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Approve(_System.ID, FinYear, FinMonth, _MonthReportID, IsAll);
+                    ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Approve(_System.ID, FinYear, FinMonth, _MonthReportID, TargetPlanID, IsAll);
 
                 //LastestMonthlyReportDetails.ForEach(P => ReportDetails.Add(P.ToVModel()));
             }
@@ -237,7 +259,7 @@ namespace LJTH.BusinessIndicators.Engine
         /// </summary>
         public void GetReportDetail()
         {
-            ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Draft(_System.ID, FinYear, FinMonth, _MonthReportID,true);
+            ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Draft(_System.ID, FinYear, FinMonth, _MonthReportID, TargetPlanID, true);
         }
         #endregion Private Method
     }
