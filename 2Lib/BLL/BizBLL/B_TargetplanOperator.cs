@@ -160,6 +160,18 @@ namespace LJTH.BusinessIndicators.BLL
         }
 
         #endregion
+
+        /// <summary>
+        /// 获取分解指标版本类型集合
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <returns></returns>
+        public Dictionary<Guid, string> GetTargetVersionType(string systemID, int year, int month)
+        {
+            return _bTargetplanAdapter.GetTargetVersionType(systemID, year, month);
+        }
     }
 }
 
