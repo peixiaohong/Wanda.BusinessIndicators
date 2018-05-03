@@ -51,21 +51,12 @@
                         </div>
                     </li>
                     <li>
-                        <h3 v-bind:class="{'bottom': !reportState}">月度说明<span v-bind:class="{'collection-updown-icon': true, 'collection-up-icon': reportState}" v-on:click="reportState = !reportState"></span></h3>
-                        <div class="showBox report-state" v-if="reportState">
-                            <p>一、2月累计经营指标完成情况：</p>
-                            <p>1、销售收入：计划20,000万元，实际完成 22,600万元，累计完成率113%</p>
-                            <p>2、回款收入：计划30,000万元，实际完成24,500万元，累计完成率82%</p>
-                            <p>3、利润额收入：计划9,000万元，实际完成8,700万元，累计完成率97%</p>
-                            <p>二、2月当月经营指标完成情况：</p>
-                            <p>1、销售收入：计划8,900万元，实际完成 8,861万元，累计完成率99.6%</p>
-                            <p>2、回款收入：计划17,800万元，实际完成17,758万元，累计完成率99.8%</p>
-                            <p>3、利润额收入：计划4,450万元，实际完成4,448万元，累计完成率100%</p>
-                        </div>
+                        <h3 v-bind:class="{'bottom': !reportState}">月度说明<span v-bind:class="{'collection-updown-icon': true, 'collection-up-icon': reportState}" v-on:click="if(title.length){reportState = !reportState}"></span></h3>
+                        <div class="showBox report-state" v-if="reportState" v-html="Trim(title)"></div>
                     </li>
 
                     <li class="active">
-                        <h3 v-bind:class="{'bottom': currentState}">月度经营报告(本月 单位:万元)<span v-bind:class="{'collection-updown-icon': true, 'collection-down-icon': currentState}" v-on:click="currentState = !currentState"></span></h3>
+                        <h3 v-bind:class="{'bottom': currentState}">{{list.Name}}(本月 单位:万元)<span v-bind:class="{'collection-updown-icon': true, 'collection-down-icon': currentState}" v-on:click="currentState = !currentState"></span></h3>
                         <!--<div class="collection-result">-->
                         <div class="showBox" v-if="!currentState">
                             <table class="from-table alignCenter">
@@ -78,11 +69,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="item in result.ObjValue">
-
-                                        <td><a v-bind:href="'/Report/ReportMonthTemplate.aspx?id='+ item.SystemID + '&year=' + item.FinYear + '&month=' + item.FinMonth + '&name=' + encodeURI(item.TargetName)">{{item.TargetName}}</a></td>
-                                        <td>{{toThousands(item.NPlanAmmount)}}</td>
-                                        <td>{{toThousands(item.NActualAmmount)}}</td>
+                                    <tr v-for="item in list.ObjValue">
+                                        <td><a v-bind:href="'/Report/ReportMonthTemplate.aspx?id='+ item.SystemID + '&year=' + yearSelect + '&month=' + monthSelect + '&name=' + encodeURI(item.TargetName)">{{item.TargetName}}</a></td>
+                                        <td>{{ToThousands(item.NPlanAmmount)}}</td>
+                                        <td>{{ToThousands(item.NActualAmmount)}}</td>
                                         <td>{{item.NActualRate}}</td>
                                     </tr>
                                 </tbody>
@@ -90,7 +80,7 @@
                         </div>
                     </li>
                     <li class="active">
-                        <h3 v-bind:class="{'bottom': totalState}">月度经营报告(累计 单位:万元)<span v-bind:class="{'collection-updown-icon': true, 'collection-down-icon': totalState}" v-on:click="totalState = !totalState"></span></h3>
+                        <h3 v-bind:class="{'bottom': totalState}">{{list.Name}}(累计 单位:万元)<span v-bind:class="{'collection-updown-icon': true, 'collection-down-icon': totalState}" v-on:click="totalState = !totalState"></span></h3>
                         <!--<div class="collection-result">-->
                         <div class="showBox" v-if="!totalState">
                             <table class="from-table alignCenter">
@@ -103,10 +93,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="item in result.ObjValue">
+                                    <tr v-for="item in list.ObjValue">
                                         <td>{{item.TargetName}}</td>
-                                        <td>{{toThousands(item.NAccumulativePlanAmmount)}}</td>
-                                        <td>{{toThousands(item.NAccumulativeActualAmmount)}}</td>
+                                        <td>{{ToThousands(item.NAccumulativePlanAmmount)}}</td>
+                                        <td>{{ToThousands(item.NAccumulativeActualAmmount)}}</td>
                                         <td>{{item.NAccumulativeActualRate}}</td>
                                     </tr>
                                 </tbody>
@@ -114,7 +104,7 @@
                         </div>
                     </li>
                     <li class="active">
-                        <h3 v-bind:class="{'bottom': yearlyState}">月度经营报告(全年 单位:万元)<span v-bind:class="{'collection-updown-icon': true, 'collection-down-icon': yearlyState}" v-on:click="yearlyState = !yearlyState"></span></h3>
+                        <h3 v-bind:class="{'bottom': yearlyState}">{{list.Name}}(全年 单位:万元)<span v-bind:class="{'collection-updown-icon': true, 'collection-down-icon': yearlyState}" v-on:click="yearlyState = !yearlyState"></span></h3>
                         <!--<div class="collection-result">-->
                         <div class="showBox" v-if="!yearlyState">
                             <table class="from-table alignCenter">
@@ -127,10 +117,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="item in result.ObjValue">
+                                    <tr v-for="item in list.ObjValue">
                                         <td>{{item.TargetName}}</td>
-                                        <td>{{toThousands(item.MeasureRate)}}</td>
-                                        <td>{{toThousands(item.NAccumulativeActualAmmount)}}</td>
+                                        <td>{{ToThousands(item.MeasureRate)}}</td>
+                                        <td>{{ToThousands(item.NAccumulativeActualAmmount)}}</td>
                                         <td>{{item.NAnnualCompletionRate}}</td>
                                     </tr>
                                 </tbody>

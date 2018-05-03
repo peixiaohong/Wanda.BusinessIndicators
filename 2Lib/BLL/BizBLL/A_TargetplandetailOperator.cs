@@ -56,6 +56,11 @@ namespace LJTH.BusinessIndicators.BLL
             IList<A_TargetPlanDetail> result = _aTargetplandetailAdapter.GetTargetplandetailList(SystemID, FinYear);
             return result;
         }
+        public IList<A_TargetPlanDetail> GetTargetplandetailList(int FinYear)
+        {
+            IList<A_TargetPlanDetail> result = _aTargetplandetailAdapter.GetTargetplandetailList(FinYear);
+            return result;
+        }
 
         public IList<A_TargetPlanDetail> GetTargetplandetailList(Guid SystemID, int FinYear, Guid CompanyID)
         {

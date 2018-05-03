@@ -30,7 +30,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         public string CompanyXMLList(string SysID)
         {
             string xml;
-            XElement xelement =StaticResource.Instance[Guid.Parse(SysID),DateTime.Now].Configuration;
+            XElement xelement = StaticResource.Instance[Guid.Parse(SysID), DateTime.Now].Configuration;
 
             if (xelement != null)
             {
@@ -194,20 +194,20 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
 
 
 
-       /// <summary>
+        /// <summary>
         /// 添加公司，同时修改异常指标
-       /// </summary>
-       /// <param name="info">公司表的信息，同时含有没有选中的指标</param>
-       /// <param name="SysID"></param>
-       /// <param name="SelTargetIDList"> 选中的指标</param>
-       /// <returns></returns>
+        /// </summary>
+        /// <param name="info">公司表的信息，同时含有没有选中的指标</param>
+        /// <param name="SysID"></param>
+        /// <param name="SelTargetIDList"> 选中的指标</param>
+        /// <returns></returns>
         [LibAction]
-        public int AddCompany(string info, string SysID , string  SelTargetIDList)
+        public int AddCompany(string info, string SysID, string SelTargetIDList)
         {
             int a = 0;
             string[] brr;
             C_System model = new C_System();
-            model = StaticResource.Instance[Guid.Parse(SysID),DateTime.Now];
+            model = StaticResource.Instance[Guid.Parse(SysID), DateTime.Now];
             List<string> TargetList = new List<string>();
             C_Company detail = new C_Company();
             string[] arr = info.Split('|');
@@ -326,7 +326,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         {
 
             List<List<C_Company>> NewCompanyList = new List<List<C_Company>>();
-            IList<C_Target> TargetList = C_TargetOperator.Instance.GetTargetList(Guid.Parse(SysID),DateTime.Now).ToList();
+            IList<C_Target> TargetList = C_TargetOperator.Instance.GetTargetList(Guid.Parse(SysID), DateTime.Now).ToList();
 
             foreach (C_Target item in TargetList)
             {
@@ -355,7 +355,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         [LibAction]
         public List<C_Target> GetTargetList(string SysID)
         {
-            List<C_Target> result = C_TargetOperator.Instance.GetTargetList(Guid.Parse(SysID),DateTime.Now).ToList();
+            List<C_Target> result = C_TargetOperator.Instance.GetTargetList(Guid.Parse(SysID), DateTime.Now).ToList();
             for (int i = 0; i < result.Count; i++)
             {
                 result[i].TargetTypeValue = EnumHelper.GetEnumDescription(typeof(EnumTargetType), result[i].TargetType);
@@ -369,7 +369,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         {
             List<A_TargetPlanDetail> Detail = A_TargetplandetailOperator.Instance.GetTargetplandetailList(Guid.Parse(SysID), int.Parse(FinYear)).ToList();
             DateTime time = DateTime.Now;
-            if (Detail.Count>0)
+            if (Detail.Count > 0)
             {
                 time = B_TargetplanOperator.Instance.GetTargetplan(Detail[0].TargetPlanID).CreateTime;
             }
@@ -380,6 +380,21 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             }
             return result;
         }
+
+        [LibAction]
+        public List<C_Target> GetVerTargetListByTargetPlanID(string TargetPlanID)
+        {
+            B_TargetPlan tp = B_TargetplanOperator.Instance.GetTargetplan(TargetPlanID.ToGuid());
+            DateTime time = tp.CreateTime;
+            Guid SysID = tp.SystemID;
+            List<C_Target> result = C_TargetOperator.Instance.GetTargetList(SysID, time).ToList();
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i].TargetTypeValue = EnumHelper.GetEnumDescription(typeof(EnumTargetType), result[i].TargetType);
+            }
+            return result;
+        }
+
         [LibAction]
         public List<C_ExceptionTarget> GetExetargetList(string CompanyID, string TargetID)
         {
@@ -391,19 +406,19 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         /// </summary>
         /// <returns></returns>
         [LibAction]
-        public List<C_Target> GetTargetListNew(string SystemID,int Year,int Month) 
+        public List<C_Target> GetTargetListNew(string SystemID, int Year, int Month)
         {
             DateTime t = DateTime.Now;
 
             List<A_MonthlyReportDetail> AM = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetailList(Guid.Parse(SystemID), Year, Month).ToList();
-            if (AM.Count>0)
+            if (AM.Count > 0)
             {
                 B_MonthlyReport BM = B_MonthlyreportOperator.Instance.GetMonthlyreport(AM[0].MonthlyReportID);
                 t = BM.CreateTime;
             }
 
-            List<C_Target> Result=StaticResource.Instance.GetTargetList(Guid.Parse(SystemID),t).ToList();
-            Result = Result.Where(p => p.NeedEvaluation == true).OrderBy(s=>s.Sequence).ToList();
+            List<C_Target> Result = StaticResource.Instance.GetTargetList(Guid.Parse(SystemID), t).ToList();
+            Result = Result.Where(p => p.NeedEvaluation == true).OrderBy(s => s.Sequence).ToList();
             return Result;
         }
 
@@ -517,7 +532,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         [LibAction]
         public Guid UpdateTarget(string info, string ID)
         {
-            C_Target result = C_TargetOperator.Instance.GetTarget(Guid.Parse(ID),DateTime.Now);
+            C_Target result = C_TargetOperator.Instance.GetTarget(Guid.Parse(ID), DateTime.Now);
 
             DateTime time = result.VersionStart;
 
@@ -532,7 +547,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             Newresult.Configuration = result.Configuration;
             result.VersionEnd = DateTime.Now;
 
-            C_TargetOperator.Instance.UpdateTargetVerSion(result,time);
+            C_TargetOperator.Instance.UpdateTargetVerSion(result, time);
 
             return C_TargetOperator.Instance.AddTarget(Newresult);
 
@@ -540,11 +555,11 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         [LibAction]
         public Guid DeleteTarget(string ID)
         {
-            C_Target result = C_TargetOperator.Instance.GetTarget(Guid.Parse(ID),DateTime.Now);
+            C_Target result = C_TargetOperator.Instance.GetTarget(Guid.Parse(ID), DateTime.Now);
             result.IsDeleted = true;
 
             C_TargetOperator.Instance.UpdateTargetVerSion(result, result.VersionStart);
-            
+
             return Guid.NewGuid();
         }
 
@@ -552,7 +567,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         public List<ExceptionTargetUpdateList> GetExceptionTarget(string SystemID)
         {
             List<ExceptionTargetUpdateList> result = new List<ExceptionTargetUpdateList>();
-            List<C_Target> TargetList = C_TargetOperator.Instance.GetTargetList(Guid.Parse(SystemID),DateTime.Now).ToList();
+            List<C_Target> TargetList = C_TargetOperator.Instance.GetTargetList(Guid.Parse(SystemID), DateTime.Now).ToList();
             //获取异常指标,没有实际意义仅在更改完异常指标后,更新静态数据源
             List<C_ExceptionTarget> Except = StaticResource.Instance.GetExceptionTargetList();
             for (int i = 0; i < TargetList.Count; i++)
@@ -689,7 +704,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         public List<ExceptionReplaceList> GetExceptionReplace(string SystemID)
         {
             List<ExceptionReplaceList> result = new List<ExceptionReplaceList>();
-            List<C_Target> TargetList = C_TargetOperator.Instance.GetTargetList(Guid.Parse(SystemID),DateTime.Now).ToList();
+            List<C_Target> TargetList = C_TargetOperator.Instance.GetTargetList(Guid.Parse(SystemID), DateTime.Now).ToList();
             for (int i = 0; i < TargetList.Count; i++)
             {
                 ExceptionReplaceList model = new ExceptionReplaceList();
@@ -750,7 +765,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         [LibAction]
         public List<ContrastMisstargetList> GetContrastMisstarget(string FinYear, string FinMonth, string SystemID, bool IsPro)
         {
-            List<ContrastMisstargetList> returnresult = A_MonthlyreportdetailOperator.Instance.GetContrastMisstarget(int.Parse(FinYear), int.Parse(FinMonth), SystemID,  IsPro);
+            List<ContrastMisstargetList> returnresult = A_MonthlyreportdetailOperator.Instance.GetContrastMisstarget(int.Parse(FinYear), int.Parse(FinMonth), SystemID, IsPro);
 
             return returnresult;
         }
@@ -802,9 +817,9 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             Guid SysID = Guid.Parse(SystemID);
 
             string m = "ContrastRemark";
-            if (IsPro==false)
+            if (IsPro == false)
             {
-                 m = "AContrastRemark";   
+                m = "AContrastRemark";
             }
 
             model = R_MissTargetEvaluationScopeOperator.Instance.GetEvaluationDetailByType(SysID, TarID, int.Parse(FinYear), int.Parse(FinMonth), m);

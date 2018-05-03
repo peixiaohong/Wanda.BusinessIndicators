@@ -21,7 +21,14 @@ namespace WebApi.Controllers
         private string VirtualUser = System.Configuration.ConfigurationManager.AppSettings["WF.VirtualUser"];
         private string CurrentUser = WebHelper.GetCurrentLoginUser();
         #region 指标分解审批
-
+        /// <summary>
+        /// 入口
+        /// </summary>
+        /// <param name="BusinessID"></param>
+        /// <param name="OperatorType"></param>
+        /// <param name="PrcessStatus"></param>
+        /// <returns></returns>
+        [HttpGet]
         public ResultContext TargetPlanProcessRequest(string BusinessID, int OperatorType, string PrcessStatus)
         {
             try

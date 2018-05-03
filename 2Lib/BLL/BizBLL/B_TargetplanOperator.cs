@@ -111,6 +111,7 @@ namespace LJTH.BusinessIndicators.BLL
             ExceptionHelper.TrueThrow<ArgumentNullException>(Year <= 0 ? true : false, "Argument Year is Empty");
             return _bTargetplanAdapter.GetTargetPlanByApprovedAndApproved(SystemID, Year);
         }
+       
 
         /// <summary>
         /// 获取当年 所有的审批中和审批完成的指标
