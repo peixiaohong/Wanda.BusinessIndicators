@@ -53,6 +53,37 @@ namespace LJTH.BusinessIndicators.Engine
             InitialData(IsLatestVersion,IsAll);
 
         }
+        /// <summary>
+        /// 审批页面使用，审批页面数据不判断权限
+        /// </summary>
+        /// <param name="unUseful">没用，只是为了重载</param>
+        /// <param name="monthReportID"></param>
+        /// <param name="isAll"></param>
+        public ReportInstance(Guid? monthReportID, Guid? systemBatchId, bool isAll)
+        {
+            if (monthReportID != null)
+            {
+                _MonthReportID = monthReportID.Value;
+                B_MonthlyReport report = B_MonthlyreportOperator.Instance.GetMonthlyreport(_MonthReportID);
+                _SystemID = report.SystemID;
+                _SystemBatchID = report.SystemBatchID;
+                AreaID = report.AreaID;
+                FinYear = report.FinYear;
+                FinMonth = report.FinMonth;
+            }
+            else if (systemBatchId != null)
+            {
+                B_SystemBatch b_SystemBatch = B_SystemBatchOperator.Instance.GetSystemBatch(systemBatchId.Value);
+                C_System c_System = StaticResource.Instance.SystemList.Where(x => x.GroupType == b_SystemBatch.BatchType).FirstOrDefault();
+                _SystemID = c_System.ID;
+                _SystemBatchID = b_SystemBatch.ID;
+                FinYear = b_SystemBatch.FinYear;
+                FinMonth = b_SystemBatch.FinMonth;
+            }
+            DataSource = "Draft";
+            UserPermission = false;
+            InitialData(true, isAll);
+        }
 
         private string DataSource = string.Empty;
         private string currentLoginName;
@@ -81,6 +112,7 @@ namespace LJTH.BusinessIndicators.Engine
         public Sys_Config SysConfig { get; set; }
         public MonthlyReport Report { get; set; }
         public List<MonthlyReportDetail> ReportDetails { get; set; }
+        public bool UserPermission { get; set; } = true;
 
         [ScriptIgnore]
         public C_System _System { get { return StaticResource.Instance[_SystemID, DateTime.Now]; } }

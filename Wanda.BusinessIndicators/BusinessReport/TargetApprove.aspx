@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" type="text/css" href="../Scripts/UpLoad/uploadify.css" />
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
-    <script type="text/javascript" src="../Scripts/BusinessReport/TargetApprove.js?v=1"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/TargetApprove.js?v=2"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="main">
