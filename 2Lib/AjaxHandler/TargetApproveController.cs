@@ -114,23 +114,16 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         /// <param name="IsLatestVersion"></param>
         /// <returns></returns>
         [LibAction]
-        public List<DictionaryVmodel> GetReportInstance(string strMonthReportID, string strSystemId, string strProType)
+        public List<DictionaryVmodel> GetReportInstance(string strMonthReportID, string strBacthID, string strProType)
         {
             ReportInstance rpt = null;
             if (string.IsNullOrEmpty(strProType))
             {
-                rpt = new ReportInstance(strMonthReportID.ToGuid(), true);
+                rpt = new ReportInstance(strMonthReportID.ToGuid(), null, false);
             }
             else
             {
-                var time = StaticResource.Instance.GetReportDateTime();
-                rpt = new ReportInstance()
-                {
-                    _SystemID = strSystemId.ToGuid(),
-                    FinYear = time.Year,
-                    FinMonth=time.Month,
-                };
-                rpt.GetReportDetail();
+                rpt = new ReportInstance(null, strBacthID.ToGuid(), true);
             }
             List<DictionaryVmodel> listSRDS = new List<DictionaryVmodel>();
 
@@ -149,7 +142,6 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             return listSRDS;
             //}
         }
-
 
         private List<DictionaryVmodel> GetJsonData(Guid MonthlyReportID)
         {

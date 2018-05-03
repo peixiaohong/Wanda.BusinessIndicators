@@ -218,7 +218,7 @@ namespace LJTH.BusinessIndicators.BLL
             //    return result;
             //}
             //return new List<MonthlyReportDetail>();
-            return _bMonthlyreportdetailAdapter.GetMonthlyReportDetailList(MonthReportID,SystemID, IsAll);
+            return _bMonthlyreportdetailAdapter.GetMonthlyReportDetailList(MonthReportID,SystemID, IsAll,Year,Month);
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace LJTH.BusinessIndicators.BLL
             //    return result;
             //}
             //return new List<MonthlyReportDetail>();
-            return _bMonthlyreportdetailAdapter.GetMonthlyReportDetailList(MonthReportID, SystemID, IsAll);
+            return _bMonthlyreportdetailAdapter.GetMonthlyReportDetailList(MonthReportID, SystemID, IsAll,Year,Month);
 
         }
 

@@ -97,26 +97,38 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 //获取当前人拥有的系统板块
                 List<C_System> c_SystemList = StaticResource.Instance.SystemList.Where(p => _SystemIds.Contains(p.ID)).OrderBy(x => x.Sequence).ToList();
 
-                if (string.IsNullOrEmpty(Request.QueryString["BusinessID"]))
-                {
-                    C_System cs = c_SystemList.FirstOrDefault();
-                    if (cs.Category == 2)
-                    {
-                        Server.Transfer("~/BusinessReport/TargetProReported.aspx");
-                    }
-                    else if (cs.Category == 3)
-                    {
-                        Server.Transfer("~/BusinessReport/TargetGroupReported.aspx");
-                    }
-                    else if (cs.Category == 4)
-                    {
-                        Server.Transfer("~/BusinessReport/TargetDirectlyReported.aspx");
-                    }
-                }
                 ddlSystem.DataSource = c_SystemList;
                 ddlSystem.DataTextField = "SystemName";
                 ddlSystem.DataValueField = "ID";
                 ddlSystem.DataBind();
+                if (string.IsNullOrEmpty(Request.QueryString["BusinessID"]))
+                {
+                    C_System cs;
+                    if (!string.IsNullOrEmpty(Request["SystemId"]) && Guid.Parse(Request["SystemId"]) != Guid.Empty)
+                    {
+                        cs = c_SystemList.Where(v => v.ID == Guid.Parse(Request["SystemId"])).FirstOrDefault();
+                        ddlSystem.SelectedIndex= ddlSystem.Items.IndexOf(ddlSystem.Items.FindByValue(cs.ID.ToString()));
+                    }
+                    else
+                    {
+                        cs = c_SystemList.FirstOrDefault();
+                    }
+                    if (cs.Category == 2)
+                    {
+                        //Server.Transfer("~/BusinessReport/TargetProReported.aspx?SystemId=" + cs.ID);
+                        Response.Redirect("~/BusinessReport/TargetProReported.aspx?SystemId=" + cs.ID);
+                    }
+                    else if (cs.Category == 3)
+                    {
+                        //Server.Transfer("~/BusinessReport/TargetGroupReported.aspx?SystemId=" + cs.ID);
+                        Response.Redirect("~/BusinessReport/TargetGroupReported.aspx?SystemId=" + cs.ID);
+                    }
+                    else if (cs.Category == 4)
+                    {
+                        //Server.Transfer("~/BusinessReport/TargetDirectlyReported.aspx?SystemId=" + cs.ID);
+                        Response.Redirect("~/BusinessReport/TargetDirectlyReported.aspx?SystemId=" + cs.ID);
+                    }
+                }
 
                 lblName.Text = FinYear + "-" + FinMonth + "月度经营报告上报";
                 //加载区域
@@ -566,15 +578,18 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             C_System cs = C_SystemOperator.Instance.GetSystem(Guid.Parse(ddlSystem.SelectedValue));
             if (cs.Category == 2)
             {
-                Server.Transfer("~/BusinessReport/TargetProReported.aspx");
+                //Server.Transfer("~/BusinessReport/TargetProReported.aspx?SystemId=" + cs.ID);
+                Response.Redirect("~/BusinessReport/TargetProReported.aspx?SystemId=" + cs.ID);
             }
             else if (cs.Category == 3)
             {
-                Server.Transfer("~/BusinessReport/TargetGroupReported.aspx");
+                //Server.Transfer("~/BusinessReport/TargetGroupReported.aspx?SystemId=" + cs.ID);
+                Response.Redirect("~/BusinessReport/TargetGroupReported.aspx?SystemId=" + cs.ID);
             }
             else if (cs.Category == 4)
             {
-                Server.Transfer("~/BusinessReport/TargetDirectlyReported.aspx");
+                //Server.Transfer("~/BusinessReport/TargetDirectlyReported.aspx?SystemId=" + cs.ID);
+                Response.Redirect("~/BusinessReport/TargetDirectlyReported.aspx?SystemId=" + cs.ID);
             }
         }
     }

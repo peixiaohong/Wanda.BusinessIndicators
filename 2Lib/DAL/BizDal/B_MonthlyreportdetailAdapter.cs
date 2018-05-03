@@ -236,17 +236,19 @@ WHERE   MonthlyReportID = @MonthlyReportID
             return data;
         }
 
-        internal List<MonthlyReportDetail> GetMonthlyReportDetailList(Guid MonthlyReportID, Guid SystemID, bool IsAll)
+        internal List<MonthlyReportDetail> GetMonthlyReportDetailList(Guid MonthlyReportID, Guid SystemID, bool IsAll,int FinYear,int FinMonth)
         {
             string sql = "GetMonthlyReportDetailList ";
             SqlParameter p1 = new SqlParameter("@SystemID", SystemID);
+            SqlParameter p2 = new SqlParameter { ParameterName = "@Year", Value = FinYear };
+            SqlParameter p3 = new SqlParameter {ParameterName= "@Month", Value= FinMonth };
             if (!IsAll)
             {
                 sql = "GetMonthlyReportDetailListMonthID";
                 p1 = new SqlParameter("@MonthlyReportID", MonthlyReportID);
             }
             //SqlParameter p1 = new SqlParameter("@MonthlyReportID", MonthlyReportID);
-            DataSet ds = DbHelper.RunSPReturnDS(sql, ConnectionName, p1);
+            DataSet ds = DbHelper.RunSPReturnDS(sql, ConnectionName, p1,p2,p3);
 
             List<MonthlyReportDetail> data = new List<MonthlyReportDetail>();
             ds.Tables[0].Rows.Cast<System.Data.DataRow>().ForEach(row =>
