@@ -1,6 +1,6 @@
 ﻿<Root>
-	<ProcessCode ShowProcessNodeName="true"> YY_ZBGK-RZ </ProcessCode>
-	<ProcessCode ShowProcessNodeName="true"> YY_ZBGK-RZ-ZB </ProcessCode>
+	<ProcessCode ShowProcessNodeName="true">YY_ZBGK-RZ</ProcessCode>
+	<ProcessCode ShowProcessNodeName="true">YY_ZBGK-RZ-ZB</ProcessCode>
 	<Interfaces>
 		<ISequence TemplateType="MissTarget" InterfaceName="MissTargetSequence" />
 		<ISequence TemplateType="Return" InterfaceName="ReturnSequence" />

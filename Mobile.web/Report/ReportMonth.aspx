@@ -15,34 +15,25 @@
                                     <tr>
                                         <td style="width: 50%">
                                             <div class="select-container">
-                                                <select class="form-control select-item mobile-select repeort-select">
-                                                    <option value="1">房地产事业部</option>
+                                                <select class="form-control select-item mobile-select repeort-select" v-model="systemID" v-on:change="ChangeData()">
+                                                    <option :value="system.ID" v-for="(system,index) in systemAndYearList.System" selected>{{system.SystemName}}</option>
                                                 </select>
                                             </div>
                                         </td>
                                         <td style="width: 30%">
                                             <div class="select-container clear">
-                                                <select class="form-control select-item mobile-select repeort-select">
-                                                    <option value="2">2013年</option>
-                                                    <option value="3">2014年</option>
-                                                    <option value="4">2015年</option>
-                                                    <option value="5">2016年</option>
-                                                    <option value="6">2017年</option>
-                                                    <option value="1" selected="selected">2018年</option>
-                                                    <option value="7">2019年</option>
-                                                    <option value="8">2020年</option>
-                                                    <option value="9">2021年</option>
-                                                    <option value="10">2022年</option>
+                                                <select class="form-control select-item mobile-select repeort-select" v-model="yearSelect" v-on:change="ChangeData()">
+                                                    <option :value="year" v-for="year in systemAndYearList.Year">{{year}}年</option>
                                                 </select>
                                             </div>
                                         </td>
                                         <td style="width: 25%">
                                             <div class="select-container">
-                                                <select id="taskType" class="form-control select-item mobile-select repeort-select">
+                                                <select id="taskType" class="form-control select-item mobile-select repeort-select" v-model="monthSelect" v-on:change="ChangeData()">
                                                     <option value="1">1月</option>
-                                                    <option value="4" selected="selected">2月</option>
+                                                    <option value="2">2月</option>
                                                     <option value="3">3月</option>
-                                                    <option value="2">4月</option>
+                                                    <option value="4">4月</option>
                                                     <option value="5">5月</option>
                                                     <option value="6">6月</option>
                                                     <option value="7">7月</option>
@@ -60,21 +51,12 @@
                         </div>
                     </li>
                     <li>
-                        <h3 v-bind:class="{'bottom': !reportState}">月度说明<span v-bind:class="{'collection-updown-icon': true, 'collection-up-icon': reportState}" v-on:click="reportState = !reportState"></span></h3>
-                        <div class="showBox report-state" v-if="reportState">
-                            <p>一、2月累计经营指标完成情况：</p>
-                            <p>1、销售收入：计划20,000万元，实际完成 22,600万元，累计完成率113%</p>
-                            <p>2、回款收入：计划30,000万元，实际完成24,500万元，累计完成率82%</p>
-                            <p>3、利润额收入：计划9,000万元，实际完成8,700万元，累计完成率97%</p>
-                            <p>二、2月当月经营指标完成情况：</p>
-                            <p>1、销售收入：计划8,900万元，实际完成 8,861万元，累计完成率99.6%</p>
-                            <p>2、回款收入：计划17,800万元，实际完成17,758万元，累计完成率99.8%</p>
-                            <p>3、利润额收入：计划4,450万元，实际完成4,448万元，累计完成率100%</p>
-                        </div>
+                        <h3 v-bind:class="{'bottom': !reportState}">月度说明<span v-bind:class="{'collection-updown-icon': true, 'collection-up-icon': reportState}" v-on:click="if(title.length){reportState = !reportState}"></span></h3>
+                        <div class="showBox report-state" v-if="reportState" v-html="Trim(title)"></div>
                     </li>
 
                     <li class="active">
-                        <h3 v-bind:class="{'bottom': currentState}">月度经营报告(本月 单位:万元)<span v-bind:class="{'collection-updown-icon': true, 'collection-down-icon': currentState}" v-on:click="currentState = !currentState"></span></h3>
+                        <h3 v-bind:class="{'bottom': currentState}">{{list.Name}}(本月 单位:万元)<span v-bind:class="{'collection-updown-icon': true, 'collection-down-icon': currentState}" v-on:click="currentState = !currentState"></span></h3>
                         <!--<div class="collection-result">-->
                         <div class="showBox" v-if="!currentState">
                             <table class="from-table alignCenter">
@@ -87,19 +69,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="item in result.ObjValue">
-
-                                        <td><a v-bind:href="'/Report/ReportMonthTemplate.aspx?name=' + item.TargetName">{{item.TargetName}}</a></td>
-                                        <td>{{parseInt(item.NPlanAmmount)}}</td>
-                                        <td>{{parseInt(item.NActualAmmount)}}</td>
-                                        <td>{{parseInt(item.NActualRate)}}%</td>
+                                    <tr v-for="item in list.ObjValue">
+                                        <td><a v-bind:href="'/Report/ReportMonthTemplate.aspx?id='+ item.SystemID + '&year=' + yearSelect + '&month=' + monthSelect + '&name=' + encodeURI(item.TargetName)">{{item.TargetName}}</a></td>
+                                        <td>{{ToThousands(item.NPlanAmmount)}}</td>
+                                        <td>{{ToThousands(item.NActualAmmount)}}</td>
+                                        <td>{{item.NActualRate}}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </li>
                     <li class="active">
-                        <h3 v-bind:class="{'bottom': totalState}">月度经营报告(累计 单位:万元)<span v-bind:class="{'collection-updown-icon': true, 'collection-down-icon': totalState}" v-on:click="totalState = !totalState"></span></h3>
+                        <h3 v-bind:class="{'bottom': totalState}">{{list.Name}}(累计 单位:万元)<span v-bind:class="{'collection-updown-icon': true, 'collection-down-icon': totalState}" v-on:click="totalState = !totalState"></span></h3>
                         <!--<div class="collection-result">-->
                         <div class="showBox" v-if="!totalState">
                             <table class="from-table alignCenter">
@@ -112,19 +93,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="item in result.ObjValue">
-
+                                    <tr v-for="item in list.ObjValue">
                                         <td>{{item.TargetName}}</td>
-                                        <td>{{parseInt(item.NAccumulativePlanAmmount)}}</td>
-                                        <td>{{parseInt(item.NAccumulativeActualAmmount)}}</td>
-                                        <td>{{parseInt(item.NAccumulativeActualRate)}}%</td>
+                                        <td>{{ToThousands(item.NAccumulativePlanAmmount)}}</td>
+                                        <td>{{ToThousands(item.NAccumulativeActualAmmount)}}</td>
+                                        <td>{{item.NAccumulativeActualRate}}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </li>
                     <li class="active">
-                        <h3 v-bind:class="{'bottom': yearlyState}">月度经营报告(全年 单位:万元)<span v-bind:class="{'collection-updown-icon': true, 'collection-down-icon': yearlyState}" v-on:click="yearlyState = !yearlyState"></span></h3>
+                        <h3 v-bind:class="{'bottom': yearlyState}">{{list.Name}}(全年 单位:万元)<span v-bind:class="{'collection-updown-icon': true, 'collection-down-icon': yearlyState}" v-on:click="yearlyState = !yearlyState"></span></h3>
                         <!--<div class="collection-result">-->
                         <div class="showBox" v-if="!yearlyState">
                             <table class="from-table alignCenter">
@@ -137,11 +117,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="item in result.ObjValue">
+                                    <tr v-for="item in list.ObjValue">
                                         <td>{{item.TargetName}}</td>
-                                        <td>{{parseInt(item.MeasureRate)}}</td>
-                                        <td>{{parseInt(item.NAccumulativeActualAmmount)}}</td>
-                                        <td>{{parseInt(item.NAnnualCompletionRate)}}%</td>
+                                        <td>{{ToThousands(item.MeasureRate)}}</td>
+                                        <td>{{ToThousands(item.NAccumulativeActualAmmount)}}</td>
+                                        <td>{{item.NAnnualCompletionRate}}</td>
                                     </tr>
                                 </tbody>
                             </table>

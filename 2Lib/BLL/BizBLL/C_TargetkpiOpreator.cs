@@ -45,6 +45,11 @@ namespace LJTH.BusinessIndicators.BLL
             IList<C_TargetKpi> result = _cTargetkpiAdapter.GetTargetkpiList(systemID, FinYear);
             return result;
         }
+        internal IList<C_TargetKpi> GetTargetkpiList(int FinYear)
+        {
+            IList<C_TargetKpi> result = _cTargetkpiAdapter.GetTargetkpiList(FinYear);
+            return result;
+        }
 
         public Guid AddTargetkpi(C_TargetKpi data)
         {

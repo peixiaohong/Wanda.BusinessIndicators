@@ -56,7 +56,22 @@ namespace LJTH.BusinessIndicators.DAL
             SqlParameter pFinYear = CreateSqlParameter("@FinYear", System.Data.DbType.Int16, FinYear);
             return ExecuteQuery(sql, pSystemID, pFinYear);
         }
-		 
-	} 
+        /// <summary>
+        /// 获取年度指标
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <returns></returns>
+        public IList<C_TargetKpi> GetTargetkpiList(int FinYear)
+        {
+            string sql = ORMapping.GetSelectSql<C_TargetKpi>(TSqlBuilder.Instance);
+
+            sql += "WHERE " + base.NotDeleted;
+            sql += " AND FinYear=@FinYear ";
+            sql += " ORDER BY CreateTime DESC";
+            SqlParameter pFinYear = CreateSqlParameter("@FinYear", System.Data.DbType.Int16, FinYear);
+            return ExecuteQuery(sql, pFinYear);
+        }
+
+    } 
 }
 

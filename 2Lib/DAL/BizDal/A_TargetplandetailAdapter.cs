@@ -54,6 +54,18 @@ namespace LJTH.BusinessIndicators.DAL
             return ExecuteQuery(sql, pSystemID, pFinYear);
         }
 
+        public IList<A_TargetPlanDetail> GetTargetplandetailList(int FinYear)
+        {
+            string sql = ORMapping.GetSelectSql<A_TargetPlanDetail>(TSqlBuilder.Instance);
+
+            sql += "WHERE " + base.NotDeleted;
+            sql += "AND FinYear=@FinYear";
+
+            SqlParameter pFinYear = CreateSqlParameter("@FinYear", System.Data.DbType.Int64, FinYear);
+
+            return ExecuteQuery(sql, pFinYear);
+        }
+
         /// <summary>
         /// 同步数据--从久其系统里得到相关的数据 , 固定了 系统ID，是院线的ID
         /// </summary>

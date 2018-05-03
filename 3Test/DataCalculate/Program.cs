@@ -7,7 +7,7 @@ using LJTH.BusinessIndicators;
 using LJTH.BusinessIndicators.Engine;
 using LJTH.BusinessIndicators.BLL;
 using LJTH.BusinessIndicators.Model;
-using Lib.Web.Json;
+using Newtonsoft.Json;
 
 namespace DataCalculate
 {
@@ -15,9 +15,10 @@ namespace DataCalculate
     {
         static void Main(string[] args)
         {
-            double d = -0.0000004;
-            Console.Write(JsonHelper.Serialize(d));
-            Console.Read();
+            string systemId = "2EB7465B-95DA-450C-AA2F-9AF04E06D9BC";
+            var r=  StaticResource.Instance.GetSystem_Regional(systemId.ToGuid());
+            Console.WriteLine(JsonConvert.SerializeObject(StaticResource.Instance.GetReportDateTime()));
+            Console.ReadKey();
             return;
 
 
