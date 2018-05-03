@@ -12,6 +12,7 @@ using WebApi.Models;
 using Newtonsoft.Json;
 using Lib.Core;
 using LJTH.BusinessIndicators.Common;
+using LJTH.BusinessIndicators.Engine;
 
 namespace WebApi.Controllers
 {
@@ -25,6 +26,7 @@ namespace WebApi.Controllers
         /// <param name="strSystemId"></param>
         /// <param name="strProType"></param>
         /// <returns></returns>
+        [HttpGet]
         public ResultContext GetReportInstance(string strMonthReportID, string strSystemId, string strProType)
         {
             TargetApproveController ta = new TargetApproveController();
@@ -32,6 +34,7 @@ namespace WebApi.Controllers
             return new ResultContext(list);
         }
 
+        [HttpGet]
         public ResultContext GetDetailRptDataSource(string rpts, string strCompanyProperty, string strMonthReportOrderType, bool IncludeHaveDetail)
         {
             TargetApproveController ta = new TargetApproveController();
@@ -42,6 +45,7 @@ namespace WebApi.Controllers
         /// 获取月报的年与业态列表
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public ResultContext GetSystemAndYearList()
         {
             try
@@ -68,6 +72,7 @@ namespace WebApi.Controllers
         /// <param name="Year"></param>
         /// <param name="Month"></param>
         /// <returns></returns>
+        [HttpGet]
         public ResultContext GetMonthList(string SystemID, int Year, int Month, bool IsLatestVersion = false, string DataSource = "Draft", bool IsAll = false)
         {
             try
@@ -83,7 +88,7 @@ namespace WebApi.Controllers
                 if (li.Count > 0)
                     Dis = li.FirstOrDefault().Description;
 
-                return new ResultContext(new { title = Dis, list = listM[2] });
+                return new ResultContext(new { title = Dis, list = JsonConvert.SerializeObject(listM[2]) });
             }
             catch (Exception ex)
             {
@@ -99,14 +104,17 @@ namespace WebApi.Controllers
         /// <param name="Year"></param>
         /// <param name="Month"></param>
         /// <returns></returns>
+        [HttpGet]
         public ResultContext GetMonthDetailList(string SystemID, int Year, int Month, string TargetName, bool IncludeHaveDetail, bool IsLatestVersion = false, string DataSource = "Draft", bool IsAll = false)
         {
             try
             {
                 MonthlyReportController ms = new MonthlyReportController();
                 TargetApproveController ta = new TargetApproveController();
-                List<DictionaryVmodel> li = ms.GetReportInstance(SystemID, Year, Month);
-                List<DictionaryVmodel> listM = ms.GetDetailRptDataSource(li[0].ObjValue.ToString(), "", "Detail", IncludeHaveDetail);
+                List<DictionaryVmodel> li = ms.GetReportInstance(SystemID, Year, Month, IsLatestVersion, DataSource, IsAll);
+                if(li==null||li.Count==0||li[0].ObjValue==null)
+                    return new ResultContext();
+                List<DictionaryVmodel> listM = ms.GetDetailRptDataSource((ReportInstance)li[0].ObjValue, "", "Detail", IncludeHaveDetail);
                 Guid result = Guid.Empty;
                 Guid.TryParse(SystemID, out result);
                 if (result == Guid.Empty)
@@ -115,12 +123,10 @@ namespace WebApi.Controllers
                 List<DictionaryVmodel> listS = new List<DictionaryVmodel>();
                 if (!string.IsNullOrEmpty(TargetName))
                     listS = listM.Where(x => x.Name == TargetName).ToList();
-                List<B_MonthlyReport> lis = B_MonthlyreportOperator.Instance.GetMonthlyReportBySysIDList(result, Year, Month);
-                string Dis = "";
-                if (lis.Count > 0)
-                    Dis = lis.FirstOrDefault().Description;
+                C_System system = new C_System();
+                system = StaticResource.Instance[SystemID.ToGuid(), DateTime.Now];
 
-                return new ResultContext(new { title = Dis, list = listS });
+                return new ResultContext(new { title = system.SystemName, list = listS });
             }
             catch (Exception ex)
             {
@@ -136,6 +142,7 @@ namespace WebApi.Controllers
         /// <param name="BusinessID"></param>
         /// <param name="ProType"></param>
         /// <returns></returns>
+        [HttpGet]
         public ResultContext MonthApprove(string BusinessID, string ProType, bool IsLatestVersion)
         {
             MonthlyReportController mr = new MonthlyReportController();
@@ -174,7 +181,7 @@ namespace WebApi.Controllers
         }
 
 
-
+        [HttpGet]
         public ResultContext GetShowPrcessNodeName(string strSystemID, string strProcessCode)
         {
             try
@@ -198,6 +205,7 @@ namespace WebApi.Controllers
         /// 获取分解指标的年与业态列表
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public ResultContext GetTargetCollectInit()
         {
             try
@@ -224,6 +232,7 @@ namespace WebApi.Controllers
         /// <param name="SysID"></param>
         /// <param name="FinYear"></param>
         /// <returns></returns>
+        [HttpGet]
         public ResultContext GetVerTargetList(string SysID, string FinYear)
         {
             try
@@ -246,6 +255,7 @@ namespace WebApi.Controllers
         /// <param name="BusinessID"></param>
         /// <param name="IsLatestVersion"></param>
         /// <returns></returns>
+        [HttpGet]
         public ResultContext TargetPlanApprove(string BusinessID, bool IsLatestVersion)
         {
             try

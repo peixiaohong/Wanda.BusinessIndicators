@@ -37,6 +37,34 @@
          <td class="Td_Center"><a href="#" onclick="CheckAction('${ID}')">点击查看</a></td>
     </tr>
 </script>
+<script id="TargetPlanHistoryforVersion" type="text/x-jquery-tmpl">
+    <tr>
+        <td class="Td_Center">${$index+1}</td>
+        <td class="Td_Center"><a href="javascript:void(0);" onclick="GetList('${ID}')"> ${VersionName}</a></td>
+        <td class="Td_Center">${FormatTime(ModifyTime)}</td>
+        <td class="Td_Center">${ProcessOwn}</td>
+        <td class="Td_Center">${FormatTime(CreateTime)}</td>
+        {{if IfCurrentTarget==true}}
+        <td class="Td_Center">是</td>
+        {{if VersionDefault==0}}
+        <td class="Td_Center">否</td>
+        <td class="Td_Center">
+            <a href="#" onclick="updateDefault('${ID}')">设为默认</a>&nbsp;&nbsp;
+            <a href="#" onclick="IsDeleteA('${ID}')">禁用</a>
+        </td>
+        {{else}}
+        <td class="Td_Center" style="color: red">是</td>
+        <td class="Td_Center"></td>
+        {{/if}}
+        {{else}}
+        <td class="Td_Center" style="color: gray">否</td>
+        <td class="Td_Center">否</td>
+        <td class="Td_Center"></td>
+        {{/if}}
+        <td class="Td_Center"><a href="javascript:void(0);" onclick="DownLoad('${ID}')">下载 </a></td>
+        <td class="Td_Center"><a href="javascript:void(0);" onclick="CheckAction('${ID}')">点击查看</a></td>
+    </tr>
+</script>
 
 <script id="TargetPlanHistoryHead" type="text/x-jquery-tmpl">
     <tr>

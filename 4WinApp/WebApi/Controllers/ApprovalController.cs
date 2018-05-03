@@ -29,6 +29,7 @@ namespace WebApi.Controllers
         /// <param name="ExecuteType"></param>
         /// <param name="OperatorType"></param>
         /// <param name="PrcessStatus"></param>
+        [HttpGet]
         public ResultContext MonthProcessRequest(string BusinessID, string strProType, string ExecuteType, int OperatorType, string PrcessStatus)
         {
             try

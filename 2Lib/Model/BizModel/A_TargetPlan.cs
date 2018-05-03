@@ -63,9 +63,22 @@ namespace LJTH.BusinessIndicators.Model
         /// </summary>
         [ORFieldMapping("SystemBatchID")]
         public Guid SystemBatchID { get; set; }
-		#endregion
-		
-		 
-	} 
+
+        /// <summary>
+        /// 版本名称
+        /// </summary>
+        [ORFieldMapping("VensionName")]
+        public string VensionName { get; set; }
+
+
+        /// <summary>
+        /// 是否默认版本
+        /// </summary>
+        [ORFieldMapping("VensionDefault")]
+        public int VensionDefault { get; set; }
+        #endregion
+
+
+    } 
 }
 

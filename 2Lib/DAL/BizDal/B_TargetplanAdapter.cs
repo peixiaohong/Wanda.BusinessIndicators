@@ -166,7 +166,7 @@ namespace LJTH.BusinessIndicators.DAL
             return ExecuteQuery(sql, pSystemID, pYear);
 
         }
-
+        
 
         public IList<B_TargetPlan> GetTargetPlanByApprovedAndApproved(int Year)
         {
