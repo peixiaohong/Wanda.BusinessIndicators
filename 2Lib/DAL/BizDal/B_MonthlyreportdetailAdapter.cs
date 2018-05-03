@@ -292,17 +292,18 @@ WHERE   MonthlyReportID = @MonthlyReportID
             try
             {
                 string createTableSql = "	SELECT * FROM B_MonthlyReportDetail WHERE 1=2";
-                string sql = string.Format(@"DELETE
-                        FROM    B_MonthlyReportDetail
-                        WHERE   SystemID = '{0}'
-                                AND MonthlyReportID='{1}'
-                                AND TargetPlanID = '{2}'
-                                AND FinYear = {3}
-                                AND FinMonth = {4}
-                                AND TargetID IN ( {5} )
-                                AND CompanyID IN ( {6} );", list[0].SystemID, list[0].MonthlyReportID,  list[0].TargetPlanID, list[0].FinYear, list[0].FinMonth
-                           , string.Format(@"'{0}'", string.Join(",", list.Select(v => v.TargetID).Distinct()).Replace(",", "','"))
-                           , string.Format(@"'{0}'", string.Join(",", list.Select(v => v.CompanyID).Distinct()).Replace(",", "','")));
+                //string sql = string.Format(@"DELETE
+                //        FROM    B_MonthlyReportDetail
+                //        WHERE   SystemID = '{0}'
+                //                AND MonthlyReportID='{1}'
+                //                AND TargetPlanID = '{2}'
+                //                AND FinYear = {3}
+                //                AND FinMonth = {4}
+                //                AND TargetID IN ( {5} )
+                //                AND CompanyID IN ( {6} );", list[0].SystemID, list[0].MonthlyReportID,  list[0].TargetPlanID, list[0].FinYear, list[0].FinMonth
+                //           , string.Format(@"'{0}'", string.Join(",", list.Select(v => v.TargetID).Distinct()).Replace(",", "','"))
+                //           , string.Format(@"'{0}'", string.Join(",", list.Select(v => v.CompanyID).Distinct()).Replace(",", "','")));
+                string sql = string.Format("DELETE B_MonthlyReportDetail where MonthlyReportID='{0}'", list.Select(X => X.MonthlyReportID).FirstOrDefault());
                 list.ConvertAll(v => v.ID = System.Guid.NewGuid());
                 list.ConvertAll(v => v.ModifyTime = DateTime.Now);
                 using (TransactionScope scope = TransactionScopeFactory.Create())
