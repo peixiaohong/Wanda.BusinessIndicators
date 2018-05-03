@@ -104,7 +104,32 @@ namespace LJTH.BusinessIndicators.DAL
 
             return ExecuteQuery(sql);
         }
-
+        /// <summary>
+        /// 获取已审批通过的分解指标版本类型集合
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <returns></returns>
+        public Dictionary<Guid,string> GetTargetVersionType(string systemID, int year, int month)
+        {
+            Dictionary<Guid, string> dc = new Dictionary<Guid, string>();
+            string sql = @"SELECT b.ID,isnull(b.VersionName,'') AS VersionName  FROM A_TargetPlanDetail a INNER JOIN A_TargetPlan b ON a.TargetPlanID=b.ID AND a.IsDeleted=b.IsDeleted
+            WHERE a.SystemID =@SystemID AND a.FinYear =@FinYear AND a.FinMonth =@FinMonth AND a.IsDeleted = 0 ";
+            sql += " ORDER BY b.VersionDefault desc, b.CreateTime DESC";
+            var result = ExecuteQuery(sql, CreateSqlParameter("@SystemID", System.Data.DbType.Guid, systemID), CreateSqlParameter("@FinYear", System.Data.DbType.Int32, year), CreateSqlParameter("@FinMonth", System.Data.DbType.Int32, month));
+            if(result!=null && result.Count > 0)
+            {
+                foreach (var item in result)
+                {
+                    if (!dc.ContainsKey(item.ID))
+                    {
+                        dc.Add(item.ID, item.VersionName);
+                    }
+                }
+            }
+            return dc;
+        }
     }
 }
 

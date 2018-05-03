@@ -329,5 +329,27 @@ namespace LJTH.BusinessIndicators.BLL
             var result = S_OrganizationalActionOperator.Instance.GetSystem_Regional(systemID);
             return result != null && result.Any() ? true : false;
         }
+
+        /// <summary>
+        /// 获取板块当前年、月指标版本信息
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <returns>true存在区域false不存在区域</returns>
+        public Dictionary<Guid,string> GetTargetVersionType(string systemID, int year, int month,bool IsLatestVersion)
+        {
+            Dictionary<Guid, string> dc = new Dictionary<Guid, string>();
+            //是否查询审批中数据
+            if (IsLatestVersion)
+            {
+                dc = B_TargetplanOperator.Instance.GetTargetVersionType(systemID, year, month);
+            }
+            else
+            {
+                dc = A_TargetplanOperator.Instance.GetTargetVersionType(systemID, year, month);
+            }
+            return dc;
+        }
     }
 }
