@@ -92,7 +92,6 @@
     <Content Include="DepartmentStoreReport\PlayVideo.aspx" />
     <Content Include="DllReference\Wanda.SDK.Common.dll" />
     <Content Include="DllReference\Wanda.UserSource.Client.dll" />
-    <Content Include="Excel\Help\最新月报上报视频.mp4" />
     <Content Include="Images\action-icon.png" />
     <Content Include="Images\close-icon.png" />
     <Content Include="Images\defaultLeaf.gif" />
@@ -918,9 +917,6 @@
     <Content Include="Scripts\ueditor\lang\zh-cn\images\music.png" />
     <Content Include="Scripts\ueditor\lang\zh-cn\images\upload.png" />
     <Content Include="Scripts\ueditor\lang\zh-cn\zh-cn.js" />
-    <Content Include="Scripts\ueditor\net\Bin\Newtonsoft.Json.dll" />
-    <Content Include="Scripts\ueditor\net\Bin\Newtonsoft.Json.pdb" />
-    <Content Include="Scripts\ueditor\net\Bin\Newtonsoft.Json.xml" />
     <Content Include="Scripts\ueditor\net\net.sln" />
     <Content Include="Scripts\ueditor\themes\default\css\ueditor.css" />
     <Content Include="Scripts\ueditor\themes\default\css\ueditor.min.css" />
@@ -1849,7 +1845,6 @@
     <Content Include="packages.config" />
     <Fakes Include="Fakes\Newtonsoft.Json.fakes" />
     <Content Include="Excel\月度经营报告_商管系统查询V1.xlsx" />
-    <Content Include="Excel\Help\经营指标管控系统月报上报操作手册V1.pptx" />
     <Content Include="AjaxHander\TargetReportLog.ashx" />
     <Content Include="AjaxHander\DownFileList.ashx" />
     <Content Include="AjaxHander\DownMonthRptFileList.ashx" />
@@ -1943,10 +1938,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Excel\Help\" />
     <Folder Include="Images\Charts\" />
     <Folder Include="Images\help\" />
     <Folder Include="Scripts\json\" />
     <Folder Include="Scripts\ProtoType\" />
+    <Folder Include="Scripts\ueditor\net\Bin\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
