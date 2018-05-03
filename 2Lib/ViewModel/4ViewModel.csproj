@@ -46,7 +46,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Wanda.Platform.WorkFlow.ClientComponent">
+    <Reference Include="Wanda.Platform.WorkFlow.ClientComponent, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Wanda.BusinessIndicators\DllReference\Wanda.Platform.WorkFlow.ClientComponent.dll</HintPath>
     </Reference>
   </ItemGroup>
