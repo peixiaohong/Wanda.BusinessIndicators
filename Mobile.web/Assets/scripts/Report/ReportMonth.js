@@ -28,6 +28,7 @@
                         if (res.IsSuccess && res.StatusCode == 200) {
                             self.systemAndYearList = res.Data;
                             self.InitYM();
+                            self.ChangeData();
                         } else {
                             utils.alertMessage(res.StatusMessage)
                         }
@@ -61,7 +62,6 @@
             InitYM: function () {
                 var self = this;
                 var date = new Date();
-                var year = date.getMonth() + 1;
                 self.yearSelect = date.getFullYear();
                 self.monthSelect = date.getMonth() + 1.
             },

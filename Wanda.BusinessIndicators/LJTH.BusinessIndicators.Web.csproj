@@ -51,11 +51,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Aspose.Cells.5.3.0\Aspose.Cells.dll</HintPath>
     </Reference>
-    <Reference Include="BPF.SDK.Common">
-      <HintPath>..\packages\WorkFlow\BPF.SDK.Common.dll</HintPath>
+    <Reference Include="BPF.SDK.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DllReference\BPF.SDK.Common.dll</HintPath>
     </Reference>
-    <Reference Include="BPF.UserSelect.Client">
-      <HintPath>..\packages\WorkFlow\BPF.UserSelect.Client.dll</HintPath>
+    <Reference Include="BPF.UserSelect.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DllReference\BPF.UserSelect.Client.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Documents.Client, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Azure.DocumentDB.1.1.0\lib\net40\Microsoft.Azure.Documents.Client.dll</HintPath>

@@ -418,11 +418,12 @@ function getMonthReportSummaryData(asyncBlock) {
     WebUtil.ajax({
         async: true,
         asyncBlock: block,
-        //url: "/TargetApproveController/GetReportInstance",
-        url: "/MonthlyReportController/GetReportInstance",
+        url: "/TargetApproveController/GetReportInstance",
+        //url: "/MonthlyReportController/GetReportInstance",
         args: {
             SystemID: SystemID,
             strMonthReportID: MonthReportID,
+            strBacthID: BatchID,
             IsLatestVersion: IsLatestVersion,
             Year: Year,
             Month: Month,
@@ -449,8 +450,8 @@ function getMonthReprotDetailData() {
     
     WebUtil.ajax({
         async: true,
-        //url: "/TargetApproveController/GetDetailRptDataSource",
-        url:"/MonthlyReportController/GetDetailRptDataSource",
+        url: "/TargetApproveController/GetDetailRptDataSource",
+        //url:"/MonthlyReportController/GetDetailRptDataSource",
         args: {
             rpts: WebUtil.jsonToString(ReportInstance),
             strCompanyProperty: CompanyProperty,
@@ -613,8 +614,8 @@ function getMonthReportReturnData() {
     }
     WebUtil.ajax({
         async: true,
-        //url: "/TargetApproveController/GetTargetReturnList",
-        url: "/MonthlyReportController/GetTargetReturnList",
+        url: "/TargetApproveController/GetTargetReturnList",
+        //url: "/MonthlyReportController/GetTargetReturnList",
         args: {
             rpts: WebUtil.jsonToString(ReportInstance),
             IsLatestVersion: IsLatestVersion,
@@ -741,8 +742,8 @@ function getMonthReportMissTargetData() {
     //未完成说明
     WebUtil.ajax({
         async: true,
-        //url: "/TargetApproveController/GetMissTargetList",
-        url: "/MonthlyReportController/GetMissTargetList",
+        url: "/TargetApproveController/GetMissTargetList",
+        //url: "/MonthlyReportController/GetMissTargetList",
         args: {
             rpts: WebUtil.jsonToString(ReportInstance),
             IsLatestVersion: IsLatestVersion },
