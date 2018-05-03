@@ -67,14 +67,14 @@ namespace LJTH.BusinessIndicators.Model
         /// <summary>
         /// 版本名称
         /// </summary>
-        [ORFieldMapping("VensionName")]
+        [ORFieldMapping("VersionName")]
         public string VersionName { get; set; }
 
 
         /// <summary>
         /// 是否默认版本
         /// </summary>
-        [ORFieldMapping("VensionDefault")]
+        [ORFieldMapping("VersionDefault")]
         public int VersionDefault { get; set; }
         #endregion
 
