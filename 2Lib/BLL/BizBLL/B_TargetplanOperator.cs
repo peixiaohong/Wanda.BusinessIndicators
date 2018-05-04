@@ -174,7 +174,7 @@ namespace LJTH.BusinessIndicators.BLL
         /// <param name="year"></param>
         /// <param name="month"></param>
         /// <returns></returns>
-        public Dictionary<Guid, string> GetTargetVersionType(string systemID, int year, int month)
+        public IList<B_TargetPlan> GetTargetVersionType(string systemID, int year, int month)
         {
             return _bTargetplanAdapter.GetTargetVersionType(systemID, year, month);
         }

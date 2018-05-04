@@ -176,15 +176,11 @@ FROM    dbo.C_Target CT
         }
 
 
-        internal List<MonthlyReportDetail> GetMonthlyReportDetailList_Result(Guid SystemID, int Year, int Month)
+        internal List<MonthlyReportDetail> GetMonthlyReportDetailList_Result(Guid SystemID, int Year, int Month, Guid TargetPlanID)
         {
             string sql = "GetMonthlyReportDetailList_Result ";
-            
-            SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
-            SqlParameter pYear = CreateSqlParameter("@Year", System.Data.DbType.String, Year);
-            SqlParameter pMonth = CreateSqlParameter("@Month", System.Data.DbType.String, Month);
-            
-            var ds = DbHelper.RunSPReturnDS(sql, ConnectionName, pSystemID, pYear, pMonth);
+           
+            var ds = DbHelper.RunSPReturnDS(sql, ConnectionName, CreateSqlParameter("@SystemID", DbType.Guid, SystemID), CreateSqlParameter("@FinYear", DbType.Int32, Year), CreateSqlParameter("@FinMonth", DbType.Int32, Month), CreateSqlParameter("@TargetPlanID", DbType.Guid, TargetPlanID));
             List<MonthlyReportDetail> data = new List<MonthlyReportDetail>();
             ds.Tables[0].Rows.Cast<System.Data.DataRow>().ForEach(row =>
             {
@@ -195,10 +191,6 @@ FROM    dbo.C_Target CT
             });
             return data;
         }
-
-
-
-
 
         internal IList<MonthlyReportVM> GetAVMonthlyReport(Guid SystemID, int Year, int Month)
         {

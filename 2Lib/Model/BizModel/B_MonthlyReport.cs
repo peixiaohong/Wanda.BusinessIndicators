@@ -91,6 +91,7 @@ namespace LJTH.BusinessIndicators.Model
         public Guid AreaID { get; set; }
 
 
+
         /// <summary>
         /// Ĭ�ϰ汾״̬
         /// </summary>

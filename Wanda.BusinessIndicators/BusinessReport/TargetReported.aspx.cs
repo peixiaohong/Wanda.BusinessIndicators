@@ -107,7 +107,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     if (!string.IsNullOrEmpty(Request["SystemId"]) && Guid.Parse(Request["SystemId"]) != Guid.Empty)
                     {
                         cs = c_SystemList.Where(v => v.ID == Guid.Parse(Request["SystemId"])).FirstOrDefault();
-                        ddlSystem.SelectedIndex= ddlSystem.Items.IndexOf(ddlSystem.Items.FindByValue(cs.ID.ToString()));
+                        ddlSystem.SelectedIndex = ddlSystem.Items.IndexOf(ddlSystem.Items.FindByValue(cs.ID.ToString()));
                     }
                     else
                     {
@@ -288,7 +288,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
 
                         #endregion
                     }
-                    UserControl.SetButtonSpanStyle(bmr.Status);
+                    UserControl.SetButtonSpanStyle(bmr == null ? 2 : bmr.Status);
                 }
                 else
                 {

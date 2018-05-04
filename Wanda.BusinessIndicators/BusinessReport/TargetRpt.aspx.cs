@@ -62,7 +62,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 //string out_finMonthStr = Encoding.Default.GetString(out_finMonth);
                 //finMonth = int.Parse(out_finMonthStr);
 
-               finMonth = int.Parse(HttpUtility.UrlDecode(Request.QueryString["_finMonth"]));
+                finMonth = int.Parse(HttpUtility.UrlDecode(Request.QueryString["_finMonth"]));
             }
 
             if (!string.IsNullOrEmpty(Request.QueryString["_finYear"]))
@@ -72,13 +72,13 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 //string out_finYearStr = Encoding.Default.GetString(out_finYear);
                 //finYear = int.Parse(out_finYearStr);
 
-                 finYear = int.Parse(HttpUtility.UrlDecode(Request.QueryString["_finYear"]));
+                finYear = int.Parse(HttpUtility.UrlDecode(Request.QueryString["_finYear"]));
             }
             if (!string.IsNullOrEmpty(Request.QueryString["IsLastestVersion"]))
             {
                 IsLastestVersion = bool.Parse(HttpUtility.UrlDecode(Request.QueryString["IsLastestVersion"]));
             }
-            if (finMonth == 0 && finYear==0)
+            if (finMonth == 0 && finYear == 0)
             {
                 DateTime datetime = StaticResource.Instance.GetReportDateTime();
                 finMonth = datetime.Month;
@@ -152,7 +152,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 TransferOtherPage(ddlSystem.SelectedValue.ToGuid());
 
                 SubManage();
-                GetTargetVersionType(sysID, finYear, finMonth, IsLastestVersion);
+                GetTargetVersionType(ddlSystem.SelectedValue.ToString(), finYear, finMonth, IsLastestVersion);
             }
         }
 
@@ -163,10 +163,10 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         {
 
 
-          //  Server.TransferRequest
+            //  Server.TransferRequest
 
 
-           
+
 
 
 
@@ -205,7 +205,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             //        }
             //    }
             //}
-           
+
 
 
 
@@ -239,10 +239,10 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         {
             Guid sysID = SystemID;
 
-           
-            if (ddlMonth.SelectedValue=="")
+
+            if (ddlMonth.SelectedValue == "")
             {
-                  DateTime datetime = StaticResource.Instance.GetReportDateTime();
+                DateTime datetime = StaticResource.Instance.GetReportDateTime();
                 finMonth = datetime.Month;
                 finYear = datetime.Year;
             }
@@ -277,9 +277,9 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
 
 
 
-            if (sysModel.Category==1)
+            if (sysModel.Category == 1)
             {
-                  return;
+                return;
             }
             else if (sysModel.Category == 2)
             {
@@ -309,14 +309,29 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         /// <param name="year"></param>
         /// <param name="month"></param>
         /// <param name="IsLatestVersion"></param>
-        private void GetTargetVersionType(string systemID, int year, int month,bool IsLatestVersion)
+        private void GetTargetVersionType(string sid, int year, int month, bool IsLatestVersion)
         {
-            var result = StaticResource.Instance.GetTargetVersionType(sysID, year, month, IsLatestVersion);
-            if (result.Count > 0)
+            //是否查询审批中数据
+            if (IsLatestVersion)
             {
-                foreach (var item in result)
+                var result = B_TargetplanOperator.Instance.GetTargetVersionType(sid, year, month);
+                if (result.Count > 0)
                 {
-                    ddVersionType.Items.Add(new ListItem(item.Value, item.Key.ToString()));
+                    foreach (var item in result)
+                    {
+                        ddlVersionType.Items.Add(new ListItem(item.VersionName, item.ID.ToString()));
+                    }
+                }
+            }
+            else
+            {
+                var result = A_TargetplanOperator.Instance.GetTargetVersionType(sid, year, month);
+                if (result.Count > 0)
+                {
+                    foreach (var item in result)
+                    {
+                        ddlVersionType.Items.Add(new ListItem(item.VersionName, item.ID.ToString()));
+                    }
                 }
             }
         }

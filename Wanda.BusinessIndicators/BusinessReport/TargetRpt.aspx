@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/SiteMasterPage/MonthReportMasterPage.Master" AutoEventWireup="true" CodeBehind="TargetRpt.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.BusinessReport.TargetRpt" %>
-
+﻿<%@ Page EnableEventValidation="false" Language="C#" MasterPageFile="~/SiteMasterPage/MonthReportMasterPage.Master" AutoEventWireup="true" CodeBehind="TargetRpt.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.BusinessReport.TargetRpt" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" type="text/css" href="../Scripts/UpLoad/uploadify.css" />
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
@@ -51,7 +50,7 @@
                             </td>
                              <th>版本类型</th>
                             <td>
-                                <asp:DropDownList ID="ddVersionType" ClientIDMode="Static" runat="server" Style="width: 120px;"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlVersionType" ClientIDMode="Static" runat="server" Style="width: 120px;"></asp:DropDownList>
                             </td>
                             <th style="text-align: center">
                                 <input id="submana" runat="server" clientidmode="Static" style="width: 80px; text-align: center; height: 27px; display: none" type="button" class="uploadify-button" value="" onclick="AddMessages()" />
