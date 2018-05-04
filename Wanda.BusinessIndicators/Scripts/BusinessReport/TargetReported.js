@@ -432,7 +432,7 @@ function ComplateDetailLiaddCss(sender) {
     loadTmpl('#' + ComplateTargetDetailTemplate).tmpl(dataArray).appendTo('#tab2_rows');
 
     SetComplateTargetDetailData(TemplData, 2);
-    replaceCompanyControl();
+    ComplateDetailReplaceClick();
 }
 var ComplateTargetDetailTemplate = null;
 
@@ -493,7 +493,7 @@ function SetComplateTargetDetailData(sender, Type) {
         $(".Detail").attr("src", "../Images/btn_down02_w.png");
         $(".DetailCss").addClass("tabOrderBackground");
     }
-    replaceCompanyControl();
+    ComplateDetailReplaceClick();
 }
 
 
@@ -1758,8 +1758,8 @@ function shrinkageTitle() {
 }
 
 
-
-function replaceCompanyControl() {
+//完成情况明细的单击事件处理
+function ComplateDetailReplaceClick() {
     //项目公司的单击事件
     $('[data-name="forMonthlyReport"]').each(function () {
         var td = $(this).parent();
@@ -1781,3 +1781,4 @@ function replaceCompanyControl() {
         $(this).html("<span><a href=\"javascript:void(0);\" onclick=\"EditMonthReportDetail('" + detailId + "','single');\" > " + NPlanAmmount + "</a ></span > ");
     });
 }
+
