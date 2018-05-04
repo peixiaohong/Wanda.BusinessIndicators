@@ -157,7 +157,7 @@ $(document).ready(function () {
         //$("#BHhide4").hide();
     }
     //搜索条件切换事件
-    //FileChangeClick();
+    FileChangeClick();
 });
 
 
@@ -465,7 +465,7 @@ function TransitionCondition(TCYear, TCMonth, TCSystemID, TCIsLatestVersion, res
         return false;
     } else {
         return true;
-    }
+    }                                                              
 
 }
 
@@ -679,7 +679,7 @@ function getMonthReportSummaryData() {
     WebUtil.ajax({
         async: true,
         url: "/MonthlyReportController/GetReportInstance",
-        args: { SystemID: $("#ddlSystem").val(), Year: $("#ddlYear").val(), Month: $("#ddlMonth").val(), IsLatestVersion: latest, DataSource: dataSource, IsAll: true },
+        args: { SystemID: $("#ddlSystem").val(), Year: $("#ddlYear").val(), Month: $("#ddlMonth").val(), TargetPlanID: $("#ddlVersionType").val(), IsLatestVersion: latest, DataSource: dataSource, IsAll: true },
         successReturn: SplitData
     });
     if (IsNewDataIndex.indexOf("A") < 0) {
@@ -702,6 +702,8 @@ function getMonthReprotDetailData() {
         url: "/MonthlyReportController/GetDetailRptDataSource",
         args: { rpts: WebUtil.jsonToString(ReportInstance), strCompanyProperty: CompanyProperty, strMonthReportOrderType: MonthReportOrderType, IncludeHaveDetail: IncludeHaveDetail },
         successReturn: function (ResultData) {
+            if (ResultData.length == 0)
+                return;
             ComplateDetailData = ResultData;
             SetComplateTargetDetailData(ComplateDetailData[0], 1);
         }
@@ -1032,6 +1034,8 @@ function getManageReprotDetailData() {
         url: "/MonthlyReportController/GetManageDetailRptDataSource",
         args: { rpts: WebUtil.jsonToString(ReportInstance), strCompanyProperty: CompanyProperty, strMonthReportOrderType: MonthReportOrderType, IncludeHaveDetail: IncludeHaveDetail },
         successReturn: function (ResultData) {
+            if (ResultData.length == 0)
+                return;
             ManageReportDetailData = ResultData;
             SetManageMonthReprotDetailData(ManageReportDetailData[0], 1);
         }
@@ -2777,13 +2781,29 @@ function GetshrinkageTitleList() {
 }
 //搜索条件年份、月份、是否包含审批中添加切换版本类型事件
 function FileChangeClick() {
+   
     $("#ddlYear").change(function () {
-        alert(this.val());
+        CommonGetTargetVersionType($("#ddlSystem").val(), $("#ddlYear").val(), $("#ddlMonth").val(), $("#chkIsLastestVersion").is(":checked"))
     });
     $("#ddlMonth").change(function () {
-        alert(this.val());
+        CommonGetTargetVersionType($("#ddlSystem").val(), $("#ddlYear").val(), $("#ddlMonth").val(), $("#chkIsLastestVersion").is(":checked"))
     });
     $("#chkIsLastestVersion").click(function () {
-        alert(this.val());
+        CommonGetTargetVersionType($("#ddlSystem").val(), $("#ddlYear").val(), $("#ddlMonth").val(), $("#chkIsLastestVersion").is(":checked"))
+    });
+}
+function CommonGetTargetVersionType(sid, y, m, lv) {
+    WebUtil.ajax({
+        async: true,
+        url: "/MonthlyReportController/GetTargetVersionType",
+        args: { SystemID: sid, FinYear: y, FinMonth: m, IsLatestVersion: lv },
+        successReturn: function (result) {
+            $("#ddlVersionType").empty();
+            if (result != undefined && result.length > 0) {
+                for (var i = 0; i < result.length; i++) {
+                    $("#ddlVersionType").append("<option value='" + result[i].ID + "'>" + result[i].VersionName + "</option>");
+                }
+            }
+        }
     });
 }
