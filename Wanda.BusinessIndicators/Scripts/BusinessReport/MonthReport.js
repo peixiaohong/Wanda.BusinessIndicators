@@ -465,7 +465,7 @@ function TransitionCondition(TCYear, TCMonth, TCSystemID, TCIsLatestVersion, res
         return false;
     } else {
         return true;
-    }
+    }                                                              
 
 }
 
@@ -679,7 +679,7 @@ function getMonthReportSummaryData() {
     WebUtil.ajax({
         async: true,
         url: "/MonthlyReportController/GetReportInstance",
-        args: { SystemID: $("#ddlSystem").val(), Year: $("#ddlYear").val(), Month: $("#ddlMonth").val(), IsLatestVersion: latest, DataSource: dataSource, IsAll: true },
+        args: { SystemID: $("#ddlSystem").val(), Year: $("#ddlYear").val(), Month: $("#ddlMonth").val(), TargetPlanID: $("#ddlVersionType").val(), IsLatestVersion: latest, DataSource: dataSource, IsAll: true },
         successReturn: SplitData
     });
     if (IsNewDataIndex.indexOf("A") < 0) {
@@ -702,6 +702,8 @@ function getMonthReprotDetailData() {
         url: "/MonthlyReportController/GetDetailRptDataSource",
         args: { rpts: WebUtil.jsonToString(ReportInstance), strCompanyProperty: CompanyProperty, strMonthReportOrderType: MonthReportOrderType, IncludeHaveDetail: IncludeHaveDetail },
         successReturn: function (ResultData) {
+            if (ResultData.length == 0)
+                return;
             ComplateDetailData = ResultData;
             SetComplateTargetDetailData(ComplateDetailData[0], 1);
         }
@@ -1032,6 +1034,8 @@ function getManageReprotDetailData() {
         url: "/MonthlyReportController/GetManageDetailRptDataSource",
         args: { rpts: WebUtil.jsonToString(ReportInstance), strCompanyProperty: CompanyProperty, strMonthReportOrderType: MonthReportOrderType, IncludeHaveDetail: IncludeHaveDetail },
         successReturn: function (ResultData) {
+            if (ResultData.length == 0)
+                return;
             ManageReportDetailData = ResultData;
             SetManageMonthReprotDetailData(ManageReportDetailData[0], 1);
         }

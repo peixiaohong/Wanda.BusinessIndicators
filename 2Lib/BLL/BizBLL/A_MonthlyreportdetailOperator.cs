@@ -105,9 +105,9 @@ namespace LJTH.BusinessIndicators.BLL
             return result;
         }
 
-        public List<MonthlyReportDetail> GetMonthlyReportDetailList_Result(Guid SystemID, int Year, int Month)
+        public List<MonthlyReportDetail> GetMonthlyReportDetailList_Result(Guid SystemID, int Year, int Month,Guid TargetPlanID)
         {
-            List<MonthlyReportDetail> result = _aMonthlyreportdetailAdapter.GetMonthlyReportDetailList_Result(SystemID, Year, Month);
+            List<MonthlyReportDetail> result = _aMonthlyreportdetailAdapter.GetMonthlyReportDetailList_Result(SystemID, Year, Month, TargetPlanID);
             return result;
         }
 

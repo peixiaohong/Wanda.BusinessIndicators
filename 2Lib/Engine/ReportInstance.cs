@@ -269,7 +269,7 @@ namespace LJTH.BusinessIndicators.Engine
                     }
                 }
                 ReportDetails = new List<MonthlyReportDetail>();
-                ReportDetails = A_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Result(_System.ID, FinYear, FinMonth);
+                ReportDetails = A_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Result(_System.ID, FinYear, FinMonth,TargetPlanID);
 
                 //ValidatedMonthlyReportDetails.ForEach(P => ReportDetails.Add(P.ToVModel()));
             }
