@@ -98,6 +98,13 @@ namespace LJTH.BusinessIndicators.Model
         [ORFieldMapping("DefaultVersionStatus")]
         public int DefaultVersionStatus { get; set; }
 
+        
+        /// <summary>
+        /// 指标计划ID
+        /// </summary>
+        [ORFieldMapping("TargetPlanID")]
+        public Guid TargetPlanID { get; set; }
+
         #endregion
 
 
