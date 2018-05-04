@@ -1368,7 +1368,8 @@ function SaveMonthReportDetail() {
         detail.NAccumulativePlanAmmount = tempNAccumulativePlanAmmount;
         detail.NAccumulativeActualAmmount = tempNAccumulativeActualAmmount;
 
-    } else if (tempEditType == "OnlyPlan") {
+    }
+    else if (tempEditType == "OnlyPlan") {
         var tempNActualAmmount = $("#WGMonthReportNActualAmmount").attr("value");
         var tempNAccumulativeActualAmmount = $("#WGMonthReportNAccumulativeActualAmmount").attr("value");
 
@@ -1759,9 +1760,24 @@ function shrinkageTitle() {
 
 
 function replaceCompanyControl() {
+    //项目公司的单击事件
     $('[data-name="forMonthlyReport"]').each(function () {
         var td = $(this).parent();
-        var company = $(this).text();
-        td.html('<span>' + company + '</span>');
+        var companyName = $(this).text();
+        var detailId = $(this).attr("data-detailId");
+        var isblend = $(this).attr("data-isblend");
+        if (typeof isblend != 'undefined' && $.trim(isblend).toLocaleLowerCase() == 'true') {
+            td.html("<span>" + companyName + "</span > ");
+        }
+        else {
+            td.html("<span><a href=\"javascript:void(0);\" onclick=\"EditMonthReportDetail('" + detailId + "','single');\" > " + companyName + "</a ></span > ");
+        }
+    });
+
+    //实际完成数的单击事件
+    $('[data-update-nactualamount="true"]').each(function () {
+        var NPlanAmmount = $(this).text();
+        var detailId = $(this).attr("data-detailId");
+        $(this).html("<span><a href=\"javascript:void(0);\" onclick=\"EditMonthReportDetail('" + detailId + "','single');\" > " + NPlanAmmount + "</a ></span > ");
     });
 }

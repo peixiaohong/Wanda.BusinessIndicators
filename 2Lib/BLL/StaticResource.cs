@@ -54,7 +54,6 @@ namespace LJTH.BusinessIndicators.BLL
             _CompanyList = null;
             _TargetList = new Dictionary<Guid, List<C_Target>>();
             _KpiList = new Dictionary<int, List<C_TargetKpi>>();
-            _TargetList = null;
             _companyList = null;
             _ExceptionTargetList = null;
             _OrgList = new Dictionary<Guid, List<S_Organizational>>();
