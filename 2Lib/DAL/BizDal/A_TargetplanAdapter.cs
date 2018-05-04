@@ -130,6 +130,12 @@ namespace LJTH.BusinessIndicators.DAL
             }
             return dc;
         }
+
+        public int DeletePlan(Guid PlanID)
+        {
+            string sql = @"DELETE dbo.A_TargetPlan  WHERE ID=@PlanID;";
+            return ExecuteSql(sql, CreateSqlParameter("@PlanID", System.Data.DbType.Guid, PlanID));
+        }
     }
 }
 

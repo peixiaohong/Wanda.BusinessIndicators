@@ -58,6 +58,15 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport {
         protected global::System.Web.UI.WebControls.HiddenField hideTargetPlanID;
         
         /// <summary>
+        /// hideVersionName 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hideVersionName;
+        
+        /// <summary>
         /// HidSystemID 控件。
         /// </summary>
         /// <remarks>
@@ -92,5 +101,14 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField HideFinYear;
+        
+        /// <summary>
+        /// Btn_VerdionName 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Btn_VerdionName;
     }
 }

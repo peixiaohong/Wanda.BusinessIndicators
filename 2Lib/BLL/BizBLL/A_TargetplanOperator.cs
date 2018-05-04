@@ -127,6 +127,12 @@ namespace LJTH.BusinessIndicators.BLL
         {
             return _aTargetplanAdapter.GetTargetVersionType(systemID,year,month);
         }
+
+
+        public int DeletePlan(Guid PlanID)
+        {
+            return _aTargetplanAdapter.DeletePlan(PlanID);
+        }
     }
 }
 

@@ -12,7 +12,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
     public partial class TargetUpdate : System.Web.UI.Page
     {
         int FinYear;
-         
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -48,19 +48,19 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 ddlSystem.DataBind();
 
                 HidSystemID.Value = ddlSystem.SelectedValue;
-           
+
                 TargetPlanControl();//如果当前月不存在计划指标数据，添加一条数据
             }
 
 
-      
+
         }
 
         public void TargetPlanControl()
         {
             HidSystemID.Value = ddlSystem.SelectedValue;
             HideProcessCode.Value = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(), DateTime.Now].Configuration.Element("ProcessCode").Value + "-ZB";
-        
+
 
             B_TargetPlan BTargetPlan = null;
             //判断当前URL是否存在BusinessID
@@ -88,6 +88,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             {
                 hideTargetPlanID.Value = Request["BusinessID"];
                 BTargetPlan = B_TargetplanOperator.Instance.GetTargetPlanByID(Request["BusinessID"].ToGuid());
+                hideVersionName.Value = BTargetPlan.VersionName;
                 ddlSystem.SelectedValue = BTargetPlan.SystemID.ToString();
                 HidSystemID.Value = BTargetPlan.SystemID.ToString();
 
@@ -186,7 +187,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 if (!string.IsNullOrEmpty(Request["BusinessID"]))
                 {
                     var host = new LJTH.BusinessIndicators.Web.AjaxHander.ProcessController();
-                   host.BusinessID = Request["BusinessID"];
+                    host.BusinessID = Request["BusinessID"];
                     if (BPF.Workflow.Client.WFClientSDK.Exist(host.BusinessID))
                     {
                         BPF.Workflow.Object.WorkflowContext wc = BPF.Workflow.Client.WFClientSDK.GetProcess(null, host.BusinessID);
@@ -211,6 +212,11 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         /// <param name="e"></param>
 
         protected void ddlSystem_TextChanged(object sender, EventArgs e)
+        {
+            TargetPlanControl();
+        }
+
+        protected void Btn_VerdionName_Click(object sender, EventArgs e)
         {
             TargetPlanControl();
         }

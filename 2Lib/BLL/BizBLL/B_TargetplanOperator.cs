@@ -159,6 +159,12 @@ namespace LJTH.BusinessIndicators.BLL
             return result;
         }
 
+        public int UpdateVersionDefault(Guid bTargetplanID)
+        {
+            ExceptionHelper.TrueThrow<ArgumentNullException>(bTargetplanID == null? true : false, "Argument Year is Empty");
+            return _bTargetplanAdapter.UpdateVersionDefault(bTargetplanID);
+        }
+
         #endregion
 
         /// <summary>

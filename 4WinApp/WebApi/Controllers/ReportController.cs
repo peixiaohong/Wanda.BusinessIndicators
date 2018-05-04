@@ -243,8 +243,8 @@ namespace WebApi.Controllers
                 CompanyController cc = new CompanyController();
                 List<C_Target> result = cc.GetVerTargetList(SysID, FinYear);
                 TargetController tc = new TargetController();
-                tc.GetSumMonthTargetDetail(SysID, FinYear);
-                return new ResultContext(result);
+                List<TargetDetail> list= tc.GetSumMonthTargetDetail(FinYear,SysID);
+                return new ResultContext(new {head= result,list });
             }
             catch (Exception ex)
             {
@@ -253,6 +253,7 @@ namespace WebApi.Controllers
             }
 
         }
+
         #endregion
         /// <summary>
         /// 获取指标分解审批页面展示数据

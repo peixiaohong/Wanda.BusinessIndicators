@@ -610,7 +610,11 @@ ORDER BY FinMonth";
             
         }
 
-
+        public int DeletePlanDetail(Guid PlanID)
+        {
+            string sql = @"DELETE dbo.A_TargetPlanDetail  WHERE TargetPlanID=@PlanID;";
+            return ExecuteSql(sql, CreateSqlParameter("@PlanID", System.Data.DbType.Guid, PlanID));
+        }
     }
 }
 

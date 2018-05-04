@@ -1,9 +1,12 @@
-﻿/// <reference path="../../BusinessReport/TargetPlanDetailReportedTmpl.html" />
+﻿/// <reference path="../../BusinessReport/TargetPlanDetailReportedTmpl.html" />import { version } from "punycode";
+
+
 //变量（误删）
 var sysID;
 var TargetPlanID;
 
 var TargetPlanDeailData;
+var VersionName="";
 
 //加载模版项
 function loadTmplTargetPlanDetail(selector) {
@@ -91,6 +94,12 @@ $(function setTitle() {
 
 
 function operateNav(sender) {
+    VersionName = $("#txt_VersionName").val();
+    if (VersionName == "") {
+        alert("请输入版本类型");
+        return;
+    }
+    $("#hideVersionName").val(VersionName);
     $("#process").hide();
     switch (sender) {
         case "downLoadTemplate":
@@ -110,7 +119,8 @@ function operateNav(sender) {
             }
 
             break;
-        case "monthReportReady": //保存事件
+        case "monthReportReady": //版本类型
+            $("#VersionName").show();
             $("#UpLoadData,#DownLoadModel,#Down1,#T2").hide();
             setStlye("monthReportSubmitSpan");
             break;
@@ -262,6 +272,11 @@ $(function OnInit() {
     else {
         GetReportTime();
     }
+    VersionName = $("#hideVersionName").val();
+    //获取年份
+    if (VersionName!="") {
+        $("#txt_VersionName").val(VersionName);
+    }
 
     GetTargetPlanDetail();
 });
@@ -312,7 +327,7 @@ function SplitData(result) {
                 $("#importedDataTable2").css("width", "500px");
             }
         } else {
-            loadTmplTargetPlanDetail('#TargetPlanDetailReportTableHeadTemplate').tmpl().appendTo('#TargetPlanDetailHead'); //加载列头
+            loadTmplTargetPlanDetail('#TargetPlanDetailReportTableHeadTemplateforVersion').tmpl().appendTo('#TargetPlanDetailHead'); //加载列头
         }
         if (TargetPlanDeailData[0].ObjValue[0].ObjValue != null) {
             setStlye('monthReportReadySpan');
@@ -393,7 +408,8 @@ function TargetPlanDetailLiaddCss(sender) {
 }
 
 function AddSumHead(result) {
-    var head = " <tr><th style=\"width: 12%\" rowspan=\"2\">月份</th> <th colspan=\"" + result.length + "\">当月数</th> <th colspan=\"" + result.length + "\">累计数</th>";
+    var head = " <tr><th style=\"width: 12%\" rowspan=\"" + (2 + result.length * 2) + "\">" + VersionName + "</th> ";
+    head += " <tr><th style=\"width: 12%\" rowspan=\"2\">月份</th> <th colspan=\"" + result.length + "\">当月数</th> <th colspan=\"" + result.length + "\">累计数</th>";
     head += " </tr><tr id=\"TrTarget\">";
     for (var i = 0; i < result.length; i++) {
         head += "<th>" + result[i].Name + "</th>";
@@ -563,7 +579,7 @@ function BangDetail() {
             else {
                 row += "<td class=\"th_Sub2\" style=\"text-align:right\">--</td>";
 
-            }   
+            }
 
         }
         for (var i = 0; i < TargetList.length; i++) {
