@@ -14,6 +14,7 @@ var MonthsgBig;
 var Year;
 var Month;
 var SystemID;
+var TargetPlanID;
 var IsLatestVersion;
 var IsNewDataIndex = "";
 var MonthReportOrderType = "Detail";
@@ -69,7 +70,6 @@ function Fake() {
 
 //初始化数据方法
 $(document).ready(function () {
-
     InitSysTree(); //初始化数控件数据
 
     if (GetQueryString("sysID") != null) {
@@ -119,7 +119,7 @@ $(document).ready(function () {
             Year = $("#ddlYear").val();
 
     }
-
+    TargetPlanID = $("#ddlVersionType").val();
     //默认选中
     var treeObj = $.fn.zTree.getZTreeObj("SysTree");
     var node = treeObj.getNodeByParam("ID", SystemID);
@@ -287,7 +287,6 @@ function ShowUpdateDetail() {
         $("#submana").hide();
     }
 }
-
 //切换不同的报表
 function ChangeTargetDetail(sender, TabOrSearch) {
     $(".active_sub2").each(function () {
@@ -304,6 +303,7 @@ function ChangeTargetDetail(sender, TabOrSearch) {
     var CTDSystemID = $("#ddlSystem").val();
     var CTDYear = $("#ddlYear").val();
     var CTDMonth = $("#ddlMonth").val();
+    var CTDTargetPlanID = $("#ddlVersionType").val();
     var CTDlatest = false;
     if ($("#chkIsLastestVersion").attr("checked") == "checked") {
         CTDlatest = true;
@@ -316,7 +316,7 @@ function ChangeTargetDetail(sender, TabOrSearch) {
         $('#T2,#T2_1,#T3,#T3_1,#T4,#T5,#T6,#T7,#T8,#T9').hide();
 
         //月度经营报告
-        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDIsLatestVersion, MonthReportData[0], "A") == true) {
+        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDTargetPlanID, CTDIsLatestVersion, MonthReportData[0], "A") == true) {
             getMonthReportSummaryData();
         }
     } else if ($(sender).text() == "完成情况明细" && TabOrSearch != "Search") {
@@ -329,7 +329,7 @@ function ChangeTargetDetail(sender, TabOrSearch) {
 
         //完成情况明细
         GetMonthReportDetailSearchCondition();
-        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDIsLatestVersion, ComplateDetailData[0], "B") == true) {
+        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDTargetPlanID, CTDIsLatestVersion, ComplateDetailData[0], "B") == true) {
             getMonthReprotDetailData();
         }
     }
@@ -343,7 +343,7 @@ function ChangeTargetDetail(sender, TabOrSearch) {
 
         //经营报告明细
         GetMonthReportDetailSearchCondition();
-        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDIsLatestVersion, ManageReportDetailData[0], "B") == true) {
+        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDTargetPlanID, CTDIsLatestVersion, ManageReportDetailData[0], "Z") == true) {
             getManageReprotDetailData();
         }
     }
@@ -354,7 +354,7 @@ function ChangeTargetDetail(sender, TabOrSearch) {
         var tab = $("#Tbody_MissTargetData");
         //FloatHeader(obj, tab, false, "MonthRpt");
         //未完成说明
-        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDIsLatestVersion, CurrentMissTargetData[0], "W") == true) {
+        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDTargetPlanID, CTDIsLatestVersion, CurrentMissTargetData[0], "W") == true) {
             getCurrentMonthReportMissTargetData();
         }
     }
@@ -367,7 +367,7 @@ function ChangeTargetDetail(sender, TabOrSearch) {
 
         FloatHeader(obj, tab, false, "MonthRpt");
         //未完成说明
-        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDIsLatestVersion, MissTargetData[0], "C") == true) {
+        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDTargetPlanID, CTDIsLatestVersion, MissTargetData[0], "C") == true) {
             getMonthReportMissTargetData();
         }
 
@@ -381,7 +381,7 @@ function ChangeTargetDetail(sender, TabOrSearch) {
 
         FloatHeader(obj, tab, false, "MonthRpt");
         //补回情况明细
-        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDIsLatestVersion, ReturnData[0], "D") == true) {
+        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDTargetPlanID, CTDIsLatestVersion, ReturnData[0], "D") == true) {
             getMonthReportReturnData();
         }
 
@@ -392,14 +392,14 @@ function ChangeTargetDetail(sender, TabOrSearch) {
         var obj = $("#ActionHead");
         var tab = $("#Action_Row");
 
-        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDIsLatestVersion, MonthReportActionData[0], "I") == true) {
+        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDTargetPlanID, CTDIsLatestVersion, MonthReportActionData[0], "I") == true) {
             getUpdateDetail();
         }
     }
     else if ($(sender).text() == "其它情况" || TabOrSearch != "Search") {
         $("#T5,#DownExcel").show();
         $("#T1,#T2,#T2_1,#T3,#T3_1,#MonthReportExplainDiv,#ApproveAttachDiv,#T4,#T6,#T7,#T8,#T9").hide();
-        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDIsLatestVersion, MonthReportData[0], "E") == true) {
+        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDTargetPlanID, CTDIsLatestVersion, MonthReportData[0], "E") == true) {
             getDSReportSummaryData();
         }
         var obj = $("#DSMonthReportSummaryHead");
@@ -411,7 +411,7 @@ function ChangeTargetDetail(sender, TabOrSearch) {
         //$("#T1,#T2,#T3,#MonthReportExplainDiv,#ApproveAttachDiv,#T4,#T5,#T7,#T8,#T9").hide();
         $("#T5,#DownExcel").show();
         $("#T1,#T2,#T2_1,#T3,#T3_1,#MonthReportExplainDiv,#ApproveAttachDiv,#T4,#T6,#T7,#T8,#T9").hide();
-        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDIsLatestVersion, ComplateDetailData[0], "F") == true) {
+        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDTargetPlanID, CTDIsLatestVersion, ComplateDetailData[0], "F") == true) {
             getDSReprotDetailData();
         }
         var obj = $("#DSMonthReportSummaryHead");
@@ -421,7 +421,7 @@ function ChangeTargetDetail(sender, TabOrSearch) {
     } else if ($(sender).text() == "补回指标缺口情况" || TabOrSearch == "Search") {
         $("#T7,#DownExcel").show();
         $("#T1,#T2,#T2_1,#T3,#T3_1,#MonthReportExplainDiv,#ApproveAttachDiv,#T4,#T5,#T6,#T8,#T9").hide();
-        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDIsLatestVersion, ReturnData[0], "G") == true) {
+        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDTargetPlanID, CTDIsLatestVersion, ReturnData[0], "G") == true) {
             getDSMonthReportReturnData();
         }
         var obj = $("#DSReturn_Thead");
@@ -429,7 +429,7 @@ function ChangeTargetDetail(sender, TabOrSearch) {
     } else if ($(sender).text() == "新增未完成门店情况" || TabOrSearch == "Search") {
         $("#T8,#DownExcel").show();
         $("#T1,#T2,#T2_1,#T3,#T3_1,#MonthReportExplainDiv,#ApproveAttachDiv,#T4,#T5,#T6,#T7,#T9").hide();
-        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDIsLatestVersion, ReturnData[0], "H") == true) {
+        if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDTargetPlanID, CTDIsLatestVersion, ReturnData[0], "H") == true) {
             getMonthReportAddMissTargetData();
         }
         var obj = $("#DSAdd_Thead");
@@ -454,18 +454,19 @@ function ChangeTargetDetail(sender, TabOrSearch) {
 }
 
 //
-function TransitionCondition(TCYear, TCMonth, TCSystemID, TCIsLatestVersion, resultDate, index) {
+function TransitionCondition(TCYear, TCMonth, TCSystemID, TCTargetPlanID, TCIsLatestVersion, resultDate, index) {
     if (resultDate == undefined) {
         return true;
     }
     if (IsNewDataIndex.indexOf(index) < 0) {
         return true;
     }
-    if (TCYear == Year && TCMonth == Month && TCSystemID == SystemID && TCIsLatestVersion == IsLatestVersion) {
+    //if (TCYear == Year && TCMonth == Month && TCSystemID == SystemID && TCTargetPlanID == TargetPlanID && TCIsLatestVersion == IsLatestVersion) {
+    //    return false;
+    //}
+    else {
         return false;
-    } else {
-        return true;
-    }                                                              
+    }
 
 }
 
@@ -1041,8 +1042,8 @@ function getManageReprotDetailData() {
         }
     });
 
-    if (IsNewDataIndex.indexOf("B") < 0) {
-        IsNewDataIndex = IsNewDataIndex + "B";
+    if (IsNewDataIndex.indexOf("Z") < 0) {
+        IsNewDataIndex = IsNewDataIndex + "Z";
     }
 }
 //填充经营报告明细模板数据
@@ -1207,12 +1208,21 @@ function showManageMonthReprotDetail(companyId, areaName, targetName) {
         if (ManageReportDetailData[i].IsBlendTarget) {
             //1、取指标
             for (var j = 0; j < ManageReportDetailData[i].ObjValue.length; j++) {
-                //targetData.push(ComplateDetailData[i].ObjValue[j]);
-                //2、取指标下的完成与未完成信息
                 if (ManageReportDetailData[i].ObjValue[j].ObjValue[0].ObjValue[0].Mark == "Area") {
                     var areaObj = Enumerable.From(ManageReportDetailData[i].ObjValue[j].ObjValue[0].ObjValue).Where("$.Name=='" + areaName + "'").ToArray();
-                    for (var k = 0; k < areaObj[0].ObjValue.length; k++) {
-                        var companyData = Enumerable.From(areaObj[0].ObjValue[k].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
+                    if (areaObj.length > 0) {
+                        for (var k = 0; k < areaObj[0].ObjValue.length; k++) {
+                            var companyData = Enumerable.From(areaObj[0].ObjValue[k].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
+                            if (companyData.length > 0) {
+                                targetData.push(companyData[0]);
+                            }
+                        }
+                    }
+                }
+                else if (ManageReportDetailData[i].ObjValue[j].ObjValue[0].ObjValue[0].Mark == "LastArea") {
+                    var areaObj = Enumerable.From(ManageReportDetailData[i].ObjValue[j].ObjValue[0].ObjValue).Where("$.Name=='" + areaName + "'").ToArray();
+                    if (areaObj.length > 0) {
+                        var companyData = Enumerable.From(areaObj[0].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
                         if (companyData.length > 0) {
                             targetData.push(companyData[0]);
                         }
@@ -1228,11 +1238,9 @@ function showManageMonthReprotDetail(companyId, areaName, targetName) {
         }
         else {
             //1、取指标
-            for (var j = 0; j < ManageReportDetailData[i].ObjValue.length; j++) {
-                //targetData.push(ComplateDetailData[i].ObjValue[j]);
-                //2、取指标下的完成与未完成信息
-                if (ManageReportDetailData[i].ObjValue[j].ObjValue[0].Mark == "Area") {
-                    var areaObj = Enumerable.From(ManageReportDetailData[i].ObjValue[j].ObjValue).Where("$.Name=='" + areaName + "'").ToArray();
+            if (ManageReportDetailData[i].ObjValue[0].ObjValue[0].Mark == "Area") {
+                var areaObj = Enumerable.From(ManageReportDetailData[i].ObjValue[0].ObjValue).Where("$.Name=='" + areaName + "'").ToArray();
+                if (areaObj.length > 0) {
                     for (var k = 0; k < areaObj[0].ObjValue.length; k++) {
                         var companyData = Enumerable.From(areaObj[0].ObjValue[k].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
                         if (companyData.length > 0) {
@@ -1240,11 +1248,20 @@ function showManageMonthReprotDetail(companyId, areaName, targetName) {
                         }
                     }
                 }
-                else {
-                    var companyData = Enumerable.From(ManageReportDetailData[i].ObjValue[j].ObjValue[0].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
+            }
+            else if (ManageReportDetailData[i].ObjValue[0].ObjValue[0].Mark == "LastArea") {
+                var areaObj = Enumerable.From(ManageReportDetailData[i].ObjValue[0].ObjValue).Where("$.Name=='" + areaName + "'").ToArray();
+                if (areaObj.length > 0) {
+                    var companyData = Enumerable.From(areaObj[0].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
                     if (companyData.length > 0) {
                         targetData.push(companyData[0]);
                     }
+                }
+            }
+            else {
+                var companyData = Enumerable.From(ManageReportDetailData[i].ObjValue[0].ObjValue[0].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
+                if (companyData.length > 0) {
+                    targetData.push(companyData[0]);
                 }
             }
         }
@@ -1863,6 +1880,7 @@ function DownExcelReportList(sender) {
     var SysId = $("#ddlSystem").val();
     var FinYear = $("#ddlYear").val();
     var FinMonth = $("#ddlMonth").val();
+    var TargetPlanID = $("#ddlVersionType").val();
     var latest = false;
     if ($("#chkIsLastestVersion").attr("checked") == "checked") {
         latest = true;
@@ -1873,7 +1891,7 @@ function DownExcelReportList(sender) {
     if ($("#submana").is(":visible")) {
         dataSource = "Progress";
     }
-    window.open("/AjaxHander/DownMonthRptFileList.ashx?Param=" + latest + "&SysId=" + SysId + "&FinYear=" + FinYear + "&FinMonth=" + FinMonth + "&IsLatestVersion=" + IsLatestVersion + "&OrderStr=" + MonthReportOrderType + "&DataSource=" + dataSource + "&IsAll=true");
+    window.open("/AjaxHander/DownMonthRptFileList.ashx?Param=" + latest + "&SysId=" + SysId + "&FinYear=" + FinYear + "&FinMonth=" + FinMonth + "&IsLatestVersion=" + IsLatestVersion + "&OrderStr=" + MonthReportOrderType + "&DataSource=" + dataSource + "&IsAll=true&TargetPlanID=" + TargetPlanID);
 }
 
 function LoadSearchConditions(strConditions) {
@@ -2804,6 +2822,7 @@ function CommonGetTargetVersionType(sid, y, m, lv) {
                     $("#ddlVersionType").append("<option value='" + result[i].ID + "'>" + result[i].VersionName + "</option>");
                 }
             }
+            $("#hidSelectTragetPlanID").text($("#ddlVersionType").val());
         }
     });
 }
