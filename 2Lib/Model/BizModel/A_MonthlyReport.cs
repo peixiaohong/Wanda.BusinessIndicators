@@ -53,9 +53,17 @@ namespace LJTH.BusinessIndicators.Model
         [ORFieldMapping("AreaID")]
         public Guid AreaID { get; set; }
 
+
+
+        /// <summary>
+        /// 指标计划ID
+        /// </summary>
+        [ORFieldMapping("TargetPlanID")]
+        public Guid TargetPlanID { get; set; }
+
         #endregion
 
 
-    } 
+    }
 }
 
