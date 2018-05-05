@@ -113,6 +113,7 @@
     <Content Include="Scripts\BusinessReport\FixedRpt.js" />
     <Content Include="Scripts\BusinessReport\TargetPlanReported.js" />
     <Content Include="Scripts\jquery.base64.js" />
+    <Content Include="Scripts\linq.min.js" />
     <Content Include="Scripts\multiple-select-master\demos\assets\bootstrap\css\bootstrap-theme.css" />
     <Content Include="Scripts\multiple-select-master\demos\assets\bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="Scripts\multiple-select-master\demos\assets\bootstrap\css\bootstrap.css" />
@@ -1965,7 +1966,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>10700</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
