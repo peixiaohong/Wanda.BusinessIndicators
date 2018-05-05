@@ -86,16 +86,20 @@ table.table-default {
   background-size: 12px;
      box-shadow: none;
     font-size: 14px !important;
-    padding-right: 18px;
-    padding-left: 8px;
+    padding-right: 15px;
+    padding-left: 0px;
     height: 30px !important;
     /*line-height: 1.42857143;*/
     border-radius: 4px;
     border: 0 solid !important;
 }
-select::-ms-expand { 
-	display: none; 
-	}
+.select-container .target-select {
+    padding-right: 18px;
+    padding-left: 8px;
+}
+select::-ms-expand {
+    display: none;
+}
 .table-tem,.table-tem-box,.reports-info,.selectTwo{
 	display: none;
 }

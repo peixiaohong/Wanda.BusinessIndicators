@@ -16,23 +16,22 @@
                                         <tr>
                                             <td style="width: 40%">
                                                 <div class="select-container">
-                                                    <select class="form-control select-item mobile-select repeort-select" v-model="systemID" v-on:change="ChangeData()">
-                                                        <option :value="system.ID" v-for="(system,index) in systemAndYearList.System" selected>{{system.SystemName}}</option>
+                                                    <select class="form-control select-item mobile-select repeort-select target-select" v-model="systemID" v-on:change="InitVersion()">
+                                                        <option :value="system.ID" v-for="(system,index) in systemAndYearList.System">{{system.SystemName}}</option>
                                                     </select>
                                                 </div>
                                             </td>
                                             <td style="width: 30%">
                                                 <div class="select-container clear">
-                                                    <select class="form-control select-item mobile-select repeort-select" v-model="yearSelect" v-on:change="ChangeData()">
+                                                    <select class="form-control select-item mobile-select repeort-select target-select" v-model="yearSelect" v-on:change="InitVersion()">
                                                         <option :value="year" v-for="year in systemAndYearList.Year">{{year}}年</option>
                                                     </select>
                                                 </div>
                                             </td>
                                             <td style="width: 30%">
                                                 <div class="select-container">
-                                                    <select id="taskType" class="form-control select-item mobile-select repeort-select">
-                                                        <option value="1">考核版</option>
-                                                        <option value="2">内控版</option>
+                                                    <select class="form-control select-item mobile-select repeort-select target-select" v-model="versionSelect" v-on:change="ChangeData()">
+                                                        <option :value="versionType.ID" v-for="(versionType,index) in versions">{{index}}</option>
                                                     </select>
                                                 </div>
                                             </td>
@@ -43,7 +42,8 @@
                         </li>
 
                         <li class="active">
-                            <h3>指标分解(单位:万元)<span class="collection-updown-icon"></span></h3>
+                            <h3 v-if="!head.length" style="text-align:center">暂无数据...</h3>
+                            <h3 v-if="head.length">指标分解(单位:万元)<span class="collection-updown-icon"></span></h3>
                             <!--<div class="collection-result">-->
                             <div class="target" v-cloak>
                                 <img src="../Assets/images/arrow-right.png" class="target-allow" data-allow="right" v-if="head.length > 3" />
@@ -56,7 +56,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr v-for="(item,index) in list" v-if="index > 0">
+                                                <tr v-for="(item,index) in list">
                                                     <td>{{item.FinMonth}}月</td>
                                                 </tr>
                                             </tbody>
@@ -71,7 +71,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="(item,index) in list" v-if="index > 0">
+                                            <tr v-for="(item,index) in list">
                                                 <td>{{item.FinMonth}}月</td>
                                                 <td v-for="target in item.TargetDetailList">{{ToThousands(target.SumTarget)}}</td>
                                             </tr>

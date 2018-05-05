@@ -13,23 +13,23 @@
                             <table class="from-table" style="line-height: 1.7">
                                 <tbody>
                                     <tr>
-                                        <td style="width: 50%">
+                                        <td style="width: 34%">
                                             <div class="select-container">
-                                                <select class="form-control select-item mobile-select repeort-select" v-model="systemID" v-on:change="ChangeData()">
+                                                <select class="form-control select-item mobile-select repeort-select" v-model="systemID" v-on:change="ChangeVersion()">
                                                     <option :value="system.ID" v-for="(system,index) in systemAndYearList.System" selected>{{system.SystemName}}</option>
                                                 </select>
                                             </div>
                                         </td>
-                                        <td style="width: 30%">
+                                        <td style="width: 25%">
                                             <div class="select-container clear">
-                                                <select class="form-control select-item mobile-select repeort-select" v-model="yearSelect" v-on:change="ChangeData()">
+                                                <select class="form-control select-item mobile-select repeort-select" v-model="yearSelect" v-on:change="ChangeVersion()">
                                                     <option :value="year" v-for="year in systemAndYearList.Year">{{year}}年</option>
                                                 </select>
                                             </div>
                                         </td>
-                                        <td style="width: 25%">
+                                        <td style="width: 16%">
                                             <div class="select-container">
-                                                <select id="taskType" class="form-control select-item mobile-select repeort-select" v-model="monthSelect" v-on:change="ChangeData()">
+                                                <select id="taskType" class="form-control select-item mobile-select repeort-select" v-model="monthSelect" v-on:change="ChangeVersion()">
                                                     <option value="1">1月</option>
                                                     <option value="2">2月</option>
                                                     <option value="3">3月</option>
@@ -42,6 +42,13 @@
                                                     <option value="10">10月</option>
                                                     <option value="11">11月</option>
                                                     <option value="12">12月</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                         <td style="width: 25%">
+                                            <div class="select-container clear">
+                                                <select class="form-control select-item mobile-select repeort-select" v-model="versionSelect" v-on:change="ChangeData()">
+                                                    <option :value="versionType.ID" v-for="(versionType,index) in versions">{{index}}</option>
                                                 </select>
                                             </div>
                                         </td>
@@ -70,7 +77,7 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="item in list.ObjValue">
-                                        <td><a v-bind:href="'/Report/ReportMonthTemplate.aspx?id='+ item.SystemID + '&year=' + yearSelect + '&month=' + monthSelect + '&name=' + encodeURI(item.TargetName)">{{item.TargetName}}</a></td>
+                                        <td><a v-bind:href="'/Report/ReportMonthTemplate.aspx?id='+ item.SystemID + '&versionID='+ versionSelect + '&year=' + yearSelect + '&month=' + monthSelect + '&name=' + encodeURI(item.TargetName)">{{item.TargetName}}</a></td>
                                         <td>{{ToThousands(item.NPlanAmmount)}}</td>
                                         <td>{{ToThousands(item.NActualAmmount)}}</td>
                                         <td>{{item.NActualRate}}</td>
