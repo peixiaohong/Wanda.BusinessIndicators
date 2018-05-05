@@ -50,6 +50,17 @@ namespace LJTH.BusinessIndicators.BLL
         }
 
         /// <summary>
+        /// 获取默认版本
+        /// </summary>
+        /// <param name="SystemID"></param>
+        /// <param name="FinYear"></param>
+        /// <returns></returns>
+        public IList<A_TargetPlan> GetDefaultTargetplanList(Guid SystemID, int FinYear)
+        {
+            IList<A_TargetPlan> result = _aTargetplanAdapter.GetDefaultTargetplanList(SystemID, FinYear);
+            return result;
+        }
+        /// <summary>
         /// 获取多版本混合指标计划
         /// </summary>
         /// <param name="SystemID"></param>

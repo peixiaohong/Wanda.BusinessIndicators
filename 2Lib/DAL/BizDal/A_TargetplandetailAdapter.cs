@@ -66,6 +66,27 @@ namespace LJTH.BusinessIndicators.DAL
             return ExecuteQuery(sql, pFinYear);
         }
 
+
+        /// <summary>
+        /// 获取默认指标详情
+        /// </summary>
+        /// <param name="FinYear"></param>
+        /// <returns></returns>
+        public IList<A_TargetPlanDetail> GetDefaultTargetplandetailList(int FinYear)
+        {
+            string sql = @"SELECT  B.*
+                            FROM    dbo.A_TargetPlan AS A WITH ( NOLOCK )
+                                    INNER JOIN dbo.A_TargetPlanDetail AS B ON B.TargetPlanID = A.ID
+                                                                              AND B.IsDeleted = 0
+                            WHERE   A.FinYear = @FinYear
+                                    AND A.VersionDefault = 1
+                                    AND A.IsDeleted = 0;";
+
+            SqlParameter pFinYear = CreateSqlParameter("@FinYear", System.Data.DbType.Int64, FinYear);
+
+            return ExecuteQuery(sql, pFinYear);
+        }
+
         /// <summary>
         /// 同步数据--从久其系统里得到相关的数据 , 固定了 系统ID，是院线的ID
         /// </summary>
