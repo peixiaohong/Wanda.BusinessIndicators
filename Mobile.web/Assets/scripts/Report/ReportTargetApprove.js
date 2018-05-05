@@ -10,7 +10,7 @@ var Task = {
     },
     BuildData: function (data) {
         model = new Vue({
-            el: '#ApproveContent',
+            el: '#ReportApproveContent',
             data: data,
             created: function () {
                 var self = this;
@@ -44,6 +44,7 @@ var Task = {
         });
     },
     CommonSave: function (action, args, func) {
+        console.log(args);
         var businessID = utils.getQueryString("businessID");
         var url = api_url + 'api/todos/workflow/' + action + '/' + businessID;
         utils.ajax({
@@ -82,31 +83,18 @@ var Task = {
 
         var ShowProecessNodeName = false;
         var url = api_url + 'Report/MonthApprove';
-        //utils.ajax({
-        //    type: 'GET',
-        //    url: url,
-        //    args: {
-        //        "BusinessID": businessId,
-        //        "ProType": proType,
-        //        "IsLatestVersion": true
-        //    },
-        //    success: function (data) {
-        //        //工作流操作开始
-        //        WFOperator_SJSJ.InitSetting({
-        //            UserSelectSetting: {
-        //                 IsNeedHiddenNav: utils.mobileBrower(),
-        //                TopValue: 14
-        //           },
-        //            OnAfterExecute: Task.AfterAction//执行后调用（进行回滚或其它操作（例如跳转））
-        //            , IsView: utils.getQueryString("v").length > 0 ? true : false
-        //        });
-        //        if (businessId != "") {
-        //            WFOperator_SJSJ.GetProcess({ BusinessID: businessId, CheckUserInProcess: utils.getQueryString("v").length > 0 ? false : true }, function () {
-        //                callback(data);
-        //            });
-        //        }
-        //    }
-        //});
+        utils.ajax({
+            type: 'GET',
+            url: url,
+            args: {
+                "BusinessID": businessId,
+                "BacthID": businessId,
+                "ProType": proType
+            },
+            success: function (data) {
+                console.log(data);
+            }
+        });
 
         WFOperator_SJSJ.InitSetting({
             UserSelectSetting: {
@@ -121,21 +109,7 @@ var Task = {
                 //callback(data);
             });
         }
-    
-        //var otherSetting = {
-        //    IsShowContextMenu: true,
-        //    PageContextMenu: true,
-        //    EnableDebug: true,
-        //    ShowNodeName: ShowProecessNodeName == true ? true : false,
-        //    ButtonCssType: "middle",
-        //    OnAfterExecute: afterAction,
-        //    CustomerSceneSetting: {
-        //        ShowCc: false,//是否显示抄送
-        //        ShowFowardButton: false,//是否显示转发按钮
-        //        AlwaysReturnToStart: true
-        //    },
-        //};
-        //bpf_wf_client.initAjaxSetting("#process", false, otherSetting);
-    
+
+
     }
 };
