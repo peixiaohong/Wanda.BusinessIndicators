@@ -48,11 +48,17 @@ var Task = {
     },
     CommonSave: function (action, args, func) {
         var businessID = utils.getQueryString("businessID");
-        var url = api_url + 'api/todos/workflow/' + action + '/' + businessID;
+        var url = api_url + 'Approval/MonthProcessRequest';
         utils.ajax({
             type: 'POST',
             url: url,
-            args: { BusinessID: businessID, TaskReportRemark: model.TaskReportRemark },
+            args: {
+                "BusinessID": businessID,
+                "strProType": utils.getQueryString("ProType"),
+                "ExecuteType": args.ExecuteType,
+                "OperatorType": args.OperatorType,
+                "PrcessStatus": args.PrcessStatus
+            },
             success: function (data) {
                 func();
             }

@@ -29,8 +29,16 @@ var Task = {
 
             },
             mounted: function () {
+                var self = this;
+                self.$nextTick(function () {
+                    var length = self.list[0].TargetDetailList.length + 1;
+                    utils.initTarget(".target-main", ".target-content", ".target-name", ".target-allow", length)
+                })
             },
             methods: {
+                ToThousands: function (num) {
+                    return (parseInt(num) || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
+                },
             }
         });
     },
@@ -45,11 +53,15 @@ var Task = {
     CommonSave: function (action, args, func) {
         console.log(args);
         var businessID = utils.getQueryString("businessID");
-        var url = api_url + 'api/todos/workflow/' + action + '/' + businessID;
+        var url = api_url + 'TargetPlanProcess/TargetPlanProcessRequest';
         utils.ajax({
             type: 'POST',
             url: url,
-            args: { BusinessID: businessID, TaskReportRemark: model.TaskReportRemark },
+            args: {
+                "BusinessID": businessID,
+                "OperatorType": args.OperatorType,
+                "PrcessStatus": args.PrcessStatus
+            },
             success: function (data) {
                 func();
             }
@@ -91,23 +103,25 @@ var Task = {
             },
             success: function (data) {
                 console.log(data);
+                if (data.IsSuccess && data.StatusCode == 200) {
+                    callback(data.Data);
+                    WFOperator_SJSJ.InitSetting({
+                        UserSelectSetting: {
+                            IsNeedHiddenNav: utils.mobileBrower(),
+                            TopValue: 14
+                        },
+                        OnAfterExecute: Task.AfterAction//执行后调用（进行回滚或其它操作（例如跳转））
+                        , IsView: utils.getQueryString("v").length > 0 ? true : false
+                    });
+                    if (businessId != "") {
+                        WFOperator_SJSJ.GetProcess({ BusinessID: businessId, CheckUserInProcess: utils.getQueryString("v").length > 0 ? false : true }, function () {
+                        });
+                    }
+                } else {
+                    utils.alertMessage(res.StatusMessage)
+                }
             }
         });
-
-        WFOperator_SJSJ.InitSetting({
-            UserSelectSetting: {
-                IsNeedHiddenNav: utils.mobileBrower(),
-                TopValue: 14
-            },
-            OnAfterExecute: Task.AfterAction//执行后调用（进行回滚或其它操作（例如跳转））
-            , IsView: utils.getQueryString("v").length > 0 ? true : false
-        });
-        if (businessId != "") {
-            WFOperator_SJSJ.GetProcess({ BusinessID: businessId, CheckUserInProcess: utils.getQueryString("v").length > 0 ? false : true }, function () {
-                //callback(data);
-            });
-        }
-
 
     }
 };

@@ -206,13 +206,37 @@ function GetList(id) {
 
 //设置默认版本
 function updateDefault(id) {
-
+    WebUtil.ajax({
+        async: true,
+        url: "/TargetPlanDetailController/UpdateVersionDefault",
+        args: { TargetPlanID: id, SystemID: SysID, Year: FinYear  },
+        successReturn: function (result) {
+            GetSumList();
+            if (result == "true")
+                alert("变更默认版本成功");
+            else
+                alert("操作失败,请联系管理员！");
+            Fake();
+        }
+    });
 
 }
 
 //禁用
 function IsDeleteA(id) {
-
+    WebUtil.ajax({
+        async: true,
+        url: "/TargetPlanDetailController/DeleteTargetPlan",
+        args: { TargetPlanID: id, SystemID: SysID, Year: FinYear  },
+        successReturn: function (result) {
+            GetSumList();
+            if (result=="true")
+                alert("禁用成功");
+            else
+                alert("操作失败,请联系管理员！");
+            Fake();
+        }
+    });
 
 }
 

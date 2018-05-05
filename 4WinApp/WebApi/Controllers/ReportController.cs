@@ -19,28 +19,8 @@ namespace WebApi.Controllers
     public class ReportController : ApiController
     {
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="strMonthReportID"></param>
-        /// <param name="strSystemId"></param>
-        /// <param name="strProType"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public ResultContext GetReportInstance(string strMonthReportID, string strSystemId, string strProType)
-        {
-            TargetApproveController ta = new TargetApproveController();
-            List<DictionaryVmodel> list = ta.GetReportInstance(strMonthReportID, strSystemId, strProType);
-            return new ResultContext(list);
-        }
-
-        [HttpGet]
-        public ResultContext GetDetailRptDataSource(string rpts, string strCompanyProperty, string strMonthReportOrderType, bool IncludeHaveDetail)
-        {
-            TargetApproveController ta = new TargetApproveController();
-            List<DictionaryVmodel> list = ta.GetDetailRptDataSource(rpts, strCompanyProperty, strMonthReportOrderType, IncludeHaveDetail);
-            return new ResultContext(list);
-        }
+      
+      
         /// <summary>
         /// 获取月报的年与业态列表
         /// </summary>
@@ -66,6 +46,29 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
+        /// 获取月报版本
+        /// </summary>
+        /// <param name="SystemID"></param>
+        /// <param name="Year"></param>
+        /// <param name="Month"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ResultContext GetTargetPlanVersionList(string SystemID, string Year,string Month)
+        {
+            try
+            {
+                MonthlyReportController tc = new MonthlyReportController();
+                List<B_TargetPlan> list = (List<B_TargetPlan>)tc.GetTargetVersionType(SystemID, int.Parse(Year), int.Parse(Month));
+
+                return new ResultContext(list);
+            }
+            catch (Exception ex)
+            {
+                return new ResultContext((int)StatusCodeEnum.isCatch, ex.ToString());
+                throw;
+            }
+        }
+        /// <summary>
         /// 月报
         /// </summary>
         /// <param name="SystemID"></param>
@@ -73,12 +76,12 @@ namespace WebApi.Controllers
         /// <param name="Month"></param>
         /// <returns></returns>
         [HttpGet]
-        public ResultContext GetMonthList(string SystemID, int Year, int Month, bool IsLatestVersion = false, string DataSource = "Draft", bool IsAll = false)
+        public ResultContext GetMonthList(string SystemID, int Year, int Month,string TargetPlanID, bool IsLatestVersion = false, string DataSource = "Draft", bool IsAll = false)
         {
             try
             {
                 MonthlyReportController ms = new MonthlyReportController();
-                List<DictionaryVmodel> listM = ms.GetReportInstance(SystemID, Year, Month, IsLatestVersion, DataSource, IsAll);
+                List<DictionaryVmodel> listM = ms.GetReportInstance(SystemID, Year, Month, TargetPlanID, IsLatestVersion, DataSource, IsAll);
                 Guid result = Guid.Empty;
                 Guid.TryParse(SystemID, out result);
                 if (result == Guid.Empty)
@@ -108,13 +111,13 @@ namespace WebApi.Controllers
         /// <param name="Month"></param>
         /// <returns></returns>
         [HttpGet]
-        public ResultContext GetMonthDetailList(string SystemID, int Year, int Month, string TargetName, bool IncludeHaveDetail, bool IsLatestVersion = false, string DataSource = "Draft", bool IsAll = false)
+        public ResultContext GetMonthDetailList(string SystemID, int Year, int Month, string TargetName,string TargetPlanID, bool IncludeHaveDetail, bool IsLatestVersion = false, string DataSource = "Draft", bool IsAll = false)
         {
             try
             {
                 MonthlyReportController ms = new MonthlyReportController();
                 TargetApproveController ta = new TargetApproveController();
-                List<DictionaryVmodel> li = ms.GetReportInstance(SystemID, Year, Month, IsLatestVersion, DataSource, IsAll);
+                List<DictionaryVmodel> li = ms.GetReportInstance(SystemID, Year, Month, TargetPlanID, IsLatestVersion, DataSource, IsAll);
                 if(li==null||li.Count==0||li[0].ObjValue==null)
                     return new ResultContext();
                 List<DictionaryVmodel> listM = ms.GetDetailRptDataSource((ReportInstance)li[0].ObjValue, "", "Detail", IncludeHaveDetail);
@@ -146,39 +149,10 @@ namespace WebApi.Controllers
         /// <param name="ProType"></param>
         /// <returns></returns>
         [HttpGet]
-        public ResultContext MonthApprove(string BusinessID, string ProType, bool IsLatestVersion)
+        public ResultContext MonthApprove(string strMonthReportID, string strBacthID, string strProType)
         {
-            MonthlyReportController mr = new MonthlyReportController();
-            string SystemID = string.Empty;
-            int Year = 0;
-            int Month = 0;
-            string systemName = string.Empty;
-            if (string.IsNullOrEmpty(ProType))
-            {
-                B_MonthlyReport bmonthReport = B_MonthlyreportOperator.Instance.GetMonthlyreport(Guid.Parse(BusinessID));
-                if (bmonthReport != null)
-                {
-                    SystemID = bmonthReport.SystemID.ToString();
-                    Year = bmonthReport.FinYear;
-                    Month = bmonthReport.FinMonth;
-                    C_System system = StaticResource.Instance.SystemList.Where(p => p.ID == bmonthReport.SystemID).FirstOrDefault();
-                    if (system != null)
-                    {
-                        systemName = system.SystemName;
-                    }
-                }
-            }
-            else
-            {
-                B_SystemBatch _BatchModel = B_SystemBatchOperator.Instance.GetSystemBatch(Guid.Parse(BusinessID));
-                List<V_SubReport> BatchRptList = JsonConvert.DeserializeObject<List<V_SubReport>>(_BatchModel.SubReport);
-
-                C_System c_System = StaticResource.Instance.SystemList.Where(x => x.GroupType == _BatchModel.BatchType).FirstOrDefault();
-                SystemID = c_System.ID.ToString();
-                Month = _BatchModel.FinMonth;
-                Year = _BatchModel.FinYear;
-            }
-            List<DictionaryVmodel> list = mr.GetReportInstance(SystemID, Year, Month, IsLatestVersion);
+            TargetApproveController ta = new TargetApproveController();
+            List<DictionaryVmodel> list =ta.GetReportInstance(strMonthReportID, strBacthID, strProType);
             return new ResultContext(list);
 
         }
@@ -228,7 +202,28 @@ namespace WebApi.Controllers
             }
         }
 
+      /// <summary>
+      /// 获取分解指标版本
+      /// </summary>
+      /// <param name="SystemID"></param>
+      /// <param name="Year"></param>
+      /// <returns></returns>
+        [HttpGet]
+        public ResultContext GetTargetPlanVersionList(string SystemID, string Year)
+        {
+            try
+            {
+                TargetController tc = new TargetController();
+                List<B_TargetPlan> list= tc.GetTargetVersionList(SystemID, Year);
 
+                return new ResultContext(list);
+            }
+            catch (Exception ex)
+            {
+                return new ResultContext((int)StatusCodeEnum.isCatch, ex.ToString());
+                throw;
+            }
+        }
         /// <summary>
         /// 分解指标数据
         /// </summary>
@@ -236,15 +231,15 @@ namespace WebApi.Controllers
         /// <param name="FinYear"></param>
         /// <returns></returns>
         [HttpGet]
-        public ResultContext GetVerTargetList(string SysID, string FinYear)
+        public ResultContext GetTargetPlanList(string SysID, string FinYear,string TargetPlanID)
         {
             try
             {
                 CompanyController cc = new CompanyController();
                 List<C_Target> result = cc.GetVerTargetList(SysID, FinYear);
                 TargetController tc = new TargetController();
-                tc.GetSumMonthTargetDetail(SysID, FinYear);
-                return new ResultContext(result);
+                List<TargetDetail> list= tc.GetSumMonthTargetDetailByTID(TargetPlanID);
+                return new ResultContext(new {head= result,list });
             }
             catch (Exception ex)
             {
@@ -253,6 +248,7 @@ namespace WebApi.Controllers
             }
 
         }
+
         #endregion
         /// <summary>
         /// 获取指标分解审批页面展示数据
@@ -277,14 +273,15 @@ namespace WebApi.Controllers
 
                 }
                 TargetPlanDetailController tp = new TargetPlanDetailController();
-
+                TargetController tc = new TargetController();
+                string title= Year + "年" + system.SystemName + "指标分解";
                 if (system != null && system.Category == 3)
                 {
                     return new ResultContext(tp.GetTargetPlanDetail(SystemID, Year, BusinessID, IsLatestVersion));
                 }
                 else
                 {
-                    return new ResultContext(tp.GetVerTargetList(BusinessID));
+                    return new ResultContext(new { title,systemName= system.SystemName,Year, list = tc.GetSumMonthTargetDetailByTID(BusinessID) });
                 }
             }
             catch (Exception ex)

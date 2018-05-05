@@ -72,6 +72,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         Guid MonthReportID = Guid.Empty;
         int FinYear = 0;
         int FinMonth = 0;
+        string VersionName = string.Empty;
 
         ReportInstance CurrentRpt;
 
@@ -83,6 +84,11 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             if (HttpContext.Current.Request.QueryString["FileType"] != null)
             {
                 FileType = HttpContext.Current.Request.QueryString["FileType"];
+            }
+
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request["FileType"]))
+            {
+                FileType = HttpContext.Current.Request["FileType"];
             }
 
             if (!string.IsNullOrEmpty(HttpContext.Current.Request["SysId"]))
@@ -103,7 +109,14 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             {
                 MonthReportID = Guid.Parse(HttpContext.Current.Request["MonthReportID"]);
             }
-
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request["VersionName"]))
+            {
+                VersionName = HttpContext.Current.Request.QueryString["VersionName"];
+            }
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Form["VersionName"]))
+            {
+                VersionName = HttpContext.Current.Request.Form["VersionName"];
+            }
             //文件相对路径
             string filePath = "UploadFile\\" + WebHelper.DateTimeNow.ToString("yyyy-MM-dd");
             string uploadpath = Path.Combine(UploadFilePath, filePath);
@@ -1026,6 +1039,11 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     ListDV.Add(new DictionaryVmodel("Insert", InsertTargetPlanDetail));
                     ListDV.Add(new DictionaryVmodel("Update", UpdateTargetPlanDetail));
                     AddOrUpdateTargetPlanDeatilData(ListDV);
+                    if (string.IsNullOrEmpty(VersionName))
+                    {
+                        BtargetPlan.VersionName = VersionName;
+                        B_TargetplanOperator.Instance.UpdateTargetplan(BtargetPlan);
+                    }
                 }
                 catch (Exception)
                 {

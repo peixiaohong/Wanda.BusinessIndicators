@@ -12,7 +12,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
     public partial class TargetUpdate : System.Web.UI.Page
     {
         int FinYear;
-         
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -48,19 +48,19 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 ddlSystem.DataBind();
 
                 HidSystemID.Value = ddlSystem.SelectedValue;
-           
+
                 TargetPlanControl();//如果当前月不存在计划指标数据，添加一条数据
             }
 
 
-      
+
         }
 
         public void TargetPlanControl()
         {
             HidSystemID.Value = ddlSystem.SelectedValue;
             HideProcessCode.Value = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(), DateTime.Now].Configuration.Element("ProcessCode").Value + "-ZB";
-        
+
 
             B_TargetPlan BTargetPlan = null;
             //判断当前URL是否存在BusinessID
@@ -81,12 +81,11 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     }
                 }
                 //为当前计划指标（BTargetPlan），插入计划指标明细数据
-                AddTargetPlanDetail(BTargetPlan);
-                hideTargetPlanID.Value = BTargetPlan.ID.ToString();
+               // AddTargetPlanDetail(BTargetPlan);
+                
             }
             else
             {
-                hideTargetPlanID.Value = Request["BusinessID"];
                 BTargetPlan = B_TargetplanOperator.Instance.GetTargetPlanByID(Request["BusinessID"].ToGuid());
                 ddlSystem.SelectedValue = BTargetPlan.SystemID.ToString();
                 HidSystemID.Value = BTargetPlan.SystemID.ToString();
@@ -96,7 +95,8 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 FinYear = BTargetPlan.FinYear;
 
             }
-
+            hideTargetPlanID.Value = BTargetPlan.ID.ToString();
+            hideVersionName.Value= BTargetPlan.VersionName;
             //if (BTargetPlan != null)
             //{
             //    this.Page.ClientScript.RegisterStartupScript(this.GetType(), "_setStlye", "<script>setStlye('missTargetReportSpan,monthReportSpan,monthReportSubmitSpan');</script>");
@@ -112,6 +112,8 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             //bmr.FinMonth = FinMonth;
             _BTargetPlan.FinYear = FinYear;
             _BTargetPlan.Status = 2;
+            _BTargetPlan.VersionStart = DateTime.Now;
+            _BTargetPlan.Versionend = new DateTime(9999);
             _BTargetPlan.WFStatus = "Draft";
             _BTargetPlan.ID = B_TargetplanOperator.Instance.AddTargetplan(_BTargetPlan);
             return _BTargetPlan;
@@ -186,7 +188,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 if (!string.IsNullOrEmpty(Request["BusinessID"]))
                 {
                     var host = new LJTH.BusinessIndicators.Web.AjaxHander.ProcessController();
-                   host.BusinessID = Request["BusinessID"];
+                    host.BusinessID = Request["BusinessID"];
                     if (BPF.Workflow.Client.WFClientSDK.Exist(host.BusinessID))
                     {
                         BPF.Workflow.Object.WorkflowContext wc = BPF.Workflow.Client.WFClientSDK.GetProcess(null, host.BusinessID);

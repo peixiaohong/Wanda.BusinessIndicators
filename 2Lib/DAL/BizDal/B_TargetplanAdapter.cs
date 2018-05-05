@@ -196,6 +196,17 @@ namespace LJTH.BusinessIndicators.DAL
             return ExecuteQuery(sql, CreateSqlParameter("@SystemID", System.Data.DbType.Guid, systemID.ToGuid()), CreateSqlParameter("@FinYear", System.Data.DbType.Int32, year), CreateSqlParameter("@FinMonth", System.Data.DbType.Int32, month));
         }
 
+        public int UpdateVersionDefault(Guid PlanID)
+        {
+            string sql = @"
+DECLARE @SystemID UNIQUEIDENTIFIER;
+DECLARE @Year INT;
+SELECT @SystemID=SystemID,@Year=FinYear FROM [B_TargetPlan] WHERE ID=@PlanID;
+UPDATE [B_TargetPlan] SET VersionDefault=0 WHERE SystemID=@SystemID AND FinYear=@Year;
+UPDATE [B_TargetPlan] SET VersionDefault=1  WHERE ID=@PlanID;";
+            return ExecuteSql(sql, CreateSqlParameter("@PlanID", System.Data.DbType.Guid, PlanID));
+        }
+
     }
 }
 

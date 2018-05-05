@@ -908,7 +908,10 @@ namespace LJTH.BusinessIndicators.BLL
             return _aTargetplandetailAdapter.GetTargetplandetailListBySYNC(FinYear, FinMonth);
         }
 
-
+        public int DeletePlanDetail(Guid PlanID)
+        {
+            return _aTargetplandetailAdapter.DeletePlanDetail(PlanID);
+        }
 
     }
 }

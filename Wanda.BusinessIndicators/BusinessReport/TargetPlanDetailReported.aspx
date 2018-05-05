@@ -29,6 +29,7 @@
                 <asp:DropDownList ID="ddlSystem" ClientIDMode="Static" AutoPostBack="true" OnTextChanged="ddlSystem_TextChanged" runat="server" Style="width: 150px; height: 25px;"></asp:DropDownList>
                 <asp:Label ID="lblName" Style="font-size: 18px; text-indent: 3px; height: 26px; line-height: 26px; border: none; width: 200px;" runat="server" Text="年计划指标上报 "></asp:Label>
                 <asp:HiddenField runat="server" ID="hideTargetPlanID" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hideVersionName" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="HidSystemID" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="HidSystemText" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="HideProcessCode" ClientIDMode="Static" />
@@ -104,9 +105,23 @@
         </div>
         <!--导航条 结束-->
 
-        <!--下载填报模版  开始-->
+
+
+
+
         <div id="weiwancheng1" style="margin-top: 10px;">
-            <div id="DownLoadModel" class="">
+            <!--填写版本类型  开始-->
+            <div id="VersionName" class="">
+                <span class="">
+                    <span style="font-weight: bold; color: #cb5c61;">版本类型：</span>
+                    <span>
+                        <input id="txt_VersionName" type="text" value="" style="width: 180px; margin-right: 15px; height: 25px;"/>
+                    </span>
+                </span>
+            </div>
+            <!--填写版本类型  结束-->
+            <!--下载填报模版  开始-->
+            <div id="DownLoadModel" class="TClassHide">
                 <span style="font-size: 13px; height: 30px; line-height: 60px; display: block; top: -35px; right: 0; z-index: 100; padding-right: 0px;">
                     <div class="uploadify-button " id="Div4" style="height: 25px; line-height: 25px; text-indent: 0px; width: 150px; cursor: pointer;">
                         <span class="uploadify-button-text">
@@ -114,6 +129,7 @@
                     </div>
                 </span>
             </div>
+            <!--下载填报模版  结束-->
             <!--上传数据 Start-->
             <div id="UpLoadData" class="TClassHide">
                 <span class="UpLoadExcelspan">
@@ -122,9 +138,10 @@
                     </span>
                 </span>
             </div>
+            <!--上传数据 End-->
         </div>
-        <!--上传数据 End-->
-        <!--下载填报模版  结束-->
+
+
 
         <!--下载按钮 开始-->
         <div id="Down1" class="TClassHide">
