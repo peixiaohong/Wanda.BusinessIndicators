@@ -128,6 +128,15 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
             return _s_OrganizationalAdapter.GetDataByLoginName(loginName);
         }
 
+        /// <summary>
+        /// 根据ID拿到实体类
+        /// </summary>
+        /// <param name="ID">主键ID</param>
+        /// <returns></returns>
+        public S_Organizational GetDataByID(Guid ID)
+        {
+            return base.GetModelObject(ID);
+        }
 
         #endregion
 
