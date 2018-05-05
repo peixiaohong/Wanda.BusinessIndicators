@@ -11,6 +11,7 @@ var MonthReportActionData = {};
 var Year;
 var Month;
 var SystemID;
+var TargetPlanID;
 var IsLatestVersion;
 var IsNewDataIndex = "";
 var MonthReportOrderType = "Detail";
@@ -110,7 +111,7 @@ $(document).ready(function () {
 
     }
 
-
+    TargetPlanID = $("#ddlVersionType").val();
     //默认选中
     var treeObj = $.fn.zTree.getZTreeObj("SysTree");
     var node = treeObj.getNodeByParam("ID", SystemID);
@@ -131,10 +132,14 @@ $(document).ready(function () {
     GetReportTime();
     SelectMessages();
 
+    FileChangeClick();
 
 });
 
-
+function f_search() {
+    IsNewDataIndex = "";
+    ChangeTargetDetail($(".defaultTarget"), "Tab");
+}
 
 //初始化Ztree的数据
 function InitSysTree() {
@@ -372,9 +377,10 @@ function TransitionCondition(TCYear, TCMonth, TCSystemID, TCIsLatestVersion, res
     if (IsNewDataIndex.indexOf(index) < 0) {
         return true;
     }
-    if (TCYear == Year && TCMonth == Month && TCSystemID == SystemID && TCIsLatestVersion == IsLatestVersion) {
-        return false;
-    } else {
+    //if (TCYear == Year && TCMonth == Month && TCSystemID == SystemID && TCIsLatestVersion == IsLatestVersion) {
+    //    return false;
+    //}
+    else {
         return true;
     }
 
@@ -555,7 +561,7 @@ function getMonthReportSummaryData() {
     WebUtil.ajax({
         async: true,
         url: "/MonthlyReportController/GetReportInstance",
-        args: { SystemID: $("#ddlSystem").val(), Year: $("#ddlYear").val(), Month: $("#ddlMonth").val(), IsLatestVersion: latest, DataSource: dataSource, IsAll: true },
+        args: { SystemID: $("#ddlSystem").val(), Year: $("#ddlYear").val(), Month: $("#ddlMonth").val(), TargetPlanID: $("#ddlVersionType").val(), IsLatestVersion: latest, DataSource: dataSource, IsAll: true },
         successReturn: SplitData
     });
     if (IsNewDataIndex.indexOf("A") < 0) {
@@ -922,6 +928,7 @@ function DownExcelReportList(sender) {
     var SysId = $("#ddlSystem").val();
     var FinYear = $("#ddlYear").val();
     var FinMonth = $("#ddlMonth").val();
+    var TargetPlanID = $("#ddlVersionType").val();
     var latest = false;
     if ($("#chkIsLastestVersion").attr("checked") == "checked") {
         latest = true;
@@ -929,7 +936,8 @@ function DownExcelReportList(sender) {
 
     //这里数据源是审批状态的
     var dataSource = "Progress";
-    window.open("/AjaxHander/DownMonthRptFileList.ashx?SysId=" + SysId + "&FinYear=" + FinYear + "&FinMonth=" + FinMonth + "&IsLatestVersion=" + IsLatestVersion + "&DataSource=" + dataSource);
+
+    window.open("/AjaxHander/DownMonthRptFileList.ashx?SysId=" + SysId + "&FinYear=" + FinYear + "&FinMonth=" + FinMonth + "&IsLatestVersion=" + IsLatestVersion + "&DataSource=" + dataSource + "&IsAll=true&TargetPlanID=" + TargetPlanID);
 }
 
 //用正则表达式获取URL参数
@@ -1134,4 +1142,33 @@ function IsTimeShow(obj) {
     } catch (e) {
         return false;
     }
+}
+//搜索条件年份、月份、是否包含审批中添加切换版本类型事件
+function FileChangeClick() {
+
+    $("#ddlYear").change(function () {
+        CommonGetTargetVersionType($("#ddlSystem").val(), $("#ddlYear").val(), $("#ddlMonth").val(), $("#chkIsLastestVersion").is(":checked"))
+    });
+    $("#ddlMonth").change(function () {
+        CommonGetTargetVersionType($("#ddlSystem").val(), $("#ddlYear").val(), $("#ddlMonth").val(), $("#chkIsLastestVersion").is(":checked"))
+    });
+    $("#chkIsLastestVersion").click(function () {
+        CommonGetTargetVersionType($("#ddlSystem").val(), $("#ddlYear").val(), $("#ddlMonth").val(), $("#chkIsLastestVersion").is(":checked"))
+    });
+}
+function CommonGetTargetVersionType(sid, y, m, lv) {
+    WebUtil.ajax({
+        async: true,
+        url: "/MonthlyReportController/GetTargetVersionType",
+        args: { SystemID: sid, FinYear: y, FinMonth: m, IsLatestVersion: lv },
+        successReturn: function (result) {
+            $("#ddlVersionType").empty();
+            if (result != undefined && result.length > 0) {
+                for (var i = 0; i < result.length; i++) {
+                    $("#ddlVersionType").append("<option value='" + result[i].ID + "'>" + result[i].VersionName + "</option>");
+                }
+            }
+            $("#hidSelectTragetPlanID").text($("#ddlVersionType").val());
+        }
+    });
 }

@@ -1,9 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterApprove.Master" AutoEventWireup="true" CodeBehind="ReportMonthApprove.aspx.cs" Inherits="Mobile.web.Report.ReportMonthApprove" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterApprove.Master" AutoEventWireup="true" CodeBehind="ReportTargetApprove.aspx.cs" Inherits="Mobile.web.Report.ReportTargetApprove" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-        <script src="<%=ResolveUrl("~/Assets/scripts/Report/ReportMonthApprove.js") %>"></script>
+      <script src="<%=ResolveUrl("~/Assets/scripts/Report/ReportTargetApprove.js") %>"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-        <section id="MonthApproveContent">
+      <section id="ReportApproveContent">
         <div class="container" style="padding-top:0;">
             <div class="row">
 

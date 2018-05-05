@@ -311,6 +311,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         /// <param name="IsLatestVersion"></param>
         private void GetTargetVersionType(string sid, int year, int month, bool IsLatestVersion)
         {
+            ddlVersionType.Items.Clear();
             //是否查询审批中数据
             if (IsLatestVersion)
             {

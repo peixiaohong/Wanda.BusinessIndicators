@@ -1728,7 +1728,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
             //获取当年指标计划ID
             Guid targetPlanID = Guid.Empty;
-            List<A_TargetPlan> CurrentYearTargetPlan = LJTH.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetTargetplanList(SystemID, FinYear).ToList();
+            //List<A_TargetPlan> CurrentYearTargetPlan = LJTH.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetTargetplanList(SystemID, FinYear).ToList();
+            List<A_TargetPlan> CurrentYearTargetPlan = LJTH.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetDefaultTargetplanList(SystemID, FinYear).ToList();
             if (CurrentYearTargetPlan.Count > 0)
             {
                 targetPlanID = CurrentYearTargetPlan[0].ID;
@@ -1803,6 +1804,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             if (bmr != null && lstInsertMonthReportDetail.Count > 0)
             {
                 bmr.Status = 5;
+                bmr.TargetPlanID = lstInsertMonthReportDetail.FirstOrDefault().TargetPlanID;
                 B_MonthlyreportOperator.Instance.UpdateMonthlyreport(bmr);
             }
 

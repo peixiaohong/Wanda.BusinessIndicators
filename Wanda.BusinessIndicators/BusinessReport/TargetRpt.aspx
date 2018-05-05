@@ -59,8 +59,7 @@
                                 <asp:CheckBox ID="chkIsLastestVersion" ClientIDMode="Static" runat="server" Text="包含审批中" />
                             </td>
                             <th>
-                                <a class="btn_search" id="ContentPlaceHolder1_LinkButton1" href="#" runat="server" onserverclick="ContentPlaceHolder1_LinkButton1_ServerClick"><span><i class="fa fa-search"></i>&nbsp;查询</span></a>
-
+                                <a class="btn_search" id="ContentPlaceHolder1_LinkButton1" href="javascript:void(0)" onclick="f_search()" ><span><i class="fa fa-search"></i>&nbsp;查询</span></a>
                             </th>
                         </tr>
                     </tbody>
@@ -96,7 +95,7 @@
         <div class="margin_t10">
             <div class="tabs_m">
                 <ul id="Ul3">
-                    <li class="selected m_1"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>月度经营报告</span></a></li>
+                    <li class="selected m_1"><a class="active_sub2 defaultTarget" onclick="ChangeTargetDetail(this,'Tab');"><span>月度经营报告</span></a></li>
                     <li class="jybgmx hide"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>经营报告明细</span></a></li>
                     <li><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>完成情况明细</span></a></li>
                     <li><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>当月未完成</span></a></li>

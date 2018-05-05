@@ -55,6 +55,28 @@ namespace LJTH.BusinessIndicators.DAL
 
 
         /// <summary>
+        /// 获取默认版本
+        /// </summary>
+        /// <param name="SystemID"></param>
+        /// <param name="FinYear"></param>
+        /// <returns></returns>
+        public IList<A_TargetPlan> GetDefaultTargetplanList(Guid SystemID, int FinYear)
+        {
+            string sql = ORMapping.GetSelectSql<A_TargetPlan>(TSqlBuilder.Instance);
+
+            sql += "WHERE " + base.NotDeleted;
+            sql += " AND Systemid=@SystemID ";
+            sql += " AND FinYear=@FinYear ";
+            sql += " AND VersionDefault=1 ";
+
+            SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
+            SqlParameter pFinYear = CreateSqlParameter("@FinYear", System.Data.DbType.Int32, FinYear);
+
+            return ExecuteQuery(sql, pSystemID, pFinYear);
+        }
+
+
+        /// <summary>
         /// 获取多版本混合指标计划
         /// </summary>
         /// <param name="SystemID"></param>

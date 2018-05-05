@@ -55,12 +55,12 @@ namespace LJTH.BusinessIndicators.BLL
             _CompanyList = null;
             _TargetList = new Dictionary<Guid, List<C_Target>>();
             _KpiList = new Dictionary<int, List<C_TargetKpi>>();
-            _TargetList = null;
             _companyList = null;
             _ExceptionTargetList = null;
             _OrgList = new Dictionary<Guid, List<S_Organizational>>();
             _ReportDateTime = null;
             _TargetPlanDetail = new Dictionary<int, List<A_TargetPlanDetail>>();
+            _DefaultTargetPlanDetail = new Dictionary<int, List<A_TargetPlanDetail>>();
         }
 
         public C_System this[Guid Key, DateTime CurrentDate]
@@ -246,6 +246,12 @@ namespace LJTH.BusinessIndicators.BLL
         //private List<B_TargetPlan> _TargetPlan = new List<B_TargetPlan>();
 
         private Dictionary<int, List<A_TargetPlanDetail>> _TargetPlanDetail = new Dictionary<int, List<A_TargetPlanDetail>>();
+
+
+        /// <summary>
+        /// 默认指标计划详情
+        /// </summary>
+        private Dictionary<int, List<A_TargetPlanDetail>> _DefaultTargetPlanDetail = new Dictionary<int, List<A_TargetPlanDetail>>();
         /// <summary>
         /// 获取计划指标
         /// </summary>
@@ -267,6 +273,22 @@ namespace LJTH.BusinessIndicators.BLL
             return _TargetPlanDetail[FinYear].FindAll(P => P.SystemID == SystemID && P.FinYear == FinYear && P.FinMonth == FinMonth);
         }
 
+
+        public List<A_TargetPlanDetail> GetDefaultTargetPlanList(Guid SystemID, int FinYear, int FinMonth)
+        {
+            if (_DefaultTargetPlanDetail == null || _DefaultTargetPlanDetail.Count <= 0 || !_DefaultTargetPlanDetail.Keys.Contains(FinYear))
+            {
+                var list = A_TargetplandetailOperator.Instance.GetDefaultTargetplandetailList(FinYear).ToList();
+                _DefaultTargetPlanDetail[FinYear] = list;
+            }
+            //if (!TargetPlanList.Exists(P => P.FinYear == FinYear && P.SystemID == SystemID))
+            //{
+            //    TargetPlanList.AddRange(A_TargetplandetailOperator.Instance.GetTargetplandetailList(SystemID, FinYear).ToList());
+            //}
+            return _DefaultTargetPlanDetail[FinYear].FindAll(P => P.SystemID == SystemID && P.FinYear == FinYear && P.FinMonth == FinMonth);
+        }
+
+
         /// <summary>
         /// 获取计划指标
         /// </summary>
@@ -281,6 +303,22 @@ namespace LJTH.BusinessIndicators.BLL
                 _TargetPlanDetail[FinYear] = list;
             }
             return _TargetPlanDetail[FinYear].FindAll(P => P.SystemID == SystemID);
+        }
+
+        /// <summary>
+        /// 获取计划指标
+        /// </summary>
+        /// <param name="SystemID">系统ID</param>
+        /// <param name="FinYear">年</param>
+        /// <returns>计划指标</returns>
+        public List<A_TargetPlanDetail> GetDefaultTargetPlanList(Guid SystemID, int FinYear)
+        {
+            if (_DefaultTargetPlanDetail == null || _DefaultTargetPlanDetail.Count <= 0 || !_DefaultTargetPlanDetail.Keys.Contains(FinYear))
+            {
+                var list = A_TargetplandetailOperator.Instance.GetDefaultTargetplandetailList(FinYear).ToList();
+                _DefaultTargetPlanDetail[FinYear] = list;
+            }
+            return _DefaultTargetPlanDetail[FinYear].FindAll(P => P.SystemID == SystemID);
         }
 
         private List<C_ExceptionTarget> ExceptionTargetList
