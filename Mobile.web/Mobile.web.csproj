@@ -115,6 +115,7 @@
     <Content Include="Report\ReportList.aspx" />
     <Content Include="Report\ReportMonthApprove.aspx" />
     <Content Include="Report\ReportTarget.aspx" />
+    <Content Include="Report\ReportTargetApprove.aspx" />
     <Content Include="SiteMasterPage\bsCtrl.ascx" />
     <Content Include="SiteMasterPage\MainMasterPage.Master" />
     <Content Include="SiteMasterPage\MainMasterApprove.Master" />
@@ -202,6 +203,13 @@
     </Compile>
     <Compile Include="Report\ReportTarget.aspx.designer.cs">
       <DependentUpon>ReportTarget.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\ReportTargetApprove.aspx.cs">
+      <DependentUpon>ReportTargetApprove.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\ReportTargetApprove.aspx.designer.cs">
+      <DependentUpon>ReportTargetApprove.aspx</DependentUpon>
     </Compile>
     <Compile Include="SiteMasterPage\bsCtrl.ascx.cs">
       <DependentUpon>bsCtrl.ascx</DependentUpon>

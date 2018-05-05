@@ -83,6 +83,7 @@
                     success: function (res) {
                         if (res.IsSuccess && res.StatusCode == 200) {
                             if (res.Data.length) {
+                                console.log(res);
                                 self.versions = res.Data;
                                 self.versionSelect = self.versions[0].ID;
                             }                           
