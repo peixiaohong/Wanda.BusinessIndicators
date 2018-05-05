@@ -81,14 +81,12 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     }
                 }
                 //为当前计划指标（BTargetPlan），插入计划指标明细数据
-                AddTargetPlanDetail(BTargetPlan);
-                hideTargetPlanID.Value = BTargetPlan.ID.ToString();
+               // AddTargetPlanDetail(BTargetPlan);
+                
             }
             else
             {
-                hideTargetPlanID.Value = Request["BusinessID"];
                 BTargetPlan = B_TargetplanOperator.Instance.GetTargetPlanByID(Request["BusinessID"].ToGuid());
-                hideVersionName.Value = BTargetPlan.VersionName;
                 ddlSystem.SelectedValue = BTargetPlan.SystemID.ToString();
                 HidSystemID.Value = BTargetPlan.SystemID.ToString();
 
@@ -97,7 +95,8 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 FinYear = BTargetPlan.FinYear;
 
             }
-
+            hideTargetPlanID.Value = BTargetPlan.ID.ToString();
+            hideVersionName.Value= BTargetPlan.VersionName;
             //if (BTargetPlan != null)
             //{
             //    this.Page.ClientScript.RegisterStartupScript(this.GetType(), "_setStlye", "<script>setStlye('missTargetReportSpan,monthReportSpan,monthReportSubmitSpan');</script>");
@@ -113,6 +112,8 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             //bmr.FinMonth = FinMonth;
             _BTargetPlan.FinYear = FinYear;
             _BTargetPlan.Status = 2;
+            _BTargetPlan.VersionStart = DateTime.Now;
+            _BTargetPlan.Versionend = new DateTime(9999);
             _BTargetPlan.WFStatus = "Draft";
             _BTargetPlan.ID = B_TargetplanOperator.Instance.AddTargetplan(_BTargetPlan);
             return _BTargetPlan;
@@ -212,11 +213,6 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         /// <param name="e"></param>
 
         protected void ddlSystem_TextChanged(object sender, EventArgs e)
-        {
-            TargetPlanControl();
-        }
-
-        protected void Btn_VerdionName_Click(object sender, EventArgs e)
         {
             TargetPlanControl();
         }

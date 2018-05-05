@@ -117,7 +117,6 @@
                     <span>
                         <input id="txt_VersionName" type="text" value="" style="width: 180px; margin-right: 15px; height: 25px;"/>
                     </span>
-                    <asp:Button ID="Btn_VerdionName" runat="server" Text="确定" OnClick="Btn_VerdionName_Click" />
                 </span>
             </div>
             <!--填写版本类型  结束-->

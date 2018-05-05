@@ -128,6 +128,16 @@ namespace LJTH.BusinessIndicators.BLL
             return _aTargetplanAdapter.GetTargetVersionType(systemID,year,month);
         }
 
+        /// <summary>
+        /// 获取已审批通过的分解指标版本类型集合
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
+        public IList<A_TargetPlan> GetTargetVersionType(string systemID, int year)
+        {
+            return _aTargetplanAdapter.GetTargetVersionType(systemID, year);
+        }
 
         public int DeletePlan(Guid PlanID)
         {

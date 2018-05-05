@@ -668,7 +668,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         {
             List<B_TargetPlan> result = new List<B_TargetPlan>();
             result = B_TargetplanOperator.Instance.GetTargetPlanByApprovedAndApproved(Guid.Parse(SystemID), int.Parse(Year)).ToList();
-            List<A_TargetPlanDetail> targetList = A_TargetplandetailOperator.Instance.GetTargetplandetailList(SystemID.ToGuid(), int.Parse(Year)).ToList();
+            List<A_TargetPlan> targetList = A_TargetplanOperator.Instance.GetTargetVersionType(SystemID, int.Parse(Year)).ToList();
             //Guid id = Guid.Empty;
             //if (targetList.Count > 0)
             //{
@@ -691,6 +691,20 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     result[i].IfCurrentTarget = true;
                 }
             }
+            return result;
+        }
+
+        /// <summary>
+        /// 获取版本列表
+        /// </summary>
+        /// <param name="SystemID"></param>
+        /// <param name="Year"></param>
+        /// <returns></returns>
+        [LibAction]
+        public List<B_TargetPlan> GetTargetVersionList(string SystemID, string Year)
+        {
+            List<B_TargetPlan> result = new List<B_TargetPlan>();
+            result = B_TargetplanOperator.Instance.GetTargetPlanByApprovedAndApproved(Guid.Parse(SystemID), int.Parse(Year)).ToList();
             return result;
         }
         [LibAction]
@@ -1196,6 +1210,40 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             return list;
         }
 
+        /// <summary>
+        /// 验证多版本指标分解
+        /// </summary>
+        /// <param name="SysID"></param>
+        /// <param name="Year"></param>
+        /// <param name="PlanID"></param>
+        /// <param name="VersionName"></param>
+        /// <returns></returns>
+        [LibAction]
+        public object isCheckPlan(string SysID,string Year,string PlanID,string VersionName)
+        {
+            bool success = true;
+            IList<B_TargetPlan> List = new List<B_TargetPlan>();
+            List = B_TargetplanOperator.Instance.GetTargetPlanByApprovedList(Guid.Parse(SysID), int.Parse(Year));
+            if (List.Where(x => (x.WFStatus == "Progress" || x.WFStatus == "Approved") && x.VersionName == VersionName).Count() > 0)
+            {
+                success = false;
+            }
+            else if (List.Where(x => (x.WFStatus == "Progress" || x.WFStatus == "Approved") && x.ID == PlanID.ToGuid()).Count() > 0)
+            {
+                success = false;
+                B_TargetPlan _BTargetPlan = new B_TargetPlan();
+                _BTargetPlan.SystemID = Guid.Parse(SysID);
+                //bmr.FinMonth = FinMonth;
+                _BTargetPlan.FinYear = int.Parse(Year);
+                _BTargetPlan.Status = 2;
+                _BTargetPlan.VersionStart = DateTime.Now;
+                _BTargetPlan.Versionend = new DateTime(9999);
+                _BTargetPlan.WFStatus = "Draft";
+                PlanID = B_TargetplanOperator.Instance.AddTargetplan(_BTargetPlan).ToString();
+
+            }
+            return new { success, TargetPlanID= PlanID };
+        }
     }
 
 

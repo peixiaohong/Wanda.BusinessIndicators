@@ -1,4 +1,4 @@
-﻿/// <reference path="../../BusinessReport/TargetPlanDetailReportedTmpl.html" />import { version } from "punycode";
+﻿/// <reference path="../../BusinessReport/TargetPlanDetailReportedTmpl.html" />
 
 
 //变量（误删）
@@ -6,7 +6,7 @@ var sysID;
 var TargetPlanID;
 
 var TargetPlanDeailData;
-var VersionName="";
+var VersionName = "";
 
 //加载模版项
 function loadTmplTargetPlanDetail(selector) {
@@ -66,7 +66,7 @@ function setArrow_nLeft(sender) {
 function setStlye(sender) {
     var val = sender.split(",");
     for (var i = 0; i < val.length; i++) {
-        if (val[i] == 'downLoadTemplateSpan') {
+        if (val[i] == 'monthReportReady') {
             var s = val[i].substring(0, val[i].length - 4)
             $("#" + s).addClass("current");
         }
@@ -89,14 +89,15 @@ $(function setTitle() {
         }
 
     })
-    setStlye('downLoadTemplateSpan,dataUploadSpan');
+    setStlye('monthReportReadySpan,downLoadTemplateSpan');
 });
 
 
 function operateNav(sender) {
     VersionName = $("#txt_VersionName").val();
-    if (VersionName == "") {
+    if (VersionName == "" && sender != "monthReportReady") {
         alert("请输入版本类型");
+        ClickItems("monthReportReady");
         return;
     }
     $("#hideVersionName").val(VersionName);
@@ -104,33 +105,39 @@ function operateNav(sender) {
     switch (sender) {
         case "downLoadTemplate":
             $("#DownLoadModel").show();
-            $("#UpLoadData,#Down1,#T2").hide();
+            $("#UpLoadData,#Down1,#T2,#VersionName").hide();
+            if (isCheckPlan())
+                setStlye("dataUploadSpan");
             break;
         case "dataUpload":
-            if (TargetPlanDeailData[0].ObjValue[0].ObjValue.length != 0) {
-                $("#Down1,#T2").show();
-                $("#DownLoadModel,#UpLoadData").hide();
-                var obj = $("#TargetPlanDetailHead");
-                var tab = $("#rows");
-                FloatHeader(obj, tab);
-            } else {
-                $("#UpLoadData").show();
-                $("#DownLoadModel,#Down1,#T2").hide();
+            if (isCheckPlan()) {
+                if (TargetPlanDeailData[0].ObjValue[0].ObjValue.length != 0) {
+                    $("#Down1,#T2").show();
+                    $("#DownLoadModel,#UpLoadData,#VersionName").hide();
+                    var obj = $("#TargetPlanDetailHead");
+                    var tab = $("#rows");
+                    FloatHeader(obj, tab);
+                } else {
+                    $("#UpLoadData").show();
+                    $("#DownLoadModel,#Down1,#T2,#VersionName").hide();
+                }
             }
 
             break;
         case "monthReportReady": //版本类型
             $("#VersionName").show();
             $("#UpLoadData,#DownLoadModel,#Down1,#T2").hide();
-            setStlye("monthReportSubmitSpan");
             break;
 
         case "monthReportSubmit":
-            $("#process").show();
-            //$.blockUI({ message: "<div style='width:200px'><img src='../../images/ajax-loader.gif' alt='waiting'><span style='font-size:20px;padding-left:20px;color:#3f3f3f'>数据请求中...</span></div>" });
-            //后续加上 BusinessID
-            GetProcess($("#HideProcessCode").val(), $("#hideTargetPlanID").val());
-            $("#T2,#UpLoadDataDiv,#DownLoadModel,#Down1").hide();
+            if (isCheckPlan()) {
+                $("#process").show();
+                //$.blockUI({ message: "<div style='width:200px'><img src='../../images/ajax-loader.gif' alt='waiting'><span style='font-size:20px;padding-left:20px;color:#3f3f3f'>数据请求中...</span></div>" });
+                //后续加上 BusinessID
+                GetProcess($("#HideProcessCode").val(), $("#hideTargetPlanID").val());
+                $("#T2,#UpLoadDataDiv,#DownLoadModel,#Down1,#VersionName").hide();
+            }
+
             break;
 
     }
@@ -168,7 +175,26 @@ $(function () {
     bpf_wf_client.initAjaxSetting("process", false, otherSetting);
 })
 
-
+function isCheckPlan() {
+    var ret = true;
+    WebUtil.ajax({
+        async: false,
+        url: "/TargetController/isCheckPlan",
+        args: { SysID: sysID, Year: $("#HideFinYear").val(), PlanID: TargetPlanID, VersionName: VersionName },
+        successReturn: function (resultData) {
+            $.unblockUI();
+            if (!resultData.success) {
+                alert('当前版本已纯在审批版本，请勿重复操作！');
+                TargetPlanID = resultData.TargetPlanID;
+                //$("#txt_VersionName").val("");
+                ClickItems("monthReportReady");
+                GetTargetPlanDetail();
+                ret = false;
+            }
+        }
+    });
+    return ret;
+}
 
 function GetProcess(key, instanceID) {
     FlowCode = key;
@@ -274,9 +300,8 @@ $(function OnInit() {
     }
     VersionName = $("#hideVersionName").val();
     //获取年份
-    if (VersionName!="") {
-        $("#txt_VersionName").val(VersionName);
-    }
+
+    $("#txt_VersionName").val(VersionName);
 
     GetTargetPlanDetail();
 });
@@ -329,8 +354,8 @@ function SplitData(result) {
         } else {
             loadTmplTargetPlanDetail('#TargetPlanDetailReportTableHeadTemplateforVersion').tmpl().appendTo('#TargetPlanDetailHead'); //加载列头
         }
-        if (TargetPlanDeailData[0].ObjValue[0].ObjValue != null) {
-            setStlye('monthReportReadySpan');
+        if (TargetPlanDeailData[0].ObjValue[0].ObjValue.length != 0) {
+            setStlye('dataUploadSpan,monthReportSubmitSpan');
             if (SystemModel.Category != 3) {
                 var heji = " <li class=\"sd\"><a class=\"active2\" onclick=\"TargetPlanDetailLiaddCss(this);\">汇总</a></li>";
                 $("#Ul4").html(heji);
@@ -408,7 +433,7 @@ function TargetPlanDetailLiaddCss(sender) {
 }
 
 function AddSumHead(result) {
-    var head = " <tr><th style=\"width: 12%\" rowspan=\"" + (2 + result.length * 2) + "\">" + VersionName + "</th> ";
+    var head = " <tr><th  colspan=\"" + (1 + result.length * 2) + "\">" + VersionName + "</th></tr> ";
     head += " <tr><th style=\"width: 12%\" rowspan=\"2\">月份</th> <th colspan=\"" + result.length + "\">当月数</th> <th colspan=\"" + result.length + "\">累计数</th>";
     head += " </tr><tr id=\"TrTarget\">";
     for (var i = 0; i < result.length; i++) {
@@ -438,14 +463,15 @@ $(function () {
         'fileSizeLimit': '10240',
         //swf文件路径
         'swf': '../Scripts/UpLoad/uploadify.swf',
+        'formData': { 'FileType': 'UpTargetPlanDetail', 'SysId': sysID, 'FinYear': FinYear, 'MonthReportID': TargetPlanID },
         //后台处理页面
-        'uploader': '/AjaxHander/UpLoadMonthTargetDetail.ashx?FileType=UpTargetPlanDetail&SysId=' + sysID + "&FinYear=" + FinYear + "&MonthReportID=" + TargetPlanID,
+        'uploader': '/AjaxHander/UpLoadMonthTargetDetail.ashx',
         'onUploadSuccess': function (file, data, response) {
             error = data;
             if (data == "" || data == null) {
 
                 GetTargetPlanDetail();
-                setStlye('monthReportReadySpan');
+                setStlye('monthReportSubmitSpan');
                 $("#Down1,#T2").show();
                 $("#DownLoadModel,#UpLoadData").hide();
             } else {
@@ -459,6 +485,9 @@ $(function () {
         },
         'onUploadError': function (file, data, response) {
             alert("上传失败，程序出错！");
+        },
+        'onUploadStart': function (file) {
+            $("#file_upload").uploadify("settings", "formData", { 'VersionName': $("#hideVersionName").val() })
         }
     });
 });

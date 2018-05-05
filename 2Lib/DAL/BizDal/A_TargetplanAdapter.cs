@@ -119,6 +119,21 @@ namespace LJTH.BusinessIndicators.DAL
             return ExecuteQuery(sql, CreateSqlParameter("@SystemID", System.Data.DbType.Guid, systemID.ToGuid()), CreateSqlParameter("@FinYear", System.Data.DbType.Int32, year), CreateSqlParameter("@FinMonth", System.Data.DbType.Int32, month));
         }
 
+
+         /// <summary>
+        /// 获取已审批通过的分解指标版本类型集合
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
+        public IList<A_TargetPlan> GetTargetVersionType(string systemID, int year)
+        {
+            string sql = @"SELECT  *  FROM A_TargetPlan 
+            WHERE SystemID =@SystemID AND FinYear =@FinYear  AND IsDeleted = 0 ";
+            sql += " ORDER BY VersionDefault desc, CreateTime DESC";
+            return ExecuteQuery(sql, CreateSqlParameter("@SystemID", System.Data.DbType.Guid, systemID.ToGuid()), CreateSqlParameter("@FinYear", System.Data.DbType.Int32, year));
+        }
+
         public int DeletePlan(Guid PlanID)
         {
             string sql = @"DELETE dbo.A_TargetPlan  WHERE ID=@PlanID;";

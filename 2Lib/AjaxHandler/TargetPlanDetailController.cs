@@ -131,13 +131,18 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             Guid result = Guid.Empty;
             using (TransactionScope scope = TransactionScopeFactory.Create())
             {
+                //删除a表数据，物理删除
                 A_TargetplanOperator.Instance.DeletePlan(Guid.Parse(ID));
                 A_TargetplandetailOperator.Instance.DeletePlanDetail(Guid.Parse(ID));
+                //改b表版本结束时间
+                B_TargetPlan BtargetPlan = B_TargetplanOperator.Instance.GetTargetplan(Guid.Parse(ID));
+                BtargetPlan.Versionend = DateTime.Now;
+                B_TargetplanOperator.Instance.UpdateTargetplan(BtargetPlan);
 
                 #region 在日志表中添加该次操作的日志
 
-              
-                    B_TargetPlanAction TargetAction = new B_TargetPlanAction()
+
+                B_TargetPlanAction TargetAction = new B_TargetPlanAction()
                     {
                         TargetPlanID = ID.ToGuid(),
                         SystemID = SystemID.ToGuid(),
