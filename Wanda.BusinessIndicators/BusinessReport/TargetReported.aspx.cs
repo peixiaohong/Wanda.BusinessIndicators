@@ -386,6 +386,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 BatchMonthlyReport.FinMonth = FinMonth;
                 BatchMonthlyReport.FinYear = FinYear;
                 BatchMonthlyReport.Status = 2;
+                BatchMonthlyReport.DefaultVersionStatus = 1;
                 BatchMonthlyReport.WFStatus = "Draft";
                 BatchMonthlyReport.SystemBatchID = BatchModel.ID;
                 BatchMonthlyReport.CreateTime = DateTime.Now;
@@ -425,6 +426,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             bmr.FinYear = FinYear;
             bmr.Status = 2;
             bmr.WFStatus = "Draft";
+            bmr.DefaultVersionStatus = 1;
             bmr.CreateTime = DateTime.Now;
             bmr.ID = B_MonthlyreportOperator.Instance.AddMonthlyreport(bmr);
             return bmr;
