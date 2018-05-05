@@ -1,12 +1,11 @@
 ﻿$(function () {
     var businessId = utils.getQueryString("businessID");
-    var proType = utils.getQueryString("ProType");
-    Task.Init(businessId, proType);
+    Task.Init(businessId);
 });
 var model = null;
 var Task = {
-    Init: function (businessId, proType) {
-        Task.LoadData(businessId, proType, Task.BuildData);
+    Init: function (businessId) {
+        Task.LoadData(businessId, Task.BuildData);
     },
     BuildData: function (data) {
         model = new Vue({
@@ -79,17 +78,16 @@ var Task = {
                 Redirect: function (args) { setTimeout(function () { location.href = '/todoListMobile.html'; }, 1000) }
             });
     },
-    LoadData: function (businessId, proType, callback) {
+    LoadData: function (businessId, callback) {
 
         var ShowProecessNodeName = false;
-        var url = api_url + 'Report/MonthApprove';
+        var url = api_url + 'Report/TargetPlanApprove';
         utils.ajax({
             type: 'GET',
             url: url,
             args: {
                 "BusinessID": businessId,
-                "BacthID": businessId,
-                "ProType": proType
+                "IsLatestVersion": true,
             },
             success: function (data) {
                 console.log(data);

@@ -13,7 +13,7 @@
                             <table class="from-table" style="line-height: 1.7">
                                 <tbody>
                                     <tr>
-                                        <td style="width: 34%">
+                                        <td style="width: 40%">
                                             <div class="select-container">
                                                 <select class="form-control select-item mobile-select repeort-select" v-model="systemID" v-on:change="ChangeVersion()">
                                                     <option :value="system.ID" v-for="(system,index) in systemAndYearList.System" selected>{{system.SystemName}}</option>
@@ -27,7 +27,7 @@
                                                 </select>
                                             </div>
                                         </td>
-                                        <td style="width: 16%">
+                                        <td style="width: 20%">
                                             <div class="select-container">
                                                 <select id="taskType" class="form-control select-item mobile-select repeort-select" v-model="monthSelect" v-on:change="ChangeVersion()">
                                                     <option value="1">1月</option>
@@ -45,10 +45,10 @@
                                                 </select>
                                             </div>
                                         </td>
-                                         <td style="width: 25%">
+                                         <td style="width: 15%">
                                             <div class="select-container clear">
                                                 <select class="form-control select-item mobile-select repeort-select" v-model="versionSelect" v-on:change="ChangeData()">
-                                                    <option :value="versionType.ID" v-for="(versionType,index) in versions">{{index}}</option>
+                                                    <option :value="versionType.ID" v-for="(versionType,index) in versions">{{versionType.VersionName}}</option>
                                                 </select>
                                             </div>
                                         </td>

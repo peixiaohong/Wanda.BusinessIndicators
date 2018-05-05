@@ -563,16 +563,9 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
 
         }
         [LibAction]
-        public object GetTargetVersionType(string SystemID, int FinYear, int FinMonth,bool IsLatestVersion = false)
+        public object GetTargetVersionType(string SystemID, int FinYear, int FinMonth)
         {
-            if (IsLatestVersion)
-            {
-                return B_TargetplanOperator.Instance.GetTargetVersionType(SystemID, FinYear, FinMonth);
-            }
-            else
-            {
-                return A_TargetplanOperator.Instance.GetTargetVersionType(SystemID, FinYear, FinMonth);
-            }
+            return A_TargetplanOperator.Instance.GetTargetVersionType(SystemID, FinYear, FinMonth);
         }
     }
 }
