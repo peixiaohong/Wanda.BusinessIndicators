@@ -33,6 +33,7 @@
             <asp:HiddenField runat="server" ID="Hide_sg" ClientIDMode="Static" />
             <asp:HiddenField runat="server" ID="Hide_sgrent" ClientIDMode="Static" />
             <asp:HiddenField runat="server" ID="HiddenBatch" ClientIDMode="Static" />
+            <asp:HiddenField runat="server" ID="hiddenDis" ClientIDMode="Static" />
 
             <br />
             <span style="color: red">注：上传excel后，若页面没有出现相应数据，请稍等几分钟再次刷新页面（数据正在后台进行计算），即可恢复正常。请勿因此重复上传数据。</span>
@@ -199,11 +200,23 @@
         <!--上报审批 结束-->
 
         
+
+        <div id="ReportedDone" class="hide">
+
+            <div class="">
+                <span style="font-size: 13px; height: 30px; line-height: 60px; display: block; top: -35px; right: 0; z-index: 100; padding-right: 0px;">
+                    提示：月报已上报，正在审批申请中，请勿重复上报。
+                    <span >
+                       <a href="TargetApprove.aspx?BusinessID=<%=hideMonthReportID.Value %>" target="_blank" style="color:#337ab7">点击查看审批进度</a>
+                    </span>
+                </span>
+            </div>
+            
+          </div>
+        
         <input type="text" class="TClassHide" id="HidSystemID" runat="server" />
         <input type="text" class="TClassHide" id="HidAreaID" runat="server" />
     </div>
-
-
 
 
 

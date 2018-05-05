@@ -35,7 +35,14 @@ function loadTmpl_1(selector) {
 }
 
 function GetReportInstance() {
-
+    $('.tip').removeClass('hide');
+    $('#weiwancheng1').removeClass('hide');
+    if ($("#hiddenDis").val() == "1") {
+        $("#ReportedDone").removeClass("hide");
+        $('.tip').addClass('hide');
+        $('#weiwancheng1').addClass('hide');
+        return;
+    }
     WebUtil.ajax({
         async: true,
         url: "/TargetReportedControll/GetReportInstance",

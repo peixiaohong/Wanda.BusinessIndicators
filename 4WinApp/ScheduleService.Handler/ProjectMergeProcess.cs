@@ -162,7 +162,7 @@ namespace ScheduleService.Handler
                                     //将批次的审批状态改变
                                     ExceptionHelper.TrueThrow(batchModel == null, string.Format("cannot find the report data which id={0}", BusinessID));
                                     batchModel.WFBatchStatus = "Progress";
-                                    batchModel.Description = GetDescription(c_System.ID, batchModel.FinYear, batchModel.FinMonth);
+                                    //batchModel.Description = GetDescription(c_System.ID, batchModel.FinYear, batchModel.FinMonth);
                                     //获取流程导航
                                     List<NavigatActivity1> listna = GetProcessIntance(wfc);
 
@@ -215,27 +215,27 @@ namespace ScheduleService.Handler
                     throw new NotImplementedException();
             }
         }
-        protected string GetDescription(Guid systemtId, int year, int month)
-        {
-            string Description = string.Empty;
-            C_System sysModel = StaticResource.Instance[systemtId, DateTime.Now];
-            XElement element = sysModel.Configuration;
-            var RptList = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Approve(systemtId, year, month, Guid.Empty,false);
+        //protected string GetDescription(Guid systemtId, int year, int month)
+        //{
+        //    string Description = string.Empty;
+        //    C_System sysModel = StaticResource.Instance[systemtId, DateTime.Now];
+        //    XElement element = sysModel.Configuration;
+        //    var RptList = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Approve(systemtId, year, month, Guid.Empty,,false);
 
-            if (element.Elements("Report").Elements("Rgroup") != null)
-            {
-                Description = element.Element("Report").GetElementValue("Rgroup", "");
-                if (!string.IsNullOrEmpty(Description))
-                {
-                    Hashtable p = MonthDescriptionValueEngine.MonthDescriptionValueService.GetMonthDescriptionValue(RptList, systemtId, "");
-                    foreach (string key in p.Keys)
-                    {
-                        Description = Description.Replace("【" + key + "】", p[key].ToString());
-                    }
-                }
-            }
-            return Description;
-        }
+        //    if (element.Elements("Report").Elements("Rgroup") != null)
+        //    {
+        //        Description = element.Element("Report").GetElementValue("Rgroup", "");
+        //        if (!string.IsNullOrEmpty(Description))
+        //        {
+        //            Hashtable p = MonthDescriptionValueEngine.MonthDescriptionValueService.GetMonthDescriptionValue(RptList, systemtId, "");
+        //            foreach (string key in p.Keys)
+        //            {
+        //                Description = Description.Replace("【" + key + "】", p[key].ToString());
+        //            }
+        //        }
+        //    }
+        //    return Description;
+        //}
         public void AddMonthlyReport(B_SystemBatch batch,C_System c_System,string description)
         {
             B_MonthlyReport bmr = new B_MonthlyReport();
@@ -358,7 +358,7 @@ namespace ScheduleService.Handler
             {
                 batch.ReportApprove = JsonConvert.SerializeObject(listna);
             }
-            batch.Description = GetDescription(c_System.ID, batch.FinYear, batch.FinMonth);
+            //batch.Description = GetDescription(c_System.ID, batch.FinYear, batch.FinMonth);
             //修改批次数据
             B_SystemBatchOperator.Instance.UpdateSystemBatch(batch);
         }

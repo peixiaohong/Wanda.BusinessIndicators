@@ -181,6 +181,8 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             HidAreaID.Value = ddlAreaID.Visible ? ddlAreaID.SelectedValue : Guid.Empty.ToString();
             HideProcessCode.Value = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(), DateTime.Now].Configuration.Element("ProcessCode").Value;
 
+            hiddenDis.Value = "0";
+
             B_SystemBatch BatchModel = null; // 公用的批次 实体
 
             B_MonthlyReport bmr = null;
@@ -216,21 +218,21 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                         if (BatchModel.WFBatchStatus == "Progress" || monthRpt.WFStatus == "Progress")
                         {
                             //批次是草稿状态
-                            var model = V_SubReportList.Find(p => p.SystemID == ddlAreaID.SelectedValue.ToGuid());
+                            //var model = V_SubReportList.Find(p => p.SystemID == ddlAreaID.SelectedValue.ToGuid());
 
                             //---------------------------------------------------------------------------------------------------------------------------------------------
                             //这里批次需要控制，每次审批的状态只能是唯一的
                             // 暂时注销掉  BatchModel = AddSystemBatch();
 
-                            var host = new LJTH.BusinessIndicators.Web.AjaxHander.ProProcessController();
-                            host.BusinessID = model.ReportID.ToString();
-
-                            if (BPF.Workflow.Client.WFClientSDK.Exist(host.BusinessID))
+                            if (BPF.Workflow.Client.WFClientSDK.Exist(monthRpt.ID.ToString()))
                             {
-                                BPF.Workflow.Object.WorkflowContext wc = BPF.Workflow.Client.WFClientSDK.GetProcess(null, host.BusinessID);
+                                BPF.Workflow.Object.WorkflowContext wc = BPF.Workflow.Client.WFClientSDK.GetProcess(null, monthRpt.ID.ToString());
                                 if (!wc.CurrentUserHasTodoTask)
                                 {
-                                    Server.Transfer("~/BusinessReport/TargetApprove.aspx?BusinessID=" + host.BusinessID);
+                                    hiddenDis.Value = "1";
+                                    hideMonthReportID.Value = monthRpt.ID.ToString();
+                                    return;
+                                    //Server.Transfer("~/BusinessReport/TargetApprove.aspx?BusinessID=" + host.BusinessID);
                                 }
                                 else
                                 {
