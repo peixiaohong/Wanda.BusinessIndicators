@@ -95,10 +95,11 @@
     <Content Include="Assets\images\close-icon.png" />
     <Content Include="Assets\scripts\common\base.utils.js" />
     <Content Include="Assets\scripts\common\vue.utils.js" />
-    <Content Include="Assets\scripts\Report\ReportApprove.js" />
     <Content Include="Assets\scripts\Report\ReportMonth.js" />
+    <Content Include="Assets\scripts\Report\ReportMonthApprove.js" />
     <Content Include="Assets\scripts\Report\ReportMonthTemplate.js" />
     <Content Include="Assets\scripts\Report\ReportTarget.js" />
+    <Content Include="Assets\scripts\Report\ReportTargetApprove.js" />
     <Content Include="Assets\scripts\vue-resource.min.js" />
     <Content Include="Assets\scripts\vue.min.js" />
     <Content Include="Assets\styles\login.css" />
