@@ -31,12 +31,13 @@ function PageEffect()
     $(window).scroll(function () {
         st = Math.max(document.body.scrollTop || document.documentElement.scrollTop);
         if (st > parseInt(dv.attr('otop'))) {
-            if (ie6) {//IE6不支持fixed属性，所以只能靠设置position为absolute和top实现此效果
-                dv.css({ position: 'absolute', top: st });
-            }
-            else if (dv.css('position') != 'fixed') {
-                dv.css({ 'position': 'fixed', top: 0 });
-            }
+            //if (ie6) {//IE6不支持fixed属性，所以只能靠设置position为absolute和top实现此效果
+            //    dv.css({ position: 'absolute', top: st });
+            //}
+            //else if (dv.css('position') != 'fixed') {
+            //    dv.css({ 'position': 'fixed', top: 0 });
+            //}
+            dv.css({ 'position': 'fixed', top: 0 });
         }
         else if (dv.css('position') != 'static') {
             dv.css({ 'position': 'static' });

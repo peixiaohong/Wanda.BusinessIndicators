@@ -400,7 +400,7 @@ table.form_table td.wr > select {
 
 .content_title1_Left {
     float: left;
-    height: 20px;
+    height: auto;
     width: 100%; 
     padding-bottom: 10px;
 }
