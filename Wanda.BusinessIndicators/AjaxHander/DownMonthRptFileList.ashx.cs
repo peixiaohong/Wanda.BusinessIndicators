@@ -83,7 +83,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         bool isHaveArea = false;//板块下是否存在区域
         bool IsAll = false;//是否获取全部数据（经营月报查询获取全部数据，月报上报获取非全部数据）
         string DataSource = string.Empty; //B表数据源
-
+        Guid TargetPlanID = Guid.Empty;//指标版本ID
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
@@ -135,6 +135,10 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     IsLatestVersion = true;
                 }
             }
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request["TargetPlanID"]))
+            {
+                TargetPlanID = HttpContext.Current.Request["TargetPlanID"].ToGuid();
+            }
             List<StreamModel> Models = new List<StreamModel>();
             var datetime = DateTime.Now;
             C_System Sys = C_SystemOperator.Instance.GetSystem(SysId, datetime);
@@ -143,7 +147,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             {
                 if (MonthlyReportID == Guid.Empty)
                 {
-                    rpt = new ReportInstance(SysId, FinYear, FinMonth, IsLatestVersion, DataSource, IsAll);
+                    rpt = new ReportInstance(SysId, FinYear, FinMonth, TargetPlanID, IsLatestVersion, DataSource, IsAll);
                 }
                 else
                 {
@@ -170,16 +174,18 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 //这里的未完成和 补回不能用一个 ReportInstance 对象，引用会把集合的对象删除，导致数据错误。
 
                 ReportInstance rpt_CurrentMissTarget = new ReportInstance();
-                if (rpt._MonthReportID != Guid.Empty)
-                {
-                    rpt_MissTarget = new ReportInstance(rpt._MonthReportID, true, "Progress", IsAll);
-                    rpt_CurrentMissTarget = new ReportInstance(rpt._MonthReportID, true, "Progress", IsAll);
-                }
-                else
-                {
-                    rpt_MissTarget = rpt;
-                    rpt_CurrentMissTarget = rpt;
-                }
+                //if (rpt._MonthReportID != Guid.Empty)
+                //{
+                    //rpt_MissTarget = new ReportInstance(rpt._MonthReportID, true, "Progress", IsAll);
+                    //rpt_CurrentMissTarget = new ReportInstance(rpt._MonthReportID, true, "Progress", IsAll);
+                    rpt_MissTarget = new ReportInstance(SysId, FinYear, FinMonth, TargetPlanID, IsLatestVersion, DataSource, IsAll);
+                    rpt_CurrentMissTarget = new ReportInstance(SysId, FinYear, FinMonth, TargetPlanID, IsLatestVersion, DataSource, IsAll);
+                //}
+                //else
+                //{
+                //rpt_MissTarget = rpt;
+                //    rpt_CurrentMissTarget = rpt;
+                //}
 
                 ReportInstance rpt_Return = new ReportInstance();
                 rpt_Return = rpt;
@@ -234,17 +240,17 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 {
                     if (Sys.Category == 2)
                     {
-                        Models.Add(DownMissTarget(rpt_MissTarget)); //下载未完成说明模版
-                        Models.Add(DownTarget_Detail(rpt_Detail));      //下载指标明细模版
-                                                                        // Models.Add(DownTarget_DetailMonthly(rpt_Detail)); //下载指标明细（当月）模板
-                        Models.Add(DownTarget_Return(rpt_Return)); //下载补回明细模版
-                        Models.Add(DownCurrentMissTarget(rpt_CurrentMissTarget)); //下载当月未完成说明模版
+                        //Models.Add(DownMissTarget(rpt_MissTarget)); //下载未完成说明模版
+                        //Models.Add(DownTarget_Detail(rpt_Detail));      //下载指标明细模版
+                        //                                                // Models.Add(DownTarget_DetailMonthly(rpt_Detail)); //下载指标明细（当月）模板
+                        //Models.Add(DownTarget_Return(rpt_Return)); //下载补回明细模版
+                        //Models.Add(DownCurrentMissTarget(rpt_CurrentMissTarget)); //下载当月未完成说明模版
                     }
                     else if (Sys.Category == 3)
                     {
-                        Models.Add(DownTarget_Summary(rpt_Sum));   //下载月度报告模版
-                        Models.Add(DownTarget_Detail(rpt_Detail));      //下载指标明细模版
-                        //Models.Add(DownTarget_DetailMonthly(rpt_Detail)); //下载指标明细（当月）模板
+                        //Models.Add(DownTarget_Summary(rpt_Sum));   //下载月度报告模版
+                        //Models.Add(DownTarget_Detail(rpt_Detail));      //下载指标明细模版
+                        ////Models.Add(DownTarget_DetailMonthly(rpt_Detail)); //下载指标明细（当月）模板
 
                     }
                     else if (Sys.Category == 4)
@@ -256,16 +262,16 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     }
                     else if (Sys.ID == ConfigurationManager.AppSettings["MonthDescription"].ToGuid())
                     {
-                        Models.Add(DownTarget_Summary(rpt_Sum));   //下载月度报告模版
-                        Models.Add(DownMissTarget(rpt_MissTarget)); //下载未完成说明模版
-                        Models.Add(DownTarget_Detail(rpt_Detail));      //下载指标明细模版
-                        Models.Add(DownTarget_DetailMonthly(rpt_Detail)); //下载指标明细（当月）模板
-                        Models.Add(DownTarget_Return(rpt_Return)); //下载补回明细模版
-                        Models.Add(DownCurrentMissTarget(rpt_CurrentMissTarget)); //下载当月未完成说明模版
-                        Models.Add(DownLoadDSTargetReport(param, FinYear, FinMonth));//百货系统-其它情况-完成门店数量下载
-                        Models.Add(DownLoadDSTargetCompletedReport(param, FinYear, FinMonth));//百货系统-其它情况-完成情况明细
-                        Models.Add(DownLoadDSTargetReturnDataReport(param, FinYear, FinMonth));//百货系统-其它情况-补回上月缺口
-                        Models.Add(DownLoadDSTargetAddDataReport(param, FinYear, FinMonth));//百货系统-其它情况-新增未完成门店
+                        //Models.Add(DownTarget_Summary(rpt_Sum));   //下载月度报告模版
+                        //Models.Add(DownMissTarget(rpt_MissTarget)); //下载未完成说明模版
+                        //Models.Add(DownTarget_Detail(rpt_Detail));      //下载指标明细模版
+                        //Models.Add(DownTarget_DetailMonthly(rpt_Detail)); //下载指标明细（当月）模板
+                        //Models.Add(DownTarget_Return(rpt_Return)); //下载补回明细模版
+                        //Models.Add(DownCurrentMissTarget(rpt_CurrentMissTarget)); //下载当月未完成说明模版
+                        //Models.Add(DownLoadDSTargetReport(param, FinYear, FinMonth));//百货系统-其它情况-完成门店数量下载
+                        //Models.Add(DownLoadDSTargetCompletedReport(param, FinYear, FinMonth));//百货系统-其它情况-完成情况明细
+                        //Models.Add(DownLoadDSTargetReturnDataReport(param, FinYear, FinMonth));//百货系统-其它情况-补回上月缺口
+                        //Models.Add(DownLoadDSTargetAddDataReport(param, FinYear, FinMonth));//百货系统-其它情况-新增未完成门店
                     }
                     else
                     {

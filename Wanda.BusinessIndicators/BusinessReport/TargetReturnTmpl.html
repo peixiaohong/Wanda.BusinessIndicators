@@ -88,7 +88,8 @@
             <th rowspan="2" style="min-width:80px; width:8%; word-break:keep-all">公司名称</th>
             <th rowspan="2" class="newdiff_CurrenMiss" style="min-width:80px; width:5%; word-break:keep-all">经营指标</th>
             <th colspan="3" onclick="if(MissH){ShouSuo_Current('XS');}" style="min-width:180px; width:18%;  cursor: pointer; word-break:keep-all">
-                <div id="MonthMissTergetDiv_Current"> 当月发生(万元)&nbsp; [+]</div></th>
+                <div id="MonthMissTergetDiv_Current"> 当月发生(万元)&nbsp; [+]</div>
+            </th>
             <th colspan="3" style="min-width:180px; width:18%; cursor: pointer;word-break:keep-all" class="C_TT2 leiji" onclick='if(MissH) {ShouSuo_Current("YC");}'>
                 本月累计(万元)
             </th>
@@ -122,8 +123,8 @@
         <tr>
             <th rowspan="2" style="min-width:20px; width:4%; word-break:keep-all">序号</th>
             <th rowspan="2" style="min-width:80px; width:8%; word-break:keep-all">公司名称</th>
-            
-            <th colspan="3" class="shangyue" onclick="if(MissH){ShouSuo('XS');}" style="min-width:180px; width:18%;  cursor: pointer; word-break:keep-all">当月发生(万元)&nbsp; [+]</th>          
+
+            <th colspan="3" class="shangyue" onclick="if(MissH){ShouSuo('XS');}" style="min-width:180px; width:18%;  cursor: pointer; word-break:keep-all">当月发生(万元)&nbsp; [+]</th>
             <th colspan="3" style="min-width:180px; width:18%; cursor: pointer;word-break:keep-all" class="C_TT2 leiji" onclick="if(MissH){ShouSuo('YC');}">
                 <div id="CurrentMonthMissTergetDiv_leiji">本月累计(万元)</div>
             </th>
@@ -375,7 +376,6 @@
 
     <!--------------------------------------------------- 组合指标 补回情况模版- End-------------------------------------------------------->
     <!--------------------------------------------------- 组合指标 未完成说明模版-  Stare-------------------------------------------------------->
-    
     <!-- 累计 未完成说明-->
     <script type="text/x-jquery-tmpl" id="TmplMissTargerList">
         <li class="sd">
@@ -623,39 +623,39 @@
                 {{if ReturnType =="0"}}
                 ---
                 {{else ReturnType =="1"}}
-                        {{if IsTimeShow(CommitDate)==false }}
-                         补回中<br />
-                        {{/if}}
-                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{if IsTimeShow(CommitDate)==false }}
+                补回中<br />
+                {{/if}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
                 {{else ReturnType =="2"}}
-                        {{if IsTimeShow(CommitDate)==false }}
-                        到期未补回<br />
-                        {{/if}}
-                        {{if FormatDate(PromissDate,false) =="---"}}
-                            {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
-                        {{else}}
-                        <!--承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回 <br /> -->
-                            {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
-                        {{/if}}
+                {{if IsTimeShow(CommitDate)==false }}
+                到期未补回<br />
+                {{/if}}
+                {{if FormatDate(PromissDate,false) =="---"}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else}}
+                <!--承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回 <br /> -->
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{/if}}
                 {{else ReturnType =="3"}}
-                        {{if IsTimeShow(CommitDate)==false }}
-                        预计无法按期补回<br />
-                        {{/if}}
-                        {{if FormatDate(PromissDate,false) =="---"}}
-                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
-                        {{else}}
-                        <!-- 承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回 <br />-->
-                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
-                        {{/if}}
+                {{if IsTimeShow(CommitDate)==false }}
+                预计无法按期补回<br />
+                {{/if}}
+                {{if FormatDate(PromissDate,false) =="---"}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else}}
+                <!-- 承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回 <br />-->
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{/if}}
                 {{else ReturnType =="4"}}
-                        {{if IsTimeShow(CommitDate)==false }}
-                        预计年内无法补回<br />
-                        {{/if}}
-                        {{if FormatDate(PromissDate,false) =="---"}}
-                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
-                        {{else}}
-                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
-                        {{/if}}
+                {{if IsTimeShow(CommitDate)==false }}
+                预计年内无法补回<br />
+                {{/if}}
+                {{if FormatDate(PromissDate,false) =="---"}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{/if}}
                 {{else ReturnType =="5"}}
                 {{if IsTimeShow(CommitDate)==false }}
                 本月新增<br />
@@ -795,9 +795,9 @@
             <!--承诺时间-->
             <td class="Td_Right" style="text-align: center !important;color:red; ">
                 {{if ReturnType =="0"}}
-                    {{if NDifference < 0}}
-                    累计完成
-                    {{/if}}
+                {{if NDifference < 0}}
+                累计完成
+                {{/if}}
                 {{else ReturnType =="1"}}
                 补回中<br />
                 {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
@@ -899,7 +899,7 @@
             {{if CurrentMIssTargetReason !=""}}
             <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：<br /></span>{{html _TrimStr(CurrentMIssTargetReason).replace(/\n/g, "<br/>") +"<br /><span style='font-weight:bold;'>采取措施：</span><br />"+ _TrimStr(CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
             {{else CurrentMIssTargetDescription !=""}}
-            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：<br/></span>{{html _TrimStr(CurrentMIssTargetReason).replace(/\n/g, "<br/>") +"<br /><span style='font-weight:bold;'>采取措施：</span><br />"+ _TrimStr(CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：<br /></span>{{html _TrimStr(CurrentMIssTargetReason).replace(/\n/g, "<br/>") +"<br /><span style='font-weight:bold;'>采取措施：</span><br />"+ _TrimStr(CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
             {{else}}
             <td class="Td_Right"></td>
             {{/if}}
@@ -933,43 +933,43 @@
             <!--承诺时间-->
             <td class="Td_Right" style="text-align: center !important;color:red; ">
                 {{if ReturnType =="0"}}
-                    {{if NDifference < 0}}
-                    累计完成
-                    {{/if}}
+                {{if NDifference < 0}}
+                累计完成
+                {{/if}}
                 {{else ReturnType =="1"}}
-                        {{if IsTimeShow(CommitDate)==false }}
-                        补回中<br />
-                        {{/if}}
-                    {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{if IsTimeShow(CommitDate)==false }}
+                补回中<br />
+                {{/if}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
                 {{else ReturnType =="2"}}
-                        {{if IsTimeShow(CommitDate)==false }}
-                        到期未补回<br />
-                        {{/if}}
-                        {{if FormatDate(PromissDate,false) =="---"}}
-                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
-                        {{else}}
-                        <!--承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回 <br /> -->
-                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
-                        {{/if}}
+                {{if IsTimeShow(CommitDate)==false }}
+                到期未补回<br />
+                {{/if}}
+                {{if FormatDate(PromissDate,false) =="---"}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else}}
+                <!--承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回 <br /> -->
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{/if}}
                 {{else ReturnType =="3"}}
-                        {{if IsTimeShow(CommitDate)==false }}
-                        预计无法按期补回<br />
-                        {{/if}}
-                        {{if FormatDate(PromissDate,false) =="---"}}
-                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
-                        {{else}}
-                        <!-- 承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回 <br />-->
-                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
-                        {{/if}}
+                {{if IsTimeShow(CommitDate)==false }}
+                预计无法按期补回<br />
+                {{/if}}
+                {{if FormatDate(PromissDate,false) =="---"}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else}}
+                <!-- 承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回 <br />-->
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{/if}}
                 {{else ReturnType =="4"}}
-                        {{if IsTimeShow(CommitDate)==false }}
-                        预计年内无法补回<br />
-                        {{/if}}
-                        {{if FormatDate(PromissDate,false) =="---"}}
-                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
-                        {{else}}
-                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
-                        {{/if}}
+                {{if IsTimeShow(CommitDate)==false }}
+                预计年内无法补回<br />
+                {{/if}}
+                {{if FormatDate(PromissDate,false) =="---"}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{/if}}
                 {{else ReturnType =="5"}}
                 {{if IsTimeShow(CommitDate)==false }}
                 本月新增<br />
@@ -1147,14 +1147,14 @@
                 {{if ReturnType =="0"}}
                 ---
                 {{else ReturnType =="1"}}
-                    {{if IsTimeShow(CommitDate)==false }} 
-                    补回中<br />
-                    {{/if}}
-                    {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{if IsTimeShow(CommitDate)==false }}
+                补回中<br />
+                {{/if}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
                 {{else ReturnType =="2"}}
-                     {{if IsTimeShow(CommitDate)==false }}
-                         到期未补回<br />
-                     {{/if}}
+                {{if IsTimeShow(CommitDate)==false }}
+                到期未补回<br />
+                {{/if}}
                 {{if FormatDate(PromissDate,false) =="---"}}
                 {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
                 {{else}}
@@ -1162,9 +1162,9 @@
                 {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
                 {{/if}}
                 {{else ReturnType =="3"}}
-                        {{if IsTimeShow(CommitDate)==false }}
-                        预计无法按期补回<br />
-                         {{/if}}
+                {{if IsTimeShow(CommitDate)==false }}
+                预计无法按期补回<br />
+                {{/if}}
                 {{if FormatDate(PromissDate,false) =="---"}}
                 {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
                 {{else}}
@@ -1172,9 +1172,9 @@
                 {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
                 {{/if}}
                 {{else ReturnType =="4"}}
-                        {{if IsTimeShow(CommitDate)==false }}
-                        预计年内无法补回<br />
-                        {{/if}}
+                {{if IsTimeShow(CommitDate)==false }}
+                预计年内无法补回<br />
+                {{/if}}
                 {{if FormatDate(PromissDate,false) =="---"}}
                 {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
                 {{else}}
@@ -1186,7 +1186,7 @@
                 本月新增<br />
                 {{/if}}
 
-                
+
                 {{if FormatDate(PromissDate,false) =="---"}}
                 {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
                 {{else}}
@@ -1249,9 +1249,8 @@
         <tr class="Level3">
 
             {{if CompanyName=="未完成合计"}}
-                    
-                <!--这里当月未完成不写 -->
-          
+
+            <!--这里当月未完成不写 -->
             {{else}}
 
             <!--序号 和公司名称-->
@@ -1290,7 +1289,7 @@
             <td class="Td_Right leiji" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
             <!--本月累计差值-->
             <td class="Td_Right" {{if NAccumulativeDifference <0}} style="white-space: nowrap; color:red; " {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
-            
+
             {{if TargetGroupCount ==1}}
             {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}} <!--原因和说明  单个指标-->
             <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span><br />{{html _TrimStr(CurrentMIssTargetReason).replace(/\n/g, "<br/>") +"<br/><span style='font-weight:bold;'>采取措施：</span><br/>"+ _TrimStr(CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
@@ -1311,7 +1310,7 @@
             {{if CurrentMIssTargetReason !=""}}
             <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span><br />{{html _TrimStr(CurrentMIssTargetReason).replace(/\n/g, "<br/>") +"<br/><span style='font-weight:bold;'>采取措施：</span><br/>"+ _TrimStr(CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
             {{else CurrentMIssTargetDescription !=""}}
-            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span><br/> {{html _TrimStr(CurrentMIssTargetReason).replace(/\n/g, "<br/>") +"<br/><span style='font-weight:bold;'>采取措施：</span><br/>"+ _TrimStr(CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span><br /> {{html _TrimStr(CurrentMIssTargetReason).replace(/\n/g, "<br/>") +"<br/><span style='font-weight:bold;'>采取措施：</span><br/>"+ _TrimStr(CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
             {{else}}
             <td class="Td_Right" rowspan="${TargetGroupCount}"></td>
             {{/if}}
@@ -1332,43 +1331,43 @@
             <!--承诺时间-->
             <td class="Td_Right" style="text-align: center !important;color:red; ">
                 {{if ReturnType =="0"}}
-                    {{if NDifference < 0}}
-                    累计完成
-                    {{/if}}
+                {{if NDifference < 0}}
+                累计完成
+                {{/if}}
                 {{else ReturnType =="1"}}
-                        {{if IsTimeShow(CommitDate)==false }}
-                        补回中<br />
-                        {{/if}}
-                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{if IsTimeShow(CommitDate)==false }}
+                补回中<br />
+                {{/if}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
                 {{else ReturnType =="2"}}
-                        {{if IsTimeShow(CommitDate)==false }}
-                        到期未补回<br />
-                        {{/if}}
-                        {{if FormatDate(PromissDate,false) =="---"}}
-                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
-                        {{else}}
-                        <!-- 承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回<br />-->
-                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
-                        {{/if}}
+                {{if IsTimeShow(CommitDate)==false }}
+                到期未补回<br />
+                {{/if}}
+                {{if FormatDate(PromissDate,false) =="---"}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else}}
+                <!-- 承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回<br />-->
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{/if}}
                 {{else ReturnType =="3"}}
-                        {{if IsTimeShow(CommitDate)==false }}
-                         预计无法按期补回<br />
-                        {{/if}}
-                        {{if FormatDate(PromissDate,false) =="---"}}
-                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
-                        {{else}}
-                        <!-- 承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回<br />-->
-                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
-                        {{/if}}
+                {{if IsTimeShow(CommitDate)==false }}
+                预计无法按期补回<br />
+                {{/if}}
+                {{if FormatDate(PromissDate,false) =="---"}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else}}
+                <!-- 承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回<br />-->
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{/if}}
                 {{else ReturnType =="4"}}
-                        {{if IsTimeShow(CommitDate)==false }}
-                        预计年内无法补回<br />
-                        {{/if}}
-                        {{if FormatDate(PromissDate,false) =="---"}}
-                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
-                        {{else}}
-                        {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
-                        {{/if}}
+                {{if IsTimeShow(CommitDate)==false }}
+                预计年内无法补回<br />
+                {{/if}}
+                {{if FormatDate(PromissDate,false) =="---"}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{else}}
+                {{if ReturnDescription ==""}} ${ReturnDescription}{{else}}{{html (ReturnDescription).replace(/\n/g, "<br/>")}}{{/if}}
+                {{/if}}
                 {{else ReturnType =="5"}}
                 {{if IsTimeShow(CommitDate)==false }}
                 本月新增<br />
@@ -1686,7 +1685,6 @@
 
 
     <!--------------------------------------------------- 商管系统特殊模版（没有指标列） 未完成说明模版-  End-------------------------------------------------------->
-    
     <!--------------------------------------------------- 上报页面 未完成说明模版-  Stare-------------------------------------------------------->
     <!--未完成说明 (上报页面  累计的  )-->
     <script type="text/x-jquery-tmpl" id="TmplMissTargetRpt">
@@ -1719,7 +1717,8 @@
             {{if ($index+1)%TargetGroupCount ==1 }}
             <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: center !important;">${($index+2)/TargetGroupCount}</td>
             <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: left !important;">
-                <a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','Reason','cumulative')">${CompanyName}</a>
+                <!--<a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','Reason','cumulative')">${CompanyName}</a>-->
+                ${CompanyName}
             </td>
             {{/if}}
             {{/if}}
@@ -1816,11 +1815,13 @@
                 提前补回<br />
                 {{/if}}
                 {{else}}
-                <a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','return','cumulative')">
+                <!--<a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','return','cumulative')">-->
+                <a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','all','cumulative')">
                     {{if ReturnType =="0"}}
                 </a>
                 {{else ReturnType =="1"}}
-                补回中<br />            </a>
+                补回中<br />
+                </a>
                 {{else ReturnType =="2"}}
                 到期未补回<br />        </a>
                 {{else ReturnType =="3"}}
@@ -1872,7 +1873,9 @@
             <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: left !important;">
                 <!--这里为了使在本月补回时，不能编辑-->
                 {{if Name.indexOf("本月补回公司")>=0}} ${CompanyName}
-                {{else}}<a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','Reason','cumulative')">${CompanyName}</a>
+                {{else}}
+                <!--<a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','Reason','cumulative')">${CompanyName}</a>-->
+                ${CompanyName}
                 {{/if}}
             </td>
             {{/if}}
@@ -1988,11 +1991,13 @@
                 提前补回<br />
                 {{/if}}
                 {{else}}
-                <a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','return','cumulative')">
+                <!-- <a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','return','cumulative')">-->
+                <a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','all','cumulative')">
                     {{if ReturnType =="0"}}
                 </a>
                 {{else ReturnType =="1"}}
-                补回中<br />           </a>
+                补回中<br />
+                </a>
                 {{else ReturnType =="2"}}
                 到期未补回<br />       </a>
                 {{else ReturnType =="3"}}
@@ -2066,7 +2071,8 @@
             {{if ($index+1)%TargetGroupCount ==1 }}
             <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: center !important;">${($index+2)/TargetGroupCount}</td>
             <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: left !important;">
-                <a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','Reason','current')">${CompanyName}</a>
+                <!--<a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','Reason','current')">${CompanyName}</a>-->
+                ${CompanyName}
             </td>
             {{/if}}
             {{/if}}
@@ -2079,7 +2085,7 @@
             <td style="display:none"></td>
             {{/if}}
 
-          
+
 
             <!--当月计划数-->
             <td class="Td_Left" style="white-space: nowrap;" title="${NPlanAmmount}">${(NPlanAmmount).thousandize0OrEmpty(0)}</td>
@@ -2147,42 +2153,42 @@
             <!--承诺时间-->
             <td class="Td_Right" style="text-align: center !important;color:red; ">
                 {{if TargetGroupCount ==1}}
-                    {{if ReturnType =="0"}}
+                {{if ReturnType =="0"}}
 
-                    {{else ReturnType =="1"}}
-                    补回中<br />
-                    {{else ReturnType =="2"}}
-                    到期未补回<br />
-                    {{else ReturnType =="3"}}
-                    预计无法按期补回<br />
-                    {{else ReturnType =="4"}}
-                    预计年内无法补回<br />
-                    {{else ReturnType =="5"}}
-                    本月新增 <br />
-                    {{else ReturnType =="6"}}
-                    按期补回<br />
-                    {{else ReturnType =="7"}}
-                    提前补回<br />
-                    {{/if}}
+                {{else ReturnType =="1"}}
+                补回中<br />
+                {{else ReturnType =="2"}}
+                到期未补回<br />
+                {{else ReturnType =="3"}}
+                预计无法按期补回<br />
+                {{else ReturnType =="4"}}
+                预计年内无法补回<br />
+                {{else ReturnType =="5"}}
+                本月新增 <br />
+                {{else ReturnType =="6"}}
+                按期补回<br />
+                {{else ReturnType =="7"}}
+                提前补回<br />
+                {{/if}}
                 {{else}}
                 <a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','return','current')">
                     {{if ReturnType =="0"}}
                 </a>
-                    {{else ReturnType =="1"}}
-                    补回中<br />            </a>
-                    {{else ReturnType =="2"}}
-                    到期未补回<br />        </a>
-                    {{else ReturnType =="3"}}
-                    预计无法按期补回<br />  </a>
-                    {{else ReturnType =="4"}}
-                    预计年内无法补回<br />  </a>
-                    {{else ReturnType =="5"}}
-                    本月新增<br />          </a>
-                    {{else ReturnType =="6"}}
-                    </a> 按期补回<br />
-                    {{else ReturnType =="7"}}
-                    </a> 提前补回<br />
-                    {{/if}}
+                {{else ReturnType =="1"}}
+                补回中<br />            </a>
+                {{else ReturnType =="2"}}
+                到期未补回<br />        </a>
+                {{else ReturnType =="3"}}
+                预计无法按期补回<br />  </a>
+                {{else ReturnType =="4"}}
+                预计年内无法补回<br />  </a>
+                {{else ReturnType =="5"}}
+                本月新增<br />          </a>
+                {{else ReturnType =="6"}}
+                </a> 按期补回<br />
+                {{else ReturnType =="7"}}
+                </a> 提前补回<br />
+                {{/if}}
                 {{/if}}
 
                 {{if FormatDate(PromissDate,false) =="---"}}
@@ -2221,7 +2227,9 @@
             <td class="Td_Left" rowspan="${TargetGroupCount}" style="text-align: left !important;">
                 <!--这里为了使在本月补回时，不能编辑-->
                 {{if Name.indexOf("本月补回公司")>=0}} ${CompanyName}
-                {{else}}<a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','Reason','current')">${CompanyName}</a>
+                {{else}}
+                <!--<a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','Reason','current')">${CompanyName}</a>-->
+                ${CompanyName}
                 {{/if}}
             </td>
             {{/if}}
@@ -2298,71 +2306,72 @@
             <!--承诺时间-->
             <td class="Td_Right" style="text-align: center !important;color:red; ">
                 {{if TargetGroupCount ==1}}
-                    {{if ReturnType =="0"}}
+                {{if ReturnType =="0"}}
 
-                    {{else ReturnType =="1"}}
-                    补回中<br />
-                    {{else ReturnType =="2"}}
-                    到期未补回<br />
-                    {{else ReturnType =="3"}}
-                    预计无法按期补回<br />
-                    {{else ReturnType =="4"}}
-                    预计年内无法补回<br />
-                    {{else ReturnType =="5"}}
-                    本月新增<br />
-                    {{else ReturnType =="6"}}
-                    按期补回<br />
-                    {{else ReturnType =="7"}}
-                    提前补回<br />
-                    {{/if}}
+                {{else ReturnType =="1"}}
+                补回中<br />
+                {{else ReturnType =="2"}}
+                到期未补回<br />
+                {{else ReturnType =="3"}}
+                预计无法按期补回<br />
+                {{else ReturnType =="4"}}
+                预计年内无法补回<br />
+                {{else ReturnType =="5"}}
+                本月新增<br />
+                {{else ReturnType =="6"}}
+                按期补回<br />
+                {{else ReturnType =="7"}}
+                提前补回<br />
+                {{/if}}
                 {{else}}
-                    <!--本月补回的公司不能编辑信息-->
-                    {{if Name.indexOf("本月补回公司")>=0}}
-                        {{if ReturnType =="0"}}
-                        {{else ReturnType =="1"}}
-                        补回中<br />
-                        {{else ReturnType =="2"}}
-                        到期未补回<br />
-                        {{else ReturnType =="3"}}
-                        预计无法按期补回<br />
-                        {{else ReturnType =="4"}}
-                        预计年内无法补回<br />
-                        {{else ReturnType =="5"}}
-                        本月新增 <br />
-                        {{else ReturnType =="6"}}
-                        按期补回<br />
-                        {{else ReturnType =="7"}}
-                        提前补回<br />
-                        {{/if}}
-                    {{else}}
-                        <!--<a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','return','current')">-->
-                        {{if ReturnType =="0"}}
-                    
-                    {{else ReturnType =="1"}}
-                    补回中<br />          
-                    {{else ReturnType =="2"}}
-                    到期未补回<br />      
-                    {{else ReturnType =="3"}}
-                    预计无法按期补回<br />
-                    {{else ReturnType =="4"}}
-                    预计年内无法补回<br />
-                    {{else ReturnType =="5"}}
-                    本月新增<br />        
-                    {{else ReturnType =="6"}}
-                    按期补回<br />
-                    {{else ReturnType =="7"}}
-                     提前补回<br />
-                    {{/if}}
-                    {{/if}}
+                <!--本月补回的公司不能编辑信息-->
+                {{if Name.indexOf("本月补回公司")>=0}}
+                {{if ReturnType =="0"}}
+                {{else ReturnType =="1"}}
+                补回中<br />
+                {{else ReturnType =="2"}}
+                到期未补回<br />
+                {{else ReturnType =="3"}}
+                预计无法按期补回<br />
+                {{else ReturnType =="4"}}
+                预计年内无法补回<br />
+                {{else ReturnType =="5"}}
+                本月新增 <br />
+                {{else ReturnType =="6"}}
+                按期补回<br />
+                {{else ReturnType =="7"}}
+                提前补回<br />
+                {{/if}}
+                {{else}}
+                <!--<a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','return','current')">-->
+                <a href="javascript:void(0);" onclick="EditMissTargetRpt('${ID}','all','current')">
+                    {{if ReturnType =="0"}}
+                </a>
+                {{else ReturnType =="1"}}
+                补回中<br /> </a>
+                {{else ReturnType =="2"}}
+                到期未补回<br /> </a>
+                {{else ReturnType =="3"}}
+                预计无法按期补回<br /> </a>
+                {{else ReturnType =="4"}}
+                预计年内无法补回<br /> </a>
+                {{else ReturnType =="5"}}
+                本月新增<br /> </a>
+                {{else ReturnType =="6"}}
+                按期补回<br /> </a>
+                {{else ReturnType =="7"}}
+                提前补回<br /> </a>
+                {{/if}}
+                {{/if}}
                 {{/if}}
                 {{if FormatDate(PromissDate,false) =="---"}}
-                    {{if ReturnType =="0" && NDifference >=0 }}
-                        <span style="text-align:!important;color:black;">---</span>
-                    {{else ReturnType =="0" && NDifference < 0 }}
-                        <span style="text-align:!important;color:black;">累计完成</span>
-                    {{else}}
-                        ${FormatDate(PromissDate,false)}<br />{{html (ReturnDescription).replace(/\n/g, "<br/>")}}
-                    {{/if}}
+                {{if ReturnType =="0" && NDifference >=0 }}
+                <span style="text-align:!important;color:black;">---</span>
+                {{else ReturnType =="0" && NDifference < 0 }}
+                <span style="text-align:!important;color:black;">累计完成</span>
+                {{else}}
+                ${FormatDate(PromissDate,false)}<br />{{html (ReturnDescription).replace(/\n/g, "<br/>")}}
+                {{/if}}
                 {{else}}
                 <!--  承诺${FormatDate(PromissDate,false,"CN").substring(0,FormatDate(PromissDate,false,"CN").length-3)}月份补回  <br />-->
                 {{html (ReturnDescription).replace(/\n/g, "<br/>")}}
@@ -2384,9 +2393,6 @@
 
 
     <!--------------------------------------------------- 上报页面 未完成说明模版-  End-------------------------------------------------------->
-   
-    
-    
     <!---------------------------------------------------未完成编辑页面  开始------------------------------------------------------->
 
     <div id="divMissTargetRpt" class="popup" style="height: auto; display: none; padding-bottom: 10px">
@@ -2553,7 +2559,7 @@
                 </td>
                 <th style="width: 25%; padding: 5px; padding-right: 10px; text-align: right;">要求期限</th>
                 <td style="width: 25%; padding: 5px; padding-left: 20px; text-align: left;">
-                   {{if FormatDate(CommitDate,false) =="---"}}${FormatDate(CommitDate,false)} {{else}} ${FormatDate(CommitDate,false,"CN").substring(0,FormatDate(CommitDate,false,"CN").length-3)}月{{/if}}
+                    {{if FormatDate(CommitDate,false) =="---"}}${FormatDate(CommitDate,false)} {{else}} ${FormatDate(CommitDate,false,"CN").substring(0,FormatDate(CommitDate,false,"CN").length-3)}月{{/if}}
                 </td>
             </tr>
 
@@ -2607,7 +2613,6 @@
                 <th colspan="1" style="width: 25%; padding: 5px; padding-right: 10px; text-align: right;">要求期限</th>
                 <td colspan="3" style="width: 75%; padding: 5px; padding-left: 20px; text-align: left;">{{if FormatDate(CommitDate,false) =="---"}}${FormatDate(CommitDate,false)} {{else}} ${FormatDate(CommitDate,false,"CN").substring(0,FormatDate(CommitDate,false,"CN").length-3)}月{{/if}}</td>
             </tr>-->
-
             <!--<tr>
                 <th colspan="1" style="width: 25%; padding: 5px; padding-right: 10px; text-align: right;">补回情况</th>
                 <td colspan="3" style="width: 75%; padding: 15px; padding-left: 15px; text-align: left;">
