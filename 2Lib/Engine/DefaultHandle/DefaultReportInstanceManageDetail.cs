@@ -230,7 +230,7 @@ namespace LJTH.BusinessIndicators.Engine
                 //如果是混合指标按照公司排序 否则按照XML中配置进行排序
                 if (vt.IsBlendTarget)
                 {
-                    VCounterListMonthlyReportDetailViewModel = currentAreaMrd.OrderBy(m => m.Company.Sequence).ThenBy(m => m.Company).ToList();
+                    VCounterListMonthlyReportDetailViewModel = currentAreaMrd.OrderBy(m => m.Company.Sequence).ThenBy(m => m.Company.CompanyName).ToList();
                 }
                 else
                 {
