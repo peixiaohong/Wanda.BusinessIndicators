@@ -15,13 +15,16 @@
     <link href="/Styles/ztree/metroStyle/metroStyle.css" rel="stylesheet" />
 
     <script type="text/javascript" src="../Scripts/BusinessReport/DirectlyMonthReport.js?ver=2"></script>
-     <script type="text/javascript">
-         var TreeDataJson = <%=TreeDataJson%>;
+    <script type="text/javascript">
+        var TreeDataJson = <%=TreeDataJson%>;
     </script>
-
+    <style type="text/css">
+        .tab_search th {
+            width:5%!important;
+        }
+    </style>
     <uc1:wfCtrl runat="server" ID="wfCtrl" />
     <uc1:userSelectCtrl runat="server" ID="userSelectCtrl" />
-
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="main">
@@ -37,7 +40,7 @@
                 <table class="tab_search">
                     <tbody>
                         <tr>
-                            <th>上报系统</th>
+                            <th>板块</th>
                             <td>
                                 <input type="text" id="TxtSystem" style="width: 210px;" onclick="showMenu();" />
                                 <asp:DropDownList ID="ddlSystem" ClientIDMode="Static" runat="server" Style="width: 120px; display: none;" AutoPostBack="True" OnSelectedIndexChanged="ddlSystem_SelectedIndexChanged"></asp:DropDownList>
@@ -50,13 +53,17 @@
                             <td>
                                 <asp:DropDownList ID="ddlMonth" ClientIDMode="Static" runat="server" Style="width: 120px;"></asp:DropDownList>
                             </td>
+                            <th>版本类型</th>
+                            <td>
+                                <asp:DropDownList ID="ddlVersionType" ClientIDMode="Static" runat="server" Style="width: 120px;"></asp:DropDownList>
+                            </td>
                             <th style="text-align: center">
                                 <input id="submana" runat="server" clientidmode="Static" style="width: 80px; text-align: center; height: 27px; display: none" type="button" class="uploadify-button" value="" onclick="AddMessages()" /></th>
                             <td>
                                 <asp:CheckBox ID="chkIsLastestVersion" ClientIDMode="Static" runat="server" Text="包含审批中" />
                             </td>
                             <th>
-                                <a class="btn_search" id="ContentPlaceHolder1_LinkButton1" href="#" runat="server" onserverclick="ContentPlaceHolder1_LinkButton1_ServerClick"><span><i class="fa fa-search"></i>&nbsp;查询</span></a>
+                                <a class="btn_search" id="ContentPlaceHolder1_LinkButton1" href="javascript:void(0)" onclick="f_search()" ><span><i class="fa fa-search"></i>&nbsp;查询</span></a>
                             </th>
                         </tr>
                     </tbody>
@@ -234,7 +241,7 @@
 
 
                 <div id="ApproveAttachDiv" style="padding-bottom: 10px; padding-top: 10px;">
-                    <div style="border: 1px solid #ccc; min-height: 50px; padding-top: 5px; padding-bottom: 5px;background: #fff;">
+                    <div style="border: 1px solid #ccc; min-height: 50px; padding-top: 5px; padding-bottom: 5px; background: #fff;">
                         <div class="content_title1_Left" style="width: 100%; padding-bottom: 10px;">
                             <div>
                                 <label style="padding-left: 10px; color: #012b80; font-weight: bold">

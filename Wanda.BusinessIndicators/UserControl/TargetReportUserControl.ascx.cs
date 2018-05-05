@@ -119,7 +119,11 @@ namespace LJTH.BusinessIndicators.Web.UserControl
                 }
             }
             
-            this.Page.ClientScript.RegisterStartupScript(this.GetType(), "_setStlye", "<script>setStlye('" + showSpanID + "');</script>");
+            if(showSpanID!="")
+                this.Page.ClientScript.RegisterStartupScript(this.GetType(), "_setStlye", "<script>$('#ReportedDone').addClass('hide');setStlye('" + showSpanID + "');</script>");
+            else
+                this.Page.ClientScript.RegisterStartupScript(this.GetType(), "_setdisable", "<script>$('#ReportedDone').removeClass('hide');</script>");
+
         }
         /// <summary>
         /// 设置要选中的button

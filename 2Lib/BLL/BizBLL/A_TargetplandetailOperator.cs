@@ -62,6 +62,17 @@ namespace LJTH.BusinessIndicators.BLL
             return result;
         }
 
+        /// <summary>
+        /// 获取默认指标详情
+        /// </summary>
+        /// <param name="FinYear"></param>
+        /// <returns></returns>
+        public IList<A_TargetPlanDetail> GetDefaultTargetplandetailList(int FinYear)
+        {
+            IList<A_TargetPlanDetail> result = _aTargetplandetailAdapter.GetDefaultTargetplandetailList(FinYear);
+            return result;
+        }
+
         public IList<A_TargetPlanDetail> GetTargetplandetailList(Guid SystemID, int FinYear, Guid CompanyID)
         {
             IList<A_TargetPlanDetail> result = _aTargetplandetailAdapter.GetTargetplandetailList(SystemID, FinYear, CompanyID);

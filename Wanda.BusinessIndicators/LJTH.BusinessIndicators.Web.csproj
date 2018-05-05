@@ -92,8 +92,6 @@
     <Content Include="BusinessReport\WandaBusinessRpt.aspx" />
     <Content Include="BusinessReport\WandaCultureRpt.aspx" />
     <Content Include="DepartmentStoreReport\PlayVideo.aspx" />
-    <Content Include="DllReference\Wanda.SDK.Common.dll" />
-    <Content Include="DllReference\Wanda.UserSource.Client.dll" />
     <Content Include="Images\action-icon.png" />
     <Content Include="Images\close-icon.png" />
     <Content Include="Images\defaultLeaf.gif" />
@@ -113,6 +111,7 @@
     <Content Include="Scripts\BusinessReport\FixedRpt.js" />
     <Content Include="Scripts\BusinessReport\TargetPlanReported.js" />
     <Content Include="Scripts\jquery.base64.js" />
+    <Content Include="Scripts\linq.min.js" />
     <Content Include="Scripts\multiple-select-master\demos\assets\bootstrap\css\bootstrap-theme.css" />
     <Content Include="Scripts\multiple-select-master\demos\assets\bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="Scripts\multiple-select-master\demos\assets\bootstrap\css\bootstrap.css" />
@@ -206,12 +205,7 @@
     <Content Include="DepartmentStoreReport\DSTargetReturnDataReport.aspx" />
     <Content Include="DepartmentStoreReport\DSTargetSumReport.aspx" />
     <Content Include="DllReference\Newtonsoft.Json.dll" />
-    <Content Include="DllReference\Wanda.Platform.Permission.ClientComponent.dll" />
-    <Content Include="DllReference\Wanda.Platform.Permission.Common.dll" />
-    <Content Include="DllReference\Wanda.Platform.Permission.Contract.dll" />
     <Content Include="DllReference\Wanda.Platform.WorkFlow.ClientComponent.dll" />
-    <Content Include="DllReference\Wanda.Workflow.Client.dll" />
-    <Content Include="DllReference\Wanda.Workflow.Object.dll" />
     <Content Include="Error.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\1.jpg" />
@@ -1965,7 +1959,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>10700</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

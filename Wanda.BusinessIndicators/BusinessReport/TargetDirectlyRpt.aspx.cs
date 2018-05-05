@@ -15,8 +15,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         private string sysID;
         private int finMonth;
         private int finYear;
-
-
+        public bool IsLastestVersion = false;
 
         public string TreeDataJson
         {
@@ -36,7 +35,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
 
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+
 
             if (!string.IsNullOrEmpty(Request.QueryString["_sysid"]))
             {
@@ -52,6 +51,10 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             {
                 finYear = int.Parse(HttpUtility.UrlDecode(Request.QueryString["_finYear"]));
             }
+            if (!string.IsNullOrEmpty(Request.QueryString["IsLastestVersion"]))
+            {
+                IsLastestVersion = bool.Parse(HttpUtility.UrlDecode(Request.QueryString["IsLastestVersion"]));
+            }
             if (finMonth == 0 && finYear == 0)
             {
                 DateTime datetime = StaticResource.Instance.GetReportDateTime();
@@ -62,12 +65,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             if (!IsPostBack)
             {
 
-                if (!string.IsNullOrEmpty(Request.QueryString["IsLastestVersion"]))
-                {
-                    chkIsLastestVersion.Checked = bool.Parse(HttpUtility.UrlDecode(Request.QueryString["IsLastestVersion"]));
-                }
-
-
+                chkIsLastestVersion.Checked = bool.Parse(HttpUtility.UrlDecode(Request.QueryString["IsLastestVersion"]));
 
                 if (list != null && list.Count > 0)
                 {
@@ -145,7 +143,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     SubManage();
 
                 }
-
+                GetTargetVersionType(ddlSystem.SelectedValue.ToString(), finYear, finMonth, IsLastestVersion);
             }
         }
 
@@ -249,6 +247,40 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         {
             TransferOtherPage(ddlSystem.SelectedValue.ToGuid());
             SubManage();
+        }
+        /// <summary>
+        /// 获取指标版本数据
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <param name="IsLatestVersion"></param>
+        private void GetTargetVersionType(string sid, int year, int month, bool IsLatestVersion)
+        {
+            ddlVersionType.Items.Clear();
+            //是否查询审批中数据
+            if (IsLatestVersion)
+            {
+                var result = B_TargetplanOperator.Instance.GetTargetVersionType(sid, year, month);
+                if (result.Count > 0)
+                {
+                    foreach (var item in result)
+                    {
+                        ddlVersionType.Items.Add(new ListItem(item.VersionName, item.ID.ToString()));
+                    }
+                }
+            }
+            else
+            {
+                var result = A_TargetplanOperator.Instance.GetTargetVersionType(sid, year, month);
+                if (result.Count > 0)
+                {
+                    foreach (var item in result)
+                    {
+                        ddlVersionType.Items.Add(new ListItem(item.VersionName, item.ID.ToString()));
+                    }
+                }
+            }
         }
     }
 }

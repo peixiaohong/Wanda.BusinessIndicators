@@ -11,7 +11,9 @@
             yearlyState: false,
             systemID: "a00ad17d-57da-4f8b-9c60-807a5e83d7a7",
             yearSelect: "",
-            monthSelect: ""
+            monthSelect: "",
+            versions: [],
+            versionSelect: "",
         },
         mounted: function () {
             var self = this;
@@ -27,8 +29,7 @@
                     success: function (res) {
                         if (res.IsSuccess && res.StatusCode == 200) {
                             self.systemAndYearList = res.Data;
-                            self.InitYM();
-                            self.ChangeData();
+                            self.InitYM();                            
                         } else {
                             utils.alertMessage(res.StatusMessage)
                         }
@@ -45,12 +46,14 @@
                         "SystemID": self.systemID,
                         "Year": Number(self.yearSelect),
                         "Month": Number(self.monthSelect),
+                        "TargetPlanID": self.versionSelect,
                         "IsLatestVersion": true,
                         "DataSource": "Draft",
                         "IsAll": true,
                     },
                     success: function (res) {
                         if (res.IsSuccess && res.StatusCode == 200) {
+                            console.log(res);
                             self.title = res.Data.title;
                             self.list = JSON.parse(res.Data.list);
                         } else {
@@ -64,6 +67,32 @@
                 var date = new Date();
                 self.yearSelect = date.getFullYear();
                 self.monthSelect = date.getMonth() + 1.
+                self.ChangeVersion();
+            },
+            ChangeVersion: function () {
+                var self = this;
+                var url = api_url + 'Report/GetTargetPlanVersionList';
+                utils.ajax({
+                    type: 'GET',
+                    url: url,
+                    args: {
+                        "SystemID": self.systemID,
+                        "Year": Number(self.yearSelect),
+                        "Month": Number(self.monthSelect),
+                    },
+                    success: function (res) {
+                        if (res.IsSuccess && res.StatusCode == 200) {
+                            if (res.Data.length) {
+                                console.log(res);
+                                self.versions = res.Data;
+                                self.versionSelect = self.versions[0].ID;
+                            }                           
+                            self.ChangeData();
+                        } else {
+                            utils.alertMessage(res.StatusMessage)
+                        }
+                    }
+                });
             },
             ToThousands: function (num) {
                 return (parseInt(num) || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');

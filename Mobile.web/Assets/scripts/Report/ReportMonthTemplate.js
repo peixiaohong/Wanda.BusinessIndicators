@@ -24,6 +24,7 @@
                         "Year": Number(utils.getQueryString("year")),
                         "Month": Number(utils.getQueryString("month")),
                         "TargetName": decodeURI(utils.getQueryString("name")),
+                        "TargetPlanID": utils.getQueryString("versionID"),
                         "IncludeHaveDetail": false,
                         "IsLatestVersion": true,
                         "DataSource": "Draft",

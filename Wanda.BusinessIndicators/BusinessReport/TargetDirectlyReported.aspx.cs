@@ -214,6 +214,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             bmr.FinMonth = FinMonth;
             bmr.FinYear = FinYear;
             bmr.Status = 2;
+            bmr.DefaultVersionStatus = 1;
             bmr.WFStatus = "Draft";
             bmr.CreateTime = DateTime.Now;
             bmr.ID = B_MonthlyreportOperator.Instance.AddMonthlyreport(bmr);

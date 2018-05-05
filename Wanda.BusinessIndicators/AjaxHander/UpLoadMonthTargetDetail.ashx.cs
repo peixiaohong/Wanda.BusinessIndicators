@@ -179,7 +179,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     }
                     file.SaveAs(fileDirectlyPathName); //保存文件到磁盘
                     string errorDirectly = "";
-                    CurrentRpt = new ReportInstance(MonthReportID, true);
+                    //CurrentRpt = new ReportInstance(MonthReportID, true);
+                    CurrentRpt = new ReportInstance(MonthReportID, true, "Draft", false);
 
                     UpDirectlyTargetPlanDetailExcel(out errorDirectly, context, fileDirectlyPathName); //读取上传Excel文件
                     context.Response.Write(errorDirectly);
@@ -1745,7 +1746,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
             //获取当年指标计划ID
             Guid targetPlanID = Guid.Empty;
-            List<A_TargetPlan> CurrentYearTargetPlan = LJTH.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetTargetplanList(SystemID, FinYear).ToList();
+            //List<A_TargetPlan> CurrentYearTargetPlan = LJTH.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetTargetplanList(SystemID, FinYear).ToList();
+            List<A_TargetPlan> CurrentYearTargetPlan = LJTH.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetDefaultTargetplanList(SystemID, FinYear).ToList();
             if (CurrentYearTargetPlan.Count > 0)
             {
                 targetPlanID = CurrentYearTargetPlan[0].ID;
@@ -1820,6 +1822,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             if (bmr != null && lstInsertMonthReportDetail.Count > 0)
             {
                 bmr.Status = 5;
+                bmr.TargetPlanID = lstInsertMonthReportDetail.FirstOrDefault().TargetPlanID;
                 B_MonthlyreportOperator.Instance.UpdateMonthlyreport(bmr);
             }
 

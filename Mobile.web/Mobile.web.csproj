@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="Assets\images\62.jpg" />
     <Content Include="Assets\images\action-icon.png" />
     <Content Include="Assets\images\ajax-loader.gif" />
     <Content Include="Assets\images\arrow-left.png" />
@@ -94,12 +95,14 @@
     <Content Include="Assets\images\close-icon.png" />
     <Content Include="Assets\scripts\common\base.utils.js" />
     <Content Include="Assets\scripts\common\vue.utils.js" />
-    <Content Include="Assets\scripts\Report\ReportApprove.js" />
     <Content Include="Assets\scripts\Report\ReportMonth.js" />
+    <Content Include="Assets\scripts\Report\ReportMonthApprove.js" />
     <Content Include="Assets\scripts\Report\ReportMonthTemplate.js" />
     <Content Include="Assets\scripts\Report\ReportTarget.js" />
+    <Content Include="Assets\scripts\Report\ReportTargetApprove.js" />
     <Content Include="Assets\scripts\vue-resource.min.js" />
     <Content Include="Assets\scripts\vue.min.js" />
+    <Content Include="Assets\styles\login.css" />
     <Content Include="Assets\vendors\bpf\bpf-sdk-core.css" />
     <Content Include="Assets\vendors\bpf\bpf-workflow-mobile.css" />
     <Content Include="Assets\vendors\jquery-blockui\js\jquery.blockUI.js" />
@@ -107,10 +110,12 @@
     <Content Include="Assets\vendors\workflow\js\wanda-wf-client.js" />
     <Content Include="Assets\vendors\workflow\js\Workflow.js" />
     <Content Include="Public\Bridge.aspx" />
+    <Content Include="Public\Login.aspx" />
     <Content Include="Public\OABridge.aspx" />
     <Content Include="Report\ReportList.aspx" />
     <Content Include="Report\ReportMonthApprove.aspx" />
     <Content Include="Report\ReportTarget.aspx" />
+    <Content Include="Report\ReportTargetApprove.aspx" />
     <Content Include="SiteMasterPage\bsCtrl.ascx" />
     <Content Include="SiteMasterPage\MainMasterPage.Master" />
     <Content Include="SiteMasterPage\MainMasterApprove.Master" />
@@ -149,6 +154,13 @@
     </Compile>
     <Compile Include="Public\Bridge.aspx.designer.cs">
       <DependentUpon>Bridge.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Public\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Public\OABridge.aspx.cs">
       <DependentUpon>OABridge.aspx</DependentUpon>
@@ -191,6 +203,13 @@
     </Compile>
     <Compile Include="Report\ReportTarget.aspx.designer.cs">
       <DependentUpon>ReportTarget.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\ReportTargetApprove.aspx.cs">
+      <DependentUpon>ReportTargetApprove.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\ReportTargetApprove.aspx.designer.cs">
+      <DependentUpon>ReportTargetApprove.aspx</DependentUpon>
     </Compile>
     <Compile Include="SiteMasterPage\bsCtrl.ascx.cs">
       <DependentUpon>bsCtrl.ascx</DependentUpon>

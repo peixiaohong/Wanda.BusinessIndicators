@@ -452,7 +452,10 @@ function ChangeTargetDetail(sender, TabOrSearch) {
         $('#imgtableUpDown').show();
     }
 }
-
+function f_search() {
+    IsNewDataIndex = "";
+    ChangeTargetDetail($(".defaultTarget"), "Tab");
+}
 //
 function TransitionCondition(TCYear, TCMonth, TCSystemID, TCTargetPlanID, TCIsLatestVersion, resultDate, index) {
     if (resultDate == undefined) {
@@ -2801,20 +2804,17 @@ function GetshrinkageTitleList() {
 function FileChangeClick() {
    
     $("#ddlYear").change(function () {
-        CommonGetTargetVersionType($("#ddlSystem").val(), $("#ddlYear").val(), $("#ddlMonth").val(), $("#chkIsLastestVersion").is(":checked"))
+        CommonGetTargetVersionType($("#ddlSystem").val(), $("#ddlYear").val(), $("#ddlMonth").val())
     });
     $("#ddlMonth").change(function () {
-        CommonGetTargetVersionType($("#ddlSystem").val(), $("#ddlYear").val(), $("#ddlMonth").val(), $("#chkIsLastestVersion").is(":checked"))
-    });
-    $("#chkIsLastestVersion").click(function () {
-        CommonGetTargetVersionType($("#ddlSystem").val(), $("#ddlYear").val(), $("#ddlMonth").val(), $("#chkIsLastestVersion").is(":checked"))
+        CommonGetTargetVersionType($("#ddlSystem").val(), $("#ddlYear").val(), $("#ddlMonth").val())
     });
 }
-function CommonGetTargetVersionType(sid, y, m, lv) {
+function CommonGetTargetVersionType(sid, y, m) {
     WebUtil.ajax({
         async: true,
         url: "/MonthlyReportController/GetTargetVersionType",
-        args: { SystemID: sid, FinYear: y, FinMonth: m, IsLatestVersion: lv },
+        args: { SystemID: sid, FinYear: y, FinMonth: m },
         successReturn: function (result) {
             $("#ddlVersionType").empty();
             if (result != undefined && result.length > 0) {
@@ -2822,7 +2822,6 @@ function CommonGetTargetVersionType(sid, y, m, lv) {
                     $("#ddlVersionType").append("<option value='" + result[i].ID + "'>" + result[i].VersionName + "</option>");
                 }
             }
-            $("#hidSelectTragetPlanID").text($("#ddlVersionType").val());
         }
     });
 }

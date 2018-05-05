@@ -20,6 +20,10 @@ var Upload = true;
 
 var MissType = "MissTargetRpt";
 
+var unit = "";  //单位
+var unfoldTitleList = []; //折叠完成情况明细与经营报告明细三级表头
+var shrinkageTitleList = [];//展开完成情况明细与经营报告明细三级表头
+
 //加载模版项
 function loadTmpl(selector) {
     return WebUtil.loadTmpl("../BusinessReport/TargetRptTmpl.html?v=" + Math.floor(Math.random() * 1000 + 1), selector);
@@ -31,7 +35,14 @@ function loadTmpl_1(selector) {
 }
 
 function GetReportInstance() {
-
+    $('.tip').removeClass('hide');
+    $('#weiwancheng1').removeClass('hide');
+    if ($("#hiddenDis").val() == "1") {
+        $("#ReportedDone").removeClass("hide");
+        $('.tip').addClass('hide');
+        $('#weiwancheng1').addClass('hide');
+        return;
+    }
     WebUtil.ajax({
         async: true,
         url: "/TargetReportedControll/GetReportInstance",
@@ -42,6 +53,7 @@ function GetReportInstance() {
 }
 
 function SplitData(resultData) {
+    MonthReportData = resultData;
     if (resultData != null) {
         if (resultData[0] != null) {
             ReportInstance = resultData[0].ObjValue;
@@ -397,6 +409,23 @@ function ComplateDetailLiaddCss(sender) {
             return;
         }
     });
+    $("#CompleteDetailHead").empty();
+    //获取当前指标单位
+    $.each(MonthReportData[0].ObjValue._Target, function (i, item) {
+        if ($(sender).text().indexOf(item.TargetName) > -1) {
+            unit = item.Unit;
+            return;
+        }
+    });
+    //获取当前指标是否为为多指标
+    if (TemplData.IsBlendTarget && unfoldTitleList.length == 0) {
+        for (var i = 0; i < 9; i++) {
+            if (i < 7) {
+                unfoldTitleList.push({ "target1": TemplData.ObjValue[0].Name, "target2": TemplData.ObjValue[1].Name });
+            }
+            shrinkageTitleList.push({ "target1": TemplData.ObjValue[0].Name, "target2": TemplData.ObjValue[1].Name });
+        }
+    }
     $("#Ul4 .active_sub3").each(function () {
         $(this).removeClass("active_sub3");
     });
@@ -409,25 +438,31 @@ function ComplateDetailLiaddCss(sender) {
         strComplateMonthReportDetilHtmlTemplate = TemplData.HtmlTemplate.split(',');
     }
     //tmpl模板名称
+    if (sender.IsBlendTarget && unfoldTitleList.length == 0) {
+        for (var i = 0; i < 9; i++) {
+            if (i < 7) {
+                unfoldTitleList.push({ "target1": sender.ObjValue[0].Name, "target2": sender.ObjValue[1].Name });
+            }
+            shrinkageTitleList.push({ "target1": sender.ObjValue[0].Name, "target2": sender.ObjValue[1].Name });
+        }
+    }
+
     //if (strComplateMonthReportDetilHtmlTemplate[2] != "" && strComplateMonthReportDetilHtmlTemplate[2] != undefined) {
     //    ComplateTargetDetailTemplate = strComplateMonthReportDetilHtmlTemplate[2];
     if (strComplateMonthReportDetilHtmlTemplate[1] != "" && strComplateMonthReportDetilHtmlTemplate[1] != undefined) {
         ComplateTargetDetailTemplate = strComplateMonthReportDetilHtmlTemplate[1];
     } else {
-        ComplateTargetDetailTemplate = "TargetReportedComplateTargetDetailTemplate"
+        ComplateTargetDetailTemplate = "TmplManageTargetDetail_Data"
     }
 
     $("#tab2_rows").empty();
     //为了配合混合指标展示，外面包装了一层data
     //loadTmpl('#' + ComplateTargetDetailTemplate).tmpl(sender).appendTo('#tab2_rows');
     var dataArray = [];
-    if (ComplateTargetDetailTemplate == "TargetReportedComplateTargetDetailTemplate") {
-        dataArray = TemplData;
-    }
-    else {
-        var data = { "data": TemplData };
-        dataArray.push(data);
-    }
+
+    var data = { "data": TemplData };
+    dataArray.push(data);
+
 
     loadTmpl('#' + ComplateTargetDetailTemplate).tmpl(dataArray).appendTo('#tab2_rows');
 
@@ -442,6 +477,24 @@ function SetComplateTargetDetailData(sender, Type) {
         strComplateMonthReportDetilHtmlTemplate = sender.HtmlTemplate.split(',');
     }
     $("#CompleteDetailHead").empty();
+    //获取当前指标单位
+    $.each(MonthReportData[0].ObjValue._Target, function (i, item) {
+        if (sender.Name.indexOf(item.TargetName) > -1) {
+            unit = item.Unit;
+            return;
+        }
+    });
+
+    if (sender.IsBlendTarget && unfoldTitleList.length == 0) {
+        for (var i = 0; i < 9; i++) {
+            if (i < 7) {
+                unfoldTitleList.push({ "target1": sender.ObjValue[0].Name, "target2": sender.ObjValue[1].Name });
+            }
+            shrinkageTitleList.push({
+                "target1": sender.ObjValue[0].Name, "target2": sender.ObjValue[1].Name
+            });
+        }
+    }
     if (strComplateMonthReportDetilHtmlTemplate[0] != "" && strComplateMonthReportDetilHtmlTemplate[0] != undefined) {
         loadTmpl('#' + strComplateMonthReportDetilHtmlTemplate[0]).tmpl(sender).appendTo('#CompleteDetailHead');
 
@@ -456,7 +509,7 @@ function SetComplateTargetDetailData(sender, Type) {
     if (strComplateMonthReportDetilHtmlTemplate[1] != "" && strComplateMonthReportDetilHtmlTemplate[1] != undefined) {
         ComplateTargetDetailTemplate = strComplateMonthReportDetilHtmlTemplate[1];
     } else {
-        ComplateTargetDetailTemplate = "TargetReportedComplateTargetDetailTemplate"
+        ComplateTargetDetailTemplate = "TmplManageTargetDetail_Data"
     }
 
     if (currentDetailTarget == null) {
@@ -467,13 +520,9 @@ function SetComplateTargetDetailData(sender, Type) {
         //为了配合混合指标展示，外面包装了一层data
         //loadTmpl('#' + ComplateTargetDetailTemplate).tmpl(sender).appendTo('#tab2_rows');
         var dataArray = [];
-        if (ComplateTargetDetailTemplate == "TargetReportedComplateTargetDetailTemplate") {
-            dataArray = sender;
-        }
-        else {
-            var data = { "data": sender };
-            dataArray.push(data);
-        }
+
+        var data = { "data": sender };
+        dataArray.push(data);
 
         loadTmpl('#' + ComplateTargetDetailTemplate).tmpl(dataArray).appendTo('#tab2_rows');
 
@@ -482,6 +531,13 @@ function SetComplateTargetDetailData(sender, Type) {
         if (Type == 1) {
             ComplateDetailLiaddCss(currentDetailTarget);
         }
+        //获取当前指标单位
+        $.each(MonthReportData[0].ObjValue._Target, function (i, item) {
+            if (sender.Name.indexOf(item.TargetName) > -1) {
+                unit = item.Unit;
+                return;
+            }
+        });
     }
 
     if (MonthReportOrderType == "Detail") {
@@ -494,6 +550,7 @@ function SetComplateTargetDetailData(sender, Type) {
         $(".DetailCss").addClass("tabOrderBackground");
     }
     ComplateDetailReplaceClick();
+
 }
 
 
@@ -1638,61 +1695,33 @@ function unfoldTitle() {
     if (liSelect.length > 0) {
         tipName = liSelect.find("span").text();
     }
-    if (tipName == "经营报告明细") {
-        $("#CompleteDetailHead_1").html("");
-        $("#tab2_rows_1").html("");
-        var targetName = $("#Ul4_1 .active_sub3")[0] == undefined ? "" : $("#Ul4_1 .active_sub3")[0].innerText;
-        var TemplData = {};
-        $.each(ManageReportDetailData, function (i, item) {
-            if (item.Name == targetName) {
-                TemplData = item;
-                return;
-            }
-        });
 
-        //加载表头
-        loadTmpl('#TmplCompleteDetail_Head_All').tmpl(TemplData).appendTo('#CompleteDetailHead_1'); //加载列头 
+    $("#CompleteDetailHead").html("");
+    $("#tab2_rows").html("");
+    var targetName = $("#Ul4 .active_sub3")[0] == undefined ? "" : $("#Ul4 .active_sub3")[0].innerText;
+    var TemplData = {};
+    $.each(ReportedComplateDetailData, function (i, item) {
+        if (item.Name == targetName) {
+            TemplData = item;
+            return;
+        }
+    });
 
-        var dataArray = [];
-        var data = { "data": TemplData };
-        dataArray.push(data);
+    //加载表头
+    loadTmpl('#TmplCompleteDetail_Head_All').tmpl(TemplData).appendTo('#CompleteDetailHead'); //加载列头 
 
-        loadTmpl('#TmplManageTargetDetail_Data_All').tmpl(dataArray).appendTo('#tab2_rows_1');
-        $("#importedDataTable2_1").css("width", "110%");
+    var dataArray = [];
+    var data = { "data": TemplData };
+    dataArray.push(data);
 
-        var obj = $("#CompleteDetailHead_1");
-        var tab = $("#tab2_rows_1");
-        FloatHeader(obj, tab, false, "MonthRpt");
-        AddBackGroundColor();
-    }
-    else if (tipName == "完成情况明细") {
-        $("#CompleteDetailHead").html("");
-        $("#tab2_rows").html("");
-        var targetName = $("#Ul4 .active_sub3")[0] == undefined ? "" : $("#Ul4 .active_sub3")[0].innerText;
-        var TemplData = {};
-        $.each(ComplateDetailData, function (i, item) {
-            if (item.Name == targetName) {
-                TemplData = item;
-                return;
-            }
-        });
+    loadTmpl('#TmplCompleteDetail_Data_All').tmpl(dataArray).appendTo('#tab2_rows');
+    $("#importedDataTable2").css("width", "110%");
 
-        //加载表头
-        loadTmpl('#TmplCompleteDetail_Head_All').tmpl(TemplData).appendTo('#CompleteDetailHead'); //加载列头 
-
-        var dataArray = [];
-        var data = { "data": TemplData };
-        dataArray.push(data);
-
-        loadTmpl('#TmplCompleteDetail_Data_All').tmpl(dataArray).appendTo('#tab2_rows');
-        $("#importedDataTable2").css("width", "110%");
-
-        var obj = $("#CompleteDetailHead");
-        var tab = $("#tab2_rows");
-        FloatHeader(obj, tab, false, "MonthRpt");
-        AddBackGroundColor();
-    }
-
+    var obj = $("#CompleteDetailHead");
+    var tab = $("#tab2_rows");
+    FloatHeader(obj, tab, false, "MonthRpt");
+    //SetComplateTargetDetailData(TemplData, 2);
+    ComplateDetailReplaceClick();
 }
 //完成情况明细点击警示灯收缩列
 function shrinkageTitle() {
@@ -1701,60 +1730,34 @@ function shrinkageTitle() {
     if (liSelect.length > 0) {
         tipName = liSelect.find("span").text();
     }
-    if (tipName == "经营报告明细") {
-        $("#CompleteDetailHead_1").html("");
-        $("#tab2_rows_1").html("");
 
-        var targetName = $("#Ul4_1 .active_sub3")[0] == undefined ? "" : $("#Ul4_1 .active_sub3")[0].innerText;
-        var TemplData = {};
-        $.each(ManageReportDetailData, function (i, item) {
-            if (item.Name == targetName) {
-                TemplData = item;
-                return;
-            }
-        });
-        //加载表头
-        loadTmpl('#TmplCompleteDetail_Head').tmpl(TemplData).appendTo('#CompleteDetailHead_1'); //加载列头 
+    $("#CompleteDetailHead").html("");
+    $("#tab2_rows").html("");
 
-        var dataArray = [];
-        var data = { "data": TemplData };
-        dataArray.push(data);
+    var targetName = $("#Ul4 .active_sub3")[0] == undefined ? "" : $("#Ul4 .active_sub3")[0].innerText;
+    var TemplData = {};
+    $.each(ReportedComplateDetailData, function (i, item) {
+        if (item.Name == targetName) {
+            TemplData = item;
+            return;
+        }
+    });
+    //加载表头
+    loadTmpl('#TmplCompleteDetail_Head').tmpl(TemplData).appendTo('#CompleteDetailHead'); //加载列头 
 
-        loadTmpl('#TmplCompleteDetail_Data').tmpl(dataArray).appendTo('#tab2_rows_1');
+    var dataArray = [];
+    var data = { "data": TemplData };
+    dataArray.push(data);
 
-        $("#importedDataTable2_1").css("width", "100%");
-        var obj = $("#CompleteDetailHead_1");
-        var tab = $("#tab2_rows_1");
-        FloatHeader(obj, tab, false, "MonthRpt");
-        AddBackGroundColor();
-    }
-    else if (tipName == "完成情况明细") {
-        $("#CompleteDetailHead").html("");
-        $("#tab2_rows").html("");
+    loadTmpl('#TmplCompleteDetail_Data').tmpl(dataArray).appendTo('#tab2_rows');
 
-        var targetName = $("#Ul4 .active_sub3")[0] == undefined ? "" : $("#Ul4 .active_sub3")[0].innerText;
-        var TemplData = {};
-        $.each(ComplateDetailData, function (i, item) {
-            if (item.Name == targetName) {
-                TemplData = item;
-                return;
-            }
-        });
-        //加载表头
-        loadTmpl('#TmplCompleteDetail_Head').tmpl(TemplData).appendTo('#CompleteDetailHead'); //加载列头 
+    $("#importedDataTable2").css("width", "100%");
+    var obj = $("#CompleteDetailHead");
+    var tab = $("#tab2_rows");
+    FloatHeader(obj, tab, false, "MonthRpt");
+    //SetComplateTargetDetailData(TemplData, 2);
+    ComplateDetailReplaceClick();
 
-        var dataArray = [];
-        var data = { "data": TemplData };
-        dataArray.push(data);
-
-        loadTmpl('#TmplCompleteDetail_Data').tmpl(dataArray).appendTo('#tab2_rows');
-
-        $("#importedDataTable2").css("width", "100%");
-        var obj = $("#CompleteDetailHead");
-        var tab = $("#tab2_rows");
-        FloatHeader(obj, tab, false, "MonthRpt");
-        AddBackGroundColor();
-    }
 }
 
 
@@ -1782,3 +1785,13 @@ function ComplateDetailReplaceClick() {
     });
 }
 
+function GetUnit() {
+    return unit;
+}
+
+function GetunfoldTitleList() {
+    return unfoldTitleList;
+}
+function GetshrinkageTitleList() {
+    return shrinkageTitleList;
+}

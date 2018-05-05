@@ -79,7 +79,7 @@ IF @IsHaveArea>0
 	   ,( SELECT CompanyName FROM dbo.C_Company WHERE id = a.CompanyID   ) AS CompanyName
 	   ,(SELECT TargetName FROM  dbo.C_Target WHERE id= a.TargetID AND SystemID =a.SystemID  AND  VersionStart <= GETDATE() AND GETDATE() < VersionEnd   AND IsDeleted =0   )AS   TargetName
 	   ,(SELECT TargetType FROM  dbo.C_Target WHERE id= a.TargetID AND SystemID =a.SystemID AND  VersionStart <= GETDATE() AND GETDATE() < VersionEnd    AND IsDeleted =0 ) AS TargetType
-	   ,(SELECT sum(Target) FROM B_TargetPlanDetail WHERE SystemID=a.SystemID AND CompanyID=a.CompanyID AND FinYear=a.FinYear AND TargetID=a.TargetID AND TargetPlanID=a.TargetPlanID  AND IsDeleted=0 GROUP BY SystemID,CompanyID,FinYear,TargetID,TargetPlanID ) AS NPlanAmmountByYear--全年指标	   
+	   ,(SELECT sum(Target) FROM A_TargetPlanDetail WHERE SystemID=a.SystemID AND CompanyID=a.CompanyID AND FinYear=a.FinYear AND TargetID=a.TargetID AND TargetPlanID=a.TargetPlanID  AND IsDeleted=0 GROUP BY SystemID,CompanyID,FinYear,TargetID,TargetPlanID ) AS NPlanAmmountByYear--全年指标	   
 	  FROM [dbo].[B_MonthlyReportDetail] a INNER JOIN B_MonthlyReport b ON a.MonthlyReportID=b.ID  
 	  WHERE b.SystemBatchID=@SystemBatchID
 	END 
@@ -148,7 +148,7 @@ ELSE
 	   ,( SELECT CompanyName FROM dbo.C_Company WHERE id = CompanyID   ) AS CompanyName
 	   ,(SELECT TargetName FROM  dbo.C_Target WHERE id= TargetID AND SystemID =SystemID  AND  VersionStart <= GETDATE() AND GETDATE() < VersionEnd   AND IsDeleted =0   )AS   TargetName
 	   ,(SELECT TargetType FROM  dbo.C_Target WHERE id= TargetID AND SystemID =SystemID AND  VersionStart <= GETDATE() AND GETDATE() < VersionEnd    AND IsDeleted =0 ) AS TargetType
-	   ,(SELECT sum(Target) FROM B_TargetPlanDetail WHERE SystemID=SystemID AND CompanyID=CompanyID AND FinYear=FinYear AND TargetID=TargetID AND TargetPlanID=TargetPlanID  AND IsDeleted=0 GROUP BY SystemID,CompanyID,FinYear,TargetID,TargetPlanID ) AS NPlanAmmountByYear--全年指标	   
+	   ,(SELECT sum(Target) FROM A_TargetPlanDetail WHERE SystemID=SystemID AND CompanyID=CompanyID AND FinYear=FinYear AND TargetID=TargetID AND TargetPlanID=TargetPlanID  AND IsDeleted=0 GROUP BY SystemID,CompanyID,FinYear,TargetID,TargetPlanID ) AS NPlanAmmountByYear--全年指标	   
 	  FROM B_MonthlyReportDetail  
 	  WHERE MonthlyReportID=@lastMonthlyReportID
 	END 

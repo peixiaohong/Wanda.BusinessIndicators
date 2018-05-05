@@ -13,6 +13,7 @@
     <uc1:bsCtrl runat="server" ID="bsCtrl" />
     <link href="<%=ResolveUrl("~/Assets/vendors/bootstrap/css/bootstrap.min.css") %>" rel="stylesheet" />
     <link href="<%=ResolveUrl("~/Assets/styles/content.css") %>" rel="stylesheet" />
+    <link href="<%=ResolveUrl("~/Assets/styles/main.css") %>" rel="stylesheet" />
     <link href="<%=ResolveUrl("~/Assets/styles/common.css") %>" rel="stylesheet" />
 
     <script src="<%=ResolveUrl("~/Assets/scripts/vue.min.js") %>"></script>

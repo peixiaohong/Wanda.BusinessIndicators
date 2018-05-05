@@ -382,7 +382,7 @@ function BangDetail(TID) {
         url: "/TargetController/GetSumMonthTargetDetailByTID",
         args: { TargetPlanID: TID },
         successReturn: function (view) {
-            console.log(JSON.stringify(view));
+            //console.log(JSON.stringify(view));
             SumMonthTargetList = view;
         }
     });
