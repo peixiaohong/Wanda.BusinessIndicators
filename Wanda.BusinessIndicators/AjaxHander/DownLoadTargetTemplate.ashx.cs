@@ -1,6 +1,7 @@
 ﻿using Aspose.Cells;
 using Lib.Config;
 using Lib.Xml;
+using LJTH.BusinessIndicators.BLL.BizBLL;
 using LJTH.BusinessIndicators.Common;
 using LJTH.BusinessIndicators.Common.Web;
 using LJTH.BusinessIndicators.Engine;
@@ -148,7 +149,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         private void DownExcelMonthReportDetailForOrigina(HttpContext context, ReportInstance rpt)
         {
             string templeteName = "指标上报模版V1.xlsx";
-            string fileName = "指标上报";
+            string fileName = "月度经营报告上报";
 
             // ReportInstance rpt = new ReportInstance(MonthReportID, true);
             string str;
@@ -401,6 +402,12 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     #endregion
                 }
 
+                var AreaName = "";
+                if (rpt.AreaID != Guid.Empty)
+                {
+                    AreaName = "-" + S_OrganizationalActionOperator.Instance.GetDataByID(rpt.AreaID).CnName + "-";
+                }
+
                 MemoryStream stream = designer.Workbook.SaveToStream();
                 fileStream.Close();
                 fileStream.Dispose();
@@ -409,7 +416,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 HttpContext.Current.Response.Buffer = true;
                 HttpContext.Current.Response.Charset = "utf-8";
                 string dateNow = DateTime.Now.ToString("HHmmss");
-                HttpContext.Current.Response.AppendHeader("Content-Disposition", "attachment;filename=" + HttpUtility.UrlEncode(rpt._System.SystemName + fileName, System.Text.Encoding.UTF8) + FinYear.ToString() + FinMonth.ToString("D2") + "_" + dateNow + ".xls");
+                HttpContext.Current.Response.AppendHeader("Content-Disposition", "attachment;filename=" + HttpUtility.UrlEncode(rpt._System.SystemName + AreaName + fileName, System.Text.Encoding.UTF8) + FinYear.ToString() + FinMonth.ToString("D2") + "_" + dateNow + ".xls");
                 HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.Default;
                 HttpContext.Current.Response.ContentType = "application/ms-excel";
                 HttpContext.Current.Response.BinaryWrite(stream.ToArray());
@@ -431,7 +438,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         private void DownExcelMonthReportDetailForBlend(HttpContext context, ReportInstance rpt, List<C_Target> blendTargetList)
         {
             string templeteName = "指标上报模版_混合V1.xlsx";
-            string fileName = "指标上报";
+            string fileName = "月度经营报告上报";
             bool IncludeHaveDetail = true;
             // ReportInstance rpt = new ReportInstance(MonthReportID, true);
             //List<DictionaryVmodel> listTargetPlanView = new List<DictionaryVmodel>();
@@ -688,6 +695,11 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     worksheets[i + 1].Protect(ProtectionType.All);
                     #endregion
                 }
+                var AreaName = "";
+                if (rpt.AreaID != Guid.Empty)
+                {
+                    AreaName = "-" + S_OrganizationalActionOperator.Instance.GetDataByID(rpt.AreaID).CnName + "-";
+                }
 
                 MemoryStream stream = designer.Workbook.SaveToStream();
                 fileStream.Close();
@@ -697,7 +709,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 HttpContext.Current.Response.Buffer = true;
                 HttpContext.Current.Response.Charset = "utf-8";
                 string dateNow = DateTime.Now.ToString("HHmmss");
-                HttpContext.Current.Response.AppendHeader("Content-Disposition", "attachment;filename=" + HttpUtility.UrlEncode(rpt._System.SystemName + fileName, System.Text.Encoding.UTF8) + FinYear.ToString() + FinMonth.ToString("D2") + "_" + dateNow + ".xls");
+                HttpContext.Current.Response.AppendHeader("Content-Disposition", "attachment;filename=" + HttpUtility.UrlEncode(rpt._System.SystemName + fileName + AreaName, System.Text.Encoding.UTF8) + FinYear.ToString() + FinMonth.ToString("D2") + "_" + dateNow + ".xls");
                 HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.Default;
                 HttpContext.Current.Response.ContentType = "application/ms-excel";
                 HttpContext.Current.Response.BinaryWrite(stream.ToArray());
@@ -885,7 +897,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         private void DownTargetPlanExcelForOriginal(HttpContext context, ReportInstance rpt)
         {
             string templeteName = "指标上报模版V1.xlsx";
-            string fileName = "指标上报";
+            string fileName = "月度经营报告上报";
             //ReportInstance rpt = new ReportInstance(MonthReportID, true);
 
             List<DictionaryVmodel> listTargetPlanView = new List<DictionaryVmodel>();
@@ -1101,6 +1113,12 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     #endregion
                 }
 
+                var AreaName = "";
+                if (rpt.AreaID != Guid.Empty)
+                {
+                    AreaName = "-" + S_OrganizationalActionOperator.Instance.GetDataByID(rpt.AreaID).CnName + "-";
+                }
+
                 MemoryStream stream = designer.Workbook.SaveToStream();
                 fileStream.Close();
                 fileStream.Dispose();
@@ -1109,7 +1127,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 HttpContext.Current.Response.Buffer = true;
                 HttpContext.Current.Response.Charset = "utf-8";
                 string dateNow = DateTime.Now.ToString("HHmmss");
-                HttpContext.Current.Response.AppendHeader("Content-Disposition", "attachment;filename=" + HttpUtility.UrlEncode(rpt._System.SystemName + fileName, System.Text.Encoding.UTF8) + FinYear.ToString() + FinMonth.ToString("D2") + "_" + dateNow + ".xls");
+                HttpContext.Current.Response.AppendHeader("Content-Disposition", "attachment;filename=" + HttpUtility.UrlEncode(rpt._System.SystemName + fileName + AreaName, System.Text.Encoding.UTF8) + FinYear.ToString() + FinMonth.ToString("D2") + "_" + dateNow + ".xls");
                 HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.Default;
                 HttpContext.Current.Response.ContentType = "application/ms-excel";
                 HttpContext.Current.Response.BinaryWrite(stream.ToArray());
@@ -1128,7 +1146,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         private void DownTargetPlanExcelForBlend(HttpContext context, ReportInstance rpt, List<C_Target> blendTargetList)
         {
             string templeteName = "指标上报模版_混合V1.xlsx";
-            string fileName = "指标上报";
+            string fileName = "月度经营报告上报";
             // ReportInstance rpt = new ReportInstance(MonthReportID, true);
 
             List<DictionaryVmodel> listTargetPlanView = new List<DictionaryVmodel>();
@@ -1353,6 +1371,12 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     #endregion
                 }
 
+                var AreaName = "";
+                if (rpt.AreaID != Guid.Empty)
+                {
+                    AreaName = "-" + S_OrganizationalActionOperator.Instance.GetDataByID(rpt.AreaID).CnName + "-";
+                }
+
                 MemoryStream stream = designer.Workbook.SaveToStream();
                 fileStream.Close();
                 fileStream.Dispose();
@@ -1361,7 +1385,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 HttpContext.Current.Response.Buffer = true;
                 HttpContext.Current.Response.Charset = "utf-8";
                 string dateNow = DateTime.Now.ToString("HHmmss");
-                HttpContext.Current.Response.AppendHeader("Content-Disposition", "attachment;filename=" + HttpUtility.UrlEncode(rpt._System.SystemName + fileName, System.Text.Encoding.UTF8) + FinYear.ToString() + FinMonth.ToString("D2") + "_" + dateNow + ".xls");
+                HttpContext.Current.Response.AppendHeader("Content-Disposition", "attachment;filename=" + HttpUtility.UrlEncode(rpt._System.SystemName + fileName + AreaName, System.Text.Encoding.UTF8) + FinYear.ToString() + FinMonth.ToString("D2") + "_" + dateNow + ".xls");
                 HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.Default;
                 HttpContext.Current.Response.ContentType = "application/ms-excel";
                 HttpContext.Current.Response.BinaryWrite(stream.ToArray());
