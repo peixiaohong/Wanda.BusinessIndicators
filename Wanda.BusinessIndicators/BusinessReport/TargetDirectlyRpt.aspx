@@ -40,7 +40,7 @@
                 <table class="tab_search">
                     <tbody>
                         <tr>
-                            <th>上报系统</th>
+                            <th>板块</th>
                             <td>
                                 <input type="text" id="TxtSystem" style="width: 210px;" onclick="showMenu();" />
                                 <asp:DropDownList ID="ddlSystem" ClientIDMode="Static" runat="server" Style="width: 120px; display: none;" AutoPostBack="True" OnSelectedIndexChanged="ddlSystem_SelectedIndexChanged"></asp:DropDownList>

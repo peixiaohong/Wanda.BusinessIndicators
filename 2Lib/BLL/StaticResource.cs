@@ -310,6 +310,23 @@ namespace LJTH.BusinessIndicators.BLL
         /// </summary>
         /// <param name="SystemID">系统ID</param>
         /// <param name="FinYear">年</param>
+        /// <param name="TargetPlanID">治标版本</param>
+        /// <returns>计划指标</returns>
+        public List<A_TargetPlanDetail> GetTargetPlanList(Guid SystemID, int FinYear, Guid TargetPlanID)
+        {
+            if (_TargetPlanDetail == null || _TargetPlanDetail.Count <= 0 || !_TargetPlanDetail.Keys.Contains(FinYear))
+            {
+                var list = A_TargetplandetailOperator.Instance.GetTargetplandetailList(FinYear).ToList();
+                _TargetPlanDetail[FinYear] = list;
+            }
+            return _TargetPlanDetail[FinYear].FindAll(P => P.SystemID == SystemID && P.TargetPlanID == TargetPlanID);
+        }
+
+        /// <summary>
+        /// 获取计划指标
+        /// </summary>
+        /// <param name="SystemID">系统ID</param>
+        /// <param name="FinYear">年</param>
         /// <returns>计划指标</returns>
         public List<A_TargetPlanDetail> GetDefaultTargetPlanList(Guid SystemID, int FinYear)
         {

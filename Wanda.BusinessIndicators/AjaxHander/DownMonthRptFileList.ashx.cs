@@ -9217,7 +9217,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         {
                             List<DictionaryVmodel> ListItem = ((List<DictionaryVmodel>)listCompanyProperty[j].ObjValue);
                             List<DictionaryVmodel> ListItem2 = ((List<DictionaryVmodel>)listCompanyProperty2[j].ObjValue);
-                            if (ListItem.FirstOrDefault().Mark == "Area")
+                            if (ListItem.Count > 0 && ListItem.FirstOrDefault().Mark == "Area")
                             {
                                 for (int i = 0; i < ListItem.Count; i++)
                                 {
@@ -9469,7 +9469,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                                     }
                                 }
                             }
-                            else if (ListItem.FirstOrDefault().Mark == "LastArea")
+                            else if (ListItem.Count > 0 && ListItem.FirstOrDefault().Mark == "LastArea")
                             {
                                 for (int i = 0; i < ListItem.Count; i++)
                                 {
@@ -9735,7 +9735,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         else if (listCompanyProperty[j].Mark == "CompanyProperty")
                         {
                             List<DictionaryVmodel> ListItem = ((List<DictionaryVmodel>)listCompanyProperty[j].ObjValue);
-                            if (ListItem.FirstOrDefault().Mark == "Area")
+                            if (ListItem.Count > 0 && ListItem.FirstOrDefault().Mark == "Area")
                             {
                                 for (int i = 0; i < ListItem.Count; i++)
                                 {
@@ -9901,7 +9901,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                                     }
                                 }
                             }
-                            else if (ListItem.FirstOrDefault().Mark == "LastArea")
+                            else if (ListItem.Count > 0 && ListItem.FirstOrDefault().Mark == "LastArea")
                             {
                                 for (int i = 0; i < ListItem.Count; i++)
                                 {

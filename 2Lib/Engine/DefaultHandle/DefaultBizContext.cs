@@ -32,7 +32,7 @@ namespace LJTH.BusinessIndicators.Engine
                     ReportDate = DateTime.Parse(GroupRpt[0].FinYear + "-" + Convert.ToInt32(GroupRpt[0].FinMonth + 1) + "-01").AddDays(-1);
                 }
 
-                var TargetPlanListByYear = StaticResource.Instance.GetTargetPlanList(GroupRpt[0].SystemID, GroupRpt[0].FinYear);
+                var TargetPlanListByYear = StaticResource.Instance.GetTargetPlanList(GroupRpt[0].SystemID, GroupRpt[0].FinYear, GroupRpt[0].TargetPlanID);
                 var TargetData = StaticResource.Instance.GetTargetList(GroupRpt[0].SystemID, DateTime.Now).ToList();
                 foreach (MonthlyReportDetail item in GroupRpt)
                 {
