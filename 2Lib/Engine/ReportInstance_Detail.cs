@@ -429,10 +429,12 @@ namespace LJTH.BusinessIndicators.Engine
         public List<DictionaryVmodel> GetTagetPlanViewModel()
         {
             //获取当前月计划数据
-            List<A_TargetPlanDetail> listTargetPlan = StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear, FinMonth);
+            //List<A_TargetPlanDetail> listTargetPlan = StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear, FinMonth);
+            List<A_TargetPlanDetail> listTargetPlan = StaticResource.Instance.GetDefaultTargetPlanList(_System.ID, FinYear, FinMonth);
 
             //获取当前月与之前月的计划数据
-            List<A_TargetPlanDetail> listTargetPlanToYear = StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear);
+            //List<A_TargetPlanDetail> listTargetPlanToYear = StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear);
+            List<A_TargetPlanDetail> listTargetPlanToYear = StaticResource.Instance.GetDefaultTargetPlanList(_System.ID, FinYear);
 
             //得到当前系统的所有公司
             List<C_Company> listComPany = StaticResource.Instance.CompanyList[_System.ID];
