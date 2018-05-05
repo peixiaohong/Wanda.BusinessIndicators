@@ -166,7 +166,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     }
                     file.SaveAs(fileDirectlyPathName); //保存文件到磁盘
                     string errorDirectly = "";
-                    CurrentRpt = new ReportInstance(MonthReportID, true);
+                    //CurrentRpt = new ReportInstance(MonthReportID, true);
+                    CurrentRpt = new ReportInstance(MonthReportID, true, "Draft", false);
 
                     UpDirectlyTargetPlanDetailExcel(out errorDirectly, context, fileDirectlyPathName); //读取上传Excel文件
                     context.Response.Write(errorDirectly);
