@@ -452,7 +452,10 @@ function ChangeTargetDetail(sender, TabOrSearch) {
         $('#imgtableUpDown').show();
     }
 }
-
+function f_search() {
+    IsNewDataIndex = "";
+    ChangeTargetDetail($(".defaultTarget"), "Tab");
+}
 //
 function TransitionCondition(TCYear, TCMonth, TCSystemID, TCTargetPlanID, TCIsLatestVersion, resultDate, index) {
     if (resultDate == undefined) {
