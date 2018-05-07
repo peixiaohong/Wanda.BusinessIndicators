@@ -879,6 +879,13 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         /// </summary>
         public void DownTargetPlanExcel(HttpContext context)
         {
+            if (MonthReportID == null || MonthReportID == Guid.Empty)
+            {
+                context.Response.ContentType = "text/plain";
+                context.Response.Write("请确认有默认的分解指标计划。");
+                return;
+            }
+
             ReportInstance rpt = new ReportInstance(MonthReportID, true);
 
             var blendResult = GetBlendTargets(rpt);
