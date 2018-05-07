@@ -104,6 +104,7 @@
     <Content Include="Assets\vendors\workflow\css\wanda-wf-client.css" />
     <Content Include="Assets\vendors\workflow\js\wanda-wf-client.js" />
     <Content Include="Assets\vendors\workflow\js\Workflow.js" />
+    <Content Include="index.html" />
     <Content Include="Public\Bridge.aspx" />
     <Content Include="Public\Login.aspx" />
     <Content Include="Public\OABridge.aspx" />

@@ -181,9 +181,9 @@ namespace BPF.OAMQServices
                             var arrayParam = BuildMQMessage(message);
                             using (Plugin.OAMessage.OAMessage.WebServices.OfsTodoDataWebService service = new Plugin.OAMessage.OAMessage.WebServices.OfsTodoDataWebService())
                             {
+                                Common.Log.Info("【输入】{0}",Newtonsoft.Json.JsonConvert.SerializeObject(arrayParam));
                                 var result = service.receiveRequestInfoByMap(arrayParam);
                                 message.MessageRemark = string.Join(",", result.ToList().Select(x => string.Format("{0}:{1}", x.key, x.value)));
-                                BPF.OAMQServices.Common.Log.Info("发送消息到MQ，【输入】"+Newtonsoft.Json.JsonConvert.SerializeObject(arrayParam)+"【输出】"+ message.MessageRemark);
 
                             }
                         }
