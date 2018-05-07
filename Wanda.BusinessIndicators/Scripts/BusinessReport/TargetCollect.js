@@ -209,7 +209,7 @@ function updateDefault(id) {
     WebUtil.ajax({
         async: true,
         url: "/TargetPlanDetailController/UpdateVersionDefault",
-        args: { TargetPlanID: id, SystemID: SysID, Year: FinYear  },
+        args: { ID: id, SystemID: SysID, Year: FinYear  },
         successReturn: function (result) {
             GetSumList();
             if (result == "true")
@@ -227,7 +227,7 @@ function IsDeleteA(id) {
     WebUtil.ajax({
         async: true,
         url: "/TargetPlanDetailController/DeleteTargetPlan",
-        args: { TargetPlanID: id, SystemID: SysID, Year: FinYear  },
+        args: { ID: id, SystemID: SysID, Year: FinYear  },
         successReturn: function (result) {
             GetSumList();
             if (result=="true")
@@ -262,14 +262,16 @@ function BangHistoryTable() {
 function BangHistory() {
     $("#HistoryTr").html("");
     if (HistoryList.length > 0) {
-        loadTmplhistory('#TargetPlanHistoryforVersion').tmpl(HistoryList).appendTo('#HistoryTr');
+        var plan = new Object();
+        plan.list = HistoryList;
+        loadTmplhistory('#TargetPlanHistoryforVersion').tmpl(plan).appendTo('#HistoryTr');
     }
 }
 function GetSumTargetPlanList() {
     WebUtil.ajax({
         async: false,
         url: "/TargetPlanDetailController/GetSumTargetDetail",
-        args: { FinYear: FinYear, SystemID: SysID, strTargetPlanID: TarplanID },
+        args: { strFinYear: FinYear, strSystemID: SysID, strTargetPlanID: TarplanID },
         successReturn: function (result) {
             SumTargetPlanList = result;
         }
@@ -338,7 +340,7 @@ function BangSumTargetPlanList(id) {
         WebUtil.ajax({
             async: true,
             url: "/TargetPlanDetailController/GetSumTargetDetail",
-            args: { FinYear: FinYear, SystemID: SysID, strTargetPlanID: TarplanID },
+            args: { strFinYear: FinYear, strSystemID: SysID, strTargetPlanID: TarplanID },
             successReturn: function (result) {
                 SumTargetPlanList = result;
                 for (var i = 0; i < SumTargetPlanList.length; i++) {

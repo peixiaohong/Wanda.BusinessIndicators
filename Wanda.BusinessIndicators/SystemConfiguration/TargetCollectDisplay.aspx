@@ -47,7 +47,7 @@
         <div class="content_b_l">
             <div class="content_b_r"></div>
         </div>
-         <div class="margin_t10">
+        <div class="margin_t10">
             <div class="tabs_m">
 
                 <table style="width: 99%">
@@ -55,11 +55,11 @@
                         <tr>
                             <td>
                                 <ul class="tabs" style="margin-bottom: 0px; height: auto; border-bottom-color: #fff; margin-top: 5px">
-                                   <li class="sd" style="DISPLAY: list-item"><a class="active3 active_sub3" href="javascript:void(0)" id="tabHistory">指标历史查询</a></li>
+                                    <li class="sd" style="display: list-item"><a class="active3 active_sub3" href="javascript:void(0)" id="tabHistory">指标历史查询</a></li>
 
                                 </ul>
                             </td>
-                           
+
                         </tr>
                     </tbody>
                 </table>
@@ -67,7 +67,7 @@
         </div>
         <div class="tabs_content">
             <div class="scrolldoorFrame copy">
-                <table class="tab_005" id="HistoryTable" >
+                <table class="tab_005" id="HistoryTable">
                     <thead id="Thead2">
                         <tr>
                             <th style="width: 8px">序号</th>
@@ -88,109 +88,111 @@
             </div>
         </div>
 
-       
+
     </div>
     <div id="divList" class="popup" style="height: auto; display: none; padding-bottom: 10px">
-         <div class="margin_t10">
-            <div class="tabs_m">
+        <div class="main">
+            <div class="margin_t10">
+                <div class="tabs_m">
 
-                <table style="width: 99%">
-                    <tbody>
-                        <tr>
-                            <td>
-                                <ul class="tabs" id="tabs" style="margin-bottom: 0px; height: auto; border-bottom-color: #fff; margin-top: 5px">
-                                    <li class="sd" style="display: list-item">
-                                        <a class="active3 active_sub3" onclick="Change('sum','')" id="tabsum">汇总</a>
-                                    </li>
+                    <table style="width: 99%">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <ul class="tabs" id="tabs" style="margin-bottom: 0px; height: auto; border-bottom-color: #fff; margin-top: 5px">
+                                        <li class="sd" style="display: list-item">
+                                            <a class="active3 active_sub3" onclick="Change('sum','')" id="tabsum">汇总</a>
+                                        </li>
 
-                                </ul>
-                            </td>
-                            <td>
+                                    </ul>
+                                </td>
+                                <td>
 
-                                <div class="uploadify-button" id="file_upload-button1" onclick="DownExcel()" style="width: 90px; float: right">
-                                    <span>
-                                        <label class="DownExcelLabel" id="LabelDownload">导出数据</label></span>
-                                </div>
+                                    <div class="uploadify-button" id="file_upload-button1" onclick="DownExcel()" style="width: 90px; float: right">
+                                        <span>
+                                            <label class="DownExcelLabel" id="LabelDownload">导出数据</label></span>
+                                    </div>
 
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-        <div class="tabs_content">
-            <div class="scrolldoorFrame copy">
-                <table class="tab_005" id="SumTable" style="display: none">
-                    <thead id="Head" style="width: 100%">
-                        <%-- 因为空的tr和rowspan会自动消除 因此备份一份--%>
-                        <%--  <tr>  
+            <div class="tabs_content">
+                <div class="scrolldoorFrame copy">
+                    <table class="tab_005" id="SumTable" style="display: none">
+                        <thead id="Head" style="width: 100%">
+                            <%-- 因为空的tr和rowspan会自动消除 因此备份一份--%>
+                            <%--  <tr>  
                             <th style="width: 12%" rowspan="2">月份</th>
                             <th id="Dsum">当前数</th>
                             <th id="Asum">累计数</th>
                         </tr>
                         <tr id="TrTarget">
                         </tr>--%>
-                        <tr>
-                            <th style="width: 12%" rowspan="2">月份</th>
-                            <th id="Dsum">当前数</th>
-                            <th id="Asum">累计数</th>
-                        </tr>
-                        <tr id="TrTarget">
-                            <%--<td></td>--%>
-                        </tr>
-                    </thead>
+                            <tr>
+                                <th style="width: 12%" rowspan="2">月份</th>
+                                <th id="Dsum">当前数</th>
+                                <th id="Asum">累计数</th>
+                            </tr>
+                            <tr id="TrTarget">
+                                <%--<td></td>--%>
+                            </tr>
+                        </thead>
 
-                    <tbody id="rows">
-                    </tbody>
-                </table>
-                <table class="tab_005" id="TargetTable" style="display: none">
-                    <thead id="Thead1" style="width: 100%">
+                        <tbody id="rows">
+                        </tbody>
+                    </table>
+                    <table class="tab_005" id="TargetTable" style="display: none">
+                        <thead id="Thead1" style="width: 100%">
 
-                        <tr>
-                            <th rowspan="2" style="width: 6%">序号</th>
-                            <th rowspan="2" style="width: 11%">门店</th>
-                            <th rowspan="2" style="width: 11%">年度指标</th>
-                            <th colspan="12" class="sum" style="cursor: pointer" onclick="ClickChange('sum')">累计数  &nbsp;  &nbsp;<img src="../Images/btn02.png" /></th>
-                            <th colspan="12" style="display: none; cursor: pointer" class="dan" onclick="ClickChange('dan')">当月数  &nbsp;  &nbsp;<img src="../Images/btn02.png" /></th>
-                        </tr>
-                        <tr>
-                            <th class="sum">1-1月</th>
-                            <th class="sum">1-2月</th>
-                            <th class="sum">1-3月</th>
-                            <th class="sum">1-4月</th>
-                            <th class="sum">1-5月</th>
-                            <th class="sum">1-6月</th>
-                            <th class="sum">1-7月</th>
-                            <th class="sum">1-8月</th>
-                            <th class="sum">1-9月</th>
-                            <th class="sum">1-10月</th>
-                            <th class="sum">1-11月</th>
-                            <th class="sum">1-12月</th>
-                            <%--当月--%>
-                            <th style="display: none" class="dan">1月</th>
-                            <th style="display: none" class="dan">2月</th>
-                            <th style="display: none" class="dan">3月</th>
-                            <th style="display: none" class="dan">4月</th>
-                            <th style="display: none" class="dan">5月</th>
-                            <th style="display: none" class="dan">6月</th>
-                            <th style="display: none" class="dan">7月</th>
-                            <th style="display: none" class="dan">8月</th>
-                            <th style="display: none" class="dan">9月</th>
-                            <th style="display: none" class="dan">10月</th>
-                            <th style="display: none" class="dan">11月</th>
-                            <th style="display: none" class="dan">12月</th>
-                        </tr>
-                    </thead>
-                    <tbody id="SumTrTargetTable">
-                    </tbody>
-                    <tfoot id="TrTargetTable"></tfoot>
+                            <tr>
+                                <th rowspan="2" style="width: 6%">序号</th>
+                                <th rowspan="2" style="width: 11%">门店</th>
+                                <th rowspan="2" style="width: 11%">年度指标</th>
+                                <th colspan="12" class="sum" style="cursor: pointer" onclick="ClickChange('sum')">累计数  &nbsp;  &nbsp;<img src="../Images/btn02.png" /></th>
+                                <th colspan="12" style="display: none; cursor: pointer" class="dan" onclick="ClickChange('dan')">当月数  &nbsp;  &nbsp;<img src="../Images/btn02.png" /></th>
+                            </tr>
+                            <tr>
+                                <th class="sum">1-1月</th>
+                                <th class="sum">1-2月</th>
+                                <th class="sum">1-3月</th>
+                                <th class="sum">1-4月</th>
+                                <th class="sum">1-5月</th>
+                                <th class="sum">1-6月</th>
+                                <th class="sum">1-7月</th>
+                                <th class="sum">1-8月</th>
+                                <th class="sum">1-9月</th>
+                                <th class="sum">1-10月</th>
+                                <th class="sum">1-11月</th>
+                                <th class="sum">1-12月</th>
+                                <%--当月--%>
+                                <th style="display: none" class="dan">1月</th>
+                                <th style="display: none" class="dan">2月</th>
+                                <th style="display: none" class="dan">3月</th>
+                                <th style="display: none" class="dan">4月</th>
+                                <th style="display: none" class="dan">5月</th>
+                                <th style="display: none" class="dan">6月</th>
+                                <th style="display: none" class="dan">7月</th>
+                                <th style="display: none" class="dan">8月</th>
+                                <th style="display: none" class="dan">9月</th>
+                                <th style="display: none" class="dan">10月</th>
+                                <th style="display: none" class="dan">11月</th>
+                                <th style="display: none" class="dan">12月</th>
+                            </tr>
+                        </thead>
+                        <tbody id="SumTrTargetTable">
+                        </tbody>
+                        <tfoot id="TrTargetTable"></tfoot>
 
-                </table>
-                
+                    </table>
+
+                </div>
             </div>
-        </div>
-        <div class="pop_operate">
-            <input type="button" class="pop_btn btn_gray" value="关闭" onclick="art.dialog({ id: 'divList' }).close();" />
+            <div class="pop_operate">
+                <input type="button" class="pop_btn btn_gray" value="关闭" onclick="art.dialog({ id: 'divList' }).close();" />
+            </div>
         </div>
     </div>
     <div id="divDetail" class="popup" style="height: auto; display: none; padding-bottom: 10px">
