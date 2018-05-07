@@ -59,9 +59,6 @@
                 });
                 self.result = data;
             },
-            ToThousands: function (num) {
-                return (parseInt(num) || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
-            },
         },
         
     })

@@ -94,14 +94,6 @@
                     }
                 });
             },
-            ToThousands: function (num) {
-                return (parseInt(num) || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
-            },
-            Trim: function (str) {
-                if (str.length) {
-                    return str.replace(/(?!(^\n|\n{2}))\n/g, "<br/>"); 
-                } 
-            }  
         }
     })
 })

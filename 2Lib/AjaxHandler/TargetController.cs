@@ -1237,7 +1237,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 _BTargetPlan.FinYear = int.Parse(Year);
                 _BTargetPlan.Status = 2;
                 _BTargetPlan.VersionStart = DateTime.Now;
-                _BTargetPlan.Versionend = new DateTime(9999);
+                _BTargetPlan.Versionend = new DateTime(9999, 01, 01);
                 _BTargetPlan.WFStatus = "Draft";
                 PlanID = B_TargetplanOperator.Instance.AddTargetplan(_BTargetPlan).ToString();
 

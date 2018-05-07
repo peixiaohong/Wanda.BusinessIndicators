@@ -90,6 +90,7 @@ $(function setTitle() {
 
     })
     setStlye('monthReportReadySpan,downLoadTemplateSpan');
+    ClickItems('monthReportReady');
 });
 
 

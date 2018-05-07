@@ -36,9 +36,6 @@ var Task = {
                 })
             },
             methods: {
-                ToThousands: function (num) {
-                    return (parseInt(num) || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
-                },
             }
         });
     },
@@ -118,7 +115,7 @@ var Task = {
                         });
                     }
                 } else {
-                    utils.alertMessage(res.StatusMessage)
+                    utils.alertMessage(data.StatusMessage)
                 }
             }
         });

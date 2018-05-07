@@ -52,7 +52,7 @@ namespace LJTH.BusinessIndicators.BLL
         void Reload()
         {
             _SystemList = null;
-            _CompanyList = null;
+            _CompanyList = new Dictionary<Guid, List<C_Company>>();
             _TargetList = new Dictionary<Guid, List<C_Target>>();
             _KpiList = new Dictionary<int, List<C_TargetKpi>>();
             _companyList = null;

@@ -372,7 +372,8 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             BatchModel.FinYear = FinYear;
             BatchModel.WFBatchStatus = "Draft";
             BatchModel.ID = Guid.NewGuid();
-
+            var defaultTarget = A_TargetplanOperator.Instance.GetDefaultTargetplanList(ddlSystem.SelectedValue.ToGuid(), DateTime.Now.Year);
+            BatchModel.TargetPlanID = defaultTarget.FirstOrDefault().ID;
             List<V_SubReport> SubReportList = new List<V_SubReport>();
             //获取项目系统的公司
             //List<C_System> ProSysList = StaticResource.Instance.SystemList.Where(p => p.GroupType == groupType).OrderBy(PR => PR.Sequence).ToList();
@@ -390,6 +391,9 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 BatchMonthlyReport.WFStatus = "Draft";
                 BatchMonthlyReport.SystemBatchID = BatchModel.ID;
                 BatchMonthlyReport.CreateTime = DateTime.Now;
+                BatchMonthlyReport.DefaultVersionStatus = 1;
+                BatchMonthlyReport.TargetPlanID = BatchModel.TargetPlanID;
+
                 BatchMonthlyReport.ID = B_MonthlyreportOperator.Instance.AddMonthlyreport(BatchMonthlyReport);
 
                 //添加数据 ,如果是当前选择的系统，isreaday==true
