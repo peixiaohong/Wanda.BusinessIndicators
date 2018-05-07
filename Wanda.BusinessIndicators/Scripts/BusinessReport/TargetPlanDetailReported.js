@@ -455,80 +455,48 @@ function DownLoadTargetPlanExcel(sender) {
 
 $(function () {
     var error = 0;
-    $("#file_upload").uploadify({
-        'buttonText': '导入数据',
-        'width': 100,
-        'height': 25,
-        'fileTypeDesc': 'office file',
-        'fileTypeExts': '*.doc; *.docx; *.xls;*.xlsx;',
-        'fileSizeLimit': '10240',
-        //swf文件路径
-        'swf': '../Scripts/UpLoad/uploadify.swf',
-        'formData': { 'FileType': 'UpTargetPlanDetail', 'SysId': sysID, 'FinYear': FinYear, 'MonthReportID': TargetPlanID },
-        //后台处理页面
-        'uploader': '/AjaxHander/UpLoadMonthTargetDetail.ashx',
-        'onUploadSuccess': function (file, data, response) {
-            error = data;
-            if (data == "" || data == null) {
-
-                GetTargetPlanDetail();
-                setStlye('monthReportSubmitSpan');
-                $("#Down1,#T2").show();
-                $("#DownLoadModel,#UpLoadData").hide();
-            } else {
-                alert(data);
-            }
-        },
-        'onUploadComplete': function () {
-            if (error == 0) {
-                $("#UpLoadData").hide();
-            }
-        },
-        'onUploadError': function (file, data, response) {
-            alert("上传失败，程序出错！");
-        }
-        , 'onUploadStart': function (file, data, response) {
-            $("#file_upload").uploadify("settings", "formData", { 'VersionName': $("#hideVersionName").val() });
-        }
-    });
-    $("#file1").uploadify({
-        'buttonText': '导入数据',
-        'width': 100,
-        'height': 25,
-        'fileTypeDesc': 'office file',
-        'fileTypeExts': '*.doc; *.docx; *.xls;*.xlsx;',
-        'fileSizeLimit': '10240',
-        //swf文件路径
-        'swf': '../Scripts/UpLoad/uploadify.swf',
-        'formData': { 'FileType': 'UpTargetPlanDetail', 'SysId': sysID, 'FinYear': FinYear, 'MonthReportID': TargetPlanID },
-        //后台处理页面
-        'uploader': '/AjaxHander/UpLoadMonthTargetDetail.ashx',
-        'onUploadSuccess': function (file, data, response) {
-            error = data;
-            if (data == "" || data == null) {
-
-                GetTargetPlanDetail();
-                setStlye('monthReportSubmitSpan');
-                $("#Down1,#T2").show();
-                $("#DownLoadModel,#UpLoadData").hide();
-            } else {
-                alert(data);
-            }
-        },
-        'onUploadComplete': function () {
-            if (error == 0) {
-                $("#UpLoadData").hide();
-            }
-        },
-        'onUploadError': function (file, data, response) {
-            alert("上传失败，程序出错！");
-        }
-        , 'onUploadStart': function (file, data, response) {
-            $("#file1").uploadify("settings", "formData", { 'VersionName': $("#hideVersionName").val() });
-        }
-    });
+    fileUpload("file1");
+    fileUpload("file_upload");
 });
 
+function fileUpload(name) {
+    $("#" + name).uploadify({
+        'buttonText': '导入数据',
+        'width': 100,
+        'height': 25,
+        'fileTypeDesc': 'office file',
+        'fileTypeExts': '*.doc; *.docx; *.xls;*.xlsx;',
+        'fileSizeLimit': '10240',
+        //swf文件路径
+        'swf': '../Scripts/UpLoad/uploadify.swf',
+        'formData': { 'FileType': 'UpTargetPlanDetail', 'SysId': sysID, 'FinYear': FinYear, 'MonthReportID': TargetPlanID },
+        //后台处理页面
+        'uploader': '/AjaxHander/UpLoadMonthTargetDetail.ashx',
+        'onUploadSuccess': function (file, data, response) {
+            error = data;
+            if (data == "" || data == null) {
+
+                GetTargetPlanDetail();
+                setStlye('monthReportSubmitSpan');
+                $("#Down1,#T2").show();
+                $("#DownLoadModel,#UpLoadData").hide();
+            } else {
+                alert(data);
+            }
+        },
+        'onUploadComplete': function () {
+            if (error == 0) {
+                $("#UpLoadData").hide();
+            }
+        },
+        'onUploadError': function (file, data, response) {
+            alert("上传失败，程序出错！");
+        }
+        , 'onUploadStart': function (file, data, response) {
+            $("#" + name).uploadify("settings", "formData", { 'VersionName': $("#hideVersionName").val() });
+        }
+    });
+}
 
 
 
