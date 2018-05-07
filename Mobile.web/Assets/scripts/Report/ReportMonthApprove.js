@@ -17,6 +17,8 @@ var Task = {
             data: data,
             created: function () {
                 var self = this;
+                console.log(self.head);
+                console.log(self.list);
                 if (!self.IsNeedApprove) {
                     $('.bpf_workflow_result_list').hide();
                     var $container = $("#SJSJ_LC").closest(".approval-process");
@@ -100,24 +102,38 @@ var Task = {
                 "strProType": proType
             },
             success: function (data) {
-                console.log(data);
+                if (data.IsSuccess && data.StatusCode == 200) {
+                    var listData = JSON.parse(data.Data);
+                    var result = {
+                        "head": {
+                            "SystemName": listData[0].ObjValue._System.SystemName,
+                            "FinYear": listData[0].ObjValue.FinYear,
+                            "FinMonth": listData[0].ObjValue.FinMonth,
+                            "ObjValue": listData[1].ObjValue
+                        },
+                        "list": listData[2],
+                        "reportState": false,
+                        "currentState": false,
+                        "totalState": false,
+                        "yearlyState": false,
+                    }
+                    callback(result);
+                    WFOperator_SJSJ.InitSetting({
+                        UserSelectSetting: {
+                            IsNeedHiddenNav: utils.mobileBrower(),
+                            TopValue: 14
+                        },
+                        OnAfterExecute: Task.AfterAction//执行后调用（进行回滚或其它操作（例如跳转））
+                        , IsView: utils.getQueryString("v").length > 0 ? true : false
+                    });
+                    if (businessId != "") {
+                        WFOperator_SJSJ.GetProcess({ BusinessID: businessId, CheckUserInProcess: utils.getQueryString("v").length > 0 ? false : true }, function () {
+                        });
+                    }
+                } else {
+                    utils.alertMessage(data.StatusMessage)
+                }
             }
         });
-
-        WFOperator_SJSJ.InitSetting({
-            UserSelectSetting: {
-                IsNeedHiddenNav: utils.mobileBrower(),
-                TopValue: 14
-            },
-            OnAfterExecute: Task.AfterAction//执行后调用（进行回滚或其它操作（例如跳转））
-            , IsView: utils.getQueryString("v").length > 0 ? true : false
-        });
-        if (businessId != "") {
-            WFOperator_SJSJ.GetProcess({ BusinessID: businessId, CheckUserInProcess: false}, function () {
-                //callback(data);
-            });
-        }
-    
-    
     }
 };
