@@ -95,13 +95,13 @@ $(function setTitle() {
 
 
 function operateNav(sender) {
-    VersionName = $("#txt_VersionName").val();
     if (VersionName == "" && sender != "monthReportReady") {
         alert("请输入版本类型");
         ClickItems("monthReportReady");
+        VersionName = $("#txt_VersionName").val();
+        $("#hideVersionName").val(VersionName);
         return;
     }
-    $("#hideVersionName").val(VersionName);
     $("#process").hide();
     switch (sender) {
         case "downLoadTemplate":
@@ -424,7 +424,7 @@ function TargetPlanDetailLiaddCss(sender) {
         AddSumHead(TargetPlanDeailData);
     }
     else {
-        loadTmplTargetPlanDetail('#TargetPlanDetailReportTableHeadTemplate').tmpl().appendTo('#TargetPlanDetailHead'); //加载列头
+        loadTmplTargetPlanDetail('#TargetPlanDetailReportTableHeadTemplateforVersion').tmpl().appendTo('#TargetPlanDetailHead'); //加载列头
     }
 
     LoadTargetPlanDetailData(TemplData)
@@ -498,7 +498,9 @@ function fileUpload(name) {
     });
 }
 
-
+function getVersionName() {
+    return VersionName;
+}
 
 //格式化日期类型
 function FormatDate(obj, displayTime, local) {
