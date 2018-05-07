@@ -95,13 +95,6 @@ $(function setTitle() {
 
 
 function operateNav(sender) {
-    if (VersionName == "" && sender != "monthReportReady") {
-        alert("请输入版本类型");
-        ClickItems("monthReportReady");
-        VersionName = $("#txt_VersionName").val();
-        $("#hideVersionName").val(VersionName);
-        return;
-    }
     $("#process").hide();
     switch (sender) {
         case "downLoadTemplate":
@@ -177,6 +170,13 @@ $(function () {
 })
 
 function isCheckPlan() {
+    VersionName = $("#txt_VersionName").val();
+    if (VersionName == "") {
+        alert("请输入版本类型");
+        ClickItems("monthReportReady");
+        return false;
+    }
+    $("#hideVersionName").val(VersionName);
     var ret = true;
     WebUtil.ajax({
         async: false,
@@ -184,6 +184,7 @@ function isCheckPlan() {
         args: { SysID: sysID, Year: $("#HideFinYear").val(), PlanID: TargetPlanID, VersionName: VersionName },
         successReturn: function (resultData) {
             $.unblockUI();
+          
             if (!resultData.success) {
                 alert('当前版本已纯在审批版本，请勿重复操作！');
                 TargetPlanID = resultData.TargetPlanID;
