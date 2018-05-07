@@ -118,7 +118,7 @@ var Task = {
                         });
                     }
                 } else {
-                    utils.alertMessage(res.StatusMessage)
+                    utils.alertMessage(data.StatusMessage)
                 }
             }
         });

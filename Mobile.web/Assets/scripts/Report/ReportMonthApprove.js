@@ -113,7 +113,7 @@ var Task = {
             , IsView: utils.getQueryString("v").length > 0 ? true : false
         });
         if (businessId != "") {
-            WFOperator_SJSJ.GetProcess({ BusinessID: businessId, CheckUserInProcess: utils.getQueryString("v").length > 0 ? false : true }, function () {
+            WFOperator_SJSJ.GetProcess({ BusinessID: businessId, CheckUserInProcess: false}, function () {
                 //callback(data);
             });
         }
