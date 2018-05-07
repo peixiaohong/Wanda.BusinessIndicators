@@ -134,7 +134,7 @@ function onBodyDown(event) {
 
 function GetSumList() {
     // $("#tabs").html("<li class=\"sd\" style=\"DISPLAY: list-item\"><a class=\"active3 active_sub3\" onclick=\"Change('sum','')\" id=\"tabsum\">汇总</a></li>");
-    $("#rows").html("");
+    $("#HistoryTr").html("");
     if (GetQueryString("sysID") != null) {
         sysid = $.base64.atob(GetQueryString("sysID"));
         SysID = sysid;

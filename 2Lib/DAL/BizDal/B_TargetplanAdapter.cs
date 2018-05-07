@@ -203,7 +203,9 @@ DECLARE @SystemID UNIQUEIDENTIFIER;
 DECLARE @Year INT;
 SELECT @SystemID=SystemID,@Year=FinYear FROM [B_TargetPlan] WHERE ID=@PlanID;
 UPDATE [B_TargetPlan] SET VersionDefault=0 WHERE SystemID=@SystemID AND FinYear=@Year;
-UPDATE [B_TargetPlan] SET VersionDefault=1  WHERE ID=@PlanID;";
+UPDATE [B_TargetPlan] SET VersionDefault=1  WHERE ID=@PlanID;
+UPDATE [A_TargetPlan] SET VersionDefault=0  WHERE SystemID=@SystemID AND FinYear=@Year;
+UPDATE [A_TargetPlan] SET VersionDefault=1  WHERE ID=@PlanID;";
             return ExecuteSql(sql, CreateSqlParameter("@PlanID", System.Data.DbType.Guid, PlanID));
         }
 
