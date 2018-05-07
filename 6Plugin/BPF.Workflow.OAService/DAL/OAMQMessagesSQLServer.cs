@@ -91,6 +91,7 @@ namespace BPF.OAMQMessages.DAL
                             MessageCreateTime = DataTypeHelper.GetDateTime(row["MessageCreateTime"]),
                             AllowMobile = DataTypeHelper.GetInt(row["AllowMobile"]),
                             ProcessID = DataTypeHelper.GetString(row["ProcessID"]),
+                            MobileUrl = DataTypeHelper.GetString(row["MobileUrl"]),
                         };
                         if (BPF.OAMQServices.OAMQBll.Instance.SendMode == 2)
                             message.SenderCode = DataTypeHelper.GetString(row["SenderCode"]);
