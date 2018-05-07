@@ -98,7 +98,7 @@
         <div class="margin_t10">
             <div class="tabs_m">
                 <ul id="Ul3">
-                    <li class="selected m_1"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>月度经营报告</span></a></li>
+                    <li class="selected m_1"><a class="defaultTarget active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>月度经营报告</span></a></li>
                     <li><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>当月未完成</span></a></li>
                     <li><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>累计未完成</span></a></li>
                     <li><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>补回情况明细</span></a></li>
