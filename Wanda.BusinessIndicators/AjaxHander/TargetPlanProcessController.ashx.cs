@@ -228,7 +228,16 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
             //List<A_TargetPlanDetail> rptADetailList = null;
 
-            A_TargetplanOperator.Instance.AddTargetplan(new A_TargetPlan() { ID = rpt.ID, FinYear = rpt.FinYear, Description = rpt.Description, SystemID = rpt.SystemID, Status = 5, CreateTime = DateTime.Now });
+            A_TargetplanOperator.Instance.AddTargetplan(
+                new A_TargetPlan() {
+                    ID = rpt.ID,
+                    VersionName=rpt.VersionName,
+                    VersionDefault =rpt.VersionDefault,
+                    FinYear = rpt.FinYear,
+                    Description = rpt.Description,
+                    SystemID = rpt.SystemID,
+                    Status = 5,
+                    CreateTime = DateTime.Now });
             rptDetailList.ForEach(p => rptTempDetailList.Add(p.ToAModel()));
             A_TargetplandetailOperator.Instance.AddTargetPlanDetailList(rptTempDetailList);
 

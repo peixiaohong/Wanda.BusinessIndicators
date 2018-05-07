@@ -209,13 +209,14 @@ UPDATE [A_TargetPlan] SET VersionDefault=1  WHERE ID=@PlanID;";
             return ExecuteSql(sql, CreateSqlParameter("@PlanID", System.Data.DbType.Guid, PlanID));
         }
 
-        public bool HasDefaultVersion(Guid systemID,int year)
+        public bool HasDefaultVersion(Guid systemID, int year)
         {
             string sql = "SELECT COUNT(1) FROM dbo.B_TargetPlan WHERE VersionDefault = 1 AND SystemID = @SystemID AND FinYear = @FinYear";
             SqlParameter p1 = new SqlParameter { ParameterName = "@SystemID", Value = systemID };
             SqlParameter p2 = new SqlParameter { ParameterName = "@FinYear", Value = year };
-            int n = ExecuteSql(sql, p1, p2);
-            if (n > 0)
+            var dt = ExecuteReturnTable(sql, p1, p2);
+
+            if (dt.Rows.Count > 0 && Convert.ToInt32(dt.Rows[0][0]) > 0)
                 return true;
             else
                 return false;

@@ -531,7 +531,7 @@ Requirements:
     }
 
     , loadTmpl: function (url, selector) {
-        url = url + "?ver=1" ;
+        url = url + "?ver=" + Math.random();
         var result = null;
         var container = $("#tmplContainer__");
         if (container.length == 0 || true) {

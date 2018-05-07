@@ -11,7 +11,7 @@
 
     <script type="text/javascript" src="/Scripts/jquery-1.7.1.js"></script>
     <script type="text/javascript" src="/Scripts/jquery.blockUI.js"></script>
-    <script type="text/javascript" src="/Scripts/base.js?v=2"></script>
+    <script type="text/javascript" src="/Scripts/base.js?v=3"></script>
     <script type="text/javascript" src="/Scripts/BusinessReport/FloatTable.js"></script>
   <%--  <script type="text/javascript" src="/Scripts/nav.js"></script>--%>
     <script type="text/javascript"  src="../Scripts/jMenu.jquery.js"></script>
@@ -20,7 +20,7 @@
     <script type="text/javascript" src="/Scripts/jqueryControl.js"></script>
     <script type="text/javascript" src="/Scripts/posfixed.js"></script>
     <script type="text/javascript" src="/Scripts/My97DatePicker/WdatePicker.js"></script>
-    <script type="text/javascript" src="/Scripts/jquery.tmpl.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
+    <script type="text/javascript" src="/Scripts/jquery.tmpl.js"></script>
     <link rel="shortcut icon" href="/Images/images1/favicon.ico" type="image/x-icon" />
     <%--  <link href="/Styles/style02.css" rel="stylesheet" /> 
      <link href="/Styles/css.css" rel="stylesheet" /> 
