@@ -28,6 +28,11 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         public List<DictionaryVmodel> GetReportInstance(string strSystemID, string strMonthReportID, string strMonthReportOrderType, bool IncludeHaveDetail, bool UploadStr)
         {
             List<DictionaryVmodel> ListObj = new List<DictionaryVmodel>();
+            if (string.IsNullOrEmpty(strMonthReportID) || Guid.Parse(strMonthReportID) == Guid.Empty)
+            {
+                return ListObj;
+            }
+
 
             B_MonthlyReportJsonData JsonData;
 
@@ -39,7 +44,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             {
                 JsonData = null;
             }
-            
+
             if (JsonData != null)
             {
                 if (!string.IsNullOrEmpty(JsonData.ReportJsonData))
@@ -49,7 +54,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 }
                 else
                 {
-                   // 修改
+                    // 修改
                     ReportInstance rpt = new ReportInstance(strMonthReportID.ToGuid(), true);
                     ListObj.Add(new DictionaryVmodel("ReportInstance", rpt));
                     ListObj.Add(new DictionaryVmodel("MonthDetail", GetTargetDetailList(rpt, strMonthReportOrderType, IncludeHaveDetail)));
@@ -166,7 +171,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     RptDictList = ReportInstanceMissTargetEngine.ReportInstanceMissTargetService.GetMissTargetRptDataSource(rpt);
                 }
             }
-            
+
             return RptDictList;
         }
 
@@ -236,7 +241,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 ReportInstance rpt = new ReportInstance(_monthRptID, true);
                 RptDictList = ReportInstanceMissTargetEngine.ReportInstanceMissTargetService.GetMissTargetRptDataSource(rpt);
 
-               
+
             }
             else
             {
@@ -448,9 +453,9 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         {
             int result = 0;
             B_MonthlyReportDetail detail = JsonHelper.Deserialize<B_MonthlyReportDetail>(info);
-            
+
             B_MonthlyreportdetailOperator.Instance.UpdateMonthlyreportdetail(detail);
-            
+
             //保存Json , 开始
 
             //ReportInstance rpt = new ReportInstance(detail.MonthlyReportID, true);
@@ -467,7 +472,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         /// <param name="MonthReportID">月报ID</param>
         /// <param name="CurrentRpt"></param>
         /// <param name="ListObj"></param>
-        private void SaveJsonData(Guid MonthReportID, ReportInstance CurrentRpt )
+        private void SaveJsonData(Guid MonthReportID, ReportInstance CurrentRpt)
         {
             B_MonthlyReportJsonData Update_JsonData;
 
@@ -488,7 +493,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 Update_JsonData.FinYear = CurrentRpt.FinYear;
                 Update_JsonData.ModifyTime = DateTime.Now;
 
-                List<DictionaryVmodel> ListObj ;
+                List<DictionaryVmodel> ListObj;
 
                 if (string.IsNullOrEmpty(Update_JsonData.ReportJsonData)) //新增
                 {//这是上报页面的Json 数据     
@@ -502,15 +507,16 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 }
                 else
                 { //编辑数据
-                    ListObj  = JsonHelper.Deserialize<List<DictionaryVmodel>>(Update_JsonData.ReportJsonData);
-                    ListObj.ForEach(p => {
+                    ListObj = JsonHelper.Deserialize<List<DictionaryVmodel>>(Update_JsonData.ReportJsonData);
+                    ListObj.ForEach(p =>
+                    {
                         if (p.Name == "Misstarget")
                         {
                             p.ObjValue = GetMissTargetList(CurrentRpt, MonthReportID.ToString(), true);
                         }
                     });
                 }
-               
+
                 StringBuilder sb = new StringBuilder();
                 sb.Append(JsonHelper.Serialize(ListObj)); // 追加所有的出来的数据
                 Update_JsonData.ReportJsonData = sb.ToString();
@@ -565,7 +571,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             B_MonthlyReportDetail B_detail = CalculationEvaluationEngine.CalculationEvaluationService.Calculation(detail.ToBModel(), "");
             B_MonthlyreportdetailOperator.Instance.UpdateMonthlyreportdetail(B_detail);
 
-            
+
             ReportInstance rpt = JsonHelper.Deserialize<ReportInstance>(rpts);
             rpt.ReportDetails.Remove(rpt.ReportDetails.Find(p => p.ID == detail.ID));
             rpt.ReportDetails.Add(B_detail.ToVModel());
@@ -582,7 +588,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             return ListObj;
 
         }
-        
+
 
         /// <summary>
         /// 集团总部编辑
@@ -740,7 +746,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         /// <param name="MonthReportID">月报ID</param>
         /// <param name="CurrentRpt"></param>
         /// <param name="ListObj"></param>
-        private void SaveJsonData(Guid MonthReportID , ReportInstance CurrentRpt , List<DictionaryVmodel> ListObj)
+        private void SaveJsonData(Guid MonthReportID, ReportInstance CurrentRpt, List<DictionaryVmodel> ListObj)
         {
             B_MonthlyReportJsonData Update_JsonData;
 
