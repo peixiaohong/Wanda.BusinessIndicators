@@ -149,6 +149,7 @@ function BangSumTargetPlanList(id) {
 function BangHead(result) {
     $("#Dsum").attr("colspan", result.length);
     $("#Asum").attr("colspan", result.length);
+    $("#Vsum").attr("colspan", result.length*2+1);
     $("#TrTarget").html("");
     for (var i = 0; i < 2; i++) {
         loadTmpl('#TrTarget').tmpl(result).appendTo('#TrTarget');
@@ -195,7 +196,7 @@ function SplitData(result) {
                 $("#importedDataTable2").css("width", "500px");
             }
         } else {
-            loadTmpl('#TargetPlanDetailReportTableHeadTemplate').tmpl().appendTo('#TargetPlanDetailHead'); //加载列头
+            loadTmpl('#TargetPlanDetailReportTableHeadTemplateforVersion').tmpl().appendTo('#TargetPlanDetailHead'); //加载列头
         }
         if (TargetPlanDeailData[0].ObjValue[0].ObjValue != null) {
             if (SystemModel.Category != 3) {
@@ -283,7 +284,7 @@ function TargetPlanDetailLiaddCss(sender) {
     else if ($(sender).text() == "汇总") {
         AddSumHead(TargetPlanDeailData);
     } else {
-        loadTmpl('#TargetPlanDetailReportTableHeadTemplate').tmpl().appendTo('#TargetPlanDetailHead'); //加载列头
+        loadTmpl('#TargetPlanDetailReportTableHeadTemplateforVersion').tmpl().appendTo('#TargetPlanDetailHead'); //加载列头
     }
 
     LoadTargetPlanDetailData(TemplData)
@@ -436,7 +437,8 @@ function BusinessDataHandle(instanceID, args) {
 }
 
 function AddSumHead(result) {
-    var head = " <tr><th style=\"width: 12%\" rowspan=\"2\">月份</th> <th colspan=\"" + result.length + "\">当前数</th> <th colspan=\"" + result.length + "\">累计数</th>";
+    var head = " <tr><th  colspan=\"" + (1 + result.length * 2) + "\">" + $("#hideVersionName").val() + "</th></tr> ";
+     head += " <tr><th style=\"width: 12%\" rowspan=\"2\">月份</th> <th colspan=\"" + result.length + "\">当前数</th> <th colspan=\"" + result.length + "\">累计数</th>";
     head += " </tr><tr id=\"TrTarget\">";
     for (var i = 0; i < result.length; i++) {
         head += "<th>" + result[i].Name + "</th>";

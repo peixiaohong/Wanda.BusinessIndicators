@@ -57,7 +57,7 @@ var Task = {
             args: {
                 "BusinessID": businessID,
                 "OperatorType": args.OperatorType,
-                "PrcessStatus": args.PrcessStatus
+                "PrcessStatus": null
             },
             success: function (data) {
                 func();
@@ -82,8 +82,8 @@ var Task = {
         //TODO审批通过时修改数据状态，修改成功后请调用WFOperator_SJSJ.AfterActionRedirect(args);做跳转
         WFOperator_SJSJ.ApprovePage.AfterAction(argsT,
             {
-                Approval: function (args) { Task.Approve(args); setTimeout(function () { location.href = '/todoListMobile.html'; }, 1000) },
-                Return: function (args) { Task.Reject(args); setTimeout(function () { location.href = '/todoListMobile.html'; }, 1000) },
+                Approval: function (args) { Task.Approve(args);/* setTimeout(function () { location.href = '/todoListMobile.html'; }, 1000)*/ },
+                Return: function (args) { Task.Reject(args);/* setTimeout(function () { location.href = '/todoListMobile.html'; }, 1000)*/ },
                 Redirect: function (args) { setTimeout(function () { location.href = '/todoListMobile.html'; }, 1000) }
             });
     },
@@ -99,23 +99,22 @@ var Task = {
                 "IsLatestVersion": true,
             },
             success: function (data) {
-                console.log(data);
                 if (data.IsSuccess && data.StatusCode == 200) {
-                    callback(data.Data);
-                    WFOperator_SJSJ.InitSetting({
-                        UserSelectSetting: {
-                            IsNeedHiddenNav: utils.mobileBrower(),
-                            TopValue: 14
-                        },
-                        OnAfterExecute: Task.AfterAction//执行后调用（进行回滚或其它操作（例如跳转））
-                        , IsView: utils.getQueryString("v").length > 0 ? true : false
-                    });
-                    if (businessId != "") {
-                        WFOperator_SJSJ.GetProcess({ BusinessID: businessId, CheckUserInProcess: utils.getQueryString("v").length > 0 ? false : true }, function () {
-                        });
-                    }
+                    callback(data.Data);                
                 } else {
                     utils.alertMessage(data.StatusMessage)
+                }
+                WFOperator_SJSJ.InitSetting({
+                    UserSelectSetting: {
+                        IsNeedHiddenNav: utils.mobileBrower(),
+                        TopValue: 14
+                    },
+                    OnAfterExecute: Task.AfterAction//执行后调用（进行回滚或其它操作（例如跳转））
+                    , IsView: utils.getQueryString("v").length > 0 ? true : false
+                });
+                if (businessId != "") {
+                    WFOperator_SJSJ.GetProcess({ BusinessID: businessId, CheckUserInProcess: utils.getQueryString("v").length > 0 ? false : true }, function () {
+                    });
                 }
             }
         });

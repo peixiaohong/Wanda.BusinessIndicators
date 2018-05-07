@@ -133,7 +133,7 @@ function onBodyDown(event) {
 
 
 function GetSumList() {
-   // $("#tabs").html("<li class=\"sd\" style=\"DISPLAY: list-item\"><a class=\"active3 active_sub3\" onclick=\"Change('sum','')\" id=\"tabsum\">汇总</a></li>");
+    // $("#tabs").html("<li class=\"sd\" style=\"DISPLAY: list-item\"><a class=\"active3 active_sub3\" onclick=\"Change('sum','')\" id=\"tabsum\">汇总</a></li>");
     $("#rows").html("");
     if (GetQueryString("sysID") != null) {
         sysid = $.base64.atob(GetQueryString("sysID"));
@@ -159,11 +159,11 @@ function GetSumList() {
     //查询版本列表
     BangHistoryTable();
 
-    
+
 
     // BangHistoryTable();
 
-   
+
 }
 //查询数据
 function GetList(id) {
@@ -178,11 +178,11 @@ function GetList(id) {
     WebUtil.ajax({
         async: true,
         url: "/CompanyController/GetVerTargetListByTargetPlanID",
-        args: { TargetPlanID: id},
+        args: { TargetPlanID: id },
         successReturn: function (result) {
 
             TargetList = result; //绑定 指标
-             BangTabs(); 
+            BangTabs();
             BangHead(result); // 汇总的表头
 
             BangDetail(id); //汇总的数据    
@@ -195,7 +195,7 @@ function GetList(id) {
             $("#TargetTable").hide();
 
             Fake();
-            
+
         }
     });
 
@@ -209,7 +209,7 @@ function updateDefault(id) {
     WebUtil.ajax({
         async: true,
         url: "/TargetPlanDetailController/UpdateVersionDefault",
-        args: { ID: id, SystemID: SysID, Year: FinYear  },
+        args: { ID: id, SystemID: SysID, Year: FinYear },
         successReturn: function (result) {
             GetSumList();
             if (result == "true")
@@ -227,10 +227,10 @@ function IsDeleteA(id) {
     WebUtil.ajax({
         async: true,
         url: "/TargetPlanDetailController/DeleteTargetPlan",
-        args: { ID: id, SystemID: SysID, Year: FinYear  },
+        args: { ID: id, SystemID: SysID, Year: FinYear },
         successReturn: function (result) {
             GetSumList();
-            if (result=="true")
+            if (result == "true")
                 alert("禁用成功");
             else
                 alert("操作失败,请联系管理员！");
@@ -242,31 +242,20 @@ function IsDeleteA(id) {
 
 function BangHistoryTable() {
 
-    if (HistoryList != null && HistoryList != undefined && HistoryList.length > 0) {
-        BangHistory();
-    } else
-    {
-        WebUtil.ajax({
-            async: true,
-            url: "/TargetController/GetTargetHistory",
-            args: { SystemID: SysID, Year: FinYear },
-            successReturn: function (result) {
-                HistoryList = result;
-                BangHistory();
-            }
-        });
-    }
+
+    WebUtil.ajax({
+        async: true,
+        url: "/TargetController/GetTargetHistory",
+        args: { SystemID: SysID, Year: FinYear },
+        successReturn: function (result) {
+            var plan = new Object();
+            plan.list = result;
+            loadTmplhistory('#TargetPlanHistoryforVersion').tmpl(plan).appendTo('#HistoryTr');
+        }
+    });
 }
 
 
-function BangHistory() {
-    $("#HistoryTr").html("");
-    if (HistoryList.length > 0) {
-        var plan = new Object();
-        plan.list = HistoryList;
-        loadTmplhistory('#TargetPlanHistoryforVersion').tmpl(plan).appendTo('#HistoryTr');
-    }
-}
 function GetSumTargetPlanList() {
     WebUtil.ajax({
         async: false,
@@ -311,7 +300,7 @@ function Change(adj, id) {
     //    $("#HistoryTable").show();
     //    // 获取指标历史查询
     //    BangHistoryTable();
-        
+
     //}
     else {
         $("#SumTable").hide();
@@ -335,8 +324,7 @@ function BangSumTargetPlanList(id) {
             }
         }
     }
-    else
-    {
+    else {
         WebUtil.ajax({
             async: true,
             url: "/TargetPlanDetailController/GetSumTargetDetail",
@@ -353,7 +341,7 @@ function BangSumTargetPlanList(id) {
         });
 
     }
-   
+
 }
 
 //用正则表达式获取URL参数

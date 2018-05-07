@@ -20,6 +20,7 @@
                 runat="server" Text=""></asp:Label>
         </div>
         <asp:HiddenField runat="server" ID="hideTargetPlanID" ClientIDMode="Static" />
+        <asp:HiddenField runat="server" ID="hideVersionName" ClientIDMode="Static" />
         <asp:HiddenField runat="server" ID="hideSystemID" ClientIDMode="Static" />
         <asp:HiddenField runat="server" ID="hideFinYear" ClientIDMode="Static" />
         <asp:HiddenField runat="server" ID="HideProcessCode" ClientIDMode="Static" />
@@ -60,7 +61,7 @@
 
                         <table class="tab_005" id="SumTable" style="display: none">
                             <thead id="Head" style="width: 100%">
-
+                                <tr> <th id="Vsum" > <asp:Label ID="lblVersionName2"  runat="server" Text=""></asp:Label></th></tr>
                                 <tr>
                                     <th style="width: 12%" rowspan="2">月份</th>
                                     <th id="Dsum">当前数</th>
@@ -77,7 +78,7 @@
 
                         <table class="tab_005" id="TargetTable" style="display: none">
                             <thead id="Thead1" style="width: 100%">
-
+                                <tr> <th colspan="16" > <asp:Label ID="lblVersionName1"  runat="server" Text=""></asp:Label></th></tr>
                                 <tr>
                                     <th rowspan="2" style="width: 4%">序号</th>
                                     <th rowspan="2" style="width: 11%">门店</th>
