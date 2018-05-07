@@ -153,7 +153,7 @@ namespace WebApi.Controllers
         {
             TargetApproveController ta = new TargetApproveController();
             List<DictionaryVmodel> list =ta.GetReportInstance(strMonthReportID, strBacthID, strProType);
-            return new ResultContext(list);
+            return new ResultContext( JsonConvert.SerializeObject(list));
 
         }
 
