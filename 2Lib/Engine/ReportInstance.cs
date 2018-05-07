@@ -86,6 +86,7 @@ namespace LJTH.BusinessIndicators.Engine
                 B_MonthlyReport report = B_MonthlyreportOperator.Instance.GetMonthlyreport(_MonthReportID);
                 _SystemID = report.SystemID;
                 _SystemBatchID = report.SystemBatchID;
+                TargetPlanID = report.TargetPlanID;
                 AreaID = report.AreaID;
                 FinYear = report.FinYear;
                 FinMonth = report.FinMonth;
@@ -96,6 +97,7 @@ namespace LJTH.BusinessIndicators.Engine
                 C_System c_System = StaticResource.Instance.SystemList.Where(x => x.GroupType == b_SystemBatch.BatchType).FirstOrDefault();
                 _SystemID = c_System.ID;
                 _SystemBatchID = b_SystemBatch.ID;
+                TargetPlanID = b_SystemBatch.TargetPlanID;
                 FinYear = b_SystemBatch.FinYear;
                 FinMonth = b_SystemBatch.FinMonth;
             }
@@ -274,15 +276,18 @@ namespace LJTH.BusinessIndicators.Engine
                 //ValidatedMonthlyReportDetails.ForEach(P => ReportDetails.Add(P.ToVModel()));
             }
 
-            //筛选当前用户有权限的项目公司信息(因为权限数据缺失暂时注释)
-            var companyIDArray = BLL.BizBLL.S_OrganizationalActionOperator.Instance.GetUserCompanyDataNoIsDelete(_System.ID, CurrentLoginName).Select(m => m.ID).ToArray();
-            if (companyIDArray.Length > 0)
+            if (UserPermission)
             {
-                ReportDetails = ReportDetails.Where(m => companyIDArray.Contains(m.CompanyID)).ToList();
-            }
-            else
-            {
-                ReportDetails = new List<MonthlyReportDetail>();
+                //筛选当前用户有权限的项目公司信息(因为权限数据缺失暂时注释)
+                var companyIDArray = BLL.BizBLL.S_OrganizationalActionOperator.Instance.GetUserCompanyDataNoIsDelete(_System.ID, CurrentLoginName).Select(m => m.ID).ToArray();
+                if (companyIDArray.Length > 0)
+                {
+                    ReportDetails = ReportDetails.Where(m => companyIDArray.Contains(m.CompanyID)).ToList();
+                }
+                else
+                {
+                    ReportDetails = new List<MonthlyReportDetail>();
+                }
             }
         }
 
