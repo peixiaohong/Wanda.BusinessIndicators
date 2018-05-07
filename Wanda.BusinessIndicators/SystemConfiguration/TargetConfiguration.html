@@ -14,11 +14,11 @@
 
 <script id="TargetTypeEnums" type="text/x-jquery-tmpl">
     {{if IfSelect==true}}
-     <option value="${TargetType}" selected="selected">${TargetTypeValue}</option>
+    <option value="${TargetType}" selected="selected">${TargetTypeValue}</option>
     {{else}}
-       <option value="${TargetType}">${TargetTypeValue}</option>
+    <option value="${TargetType}">${TargetTypeValue}</option>
     {{/if}}
-    
+
 </script>
 
 <script id="TargetPlanHistory" type="text/x-jquery-tmpl">
@@ -34,13 +34,18 @@
         <td class="Td_Center"><a href="#" onclick="ActTarget('${ID}')">激活</a></td>
         {{/if}}
         <td class="Td_Right">${FormatTime(ModifyTime)}</td>
-         <td class="Td_Center"><a href="#" onclick="CheckAction('${ID}')">点击查看</a></td>
+        <td class="Td_Center"><a href="#" onclick="CheckAction('${ID}')">点击查看</a></td>
     </tr>
 </script>
 <script id="TargetPlanHistoryforVersion" type="text/x-jquery-tmpl">
+    {{each list }}
     <tr>
-        <td class="Td_Center"></td>
-        <td class="Td_Center"><a href="javascript:void(0);" onclick="GetList('${ID}')"> ${VersionName}</a></td>
+        <td class="Td_Center">${$index+1}</td>
+        <td class="Td_Center">
+            <a href="javascript:void(0);" onclick="GetList('${ID}')">
+                ${VersionName==""?'无':VersionName}
+            </a>
+        </td>
         <td class="Td_Center">${FormatTime(ModifyTime)}</td>
         <td class="Td_Center">${ProcessOwn}</td>
         <td class="Td_Center">${FormatTime(CreateTime)}</td>
@@ -64,6 +69,7 @@
         <td class="Td_Center"><a href="javascript:void(0);" onclick="DownLoad('${ID}')">下载 </a></td>
         <td class="Td_Center"><a href="javascript:void(0);" onclick="CheckAction('${ID}')">点击查看</a></td>
     </tr>
+    {{/each}}
 </script>
 
 <script id="TargetPlanHistoryHead" type="text/x-jquery-tmpl">
@@ -73,7 +79,7 @@
         <th style="width: 10%">文档下载</th>
         <th style="width: 10%">指标状态</th>
         <th style="width: 20%">操作</th>
-         <th style="width: 20%">审批日期</th>
+        <th style="width: 20%">审批日期</th>
         <th style="width: 20%">查看日志</th>
     </tr>
 </script>

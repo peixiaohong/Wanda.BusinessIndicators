@@ -455,7 +455,12 @@ function DownLoadTargetPlanExcel(sender) {
 
 $(function () {
     var error = 0;
-    $("#file1,#file_upload").uploadify({
+    fileUpload("file1");
+    fileUpload("file_upload");
+});
+
+function fileUpload(name) {
+    $("#" + name).uploadify({
         'buttonText': '导入数据',
         'width': 100,
         'height': 25,
@@ -486,12 +491,12 @@ $(function () {
         },
         'onUploadError': function (file, data, response) {
             alert("上传失败，程序出错！");
-        },
-        'onUploadStart': function (file) {
-            $("#file_upload").uploadify("settings", "formData", { 'VersionName': $("#hideVersionName").val() })
+        }
+        , 'onUploadStart': function (file, data, response) {
+            $("#" + name).uploadify("settings", "formData", { 'VersionName': $("#hideVersionName").val() });
         }
     });
-});
+}
 
 
 
