@@ -62,7 +62,7 @@
                                         <tbody>
                                             <tr v-for="(item,index) in list">
                                                 <td>{{item.FinMonth}}月</td>
-                                                <td v-for="target in item.TargetDetailList">{{ToThousands(target.SumTarget)}}</td>
+                                                <td v-for="target in item.TargetDetailList">{{Vue.ToThousands(target.SumTarget)}}</td>
                                             </tr>
                                         </tbody>
                                     </table>

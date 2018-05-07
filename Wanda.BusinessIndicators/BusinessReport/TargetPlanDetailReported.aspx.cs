@@ -113,7 +113,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             _BTargetPlan.FinYear = FinYear;
             _BTargetPlan.Status = 2;
             _BTargetPlan.VersionStart = DateTime.Now;
-            _BTargetPlan.Versionend = new DateTime(9999);
+            _BTargetPlan.Versionend = new DateTime(9999, 01, 01);
             _BTargetPlan.WFStatus = "Draft";
             _BTargetPlan.ID = B_TargetplanOperator.Instance.AddTargetplan(_BTargetPlan);
             return _BTargetPlan;

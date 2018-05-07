@@ -61,7 +61,14 @@ CommonProvider.install = function (Vue, ops) {
     Vue.ajaxDelete = function (opts) {
         CommonAjaxDelete(Vue.http, opts);
     }
-
+    Vue.ToThousands = function (num) {
+        return (parseInt(num) || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
+    }
+    Vue.Trim = function (str) {
+        if (str.length) {
+            return str.replace(/(?!(^\n|\n{2}))\n/g, "<br/>");
+        } 
+    }
     /*
      * 异步post事件
      * options
