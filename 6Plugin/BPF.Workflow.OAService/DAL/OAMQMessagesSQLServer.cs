@@ -46,7 +46,8 @@ namespace BPF.OAMQMessages.DAL
       ,Status
       ,ErrorCount
       ,MessageCreateTime
-,ProcessID
+      ,ProcessID
+      ,MobileUrl
       ,AllowMobile"
       + senderCodeSQL
       + " FROM OAMQMessages WHERE Status = 0 ORDER BY Sendertime ASC ;";

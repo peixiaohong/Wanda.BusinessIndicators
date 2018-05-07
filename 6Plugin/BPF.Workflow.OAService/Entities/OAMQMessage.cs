@@ -267,5 +267,6 @@ namespace BPF.OAMQMessages.Entities
                 this._MessageRemark = value;
             }
         }
+        public string MobileUrl { get; set; }
     }
 }

@@ -227,7 +227,7 @@ namespace BPF.OAMQServices
             paramList.Add("workflowname", message.Flowtype);
             paramList.Add("nodename", message.Nodename);
             paramList.Add("pcurl", SSOToolkit.Instance.GetAuthOAUrlWithSSO(message.PtpUrl, message.Userid, message.FlowID));
-            paramList.Add("appurl", SSOToolkit.Instance.GetAuthOAUrlWithSSO(message.PtpUrl, message.Userid, message.FlowID));
+            paramList.Add("appurl", SSOToolkit.Instance.GetAuthOAUrlWithSSO(message.MobileUrl, message.Userid, message.FlowID));
             paramList.Add("creator", message.Creator);
             paramList.Add("isremark", message.Flowmess.ToString());
             //paramList.Add("viewtype", message.Viewtype.ToString());
