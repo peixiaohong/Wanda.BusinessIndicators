@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterApprove.Master" AutoEventWireup="true" CodeBehind="ReportTargetApprove.aspx.cs" Inherits="Mobile.web.Report.ReportTargetApprove" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-      <script src="<%=ResolveUrl("~/Assets/scripts/Report/ReportTargetApprove.js") %>"></script>
+    <script src="<%=ResolveUrl("~/Assets/scripts/Report/ReportTargetApprove.js?v=")+System.Guid.NewGuid() %>"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
       <section id="ReportApproveContent" v-cloak>

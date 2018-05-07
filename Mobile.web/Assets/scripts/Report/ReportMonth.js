@@ -31,7 +31,8 @@
                             self.systemAndYearList = res.Data;
                             self.InitYM();                            
                         } else {
-                            utils.alertMessage(res.StatusMessage)
+                            utils.alertMessage(res.StatusMessage);
+                            self.systemAndYearList = [];
                         }
                     }
                 });
@@ -57,7 +58,9 @@
                             self.title = res.Data.title;
                             self.list = JSON.parse(res.Data.list);
                         } else {
-                            utils.alertMessage(res.StatusMessage)
+                            utils.alertMessage(res.StatusMessage);
+                            self.title = "";
+                            self.list = {};
                         }
                     }
                 });
@@ -89,7 +92,9 @@
                             }                           
                             self.ChangeData();
                         } else {
-                            utils.alertMessage(res.StatusMessage)
+                            utils.alertMessage(res.StatusMessage);
+                            self.versions = [];
+                            self.versionSelect = "";
                         }
                     }
                 });

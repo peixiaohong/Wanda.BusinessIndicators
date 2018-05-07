@@ -202,6 +202,11 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     if (BatchModel == null)
                     {
                         BatchModel = AddSystemBatch(Gtypt);
+                        if (BatchModel == null)
+                        {
+                            UserControl.SetButtonSpanStyle(2);
+                            return;
+                        }
                     }
                     else
                     {
@@ -373,6 +378,8 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             BatchModel.WFBatchStatus = "Draft";
             BatchModel.ID = Guid.NewGuid();
             var defaultTarget = A_TargetplanOperator.Instance.GetDefaultTargetplanList(ddlSystem.SelectedValue.ToGuid(), DateTime.Now.Year);
+            if (defaultTarget == null || defaultTarget.Count < 1)
+                return null;
             BatchModel.TargetPlanID = defaultTarget.FirstOrDefault().ID;
             List<V_SubReport> SubReportList = new List<V_SubReport>();
             //获取项目系统的公司

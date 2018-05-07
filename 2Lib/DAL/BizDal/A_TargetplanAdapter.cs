@@ -92,7 +92,7 @@ namespace LJTH.BusinessIndicators.DAL
 
             sql += " AND FinYear=@FinYear";
 
-            sql += " AND a.VersionDefault=0";
+            sql += " AND VersionDefault=0";
 
             SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
             SqlParameter pFinYear = CreateSqlParameter("@FinYear", System.Data.DbType.Int32, FinYear);

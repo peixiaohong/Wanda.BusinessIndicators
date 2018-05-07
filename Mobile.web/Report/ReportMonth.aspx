@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="ReportMonth.aspx.cs" Inherits="Mobile.web.Report.ReportMonth" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <script src="../Assets/scripts/Report/ReportMonth.js"></script>
+    <script src="<%=ResolveUrl("~/Assets/scripts/Report/ReportMonth.js?v=")+System.Guid.NewGuid() %>"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <section id="ReportMonthContent" v-cloak>
