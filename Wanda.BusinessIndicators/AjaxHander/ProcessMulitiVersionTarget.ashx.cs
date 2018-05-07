@@ -40,37 +40,37 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
         public void AddMulitiVersionMonthlyReport()
         {
+            var MonthReportID = Guid.Parse(context.Request["MonthReportID"]);
+            var MonthlyReport = B_MonthlyreportOperator.Instance.GetMonthlyreport(MonthReportID);
             try
             {
                 var error = "";
-
-                int FinYear = int.Parse(context.Request["FinYear"]);
-                int FinMonth = int.Parse(context.Request["FinMonth"]);
-                var MonthReportID = Guid.Parse(context.Request["MonthReportID"]);
                 var newMonthlyReportGuid = Guid.Empty;
                 var newMonthlyReport = new B_MonthlyReport();
                 MonthlyReportDetail mrd = null;
                 var CurrentMonthlyReportDetailList = new List<B_MonthlyReportDetail>();
                 //CurrentRpt = new ReportInstance(currentMonthReportId, true);
                 //获取默认的MonthlyReport
-                var MonthlyReport = B_MonthlyreportOperator.Instance.GetMonthlyreport(MonthReportID);
+                int FinYear = MonthlyReport.FinYear;
+                int FinMonth = MonthlyReport.FinMonth;
                 var MonthlyReportDetailList = B_MonthlyreportdetailOperator.Instance.GetMonthlyreportdetailList(MonthlyReport.ID);
                 var targetVersionList = A_TargetplanOperator.Instance.GetTargetplanListForMulitiVersion(MonthlyReport.SystemID, MonthlyReport.FinYear);
-                var targetList = C_TargetOperator.Instance.GetTargetList().Where(t => MonthlyReportDetailList.Select(v => v.TargetID).ToList().Contains(t.ID));
+                var targetList = C_TargetOperator.Instance.GetTargetList().Where(t => MonthlyReportDetailList.Select(v => v.TargetID).ToList().Contains(t.ID)).ToList();
                 //循环多版本
 
                 //先删除现有的非默认下的月报
                 B_MonthlyreportOperator.Instance.DeleteNoDefaultVersionMonthlyReport(MonthlyReport);
 
+                List<DictionaryVmodel> ListDV = null;
+                List<MonthlyReportDetail> listMrd = null;
                 foreach (var tagerPlanItem in targetVersionList)
                 {
-                    List<DictionaryVmodel> ListDV = new List<DictionaryVmodel>();
-                    List<MonthlyReportDetail> listMrd = null;
-
+                    ListDV = new List<DictionaryVmodel>();
                     newMonthlyReport = MonthlyReport;
                     newMonthlyReport.ID = Guid.NewGuid();
                     //表示不是当前默认版本的计划指标
                     newMonthlyReport.DefaultVersionStatus = 0;
+                    newMonthlyReport.TargetPlanID = tagerPlanItem.ID;
                     newMonthlyReportGuid = B_MonthlyreportOperator.Instance.AddMonthlyreport(newMonthlyReport);
 
                     var targetPlanDetailList = A_TargetplandetailOperator.Instance.GetTargetplandetailList(tagerPlanItem.ID).Where(v => v.FinYear == FinYear && v.FinMonth == FinMonth).ToList();
@@ -78,7 +78,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     foreach (var targetItem in targetList)
                     {
                         CurrentMonthlyReportDetailList = MonthlyReportDetailList.Where(v => v.TargetID == targetItem.ID).ToList();
-
+                        listMrd = new List<MonthlyReportDetail>();
                         //拼装指标下面的所有项
                         foreach (var monthlyReportDetailItem in CurrentMonthlyReportDetailList)
                         {
@@ -100,6 +100,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             }
             catch (Exception ex)
             {
+                MonthlyReport = B_MonthlyreportOperator.Instance.GetMonthlyreport(MonthReportID);
+                B_MonthlyreportOperator.Instance.DeleteNoDefaultVersionMonthlyReport(MonthlyReport);
             }
         }
 
@@ -132,7 +134,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 error = "请确认上传的指标是否是本系统的指标!";
                 return null;
             }
-            
+
             MonthlyReportDetail monthlyReportDetail = null;
             //是否存在B_MonthlyReport
 
@@ -194,11 +196,11 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 B_MonthlyreportdetailOperator.Instance.BulkAddTargetDetail(lstInsertMonthReportDetail);
             }
             B_MonthlyReport bmr = B_MonthlyreportOperator.Instance.GetMonthlyreport(MonthReportID);
-            if (bmr != null && lstInsertMonthReportDetail.Count > 0)
-            {
-                bmr.Status = 5;
-                B_MonthlyreportOperator.Instance.UpdateMonthlyreport(bmr);
-            }
+            //if (bmr != null && lstInsertMonthReportDetail.Count > 0)
+            //{
+            //    bmr.Status = 5;
+            //    B_MonthlyreportOperator.Instance.UpdateMonthlyreport(bmr);
+            //}
 
             //上报的时候序列化后的Json数据
             SaveJsonData(MonthReportID);
