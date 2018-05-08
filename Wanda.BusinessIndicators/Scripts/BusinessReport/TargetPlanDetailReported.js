@@ -170,8 +170,8 @@ $(function () {
 })
 
 function isCheckPlan() {
-    VersionName = $("#txt_VersionName").val();
-    if (VersionName == "") {
+    VersionName = $("#txt_VersionName").val().trim();
+    if (VersionName.trim() == "") {
         alert("请输入版本类型");
         ClickItems("monthReportReady");
         return false;
