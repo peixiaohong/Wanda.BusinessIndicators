@@ -75,11 +75,11 @@ namespace LJTH.Lib.Data.AppBase
         {
             TModel result = GetAdapter().GetModelByID(id);
 
-            if (result == null)
-            {
-                throw new ArgumentException(
-                    string.Format("Cannot find '{0}' object by {0}ID. {0}ID={1}", typeof(TModel), id));
-            }
+            //if (result == null)
+            //{
+            //    throw new ArgumentException(
+            //        string.Format("Cannot find '{0}' object by {0}ID. {0}ID={1}", typeof(TModel), id));
+            //}
 
             return result;
         }

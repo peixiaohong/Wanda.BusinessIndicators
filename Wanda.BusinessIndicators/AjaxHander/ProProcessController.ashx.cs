@@ -597,7 +597,17 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             //判断当月主表是否是null
             if (rptA == null)
             {
-                A_MonthlyreportOperator.Instance.AddMonthlyreport(new A_MonthlyReport() { ID = rpt.ID, FinYear = rpt.FinYear, FinMonth = rpt.FinMonth, Description = rpt.Description, SystemID = rpt.SystemID, Status = 5, SystemBatchID = rpt.SystemBatchID, CreatorName = this.CurrentUser, CreateTime = DateTime.Now });
+                A_MonthlyreportOperator.Instance.AddMonthlyreport(new A_MonthlyReport() { ID = rpt.ID,
+                    TargetPlanID = rpt.TargetPlanID,
+                    AreaID = rpt.AreaID,
+                    FinYear = rpt.FinYear,
+                    FinMonth = rpt.FinMonth,
+                    Description = rpt.Description,
+                    SystemID = rpt.SystemID,
+                    Status = 5,
+                    SystemBatchID = rpt.SystemBatchID,
+                    CreatorName = this.CurrentUser,
+                    CreateTime = DateTime.Now });
 
                 //判断A 明细
                 if (rptADetailList.Count == 0)
@@ -632,7 +642,10 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 A_MonthlyreportOperator.Instance.DeleteModel(rptA);
 
                 //新增B表的主表数据
-                A_MonthlyreportOperator.Instance.AddMonthlyreport(new A_MonthlyReport() { ID = rpt.ID, FinYear = rpt.FinYear, FinMonth = rpt.FinMonth, Description = rpt.Description, SystemID = rpt.SystemID, Status = 5, SystemBatchID = rpt.SystemBatchID, CreatorName = this.CurrentUser, CreateTime = DateTime.Now });
+                A_MonthlyreportOperator.Instance.AddMonthlyreport(new A_MonthlyReport() { ID = rpt.ID,
+                    TargetPlanID = rpt.TargetPlanID,
+                    AreaID = rpt.AreaID,
+                    FinYear = rpt.FinYear, FinMonth = rpt.FinMonth, Description = rpt.Description, SystemID = rpt.SystemID, Status = 5, SystemBatchID = rpt.SystemBatchID, CreatorName = this.CurrentUser, CreateTime = DateTime.Now });
 
                 //B表转换到A表
                 if (rptADetailList.Count == 0)

@@ -8,6 +8,7 @@ using LJTH.BusinessIndicators.Engine;
 using LJTH.BusinessIndicators.BLL;
 using LJTH.BusinessIndicators.Model;
 using Newtonsoft.Json;
+using BPF.Workflow.Client.Tools;
 
 namespace DataCalculate
 {
@@ -15,133 +16,124 @@ namespace DataCalculate
     {
         static void Main(string[] args)
         {
-            string systemId = "2EB7465B-95DA-450C-AA2F-9AF04E06D9BC";
-            var r=  StaticResource.Instance.GetSystem_Regional(systemId.ToGuid());
-            Console.WriteLine(JsonConvert.SerializeObject(StaticResource.Instance.GetReportDateTime()));
-            Console.ReadKey();
+            OnProecssCompleted("b564d96a-57e3-4e96-a003-db9be1273406");
+              Console.ReadKey();
             return;
-
-
-            Console.Write("Please select process A or B model (default is B): ");
-            string P=Console.ReadLine();
-            if (P.ToLower().Trim() == "a")
-            {
-                Console.WriteLine("Input Month....");
-                string FinMonth = Console.ReadLine();
-                int m = 0;
-                int.TryParse(FinMonth, out m);
-                if (m <= 0) m = DateTime.Now.AddMonths(-1).Month;
-                Console.WriteLine("Input Year....");
-                string FinYear = Console.ReadLine();
-                int y = 0;
-                int.TryParse(FinYear, out y);
-                if (y <= 0) y = DateTime.Now.AddMonths(-1).Year;
-                Console.WriteLine("Processing A model list....");
-                ProcessA(m,y);
-            }
-            else
-            {
-                Console.WriteLine("Processing B model list....");
-                ProcessB();
-            }
+            
         }
-
-        static void ProcessB()
+        public static void OnProecssCompleted(string BusinessID)
         {
-            List<B_MonthlyReportDetail> list = B_MonthlyreportdetailOperator.Instance.GetMonthlyreportdetailList().ToList().OrderBy(P=>(P.FinYear*100+P.FinMonth)).ToList();
+            B_TargetPlan rpt = B_TargetplanOperator.Instance.GetTargetPlanByID(BusinessID.ToGuid());
+            List<B_TargetPlanDetail> rptDetailList = B_TargetplandetailOperator.Instance.GetTargetplandetailList(BusinessID.ToGuid()).ToList();
 
-            Console.WriteLine(string.Format("There are {0} records", list.Count));
-            int Index = list.Count;
-            int Success = 0;
-            int InitialDataError = 0;
-            List<Exception> exps = new List<Exception>();
-            foreach (B_MonthlyReportDetail RptDetail in list)
+            rpt.WFStatus = "Approved";
+            if (!B_TargetplanOperator.Instance.HasDefaultVersion(rpt.SystemID, rpt.FinYear))
             {
-                try
-                {
-                    B_MonthlyReportDetail res = TargetEvaluationEngine.TargetEvaluationService.Calculation(RptDetail,false);
-                    B_MonthlyreportdetailOperator.Instance.UpdateMonthlyreportdetail(res);
-                    Success++;
-                }
-                catch (Exception exp)
-                {
-                    if (exp is InitialDataException)
-                    {
-                        InitialDataError++;
-                        Console.WriteLine(string.Format("Processing B_MonthlyReportDetail(ID='{0}') error, Message:{1}", RptDetail.ID.ToString(), exp.ToString()));
-                        Console.WriteLine();
-                    }
-                    else
-                    {
-                        if (!exps.Exists(e => e.Message == exp.Message && e.StackTrace == exp.StackTrace))
-                        {
-                            exps.Add(exp);
-                            Console.WriteLine(string.Format("Processing B_MonthlyReportDetail(ID='{0}') error, Message:{1}", RptDetail.ID.ToString(), exp.ToString()));
-                            Console.WriteLine();
-                        }
-                    }
-                }
-                Index--;
-                if (Index % 200 == 0 && Index > 0)
-                {
-                    Console.WriteLine(string.Format("There are {0} records", Index));
-                }
+                rpt.VersionDefault = 1;
             }
-            Console.WriteLine();
-            Console.WriteLine(string.Format("There are {0} records", list.Count));
-            Console.WriteLine(string.Format("There are {0} Success", Success));
-            Console.WriteLine(string.Format("There are {0} InitialDataException", InitialDataError));
+            B_TargetplanOperator.Instance.UpdateTargetplan(rpt);
 
-            Console.Read();
+
+            //A_TargetPlan rptA = null;
+
+            List<A_TargetPlanDetail> rptTempDetailList = new List<A_TargetPlanDetail>();
+
+            //List<A_TargetPlanDetail> rptADetailList = null;
+
+            A_TargetplanOperator.Instance.AddTargetplan(
+                new A_TargetPlan()
+                {
+                    ID = rpt.ID,
+                    VersionName = rpt.VersionName,
+                    VersionDefault = rpt.VersionDefault,
+                    FinYear = rpt.FinYear,
+                    Description = rpt.Description,
+                    SystemID = rpt.SystemID,
+                    Status = 5,
+                    CreateTime = DateTime.Now
+                });
+            rptDetailList.ForEach(p => rptTempDetailList.Add(p.ToAModel()));
+            A_TargetplandetailOperator.Instance.AddTargetPlanDetailList(rptTempDetailList);
+
+
+            #region 原有逻辑
+            //A主表的的数据
+            //rptA = A_TargetplanOperator.Instance.GetTargetplanList(rpt.SystemID, rpt.FinYear).FirstOrDefault();
+
+            ////A表明细数据
+            //rptADetailList = A_TargetplandetailOperator.Instance.GetTargetplandetailList(rpt.SystemID, rpt.FinYear).ToList();
+
+
+            ////判断当月主表是否是null
+            //if (rptA == null)
+            //{
+            //    A_TargetplanOperator.Instance.AddTargetplan(new A_TargetPlan() { ID = rpt.ID, FinYear = rpt.FinYear, Description = rpt.Description, SystemID = rpt.SystemID, Status = 5, CreateTime = DateTime.Now });
+
+            //    //判断A 明细
+            //    if (rptADetailList.Count == 0)
+            //    {
+            //        #region 明细数据
+
+            //        //将B 表数据添加到 A表中
+            //        rptDetailList.ForEach(p => rptTempDetailList.Add(p.ToAModel()));
+
+            //        #endregion
+            //    }
+            //    else
+            //    {
+
+            //        //删除A表明细的所有数据
+            //        A_TargetplandetailOperator.Instance.DeleteTargetPlanDetailList(rptADetailList);
+
+
+            //        #region 明细数据
+
+            //        //将B 表数据添加到 A表中
+            //        rptDetailList.ForEach(p => rptTempDetailList.Add(p.ToAModel()));
+
+            //        #endregion
+            //    }
+
+            //    //添加明细数据
+            //    A_TargetplandetailOperator.Instance.AddTargetPlanDetailList(rptTempDetailList);
+            //}
+            //else
+            //{
+            //    //上来删除主表的ID
+            //    A_TargetplanOperator.Instance.DeleteModel(rptA);
+
+            //    //新增B表的主表数据
+            //    A_TargetplanOperator.Instance.AddTargetplan(new A_TargetPlan() { ID = rpt.ID, FinYear = rpt.FinYear, Description = rpt.Description, SystemID = rpt.SystemID, Status = 5, CreateTime = DateTime.Now });
+
+            //    //B表转换到A表
+            //    if (rptADetailList.Count == 0)
+            //    {
+            //        #region 明细数据
+
+            //        //将B 表数据添加到 A表中
+            //        rptDetailList.ForEach(p => rptTempDetailList.Add(p.ToAModel()));
+
+            //        #endregion
+            //    }
+            //    else
+            //    {
+            //        //删除A表明细的所有数据
+            //        A_TargetplandetailOperator.Instance.DeleteTargetPlanDetailList(rptADetailList);
+
+
+            //        #region 明细数据
+
+            //        //将B 表数据添加到 A表中
+            //        rptDetailList.ForEach(p => rptTempDetailList.Add(p.ToAModel()));
+
+            //        #endregion
+            //    }
+
+            //    //添加明细数据
+            //    A_TargetplandetailOperator.Instance.AddTargetPlanDetailList(rptTempDetailList);
+            //}
+            #endregion
         }
 
-        static void ProcessA(int FM,int FY)
-        {
-            List<A_MonthlyReportDetail> list = A_MonthlyreportdetailOperator.Instance.GetMonthlyreportdetailList().ToList().FindAll(D=>D.FinMonth==FM && D.FinYear==FY).OrderBy(P => (P.FinYear * 100 + P.FinMonth)).ToList();
-
-            Console.WriteLine(string.Format("There are {0} records", list.Count));
-            int Index = list.Count;
-            int Success = 0;
-            int InitialDataError = 0;
-            List<Exception> exps = new List<Exception>();
-            foreach (A_MonthlyReportDetail RptDetail in list)
-            {
-                try
-                {
-                    A_MonthlyReportDetail res = TargetEvaluationEngine.TargetEvaluationService.Calculation(RptDetail.ToVModel().ToBModel(),false).ToVModel().ToAModel();
-                    A_MonthlyreportdetailOperator.Instance.UpdateMonthlyreportdetail(res);
-                    Success++;
-                }
-                catch (Exception exp)
-                {
-                    if (exp is InitialDataException)
-                    {
-                        InitialDataError++;
-                        Console.WriteLine(string.Format("Processing B_MonthlyReportDetail(ID='{0}') error, Message:{1}", RptDetail.ID.ToString(), exp.ToString()));
-                        Console.WriteLine();
-                    }
-                    else
-                    {
-                        if (!exps.Exists(e => e.Message == exp.Message && e.StackTrace == exp.StackTrace))
-                        {
-                            exps.Add(exp);
-                            Console.WriteLine(string.Format("Processing B_MonthlyReportDetail(ID='{0}') error, Message:{1}", RptDetail.ID.ToString(), exp.ToString()));
-                            Console.WriteLine();
-                        }
-                    }
-                }
-                Index--;
-                if (Index % 200 == 0 && Index > 0)
-                {
-                    Console.WriteLine(string.Format("There are {0} records", Index));
-                }
-            }
-            Console.WriteLine();
-            Console.WriteLine(string.Format("There are {0} records", list.Count));
-            Console.WriteLine(string.Format("There are {0} Success", Success));
-            Console.WriteLine(string.Format("There are {0} InitialDataException", InitialDataError));
-
-            Console.Read();
-        }
     }
 }

@@ -186,7 +186,8 @@ function BusinessDataHandle(instanceID, args) {
             data: {
                 BusinessID: instanceID,
                 OperatorType: args.OperatorType,
-                PrcessStatus: strPrcessStatus
+                PrcessStatus: strPrcessStatus,
+                ExecuteType:'afterAction',
             },
             success: function (result) {
                 $.unblockUI();

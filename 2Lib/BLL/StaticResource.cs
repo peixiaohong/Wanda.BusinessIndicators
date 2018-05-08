@@ -42,14 +42,13 @@ namespace LJTH.BusinessIndicators.BLL
                 else if (DateTime.Now > _instance.timer.AddHours(1))
                 {
                     _instance.Reload();
-                    _instance.timer = DateTime.Now;
                 }
                 return _instance;
             }
         }
         private static StaticResource _instance;
 
-        void Reload()
+        public void Reload()
         {
             _SystemList = null;
             _CompanyList = new Dictionary<Guid, List<C_Company>>();
@@ -61,6 +60,8 @@ namespace LJTH.BusinessIndicators.BLL
             _ReportDateTime = null;
             _TargetPlanDetail = new Dictionary<int, List<A_TargetPlanDetail>>();
             _DefaultTargetPlanDetail = new Dictionary<int, List<A_TargetPlanDetail>>();
+
+            _instance.timer = DateTime.Now;
         }
 
         public C_System this[Guid Key, DateTime CurrentDate]
