@@ -7,7 +7,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/css/NavStlye.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" src="../Scripts/BusinessReport/TargetPlanDetailReported.js"></script>
-    <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
+    <%--<script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>--%>
     <script type="text/javascript" src="../Scripts/UpLoad/jquery.uploadify.min.js"></script>
     <script type="text/javascript" src="../Scripts/jquery.base64.js"></script>
 

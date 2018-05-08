@@ -178,6 +178,10 @@ namespace LJTH.BusinessIndicators.BLL
         {
             return _bTargetplanAdapter.GetTargetVersionType(systemID, year, month);
         }
+        public bool HasDefaultVersion(Guid systemID,int year)
+        {
+            return _bTargetplanAdapter.HasDefaultVersion(systemID, year);
+        }
     }
 }
 
