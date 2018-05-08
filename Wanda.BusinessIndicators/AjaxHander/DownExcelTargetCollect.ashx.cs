@@ -68,6 +68,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         string FinYear = string.Empty;
         string FileType = string.Empty; //下载的文件类型
         string fileName = "年度经营指标月度分解表汇总表";
+        Guid TargetPlanID = Guid.Empty;
 
         public void ProcessRequest(HttpContext context)
         {
@@ -80,6 +81,10 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             if (!string.IsNullOrEmpty(HttpContext.Current.Request["FinYear"]))
             {
                 FinYear = HttpContext.Current.Request["FinYear"];
+            }
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request["TargetPlanID"]))
+            {
+                TargetPlanID = Guid.Parse(HttpContext.Current.Request["TargetPlanID"]);
             }
             DownExcel();
         }
@@ -265,7 +270,9 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
             C_System SysModel = C_SystemOperator.Instance.GetSystem(SysId);
             // List<C_Target> TargetList = C_TargetOperator.Instance.GetTargetList(SysId).ToList();
-            List<TargetPlanDetailVList> TargetPlanDetailVList = A_TargetplandetailOperator.Instance.GetSumTargetDetail(int.Parse(FinYear), SysId);
+           // List<TargetPlanDetailVList> TargetPlanDetailVList = A_TargetplandetailOperator.Instance.GetSumTargetDetail(int.Parse(FinYear), SysId);
+            List<TargetPlanDetailVList> TargetPlanDetailVList = A_TargetplandetailOperator.Instance.GetSumTargetDetailApprove(int.Parse(FinYear), SysId,TargetPlanID);
+            
             //复制sheet
             for (int i = 0; i < TargetPlanDetailVList.Count; i++)
             {

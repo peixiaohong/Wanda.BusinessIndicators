@@ -37,6 +37,6 @@ namespace WebApi.Models
         //逻辑错误
         isFalse = 300,
         //系统错误
-        isCatch = 500
+        isCatch = 305
     }
 }
