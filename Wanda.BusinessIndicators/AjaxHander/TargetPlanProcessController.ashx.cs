@@ -56,6 +56,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             {
                 //审批结束，调用这个
                 OnProecssCompleted();
+                StaticResource.Instance.Reload();
             }
             //处理数据
             DisposeBusinessData();

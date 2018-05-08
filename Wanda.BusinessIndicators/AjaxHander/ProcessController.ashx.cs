@@ -268,8 +268,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             //修改B批次表的审批状态
             B_SystemBatchOperator.Instance.UpdateSystemBatch(_BatchModel);
 
-            //将B批次表信息，添加到A表
-            A_SystemBatchOperator.Instance.AddSystemBatch(new A_SystemBatch()
+            var amodel = new A_SystemBatch()
             {
                 ID = _BatchModel.ID,
                 FinYear = _BatchModel.FinYear,
@@ -280,8 +279,12 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 CreateTime = DateTime.Now,
                 CreatorName = this.CurrentUser,
                 Opinions = _BatchModel.Opinions,
-                Batch_Opinions = _BatchModel.Batch_Opinions
-            });
+                Batch_Opinions = _BatchModel.Batch_Opinions,
+                TargetPlanID=_BatchModel.TargetPlanID
+            };
+            A_SystemBatchOperator.Instance.DeleteSystemBatch(amodel);
+            //将B批次表信息，添加到A表
+            A_SystemBatchOperator.Instance.AddSystemBatch(amodel);
 
         }
 
@@ -298,16 +301,18 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             List<A_MonthlyReportDetail> rptADetailList = null;
 
             //A主表的的数据
-            rptA = A_MonthlyreportOperator.Instance.GetAMonthlyReport(rpt.SystemID, rpt.FinYear, rpt.FinMonth);
+            //rptA = A_MonthlyreportOperator.Instance.GetAMonthlyReport(rpt.SystemID, rpt.FinYear, rpt.FinMonth);
+            rptA = A_MonthlyreportOperator.Instance.GetMonthlyreport(rpt.ID);
 
             //A表明细数据
-            rptADetailList = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetailList(rpt.SystemID, rpt.FinYear, rpt.FinMonth).ToList();
+            //rptADetailList = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetailList(rpt.SystemID, rpt.FinYear, rpt.FinMonth).ToList();
+            rptADetailList = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetailList(rpt.SystemID, rpt.FinYear, rpt.FinMonth).Where(x => x.MonthlyReportID == rpt.ID).ToList();
 
 
             //判断当月主表是否是null
             if (rptA == null)
             {
-                A_MonthlyreportOperator.Instance.AddMonthlyreport(new A_MonthlyReport() { ID = rpt.ID, FinYear = rpt.FinYear, FinMonth = rpt.FinMonth, Description = rpt.Description, SystemID = rpt.SystemID, Status = 5, SystemBatchID = rpt.SystemBatchID, CreatorName = this.CurrentUser, CreateTime = DateTime.Now });
+                A_MonthlyreportOperator.Instance.AddMonthlyreport(new A_MonthlyReport() { ID = rpt.ID,TargetPlanID=rpt.TargetPlanID,AreaID=rpt.AreaID, FinYear = rpt.FinYear, FinMonth = rpt.FinMonth, Description = rpt.Description, SystemID = rpt.SystemID, Status = 5, SystemBatchID = rpt.SystemBatchID, CreatorName = this.CurrentUser, CreateTime = DateTime.Now });
 
                 //判断A 明细
                 if (rptADetailList.Count == 0)
@@ -342,7 +347,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 A_MonthlyreportOperator.Instance.DeleteModel(rptA);
 
                 //新增B表的主表数据
-                A_MonthlyreportOperator.Instance.AddMonthlyreport(new A_MonthlyReport() { ID = rpt.ID, FinYear = rpt.FinYear, FinMonth = rpt.FinMonth, Description = rpt.Description, SystemID = rpt.SystemID, Status = 5, SystemBatchID = rpt.SystemBatchID, CreatorName = this.CurrentUser, CreateTime = DateTime.Now });
+                A_MonthlyreportOperator.Instance.AddMonthlyreport(new A_MonthlyReport() { ID = rpt.ID,TargetPlanID=rpt.TargetPlanID,AreaID=rpt.AreaID, FinYear = rpt.FinYear, FinMonth = rpt.FinMonth, Description = rpt.Description, SystemID = rpt.SystemID, Status = 5, SystemBatchID = rpt.SystemBatchID, CreatorName = this.CurrentUser, CreateTime = DateTime.Now });
 
                 //B表转换到A表
                 if (rptADetailList.Count == 0)

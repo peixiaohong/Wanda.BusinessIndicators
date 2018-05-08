@@ -88,6 +88,14 @@
       <Project>{ab142c57-a632-4958-9814-4f7c3ea9083a}</Project>
       <Name>4ViewModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\6Plugin\BPF.Workflow.Client\BPF.Workflow.Client.csproj">
+      <Project>{5bd5cc30-3bd6-4b83-af1a-cf62e7f67297}</Project>
+      <Name>BPF.Workflow.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\6Plugin\BPF.Workflow.Object\BPF.Workflow.Object.csproj">
+      <Project>{3b2bb7db-894f-4604-b720-be5f017f77b6}</Project>
+      <Name>BPF.Workflow.Object</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
