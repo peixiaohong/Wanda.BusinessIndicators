@@ -8,10 +8,10 @@
 }
 
     .TreeGrid .header {
-        background-color: #0463d0;
+        background-color: #f6f6f6;
         font-size: 11px;
         font-weight: 600;
-        color:#fff;
+        color: #444;
     }
 
 .TreeGrid td{
