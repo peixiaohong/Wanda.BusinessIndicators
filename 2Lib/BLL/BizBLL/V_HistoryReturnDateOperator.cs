@@ -245,9 +245,9 @@ namespace LJTH.BusinessIndicators.BLL
         /// <param name="finMonth">月</param>
         /// <param name="loginName">登陆人</param>
         /// <returns></returns>
-        public List<ComprehensiveReportViewModel> GetComprehensiveReportData(string systemID, int finYear, int finMonth, string loginName)
+        public List<ComprehensiveReportViewModel> GetComprehensiveReportData(string systemID, int finYear, int finMonth, string loginName,string targetPlanID)
         {
-            return _comprehensiveReportDateAdapter.GetComprehensiveReportData(systemID, finYear, finMonth, loginName);
+            return _comprehensiveReportDateAdapter.GetComprehensiveReportData(systemID, finYear, finMonth, loginName, targetPlanID);
         }
     }
 }

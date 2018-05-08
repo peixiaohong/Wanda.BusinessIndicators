@@ -59,7 +59,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         [LibAction]
         public C_ReportTime GetReportTime()
         {
-               return   C_ReportTimeOperator.Instance.GetReportTime();
+            return C_ReportTimeOperator.Instance.GetReportTime();
         }
 
 
@@ -78,15 +78,15 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         {
             String[] str = SysIDs.Split(',');
             List<string> list_str = str.ToList();
-            string a =string.Join(",", list_str.Select(S => S.ToString()).ToList()) ;
+            string a = string.Join(",", list_str.Select(S => S.ToString()).ToList());
 
 
             List<int> list_year = JsonHelper.Deserialize<List<int>>(FinYears);
-            string b = string.Join(",", list_year.Select(S => S.ToString()).ToList()) ;
+            string b = string.Join(",", list_year.Select(S => S.ToString()).ToList());
 
 
             List<string> list_target = JsonHelper.Deserialize<List<string>>(Targets);
-            string c =  string.Join(",", list_target.Select(S => S.ToString()).ToList()) ;
+            string c = string.Join(",", list_target.Select(S => S.ToString()).ToList());
 
             var d = DataType;
             var e = IsCurrent;
@@ -158,12 +158,46 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             };
         }
 
+
+        /// <summary>
+        /// 下拉框，版本数据信息
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <returns></returns>
+        [LibAction]
+        public object GetTargetVersionType(string systemID, string year, string month)
+        {
+            try
+            {
+                var result = A_TargetplanOperator.Instance.GetTargetVersionType(systemID, Convert.ToInt32(year), Convert.ToInt32(month));
+                return new
+                {
+                    Data = result,
+                    Success = 1,
+                    Message = "查询成功"
+                };
+            }
+            catch (Exception ex)
+            {
+
+                return new
+                {
+                    Data = "",
+                    Success = 0,
+                    Message = ex.Message
+                };
+            }
+
+        }
+
         /// <summary>
         /// 获取页面列表数据
         /// </summary>
         /// <returns></returns>
         [LibAction]
-        public object GetListData(string systemID,string year,string month)
+        public object GetListData(string systemID, string year, string month,string targetPlanID)
         {
             int finYear = DateTime.Now.Year, finMonth = DateTime.Now.Month;
             if (year != "0")
@@ -176,12 +210,12 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             }
             try
             {
-                var data = V_ComprehensiveReportFormsOperator.Instance.GetComprehensiveReportData(systemID, finYear, finMonth, base.CurrentUserName);
+                var data = V_ComprehensiveReportFormsOperator.Instance.GetComprehensiveReportData(systemID, finYear, finMonth, base.CurrentUserName, targetPlanID);
                 return new
                 {
-                    Data=data,
-                    Success=1,
-                    Message="查询成功"
+                    Data = data,
+                    Success = 1,
+                    Message = "查询成功"
                 };
             }
             catch (Exception ex)
@@ -191,7 +225,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 {
                     Data = "",
                     Success = 0,
-                    Message =ex.Message
+                    Message = ex.Message
                 };
             }
         }
