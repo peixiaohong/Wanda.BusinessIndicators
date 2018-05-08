@@ -82,7 +82,7 @@ namespace LJTH.BusinessIndicators.DAL
         /// <param name="SystemID"></param>
         /// <param name="FinYear"></param>
         /// <returns></returns>
-        public IList<A_TargetPlan> GetTargetplanListForMulitiVersion(Guid SystemID, int FinYear)
+        public IList<A_TargetPlan> GetTargetplanListForMulitiVersion(Guid SystemID, int FinYear, Guid TargetPlanId)
         {
             string sql = ORMapping.GetSelectSql<A_TargetPlan>(TSqlBuilder.Instance);
 
@@ -92,12 +92,13 @@ namespace LJTH.BusinessIndicators.DAL
 
             sql += " AND FinYear=@FinYear";
 
-            sql += " AND VersionDefault=0";
+            sql += " AND ID<>@TargetPlanId";
 
             SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
             SqlParameter pFinYear = CreateSqlParameter("@FinYear", System.Data.DbType.Int32, FinYear);
+            SqlParameter pTargetPlanId = CreateSqlParameter("@TargetPlanId", System.Data.DbType.Guid, TargetPlanId);
 
-            return ExecuteQuery(sql, pSystemID, pFinYear);
+            return ExecuteQuery(sql, pSystemID, pFinYear, pTargetPlanId);
         }
 
         public IList<A_TargetPlan> GetTargetplanListByRecalculation(DateTime OperatorTime)
@@ -142,7 +143,7 @@ namespace LJTH.BusinessIndicators.DAL
         }
 
 
-         /// <summary>
+        /// <summary>
         /// 获取已审批通过的分解指标版本类型集合
         /// </summary>
         /// <param name="systemID"></param>
