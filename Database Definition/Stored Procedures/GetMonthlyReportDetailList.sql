@@ -148,8 +148,8 @@ ELSE
 	   ,( SELECT CompanyName FROM dbo.C_Company WHERE id = CompanyID   ) AS CompanyName
 	   ,(SELECT TargetName FROM  dbo.C_Target WHERE id= TargetID AND SystemID =SystemID  AND  VersionStart <= GETDATE() AND GETDATE() < VersionEnd   AND IsDeleted =0   )AS   TargetName
 	   ,(SELECT TargetType FROM  dbo.C_Target WHERE id= TargetID AND SystemID =SystemID AND  VersionStart <= GETDATE() AND GETDATE() < VersionEnd    AND IsDeleted =0 ) AS TargetType
-	   ,(SELECT sum(Target) FROM A_TargetPlanDetail WHERE SystemID=SystemID AND CompanyID=CompanyID AND FinYear=FinYear AND TargetID=TargetID AND TargetPlanID=TargetPlanID  AND IsDeleted=0 GROUP BY SystemID,CompanyID,FinYear,TargetID,TargetPlanID ) AS NPlanAmmountByYear--全年指标	   
-	  FROM B_MonthlyReportDetail  
+	   ,(SELECT sum(Target) FROM A_TargetPlanDetail p WHERE p.SystemID=b.SystemID AND p.CompanyID=b.CompanyID AND p.FinYear=b.FinYear AND p.TargetID=b.TargetID AND p.TargetPlanID=b.TargetPlanID  AND p.IsDeleted=0 GROUP BY SystemID,CompanyID,FinYear,TargetID,TargetPlanID ) AS NPlanAmmountByYear--全年指标	   
+	  FROM B_MonthlyReportDetail b
 	  WHERE MonthlyReportID=@lastMonthlyReportID
 	END 
 END

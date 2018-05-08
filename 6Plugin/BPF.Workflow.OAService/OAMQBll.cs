@@ -181,8 +181,10 @@ namespace BPF.OAMQServices
                             var arrayParam = BuildMQMessage(message);
                             using (Plugin.OAMessage.OAMessage.WebServices.OfsTodoDataWebService service = new Plugin.OAMessage.OAMessage.WebServices.OfsTodoDataWebService())
                             {
+                                Common.Log.Info("【输入】{0}",Newtonsoft.Json.JsonConvert.SerializeObject(arrayParam));
                                 var result = service.receiveRequestInfoByMap(arrayParam);
                                 message.MessageRemark = string.Join(",", result.ToList().Select(x => string.Format("{0}:{1}", x.key, x.value)));
+
                             }
                         }
                         message.Status = 1;
@@ -226,8 +228,8 @@ namespace BPF.OAMQServices
             paramList.Add("requestname", message.Title);
             paramList.Add("workflowname", message.Flowtype);
             paramList.Add("nodename", message.Nodename);
-            paramList.Add("pcurl", SSOToolkit.Instance.GetAuthOAUrlWithSSO(message.PtpUrl, message.Userid, message.FlowID));
-            paramList.Add("appurl", SSOToolkit.Instance.GetAuthOAUrlWithSSO(message.PtpUrl, message.Userid, message.FlowID));
+            paramList.Add("pcurl", SSOToolkit.Instance.GetAuthOAUrlWithSSO(message.PtpUrl.Trim(), message.Userid, message.FlowID));
+            paramList.Add("appurl", SSOToolkit.Instance.GetAuthOAUrlWithSSO(message.MobileUrl.Trim(), message.Userid, message.FlowID));
             paramList.Add("creator", message.Creator);
             paramList.Add("isremark", message.Flowmess.ToString());
             //paramList.Add("viewtype", message.Viewtype.ToString());

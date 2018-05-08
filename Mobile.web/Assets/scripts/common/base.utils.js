@@ -131,6 +131,7 @@ var utils = {
             error: null
         };
         $.extend(setting, options);
+        $.extend(setting.args, { LoginUser: $("#hideLoginUser").val() });
         $.ajax({
             async: setting.async,
             type: setting.type,
@@ -260,8 +261,8 @@ var utils = {
             $(".vue-message").remove();
         }
         var $msg = $("<div class='weui-mask'></div><div class='vue-message'><div class='dialog__hd'><span class='dialog__title'>"
-            + "<img src='../../Assets/images/action-icon.png' width='18'>  提示</span>"
-            + "<a href='javascript:;' class='btn_close'><img src='../../Assets/images/close-icon.png' width= '15'></a>"
+            + "<img src='../Assets/images/action-icon.png' width='18'>  提示</span>"
+            + "<a href='javascript:;' class='btn_close'><img src='../Assets/images/close-icon.png' width= '15'></a>"
             + "</div><div class='weui-dialog__bd dialog__bd' ><div>" + message
             + "</div></div ><div class='weui-dialog__ft dialog__ft'><a href='javascript:;' class='weui-dialog__btn weui-dialog__btn_primary'>确定</a></div></div>");
         $msg.fadeIn(1000, function () {
@@ -290,10 +291,10 @@ var utils = {
             if (isMobile) {
                 $msg.remove();
                 if (isFromWeb && isFromWeb > 0) {
-                    window.location.href = '/Application/Task/TaskList.aspx';
+                    window.location.href = '/App/Report/ReportMonth.aspx';
                 }
                 else {
-                    window.location.href = '/todoListMobile.html';
+                    window.location.href = '/APP/todoListMobile.html';
                 }
             } else {
                 $msg.remove();

@@ -46,7 +46,8 @@ namespace BPF.OAMQMessages.DAL
       ,Status
       ,ErrorCount
       ,MessageCreateTime
-,ProcessID
+      ,ProcessID
+      ,MobileUrl
       ,AllowMobile"
       + senderCodeSQL
       + " FROM OAMQMessages WHERE Status = 0 ORDER BY Sendertime ASC ;";
@@ -90,6 +91,7 @@ namespace BPF.OAMQMessages.DAL
                             MessageCreateTime = DataTypeHelper.GetDateTime(row["MessageCreateTime"]),
                             AllowMobile = DataTypeHelper.GetInt(row["AllowMobile"]),
                             ProcessID = DataTypeHelper.GetString(row["ProcessID"]),
+                            MobileUrl = DataTypeHelper.GetString(row["MobileUrl"]),
                         };
                         if (BPF.OAMQServices.OAMQBll.Instance.SendMode == 2)
                             message.SenderCode = DataTypeHelper.GetString(row["SenderCode"]);

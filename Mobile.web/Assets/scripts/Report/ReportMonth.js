@@ -31,7 +31,8 @@
                             self.systemAndYearList = res.Data;
                             self.InitYM();                            
                         } else {
-                            utils.alertMessage(res.StatusMessage)
+                            utils.alertMessage(res.StatusMessage);
+                            self.systemAndYearList = [];
                         }
                     }
                 });
@@ -57,7 +58,9 @@
                             self.title = res.Data.title;
                             self.list = JSON.parse(res.Data.list);
                         } else {
-                            utils.alertMessage(res.StatusMessage)
+                            utils.alertMessage(res.StatusMessage);
+                            self.title = "";
+                            self.list = {};
                         }
                     }
                 });
@@ -89,19 +92,13 @@
                             }                           
                             self.ChangeData();
                         } else {
-                            utils.alertMessage(res.StatusMessage)
+                            utils.alertMessage(res.StatusMessage);
+                            self.versions = [];
+                            self.versionSelect = "";
                         }
                     }
                 });
             },
-            ToThousands: function (num) {
-                return (parseInt(num) || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
-            },
-            Trim: function (str) {
-                if (str.length) {
-                    return str.replace(/(?!(^\n|\n{2}))\n/g, "<br/>"); 
-                } 
-            }  
         }
     })
 })

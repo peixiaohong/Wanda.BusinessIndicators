@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterApprove.Master" AutoEventWireup="true" CodeBehind="ReportTargetApprove.aspx.cs" Inherits="Mobile.web.Report.ReportTargetApprove" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-      <script src="<%=ResolveUrl("~/Assets/scripts/Report/ReportTargetApprove.js") %>"></script>
+    <script src="<%=ResolveUrl("~/Assets/scripts/Report/ReportTargetApprove.js?v=")+System.Guid.NewGuid() %>"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
       <section id="ReportApproveContent" v-cloak>
@@ -14,9 +14,9 @@
                         <div class="collection-cont col-md-12 col-sm-12">
                             <ul>
                                 <li class="active">
-                                    <h3>基本信息<span class="collection-updown-icon"></span></h3>
+                                     <h3 v-bind:class="{'bottom': basicState}">基本信息<span v-bind:class="{'collection-updown-icon': true, 'collection-down-icon': basicState}" v-on:click="basicState = !basicState"></span></h3>
                                     <!--<div class="collection-result">-->
-                                    <div>
+                                    <div v-if="!basicState">
                                         <table class="from-table">
                                             <tbody>
                                                 <tr>
@@ -32,9 +32,9 @@
                                     </div>
                                 </li>
                                 <li class="active">
-                            <h3>指标分解(单位:万元)<span class="collection-updown-icon"></span></h3>
+                            <h3 v-bind:class="{'bottom': targetState}">指标分解(单位:万元)<span v-bind:class="{'collection-updown-icon': true, 'collection-down-icon': targetState}" v-on:click="targetState = !targetState"></span></h3>
                             <!--<div class="collection-result">-->
-                            <div class="target" v-cloak>
+                            <div class="target" v-cloak v-if="!targetState">
                                 <img src="../Assets/images/arrow-right.png" class="target-allow" data-allow="right" v-if="list[0].TargetDetailList.length > 3" />
                                 <div class="target-main" v-if="list.length">
                                     <div>
@@ -62,7 +62,7 @@
                                         <tbody>
                                             <tr v-for="(item,index) in list">
                                                 <td>{{item.FinMonth}}月</td>
-                                                <td v-for="target in item.TargetDetailList">{{ToThousands(target.SumTarget)}}</td>
+                                                <td v-for="target in item.TargetDetailList">{{Vue.ToThousands(target.SumTarget)}}</td>
                                             </tr>
                                         </tbody>
                                     </table>

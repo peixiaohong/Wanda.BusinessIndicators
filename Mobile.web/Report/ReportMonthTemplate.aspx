@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="ReportMonthTemplate.aspx.cs" Inherits="Mobile.web.Report.ReportMonthTemplate" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <script src="<%=ResolveUrl("~/Assets/scripts/Report/ReportMonthTemplate.js") %>"></script>
+     <script src="<%=ResolveUrl("~/Assets/scripts/Report/ReportMonthTemplate.js?v=")+System.Guid.NewGuid() %>"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <section id="ReportMonthTemplateContent" v-cloak>
@@ -35,12 +35,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <template v-for="lists in result.ObjValue" v-if="lists.Mark == 'CompanyProperty'">
-                                            <template v-for="list in lists.ObjValue">
+                                            <template v-for="list in result.ObjValue">
                                             <tr>
                                                 <td v-on:click="list.IsCurrentShow = !list.IsCurrentShow">{{list.Name}}</td>
-                                                <td>{{ToThousands(list.BMonthReportDetail.NPlanAmmount)}}</td>
-                                                <td>{{ToThousands(list.BMonthReportDetail.NActualAmmount)}}</td>
+                                                <td>{{Vue.ToThousands(list.BMonthReportDetail.NPlanAmmount)}}</td>
+                                                <td>{{Vue.ToThousands(list.BMonthReportDetail.NActualAmmount)}}</td>
                                                 <td class="color-height">{{list.BMonthReportDetail.NDisplayRate}}</td>
                                             </tr>
                                             <tr class="new-tem" v-if="list.ObjValue.length && list.IsCurrentShow">
@@ -57,8 +56,8 @@
                                                                         </tr>
                                                                     </table>
                                                                 </th>
-                                                                <td style="width: 22.1%">{{ToThousands(items.NPlanAmmount)}}</td>
-                                                                <td style="width: 22.1%">{{ToThousands(items.NActualAmmount)}}</td>
+                                                                <td style="width: 22.1%">{{Vue.ToThousands(items.NPlanAmmount)}}</td>
+                                                                <td style="width: 22.1%">{{Vue.ToThousands(items.NActualAmmount)}}</td>
                                                                 <td style="width: 22%">{{items.NDisplayRate}}</td>
                                                             </tr>
                                                                 <template v-if="false && items.IsCurrentShow">
@@ -120,7 +119,6 @@
                                                 </td>
                                             </tr>
                                             </template>
-                                        </template>
                                     </tbody>
                                 </table>
                             </div>
@@ -138,12 +136,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <template v-for="lists in result.ObjValue" v-if="lists.Mark == 'CompanyProperty'">
-                                            <template v-for="list in lists.ObjValue">
+                                            <template v-for="list in result.ObjValue">
                                             <tr>
                                                 <td v-on:click="list.IsTotalShow = !list.IsTotalShow">{{list.Name}}</td>
-                                                <td>{{ToThousands(list.BMonthReportDetail.NPlanAmmount)}}</td>
-                                                <td>{{ToThousands(list.BMonthReportDetail.NActualAmmount)}}</td>
+                                                <td>{{Vue.ToThousands(list.BMonthReportDetail.NPlanAmmount)}}</td>
+                                                <td>{{Vue.ToThousands(list.BMonthReportDetail.NActualAmmount)}}</td>
                                                 <td class="color-height">{{list.BMonthReportDetail.NDisplayRate}}</td>
                                             </tr>
                                             <tr class="new-tem" v-if="list.ObjValue.length && list.IsTotalShow">
@@ -160,8 +157,8 @@
                                                                         </tr>
                                                                     </table>
                                                                 </th>
-                                                                <td style="width: 22.1%">{{ToThousands(items.NPlanAmmount)}}</td>
-                                                                <td style="width: 22.1%">{{ToThousands(items.NActualAmmount)}}</td>
+                                                                <td style="width: 22.1%">{{Vue.ToThousands(items.NPlanAmmount)}}</td>
+                                                                <td style="width: 22.1%">{{Vue.ToThousands(items.NActualAmmount)}}</td>
                                                                 <td style="width: 22%">{{items.NDisplayRate}}</td>
                                                             </tr>
                                                                 <template v-if="false && items.IsTotalShow">
@@ -223,7 +220,6 @@
                                                 </td>
                                             </tr>
                                             </template>
-                                        </template>
                                     </tbody>
                                 </table>
                             </div>
@@ -241,12 +237,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <template v-for="lists in result.ObjValue" v-if="lists.Mark == 'CompanyProperty'">
-                                            <template v-for="list in lists.ObjValue">
+                                            <template v-for="list in result.ObjValue">
                                             <tr>
                                                 <td v-on:click="list.IsYearShow = !list.IsYearShow">{{list.Name}}</td>
-                                                <td>{{ToThousands(list.BMonthReportDetail.NPlanAmmount)}}</td>
-                                                <td>{{ToThousands(list.BMonthReportDetail.NActualAmmount)}}</td>
+                                                <td>{{Vue.ToThousands(list.BMonthReportDetail.NPlanAmmount)}}</td>
+                                                <td>{{Vue.ToThousands(list.BMonthReportDetail.NActualAmmount)}}</td>
                                                 <td class="color-height">{{list.BMonthReportDetail.NDisplayRate}}</td>
                                             </tr>
                                             <tr class="new-tem" v-if="list.ObjValue.length && list.IsYearShow">
@@ -263,8 +258,8 @@
                                                                         </tr>
                                                                     </table>
                                                                 </th>
-                                                                <td style="width: 22.1%">{{ToThousands(items.NPlanAmmount)}}</td>
-                                                                <td style="width: 22.1%">{{ToThousands(items.NActualAmmount)}}</td>
+                                                                <td style="width: 22.1%">{{Vue.ToThousands(items.NPlanAmmount)}}</td>
+                                                                <td style="width: 22.1%">{{Vue.ToThousands(items.NActualAmmount)}}</td>
                                                                 <td style="width: 22%">{{items.NDisplayRate}}</td>
                                                             </tr>
                                                                 <template v-if="false && items.IsYearShow">
@@ -326,7 +321,6 @@
                                                 </td>
                                             </tr>
                                             </template>
-                                        </template>
                                     </tbody>
                                 </table>
                             </div>

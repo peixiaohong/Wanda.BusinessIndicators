@@ -18,8 +18,8 @@ namespace LJTH.BusinessIndicators.BLL
     /// Targetplan对象的业务逻辑操作
     /// </summary>
     public class A_TargetplanOperator : BizOperatorBase<A_TargetPlan>
-	{
-    
+    {
+
         #region Generate Code
 
         public static readonly A_TargetplanOperator Instance = PolicyInjection.Create<A_TargetplanOperator>();
@@ -28,7 +28,7 @@ namespace LJTH.BusinessIndicators.BLL
 
         protected override BaseAdapterT<A_TargetPlan> GetAdapter()
         {
-            return  _aTargetplanAdapter;
+            return _aTargetplanAdapter;
         }
 
         public IList<A_TargetPlan> GetTargetplanList()
@@ -66,9 +66,9 @@ namespace LJTH.BusinessIndicators.BLL
         /// <param name="SystemID"></param>
         /// <param name="FinYear"></param>
         /// <returns></returns>
-        public IList<A_TargetPlan> GetTargetplanListForMulitiVersion(Guid SystemID, int FinYear)
+        public IList<A_TargetPlan> GetTargetplanListForMulitiVersion(Guid SystemID, int FinYear, Guid TargetPlanId)
         {
-            IList<A_TargetPlan> result = _aTargetplanAdapter.GetTargetplanListForMulitiVersion(SystemID, FinYear);
+            IList<A_TargetPlan> result = _aTargetplanAdapter.GetTargetplanListForMulitiVersion(SystemID, FinYear, TargetPlanId);
             return result;
         }
         public Guid AddTargetplan(A_TargetPlan data)
@@ -80,7 +80,7 @@ namespace LJTH.BusinessIndicators.BLL
 
         public A_TargetPlan GetTargetplan(Guid aTargetplanID)
         {
-            ExceptionHelper.TrueThrow<ArgumentNullException>(aTargetplanID==null,"Argument aTargetplanID is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(aTargetplanID == null, "Argument aTargetplanID is Empty");
             return base.GetModelObject(aTargetplanID);
         }
 
@@ -93,7 +93,7 @@ namespace LJTH.BusinessIndicators.BLL
 
         public Guid RemoveTargetplan(Guid aTargetplanID)
         {
-            ExceptionHelper.TrueThrow<ArgumentNullException>(aTargetplanID==null,"Argument aTargetplanID is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(aTargetplanID == null, "Argument aTargetplanID is Empty");
             Guid result = base.RemoveObject(aTargetplanID);
             return result;
         }
@@ -109,7 +109,7 @@ namespace LJTH.BusinessIndicators.BLL
             return _aTargetplanAdapter.Delete(Model);
         }
 
-        public IList<A_TargetPlan> GetListByRecalculation(int  time )
+        public IList<A_TargetPlan> GetListByRecalculation(int time)
         {
             time = 0 - time;
             DateTime OpeeratorTime = DateTime.Now.AddMinutes(time);
@@ -136,7 +136,7 @@ namespace LJTH.BusinessIndicators.BLL
         /// <returns></returns>
         public IList<A_TargetPlan> GetTargetVersionType(string systemID, int year, int month)
         {
-            return _aTargetplanAdapter.GetTargetVersionType(systemID,year,month);
+            return _aTargetplanAdapter.GetTargetVersionType(systemID, year, month);
         }
 
         /// <summary>

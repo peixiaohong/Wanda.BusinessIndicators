@@ -662,7 +662,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             return VPlanTargeList;
         }
 
-       
+
         [LibAction]
         public List<B_TargetPlan> GetTargetHistory(string SystemID, string Year)
         {
@@ -686,7 +686,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 }
 
                 result[i].IfCurrentTarget = false;
-                if (targetList.Where(x=>x.ID==result[i].ID).Count()>0)
+                if (targetList.Where(x => x.ID == result[i].ID).Count() > 0)
                 {
                     result[i].IfCurrentTarget = true;
                 }
@@ -953,8 +953,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             int num = 0;
             int index = 0;
             //获取子List
-            var Sub_list = List.Where(P => P.ParentID == Pid).ToList();  //C_SystemTreeOperator.Instance.GetSystemTreeListByID(Pid);
-
+            //var Sub_list = List.Where(P => P.ParentID == Pid).ToList();  //C_SystemTreeOperator.Instance.GetSystemTreeListByID(Pid);
+            var Sub_list = List;
             if (Sub_list != null && Sub_list.Count > 0)
             {
                 Sub_list.ForEach(F =>
@@ -991,7 +991,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                                     model.RptTime = M.CreateTime.ToString("yyyy-MM-dd HH:mm:ss");
                                 else
                                     model.RptTime = NVlist[0].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss");
-                              
+
                                 model.WFStause = M.WFStatus;
                                 model.ReportApprove = M.ReportApprove;
                                 list.Add(model);
@@ -1129,8 +1129,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             List<SystemTreeModel> list = new List<SystemTreeModel>();
 
             //获取子List
-            var Sub_list = List.Where(P => P.ParentID == Pid).ToList();  //C_SystemTreeOperator.Instance.GetSystemTreeListByID(Pid);
-
+            //var Sub_list = List.Where(P => P.ParentID == Pid).ToList();  //C_SystemTreeOperator.Instance.GetSystemTreeListByID(Pid);
+            var Sub_list = List;
             //var Sub_list = C_SystemTreeOperator.Instance.GetSystemTreeListByID(Pid);
             if (Sub_list != null && Sub_list.Count > 0)
             {
@@ -1180,7 +1180,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                                             model.EndTime = NVlist[NVlist.Count() - 2].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss");
                                         }
                                     }
-                                    else if (NVlist[i].ActivityName == "审批" && i+1 == NVlist.Count())
+                                    else if (NVlist[i].ActivityName == "审批" && i + 1 == NVlist.Count())
                                     {
                                         if (NVlist[i].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss") != "0001-01-01 00:00:00")
                                         {
@@ -1219,16 +1219,12 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         /// <param name="VersionName"></param>
         /// <returns></returns>
         [LibAction]
-        public object isCheckPlan(string SysID,string Year,string PlanID,string VersionName)
+        public object isCheckPlan(string SysID, string Year, string PlanID, string VersionName)
         {
             bool success = true;
             IList<B_TargetPlan> List = new List<B_TargetPlan>();
             List = B_TargetplanOperator.Instance.GetTargetPlanByApprovedList(Guid.Parse(SysID), int.Parse(Year));
-            if (List.Where(x => (x.WFStatus == "Progress" || x.WFStatus == "Approved") && x.VersionName == VersionName).Count() > 0)
-            {
-                success = false;
-            }
-            else if (List.Where(x => (x.WFStatus == "Progress" || x.WFStatus == "Approved") && x.ID == PlanID.ToGuid()).Count() > 0)
+            if (List.Where(x => (x.WFStatus == "Progress" || x.WFStatus == "Approved") && x.ID == PlanID.ToGuid()).Count() > 0)
             {
                 success = false;
                 B_TargetPlan _BTargetPlan = new B_TargetPlan();
@@ -1237,12 +1233,17 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 _BTargetPlan.FinYear = int.Parse(Year);
                 _BTargetPlan.Status = 2;
                 _BTargetPlan.VersionStart = DateTime.Now;
-                _BTargetPlan.Versionend = new DateTime(9999);
+                _BTargetPlan.Versionend = new DateTime(9999, 01, 01);
                 _BTargetPlan.WFStatus = "Draft";
                 PlanID = B_TargetplanOperator.Instance.AddTargetplan(_BTargetPlan).ToString();
 
             }
-            return new { success, TargetPlanID= PlanID };
+            else if (List.Where(x => (x.WFStatus == "Progress" || x.WFStatus == "Approved") && x.VersionName == VersionName).Count() > 0)
+            {
+                success = false;
+            }
+
+            return new { success, TargetPlanID = PlanID };
         }
     }
 

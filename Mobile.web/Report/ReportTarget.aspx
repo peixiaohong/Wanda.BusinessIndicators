@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="ReportTarget.aspx.cs" Inherits="Mobile.web.Report.ReportTarget" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <script src="<%=ResolveUrl("~/Assets/scripts/Report/ReportTarget.js") %>"></script>
+    <script src="<%=ResolveUrl("~/Assets/scripts/Report/ReportTarget.js?v=")+System.Guid.NewGuid() %>"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <section id="ReportTargetContent" v-cloak>
@@ -41,11 +41,11 @@
                             </div>
                         </li>
 
-                        <li class="active">
+                        <li>
                             <h3 v-if="!head.length" style="text-align:center">暂无数据...</h3>
-                            <h3 v-if="head.length">指标分解(单位:万元)<span class="collection-updown-icon"></span></h3>
+                            <h3 v-bind:class="{'bottom': !reportState}"  v-if="head.length">指标分解(单位:万元)<span v-bind:class="{'collection-updown-icon': true, 'collection-up-icon': reportState}" v-on:click="reportState = !reportState"></span></h3>
                             <!--<div class="collection-result">-->
-                            <div class="target" v-cloak>
+                            <div class="target" v-cloak v-if="reportState">
                                 <img src="../Assets/images/arrow-right.png" class="target-allow" data-allow="right" v-if="head.length > 3" />
                                 <div class="target-main" v-if="list.length">
                                     <div>
@@ -73,7 +73,7 @@
                                         <tbody>
                                             <tr v-for="(item,index) in list">
                                                 <td>{{item.FinMonth}}月</td>
-                                                <td v-for="target in item.TargetDetailList">{{ToThousands(target.SumTarget)}}</td>
+                                                <td v-for="target in item.TargetDetailList">{{Vue.ToThousands(target.SumTarget)}}</td>
                                             </tr>
                                         </tbody>
                                     </table>

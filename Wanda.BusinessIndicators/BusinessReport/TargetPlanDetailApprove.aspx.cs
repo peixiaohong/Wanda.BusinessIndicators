@@ -57,6 +57,9 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                             {
                                 lblName.Text = _BTargetPlan.FinYear + "年" + system.SystemName + "指标分解";
                             }
+                            lblVersionName2.Text = _BTargetPlan.VersionName;
+                            lblVersionName1.Text = _BTargetPlan.VersionName;
+                            hideVersionName.Value= _BTargetPlan.VersionName;
                         }
                     }
                 }

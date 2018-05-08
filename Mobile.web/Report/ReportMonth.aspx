@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="ReportMonth.aspx.cs" Inherits="Mobile.web.Report.ReportMonth" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <script src="../Assets/scripts/Report/ReportMonth.js"></script>
+    <script src="<%=ResolveUrl("~/Assets/scripts/Report/ReportMonth.js?v=")+System.Guid.NewGuid() %>"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <section id="ReportMonthContent" v-cloak>
@@ -59,7 +59,7 @@
                     </li>
                     <li>
                         <h3 v-bind:class="{'bottom': !reportState}">月度说明<span v-bind:class="{'collection-updown-icon': true, 'collection-up-icon': reportState}" v-on:click="if(title.length){reportState = !reportState}"></span></h3>
-                        <div class="showBox report-state" v-if="reportState" v-html="Trim(title)"></div>
+                        <div class="showBox report-state" v-if="reportState" v-html="Vue.Trim(title)"></div>
                     </li>
 
                     <li class="active">
@@ -77,9 +77,9 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="item in list.ObjValue">
-                                        <td><a v-bind:href="'/Report/ReportMonthTemplate.aspx?id='+ item.SystemID + '&versionID='+ versionSelect + '&year=' + yearSelect + '&month=' + monthSelect + '&name=' + encodeURI(item.TargetName)">{{item.TargetName}}</a></td>
-                                        <td>{{ToThousands(item.NPlanAmmount)}}</td>
-                                        <td>{{ToThousands(item.NActualAmmount)}}</td>
+                                        <td><a v-bind:href="'/APP/Report/ReportMonthTemplate.aspx?id='+ item.SystemID + '&versionID='+ versionSelect + '&year=' + yearSelect + '&month=' + monthSelect + '&name=' + encodeURI(item.TargetName)">{{item.TargetName}}</a></td>
+                                        <td>{{Vue.ToThousands(item.NPlanAmmount)}}</td>
+                                        <td>{{Vue.ToThousands(item.NActualAmmount)}}</td>
                                         <td>{{item.NActualRate}}</td>
                                     </tr>
                                 </tbody>
@@ -102,8 +102,8 @@
                                 <tbody>
                                     <tr v-for="item in list.ObjValue">
                                         <td>{{item.TargetName}}</td>
-                                        <td>{{ToThousands(item.NAccumulativePlanAmmount)}}</td>
-                                        <td>{{ToThousands(item.NAccumulativeActualAmmount)}}</td>
+                                        <td>{{Vue.ToThousands(item.NAccumulativePlanAmmount)}}</td>
+                                        <td>{{Vue.ToThousands(item.NAccumulativeActualAmmount)}}</td>
                                         <td>{{item.NAccumulativeActualRate}}</td>
                                     </tr>
                                 </tbody>
@@ -126,8 +126,8 @@
                                 <tbody>
                                     <tr v-for="item in list.ObjValue">
                                         <td>{{item.TargetName}}</td>
-                                        <td>{{ToThousands(item.MeasureRate)}}</td>
-                                        <td>{{ToThousands(item.NAccumulativeActualAmmount)}}</td>
+                                        <td>{{Vue.ToThousands(item.MeasureRate)}}</td>
+                                        <td>{{Vue.ToThousands(item.NAccumulativeActualAmmount)}}</td>
                                         <td>{{item.NAnnualCompletionRate}}</td>
                                     </tr>
                                 </tbody>

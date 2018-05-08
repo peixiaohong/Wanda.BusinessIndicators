@@ -17,6 +17,8 @@ var Task = {
             data: data,
             created: function () {
                 var self = this;
+                console.log(self.head);
+                console.log(self.list);
                 if (!self.IsNeedApprove) {
                     $('.bpf_workflow_result_list').hide();
                     var $container = $("#SJSJ_LC").closest(".approval-process");
@@ -49,20 +51,45 @@ var Task = {
     CommonSave: function (action, args, func) {
         var businessID = utils.getQueryString("businessID");
         var url = api_url + 'Approval/MonthProcessRequest';
-        utils.ajax({
-            type: 'POST',
-            url: url,
-            args: {
-                "BusinessID": businessID,
-                "strProType": utils.getQueryString("ProType"),
-                "ExecuteType": args.ExecuteType,
-                "OperatorType": args.OperatorType,
-                "PrcessStatus": args.PrcessStatus
-            },
-            success: function (data) {
-                func();
+        var strPrcessStatus = "";
+        if (args.WorkflowContext.ProcessInstance.Status == 2 && args.WorkflowContext.ProcessInstance.RunningNodeID == args.WorkflowContext.ProcessInstance.StartNodeID) {
+            strPrcessStatus = "Draft";
+        } else if (args.WorkflowContext.ProcessInstance.Status == -1) {
+            PrcessStatus = "Cancel";
+        } else if (args.WorkflowContext.ProcessInstance.Status == 3) {
+
+            // 审批结束
+            if (args.WorkflowContext.CurrentUserNodeID != null && args.WorkflowContext.CurrentUserNodeID != "") {
+                var nodeInfo = args.WorkflowContext.NodeInstanceList[args.WorkflowContext.CurrentUserNodeID];
+                if (nodeInfo != null && (nodeInfo.NodeType == 1 || nodeInfo.NodeType == 2 || nodeInfo.NodeType == 7)) {
+                    strPrcessStatus = "Approved";
+                } else {
+                    strPrcessStatus = null;
+                }
+            } else {
+                strPrcessStatus = null;
             }
-        });
+        }
+        else {
+            strPrcessStatus = "Progress";
+        }
+        if (strPrcessStatus != null) {
+            utils.ajax({
+                type: 'GET',
+                url: url,
+                args: {
+                    "BusinessID": businessID,
+                    "strProType": utils.getQueryString("ProType"),
+                    "ExecuteType": "afterAction",
+                    "OperatorType": args.OperatorType,
+                    "PrcessStatus": strPrcessStatus
+                },
+                success: function (data) {
+                    func();
+                }
+            });
+
+        }
     },
     Save: function (args, func) {
         Task.CommonSave("save", args, func);
@@ -82,9 +109,9 @@ var Task = {
         //TODO审批通过时修改数据状态，修改成功后请调用WFOperator_SJSJ.AfterActionRedirect(args);做跳转
         WFOperator_SJSJ.ApprovePage.AfterAction(argsT,
             {
-                Approval: function (args) { Task.Approve(args); setTimeout(function () { location.href = '/todoListMobile.html'; }, 1000) },
-                Return: function (args) { Task.Reject(args); setTimeout(function () { location.href = '/todoListMobile.html'; }, 1000) },
-                Redirect: function (args) { setTimeout(function () { location.href = '/todoListMobile.html'; }, 1000) }
+                Approval: function (args) { Task.Approve(args); setTimeout(function () { location.href = '/APP/todoListMobile.html'; }, 1000) },
+                Return: function (args) { Task.Reject(args); setTimeout(function () { location.href = '/APP/todoListMobile.html'; }, 1000) },
+                Redirect: function (args) { setTimeout(function () { location.href = '/APP/todoListMobile.html'; }, 1000) }
             });
     },
     LoadData: function (businessId, proType, callback) {
@@ -100,24 +127,38 @@ var Task = {
                 "strProType": proType
             },
             success: function (data) {
-                console.log(data);
+                if (data.IsSuccess && data.StatusCode == 200) {
+                    var listData = JSON.parse(data.Data);
+                    var result = {
+                        "head": {
+                            "SystemName": listData[0].ObjValue._System.SystemName,
+                            "FinYear": listData[0].ObjValue.FinYear,
+                            "FinMonth": listData[0].ObjValue.FinMonth,
+                            "ObjValue": listData[1].ObjValue
+                        },
+                        "list": listData[2],
+                        "reportState": false,
+                        "currentState": false,
+                        "totalState": false,
+                        "yearlyState": false,
+                    }
+                    callback(result);
+                } else {
+                    utils.alertMessage(data.StatusMessage)
+                }
+                WFOperator_SJSJ.InitSetting({
+                    UserSelectSetting: {
+                        IsNeedHiddenNav: utils.mobileBrower(),
+                        TopValue: 14
+                    },
+                    OnAfterExecute: Task.AfterAction//执行后调用（进行回滚或其它操作（例如跳转））
+                    , IsView: utils.getQueryString("v").length > 0 ? true : false
+                });
+                if (businessId != "") {
+                    WFOperator_SJSJ.GetProcess({ BusinessID: businessId, CheckUserInProcess: utils.getQueryString("v").length > 0 ? false : true }, function () {
+                    });
+                }
             }
         });
-
-        WFOperator_SJSJ.InitSetting({
-            UserSelectSetting: {
-                IsNeedHiddenNav: utils.mobileBrower(),
-                TopValue: 14
-            },
-            OnAfterExecute: Task.AfterAction//执行后调用（进行回滚或其它操作（例如跳转））
-            , IsView: utils.getQueryString("v").length > 0 ? true : false
-        });
-        if (businessId != "") {
-            WFOperator_SJSJ.GetProcess({ BusinessID: businessId, CheckUserInProcess: utils.getQueryString("v").length > 0 ? false : true }, function () {
-                //callback(data);
-            });
-        }
-    
-    
     }
 };

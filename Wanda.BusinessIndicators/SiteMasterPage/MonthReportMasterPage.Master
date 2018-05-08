@@ -11,7 +11,7 @@
 
     <script type="text/javascript" src="/Scripts/jquery-1.7.1.js"></script>
     <script type="text/javascript" src="/Scripts/jquery.blockUI.js"></script>
-    <script type="text/javascript" src="/Scripts/base.js?v=2"></script>
+    <script type="text/javascript" src="/Scripts/base.js?v=3"></script>
     <script type="text/javascript" src="/Scripts/BusinessReport/FloatTable.js"></script>
     <script type="text/javascript" src="../Scripts/jMenu.jquery.js"></script>
     <script type="text/javascript" src="/Scripts/artDialog/artDialog.js?skin=default"></script>

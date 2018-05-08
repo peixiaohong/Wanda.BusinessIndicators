@@ -10,9 +10,26 @@
   <SummaryMonthlyReport>
     <TableTemplate />
   </SummaryMonthlyReport>
+  <MisstargetReturn Name="补回情况">
+    <Group TargetName="补回情况" Senquence="1" TargetValue="9460550F-3EE4-4C46-ADC6-5D53B7CDDC4D">
+      <Counter Title="一、到期未补回项目" Senquence="1" Expression="GetValue(&quot;置业（实业）费用额.ReturnType&quot;)==2||GetValue(&quot;税后经营净利润.ReturnType&quot;)==2||GetValue(&quot;回款额.ReturnType&quot;)==2" />
+      <Counter Title="二、未到期项目" Senquence="2" Expression="(GetValue(&quot;置业（实业）费用额.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;置业（实业）费用额.ReturnType&quot;)&lt;&gt;0)||(GetValue(&quot;税后经营净利润.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;税后经营净利润.ReturnType&quot;)&lt;&gt;0)||(GetValue(&quot;回款额.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;回款额.ReturnType&quot;)&lt;&gt;0)" />
+      <Counter Title="三、已补回项目" Senquence="3" Expression="(GetValue(&quot;置业（实业）费用额.ReturnType&quot;)&gt;=6||GetValue(&quot;置业（实业）费用额.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;税后经营净利润.ReturnType&quot;)&gt;=6||GetValue(&quot;税后经营净利润.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;回款额.ReturnType&quot;)&gt;=6||GetValue(&quot;回款额.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;置业（实业）费用额.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;税后经营净利润.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;回款额.ReturnType&quot;)&lt;&gt;0)" />
+    </Group>
+  </MisstargetReturn>
+  <Misstarget Name="未完成">
+    <Group TargetName="" Senquence="1" TargetValue="9460550F-3EE4-4C46-ADC6-5D53B7CDDC4D">
+      <Counter Title="置业（实业）费用额" Senquence="1" Expression="GetStringValue(&quot;置业（实业）费用额.IsMissTarget&quot;)==&quot;True&quot;" />
+    </Group>
+  </Misstarget>
+  <CurrentMisstarget Name="当月未完成">
+    <Group TargetName="" Senquence="1" TargetValue="9460550F-3EE4-4C46-ADC6-5D53B7CDDC4D">
+      <Counter Title="置业（实业）费用额" Senquence="1" Expression="GetStringValue(&quot;置业（实业）费用额.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+    </Group>
+  </CurrentMisstarget>
   <Report>
     <Rgroup Name="总部费用">
-		全年费用预算指标为【置业（实业）费用额.累计计划总数】万元，1-【当前月】月实际发生【置业（实业）费用额.累计实际总数】万元，差额【置业（实业）费用额.累计亏损率】万元，占全年计划比【置业（实业）费用额.累计累计完成率】
+		1-【当前月】费用预算指标为【置业（实业）费用额.累计计划总数】万元，1-【当前月】月实际发生【置业（实业）费用额.累计实际总数】万元，差额【置业（实业）费用额.累计亏损率】万元，占累计计划比【置业（实业）费用额.累计累计完成率】
 	</Rgroup>
   </Report>
 </Root>

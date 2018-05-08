@@ -21,6 +21,7 @@
     <script src="<%=ResolveUrl("~/Assets/vendors/jquery/jquery.min.js") %>"></script>
     <script src="<%=ResolveUrl("~/Assets/vendors/jquery-blockui/js/jquery.blockUI.js") %>"></script>
     <script src="<%=ResolveUrl("~/Assets/scripts/common/base.utils.js") %>"></script>
+    <script src="<%=ResolveUrl("~/Assets/scripts/common/vue.utils.js") %>"></script>
     <uc1:userSelectCtrl runat="server" ID="userSelectCtrl" />
     <uc1:wfctrl runat="server" id="wfCtrl" />
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -28,6 +29,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <input type="hidden" id="hideLoginUser" value="<%=Mobile.web.Common.UserHelper.GetUserName()%>" />
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>

@@ -55,7 +55,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             {
                 TargetPlanID = strTargetPlanID.ToGuid();
             }
-            var List = A_TargetplandetailOperator.Instance.GetSumTargetDetailApprove(int.Parse(strFinYear), strSystemID.ToGuid(), TargetPlanID);
+            var List = A_TargetplandetailOperator.Instance.GetSumTargetDetail(int.Parse(strFinYear), strSystemID.ToGuid(), TargetPlanID);
 
             return List;
         }
@@ -102,7 +102,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 res = B_TargetplanOperator.Instance.UpdateVersionDefault(Guid.Parse(ID));
 
                 #region 在日志表中添加该次操作的日志
-
+                string userName = WebHelper.GetCurrentLoginUser();
 
                 B_TargetPlanAction TargetAction = new B_TargetPlanAction()
                 {
@@ -110,7 +110,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     SystemID = SystemID.ToGuid(),
                     FinYear = int.Parse(Year),
                     Action = "变更默认版本",
-                    Operator = HttpContext.Current.GetUserName(),
+                    Operator = userName,
                     OperatorTime = DateTime.Now
                 };
                 result = B_TargetPlanActionOperator.Instance.AddTargetPlanAction(TargetAction);
