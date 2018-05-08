@@ -339,8 +339,9 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
 
             //给表格内部赋值
-            List<TargetDetail> TargetDetail = A_TargetplandetailOperator.Instance.GetSumMonthTargetDetail(int.Parse(FinYear), SysId);
-       
+            //List<TargetDetail> TargetDetail = A_TargetplandetailOperator.Instance.GetSumMonthTargetDetail(int.Parse(FinYear), SysId);
+            List<TargetDetail> TargetDetail = A_TargetplandetailOperator.Instance.GetSumMonthTargetDetailByTID(TargetPlanID);
+
             for (int a = 0; a < 12; a++)
             {
                 worksheets[0].Cells[4 + a, 1].PutValue(a + 1 + "月");
