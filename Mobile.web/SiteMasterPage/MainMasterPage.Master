@@ -18,10 +18,12 @@
     <link href="<%=ResolveUrl("~/Assets/styles/page.css") %>" rel="stylesheet" />
     <link href="<%=ResolveUrl("~/Assets/styles/common.css") %>" rel="stylesheet" />
     <script src="<%=ResolveUrl("~/Assets/scripts/vue.min.js") %>"></script>
+    <script src="<%=ResolveUrl("~/Assets/scripts/vue-resource.min.js") %>"></script>
     <script src="<%=ResolveUrl("~/Assets/vendors/jquery/jquery.min.js") %>"></script>
     <script src="<%=ResolveUrl("~/Assets/vendors/jquery-blockui/js/jquery.blockUI.js") %>"></script>
     <script src="<%=ResolveUrl("~/Assets/vendors/bootstrap/js/bootstrap.min.js") %>"></script>
     <script src="<%=ResolveUrl("~/Assets/scripts/common/base.utils.js") %>"></script>
+    <script src="<%=ResolveUrl("~/Assets/scripts/common/vue.utils.js") %>"></script>
     <%--<script src="<%=ResolveUrl("~/Assets/vendors/workflow/js/Workflow.js?v=") + ConfigurationManager.AppSettings[""] %>"></script>--%>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -81,13 +83,13 @@
                                     if (self.isMonth) {
                                         return false;
                                     }
-                                    window.location.pathname = "/Report/ReportMonth.aspx";
+                                    window.location.pathname = "/APP/Report/ReportMonth.aspx";
                                     break;
                                 case "target":
                                     if (self.isTarget) {
                                         return false;
                                     }
-                                    window.location.pathname = "/Report/ReportTarget.aspx";
+                                    window.location.pathname = "/APP/Report/ReportTarget.aspx";
                                     break;
                             }
                         },
@@ -95,12 +97,12 @@
                             var self = this;
                             var pathname = window.location.pathname;
                             switch (pathname) {
-                                case "/Report/ReportMonth.aspx":
+                                case "/APP/Report/ReportMonth.aspx":
                                     self.title = "月度经营报告";
                                     self.isMonth = true;
                                     self.isTarget = false;
                                     break;
-                                case "/Report/ReportTarget.aspx":
+                                case "/APP/Report/ReportTarget.aspx":
                                     self.title = "分解指标查询";
                                     self.isMonth = false;
                                     self.isTarget = true;
