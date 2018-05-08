@@ -271,7 +271,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             C_System SysModel = C_SystemOperator.Instance.GetSystem(SysId);
             // List<C_Target> TargetList = C_TargetOperator.Instance.GetTargetList(SysId).ToList();
            // List<TargetPlanDetailVList> TargetPlanDetailVList = A_TargetplandetailOperator.Instance.GetSumTargetDetail(int.Parse(FinYear), SysId);
-            List<TargetPlanDetailVList> TargetPlanDetailVList = A_TargetplandetailOperator.Instance.GetSumTargetDetailApprove(int.Parse(FinYear), SysId,TargetPlanID);
+            List<TargetPlanDetailVList> TargetPlanDetailVList = A_TargetplandetailOperator.Instance.GetSumTargetDetail(int.Parse(FinYear), SysId,TargetPlanID);
             
             //复制sheet
             for (int i = 0; i < TargetPlanDetailVList.Count; i++)

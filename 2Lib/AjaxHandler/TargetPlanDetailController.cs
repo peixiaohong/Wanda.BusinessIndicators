@@ -55,7 +55,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             {
                 TargetPlanID = strTargetPlanID.ToGuid();
             }
-            var List = A_TargetplandetailOperator.Instance.GetSumTargetDetailApprove(int.Parse(strFinYear), strSystemID.ToGuid(), TargetPlanID);
+            var List = A_TargetplandetailOperator.Instance.GetSumTargetDetail(int.Parse(strFinYear), strSystemID.ToGuid(), TargetPlanID);
 
             return List;
         }
