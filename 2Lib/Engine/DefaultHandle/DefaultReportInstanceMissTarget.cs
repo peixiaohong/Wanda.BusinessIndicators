@@ -620,12 +620,6 @@ namespace LJTH.BusinessIndicators.Engine
 
     }
 
-
-
-
-
-
-
     /// <summary>
     /// 直属公司的未完成原因
     /// </summary>

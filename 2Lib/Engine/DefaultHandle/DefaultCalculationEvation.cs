@@ -47,7 +47,7 @@ namespace LJTH.BusinessIndicators.Engine
                 if (currentMonthData.Target != RptDetail.OPlanAmmount)
                 {
                     //获取当前指标
-                    List<C_Target> listTarget = StaticResource.Instance.GetTargetList(RptDetail.SystemID,RptDetail.CreateTime).ToList().Where(p => p.ID == RptDetail.TargetID).ToList();
+                    List<C_Target> listTarget = StaticResource.Instance.GetTargetList(RptDetail.SystemID, RptDetail.CreateTime).ToList().Where(p => p.ID == RptDetail.TargetID).ToList();
                     if (listTarget.Count > 0)
                     {
                         //获取当前指标的Configuration
@@ -87,7 +87,7 @@ namespace LJTH.BusinessIndicators.Engine
                     rpt.CommitDate = lastMonthData.CurrentMonthCommitDate;
                     rpt.CommitReason = lastMonthData.CurrentMonthCommitReason;
                 }
-                
+
                 //这里总是从最新的指标计划获取
                 IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear).FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID && P.FinMonth <= rpt.FinMonth);
                 rpt.NAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
@@ -107,7 +107,7 @@ namespace LJTH.BusinessIndicators.Engine
 
                     rpt.NAccumulativeActualAmmount = rpt.NActualAmmount;
                     rpt.OAccumulativeActualAmmount = rpt.OActualAmmount;
-                    
+
                 }
             }
 
@@ -131,8 +131,8 @@ namespace LJTH.BusinessIndicators.Engine
                 if (!IsBaseline)  //从1月开始重新计算
                 {
                     #region 是否有上月数据完成，或者是没有上月数据
-                    
-                    if (lastMonthData != null && lastMonthData.NewCounter !=0  )
+
+                    if (lastMonthData != null && lastMonthData.NewCounter != 0)
                     {
                         if (rpt.IsMissTarget || (!CostTarget && rpt.NAccumulativeDifference < 0))
                         {
@@ -197,7 +197,7 @@ namespace LJTH.BusinessIndicators.Engine
                 //重新计算
                 else
                 {
-                    if (rpt.IsMissTarget || (!CostTarget &&  rpt.NAccumulativeDifference < 0))
+                    if (rpt.IsMissTarget || (!CostTarget && rpt.NAccumulativeDifference < 0))
                     {
                         rpt.ReturnType = (int)EnumReturnType.New;
                         if (rpt.IsMissTarget && WithCounter)
@@ -217,10 +217,10 @@ namespace LJTH.BusinessIndicators.Engine
 
             //如果计划数和实际数都为0，则页面不显示。（display控制页面是否显示当前数据）
             RptDetail.Display = true;
-            if (RptDetail.NActualAmmount == 0 && RptDetail.NPlanAmmount == 0 && RptDetail.NAccumulativePlanAmmount == 0 && RptDetail.NAccumulativeActualAmmount == 0)
-            {
-                RptDetail.Display = false;
-            }
+            //if (RptDetail.NActualAmmount == 0 && RptDetail.NPlanAmmount == 0 && RptDetail.NAccumulativePlanAmmount == 0 && RptDetail.NAccumulativeActualAmmount == 0)
+            //{
+            //    RptDetail.Display = false;
+            //}
             //判断异常指标
             rpt = ExceptionTargetEvaluationEngine.ExceptionTargetEvaluationService.Calculation(rpt, "");
 
@@ -274,7 +274,7 @@ namespace LJTH.BusinessIndicators.Engine
 
             bool IsDifferenceException = false;
 
-            if (element.Elements("IsDifferenceExceptionTarget").ToList().Count >0)
+            if (element.Elements("IsDifferenceExceptionTarget").ToList().Count > 0)
             {
                 subElement = element.Elements("IsDifferenceExceptionTarget").ToList()[0];
                 IsDifferenceException = subElement.GetAttributeValue("value", false);
@@ -316,7 +316,7 @@ namespace LJTH.BusinessIndicators.Engine
                         bool IsDelayComplete = false;
                         if (lastMonthData.IsDelayComplete == true)
                             IsDelayComplete = lastMonthData.IsDelayComplete;
-                            
+
 
                         if (rpt.IsMissTarget || (!CostTarget && rpt.NAccumulativeDifference < 0))
                         {
@@ -336,7 +336,7 @@ namespace LJTH.BusinessIndicators.Engine
                             else
                             {
                                 #region 正常处理
-                               
+
                                 if (lastMonthData.CurrentMonthCommitDate > ReportDate)
                                 {
                                     rpt.ReturnType = (int)EnumReturnType.Returning;
@@ -365,17 +365,17 @@ namespace LJTH.BusinessIndicators.Engine
                             if (IsDelayComplete)
                             {
                                 #region 特殊处理 延迟完成
-                                
+
                                 rpt.Counter = 0;
                                 rpt.NewCounter = 0;
                                 rpt.FirstMissTargetDate = null;
-                                
+
                                 #endregion
                             }
                             else
                             {
                                 #region 正常处理
-                                
+
                                 if (lastMonthData.CurrentMonthCommitDate > ReportDate)
                                 {
                                     rpt.ReturnType = (int)EnumReturnType.AccomplishInadvance;
@@ -399,11 +399,11 @@ namespace LJTH.BusinessIndicators.Engine
 
                         #endregion
                     }
-                    else 
+                    else
                     {
                         #region 无上月数据(1月)或上月累计完成
 
-                        if (rpt.IsMissTarget ||(!CostTarget && rpt.NAccumulativeDifference < 0))
+                        if (rpt.IsMissTarget || (!CostTarget && rpt.NAccumulativeDifference < 0))
                         {
                             rpt.ReturnType = (int)EnumReturnType.New;
                             if (rpt.IsMissTarget && WithCounter)
@@ -421,7 +421,7 @@ namespace LJTH.BusinessIndicators.Engine
                 {
                     #region  重新计算（指定任意月为起始月份）
 
-                    if (rpt.IsMissTarget || ( !CostTarget && rpt.NAccumulativeDifference < 0)) 
+                    if (rpt.IsMissTarget || (!CostTarget && rpt.NAccumulativeDifference < 0))
                     {
                         rpt.ReturnType = (int)EnumReturnType.New;
                         if (rpt.IsMissTarget && WithCounter)
@@ -443,10 +443,10 @@ namespace LJTH.BusinessIndicators.Engine
 
             //如果计划数和实际数都为0，则页面不显示。（display控制页面是否显示当前数据）
             RptDetail.Display = true;
-            if (RptDetail.NActualAmmount == 0 && RptDetail.NPlanAmmount == 0 && RptDetail.NAccumulativePlanAmmount == 0 && RptDetail.NAccumulativeActualAmmount == 0)
-            {
-                RptDetail.Display = false;
-            }
+            //if (RptDetail.NActualAmmount == 0 && RptDetail.NPlanAmmount == 0 && RptDetail.NAccumulativePlanAmmount == 0 && RptDetail.NAccumulativeActualAmmount == 0)
+            //{
+            //    RptDetail.Display = false;
+            //}
 
             //判断异常指标
             rpt = ExceptionTargetEvaluationEngine.ExceptionTargetEvaluationService.Calculation(rpt, "");
@@ -472,7 +472,7 @@ namespace LJTH.BusinessIndicators.Engine
             //成本类指标
             bool CostTarget = false;
             if (T.TargetType == 3) CostTarget = true;
-            
+
             bool IsBaseline = false;
             if (T.BaseLine.Year == rpt.FinYear && T.BaseLine.Month == rpt.FinMonth)
             {
@@ -523,10 +523,10 @@ namespace LJTH.BusinessIndicators.Engine
                     rpt.CommitDate = lastMonthData.CurrentMonthCommitDate;
                     rpt.CommitReason = lastMonthData.CurrentMonthCommitReason;
                 }
-              
-              IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear).FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID && P.FinMonth <= rpt.FinMonth);
-              rpt.NAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
-              rpt.OAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
+
+                IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear).FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID && P.FinMonth <= rpt.FinMonth);
+                rpt.NAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
+                rpt.OAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
             }
             else
             {
@@ -560,9 +560,9 @@ namespace LJTH.BusinessIndicators.Engine
                 //上月累计未完成
                 if (!IsBaseline)  //从1月开始重新计算
                 {
-                    if (lastMonthData != null && (lastMonthData.IsMissTarget || ( !CostTarget && lastMonthData.NAccumulativeDifference < 0)))
+                    if (lastMonthData != null && (lastMonthData.IsMissTarget || (!CostTarget && lastMonthData.NAccumulativeDifference < 0)))
                     {
-                        if (rpt.IsMissTarget || ( !CostTarget && rpt.NAccumulativeDifference < 0))
+                        if (rpt.IsMissTarget || (!CostTarget && rpt.NAccumulativeDifference < 0))
                         {
                             if (lastMonthData.CurrentMonthCommitDate > ReportDate)
                             {
@@ -624,7 +624,7 @@ namespace LJTH.BusinessIndicators.Engine
                 //重新计算
                 else
                 {
-                    if (rpt.IsMissTarget || ( !CostTarget && rpt.NAccumulativeDifference < 0))
+                    if (rpt.IsMissTarget || (!CostTarget && rpt.NAccumulativeDifference < 0))
                     {
                         rpt.ReturnType = (int)EnumReturnType.New;
                         if (rpt.IsMissTarget && WithCounter)
@@ -644,10 +644,10 @@ namespace LJTH.BusinessIndicators.Engine
 
             //如果计划数和实际数都为0，则页面不显示。（display控制页面是否显示当前数据）
             RptDetail.Display = true;
-            if (RptDetail.NActualAmmount == 0 && RptDetail.NPlanAmmount == 0 && RptDetail.NAccumulativePlanAmmount == 0 && RptDetail.NAccumulativeActualAmmount == 0)
-            {
-                RptDetail.Display = false;
-            }
+            //if (RptDetail.NActualAmmount == 0 && RptDetail.NPlanAmmount == 0 && RptDetail.NAccumulativePlanAmmount == 0 && RptDetail.NAccumulativeActualAmmount == 0)
+            //{
+            //    RptDetail.Display = false;
+            //}
             //判断异常指标
             rpt = ExceptionTargetEvaluationEngine.ExceptionTargetEvaluationService.Calculation(rpt, "");
 
@@ -691,7 +691,7 @@ namespace LJTH.BusinessIndicators.Engine
                 if (currentMonthData.Target != RptDetail.OPlanAmmount)
                 {
                     //获取当前指标
-                    List<C_Target> listTarget = StaticResource.Instance.GetTargetList(RptDetail.SystemID,RptDetail.CreateTime).ToList().Where(p => p.ID == RptDetail.TargetID).ToList();
+                    List<C_Target> listTarget = StaticResource.Instance.GetTargetList(RptDetail.SystemID, RptDetail.CreateTime).ToList().Where(p => p.ID == RptDetail.TargetID).ToList();
                     if (listTarget.Count > 0)
                     {
                         //获取当前指标的Configuration
@@ -717,8 +717,8 @@ namespace LJTH.BusinessIndicators.Engine
             #endregion
 
             #region 计算本月累计实际数，这里有两种情况：1 本月 + 上月累计  2 直接从Excel中读取得到的本月累计数
-            
-           
+
+
             A_MonthlyReportDetail lastMonthData = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetail(rpt.SystemID, rpt.CompanyID, rpt.TargetID, rpt.FinYear, rpt.FinMonth - 1);
 
             if (lastMonthData != null)
@@ -730,11 +730,11 @@ namespace LJTH.BusinessIndicators.Engine
                     rpt.CommitDate = lastMonthData.CurrentMonthCommitDate;
                     rpt.CommitReason = lastMonthData.CurrentMonthCommitReason;
                 }
-              
-                    //如果中途指标更换, 则重新计算更换后的指标
-                    IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear).FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID && P.FinMonth <= rpt.FinMonth);
-                    rpt.NAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
-                    rpt.OAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
+
+                //如果中途指标更换, 则重新计算更换后的指标
+                IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear).FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID && P.FinMonth <= rpt.FinMonth);
+                rpt.NAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
+                rpt.OAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
             }
 
             rpt.NAccumulativeDifference = rpt.NAccumulativeActualAmmount - rpt.NAccumulativePlanAmmount;
@@ -760,7 +760,7 @@ namespace LJTH.BusinessIndicators.Engine
 
                 if (!IsBaseline)  //从1月开始重新计算
                 {
-                    if (lastMonthData != null && lastMonthData.NewCounter !=0)
+                    if (lastMonthData != null && lastMonthData.NewCounter != 0)
                     {
                         if (rpt.IsMissTarget || (!CostTarget && rpt.NAccumulativeDifference < 0))
                         {
@@ -806,7 +806,7 @@ namespace LJTH.BusinessIndicators.Engine
                         }
 
                         rpt.IsCommitDate = 0;
-                      
+
                     }
                     //无上月数据(1月)或上月累计完成
                     else
@@ -848,10 +848,10 @@ namespace LJTH.BusinessIndicators.Engine
 
             //如果计划数和实际数都为0，则页面不显示。（display控制页面是否显示当前数据）
             RptDetail.Display = true;
-            if (RptDetail.NActualAmmount == 0 && RptDetail.NPlanAmmount == 0 && RptDetail.NAccumulativePlanAmmount == 0 && RptDetail.NAccumulativeActualAmmount == 0)
-            {
-                RptDetail.Display = false;
-            }
+            //if (RptDetail.NActualAmmount == 0 && RptDetail.NPlanAmmount == 0 && RptDetail.NAccumulativePlanAmmount == 0 && RptDetail.NAccumulativeActualAmmount == 0)
+            //{
+            //    RptDetail.Display = false;
+            //}
 
             #endregion
 
@@ -882,7 +882,7 @@ namespace LJTH.BusinessIndicators.Engine
             //成本类指标
             bool CostTarget = false;
             if (T.TargetType == 3) CostTarget = true;
-            
+
             bool IsBaseline = false;
             bool IsModifiy = false;
             IList<System.Xml.Linq.XElement> xmlConfiguration = T.Configuration.Elements("IsModifyTargetPlanDetail").ToList();
@@ -962,7 +962,7 @@ namespace LJTH.BusinessIndicators.Engine
 
                 if (!IsBaseline)  //从1月开始重新计算
                 {
-                    if (lastMonthData != null && lastMonthData.NewCounter !=0)
+                    if (lastMonthData != null && lastMonthData.NewCounter != 0)
                     {
                         if (rpt.IsMissTarget || (!CostTarget && rpt.NAccumulativeDifference < 0))
                         {
@@ -1046,10 +1046,10 @@ namespace LJTH.BusinessIndicators.Engine
 
             //如果计划数和实际数都为0，则页面不显示。（display控制页面是否显示当前数据）
             RptDetail.Display = true;
-            if (RptDetail.NActualAmmount == 0 && RptDetail.NPlanAmmount == 0 && RptDetail.NAccumulativePlanAmmount == 0 && RptDetail.NAccumulativeActualAmmount == 0)
-            {
-                RptDetail.Display = false;
-            }
+            //if (RptDetail.NActualAmmount == 0 && RptDetail.NPlanAmmount == 0 && RptDetail.NAccumulativePlanAmmount == 0 && RptDetail.NAccumulativeActualAmmount == 0)
+            //{
+            //    RptDetail.Display = false;
+            //}
 
             #endregion
 
@@ -1079,7 +1079,7 @@ namespace LJTH.BusinessIndicators.Engine
             //成本类指标
             bool CostTarget = false;
             if (T.TargetType == 3) CostTarget = true;
-            
+
             bool IsBaseline = false;
             if (T.BaseLine.Year == rpt.FinYear && T.BaseLine.Month == rpt.FinMonth)
             {
@@ -1095,7 +1095,7 @@ namespace LJTH.BusinessIndicators.Engine
                 if (currentMonthData.Target != RptDetail.OPlanAmmount)
                 {
                     //获取当前指标
-                    List<C_Target> listTarget = StaticResource.Instance.GetTargetList(RptDetail.SystemID,RptDetail.CreateTime).ToList().Where(p => p.ID == RptDetail.TargetID).ToList();
+                    List<C_Target> listTarget = StaticResource.Instance.GetTargetList(RptDetail.SystemID, RptDetail.CreateTime).ToList().Where(p => p.ID == RptDetail.TargetID).ToList();
                     if (listTarget.Count > 0)
                     {
                         //获取当前指标的Configuration
@@ -1192,7 +1192,7 @@ namespace LJTH.BusinessIndicators.Engine
                                 {
                                     rpt.ReturnDescription = lastMonthData.ReturnDescription;
                                 } // Update 2015-5-29
-                                
+
                             }
                             else
                             {
@@ -1263,10 +1263,10 @@ namespace LJTH.BusinessIndicators.Engine
 
             //如果计划数和实际数都为0，则页面不显示。（display控制页面是否显示当前数据）
             RptDetail.Display = true;
-            if (RptDetail.NActualAmmount == 0 && RptDetail.NPlanAmmount == 0 && RptDetail.NAccumulativePlanAmmount == 0 && RptDetail.NAccumulativeActualAmmount == 0)
-            {
-                RptDetail.Display = false;
-            }
+            //if (RptDetail.NActualAmmount == 0 && RptDetail.NPlanAmmount == 0 && RptDetail.NAccumulativePlanAmmount == 0 && RptDetail.NAccumulativeActualAmmount == 0)
+            //{
+            //    RptDetail.Display = false;
+            //}
             //判断异常指标
             rpt = ExceptionTargetEvaluationEngine.ExceptionTargetEvaluationService.Calculation(rpt, "");
 
@@ -1324,14 +1324,14 @@ namespace LJTH.BusinessIndicators.Engine
                     //累计未完成情况
 
                     //上月累计未完成
-                    A_MonthlyReportDetail lastMonthData =  A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetail(p.SystemID, p.CompanyID, p.TargetID, p.FinYear, p.FinMonth - 1);
+                    A_MonthlyReportDetail lastMonthData = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetail(p.SystemID, p.CompanyID, p.TargetID, p.FinYear, p.FinMonth - 1);
 
                     if (!IsBaseline)  //从1月开始重新计算
                     {
                         #region 上月累计未完成计算
 
-                       
-                        if (lastMonthData != null )
+
+                        if (lastMonthData != null)
                         {
                             if (rpt.IsMissTarget || (!CostTarget && rpt.NAccumulativeDifference < 0))
                             {
