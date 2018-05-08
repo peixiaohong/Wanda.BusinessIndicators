@@ -231,6 +231,10 @@
       <Project>{3b2bb7db-894f-4604-b720-be5f017f77b6}</Project>
       <Name>BPF.Workflow.Object</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Wanda.BusinessIndicators\LJTH.BusinessIndicators.Web.csproj">
+      <Project>{889e4f76-5ee8-49b4-ac1a-0c3029fbc080}</Project>
+      <Name>LJTH.BusinessIndicators.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
