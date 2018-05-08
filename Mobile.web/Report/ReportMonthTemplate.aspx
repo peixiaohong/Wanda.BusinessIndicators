@@ -35,8 +35,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <template v-for="lists in result.ObjValue" v-if="lists.Mark == 'CompanyProperty'">
-                                            <template v-for="list in lists.ObjValue">
+                                            <template v-for="list in result.ObjValue">
                                             <tr>
                                                 <td v-on:click="list.IsCurrentShow = !list.IsCurrentShow">{{list.Name}}</td>
                                                 <td>{{Vue.ToThousands(list.BMonthReportDetail.NPlanAmmount)}}</td>
@@ -120,7 +119,6 @@
                                                 </td>
                                             </tr>
                                             </template>
-                                        </template>
                                     </tbody>
                                 </table>
                             </div>
@@ -138,8 +136,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <template v-for="lists in result.ObjValue" v-if="lists.Mark == 'CompanyProperty'">
-                                            <template v-for="list in lists.ObjValue">
+                                            <template v-for="list in result.ObjValue">
                                             <tr>
                                                 <td v-on:click="list.IsTotalShow = !list.IsTotalShow">{{list.Name}}</td>
                                                 <td>{{Vue.ToThousands(list.BMonthReportDetail.NPlanAmmount)}}</td>
@@ -223,7 +220,6 @@
                                                 </td>
                                             </tr>
                                             </template>
-                                        </template>
                                     </tbody>
                                 </table>
                             </div>
@@ -241,8 +237,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <template v-for="lists in result.ObjValue" v-if="lists.Mark == 'CompanyProperty'">
-                                            <template v-for="list in lists.ObjValue">
+                                            <template v-for="list in result.ObjValue">
                                             <tr>
                                                 <td v-on:click="list.IsYearShow = !list.IsYearShow">{{list.Name}}</td>
                                                 <td>{{Vue.ToThousands(list.BMonthReportDetail.NPlanAmmount)}}</td>
@@ -326,7 +321,6 @@
                                                 </td>
                                             </tr>
                                             </template>
-                                        </template>
                                     </tbody>
                                 </table>
                             </div>
