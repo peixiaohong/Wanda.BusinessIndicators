@@ -290,7 +290,7 @@ function Change(adj, id) {
         $("#SumTable").show();
         $("#TargetTable").hide();
         $("#file_upload-button1").show();
-        $("#HistoryTable").hide();
+       // $("#HistoryTable").hide();
     }
     //else if (adj == "History") {
     //    document.getElementById('tabHistory').className = "active3 active_sub3";
@@ -307,7 +307,7 @@ function Change(adj, id) {
         $("#TargetTable").show();
         BangSumTargetPlanList(id);
         $("#file_upload-button1").show();
-        $("#HistoryTable").hide();
+        //$("#HistoryTable").hide();
     }
     //Fake();
 }

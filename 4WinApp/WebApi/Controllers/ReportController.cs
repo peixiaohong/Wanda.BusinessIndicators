@@ -292,6 +292,9 @@ namespace WebApi.Controllers
 
         }
 
-
+        [HttpGet]
+        public string api() {
+            return "aaa";
+        }
     }
 }

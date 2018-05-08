@@ -91,7 +91,7 @@
 
     </div>
     <div id="divList" class="popup" style="height: auto; display: none; padding-bottom: 10px">
-        <div class="main">
+        <div class="main" style="width:1000px">
             <div class="margin_t10">
                 <div class="tabs_m">
 

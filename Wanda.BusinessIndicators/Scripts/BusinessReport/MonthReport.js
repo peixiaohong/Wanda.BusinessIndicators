@@ -500,8 +500,7 @@ function getGroupCount(obj, send) {
                 {
                     $.each(item.ObjValue, function (j, item1) {
 
-                        if (item.Mark != undefined)
-                        { } else { $.each(item.ObjValue, function (m, data2) { RowCount++; }); }
+                        if (item.Mark != undefined) { } else { $.each(item.ObjValue, function (m, data2) { RowCount++; }); }
                     });
                 } else { $.each(item.ObjValue, function (m, data1) { RowCount++; }); }
 
@@ -1208,12 +1207,14 @@ function ClickTr(sender, level) {
 function showManageMonthReprotDetail(companyId, areaName, targetName) {
     var targetData = [];
     for (var i = 0; i < ManageReportDetailData.length; i++) {
+
         if (ManageReportDetailData[i].IsBlendTarget) {
             //1、取指标
             for (var j = 0; j < ManageReportDetailData[i].ObjValue.length; j++) {
-                if (ManageReportDetailData[i].ObjValue[j].ObjValue[0].ObjValue[0].Mark == "Area") {
-                    var areaObj = Enumerable.From(ManageReportDetailData[i].ObjValue[j].ObjValue[0].ObjValue).Where("$.Name=='" + areaName + "'").ToArray();
-                    if (areaObj.length > 0) {
+
+                var areaObj = Enumerable.From(ManageReportDetailData[i].ObjValue[j].ObjValue[0].ObjValue).Where("$.Name=='" + areaName + "'").ToArray();
+                if (areaObj.length > 0) {
+                    if (ManageReportDetailData[i].ObjValue[j].ObjValue[0].ObjValue[0].Mark == "Area") {
                         for (var k = 0; k < areaObj[0].ObjValue.length; k++) {
                             var companyData = Enumerable.From(areaObj[0].ObjValue[k].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
                             if (companyData.length > 0) {
@@ -1221,50 +1222,46 @@ function showManageMonthReprotDetail(companyId, areaName, targetName) {
                             }
                         }
                     }
-                }
-                else if (ManageReportDetailData[i].ObjValue[j].ObjValue[0].ObjValue[0].Mark == "LastArea") {
-                    var areaObj = Enumerable.From(ManageReportDetailData[i].ObjValue[j].ObjValue[0].ObjValue).Where("$.Name=='" + areaName + "'").ToArray();
-                    if (areaObj.length > 0) {
+                    else if (ManageReportDetailData[i].ObjValue[j].ObjValue[0].ObjValue[0].Mark == "LastArea") {
                         var companyData = Enumerable.From(areaObj[0].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
                         if (companyData.length > 0) {
                             targetData.push(companyData[0]);
                         }
                     }
-                }
-                else {
-                    var companyData = Enumerable.From(ManageReportDetailData[i].ObjValue[j].ObjValue[0].ObjValue[0].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
-                    if (companyData.length > 0) {
-                        targetData.push(companyData[0]);
+                    else {
+                        var companyData = Enumerable.From(ManageReportDetailData[i].ObjValue[j].ObjValue[0].ObjValue[0].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
+                        if (companyData.length > 0) {
+                            targetData.push(companyData[0]);
+                        }
                     }
                 }
+
             }
         }
         else {
             //1、取指标
-            if (ManageReportDetailData[i].ObjValue[0].ObjValue[0].Mark == "Area") {
-                var areaObj = Enumerable.From(ManageReportDetailData[i].ObjValue[0].ObjValue).Where("$.Name=='" + areaName + "'").ToArray();
-                if (areaObj.length > 0) {
+
+            var areaObj = Enumerable.From(ManageReportDetailData[i].ObjValue[0].ObjValue).Where("$.Name=='" + areaName + "'").ToArray();
+            if (areaObj.length > 0) {
+                if (ManageReportDetailData[i].ObjValue[0].ObjValue[0].Mark == "Area") {
                     for (var k = 0; k < areaObj[0].ObjValue.length; k++) {
                         var companyData = Enumerable.From(areaObj[0].ObjValue[k].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
                         if (companyData.length > 0) {
                             targetData.push(companyData[0]);
                         }
                     }
-                }
-            }
-            else if (ManageReportDetailData[i].ObjValue[0].ObjValue[0].Mark == "LastArea") {
-                var areaObj = Enumerable.From(ManageReportDetailData[i].ObjValue[0].ObjValue).Where("$.Name=='" + areaName + "'").ToArray();
-                if (areaObj.length > 0) {
+                } else if (ManageReportDetailData[i].ObjValue[0].ObjValue[0].Mark == "LastArea") {
+
                     var companyData = Enumerable.From(areaObj[0].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
                     if (companyData.length > 0) {
                         targetData.push(companyData[0]);
                     }
                 }
-            }
-            else {
-                var companyData = Enumerable.From(ManageReportDetailData[i].ObjValue[0].ObjValue[0].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
-                if (companyData.length > 0) {
-                    targetData.push(companyData[0]);
+                else {
+                    var companyData = Enumerable.From(ManageReportDetailData[i].ObjValue[0].ObjValue[0].ObjValue).Where("$.CompanyID=='" + companyId + "'").ToArray();
+                    if (companyData.length > 0) {
+                        targetData.push(companyData[0]);
+                    }
                 }
             }
         }
@@ -1432,7 +1429,7 @@ function getMonthReportMissTargetData() {
                 $(".Level1TdSp1").attr("colspan", 11);
 
                 $('#Tab_MissTargetHead tr th').eq(15).hide();
-               
+
                 return;
             }
 
@@ -1455,12 +1452,12 @@ function getMonthReportMissTargetData() {
                 multitarget = true;
 
             } else {
-                
+
                 //组合指标
                 loadTmpl_1('#TmplMissTarget').tmpl(MissTargetData[0]).appendTo('#Tbody_MissTargetData');
                 $(".newdiff_miss").show();
                 $(".Level1TdSp1").attr("colspan", 11);
-                
+
             }
             $("#U2 :first a").addClass("active_sub3");
 
@@ -2033,8 +2030,7 @@ function TrLv2Show(obj) {
 
         $(tr).nextUntil(".Level2").each(function () {
 
-            if ($(this).hasClass("Level1") == true)
-            { return; } else {
+            if ($(this).hasClass("Level1") == true) { return; } else {
 
                 if ($(this).context.className.indexOf("Level3") >= 0) {
                     $(this).show();
@@ -2045,8 +2041,7 @@ function TrLv2Show(obj) {
     else {
         $(obj).removeClass("minus").addClass("show");
         $(tr).nextUntil(".Level2").each(function () {
-            if ($(this).hasClass("Level1") == true)
-            { return; } else {
+            if ($(this).hasClass("Level1") == true) { return; } else {
                 if ($(this).context.className.indexOf("Level3") >= 0) {
                     $(this).hide();
                 }
@@ -2617,20 +2612,18 @@ function SelectMessages() {
 
 
 //去除换行，空格
-function _TrimStr(obj)
-{
+function _TrimStr(obj) {
     var str;
-    str = obj.replace(new RegExp('^(\s*\\n)*|(\\n\s*)*$'),'');
+    str = obj.replace(new RegExp('^(\s*\\n)*|(\\n\s*)*$'), '');
     ws = /\n/,
-    i = str.length;
+        i = str.length;
     while (ws.test(str.charAt(--i)));
     return str.slice(0, i + 1);
 }
 
 
 //判断是否是12月31日，以便前面判断是否隐藏
-function IsTimeShow(obj)
-{
+function IsTimeShow(obj) {
     try {
         var date = new Date(obj);
         var year = date.getFullYear();
@@ -2639,8 +2632,7 @@ function IsTimeShow(obj)
 
         if (month == 12 && day == 31) {
             return true;
-        } else
-        {
+        } else {
             return false
         }
     } catch (e) {
@@ -2685,7 +2677,7 @@ function unfoldTitle() {
         FloatHeader(obj, tab, false, "MonthRpt");
         AddBackGroundColor();
     }
-    else if (tipName == "完成情况明细"){
+    else if (tipName == "完成情况明细") {
         $("#CompleteDetailHead").html("");
         $("#tab2_rows").html("");
         var targetName = $("#Ul4 .active_sub3")[0] == undefined ? "" : $("#Ul4 .active_sub3")[0].innerText;
@@ -2712,7 +2704,7 @@ function unfoldTitle() {
         FloatHeader(obj, tab, false, "MonthRpt");
         AddBackGroundColor();
     }
-  
+
 }
 //完成情况明细点击警示灯收缩列
 function shrinkageTitle() {
@@ -2793,7 +2785,7 @@ function GetUnit() {
     return unit;
 }
 //获取完成情况明细、经营月报明细三级收缩表头
-function GetunfoldTitleList(){
+function GetunfoldTitleList() {
     return unfoldTitleList;
 }
 //获取完成情况明细、经营月报明细三级展开表头
@@ -2802,7 +2794,7 @@ function GetshrinkageTitleList() {
 }
 //搜索条件年份、月份、是否包含审批中添加切换版本类型事件
 function FileChangeClick() {
-   
+
     $("#ddlYear").change(function () {
         CommonGetTargetVersionType($("#ddlSystem").val(), $("#ddlYear").val(), $("#ddlMonth").val())
     });
