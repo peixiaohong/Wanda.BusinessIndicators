@@ -47,7 +47,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
 
                 if (sysList.Count > 0)
                 {
-                 
+
                     //获取Tree数据
                     string Sys_str = "'" + string.Join("','", sysList.Distinct().ToList().Select(S => S.ID).ToList()) + "'";
                     var TreeData = C_SystemTreeOperator.Instance.GetSystemTreeData(Sys_str);
@@ -60,7 +60,6 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     var TreeData = C_SystemTreeOperator.Instance.GetSystemTreeData(Sys_str);
                     TreeDataJson = JsonConvert.SerializeObject(TreeData);
                 }
-                
             }
         }
 

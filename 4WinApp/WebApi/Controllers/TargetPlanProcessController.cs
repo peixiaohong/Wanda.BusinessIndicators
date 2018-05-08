@@ -64,7 +64,7 @@ namespace WebApi.Controllers
                     tp.OnProecssCompleted();
                 }
                 //处理数据
-                tp.DisposeBusinessData(OperatorType);
+                tp.DisposeBusinessData(OperatorType, WebHelper.GetCurrentLoginUser());
                 return new ResultContext();
             }
             catch (Exception ex)

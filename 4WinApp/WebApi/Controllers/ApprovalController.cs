@@ -42,9 +42,9 @@ namespace WebApi.Controllers
             {
                 //业务处理
                 pc.DisposeBusinessData();
-
+                
                 //执行按钮事件的处理
-                pc.ExecutionBusinessData();
+                pc.ExecutionBusinessData(WebHelper.GetCurrentLoginUser());
                 return new ResultContext();
             }
             catch (Exception ex)
