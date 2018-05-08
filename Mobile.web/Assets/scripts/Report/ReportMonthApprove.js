@@ -75,7 +75,7 @@ var Task = {
         }
         if (strPrcessStatus != null) {
             utils.ajax({
-                type: 'POST',
+                type: 'GET',
                 url: url,
                 args: {
                     "BusinessID": businessID,
@@ -109,9 +109,9 @@ var Task = {
         //TODO审批通过时修改数据状态，修改成功后请调用WFOperator_SJSJ.AfterActionRedirect(args);做跳转
         WFOperator_SJSJ.ApprovePage.AfterAction(argsT,
             {
-                Approval: function (args) { Task.Approve(args); setTimeout(function () { location.href = '/todoListMobile.html'; }, 1000) },
-                Return: function (args) { Task.Reject(args);/* setTimeout(function () { location.href = '/todoListMobile.html'; }, 1000)*/ },
-                Redirect: function (args) { setTimeout(function () { location.href = '/todoListMobile.html'; }, 1000) }
+                Approval: function (args) { Task.Approve(args); setTimeout(function () { location.href = '/APP/todoListMobile.html'; }, 1000) },
+                Return: function (args) { Task.Reject(args); setTimeout(function () { location.href = '/APP/todoListMobile.html'; }, 1000) },
+                Redirect: function (args) { setTimeout(function () { location.href = '/APP/todoListMobile.html'; }, 1000) }
             });
     },
     LoadData: function (businessId, proType, callback) {

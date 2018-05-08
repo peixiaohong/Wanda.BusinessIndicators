@@ -41,11 +41,11 @@
                             </div>
                         </li>
 
-                        <li class="active">
+                        <li>
                             <h3 v-if="!head.length" style="text-align:center">暂无数据...</h3>
-                            <h3 v-if="head.length">指标分解(单位:万元)<span class="collection-updown-icon"></span></h3>
+                            <h3 v-bind:class="{'bottom': !reportState}"  v-if="head.length">指标分解(单位:万元)<span v-bind:class="{'collection-updown-icon': true, 'collection-up-icon': reportState}" v-on:click="reportState = !reportState"></span></h3>
                             <!--<div class="collection-result">-->
-                            <div class="target" v-cloak>
+                            <div class="target" v-cloak v-if="reportState">
                                 <img src="../Assets/images/arrow-right.png" class="target-allow" data-allow="right" v-if="head.length > 3" />
                                 <div class="target-main" v-if="list.length">
                                     <div>
