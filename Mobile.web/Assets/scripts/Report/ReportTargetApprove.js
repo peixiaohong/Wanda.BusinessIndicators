@@ -59,13 +59,38 @@ var Task = {
         console.log(args);
         var businessID = utils.getQueryString("businessID");
         var url = api_url + 'TargetPlanProcess/TargetPlanProcessRequest';
+        var strPrcessStatus = "";
+        if (args.WorkflowContext.ProcessInstance.Status == 2 && args.WorkflowContext.ProcessInstance.RunningNodeID == args.WorkflowContext.ProcessInstance.StartNodeID) {
+            strPrcessStatus = "Draft";
+        } else if (args.WorkflowContext.ProcessInstance.Status == -1) {
+            PrcessStatus = "Cancel";
+        } else if (args.WorkflowContext.ProcessInstance.Status == 3) {
+            // 审批结束
+            if (args.WorkflowContext.CurrentUserNodeID != null && args.WorkflowContext.CurrentUserNodeID != "") {
+                var nodeInfo = args.WorkflowContext.NodeInstanceList[args.WorkflowContext.CurrentUserNodeID];
+                if (nodeInfo != null && (nodeInfo.NodeType == 1 || nodeInfo.NodeType == 2 || nodeInfo.NodeType == 7)) {
+                    strPrcessStatus = "Approved";
+
+
+                } else {
+                    strPrcessStatus = null;
+                }
+            } else {
+                strPrcessStatus = null;
+            }
+
+        }
+        else {
+            //审批中的
+            strPrcessStatus = "Progress";
+        }
         utils.ajax({
             type: 'GET',
             url: url,
             args: {
                 "BusinessID": businessID,
                 "OperatorType": args.OperatorType,
-                "PrcessStatus": null
+                "PrcessStatus": strPrcessStatus
             },
             success: function (data) {
                 func();

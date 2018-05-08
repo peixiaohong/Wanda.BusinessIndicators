@@ -34,7 +34,7 @@ function operateNav(sender) {
             $("#T3,#Down1").show();
             var obj = $("#Tab_MissTargetHead");
             var tab = $("#Tbody_MissTargetData");
-           // FloatHeader(obj, tab, false);
+            // FloatHeader(obj, tab, false);
             DownLoadTag = "missTargetReport"; // 判断下载的模版
             MissTagetExcelReport();
 
@@ -44,7 +44,7 @@ function operateNav(sender) {
             $("#T3_1,#Down1").show();
             var obj = $("#Tab_CurrentMissTargetHead");
             var tab = $("#Tbody_CurrentMissTargetData");
-           // FloatHeader(obj, tab, false);
+            // FloatHeader(obj, tab, false);
 
             DownLoadTag = "missCurrentTargetReport"; // 判断下载的模版
 
@@ -59,10 +59,10 @@ function operateNav(sender) {
         case "monthReportReady": //保存事件
             $("#T2,#UpLoadDataDiv,#DownLoadModel,#T3,#T3_1,#Down1,#T4,#RptAttachments,#UpLoadData").hide();
             SaveMonthlyReportLog("1");
-          
+
             $("#divMonthLyReportAction").show();//显示日志列表
             setStlye('missTargetReportSpan,monthReportSpan,monthReportReadySpan,monthReportSubmitSpan');
-            
+
             break;
         case "monthReportSubmit":
             $("#process").show();
@@ -148,7 +148,9 @@ function saveApplicationData(args) {
 //流程处理完成，如果执行成功
 function afterAction(args) {
     if (args.WorkflowContext.StatusCode == 0) {
-        BusinessDataHandle($("#hideMonthReportID").val(), args)
+        BusinessDataHandle($("#hideMonthReportID").val(), args);
+        //计算多版本
+        AddMulitiVersionMonthlyReport(args.BizContext.BusinessID);
     }
 }
 
@@ -205,8 +207,6 @@ function BusinessDataHandle(instanceID, args) {
     }
 
 }
-
-
 
 
 function SaveMonthlyReportLog(sender) {
@@ -267,5 +267,20 @@ function ClickCounter(sender, val) {
     } catch (e) {
 
     }
+}
+
+//计算多版本
+function AddMulitiVersionMonthlyReport(BusinessID) {
+    $.ajax({
+        url: "/AjaxHander/ProcessMulitiVersionTarget.ashx/AddMulitiVersionMonthlyReport",
+        async: true,
+        type: "POST",
+        data: ({
+            MonthReportID: BusinessID
+        }),
+        success: function (data) {
+
+        }
+    });
 }
 

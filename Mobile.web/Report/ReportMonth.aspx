@@ -77,7 +77,7 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="item in list.ObjValue">
-                                        <td><a v-bind:href="'/Report/ReportMonthTemplate.aspx?id='+ item.SystemID + '&versionID='+ versionSelect + '&year=' + yearSelect + '&month=' + monthSelect + '&name=' + encodeURI(item.TargetName)">{{item.TargetName}}</a></td>
+                                        <td><a v-bind:href="'/APP/Report/ReportMonthTemplate.aspx?id='+ item.SystemID + '&versionID='+ versionSelect + '&year=' + yearSelect + '&month=' + monthSelect + '&name=' + encodeURI(item.TargetName)">{{item.TargetName}}</a></td>
                                         <td>{{Vue.ToThousands(item.NPlanAmmount)}}</td>
                                         <td>{{Vue.ToThousands(item.NActualAmmount)}}</td>
                                         <td>{{item.NActualRate}}</td>

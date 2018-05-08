@@ -32,7 +32,10 @@
                     },
                     success: function (res) {
                         if (res.IsSuccess && res.StatusCode == 200) {
-                            self.ShowFilter(res.Data.list[0]);
+                            console.log(res);
+                            if (res.Data.list.length) {
+                                self.ShowFilter(res.Data.list[0]);
+                            }
                             self.title = res.Data.title;
                         } else {
                             utils.alertMessage(res.StatusMessage)
@@ -52,7 +55,8 @@
                                 val.ObjValue.forEach(function (item) {
                                     item.IsCurrentShow = false;
                                     item.IsTotalShow = false;
-                                    item.IsYearShow = false;                                })
+                                    item.IsYearShow = false;
+                                })
                             }
                         })
                     }

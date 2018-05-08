@@ -125,14 +125,11 @@ namespace WebApi.Controllers
                 Guid.TryParse(SystemID, out result);
                 if (result == Guid.Empty)
                     return new ResultContext((int)StatusCodeEnum.isFalse, "系统编码错误");
-
-                List<DictionaryVmodel> listS = new List<DictionaryVmodel>();
-                if (!string.IsNullOrEmpty(TargetName))
-                    listS = listM.Where(x => x.Name == TargetName).ToList();
+                
                 C_System system = new C_System();
                 system = StaticResource.Instance[SystemID.ToGuid(), DateTime.Now];
 
-                return new ResultContext(new { title = system.SystemName, list = listS });
+                return new ResultContext(new { title = system.SystemName, list = listM });
             }
             catch (Exception ex)
             {

@@ -439,6 +439,9 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             bmr.WFStatus = "Draft";
             bmr.DefaultVersionStatus = 1;
             bmr.CreateTime = DateTime.Now;
+            var targetPlanDetail = StaticResource.Instance.GetDefaultTargetPlanList(bmr.SystemID, bmr.FinYear).FirstOrDefault();
+            if (targetPlanDetail != null && targetPlanDetail.TargetPlanID != null)
+                bmr.TargetPlanID = targetPlanDetail.TargetPlanID;
             bmr.ID = B_MonthlyreportOperator.Instance.AddMonthlyreport(bmr);
             return bmr;
         }
