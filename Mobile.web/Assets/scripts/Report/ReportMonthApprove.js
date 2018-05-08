@@ -75,7 +75,7 @@ var Task = {
         }
         if (strPrcessStatus != null) {
             utils.ajax({
-                type: 'POST',
+                type: 'GET',
                 url: url,
                 args: {
                     "BusinessID": businessID,

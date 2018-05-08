@@ -8,7 +8,9 @@
             head: [],
             list: [],
             versions: [],
-            versionSelect:""
+            versionSelect: "",
+            reportState: true,
+            length:""
         },
         mounted: function () {
             var self = this;
@@ -81,8 +83,8 @@
                             self.head = res.Data.head;
                             self.list = res.Data.list;
                             self.$nextTick(function () {
-                                var length = self.head.length + 1;
-                                utils.initTarget(".target-main", ".target-content", ".target-name", ".target-allow", length)
+                                self.length = self.head.length + 1;
+                                utils.initTarget(".target-main", ".target-content", ".target-name", ".target-allow", self.length)
                             })
                         } else {
                             utils.alertMessage(res.StatusMessage)
@@ -91,5 +93,13 @@
                 });
             },
         },
+        watch: {
+            reportState: function (val) {
+                var self = this;
+                self.$nextTick(function () {
+                    utils.initTarget(".target-main", ".target-content", ".target-name", ".target-allow", self.length)
+                })
+            }
+        }
     })
 })

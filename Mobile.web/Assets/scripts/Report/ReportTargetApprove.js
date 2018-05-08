@@ -31,11 +31,19 @@ var Task = {
             mounted: function () {
                 var self = this;
                 self.$nextTick(function () {
-                    var length = self.list[0].TargetDetailList.length + 1;
-                    utils.initTarget(".target-main", ".target-content", ".target-name", ".target-allow", length)
+                    self.length = self.list[0].TargetDetailList.length + 1;
+                    utils.initTarget(".target-main", ".target-content", ".target-name", ".target-allow", self.length)
                 })
             },
             methods: {
+            },
+            watch: {
+                targetState: function () {
+                    var self = this;
+                    self.$nextTick(function () {
+                        utils.initTarget(".target-main", ".target-content", ".target-name", ".target-allow", self.length)
+                    })
+                }
             }
         });
     },
@@ -52,7 +60,7 @@ var Task = {
         var businessID = utils.getQueryString("businessID");
         var url = api_url + 'TargetPlanProcess/TargetPlanProcessRequest';
         utils.ajax({
-            type: 'POST',
+            type: 'GET',
             url: url,
             args: {
                 "BusinessID": businessID,
@@ -100,6 +108,9 @@ var Task = {
             },
             success: function (data) {
                 if (data.IsSuccess && data.StatusCode == 200) {
+                    data.Data.basicState = false;
+                    data.Data.targetState = false;
+                    data.Data.length = "";
                     callback(data.Data);                
                 } else {
                     utils.alertMessage(data.StatusMessage)
