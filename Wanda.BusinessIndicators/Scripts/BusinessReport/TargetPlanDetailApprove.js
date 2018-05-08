@@ -294,8 +294,8 @@ function TargetPlanDetailLiaddCss(sender) {
 
 
 function DownExcelReport(sender) {
-    var latest = true;
-    window.open("/AjaxHander/DownExcelTargetPlan.ashx?FileType=MissTargetRpt&SystemID=" + SystemID + "&TargetPlanID=" + TargetPlanID + "&FinYear=" + FinYear + "&IsLatestVersion=" + latest);
+    var latest = true; //修改下载
+    window.open("/AjaxHander/DownExcelTargetPlan.ashx?FileType=Reported&SystemID=" + SystemID + "&TargetPlanID=" + TargetPlanID + "&FinYear=" + FinYear + "&IsLatestVersion=" + latest);
 }
 
 
@@ -418,7 +418,8 @@ function BusinessDataHandle(instanceID, args) {
         data: {
             BusinessID: instanceID,
             OperatorType: args.OperatorType,
-            PrcessStatus: strPrcessStatus
+            PrcessStatus: strPrcessStatus,
+
         },
         success: function (result) {
             $.unblockUI();

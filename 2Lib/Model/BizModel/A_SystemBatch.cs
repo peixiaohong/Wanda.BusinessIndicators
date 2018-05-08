@@ -45,5 +45,11 @@ namespace LJTH.BusinessIndicators.Model
         public string ReportApprove { get; set; }
         [ORFieldMapping("Description")]
         public string Description { get; set; }
+
+        /// <summary>
+        /// 指标计划ID
+        /// </summary>
+        [ORFieldMapping("TargetPlanID")]
+        public Guid TargetPlanID { get; set; }
     }
 }

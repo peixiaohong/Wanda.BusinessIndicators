@@ -131,6 +131,7 @@ var utils = {
             error: null
         };
         $.extend(setting, options);
+        $.extend(setting.args, { LoginUser: $("#hideLoginUser").val() });
         $.ajax({
             async: setting.async,
             type: setting.type,
@@ -293,7 +294,7 @@ var utils = {
                     window.location.href = '/App/Report/ReportMonth.aspx';
                 }
                 else {
-                    window.location.href = '/todoListMobile.html';
+                    window.location.href = '/APP/todoListMobile.html';
                 }
             } else {
                 $msg.remove();

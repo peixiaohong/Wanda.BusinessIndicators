@@ -431,7 +431,7 @@ function BangDetail(TID) {
 
 }
 function DownExcel() {
-    window.open("/AjaxHander/DownExcelTargetCollect.ashx?SysId=" + SysID + "&FinYear=" + FinYear);
+    window.open("/AjaxHander/DownExcelTargetCollect.ashx?SysId=" + SysID + "&FinYear=" + FinYear + "&TargetPlanID=" + TarplanID);
 }
 function DownLoad(TargetPlanID) {
     window.open("/AjaxHander/DownExcelTargetHistory.ashx?SysId=" + SysID + "&FinYear=" + FinYear + "&TargetPlanID=" + TargetPlanID);

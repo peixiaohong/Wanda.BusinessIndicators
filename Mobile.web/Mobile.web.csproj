@@ -144,6 +144,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\UserHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Public\Bridge.aspx.cs">
       <DependentUpon>Bridge.aspx</DependentUpon>

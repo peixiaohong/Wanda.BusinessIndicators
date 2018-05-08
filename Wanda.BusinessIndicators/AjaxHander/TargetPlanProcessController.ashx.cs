@@ -56,15 +56,16 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             {
                 //审批结束，调用这个
                 OnProecssCompleted();
+                StaticResource.Instance.Reload();
             }
             //处理数据
-            DisposeBusinessData();
+            DisposeBusinessData(OperatorType);
             
         }
         /// <summary>
         /// 处理业务数据
         /// </summary>
-        public void DisposeBusinessData(string UserLonginID = null)
+        public void DisposeBusinessData(int OperatorType, string UserLonginID = null)
         {
             #region
 
