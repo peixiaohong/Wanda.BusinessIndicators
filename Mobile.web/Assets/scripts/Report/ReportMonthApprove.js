@@ -80,9 +80,9 @@ var Task = {
                 args: {
                     "BusinessID": businessID,
                     "strProType": utils.getQueryString("ProType"),
-                    "ExecuteType": args.ExecuteType,
+                    "ExecuteType": "afterAction",
                     "OperatorType": args.OperatorType,
-                    "PrcessStatus": "afterAction"
+                    "PrcessStatus": strPrcessStatus
                 },
                 success: function (data) {
                     func();

@@ -14,12 +14,33 @@ namespace Mobile.web.Common
             {
 
                 var request = HttpContext.Current.Request;
-                var param1 = request.Cookies["user"].Value;
-                if (string.IsNullOrEmpty(param1) || param1.Length < 11)
+                var param1 = "";
+                if(string.IsNullOrEmpty(param1))
                 {
-                    return "";
+                    if (HttpContext.Current.User != null)
+                        param1 = HttpContext.Current.User.Identity.Name;
                 }
-                return DecryptBase64(param1.Substring(10));
+                if(string.IsNullOrEmpty(param1))
+                {
+                    param1 = HttpContext.Current.Request.Cookies["loginId"].ToString() ;
+                }
+                if(string.IsNullOrEmpty(param1))
+                {
+                    if (HttpContext.Current.Request.Cookies["user"] != null)
+                    {
+                        var t = HttpContext.Current.Request.Cookies["user"].Value;
+                        if (!string.IsNullOrEmpty(t) && t.Length < 11)
+                        {
+                            param1 = DecryptBase64(t.Substring(10));
+                        }
+                    }
+                }
+
+                //if (string.IsNullOrEmpty(param1) || param1.Length < 11)
+                //{
+                //    return "";
+                //}
+                return param1;
             }
             catch (Exception ex)
             {

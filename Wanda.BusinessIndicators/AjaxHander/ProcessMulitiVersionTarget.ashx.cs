@@ -54,7 +54,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 int FinYear = MonthlyReport.FinYear;
                 int FinMonth = MonthlyReport.FinMonth;
                 var MonthlyReportDetailList = B_MonthlyreportdetailOperator.Instance.GetMonthlyreportdetailList(MonthlyReport.ID);
-                var targetVersionList = A_TargetplanOperator.Instance.GetTargetplanListForMulitiVersion(MonthlyReport.SystemID, MonthlyReport.FinYear);
+                var targetVersionList = A_TargetplanOperator.Instance.GetTargetplanListForMulitiVersion(MonthlyReport.SystemID, MonthlyReport.FinYear, MonthlyReportDetailList.FirstOrDefault().TargetPlanID);
                 var targetList = C_TargetOperator.Instance.GetTargetList().Where(t => MonthlyReportDetailList.Select(v => v.TargetID).ToList().Contains(t.ID)).ToList();
                 //循环多版本
 

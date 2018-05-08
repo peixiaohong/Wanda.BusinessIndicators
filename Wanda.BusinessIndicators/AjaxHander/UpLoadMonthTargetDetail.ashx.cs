@@ -690,13 +690,13 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     DataTable dt = cells.ExportDataTable(4, 1, cells.MaxDataRow - 3, cells.MaxDataColumn);
 
                     List<MonthlyReportDetail> InsertMonthReportDetail = new List<MonthlyReportDetail>();
-                    List<MonthlyReportDetail> UpdateMonthReportDetail = new List<MonthlyReportDetail>();
+                   // List<MonthlyReportDetail> UpdateMonthReportDetail = new List<MonthlyReportDetail>();
                     MonthlyReportDetail mrd = null;
                     List<MonthlyReportDetail> listMrd = new List<MonthlyReportDetail>();
 
                     //获取当年指标计划ID
                     Guid targetPlanID = Guid.Empty;
-                    List<A_TargetPlan> CurrentYearTargetPlan = LJTH.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetTargetplanList(CurrentRpt._System.ID, FinYear).ToList();
+                    List<A_TargetPlan> CurrentYearTargetPlan = LJTH.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetDefaultTargetplanList(CurrentRpt._System.ID, FinYear).ToList();
                     if (CurrentYearTargetPlan.Count > 0)
                     {
                         targetPlanID = CurrentYearTargetPlan[0].ID;
@@ -708,15 +708,15 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         C_Target CurrentTarget = CurrentRpt._Target.Find(p => p.TargetName == dr[2].ToString());
                         if (CurrentTarget != null)
                         {
-                            MonthlyReportDetail existMRD = CurrentRpt.ReportDetails.Find(p => p.TargetID == CurrentTarget.ID);
+                            //MonthlyReportDetail existMRD = CurrentRpt.ReportDetails.Find(p => p.TargetID == CurrentTarget.ID);
 
                             #region 判断数据库是否存在该数据
-                            if (existMRD != null)
-                            {
-                                mrd = existMRD;
-                            }
-                            else
-                            {
+                            //if (existMRD != null)
+                            //{
+                            //    mrd = existMRD;
+                            //}
+                            //else
+                            //{
                                 mrd = new MonthlyReportDetail();
                                 mrd.SystemID = CurrentRpt._System.ID;
                                 mrd.TargetID = CurrentTarget.ID;
@@ -730,7 +730,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                                 mrd.MIssTargetReason = "";
                                 mrd.CreateTime = DateTime.Now;
                                 mrd.CommitReason = "";
-                            }
+                            //}
                             #endregion
                             try
                             {
@@ -762,22 +762,22 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                             }
 
                             //如果数据库存在当前数据，则把当期数据放入UpdateMonthReportDetail集合中，否则反之。
-                            if (existMRD != null)
-                            {
-                                mrd.ModifyTime = DateTime.Now;
-                                UpdateMonthReportDetail.Add(mrd);
-                            }
-                            else
-                            {
+                            //if (existMRD != null)
+                            //{
+                            //    mrd.ModifyTime = DateTime.Now;
+                            //    UpdateMonthReportDetail.Add(mrd);
+                            //}
+                            //else
+                            //{
                                 InsertMonthReportDetail.Add(mrd);
-                            }
+                            //}
                         }
                     }
                     try
                     {
 
                         ListDV.Add(new DictionaryVmodel("Insert", InsertMonthReportDetail));
-                        ListDV.Add(new DictionaryVmodel("Update", UpdateMonthReportDetail));
+                       // ListDV.Add(new DictionaryVmodel("Update", UpdateMonthReportDetail));
                     }
                     catch (ExcelException)
                     {
@@ -787,7 +787,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 }
                 try
                 {
-                    AddOrUpdateData(ListDV);
+                    AddOrUpdateDataNew(ListDV);
                 }
                 catch (Exception)
                 {

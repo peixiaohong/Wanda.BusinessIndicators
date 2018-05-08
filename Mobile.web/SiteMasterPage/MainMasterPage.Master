@@ -29,7 +29,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <input type="hidden" id="hideLoginUser" value="<%=Mobile.web.Common.UserHelper.GetUserName()%>""
+    <input type="hidden" id="hideLoginUser" value="<%=Mobile.web.Common.UserHelper.GetUserName()%>" />
     <form id="form1" runat="server">
         <a id="navigate-top" href="javascript:void(0)" class="back-top">
             <img src="<%=ResolveUrl("~/Assets/images/icon-top.png") %>" alt="返回顶部" />
