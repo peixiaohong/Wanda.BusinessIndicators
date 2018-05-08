@@ -20,7 +20,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
     public class ProcessController : IHttpHandler
     {
         protected string Content { get; set; }
-        int OperatorType = 0;
+       public int OperatorType = 0;
         string VirtualUser = System.Configuration.ConfigurationManager.AppSettings["WF.VirtualUser"];
         public void ProcessRequest(HttpContext context)
         {
@@ -909,8 +909,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         }
 
         protected string ProcessJSON { get; set; }
-        public string ProType { get; private set; }
-        public string ExecType { get; private set; }
+        public string ProType { get;  set; }
+        public string ExecType { get;  set; }
         public virtual string Recovery()
         {
             return ProcessJSON;
