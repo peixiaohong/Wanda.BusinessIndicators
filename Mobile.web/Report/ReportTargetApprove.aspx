@@ -48,6 +48,9 @@
                                                 <tr v-for="(item,index) in list">
                                                     <td>{{item.FinMonth}}月</td>
                                                 </tr>
+                                                <%--<tr v-if="sumData.length">
+                                                    <td>全年</td>
+                                                </tr>--%>
                                             </tbody>
                                         </table>
 
@@ -62,8 +65,12 @@
                                         <tbody>
                                             <tr v-for="(item,index) in list">
                                                 <td>{{item.FinMonth}}月</td>
-                                                <td v-for="target in item.TargetDetailList">{{Vue.ToThousands(target.SumTarget)}}</td>
+                                                <td v-for="target in item.TargetDetailList">{{Vue.ToThousands(target.Target)}}</td>
                                             </tr>
+                                            <%--<tr v-if="sumData.length">
+                                                <td>全年</td>
+                                                <td v-for="item in sumData">{{item}}</td>
+                                            </tr>--%>
                                         </tbody>
                                     </table>
                                     </

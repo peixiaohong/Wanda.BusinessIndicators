@@ -1039,7 +1039,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     ListDV.Add(new DictionaryVmodel("Insert", InsertTargetPlanDetail));
                     ListDV.Add(new DictionaryVmodel("Update", UpdateTargetPlanDetail));
                     AddOrUpdateTargetPlanDeatilData(ListDV);
-                    if (string.IsNullOrEmpty(VersionName))
+                    if (!string.IsNullOrEmpty(VersionName))
                     {
                         BtargetPlan.VersionName = VersionName;
                         B_TargetplanOperator.Instance.UpdateTargetplan(BtargetPlan);
