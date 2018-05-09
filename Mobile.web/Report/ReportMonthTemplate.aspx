@@ -131,7 +131,7 @@
                                                                 </th>
                                                                 <td style="width: 22.1%">{{type ? Vue.ToThousands(items.BMonthReportDetail.NAccumulativePlanAmmount): Vue.ToThousands(items.NAccumulativePlanAmmount)}}</td>
                                                                 <td style="width: 22.1%">{{type ? Vue.ToThousands(items.BMonthReportDetail.NAccumulativeActualAmmount) : Vue.ToThousands(items.NAccumulativeActualAmmount)}}</td>
-                                                                <td style="width: 22%" :class="{'color-height': type ? Vue.Height(items.BMonthReportDetail.NAccumulativeDisplayRate) : Vue.Height(items.NAccumulativeActualRate)}">{{type ? items.BMonthReportDetail.NAccumulativeDisplayRate : items.NAccumulativeActualRate}}</td>
+                                                                <td style="width: 22%" :class="{'color-height': type ? Vue.Height(items.BMonthReportDetail.NAccumulativeDisplayRate) : Vue.Height(items.NAccumulativeDisplayRate)}">{{type ? items.BMonthReportDetail.NAccumulativeDisplayRate : items.NAccumulativeDisplayRate}}</td>
                                                             </tr>
                                                                 <template v-if="items.ObjValue && items.ObjValue.length && items.IsTotalShow">
                                                                <tr class="tem-item">
