@@ -101,7 +101,7 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="item in list.ObjValue">
-                                        <td>{{item.TargetName}}</td>
+                                        <td><a v-bind:href="'/APP/Report/ReportMonthTemplate.aspx?id='+ item.SystemID + '&versionID='+ versionSelect + '&year=' + yearSelect + '&month=' + monthSelect + '&name=' + encodeURI(item.TargetName)">{{item.TargetName}}</a></td>
                                         <td>{{Vue.ToThousands(item.NAccumulativePlanAmmount)}}</td>
                                         <td>{{Vue.ToThousands(item.NAccumulativeActualAmmount)}}</td>
                                         <td>{{item.NAccumulativeActualRate}}</td>
@@ -125,7 +125,7 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="item in list.ObjValue">
-                                        <td>{{item.TargetName}}</td>
+                                        <td <a v-bind:href="'/APP/Report/ReportMonthTemplate.aspx?id='+ item.SystemID + '&versionID='+ versionSelect + '&year=' + yearSelect + '&month=' + monthSelect + '&name=' + encodeURI(item.TargetName)">>{{item.TargetName}}</a></td>
                                         <td>{{Vue.ToThousands(item.MeasureRate)}}</td>
                                         <td>{{Vue.ToThousands(item.NAccumulativeActualAmmount)}}</td>
                                         <td>{{item.NAnnualCompletionRate}}</td>
