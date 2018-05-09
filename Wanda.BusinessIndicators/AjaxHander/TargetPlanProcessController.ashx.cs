@@ -171,14 +171,16 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             {
                 if (OperatorType == 6)
                 {
-                    rpt.WFStatus = "Draft";
+                    //rpt.WFStatus = "Draft";
+                    rpt.WFStatus = "Progress"; //退回状态仍是审批中
                     new MonthlyReportLog().AddMonthlyReportAction((int)MonthlyReportLogActionType.Submit, rpt.SystemID, rpt.FinYear, 0, BusinessID.ToGuid());
                 }
                 else if (OperatorType == 7)
                 {
                     new MonthlyReportLog().AddMonthlyReportAction((int)MonthlyReportLogActionType.Submit, rpt.SystemID, rpt.FinYear, 0, BusinessID.ToGuid());
 
-                    rpt.WFStatus = "Draft";
+                    // rpt.WFStatus = "Draft";
+                    rpt.WFStatus = "Progress"; //退回状态仍是审批中
                 }
             }
             else if (OperatorType == 9)//9, cancel
