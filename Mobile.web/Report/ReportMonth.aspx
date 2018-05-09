@@ -13,21 +13,21 @@
                             <table class="from-table" style="line-height: 1.7">
                                 <tbody>
                                     <tr>
-                                        <td style="width: 40%">
+                                        <td style="width: 28%">
                                             <div class="select-container">
                                                 <select class="form-control select-item mobile-select repeort-select" v-model="systemID" v-on:change="ChangeVersion()">
                                                     <option :value="system.ID" v-for="(system,index) in systemAndYearList.System" selected>{{system.SystemName}}</option>
                                                 </select>
                                             </div>
                                         </td>
-                                        <td style="width: 25%">
+                                        <td style="width: 22%">
                                             <div class="select-container clear">
                                                 <select class="form-control select-item mobile-select repeort-select" v-model="yearSelect" v-on:change="ChangeVersion()">
                                                     <option :value="year" v-for="year in systemAndYearList.Year">{{year}}年</option>
                                                 </select>
                                             </div>
                                         </td>
-                                        <td style="width: 20%">
+                                        <td style="width: 18%">
                                             <div class="select-container">
                                                 <select id="taskType" class="form-control select-item mobile-select repeort-select" v-model="monthSelect" v-on:change="ChangeVersion()">
                                                     <option value="1">1月</option>
@@ -45,7 +45,7 @@
                                                 </select>
                                             </div>
                                         </td>
-                                         <td style="width: 15%">
+                                         <td style="width: 32%">
                                             <div class="select-container clear">
                                                 <select class="form-control select-item mobile-select repeort-select" v-model="versionSelect" v-on:change="ChangeData()">
                                                     <option :value="versionType.ID" v-for="(versionType,index) in versions">{{versionType.VersionName}}</option>
@@ -101,7 +101,7 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="item in list.ObjValue">
-                                        <td>{{item.TargetName}}</td>
+                                        <td><a v-bind:href="'/APP/Report/ReportMonthTemplate.aspx?id='+ item.SystemID + '&versionID='+ versionSelect + '&year=' + yearSelect + '&month=' + monthSelect + '&name=' + encodeURI(item.TargetName)">{{item.TargetName}}</a></td>
                                         <td>{{Vue.ToThousands(item.NAccumulativePlanAmmount)}}</td>
                                         <td>{{Vue.ToThousands(item.NAccumulativeActualAmmount)}}</td>
                                         <td>{{item.NAccumulativeActualRate}}</td>
@@ -125,7 +125,7 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="item in list.ObjValue">
-                                        <td>{{item.TargetName}}</td>
+                                        <td><a v-bind:href="'/APP/Report/ReportMonthTemplate.aspx?id='+ item.SystemID + '&versionID='+ versionSelect + '&year=' + yearSelect + '&month=' + monthSelect + '&name=' + encodeURI(item.TargetName)">{{item.TargetName}}</a></td>
                                         <td>{{Vue.ToThousands(item.MeasureRate)}}</td>
                                         <td>{{Vue.ToThousands(item.NAccumulativeActualAmmount)}}</td>
                                         <td>{{item.NAnnualCompletionRate}}</td>

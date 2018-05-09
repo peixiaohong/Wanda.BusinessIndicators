@@ -69,6 +69,14 @@ CommonProvider.install = function (Vue, ops) {
             return str.replace(/(?!(^\n|\n{2}))\n/g, "<br/>");
         } 
     }
+    Vue.Height = function (str) {
+        var num = Number(str.replace(/\%/g, ""));
+        if (num < 100) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     /*
      * 异步post事件
      * options

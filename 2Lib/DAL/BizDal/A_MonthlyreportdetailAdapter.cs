@@ -340,7 +340,22 @@ WHERE   A_MonthlyReportDetail.SystemID = @SystemID
 
             return ExecuteQuery(sql, pSystemID, pCompanyID, pYear, pMonth, pTargetID).FirstOrDefault();
         }
+   internal A_MonthlyReportDetail GetAMonthlyreportdetail(Guid SystemID, Guid CompanyID, Guid TargetID, int Year, int Month,Guid TargetPlanID)
+        {
+            string sql = ORMapping.GetSelectSql<A_MonthlyReportDetail>(TSqlBuilder.Instance);
 
+            sql += "WHERE " + base.NotDeleted;
+            sql += " AND SystemID=@SystemID AND CompanyID=@CompanyID AND FinYear=@Year AND FinMonth=@Month and TargetID=@TargetID AND TargetPlanID=@TargetPlanID";
+
+            SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
+            SqlParameter pCompanyID = CreateSqlParameter("@CompanyID", System.Data.DbType.Guid, CompanyID);
+            SqlParameter pYear = CreateSqlParameter("@Year", System.Data.DbType.String, Year);
+            SqlParameter pMonth = CreateSqlParameter("@Month", System.Data.DbType.String, Month);
+            SqlParameter pTargetID = CreateSqlParameter("@TargetID", System.Data.DbType.Guid, TargetID);
+            SqlParameter pTargetPlanID = CreateSqlParameter("@TargetPlanID", System.Data.DbType.Guid, TargetPlanID);
+
+            return ExecuteQuery(sql, pSystemID, pCompanyID, pYear, pMonth, pTargetID, pTargetPlanID).FirstOrDefault();
+        }
         /// <summary>
         /// 更新列表
         /// </summary>

@@ -178,23 +178,26 @@ function isCheckPlan() {
     }
     $("#hideVersionName").val(VersionName);
     var ret = true;
-    WebUtil.ajax({
-        async: false,
-        url: "/TargetController/isCheckPlan",
-        args: { SysID: sysID, Year: $("#HideFinYear").val(), PlanID: TargetPlanID, VersionName: VersionName },
-        successReturn: function (resultData) {
-            $.unblockUI();
-          
-            if (!resultData.success) {
-                alert('当前版本已纯在审批版本，请勿重复操作！');
-                TargetPlanID = resultData.TargetPlanID;
-                //$("#txt_VersionName").val("");
-                ClickItems("monthReportReady");
-                GetTargetPlanDetail();
-                ret = false;
+    var businessID = bpf_wf_tool.getQueryString("BusinessID");
+    if (businessID == "") {
+        WebUtil.ajax({
+            async: false,
+            url: "/TargetController/isCheckPlan",
+            args: { SysID: sysID, Year: $("#HideFinYear").val(), PlanID: TargetPlanID, VersionName: VersionName },
+            successReturn: function (resultData) {
+                $.unblockUI();
+
+                if (!resultData.success) {
+                    alert('当前版本已存在审批版本，请勿重复操作！');
+                    TargetPlanID = resultData.TargetPlanID;
+                    //$("#txt_VersionName").val("");
+                    ClickItems("monthReportReady");
+                    GetTargetPlanDetail();
+                    ret = false;
+                }
             }
-        }
-    });
+        });
+    }
     return ret;
 }
 
@@ -466,7 +469,7 @@ function fileUpload(name) {
         'width': 100,
         'height': 25,
         'fileTypeDesc': 'office file',
-        'fileTypeExts': '*.doc; *.docx; *.xls;*.xlsx;',
+        'fileTypeExts': '*.xls;*.xlsx;',
         'fileSizeLimit': '10240',
         //swf文件路径
         'swf': '../Scripts/UpLoad/uploadify.swf',
@@ -491,7 +494,7 @@ function fileUpload(name) {
             }
         },
         'onUploadError': function (file, data, response) {
-            alert("上传失败，程序出错！");
+            alert("上传失败，请上传正确的文件！");
         }
         , 'onUploadStart': function (file, data, response) {
             $("#" + name).uploadify("settings", "formData", { 'VersionName': $("#hideVersionName").val() });
