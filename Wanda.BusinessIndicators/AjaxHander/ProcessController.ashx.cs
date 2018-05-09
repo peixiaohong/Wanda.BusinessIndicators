@@ -94,14 +94,16 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
                 if (OperatorType == 6)
                 {
-                    rpt.WFStatus = "Draft";
+                    // rpt.WFStatus = "Draft";
+                    rpt.WFStatus = "Progress";
                     new MonthlyReportLog().AddMonthlyReportAction((int)MonthlyReportLogActionType.Return, rpt.SystemID, rpt.FinYear, rpt.FinMonth, BusinessID.ToGuid());
                 }
                 else if (OperatorType == 7)
                 {
                     new MonthlyReportLog().AddMonthlyReportAction((int)MonthlyReportLogActionType.Withdraw, rpt.SystemID, rpt.FinYear, rpt.FinMonth, BusinessID.ToGuid());
 
-                    rpt.WFStatus = "Draft";
+                    //rpt.WFStatus = "Draft";
+                    rpt.WFStatus = "Progress";
                 }
             }
             else if (OperatorType == 9)//9, cancel

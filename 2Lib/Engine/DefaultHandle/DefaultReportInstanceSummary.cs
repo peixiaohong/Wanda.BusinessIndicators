@@ -569,7 +569,8 @@ namespace LJTH.BusinessIndicators.Engine
 
             //这里总是从最新的指标计划获取
             //List<A_TargetPlanDetail> ATPDList = StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear);
-            List<A_TargetPlanDetail> ATPDList = StaticResource.Instance.GetDefaultTargetPlanList(_System.ID, FinYear);
+            List<A_TargetPlanDetail> ATPDList = StaticResource.Instance.GetTargetPlanList
+                (_System.ID, FinYear).Where(v=>v.TargetPlanID==ReportDetails.FirstOrDefault().TargetPlanID).ToList();
 
             int i = 1;
             if (MRDList.Count>0)
@@ -622,7 +623,9 @@ namespace LJTH.BusinessIndicators.Engine
                                 {
                                     //如果是上报功能，从A表中拿到最新的 全年计划指标
                                     //mrsvm.MeasureRate = Math.Round(StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear).FindAll(P => P.TargetID == target.ID).Sum(P => P.Target), 7, MidpointRounding.AwayFromZero).ToString();
-                                    mrsvm.MeasureRate = Math.Round(StaticResource.Instance.GetDefaultTargetPlanList(_System.ID, FinYear).FindAll(P => P.TargetID == target.ID).Sum(P => P.Target), 7, MidpointRounding.AwayFromZero).ToString();
+                                    mrsvm.MeasureRate = Math.Round(StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear)
+                                        .Where(v=>v.TargetPlanID== ReportDetails.FirstOrDefault().TargetPlanID).ToList()
+                                        .FindAll(P => P.TargetID == target.ID).Sum(P => P.Target), 7, MidpointRounding.AwayFromZero).ToString();
                                 }
                                 else
                                 {
@@ -634,7 +637,9 @@ namespace LJTH.BusinessIndicators.Engine
                                     else
                                     {
                                         //mrsvm.MeasureRate = Math.Round(StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear).FindAll(P => P.TargetID == target.ID).Sum(P => P.Target), 7, MidpointRounding.AwayFromZero).ToString();
-                                        mrsvm.MeasureRate = Math.Round(StaticResource.Instance.GetDefaultTargetPlanList(_System.ID, FinYear).FindAll(P => P.TargetID == target.ID).Sum(P => P.Target), 7, MidpointRounding.AwayFromZero).ToString();
+                                        mrsvm.MeasureRate = Math.Round(StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear)
+                                              .Where(v => v.TargetPlanID == ReportDetails.FirstOrDefault().TargetPlanID).ToList()
+                                              .FindAll(P => P.TargetID == target.ID).Sum(P => P.Target), 7, MidpointRounding.AwayFromZero).ToString();
                                     }
                                 }
 
