@@ -271,7 +271,10 @@ namespace LJTH.BusinessIndicators.BLL
             return _aMonthlyreportdetailAdapter.GetAMonthlyreportdetail(SystemID, CompanyID, TargetID, Year, Month);
         }
 
-
+        public A_MonthlyReportDetail GetAMonthlyreportdetail(Guid SystemID, Guid CompanyID, Guid TargetID, int Year, int Month,Guid TargetPlanID)
+        {
+            return _aMonthlyreportdetailAdapter.GetAMonthlyreportdetail(SystemID, CompanyID, TargetID, Year, Month, TargetPlanID);
+        }
 
         /// <summary>
         /// 更新列表
