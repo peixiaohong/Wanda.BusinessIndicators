@@ -409,14 +409,16 @@ AND FinYear=2015 AND FinMonth=8 ORDER BY CreateTime DESC ";
                             AND A.FinMonth = {1}
                             AND A.FinYear = {2}
                             AND A.ID <> '{3}'
-                            AND ISNULL(A.AreaID,'00000000-0000-0000-0000-000000000000') = '{4}';       
+                            AND ISNULL(A.AreaID,'00000000-0000-0000-0000-000000000000') = '{4}'
+                            AND WFStatus<>'Approved';       
 		 
                     DELETE  dbo.B_MonthlyReport
                     WHERE   SystemID = '{0}'
                             AND FinMonth = {1}
                             AND FinYear = {2}
                             AND ID <> '{3}'
-                            AND ISNULL(AreaID,'00000000-0000-0000-0000-000000000000') = '{4}'; ", MonthlyReport.SystemID,
+                            AND ISNULL(AreaID,'00000000-0000-0000-0000-000000000000') = '{4}'
+                            AND WFStatus<>'Approved';  ", MonthlyReport.SystemID,
                             MonthlyReport.FinMonth, MonthlyReport.FinYear, MonthlyReport.ID, MonthlyReport.AreaID);
                 using (TransactionScope scope = TransactionScopeFactory.Create())
                 {
