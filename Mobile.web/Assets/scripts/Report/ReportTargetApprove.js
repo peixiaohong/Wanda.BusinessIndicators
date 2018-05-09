@@ -30,12 +30,28 @@ var Task = {
             },
             mounted: function () {
                 var self = this;
+                //self.SumFun(self.list);
                 self.$nextTick(function () {
                     self.length = self.list[0].TargetDetailList.length + 1;
                     utils.initTarget(".target-main", ".target-content", ".target-name", ".target-allow", self.length)
                 })
             },
             methods: {
+                SumFun: function (data) {
+                    var self = this;
+                    self.sumData = [];
+                    data.forEach(function (one,index) {
+                        if (index == 0) {
+                            one.TargetDetailList.forEach(function (val, valIndex) {
+                                self.sumData[valIndex] = val.Target;
+                            })
+                        } else {
+                            one.TargetDetailList.forEach(function (val, valIndex) {
+                                self.sumData[valIndex] += val.Target;
+                            })
+                        }
+                    })
+                }
             },
             watch: {
                 targetState: function () {
@@ -136,6 +152,7 @@ var Task = {
                     data.Data.basicState = false;
                     data.Data.targetState = false;
                     data.Data.length = "";
+                    data.Data.sumData = [];
                     callback(data.Data);                
                 } else {
                     utils.alertMessage(data.StatusMessage)
