@@ -6,7 +6,6 @@
             title: "",
             currentState: false,
             totalState: false,
-            yearlyState: false,
         },   
         mounted: function () {
             var self = this;
