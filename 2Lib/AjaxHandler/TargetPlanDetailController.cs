@@ -100,7 +100,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             using (TransactionScope scope = TransactionScopeFactory.Create())
             {
                 res = B_TargetplanOperator.Instance.UpdateVersionDefault(Guid.Parse(ID));
-
+                StaticResource sr = new StaticResource();
+                sr.Reload();//清楚默认版本缓存
                 #region 在日志表中添加该次操作的日志
                 string userName = WebHelper.GetCurrentLoginUser();
 
