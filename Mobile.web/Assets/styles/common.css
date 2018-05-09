@@ -94,8 +94,8 @@ table.table-default {
     border: 0 solid !important;
 }
 .select-container .target-select {
-    padding-right: 18px;
-    padding-left: 8px;
+    padding-right: 16px;
+    padding-left: 0px;
 }
 select::-ms-expand {
     display: none;

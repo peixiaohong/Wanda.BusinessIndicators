@@ -37,12 +37,12 @@
                                     <tbody>
                                             <template v-for="list in result.ObjValue">
                                             <tr>
-                                                <td v-on:click="list.IsCurrentShow = !list.IsCurrentShow">{{list.Name}}</td>
+                                                <td v-on:click="if(list.ObjValue && list.ObjValue.length){list.IsCurrentShow = !list.IsCurrentShow}">{{list.Name}}</td>
                                                 <td>{{Vue.ToThousands(list.BMonthReportDetail.NPlanAmmount)}}</td>
                                                 <td>{{Vue.ToThousands(list.BMonthReportDetail.NActualAmmount)}}</td>
-                                                <td class="color-height">{{list.BMonthReportDetail.NDisplayRate}}</td>
+                                                <td :class="{'color-height': Vue.Height(list.BMonthReportDetail.NDisplayRate)}">{{list.BMonthReportDetail.NDisplayRate}}</td>
                                             </tr>
-                                            <tr class="new-tem" v-if="list.ObjValue.length && list.IsCurrentShow">
+                                            <tr class="new-tem" v-if="list.ObjValue && list.ObjValue.length && list.IsCurrentShow">
                                                 <td colspan="4" style="padding: 0;">
                                                     <div class="clear table-tem-new">
                                                         <table>
@@ -51,61 +51,33 @@
                                                                 <th style="padding: 0; width: 33.8%">
                                                                     <table>
                                                                         <tr>
-                                                                            <td style="width: 20%">{{index + 1}}</td>
-                                                                            <td style="width: 80%" v-on:click="items.IsCurrentShow = !items.IsCurrentShow">{{items.CompanyName}}</td>
+                                                                            <td style="width: 30%">{{index + 1}}</td>
+                                                                            <td style="width: 70%" v-on:click="if(items.ObjValue && items.ObjValue.length){items.IsCurrentShow = !items.IsCurrentShow}">{{type ? items.Name : items.CompanyName}}</td>
                                                                         </tr>
                                                                     </table>
                                                                 </th>
-                                                                <td style="width: 22.1%">{{Vue.ToThousands(items.NPlanAmmount)}}</td>
-                                                                <td style="width: 22.1%">{{Vue.ToThousands(items.NActualAmmount)}}</td>
-                                                                <td style="width: 22%">{{items.NDisplayRate}}</td>
+                                                                <td style="width: 22.1%">{{type ? Vue.ToThousands(items.BMonthReportDetail.NPlanAmmount) : Vue.ToThousands(items.NPlanAmmount)}}</td>
+                                                                <td style="width: 22.1%">{{type ? Vue.ToThousands(items.BMonthReportDetail.NActualAmmount) : Vue.ToThousands(items.NActualAmmount)}}</td>
+                                                                <td style="width: 22%" :class="{'color-height': type ? Vue.Height(items.BMonthReportDetail.NDisplayRate) : Vue.Height(items.NDisplayRate)}">{{type ? items.BMonthReportDetail.NDisplayRate : items.NDisplayRate}}</td>
                                                             </tr>
-                                                                <template v-if="false && items.IsCurrentShow">
-                                                                     <tr class="tem-item">
+                                                                <template v-if="items.ObjValue && items.ObjValue.length && items.IsCurrentShow">
+                                                               <tr class="tem-item">
                                                                 <td colspan="4" style="padding: 0;">
                                                                     <div class="clear tem-list">
                                                                         <table>
-                                                                            <tr>
+                                                                            <tr v-for="(item,c) in items.ObjValue">
                                                                                 <td style="padding: 0; width: 33.8%">
                                                                                     <table style="width: 100%">
                                                                                         <tr>
-                                                                                            <td style="width: 20%">1</td>
-                                                                                            <td style="width: 80%">泰和世家</td>
+                                                                                            <td style="width: 30%">{{c + 1}}</td>
+                                                                                            <td style="width: 70%">{{item.CompanyName}}</td>
                                                                                         </tr>
                                                                                     </table>
                                                                                 </td>
 
-                                                                                <td style="width: 22.1%">1,000</td>
-                                                                                <td style="width: 22.1%">1,000</td>
-                                                                                <td style="width: 22%">100%</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="padding: 0; width: 33.8%">
-                                                                                    <table style="width: 100%">
-                                                                                        <tr>
-                                                                                            <td style="width: 20%">2</td>
-                                                                                            <td style="width: 80%">香邑溪谷</td>
-                                                                                        </tr>
-                                                                                    </table>
-                                                                                </td>
-
-                                                                                <td style="width: 22.1%">1,000</td>
-                                                                                <td style="width: 22.1%">1,000</td>
-                                                                                <td style="width: 22%">100%</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="padding: 0; width: 33.8%">
-                                                                                    <table style="width: 100%">
-                                                                                        <tr>
-                                                                                            <td style="width: 20%">3</td>
-                                                                                            <td style="width: 80%">香邑原墅</td>
-                                                                                        </tr>
-                                                                                    </table>
-                                                                                </td>
-
-                                                                                <td style="width: 22.1%">900</td>
-                                                                                <td style="width: 22.1%">361</td>
-                                                                                <td style="width: 22%" class="color-height">41%</td>
+                                                                                <td style="width: 22.1%">{{Vue.ToThousands(item.NPlanAmmount)}}</td>
+                                                                                <td style="width: 22.1%">{{Vue.ToThousands(item.NActualAmmount)}}</td>
+                                                                                <td style="width: 22%" :class="{'color-height': Vue.Height(item.NDisplayRate)}">{{item.NDisplayRate}}</td>
                                                                             </tr>
                                                                         </table>
                                                                     </div>
@@ -135,15 +107,15 @@
                                             <th style="width: 22%">完成率</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                         <tbody>
                                             <template v-for="list in result.ObjValue">
                                             <tr>
-                                                <td v-on:click="list.IsTotalShow = !list.IsTotalShow">{{list.Name}}</td>
-                                                <td>{{Vue.ToThousands(list.BMonthReportDetail.NPlanAmmount)}}</td>
-                                                <td>{{Vue.ToThousands(list.BMonthReportDetail.NActualAmmount)}}</td>
-                                                <td class="color-height">{{list.BMonthReportDetail.NDisplayRate}}</td>
+                                                <td v-on:click="if(list.ObjValue && list.ObjValue.length){list.IsTotalShow = !list.IsTotalShow}">{{list.Name}}</td>
+                                                <td>{{Vue.ToThousands(list.BMonthReportDetail.NAccumulativePlanAmmount)}}</td>
+                                                <td>{{Vue.ToThousands(list.BMonthReportDetail.NAccumulativeActualAmmount)}}</td>
+                                                <td :class="{'color-height': Vue.Height(list.BMonthReportDetail.NAccumulativeDisplayRate)}">{{list.BMonthReportDetail.NAccumulativeDisplayRate}}</td>
                                             </tr>
-                                            <tr class="new-tem" v-if="list.ObjValue.length && list.IsTotalShow">
+                                            <tr class="new-tem" v-if="list.ObjValue && list.ObjValue.length && list.IsTotalShow">
                                                 <td colspan="4" style="padding: 0;">
                                                     <div class="clear table-tem-new">
                                                         <table>
@@ -152,61 +124,33 @@
                                                                 <th style="padding: 0; width: 33.8%">
                                                                     <table>
                                                                         <tr>
-                                                                            <td style="width: 20%">{{index + 1}}</td>
-                                                                            <td style="width: 80%" v-on:click="items.IsTotalShow = !items.IsTotalShow">{{items.CompanyName}}</td>
+                                                                            <td style="width: 30%">{{index + 1}}</td>
+                                                                            <td style="width: 70%" v-on:click="if(items.ObjValue && items.ObjValue.length){items.IsTotalShow = !items.IsTotalShow}">{{type ? items.Name : items.CompanyName}}</td>
                                                                         </tr>
                                                                     </table>
                                                                 </th>
-                                                                <td style="width: 22.1%">{{Vue.ToThousands(items.NPlanAmmount)}}</td>
-                                                                <td style="width: 22.1%">{{Vue.ToThousands(items.NActualAmmount)}}</td>
-                                                                <td style="width: 22%">{{items.NDisplayRate}}</td>
+                                                                <td style="width: 22.1%">{{type ? Vue.ToThousands(items.BMonthReportDetail.NAccumulativePlanAmmount): Vue.ToThousands(items.NAccumulativePlanAmmount)}}</td>
+                                                                <td style="width: 22.1%">{{type ? Vue.ToThousands(items.BMonthReportDetail.NAccumulativeActualAmmount) : Vue.ToThousands(items.NAccumulativeActualAmmount)}}</td>
+                                                                <td style="width: 22%" :class="{'color-height': type ? Vue.Height(items.BMonthReportDetail.NAccumulativeDisplayRate) : Vue.Height(items.NAccumulativeActualRate)}">{{type ? items.BMonthReportDetail.NAccumulativeDisplayRate : items.NAccumulativeActualRate}}</td>
                                                             </tr>
-                                                                <template v-if="false && items.IsTotalShow">
-                                                                     <tr class="tem-item">
+                                                                <template v-if="items.ObjValue && items.ObjValue.length && items.IsTotalShow">
+                                                               <tr class="tem-item">
                                                                 <td colspan="4" style="padding: 0;">
                                                                     <div class="clear tem-list">
                                                                         <table>
-                                                                            <tr>
+                                                                            <tr v-for="(item,c) in items.ObjValue">
                                                                                 <td style="padding: 0; width: 33.8%">
                                                                                     <table style="width: 100%">
                                                                                         <tr>
-                                                                                            <td style="width: 20%">1</td>
-                                                                                            <td style="width: 80%">泰和世家</td>
+                                                                                            <td style="width: 30%">{{c + 1}}</td>
+                                                                                            <td style="width: 70%">{{item.CompanyName}}</td>
                                                                                         </tr>
                                                                                     </table>
                                                                                 </td>
 
-                                                                                <td style="width: 22.1%">1,000</td>
-                                                                                <td style="width: 22.1%">1,000</td>
-                                                                                <td style="width: 22%">100%</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="padding: 0; width: 33.8%">
-                                                                                    <table style="width: 100%">
-                                                                                        <tr>
-                                                                                            <td style="width: 20%">2</td>
-                                                                                            <td style="width: 80%">香邑溪谷</td>
-                                                                                        </tr>
-                                                                                    </table>
-                                                                                </td>
-
-                                                                                <td style="width: 22.1%">1,000</td>
-                                                                                <td style="width: 22.1%">1,000</td>
-                                                                                <td style="width: 22%">100%</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="padding: 0; width: 33.8%">
-                                                                                    <table style="width: 100%">
-                                                                                        <tr>
-                                                                                            <td style="width: 20%">3</td>
-                                                                                            <td style="width: 80%">香邑原墅</td>
-                                                                                        </tr>
-                                                                                    </table>
-                                                                                </td>
-
-                                                                                <td style="width: 22.1%">900</td>
-                                                                                <td style="width: 22.1%">361</td>
-                                                                                <td style="width: 22%" class="color-height">41%</td>
+                                                                                <td style="width: 22.1%">{{Vue.ToThousands(item.NAccumulativePlanAmmount)}}</td>
+                                                                                <td style="width: 22.1%">{{Vue.ToThousands(item.NAccumulativeActualAmmount)}}</td>
+                                                                                <td style="width: 22%" :class="{'color-height': Vue.Height(item.NAccumulativeDisplayRate)}">{{item.NAccumulativeDisplayRate}}</td>
                                                                             </tr>
                                                                         </table>
                                                                     </div>
@@ -221,6 +165,7 @@
                                             </tr>
                                             </template>
                                     </tbody>
+
                                 </table>
                             </div>
                         </li>

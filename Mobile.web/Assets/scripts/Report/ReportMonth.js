@@ -54,7 +54,7 @@
                     },
                     success: function (res) {
                         if (res.IsSuccess && res.StatusCode == 200) {
-                            console.log(res);
+                            console.log(JSON.parse(res.Data.list));
                             self.title = res.Data.title;
                             self.list = JSON.parse(res.Data.list);
                         } else {

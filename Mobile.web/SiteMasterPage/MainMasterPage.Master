@@ -79,32 +79,41 @@
                     methods: {
                         targetBlank: function (type) {
                             var self = this;
+                            var search = window.location.search;
                             switch (type) {
                                 case "month":
-                                    if (self.isMonth) {
+                                    if (self.isMonth && !search) {
                                         return false;
+                                    } else if (self.isMonth && search) {
+                                        window.location.pathname = "/APP/Report/ReportMonth.aspx";
                                     }
-                                    window.location.pathname = "/APP/Report/ReportMonth.aspx";
                                     break;
                                 case "target":
                                     if (self.isTarget) {
                                         return false;
                                     }
-                                    window.location.pathname = "/APP/Report/ReportTarget.aspx";
+                                    window.location.pathname = "/APP/Report/ReportTarget.aspx";                                
                                     break;
                             }
                         },
                         initTitle: function () {
                             var self = this;
                             var pathname = window.location.pathname;
+                            var search = window.location.search;
                             switch (pathname) {
                                 case "/APP/Report/ReportMonth.aspx":
                                     self.title = "月度经营报告";
+                                    if (search) {
+                                        window.location.search = "";
+                                    }
                                     self.isMonth = true;
                                     self.isTarget = false;
                                     break;
                                 case "/APP/Report/ReportTarget.aspx":
                                     self.title = "分解指标查询";
+                                    if (search) {
+                                        window.location.search = "";
+                                    }
                                     self.isMonth = false;
                                     self.isTarget = true;
                                     break;

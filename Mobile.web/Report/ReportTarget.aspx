@@ -14,7 +14,7 @@
                                 <table class="from-table" style="line-height: 1.7">
                                     <tbody>
                                         <tr>
-                                            <td style="width: 45%">
+                                            <td style="width: 35%">
                                                 <div class="select-container">
                                                     <select class="form-control select-item mobile-select repeort-select target-select" v-model="systemID" v-on:change="InitVersion()">
                                                         <option :value="system.ID" v-for="(system,index) in systemAndYearList.System">{{system.SystemName}}</option>
@@ -28,7 +28,7 @@
                                                     </select>
                                                 </div>
                                             </td>
-                                            <td style="width: 25%">
+                                            <td style="width: 35%">
                                                 <div class="select-container">
                                                     <select class="form-control select-item mobile-select repeort-select target-select" v-model="versionSelect" v-on:change="ChangeData()">
                                                         <option :value="versionType.ID" v-for="(versionType,index) in versions">{{versionType.VersionName}}</option>

@@ -6,6 +6,7 @@
             title: "",
             currentState: false,
             totalState: false,
+            type: false,
         },   
         mounted: function () {
             var self = this;
@@ -31,10 +32,11 @@
                     },
                     success: function (res) {
                         if (res.IsSuccess && res.StatusCode == 200) {
+                            self.type = res.Data.type;
+                            self.title = res.Data.title;
                             if (res.Data.list.length) {
                                 self.ShowFilter(res.Data.list);
                             }
-                            self.title = res.Data.title;
                         } else {
                             utils.alertMessage(res.StatusMessage)
                         }
@@ -59,7 +61,7 @@
                                             items.IsCurrentShow = false;
                                             items.IsTotalShow = false;
                                             items.IsYearShow = false;
-                                            if (items.ObjValue.length) {
+                                            if (items.ObjValue.length && self.type) {
                                                 items.ObjValue.forEach(function (item) {
                                                     item.IsCurrentShow = false;
                                                     item.IsTotalShow = false;
@@ -76,13 +78,12 @@
                         if (one.Name == name) {
                             match.Name = one.Name
                             one.ObjValue.forEach(function (val) {
-
                                 if (val.Mark == "CompanyProperty") {
                                     val.ObjValue.forEach(function (items) {
                                         items.IsCurrentShow = false;
                                         items.IsTotalShow = false;
                                         items.IsYearShow = false;
-                                        if (items.ObjValue.length) {
+                                        if (items.ObjValue.length && self.type) {
                                             items.ObjValue.forEach(function (item) {
                                                 item.IsCurrentShow = false;
                                                 item.IsTotalShow = false;
@@ -96,6 +97,7 @@
                         }
                     }
                 })
+                console.log(match);
                 self.result = match;
             },
         },
