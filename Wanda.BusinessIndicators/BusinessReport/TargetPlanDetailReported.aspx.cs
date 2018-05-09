@@ -6,6 +6,8 @@ using System.Web.UI.WebControls;
 using LJTH.BusinessIndicators.BLL;
 using LJTH.BusinessIndicators.Engine;
 using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.BLL.BizBLL;
+using LJTH.BusinessIndicators.Common;
 
 namespace LJTH.BusinessIndicators.Web.BusinessReport
 {
@@ -24,28 +26,44 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             //JS_WF_JY_Starter
             if (!IsPostBack)
             {
-                List<C_System> sysList = new List<C_System>();
-                if (PermissionList != null && PermissionList.Count > 0)
-                {
-                    foreach (var item in PermissionList)
-                    {
-                        sysList.AddRange(StaticResource.Instance.SystemList.Where(p => p.SystemName == item.ToString()).Distinct().ToList());
-                    }
-                }
+                var _SystemIds = S_OrganizationalActionOperator.Instance.GetUserSystemData(WebHelper.GetCurrentLoginUser()).Select(v => v.SystemID).ToList();
 
-                if (sysList.Count > 0)
+                if (_SystemIds == null || _SystemIds.Count == 0)
                 {
-                    ddlSystem.DataSource = sysList.Distinct().ToList().OrderBy(or => or.Sequence).ToList();
+                    Response.Redirect("~/NoPermission.aspx");
+                    return;
                 }
-                else
-                {
-                    ddlSystem.DataSource = StaticResource.Instance.SystemList.ToList();
-                }
+                //获取当前人拥有的系统板块
+                List<C_System> c_SystemList = StaticResource.Instance.SystemList.Where(p => _SystemIds.Contains(p.ID)).OrderBy(x => x.Sequence).ToList();
 
-
+                ddlSystem.DataSource = c_SystemList;
                 ddlSystem.DataTextField = "SystemName";
                 ddlSystem.DataValueField = "ID";
                 ddlSystem.DataBind();
+
+                //原有板块下拉逻辑
+                //List<C_System> sysList = new List<C_System>();
+                //if (PermissionList != null && PermissionList.Count > 0)
+                //{
+                //    foreach (var item in PermissionList)
+                //    {
+                //        sysList.AddRange(StaticResource.Instance.SystemList.Where(p => p.SystemName == item.ToString()).Distinct().ToList());
+                //    }
+                //}
+
+                //if (sysList.Count > 0)
+                //{
+                //    ddlSystem.DataSource = sysList.Distinct().ToList().OrderBy(or => or.Sequence).ToList();
+                //}
+                //else
+                //{
+                //    ddlSystem.DataSource = StaticResource.Instance.SystemList.ToList();
+                //}
+
+
+                //ddlSystem.DataTextField = "SystemName";
+                //ddlSystem.DataValueField = "ID";
+                //ddlSystem.DataBind();
 
                 HidSystemID.Value = ddlSystem.SelectedValue;
 

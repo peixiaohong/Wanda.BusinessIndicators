@@ -647,7 +647,7 @@ namespace LJTH.BusinessIndicators.BLL
                 model.TargetID = TargetList[i].ID;
                 model.TargetName = TargetList[i].TargetName;
                 model.Unit = TargetList[i].Unit;
-                DataTable ds = _aTargetplandetailAdapter.GetSumTargetDetail(FinYear, SystemID, TargetList[i].ID);
+                DataTable ds = _aTargetplandetailAdapter.GetSumTargetDetail_B(FinYear, SystemID, TargetList[i].ID, TargetPlanID);
                 decimal SumTar1 = 0;
                 decimal SumTar2 = 0;
                 decimal SumTar3 = 0;
