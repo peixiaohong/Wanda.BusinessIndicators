@@ -79,18 +79,17 @@
                     methods: {
                         targetBlank: function (type) {
                             var self = this;
+                            var pathname = window.location.pathname;
                             switch (type) {
                                 case "month":
-                                    if (self.isMonth) {
+                                    if (pathname == "/APP/Report/ReportMonth.aspx") {
                                         return false;
+                                    } else {
+                                        window.location.pathname = "/APP/Report/ReportMonth.aspx";
                                     }
-                                    window.location.pathname = "/APP/Report/ReportMonth.aspx";
                                     break;
                                 case "target":
-                                    if (self.isTarget) {
-                                        return false;
-                                    }
-                                    window.location.pathname = "/APP/Report/ReportTarget.aspx";
+                                    window.location.pathname = "/APP/Report/ReportTarget.aspx";                                
                                     break;
                             }
                         },
