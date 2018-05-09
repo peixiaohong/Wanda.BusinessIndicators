@@ -107,7 +107,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 BTargetPlan = B_TargetplanOperator.Instance.GetTargetPlanByID(Request["BusinessID"].ToGuid());
                 ddlSystem.SelectedValue = BTargetPlan.SystemID.ToString();
                 HidSystemID.Value = BTargetPlan.SystemID.ToString();
-
+                ddlSystem.Enabled = false;
                 HideProcessCode.Value = StaticResource.Instance[BTargetPlan.SystemID, DateTime.Now].Configuration.Element("ProcessCode").Value + "-ZB";
 
                 FinYear = BTargetPlan.FinYear;

@@ -105,7 +105,7 @@ function operateNav(sender) {
             break;
         case "dataUpload":
             if (isCheckPlan()) {
-                if (TargetPlanDeailData[0].ObjValue[0].ObjValue.length != 0) {
+                if (TargetPlanDeailData != undefined&&TargetPlanDeailData[0].ObjValue[0].ObjValue.length != 0) {
                     $("#Down1,#T2").show();
                     $("#DownLoadModel,#UpLoadData,#VersionName").hide();
                     var obj = $("#TargetPlanDetailHead");
@@ -276,6 +276,13 @@ function BusinessDataHandle(instanceID, args) {
             PrcessStatus: strPrcessStatus
         },
         success: function (result) {
+            //初始化
+            $("#hideTargetPlanID").val("");
+            TargetPlanID = "";
+            TargetPlanDeailData = undefined;
+            $("#dataUploadSpan,#monthReportSubmitSpan").removeClass("txt");
+            $("#dataUploadSpan,#monthReportSubmitSpan").addClass("txtdisable");
+            ClickItems('monthReportReady');
             $.unblockUI();
         },
         error: function () {
@@ -325,12 +332,14 @@ function GetReportTime() {
 
 function GetTargetPlanDetail() {
     TargetPlanID = $("#hideTargetPlanID").val();
+    if (TargetPlanID != "") {
     WebUtil.ajax({
         async: true,
         url: "/TargetPlanDetailController/GetTargetPlanDetail",
         args: { strSystemID: sysID, strFinYear: FinYear, strTargetPlanID: TargetPlanID, IsLatestVersion: true },
         successReturn: SplitData
-    });
+        });
+    }
 }
 function SplitData(result) {
     var SystemModel;
@@ -347,7 +356,7 @@ function SplitData(result) {
     });
 
 
-    if (TargetPlanDeailData[0] != null) {
+    if (TargetPlanDeailData != undefined &&TargetPlanDeailData[0] != null) {
         if (TargetPlanDeailData[0].HtmlTemplate != undefined) {
             strTemplate = TargetPlanDeailData[0].HtmlTemplate.split(',');
         }
