@@ -178,23 +178,26 @@ function isCheckPlan() {
     }
     $("#hideVersionName").val(VersionName);
     var ret = true;
-    WebUtil.ajax({
-        async: false,
-        url: "/TargetController/isCheckPlan",
-        args: { SysID: sysID, Year: $("#HideFinYear").val(), PlanID: TargetPlanID, VersionName: VersionName },
-        successReturn: function (resultData) {
-            $.unblockUI();
-          
-            if (!resultData.success) {
-                alert('当前版本已存在审批版本，请勿重复操作！');
-                TargetPlanID = resultData.TargetPlanID;
-                //$("#txt_VersionName").val("");
-                ClickItems("monthReportReady");
-                GetTargetPlanDetail();
-                ret = false;
+    var businessID = bpf_wf_tool.getQueryString("BusinessID");
+    if (businessID == "") {
+        WebUtil.ajax({
+            async: false,
+            url: "/TargetController/isCheckPlan",
+            args: { SysID: sysID, Year: $("#HideFinYear").val(), PlanID: TargetPlanID, VersionName: VersionName },
+            successReturn: function (resultData) {
+                $.unblockUI();
+
+                if (!resultData.success) {
+                    alert('当前版本已存在审批版本，请勿重复操作！');
+                    TargetPlanID = resultData.TargetPlanID;
+                    //$("#txt_VersionName").val("");
+                    ClickItems("monthReportReady");
+                    GetTargetPlanDetail();
+                    ret = false;
+                }
             }
-        }
-    });
+        });
+    }
     return ret;
 }
 
