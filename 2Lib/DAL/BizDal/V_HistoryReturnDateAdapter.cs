@@ -516,15 +516,16 @@ namespace LJTH.BusinessIndicators.DAL
         /// <param name="finMonth">月</param>
         /// <param name="loginName">登陆人</param>
         /// <returns></returns>
-        public List<ComprehensiveReportViewModel> GetComprehensiveReportData(string systemID,int finYear,int finMonth,string loginName)
+        public List<ComprehensiveReportViewModel> GetComprehensiveReportData(string systemID,int finYear,int finMonth,string loginName,string targetPlanID)
         {
-            string sql = string.Format("Exec [dbo].[Pro_SystemReport] @SystemID,@Years,@Month,@LoginName");
+            string sql = string.Format("Exec [dbo].[Pro_SystemReport] @SystemID,@Years,@Month,@LoginName,@TargetPlanID");
 
             DbParameter[] parameters = new DbParameter[]{
                 CreateSqlParameter("@SystemID",DbType.String,systemID),
                 CreateSqlParameter("@Years",DbType.Int32,finYear),
                 CreateSqlParameter("@Month",DbType.Int32,finMonth),
-                CreateSqlParameter("@LoginName",DbType.String,loginName)
+                CreateSqlParameter("@LoginName",DbType.String,loginName),
+                CreateSqlParameter("@TargetPlanID",DbType.String,targetPlanID)
             };
             DataSet ds = ExecuteReturnDataSet(sql, parameters);
             List<ComprehensiveReportViewModel> list = new List<ComprehensiveReportViewModel>();

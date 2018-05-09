@@ -1,7 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MonthReportMasterPage.Master" AutoEventWireup="true" CodeBehind="ComprehensiveReportForms.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.BusinessReport.ComprehensiveReportForms" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <%--<script type="text/javascript" src="../Scripts/BusinessReport/ComprehensiveReportForms.js"></script>--%>
     <script type="text/javascript" src="../Scripts/BusinessReport/ComprehensiveReportForms.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
+    <style type="text/css">
+        .tab_search th {
+            width: 5% !important;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -18,31 +24,34 @@
                     <tbody>
                         <th>上报系统</th>
                         <td>
-                            <select id="systemInfo">
-                                <option data-id="00000000-0000-0000-0000-000000000000" selected="selected">全部</option>
+                            <select id="systemInfo" class="PreDataChange">
                             </select>
                         </td>
-                        <td>上报年份</td>
+                        <th>上报年份</th>
                         <td>
-                            <select id="selectYears">
+                            <select id="selectYears" class="PreDataChange">
                             </selec>
                         </td>
                         <th>上报月份</th>
                         <td>
-                            <select id="selectMonth">
-                                <option data-value="1">1月</option>
-                                <option data-value="2">2月</option>
-                                <option data-value="3">3月</option>
-                                <option data-value="4">4月</option>
-                                <option data-value="5">5月</option>
-                                <option data-value="6">6月</option>
-                                <option data-value="7">7月</option>
-                                <option data-value="8">8月</option>
-                                <option data-value="9">9月</option>
-                                <option data-value="10">10月</option>
-                                <option data-value="11">11月</option>
-                                <option data-value="12">12月</option>
+                            <select id="selectMonth" class="PreDataChange">
+                                <option data-id="1">1月</option>
+                                <option data-id="2">2月</option>
+                                <option data-id="3">3月</option>
+                                <option data-id="4">4月</option>
+                                <option data-id="5">5月</option>
+                                <option data-id="6">6月</option>
+                                <option data-id="7">7月</option>
+                                <option data-id="8">8月</option>
+                                <option data-id="9">9月</option>
+                                <option data-id="10">10月</option>
+                                <option data-id="11">11月</option>
+                                <option data-id="12">12月</option>
                             </select>
+                        </td>
+                        <th>版本类型</th>
+                        <td>
+                            <select id="selectTargetVersionType"></select>
                         </td>
                         <th>
                             <a class="btn_search" href="#"><span><i class="fa fa-search"></i>&nbsp;查询</span></a>

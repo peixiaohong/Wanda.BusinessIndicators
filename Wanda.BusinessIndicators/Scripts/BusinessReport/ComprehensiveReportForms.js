@@ -54,7 +54,7 @@ function PageLoad()
     //上报年份数据加载
     SelectYearsInfoLoad();
     //页面列表数据加载
-    ShowReportDataLoad('00000000-0000-0000-0000-000000000000',0,0);
+    ShowReportDataLoad('00000000-0000-0000-0000-000000000000', 0, 0,'00000000-0000-0000-0000-000000000000');
 }
 
 
@@ -65,8 +65,17 @@ function EventLoad()
     $(".btn_search").off('click').on('click', function () {
         var systemID = $("#systemInfo").find("option:selected").attr("data-id");
         var year = $("#selectYears").find("option:selected").attr("data-id");
-        var month = $("#selectMonth").find("option:selected").attr("data-value");
-        ShowReportDataLoad(systemID, year, month);
+        var month = $("#selectMonth").find("option:selected").attr("data-id");
+        var targetPlanID = $("#selectTargetVersionType").find("option:selected").attr("data-id");
+        ShowReportDataLoad(systemID, year, month, targetPlanID);
+    });
+
+    //下拉框数据onchange 事件
+    $(".PreDataChange").off('change').on('change', function () {
+        var systemID = $("#systemInfo").find("option:selected").attr("data-id");
+        var year = $("#selectYears").find("option:selected").attr("data-id");
+        var month = $("#selectMonth").find("option:selected").attr("data-id");
+        SelectTargetVersionTypeLoad(systemID, year, month)
     });
 }
 
@@ -101,23 +110,21 @@ function SelectYearsInfoLoad()
                 //设定当前年默认选中
                 $("#selectYears").find("option[data-Id='" + resultData.NowYear + "'").attr("selected", "selected");
                 //设定当前月默认选中
-                $("#selectMonth").find("option[data-value='" + resultData.NowMonth + "'").attr("selected", "selected");
+                $("#selectMonth").find("option[data-id='" + resultData.NowMonth + "'").attr("selected", "selected");
             }
             else {
             }
         }
     });
 }
-
 //页面列表数据加载
-function ShowReportDataLoad(systemID, year, month)
-{
+function ShowReportDataLoad(systemID, year, month, targetPlanID) {
     //加载动画
     Load();
     WebUtil.ajax({
         async: false,
         url: "/TargetSimpleReportController/GetListData",
-        args: { systemID: systemID, year: year, month: month },
+        args: { systemID: systemID, year: year, month: month, targetPlanID: targetPlanID },
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
                 $('#ShowReportData').empty();
@@ -126,6 +133,28 @@ function ShowReportDataLoad(systemID, year, month)
             else {
             }
             Fake();
+        }
+    });
+}
+//版本列表数据加载
+function SelectTargetVersionTypeLoad(systemID, year, month)
+{
+    WebUtil.ajax({
+        async: false,
+        url: "/TargetSimpleReportController/GetTargetVersionType",
+        args: { systemID: systemID, year: year, month: month},
+        successReturn: function (resultData) {
+            $("#selectTargetVersionType").empty();
+            if (resultData.Success == 1) {
+                if (resultData.Data.length > 0)
+                {
+                    for (var i = 0; i < resultData.Data.length; i++) {
+                        $("#selectTargetVersionType").append("<option data-id='" + resultData.Data[i].ID + "'>" + resultData.Data[i].VersionName + "</option>");
+                    }
+                }
+            }
+            else {
+            }
         }
     });
 }

@@ -953,8 +953,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             int num = 0;
             int index = 0;
             //获取子List
-            var Sub_list = List.Where(P => P.ParentID == Pid).ToList();  //C_SystemTreeOperator.Instance.GetSystemTreeListByID(Pid);
-
+            //var Sub_list = List.Where(P => P.ParentID == Pid).ToList();  //C_SystemTreeOperator.Instance.GetSystemTreeListByID(Pid);
+            var Sub_list = List;
             if (Sub_list != null && Sub_list.Count > 0)
             {
                 Sub_list.ForEach(F =>
@@ -1129,8 +1129,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             List<SystemTreeModel> list = new List<SystemTreeModel>();
 
             //获取子List
-            var Sub_list = List.Where(P => P.ParentID == Pid).ToList();  //C_SystemTreeOperator.Instance.GetSystemTreeListByID(Pid);
-
+            //var Sub_list = List.Where(P => P.ParentID == Pid).ToList();  //C_SystemTreeOperator.Instance.GetSystemTreeListByID(Pid);
+            var Sub_list = List;
             //var Sub_list = C_SystemTreeOperator.Instance.GetSystemTreeListByID(Pid);
             if (Sub_list != null && Sub_list.Count > 0)
             {
