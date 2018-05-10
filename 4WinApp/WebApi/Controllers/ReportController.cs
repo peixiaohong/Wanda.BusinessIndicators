@@ -23,7 +23,7 @@ namespace WebApi.Controllers
 
 
         /// <summary>
-        /// 获取月报的年与业态列表
+        /// 获取月报的年与版块列表
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -191,7 +191,7 @@ namespace WebApi.Controllers
         #region 分解指标查询
 
         /// <summary>
-        /// 获取分解指标的年与业态列表
+        /// 获取分解指标的年与版块列表
         /// </summary>
         /// <returns></returns>
         [HttpGet]

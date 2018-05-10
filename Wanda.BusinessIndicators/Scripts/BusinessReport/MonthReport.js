@@ -2798,7 +2798,7 @@ function AddBackGroundColor() {
 }
 //获取单位
 function GetUnit() {
-    return '('+ unit+')';
+    return unit;
 }
 //获取完成情况明细、经营月报明细三级收缩表头
 function GetunfoldTitleList() {

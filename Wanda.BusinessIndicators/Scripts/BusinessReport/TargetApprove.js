@@ -20,7 +20,7 @@ var IsNewDataIndex = "";
 var MonthReportOrderType = "Detail";
 var CompanyProperty = "";
 var IncludeHaveDetail = false;
-var showMonthReprotDetail = "false"; 
+var showMonthReprot = "false"; 
 //加载模版项
 function loadTmpl(selector) {
     return WebUtil.loadTmpl("../BusinessReport/TargetRptTmpl.html", selector);
