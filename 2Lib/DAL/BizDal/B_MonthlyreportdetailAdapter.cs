@@ -154,7 +154,7 @@ namespace LJTH.BusinessIndicators.DAL
         /// </summary>
         /// <param name="MonthlyReportID"></param>
         /// <returns></returns>
-        internal List<B_MonthlyReportDetail> GetMonthlyReportDetail_ByAToB(int FinYear, int FinMonth, Guid SystemID, Guid MonthlyReportID)
+        internal List<B_MonthlyReportDetail> GetMonthlyReportDetail_ByAToB(int FinYear, int FinMonth, Guid SystemID, Guid MonthlyReportID,Guid TargetPlanID)
         {
             string sql = "GetMonthlyReportDetail_ByAToB ";
 
@@ -162,7 +162,8 @@ namespace LJTH.BusinessIndicators.DAL
             SqlParameter p2 = CreateSqlParameter("@FinMonth", DbType.Int32, FinMonth);
             SqlParameter p3 = CreateSqlParameter("@SystemID", DbType.Guid, SystemID);
             SqlParameter p4 = CreateSqlParameter("@MonthlyReportID", DbType.Guid, MonthlyReportID);
-            DataSet ds = DbHelper.RunSPReturnDS(sql, ConnectionName, p1, p2, p3, p4);
+            SqlParameter p5 = CreateSqlParameter("@TargetPlanID", DbType.Guid, TargetPlanID);
+            DataSet ds = DbHelper.RunSPReturnDS(sql, ConnectionName, p1, p2, p3, p4,p5);
 
             List<B_MonthlyReportDetail> data = new List<B_MonthlyReportDetail>();
             ds.Tables[0].Rows.Cast<System.Data.DataRow>().ForEach(row =>

@@ -41,7 +41,6 @@ namespace LJTH.BusinessIndicators.DAL
             return (list != null && list.Count > 0) ? list.FirstOrDefault() : null;
         }
 
-
         public A_MonthlyReport GetLatestAMonthlyReport(Guid SystemID, Guid AreaID, int Year, int Month)
         {
             string sql = ORMapping.GetSelectSql<A_MonthlyReport>(TSqlBuilder.Instance);
@@ -55,6 +54,24 @@ namespace LJTH.BusinessIndicators.DAL
             SqlParameter pYear = CreateSqlParameter("@Year", System.Data.DbType.String, Year);
             SqlParameter pMonth = CreateSqlParameter("@Month", System.Data.DbType.String, Month);
             List<A_MonthlyReport> list = ExecuteQuery(sql, pSystemID, pSystemBatchID, pYear, pMonth);
+            return (list != null && list.Count > 0) ? list.FirstOrDefault() : null;
+        }
+
+
+        public A_MonthlyReport GetLatestAMonthlyReport(Guid SystemID, Guid AreaID, int Year, int Month,Guid TargetPlanID)
+        {
+            string sql = ORMapping.GetSelectSql<A_MonthlyReport>(TSqlBuilder.Instance);
+
+            sql += "WHERE " + base.NotDeleted;
+            sql += " AND SystemID=@SystemID AND ISNULL(AreaID,'00000000-0000-0000-0000-000000000000')=@AreaID AND FinYear=@Year AND FinMonth=@Month AND TargetPlanID=@TargetPlanID";
+            sql += " ORDER BY CreateTime DESC";
+
+            SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
+            SqlParameter pSystemBatchID = CreateSqlParameter("@AreaID", System.Data.DbType.Guid, AreaID);
+            SqlParameter pYear = CreateSqlParameter("@Year", System.Data.DbType.String, Year);
+            SqlParameter pMonth = CreateSqlParameter("@Month", System.Data.DbType.String, Month);
+            SqlParameter pTargetPlanID = CreateSqlParameter("@TargetPlanID", System.Data.DbType.Guid, TargetPlanID);
+            List<A_MonthlyReport> list = ExecuteQuery(sql, pSystemID, pSystemBatchID, pYear, pMonth,pTargetPlanID);
             return (list != null && list.Count > 0) ? list.FirstOrDefault() : null;
         }
 

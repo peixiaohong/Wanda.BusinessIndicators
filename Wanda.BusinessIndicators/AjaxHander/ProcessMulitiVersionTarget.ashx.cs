@@ -70,6 +70,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     newMonthlyReport.ID = Guid.NewGuid();
                     //表示不是当前默认版本的计划指标
                     newMonthlyReport.DefaultVersionStatus = 0;
+                    newMonthlyReport.WFStatus = "Progress";
                     newMonthlyReport.TargetPlanID = tagerPlanItem.ID;
                     newMonthlyReportGuid = B_MonthlyreportOperator.Instance.AddMonthlyreport(newMonthlyReport);
 

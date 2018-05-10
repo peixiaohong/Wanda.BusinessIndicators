@@ -251,12 +251,12 @@ namespace LJTH.BusinessIndicators.DAL
         /// <param name="Month">月</param>
         /// <param name="MonthlyReportID">月报ID</param>
         /// <returns></returns>
-        public B_MonthlyReport GetLatestMonthlyReport(Guid SystemID, Guid AreaID, int Year, int Month, Guid MonthlyReportID)
+        public B_MonthlyReport GetLatestMonthlyReport(Guid SystemID, Guid AreaID, int Year, int Month, Guid MonthlyReportID, Guid TargetPlanID)
         {
             string sql = ORMapping.GetSelectSql<B_MonthlyReport>(TSqlBuilder.Instance);
 
             sql += "WHERE " + base.NotDeleted;
-            sql += " AND SystemID=@SystemID AND AreaID=@AreaID AND FinYear=@Year AND FinMonth=@Month AND ID not in(@MonthlyReportID) AND (WFStatus ='Progress' or  WFStatus ='Approved')";
+            sql += " AND SystemID=@SystemID AND ISNULL(AreaID,'00000000-0000-0000-0000-000000000000')=@AreaID AND FinYear=@Year AND FinMonth=@Month AND ID not in(@MonthlyReportID) AND (WFStatus ='Progress' or  WFStatus ='Approved') AND TargetPlanID=@TargetPlanID";
             sql += " ORDER BY CreateTime DESC";
 
             SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
@@ -264,7 +264,8 @@ namespace LJTH.BusinessIndicators.DAL
             SqlParameter pYear = CreateSqlParameter("@Year", System.Data.DbType.String, Year);
             SqlParameter pMonth = CreateSqlParameter("@Month", System.Data.DbType.String, Month);
             SqlParameter pMonthlyReportID = CreateSqlParameter("@MonthlyReportID", System.Data.DbType.Guid, MonthlyReportID);
-            List<B_MonthlyReport> list = ExecuteQuery(sql, pSystemID, pAreaID, pYear, pMonth, pMonthlyReportID);
+            SqlParameter pTargetPlanID = CreateSqlParameter("@TargetPlanID", System.Data.DbType.Guid, TargetPlanID);
+            List<B_MonthlyReport> list = ExecuteQuery(sql, pSystemID, pAreaID, pYear, pMonth, pMonthlyReportID,pTargetPlanID);
 
             return (list != null && list.Count > 0) ? list.FirstOrDefault() : null;
         }
