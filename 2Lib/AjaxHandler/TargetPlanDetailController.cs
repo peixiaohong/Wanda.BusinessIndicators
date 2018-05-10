@@ -125,7 +125,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         }
 
         [LibAction]
-        public string DeleteTargetPlan(string ID,string SystemID,string Year)
+        public string DeleteTargetPlan(string ID, string SystemID, string Year)
         {
             int res = 0;
             Guid result = Guid.Empty;
@@ -143,15 +143,15 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
 
 
                 B_TargetPlanAction TargetAction = new B_TargetPlanAction()
-                    {
-                        TargetPlanID = ID.ToGuid(),
-                        SystemID = SystemID.ToGuid(),
-                        FinYear = int.Parse(Year),
-                        Action = "禁用",
-                        Operator = HttpContext.Current.GetUserName(),
-                        OperatorTime = DateTime.Now
-                    };
-                    result = B_TargetPlanActionOperator.Instance.AddTargetPlanAction(TargetAction);
+                {
+                    TargetPlanID = ID.ToGuid(),
+                    SystemID = SystemID.ToGuid(),
+                    FinYear = int.Parse(Year),
+                    Action = "禁用",
+                    Operator = HttpContext.Current.GetUserName(),
+                    OperatorTime = DateTime.Now
+                };
+                result = B_TargetPlanActionOperator.Instance.AddTargetPlanAction(TargetAction);
 
                 #endregion
                 scope.Complete();
@@ -161,6 +161,21 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 return "true";
             else
                 return "false";
+        }
+
+
+        [LibAction]
+        public string UpdateVersionName(string strTargetPlanID, string VersionName)
+        {
+            B_TargetPlan BtargetPlan = B_TargetplanOperator.Instance.GetTargetplan(Guid.Parse(strTargetPlanID));
+
+            if (BtargetPlan.VersionName != VersionName)
+            {
+                BtargetPlan.VersionName = VersionName;
+                B_TargetplanOperator.Instance.UpdateTargetplan(BtargetPlan);
+            }
+
+            return "true";
         }
     }
 }

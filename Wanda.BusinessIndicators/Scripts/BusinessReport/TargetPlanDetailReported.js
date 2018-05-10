@@ -276,6 +276,13 @@ function BusinessDataHandle(instanceID, args) {
             PrcessStatus: strPrcessStatus
         },
         success: function (result) {
+            WebUtil.ajax({
+                async: false,
+                url: "/TargetPlanDetailController/UpdateVersionName",
+                args: { strTargetPlanID: TargetPlanID, VersionName: VersionName },
+                successReturn: function (resault) {
+                }
+            })
             //初始化
             $("#hideTargetPlanID").val("");
             TargetPlanID = "";
