@@ -83,6 +83,13 @@ namespace LJTH.BusinessIndicators.DAL
             SqlParameter pMonthlyreportID = CreateSqlParameter("@MonthlyreportID", System.Data.DbType.Guid, MonthlyreportID);
             return ExecuteQuery(sql, pMonthlyreportID);
         }
+        internal void InsertAllFromB(Guid businessID)
+        {
+            string sql = "B2A";
+            var p1 = new SqlParameter { ParameterName = "@BusinessID", Value = businessID };
+            var p2 = new SqlParameter { ParameterName = "@Flag", Value = 0 };
+            DbHelper.RunSPReturnDS(sql, ConnectionName, p1, p2);
+        }
     }
 }
 

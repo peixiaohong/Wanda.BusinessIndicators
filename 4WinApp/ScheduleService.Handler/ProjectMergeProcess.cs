@@ -43,6 +43,8 @@ namespace ScheduleService.Handler
 
                 B_SystemBatch batchModel = B_SystemBatchOperator.Instance.GetSystemBatchByDraft(c_System.GroupType, finYear, finMonth);
 
+                if (batchModel == null)
+                    continue;
                 if (batchModel != null)
                 {
                     Common.ScheduleService.Log.Instance.Info(c_System.SystemName+"读取数据成功!" + batchModel.FinYear + "年" + batchModel.FinMonth + "月");

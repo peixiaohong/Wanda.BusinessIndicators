@@ -105,8 +105,12 @@ namespace LJTH.BusinessIndicators.BLL
             return _aMonthlyreportAdapter.Delete(Model);
         }
 
-
+        public void InsertAllFromB(Guid monthlyReportID)
+        {
+            _aMonthlyreportAdapter.InsertAllFromB(monthlyReportID);
+        }
         #endregion
+
     } 
 }
 

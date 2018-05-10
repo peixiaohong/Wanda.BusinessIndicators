@@ -175,7 +175,7 @@
                     </div>
                 </div>
                 <!--附件 结束-->
-<div id="process">
+            <div id="process">
             </div>
                 <input type="hidden" id="wanda_wf_hd_process" value="" />
                 <input type="hidden" id="wanda_wf_opInfo" value="" />
