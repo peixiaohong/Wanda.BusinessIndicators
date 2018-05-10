@@ -93,7 +93,7 @@ namespace LJTH.BusinessIndicators.Engine
 
             //这里总是从最新的指标计划获取
             List<A_TargetPlanDetail> ATPDList = StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear);
-          
+
 
             int i = 1;
             if (MRDList != null)
@@ -138,7 +138,7 @@ namespace LJTH.BusinessIndicators.Engine
 
                             mrsvm.NAccumulativeActualAmmount = (double)(MRDList.Where(p => p.TargetID == target.ID).Sum(e => e.NAccumulativeActualAmmount));
                             mrsvm.NAccumulativeDifference = mrsvm.NAccumulativeActualAmmount - mrsvm.NAccumulativePlanAmmount;
-                           
+
                             if (target.Configuration != null
                                && target.Configuration.Element("SummaryTargetDisplay") != null
                                && target.Configuration.Element("SummaryTargetDisplay").Attribute("ShowKpi") != null
@@ -154,7 +154,7 @@ namespace LJTH.BusinessIndicators.Engine
                                 mrsvm.MeasureRate = Math.Round(StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear).FindAll(P => P.TargetID == target.ID).Sum(P => P.Target), 7, MidpointRounding.AwayFromZero).ToString();
                             }
 
-                           
+
                             listMonthReportSummaryViewModel.Add(TargetEvaluationEngine.TargetEvaluationService.SummaryCalculation(mrsvm));
                             if (target.ID == ConfigurationManager.AppSettings["MonthSGRent"].ToGuid())
                             {
@@ -203,7 +203,7 @@ namespace LJTH.BusinessIndicators.Engine
                                     mrsvm.NAnnualCompletionRate = Math.Round((merate) * 100, 1, MidpointRounding.AwayFromZero).ToString() + "%";
                                     listMonthReportSummaryViewModel[0].NAnnualCompletionRate = mrsvm.NAnnualCompletionRate;
                                 }
-                                
+
                             }
                             i++;
                         }
@@ -559,7 +559,7 @@ namespace LJTH.BusinessIndicators.Engine
             return listMonthReportSummary;
         }
 
-        private List<MonthReportSummaryViewModel> GetMonthlyReportDetailSummaryList(bool IsTargetPlan ,bool IsReported)
+        private List<MonthReportSummaryViewModel> GetMonthlyReportDetailSummaryList(bool IsTargetPlan, bool IsReported)
         {
             List<MonthReportSummaryViewModel> listMonthReportSummaryViewModel = new List<MonthReportSummaryViewModel>();
             MonthReportSummaryViewModel mrsvm = null;
@@ -569,11 +569,15 @@ namespace LJTH.BusinessIndicators.Engine
 
             //这里总是从最新的指标计划获取
             //List<A_TargetPlanDetail> ATPDList = StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear);
-            List<A_TargetPlanDetail> ATPDList = StaticResource.Instance.GetTargetPlanList
-                (_System.ID, FinYear).Where(v=>v.TargetPlanID==ReportDetails.FirstOrDefault().TargetPlanID).ToList();
+            List<A_TargetPlanDetail> ATPDList = new List<A_TargetPlanDetail>();
+            if (ReportDetails == null || ReportDetails.Count == 0)
+                StaticResource.Instance.GetDefaultTargetPlanList(_System.ID, FinYear);
+            else
+                ATPDList = StaticResource.Instance.GetTargetPlanList
+                (_System.ID, FinYear).Where(v => v.TargetPlanID == ReportDetails.FirstOrDefault().TargetPlanID).ToList();
 
             int i = 1;
-            if (MRDList.Count>0)
+            if (MRDList.Count > 0)
             {
                 foreach (C_Target target in _Target.OrderBy(p => p.Sequence))
                 {
@@ -603,7 +607,7 @@ namespace LJTH.BusinessIndicators.Engine
                                 //历史查询
                                 mrsvm.NAccumulativePlanAmmount = (double)(lstMrd.FirstOrDefault().NAccumulativePlanAmmount);
                             }
-                            
+
                             mrsvm.NAccumulativeActualAmmount = (double)(lstMrd.FirstOrDefault().NAccumulativeActualAmmount);
                             mrsvm.Counter = lstMrd.FirstOrDefault().Counter;
                             mrsvm.NAccumulativeDifference = mrsvm.NAccumulativeActualAmmount - mrsvm.NAccumulativePlanAmmount;
@@ -624,7 +628,7 @@ namespace LJTH.BusinessIndicators.Engine
                                     //如果是上报功能，从A表中拿到最新的 全年计划指标
                                     //mrsvm.MeasureRate = Math.Round(StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear).FindAll(P => P.TargetID == target.ID).Sum(P => P.Target), 7, MidpointRounding.AwayFromZero).ToString();
                                     mrsvm.MeasureRate = Math.Round(StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear)
-                                        .Where(v=>v.TargetPlanID== ReportDetails.FirstOrDefault().TargetPlanID).ToList()
+                                        .Where(v => v.TargetPlanID == ReportDetails.FirstOrDefault().TargetPlanID).ToList()
                                         .FindAll(P => P.TargetID == target.ID).Sum(P => P.Target), 7, MidpointRounding.AwayFromZero).ToString();
                                 }
                                 else
@@ -643,7 +647,7 @@ namespace LJTH.BusinessIndicators.Engine
                                     }
                                 }
 
-                                
+
                             }
                             listMonthReportSummaryViewModel.Add(TargetEvaluationEngine.TargetEvaluationService.SummaryCalculation(mrsvm));
                             i++;
