@@ -80,7 +80,7 @@ namespace LJTH.BusinessIndicators.Engine
         /// <param name="isAll"></param>
         public ReportInstance(Guid? monthReportID, Guid? systemBatchId, bool isAll)
         {
-            if (monthReportID != null)
+            if (monthReportID != null&& monthReportID!=Guid.Empty)
             {
                 _MonthReportID = monthReportID.Value;
                 B_MonthlyReport report = B_MonthlyreportOperator.Instance.GetMonthlyreport(_MonthReportID);
@@ -91,7 +91,7 @@ namespace LJTH.BusinessIndicators.Engine
                 FinYear = report.FinYear;
                 FinMonth = report.FinMonth;
             }
-            else if (systemBatchId != null)
+            else if (systemBatchId != null && monthReportID != Guid.Empty)
             {
                 B_SystemBatch b_SystemBatch = B_SystemBatchOperator.Instance.GetSystemBatch(systemBatchId.Value);
                 C_System c_System = StaticResource.Instance.SystemList.Where(x => x.GroupType == b_SystemBatch.BatchType).FirstOrDefault();
