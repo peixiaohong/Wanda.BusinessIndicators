@@ -323,9 +323,10 @@ function ChangeTargetDetail(sender, TabOrSearch) {
 
         $('#T1,#T2_1,#T3,#T3_1,#T4,#MonthReportExplainDiv,#ApproveAttachDiv,#T5,#T6,#T7,#T8,#T9').hide();
         $('#T2,#DownExcel').show();
-        var obj = $("#CompleteDetailHead");
-        var tab = $("#tab2_rows");
-        FloatHeader(obj, tab, false, "MonthRpt");
+        //var obj = $("#CompleteDetailHead");
+        //var tab = $("#tab2_rows");
+        //FloatHeader(obj, tab, false, "MonthRpt");
+       
 
         //完成情况明细
         GetMonthReportDetailSearchCondition();
@@ -337,9 +338,9 @@ function ChangeTargetDetail(sender, TabOrSearch) {
 
         $('#T1,#T2,#T3,#T3_1,#T4,#MonthReportExplainDiv,#ApproveAttachDiv,#T5,#T6,#T7,#T8,#T9').hide();
         $('#T2_1,#DownExcel').show();
-        var obj = $("#CompleteDetailHead_1");
-        var tab = $("#tab2_rows_1");
-        FloatHeader(obj, tab, false, "MonthRpt");
+        //var obj = $("#CompleteDetailHead_1");
+        //var tab = $("#tab2_rows_1");
+        //FloatHeader(obj, tab, false, "MonthRpt");
 
         //经营报告明细
         GetMonthReportDetailSearchCondition();
@@ -362,10 +363,10 @@ function ChangeTargetDetail(sender, TabOrSearch) {
         $("#T4,#T1,#T2,#T2_1,#T3_1,#MonthReportExplainDiv,#ApproveAttachDiv,#T5,#T6,#T7,#T8,#T9").hide();
         $("#T3,#DownExcel").show();
 
-        var obj = $("#Tab_MissTargetHead");
-        var tab = $("#Tbody_MissTargetData");
+        //var obj = $("#Tab_MissTargetHead");
+        //var tab = $("#Tbody_MissTargetData");
 
-        FloatHeader(obj, tab, false, "MonthRpt");
+        //FloatHeader(obj, tab, false, "MonthRpt");
         //未完成说明
         if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDTargetPlanID, CTDIsLatestVersion, MissTargetData[0], "C") == true) {
             getMonthReportMissTargetData();
@@ -901,6 +902,10 @@ function SetComplateTargetDetailData(sender, Type) {
     } else {
         loadTmpl('#CompleteDetailHeadTemplate').tmpl(sender).appendTo('#CompleteDetailHead');
     }
+    var obj = $("#importedDataFloatTable2");
+    var tab = $("#CompleteDetailHead");
+    obj.find("thead").html(tab.html());
+    FloatHeader(obj, tab);
     //tmpl模板名称
     if (strComplateMonthReportDetilHtmlTemplate[1] != "" && strComplateMonthReportDetilHtmlTemplate[1] != undefined) {
         ComplateTargetDetailTemplate = strComplateMonthReportDetilHtmlTemplate[1];
@@ -1082,6 +1087,10 @@ function SetManageMonthReprotDetailData(sender, Type) {
     } else {
         loadTmpl('#TmplCompleteDetail_Head').tmpl(sender).appendTo('#CompleteDetailHead_1');
     }
+    var obj = $("#importedDataFloatTable2_1");
+    var tab = $("#CompleteDetailHead_1");
+    obj.find("thead").html(tab.html());
+    FloatHeader(obj, tab);
     //tmpl模板名称
     if (strManageMonthReprotDetailHtmlTemplate[1] != "" && strManageMonthReprotDetailHtmlTemplate[1] != undefined) {
         strManageMonthReprotDetailTemplate = strManageMonthReprotDetailHtmlTemplate[1];
@@ -2671,10 +2680,13 @@ function unfoldTitle() {
 
         loadTmpl('#TmplManageTargetDetail_Data_All').tmpl(dataArray).appendTo('#tab2_rows_1');
         $("#importedDataTable2_1").css("width", "110%");
-
-        var obj = $("#CompleteDetailHead_1");
-        var tab = $("#tab2_rows_1");
-        FloatHeader(obj, tab, false, "MonthRpt");
+        $("#importedDataFloatTable2_1").find("thead").html($("#CompleteDetailHead_1").html());
+        var obj = $("#importedDataFloatTable2_1");
+        var tab = $("#CompleteDetailHead_1");
+        FloatHeader(obj, tab);
+        //var obj = $("#CompleteDetailHead_1");
+        //var tab = $("#tab2_rows_1");
+        //FloatHeader(obj, tab, false, "MonthRpt");
         AddBackGroundColor();
     }
     else if (tipName == "完成情况明细") {
@@ -2699,9 +2711,13 @@ function unfoldTitle() {
         loadTmpl('#TmplCompleteDetail_Data_All').tmpl(dataArray).appendTo('#tab2_rows');
         $("#importedDataTable2").css("width", "110%");
 
-        var obj = $("#CompleteDetailHead");
-        var tab = $("#tab2_rows");
-        FloatHeader(obj, tab, false, "MonthRpt");
+        $("#importedDataFloatTable2").find("thead").html($("#CompleteDetailHead").html());
+        var obj = $("#importedDataFloatTable2");
+        var tab = $("#CompleteDetailHead");
+        FloatHeader(obj, tab);
+        //var obj = $("#CompleteDetailHead");
+        //var tab = $("#tab2_rows");
+        //FloatHeader(obj, tab, false, "MonthRpt");
         AddBackGroundColor();
     }
 
