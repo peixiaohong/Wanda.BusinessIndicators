@@ -277,6 +277,7 @@ namespace LJTH.BusinessIndicators.BLL
             return _bMonthlyreportdetailAdapter.GetMonthlyReportDetailCount(MonthReportID);
         }
 
+       
         /// <summary>
         /// 从A表中复制一份数据
         /// </summary>
@@ -285,9 +286,9 @@ namespace LJTH.BusinessIndicators.BLL
         /// <param name="SysId"></param>
         /// <param name="MonthReportID"></param>
         /// <returns></returns>
-        public List<B_MonthlyReportDetail> GetMonthlyReportDetail_ByAToB(int FinYear, int FinMonth, Guid SysId, Guid MonthReportID)
+        public List<B_MonthlyReportDetail> GetMonthlyReportDetail_ByAToB(int FinYear, int FinMonth, Guid SysId, Guid MonthReportID,Guid TargetPlanID)
         {
-            return _bMonthlyreportdetailAdapter.GetMonthlyReportDetail_ByAToB(FinYear, FinMonth, SysId, MonthReportID);
+            return _bMonthlyreportdetailAdapter.GetMonthlyReportDetail_ByAToB(FinYear, FinMonth, SysId, MonthReportID, TargetPlanID);
         }
 
         /// <summary>
