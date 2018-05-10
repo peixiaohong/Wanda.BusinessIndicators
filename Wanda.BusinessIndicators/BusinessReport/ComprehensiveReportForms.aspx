@@ -25,6 +25,7 @@
                         <th>上报系统</th>
                         <td>
                             <select id="systemInfo" class="PreDataChange">
+                                <option data-id="00000000-0000-0000-0000-000000000000" selected="selected">全部</option>
                             </select>
                         </td>
                         <th>上报年份</th>
