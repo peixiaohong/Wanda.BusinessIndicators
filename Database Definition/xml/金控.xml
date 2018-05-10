@@ -32,6 +32,7 @@
 			<Counter Title="门店完成部分" Senquence="2" Display="false" DetailMonthlyExpression="GetStringValue(&quot;基金管理规模.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;基金管理规模.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;基金管理规模.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;基金管理规模.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
 			<Counter Title="门店未完成部分" Senquence="3" Display="true" DetailMonthlyExpression="GetStringValue(&quot;基金管理规模.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;基金管理规模.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;基金管理规模.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;基金管理规模.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
 		</Target>
+		<TableTemplate TableHeadTmplName="TmplCompleteDetail_Head" TableDataTmplName="TmplCompleteDetail_Data" TableExcelTemplateName="" />
 	</ComplateTargetDetail>
 	<MisstargetReturn Name="补回情况">
 		<Group TargetName="融资收入" Senquence="1" TargetValue="329D1F91-AC28-4070-B175-E54176BF4E61">
