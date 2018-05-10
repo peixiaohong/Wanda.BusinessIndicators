@@ -14,6 +14,7 @@ var BatchID;
 var IsLatestVersion;
 var ProcessCode
 var ProType
+var unit = "";  //单位
 
 var IsNewDataIndex = "";
 var MonthReportOrderType = "Detail";
@@ -35,7 +36,10 @@ function AddStr(val) {
     return val + "%";
 }
 
-
+//获取单位
+function GetUnit() {
+    return unit;
+}
 
 //加载动画开始
 function Load() {
@@ -479,6 +483,13 @@ function ComplateDetailLiaddCss(sender) {
             return;
         }
     });
+    //获取当前指标单位
+    $.each(MonthReportData[0].ObjValue._Target, function (i, item) {
+        if ($(sender).text().indexOf(item.TargetName) > -1) {
+            unit = item.Unit;
+            return;
+        }
+    });
     $("#Ul4 .active_sub3").each(function () {
         $(this).removeClass("active_sub3");
     });
@@ -520,6 +531,14 @@ function SetComplateTargetDetailData(sender, Type) {
         strComplateMonthReportDetilHtmlTemplate = sender.HtmlTemplate.split(',');
     }
     $("#CompleteDetailHead").empty();
+
+    //获取指标单位
+    $.each(MonthReportData[0].ObjValue._Target, function (i, item) {
+        if (sender.Name.indexOf(item.TargetName) > -1) {
+            unit = item.Unit;
+            return;
+        }
+    });
     //表头Tmpl名称
     if (strComplateMonthReportDetilHtmlTemplate[0] != "" && strComplateMonthReportDetilHtmlTemplate[0] != undefined) {
         loadTmpl('#' + strComplateMonthReportDetilHtmlTemplate[0]).tmpl(sender).appendTo('#CompleteDetailHead');
@@ -532,6 +551,7 @@ function SetComplateTargetDetailData(sender, Type) {
     } else {
         ComplateTargetDetailTemplate = "ComplateTargetDetailTemplate"
     }
+
 
     if (currentDetailTarget == null) {
         $("#Ul4").empty();
