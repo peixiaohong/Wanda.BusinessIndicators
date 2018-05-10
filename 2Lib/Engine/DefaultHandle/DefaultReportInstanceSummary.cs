@@ -569,12 +569,12 @@ namespace LJTH.BusinessIndicators.Engine
 
             //这里总是从最新的指标计划获取
             //List<A_TargetPlanDetail> ATPDList = StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear);
-            List<A_TargetPlanDetail> ATPDList = StaticResource.Instance.GetTargetPlanList
-                (_System.ID, FinYear).Where(v=>v.TargetPlanID==ReportDetails.FirstOrDefault().TargetPlanID).ToList();
-
+          
             int i = 1;
             if (MRDList.Count>0)
             {
+                List<A_TargetPlanDetail> ATPDList = StaticResource.Instance.GetTargetPlanList
+            (_System.ID, FinYear).Where(v => v.TargetPlanID == ReportDetails.FirstOrDefault().TargetPlanID).ToList();
                 foreach (C_Target target in _Target.OrderBy(p => p.Sequence))
                 {
                     if (target.NeedReport == true)

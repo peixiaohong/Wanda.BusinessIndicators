@@ -14,6 +14,8 @@ using LJTH.BusinessIndicators.ViewModel;
 using BPF.Workflow.Client;
 using WebApi.Models;
 using LJTH.BusinessIndicators.Web.AjaxHander;
+using Plugin.SSO;
+using System.Web;
 
 namespace WebApi.Controllers
 {
@@ -40,11 +42,20 @@ namespace WebApi.Controllers
             pc.OperatorType = OperatorType;
             try
             {
+                //写入用户信息
+                HttpContext context = HttpContext.Current;
+                SSOClaimsIdentity claimsIdentity = new SSOClaimsIdentity
+                {
+                    UserName = WebHelper.GetCurrentLoginUser()
+
+                };
+                SSOClaimsPrincipal claimsPrincipal = new SSOClaimsPrincipal(claimsIdentity);
+                context.User = claimsPrincipal;
                 //业务处理
                 pc.DisposeBusinessData();
                 
                 //执行按钮事件的处理
-                pc.ExecutionBusinessData(WebHelper.GetCurrentLoginUser());
+                pc.ExecutionBusinessData();
                 return new ResultContext();
             }
             catch (Exception ex)

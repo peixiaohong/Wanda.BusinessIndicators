@@ -12,6 +12,8 @@ using Newtonsoft.Json;
 using LJTH.BusinessIndicators.ViewModel;
 using WebApi.Models;
 using Lib.Web.Json;
+using System.Web;
+using Plugin.SSO;
 
 namespace WebApi.Controllers
 {
@@ -32,6 +34,14 @@ namespace WebApi.Controllers
         public ResultContext TargetPlanProcessRequest(string BusinessID, int OperatorType, string PrcessStatus)
         {
             LJTH.BusinessIndicators.Web.AjaxHander.TargetPlanProcessController tp = new LJTH.BusinessIndicators.Web.AjaxHander.TargetPlanProcessController();
+            HttpContext context = HttpContext.Current;
+            SSOClaimsIdentity claimsIdentity = new SSOClaimsIdentity
+            {
+                UserName = WebHelper.GetCurrentLoginUser()
+
+            };
+            SSOClaimsPrincipal claimsPrincipal = new SSOClaimsPrincipal(claimsIdentity);
+            context.User = claimsPrincipal;
 
             tp.BusinessID = BusinessID;
             try
@@ -64,7 +74,7 @@ namespace WebApi.Controllers
                     tp.OnProecssCompleted();
                 }
                 //处理数据
-                tp.DisposeBusinessData(OperatorType, WebHelper.GetCurrentLoginUser());
+                tp.DisposeBusinessData(OperatorType);
                 return new ResultContext();
             }
             catch (Exception ex)
