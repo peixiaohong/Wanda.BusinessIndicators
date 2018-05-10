@@ -1,4 +1,5 @@
 ﻿<%@ Page EnableEventValidation="false" Language="C#" MasterPageFile="~/SiteMasterPage/MonthReportMasterPage.Master" AutoEventWireup="true" CodeBehind="TargetRpt.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.BusinessReport.TargetRpt" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" type="text/css" href="../Scripts/UpLoad/uploadify.css" />
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
@@ -17,7 +18,7 @@
     </script>
     <style type="text/css">
         .tab_search th {
-            width:5%!important;
+            width: 5% !important;
         }
     </style>
 </asp:Content>
@@ -48,7 +49,7 @@
                             <td>
                                 <asp:DropDownList ID="ddlMonth" ClientIDMode="Static" runat="server" Style="width: 120px;"></asp:DropDownList>
                             </td>
-                             <th>版本类型</th>
+                            <th>版本类型</th>
                             <td>
                                 <asp:DropDownList ID="ddlVersionType" ClientIDMode="Static" runat="server" Style="width: 120px;"></asp:DropDownList>
                             </td>
@@ -59,7 +60,7 @@
                                 <asp:CheckBox ID="chkIsLastestVersion" ClientIDMode="Static" runat="server" Text="包含审批中" />
                             </td>
                             <th>
-                                <a class="btn_search" id="ContentPlaceHolder1_LinkButton1" href="javascript:void(0)" onclick="f_search()" ><span><i class="fa fa-search"></i>&nbsp;查询</span></a>
+                                <a class="btn_search" id="ContentPlaceHolder1_LinkButton1" href="javascript:void(0)" onclick="f_search()"><span><i class="fa fa-search"></i>&nbsp;查询</span></a>
                             </th>
                         </tr>
                     </tbody>
@@ -153,6 +154,10 @@
                     <div class="scrolldoorFrame copy">
                         <ul class="tabs" id="Ul4_1" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                         </ul>
+                        <table id="importedDataFloatTable2_1" class="tab_005">
+                            <thead style="width: 100%">
+                            </thead>
+                        </table>
                         <table class="tab_005" id="importedDataTable2_1">
                             <thead id="CompleteDetailHead_1" style="width: 100%">
                             </thead>
@@ -168,6 +173,10 @@
                     <div class="scrolldoorFrame copy">
                         <ul class="tabs" id="Ul4" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                         </ul>
+                        <table class="tab_005" id="importedDataFloatTable2">
+                            <thead style="width: 100%">
+                            </thead>
+                        </table>
                         <table class="tab_005" id="importedDataTable2">
                             <thead id="CompleteDetailHead" style="width: 100%">
                             </thead>

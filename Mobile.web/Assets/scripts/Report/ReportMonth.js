@@ -69,7 +69,7 @@
                 var self = this;
                 var date = new Date();
                 self.yearSelect = date.getFullYear();
-                self.monthSelect = date.getMonth() + 1.
+                self.monthSelect = date.getMonth();
                 self.ChangeVersion();
             },
             ChangeVersion: function () {
