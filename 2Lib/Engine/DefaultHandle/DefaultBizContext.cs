@@ -72,11 +72,11 @@ namespace LJTH.BusinessIndicators.Engine
                     {
                         if (SumTarget != 0)
                         {
-                            hastable.Add(TargetName + ".NDisplayRateByYear", Math.Round((item.NAccumulativeActualAmmount / SumTarget), 5, MidpointRounding.AwayFromZero).ToString("P1"));
+                            hastable[TargetName + ".NDisplayRateByYear"] = Math.Round((item.NAccumulativeActualAmmount / SumTarget), 5, MidpointRounding.AwayFromZero).ToString("P1");
                         }
                         else
                         {
-                            hastable.Add(TargetName + ".NDisplayRateByYear", "/");
+                            hastable[TargetName + ".NDisplayRateByYear"] = "/";
                         }
                     }
                     if (hastable.ContainsKey(TargetName + ".IsDelayComplete") == false) //延迟完成
