@@ -28,8 +28,8 @@
                     <tr>
                         <th>查询系统</th>
                         <td>
-                            <input type="text" id="TxtSystem" style="width: 210px;" onclick="showMenu();" />
-                            <asp:DropDownList ID="ddlSystem" runat="server" OnSelectedIndexChanged="ddlSystem_SelectedIndexChanged" AutoPostBack="True" ClientIDMode="Static" Style="width: 120px; display: none;">
+                            <%--<input type="text" id="TxtSystem" style="width: 210px;" onclick="showMenu();" />--%>
+                            <asp:DropDownList ID="ddlSystem" runat="server" OnSelectedIndexChanged="ddlSystem_SelectedIndexChanged" AutoPostBack="True" ClientIDMode="Static" Style="width: 120px;">
                             </asp:DropDownList>
                         </td>
                         <th>查询年份</th>

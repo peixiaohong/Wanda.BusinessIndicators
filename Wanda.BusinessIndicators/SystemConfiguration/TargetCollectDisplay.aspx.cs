@@ -8,6 +8,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using LJTH.BusinessIndicators.BLL;
 using LJTH.BusinessIndicators.Model;
+using LJTH.BusinessIndicators.BLL.BizBLL;
+using LJTH.BusinessIndicators.Common;
 
 namespace LJTH.BusinessIndicators.Web.SystemConfiguration
 {
@@ -59,32 +61,45 @@ namespace LJTH.BusinessIndicators.Web.SystemConfiguration
                 //{
                 //    ddlSystem.DataSource = StaticResource.Instance.SystemList.ToList();
                 //}
+                var _SystemIds = S_OrganizationalActionOperator.Instance.GetUserSystemData(WebHelper.GetCurrentLoginUser()).Select(v => v.SystemID).ToList();
 
-
-                if (sysList.Count > 0)
+                if (_SystemIds == null || _SystemIds.Count == 0)
                 {
-                    ddlSystem.DataSource = sysList.Distinct().ToList().OrderBy(or => or.Sequence).ToList();
-
-                    //获取Tree数据
-                    string Sys_str = "'" + string.Join("','", sysList.Distinct().ToList().Select(S => S.ID).ToList()) + "'";
-                    var TreeData = C_SystemTreeOperator.Instance.GetSystemTreeData(Sys_str);
-
-                    TreeDataJson = JsonConvert.SerializeObject(TreeData);
+                    Response.Redirect("~/NoPermission.aspx");
+                    return;
                 }
-                else
-                {
-                    ddlSystem.DataSource = StaticResource.Instance.SystemList.ToList();
+                //获取当前人拥有的系统板块
+                List<C_System> c_SystemList = StaticResource.Instance.SystemList.Where(p => _SystemIds.Contains(p.ID)).OrderBy(x => x.Sequence).ToList();
 
-                    string Sys_str = "'" + string.Join("','", StaticResource.Instance.SystemList.ToList().Select(S => S.ID).ToList()) + "'";
-                    var TreeData = C_SystemTreeOperator.Instance.GetSystemTreeData(Sys_str);
-                    TreeDataJson = JsonConvert.SerializeObject(TreeData);
-                }
-
-
-
+                ddlSystem.DataSource = c_SystemList;
                 ddlSystem.DataTextField = "SystemName";
-                  ddlSystem.DataValueField = "ID";
-                  ddlSystem.DataBind();
+                ddlSystem.DataValueField = "ID";
+                ddlSystem.DataBind();
+
+                //if (sysList.Count > 0)
+                //{
+                //    ddlSystem.DataSource = sysList.Distinct().ToList().OrderBy(or => or.Sequence).ToList();
+
+                //    //获取Tree数据
+                //    string Sys_str = "'" + string.Join("','", sysList.Distinct().ToList().Select(S => S.ID).ToList()) + "'";
+                //    var TreeData = C_SystemTreeOperator.Instance.GetSystemTreeData(Sys_str);
+
+                //    TreeDataJson = JsonConvert.SerializeObject(TreeData);
+                //}
+                //else
+                //{
+                //    ddlSystem.DataSource = StaticResource.Instance.SystemList.ToList();
+
+                //    string Sys_str = "'" + string.Join("','", StaticResource.Instance.SystemList.ToList().Select(S => S.ID).ToList()) + "'";
+                //    var TreeData = C_SystemTreeOperator.Instance.GetSystemTreeData(Sys_str);
+                //    TreeDataJson = JsonConvert.SerializeObject(TreeData);
+                //}
+
+
+
+                //ddlSystem.DataTextField = "SystemName";
+                //  ddlSystem.DataValueField = "ID";
+                //  ddlSystem.DataBind();
                   if (!string.IsNullOrEmpty(Request.QueryString["SystemID"]))
                   {
                       ddlSystem.Items.FindByValue(SystemID).Selected = true;

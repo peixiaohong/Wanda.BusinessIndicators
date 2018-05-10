@@ -34,10 +34,13 @@ namespace WebApi.Controllers
                 List<string> Year = new List<string>();
 
                 B_MonthlyreportOperator.Instance.GetMonthlyReportYearList().ForEach(x => Year.Add(x.FinYear.ToString()));
-                List<C_System> System = new List<C_System>();
-                System = C_SystemOperator.Instance.GetSystemList(DateTime.Now).OrderBy(S => S.Sequence).ToList();
 
-                return new ResultContext(new { Year, System });
+                var _SystemIds = S_OrganizationalActionOperator.Instance.GetUserSystemData(WebHelper.GetCurrentLoginUser()).Select(v => v.SystemID).ToList();
+                
+                //获取当前人拥有的系统板块
+                List<C_System> c_SystemList = StaticResource.Instance.SystemList.Where(p => _SystemIds.Contains(p.ID)).OrderBy(x => x.Sequence).ToList();
+
+                return new ResultContext(new { Year, System= c_SystemList });
             }
             catch (Exception ex)
             {
@@ -199,10 +202,12 @@ namespace WebApi.Controllers
                 List<string> Year = new List<string>();
 
                 A_TargetplanOperator.Instance.GetPlanYearList().ForEach(x => Year.Add(x.FinYear.ToString()));
-                List<C_System> System = new List<C_System>();
-                System = C_SystemOperator.Instance.GetSystemList(DateTime.Now).OrderBy(S => S.Sequence).ToList();
+                var _SystemIds = S_OrganizationalActionOperator.Instance.GetUserSystemData(WebHelper.GetCurrentLoginUser()).Select(v => v.SystemID).ToList();
 
-                return new ResultContext(new { Year, System });
+                //获取当前人拥有的系统板块
+                List<C_System> c_SystemList = StaticResource.Instance.SystemList.Where(p => _SystemIds.Contains(p.ID)).OrderBy(x => x.Sequence).ToList();
+
+                return new ResultContext(new { Year, System= c_SystemList });
             }
             catch (Exception ex)
             {
