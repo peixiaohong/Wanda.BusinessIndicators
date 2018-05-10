@@ -1786,7 +1786,7 @@ function ComplateDetailReplaceClick() {
 }
 
 function GetUnit() {
-    return unit;
+    return '('+ unit+')';
 }
 
 function GetunfoldTitleList() {

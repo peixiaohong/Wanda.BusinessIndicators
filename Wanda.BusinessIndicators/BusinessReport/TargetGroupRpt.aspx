@@ -10,7 +10,7 @@
     <script type="text/javascript" src="../Scripts/ztree/jquery.ztree.excheck-3.5.min.js"></script>
     <link href="/Styles/ztree/metroStyle/metroStyle.css" rel="stylesheet" />
 
-    <script type="text/javascript" src="../Scripts/BusinessReport/GroupMonthReport.js"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/GroupMonthReport.js?v=1"></script>
     <script type="text/javascript">
         var TreeDataJson = <%=TreeDataJson%>;
     </script>

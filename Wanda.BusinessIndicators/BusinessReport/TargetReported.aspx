@@ -10,7 +10,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
-    <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported.js"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported.js?v=1"></script>
     <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported1.js"></script>
     <script type="text/javascript" src="../Scripts/UpLoad/jquery.uploadify.min.js"></script>
 
