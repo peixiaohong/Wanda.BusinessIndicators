@@ -95,6 +95,10 @@ namespace LJTH.BusinessIndicators.BLL
             return _aSystemBatchAdapter.DeleteModel(data);
         }
 
+        public void InsertAllFromB(Guid BatchId)
+        {
+            _aSystemBatchAdapter.InsertAllFromB(BatchId);
+        }
         #endregion
     }
 }

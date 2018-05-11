@@ -47,8 +47,13 @@ namespace LJTH.BusinessIndicators.DAL
                 i = ExecuteSql(SQL.ToString());
             }
             return i;
-        } 
-
-
+        }
+        internal void InsertAllFromB(Guid BatchId)
+        {
+            string sql = "B2A";
+            var p1 = new SqlParameter { ParameterName = "@BusinessID", Value = BatchId };
+            var p2 = new SqlParameter { ParameterName = "@Flag", Value = 1 };
+            DbHelper.RunSPReturnDS(sql, ConnectionName, p1, p2);
+        }
     }
 }

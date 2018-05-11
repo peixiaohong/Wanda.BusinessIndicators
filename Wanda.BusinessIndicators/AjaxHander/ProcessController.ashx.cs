@@ -130,9 +130,20 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
 
         /// <summary>
-        /// 审批结束，调用
+        /// 审批结束，B表数据进A表
         /// </summary>
         protected void OnProcessCompletedBusinessData()
+        {
+            if (!string.IsNullOrEmpty(this.ProType))//批次
+            {
+                A_SystemBatchOperator.Instance.InsertAllFromB(this.BusinessID.ToGuid());
+            }
+            else
+            {
+                A_MonthlyreportOperator.Instance.InsertAllFromB(this.BusinessID.ToGuid());
+            }
+        }
+        protected void OnProcessCompletedBusinessData2()
         {
             if (!string.IsNullOrEmpty(this.ProType))//批次
             {
