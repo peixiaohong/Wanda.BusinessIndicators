@@ -172,9 +172,10 @@ function ChangeTargetDetail(sender, TabOrSearch) {
     } else if ($(sender).text() == "完成情况明细") {
         $('#T1,#T3,#T3_1,#T4,#MonthReportExplainDiv,#ApproveAttachDiv').hide();
         $('#T2').show();
-        var obj = $("#CompleteDetailHead");
-        var tab = $("#tab2_rows");
-        FloatHeader(obj, tab, false, "MonthRpt");
+        //var obj = $("#CompleteDetailHead");
+        //var tab = $("#tab2_rows");
+        //FloatHeader(obj, tab, false, "MonthRpt");
+       
         //完成情况明细
         if (TransitionCondition(ComplateDetailData[0], "B") == true) {
             getMonthReprotDetailData();
@@ -185,10 +186,10 @@ function ChangeTargetDetail(sender, TabOrSearch) {
         $("#T4,#T1,#T2,#T3,#MonthReportExplainDiv,#ApproveAttachDiv").hide();
         $("#T3_1").show();
 
-        var obj = $("#Tab_MissTargetHead");
-        var tab = $("#Tbody_MissTargetData");
-        FloatHeader(obj, tab, false, "MonthRpt");
-
+        //var obj = $("#Tab_MissTargetHead");
+        //var tab = $("#Tbody_MissTargetData");
+        //FloatHeader(obj, tab, false, "MonthRpt");
+        
         //未完成说明
         if (TransitionCondition(CurrentMissTargetData[0], "F") == true) {
             getCurrentMonthReportMissTargetData();
@@ -197,9 +198,10 @@ function ChangeTargetDetail(sender, TabOrSearch) {
         $("#T4,#T1,#T2,#T3_1,#MonthReportExplainDiv,#ApproveAttachDiv").hide();
         $("#T3").show();
 
-        var obj = $("#Tab_MissTargetHead");
-        var tab = $("#Tbody_MissTargetData");
-        FloatHeader(obj, tab, false, "MonthRpt");
+        //var obj = $("#Tab_MissTargetHead");
+        //var tab = $("#Tbody_MissTargetData");
+        //FloatHeader(obj, tab, false, "MonthRpt");
+        
 
         //未完成说明
         if (TransitionCondition(MissTargetData[0], "C") == true) {
@@ -408,6 +410,11 @@ function getMonthReportReturnData() {
 
             //$("#Tab_Return").attr({ style: "table-layout: fixed" });
             $('#CurrentMonthBackDetilDiv').text("本月累计(万元) [+]");
+            var obj = $("#Tab_FloatReturn");
+            var head = $('#Tab_ReturnHead');
+            var tab = $("#Tbody_Data");
+            obj.find("thead").html(head.html());
+            FloatHeader(obj, tab);
         }
 
     });
@@ -489,7 +496,11 @@ function getMonthReportMissTargetData() {
             $(".shangyue").hide();
             $("#Tab_MissTarget").attr({ style: "table-layout: fixed" });
             $('#CurrentMonthMissTergetDiv').text("本月累计(万元) [+]");
-
+            var obj = $("#Tab_MissFloatTarget");
+            var head = $('#Tab_MissTargetHead');
+            var tab = $("#Tbody_MissTargetData");
+            obj.find("thead").html(head.html());
+            FloatHeader(obj, tab);
         }
     });
     //给第一指标添加背景颜色
@@ -543,8 +554,13 @@ function getCurrentMonthReportMissTargetData() {
             }
             $("#U2_1 :first a").addClass("active_sub3");
 
-            var obj = $("#Tab_CurrentMissTargetHead");
+            //var obj = $("#Tab_CurrentMissTargetHead");
+            //var tab = $("#Tbody_CurrentMissTargetData");
+            var obj = $("#Tab_CurrentMissFloatTarget");
+            var head = $('#Tab_CurrentMissTargetHead');
             var tab = $("#Tbody_CurrentMissTargetData");
+            obj.find("thead").html(head.html());
+            FloatHeader(obj, tab);
 
             $(".leiji").hide();
             $("#Tab_CurrentMissTarget").attr({ style: "table-layout: auto" });
