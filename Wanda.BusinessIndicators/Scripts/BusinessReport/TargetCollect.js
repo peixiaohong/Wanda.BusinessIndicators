@@ -29,7 +29,7 @@ function loadTmplhistory(selector) {
 
 $(document).ready(function () {
 
-    InitSysTree()  //初始化树控件
+   // InitSysTree()  //初始化树控件
 
     GetSumList();
 
@@ -151,10 +151,11 @@ function GetSumList() {
 
 
     //默认选中
-    var treeObj = $.fn.zTree.getZTreeObj("SysTree");
-    var node = treeObj.getNodeByParam("ID", SysID);
-    treeObj.selectNode(node, false);
-    $("#TxtSystem").val(node.TreeNodeName);
+    //var treeObj = $.fn.zTree.getZTreeObj("SysTree");
+    //var node = treeObj.getNodeByParam("ID", SysID);
+    //treeObj.selectNode(node, false);
+    var TxtSystem = $("#ddlSystem").find("option:selected").text();
+    $("#TxtSystem").val(TxtSystem);
 
     //查询版本列表
     BangHistoryTable();
