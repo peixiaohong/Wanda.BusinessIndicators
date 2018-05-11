@@ -232,7 +232,11 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         public void AddBMRD(B_MonthlyReport bmr)
         {
             bool IsExistence = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailCount(bmr.ID);
-            var targetPlanId = StaticResource.Instance.GetDefaultTargetPlanList(Guid.Parse(ddlSystem.SelectedValue), FinYear).FirstOrDefault().TargetPlanID;
+            
+            var targetPlan = StaticResource.Instance.GetDefaultTargetPlanList(Guid.Parse(ddlSystem.SelectedValue), FinYear).FirstOrDefault();
+            if (targetPlan == null || targetPlan.TargetPlanID == null || targetPlan.TargetPlanID == Guid.Empty)
+                return;
+            var targetPlanId=targetPlan.TargetPlanID;
             List<B_MonthlyReportDetail> B_ReportDetails = new List<B_MonthlyReportDetail>();
             if (IsExistence == false)
             {
