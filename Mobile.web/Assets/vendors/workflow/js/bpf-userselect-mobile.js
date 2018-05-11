@@ -447,7 +447,7 @@ var bpf_userselect_tool = {
             '                           <div id="scroll-content" class="bpf_userselect_list_inner">',
             '                             <ul class="bpf_userselect_personal_info" v-cloak="">',
             '                                <li v-for="(userInfo,index) in waitUserList" v-on:click="checkedUser(userInfo)" v-bind:class="{\'bpf_userselect_selected_active\': (userInfo.checked==true)}">',
-            '                                    <img class="bpf_userselect_defaultavatar" v-bind:src="userInfo.ExtensionInfo" onerror="bpf_userselect_tool.imgError()" alt="" style="width: auto;">',
+            '                                    <img class="bpf_userselect_defaultavatar" v-bind:src="userInfo.ExtensionInfo" onerror="bpf_userselect_tool.imgError()" alt="" style="width: 61px;">',
             '                                    <div class="bpf_userselect_personal_cont" style="padding-left:70px">',
             '                                        <p class="bpf_userselect_personal_name">{{userInfo.UserName}}（{{userInfo.UserLoginID}}）</p>',
             '                                        <p style="white-space: pre-line;">{{userInfo.UserOrgPathName}}</p>',
