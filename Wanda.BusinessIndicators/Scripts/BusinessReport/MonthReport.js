@@ -32,6 +32,8 @@ var currentManageReportDetailTarget = null;
 var unit = "";  //单位
 var unfoldTitleList = []; //折叠完成情况明细与经营报告明细三级表头
 var shrinkageTitleList = [];//展开完成情况明细与经营报告明细三级表头
+var showMonthReprot = undefined; 
+
 function SearchData() {
     var temp;
     ColumnAmount = 0;
