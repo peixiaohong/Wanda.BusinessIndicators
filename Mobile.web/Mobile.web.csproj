@@ -102,6 +102,7 @@
     <Content Include="Assets\vendors\bpf\bpf-workflow-mobile.css" />
     <Content Include="Assets\vendors\jquery-blockui\js\jquery.blockUI.js" />
     <Content Include="Assets\vendors\workflow\css\wanda-wf-client.css" />
+    <Content Include="Assets\vendors\workflow\js\bpf-userselect-mobile.js" />
     <Content Include="Assets\vendors\workflow\js\wanda-wf-client.js" />
     <Content Include="Assets\vendors\workflow\js\Workflow.js" />
     <Content Include="index.html" />
