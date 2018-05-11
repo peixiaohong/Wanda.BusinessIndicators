@@ -454,8 +454,12 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         public void AddBMRD(B_MonthlyReport bmr)
         {
             //IList<B_MonthlyReportDetail> listBMRD = B_MonthlyreportdetailOperator.Instance.GetMonthlyreportdetailList(bmr.ID);
-            var targetPlanId = StaticResource.Instance.GetDefaultTargetPlanList(Guid.Parse(ddlSystem.SelectedValue), FinYear).FirstOrDefault().TargetPlanID;
-            
+
+            var targetPlan = StaticResource.Instance.GetDefaultTargetPlanList(Guid.Parse(ddlSystem.SelectedValue), FinYear).FirstOrDefault();
+            if (targetPlan == null || targetPlan.TargetPlanID == null || targetPlan.TargetPlanID == Guid.Empty)
+                return;
+            var targetPlanId = targetPlan.TargetPlanID;
+
             bool IsExistence = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailCount(bmr.ID);
 
             List<B_MonthlyReportDetail> B_ReportDetails = new List<B_MonthlyReportDetail>();
@@ -472,12 +476,12 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     //从A表获取数据插入B表
                     bmr.Description = AMonthlyReport.Description;//月报说明
                     B_MonthlyreportOperator.Instance.UpdateMonthlyreport(bmr);//更新月报说明
-                    B_ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetail_ByAToB(FinYear, FinMonth, AMonthlyReport.SystemID, bmr.ID,targetPlanId);
+                    B_ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetail_ByAToB(FinYear, FinMonth, AMonthlyReport.SystemID, bmr.ID, targetPlanId);
                 }
                 else
                 {
                     //B_MonthlyReport BMonthlyReport = B_MonthlyreportOperator.Instance.GetMonthlyReport(Guid.Parse(ddlSystem.SelectedValue), FinYear, FinMonth, bmr.ID);
-                    B_MonthlyReport BMonthlyReport = B_MonthlyreportOperator.Instance.GetMonthlyReport(Guid.Parse(ddlSystem.SelectedValue), AreaID, FinYear, FinMonth, bmr.ID,targetPlanId);
+                    B_MonthlyReport BMonthlyReport = B_MonthlyreportOperator.Instance.GetMonthlyReport(Guid.Parse(ddlSystem.SelectedValue), AreaID, FinYear, FinMonth, bmr.ID, targetPlanId);
                     if (BMonthlyReport != null)
                     {
                         //从B表获取上一版本数据插入B表
