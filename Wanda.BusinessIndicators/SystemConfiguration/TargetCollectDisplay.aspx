@@ -144,46 +144,6 @@
                         <tbody id="rows">
                         </tbody>
                     </table>
-                    <table class="tab_005" id="TargetFloatTable">
-                        <thead  style="width: 100%">
-
-                            <tr>
-                                <th rowspan="2" style="width: 6%">序号</th>
-                                <th rowspan="2" style="width: 11%">门店</th>
-                                <th rowspan="2" style="width: 11%">年度指标</th>
-                                <th colspan="12" class="sum" style="cursor: pointer" onclick="ClickChange('sum')">累计数  &nbsp;  &nbsp;<img src="../Images/btn02.png" /></th>
-                                <th colspan="12" style="display: none; cursor: pointer" class="dan" onclick="ClickChange('dan')">当月数  &nbsp;  &nbsp;<img src="../Images/btn02.png" /></th>
-                            </tr>
-                            <tr>
-                                <th class="sum">1-1月</th>
-                                <th class="sum">1-2月</th>
-                                <th class="sum">1-3月</th>
-                                <th class="sum">1-4月</th>
-                                <th class="sum">1-5月</th>
-                                <th class="sum">1-6月</th>
-                                <th class="sum">1-7月</th>
-                                <th class="sum">1-8月</th>
-                                <th class="sum">1-9月</th>
-                                <th class="sum">1-10月</th>
-                                <th class="sum">1-11月</th>
-                                <th class="sum">1-12月</th>
-                                <%--当月--%>
-                                <th style="display: none" class="dan">1月</th>
-                                <th style="display: none" class="dan">2月</th>
-                                <th style="display: none" class="dan">3月</th>
-                                <th style="display: none" class="dan">4月</th>
-                                <th style="display: none" class="dan">5月</th>
-                                <th style="display: none" class="dan">6月</th>
-                                <th style="display: none" class="dan">7月</th>
-                                <th style="display: none" class="dan">8月</th>
-                                <th style="display: none" class="dan">9月</th>
-                                <th style="display: none" class="dan">10月</th>
-                                <th style="display: none" class="dan">11月</th>
-                                <th style="display: none" class="dan">12月</th>
-                            </tr>
-                        </thead>
-                    </table>
-
                     <table class="tab_005" id="TargetTable" style="display: none">
                         <thead id="Thead1" style="width: 100%">
 
@@ -225,6 +185,7 @@
                         <tbody id="SumTrTargetTable">
                         </tbody>
                         <tfoot id="TrTargetTable"></tfoot>
+
                     </table>
 
                 </div>

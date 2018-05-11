@@ -192,41 +192,7 @@
                 <div class="TClassHide" id="T3_1">
                     <ul class="tabs" id="U2_1" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                     </ul>
-                    <table class="tab_005" id="Tab_CurrentMissFloatTarget">
-                        <thead>
-                            <tr>
-                                <th rowspan="2" style="min-width: 20px; width: 4%; word-break: keep-all">序号</th>
-                                <th rowspan="2" style="min-width: 80px; width: 8%; word-break: keep-all">公司名称</th>
-                                <th rowspan="2" class="newdiff_CurrenMiss" style="min-width: 80px; width: 5%; word-break: keep-all">经营指标</th>
-                                <th colspan="3" onclick="if(MissH){ShouSuo_Current('XS');}" style="min-width: 180px; width: 18%; cursor: pointer; word-break: keep-all">
-                                    <div>本月发生(万元)&nbsp; [+]</div>
-                                </th>
-                                <th colspan="3" style="min-width: 180px; width: 18%; cursor: pointer; word-break: keep-all" class="C_TT2 leiji" onclick='if(MissH) {ShouSuo_Current("YC");}'>本月累计(万元)
-                                </th>
-                                <th rowspan="2" style="min-width: 80px; width: 5%; word-break: keep-all">本月累计<br />
-                                    差额
-                                </th>
-                                <th rowspan="2" style="" class="maindata">未完成原因<br />
-                                    及采取措施
-                                </th>
-                                <th colspan="2" style="min-width: 210px; width: 18%; word-break: keep-all">补回说明</th>
-                                <th rowspan="2" style="min-width: 40px; width: 4%; word-break: keep-all">警示<br />
-                                    灯</th>
-                            </tr>
-                            <tr>
-                                <th class="th_Sub" style="min-width: 60px; width: 5%; word-break: keep-all">计划</th>
-                                <th class="th_Sub" style="min-width: 60px; width: 5%; word-break: keep-all">实际</th>
-                                <th class="th_Sub2" style="min-width: 60px; width: 5%; word-break: keep-all">差额</th>
-                                <th class="th_Sub1 leiji" style="min-width: 60px; width: 5%; word-break: keep-all">计划</th>
-                                <th class="th_Sub leiji" style="min-width: 60px; width: 5%; word-break: keep-all">实际</th>
-                                <th class="th_Sub leiji" style="min-width: 60px; width: 5%; word-break: keep-all">差额</th>
-                                <th class="th_Sub leiji" style="min-width: 80px; width: 6%; word-break: keep-all">完成率</th>
 
-                                <th style="min-width: 80px; width: 6%;">要求期限</th>
-                                <th style="min-width: 130px; width: 10%; word-break: keep-all">补回情况</th>
-                            </tr>
-                        </thead>
-                    </table>
                     <table class="tab_005" id="Tab_CurrentMissTarget">
                         <thead id="Tab_CurrentMissTargetHead">
                         </thead>
@@ -243,41 +209,6 @@
                 <div id="T3" class="TClassHide">
                     <ul class="tabs" id="U2" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                     </ul>
-                    <table class="tab_005" id="Tab_MissFloatTarget">
-                        <thead>
-                            <tr>
-                                <th rowspan="2" style="min-width: 20px; width: 4%; word-break: keep-all">序号</th>
-                                <th rowspan="2" style="min-width: 80px; width: 8%; word-break: keep-all">公司名称</th>
-                                <th rowspan="2" class="newdiff_miss" style="min-width: 80px; width: 5%; word-break: keep-all">经营指标</th>
-                                <th rowspan="2" style="min-width: 80px; width: 5%; word-break: keep-all">本月补回/<br />
-                                    新增差额
-                                </th>
-                                <th colspan="3" class="shangyue" onclick="if(MissH){ShouSuo('YC');}" style="min-width: 180px; width: 18%; cursor: pointer; word-break: keep-all">上月累计(万元)&nbsp; [-]</th>
-                                <th colspan="3" style="min-width: 180px; width: 18%; cursor: pointer; word-break: keep-all" class="TT2" onclick="if(MissH){ShouSuo('XS');}">
-                                    <div>本月累计(万元)</div>
-                                </th>
-
-                                <th rowspan="2" style="" class="maindata">未完成原因<br />
-                                    及采取措施
-                                </th>
-                                <th colspan="2" style="min-width: 210px; width: 18%; word-break: keep-all">补回说明</th>
-                                <th rowspan="2" style="min-width: 40px; width: 4%; word-break: keep-all">警示<br />
-                                    灯</th>
-                            </tr>
-                            <tr>
-                                <th class="th_Sub shangyue" style="min-width: 60px; width: 5%; word-break: keep-all">计划</th>
-                                <th class="th_Sub shangyue" style="min-width: 60px; width: 5%; word-break: keep-all">实际</th>
-                                <th class="th_Sub2 shangyue" style="min-width: 60px; width: 5%; word-break: keep-all">差额</th>
-                                <th class="th_Sub1" style="min-width: 60px; width: 5%; word-break: keep-all">计划</th>
-                                <th class="th_Sub" style="min-width: 60px; width: 5%; word-break: keep-all">实际</th>
-                                <th class="th_Sub" style="min-width: 60px; width: 5%; word-break: keep-all">差额</th>
-                                <th class="th_Sub shangyue" style="min-width: 80px; width: 6%; word-break: keep-all">完成率</th>
-
-                                <th style="min-width: 80px; width: 6%; word-break: keep-all">要求期限</th>
-                                <th style="min-width: 130px; width: 10%; word-break: keep-all">补回情况</th>
-                            </tr>
-                        </thead>
-                    </table>
                     <table class="tab_005" id="Tab_MissTarget" style="width: auto;">
                         <thead id="Tab_MissTargetHead">
                         </thead>
@@ -291,37 +222,6 @@
                 <div id="T4" class="TClassHide">
                     <ul class="tabs" id="U1" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                     </ul>
-                    <table class="tab_005" id="Tab_FloatReturn">
-                        <thead>
-                            <tr>
-                                <th rowspan="2" style="width: 4%; min-width: 40px;">序号</th>
-                                <th rowspan="2" style="width: 12%; min-width: 90px;">公司名称</th>
-                                <th rowspan="2" class="newdiff_retu" style="width: 8%; min-width: 90px;">经营指标</th>
-                                <th rowspan="2" style="width: 8%; min-width: 90px">本月补回/<br />
-                                    新增差额
-                                </th>
-                                <th colspan="3" style="width: 21%; min-width: 270px; cursor: pointer;" onclick="if(MissH){ShouSuo('YCSY');}" class="shangyueleiji">上月累计(万元)&nbsp; [-]</th>
-
-                                <th colspan="3" style="width: 29%; min-width: 360px; cursor: pointer;" class="TTR2" onclick="if(MissH){ShouSuo('XSSY');}">
-                                    <div id="CurrentMonthBackDetilDiv">本年累计(万元)</div>
-                                </th>
-
-                                <th rowspan="2">要求期限</th>
-
-                                <th rowspan="2" style="width: 4%; min-width: 40px;">警示<br />
-                                    灯</th>
-                            </tr>
-                            <tr>
-                                <th class="th_Sub shangyueleiji" style="width: 7%; min-width: 90px;">计划</th>
-                                <th class="th_Sub shangyueleiji" style="width: 7%; min-width: 90px;">实际</th>
-                                <th class="th_Sub2 shangyueleiji" style="width: 7%; min-width: 90px;">差额</th>
-                                <th class="th_Sub1" style="width: 7%; min-width: 90px;">计划</th>
-                                <th class="th_Sub" style="width: 7%; min-width: 90px;">实际</th>
-                                <th class="th_Sub" style="width: 7%; min-width: 90px;">差额</th>
-                                <th class="th_Sub shangyueleiji" style="min-width: 120px; width: 8%; word-break: keep-all">完成率</th>
-                            </tr>
-                        </thead>
-                    </table>
                     <table class="tab_005" id="Tab_Return">
                         <thead id="Tab_ReturnHead">
                         </thead>

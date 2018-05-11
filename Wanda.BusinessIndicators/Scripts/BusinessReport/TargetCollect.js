@@ -194,17 +194,15 @@ function GetList(id) {
             //  GetSumTargetPlanList(); // 指标下的明细数据 
             $("#SumTable").show();
             $("#TargetTable").hide();
+
             Fake();
-            var obj = $("#TargetFloatTable");
-            var tab = $("#SumTrTargetTable");
-            FloatHeader(obj, tab);
+
         }
     });
 
-    //var obj = $("#Thead1");
-    //var tab = $("#TrTargetTable");
-    //FloatHeader(obj, tab);
-    
+    var obj = $("#Thead1");
+    var tab = $("#TrTargetTable");
+    FloatHeader(obj, tab);
 }
 
 //设置默认版本
