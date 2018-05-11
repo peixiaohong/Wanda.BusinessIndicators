@@ -129,7 +129,7 @@
                 </div>
 
                 <!--收缩按钮 开始-->
-                <div style="margin-left: 45%; margin-bottom: 0px">
+                <div style="margin-left: 45%; margin-bottom: 0px;display: none">
                     <img id="imgtableUpDown" style="display: none" onclick="UpDownTableClick()" src="../Images/images1/Down.png" alt="" />
                 </div>
                 <!--收缩按钮 结束-->
