@@ -126,7 +126,7 @@ namespace Plugin.SSO
             var param4 = request.QueryString["returnurl"];
             if (string.IsNullOrEmpty(param1) || string.IsNullOrEmpty(param2) || string.IsNullOrEmpty(param3) || string.IsNullOrEmpty(param4))
             {
-                errorMsg = "缺少必要参数";
+                errorMsg = "缺少必要参数.p1=" + param1 + ";p2=" + param2 + ";p3=" + param3 + ";p4=" + param4;
                 return false;
             }
             //if (request.UrlReferrer == null)
