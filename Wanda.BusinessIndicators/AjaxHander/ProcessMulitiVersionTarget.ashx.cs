@@ -86,7 +86,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                             mrd = new MonthlyReportDetail();
                             mrd.CompanyID = monthlyReportDetailItem.CompanyID;
                             //mrd.CompanyName = monthlyReportDetailItem.CompanyName;
-                            mrd.NPlanAmmount = targetPlanDetailList.Where(v => v.CompanyID == mrd.CompanyID).FirstOrDefault().Target;
+                            mrd.NPlanAmmount = targetPlanDetailList.Where(v => v.CompanyID == mrd.CompanyID && v.TargetID==targetItem.ID).FirstOrDefault().Target;
                             mrd.NActualAmmount = monthlyReportDetailItem.NActualAmmount;
                             mrd.TargetPlanID = tagerPlanItem.ID;
                             listMrd.Add(mrd);

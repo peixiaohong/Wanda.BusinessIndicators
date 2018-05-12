@@ -151,7 +151,7 @@ namespace LJTH.BusinessIndicators.Engine
                             }
                             else
                             {
-                                mrsvm.MeasureRate = Math.Round(StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear).FindAll(P => P.TargetID == target.ID).Sum(P => P.Target), 7, MidpointRounding.AwayFromZero).ToString();
+                                mrsvm.MeasureRate = Math.Round(StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear, MRDList[0].TargetPlanID).FindAll(P => P.TargetID == target.ID).Sum(P => P.Target), 7, MidpointRounding.AwayFromZero).ToString();
                             }
 
 
