@@ -70,6 +70,26 @@ namespace LJTH.BusinessIndicators.BLL
             ExceptionHelper.TrueThrow<ArgumentNullException>(Month <= 0 ? true : false, "Argument Month is Empty");
             return _bMonthlyreportAdapter.GetLastMonthlyReportList(SystemID, Year, Month);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="SystemID"></param>
+        /// <param name="AreaID"></param>
+        /// <param name="Year"></param>
+        /// <param name="Month"></param>
+        /// <param name="DefaultVersionStatus">是否默认计划版本</param>
+        /// <param name="WFStatus">审批状态</param>
+        /// <returns></returns>
+        public B_MonthlyReport GetMonthlyReportModel(Guid SystemID,Guid AreaID, int Year, int Month,int DefaultVersionStatus, string WFStatus)
+        {
+            ExceptionHelper.TrueThrow<ArgumentNullException>(SystemID == null ? true : false, "Argument SystemID is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(AreaID == null ? true : false, "Argument AreaID is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(Year <= 0 ? true : false, "Argument Year is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(Month <= 0 ? true : false, "Argument Month is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(string.IsNullOrEmpty(WFStatus) == true ? true : false, "Argument WFStatus is Empty");
+            return _bMonthlyreportAdapter.GetMonthlyReportModel(SystemID,AreaID, Year, Month, DefaultVersionStatus, WFStatus);
+        }
         /// <summary>
         /// 获取B_MonthlyReport表中（审批完成）
         /// </summary>
