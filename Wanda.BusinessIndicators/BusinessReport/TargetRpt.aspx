@@ -10,7 +10,7 @@
     <script type="text/javascript" src="../Scripts/ztree/jquery.ztree.excheck-3.5.min.js"></script>
 
     <link href="/Styles/ztree/metroStyle/metroStyle.css" rel="stylesheet" />
-    <script type="text/javascript" src="../Scripts/BusinessReport/MonthReport.js?v=1"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/MonthReport.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
     <script type="text/javascript" src="../Scripts/jquery.base64.js"></script>
     <script type="text/javascript" src="../Scripts/linq.min.js"></script>
     <script type="text/javascript">

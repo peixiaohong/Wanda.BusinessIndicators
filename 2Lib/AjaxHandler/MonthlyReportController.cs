@@ -160,7 +160,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
 
                 B_MonthlyReportJsonData B_JsonData = new B_MonthlyReportJsonData();
 
-                var A_Rpt = A_MonthlyreportOperator.Instance.GetAMonthlyReport(SystemID.ToGuid(), Year, Month);
+                var A_Rpt = A_MonthlyreportOperator.Instance.GetAMonthlyReport(SystemID.ToGuid(), Year, Month, TargetPlanID.ToGuid());
 
                 if (A_Rpt != null)
                 {
@@ -193,7 +193,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 if (DataSource == "Progress")
                 {
                     //Progress 这里只有审批中的数据
-                    var B_Rpt = B_MonthlyreportOperator.Instance.GetMonthlyReporNew(SystemID.ToGuid(), Year, Month);
+                    var B_Rpt = B_MonthlyreportOperator.Instance.GetMonthlyReporNew(SystemID.ToGuid(), Year, Month, TargetPlanID.ToGuid());
 
                     if (B_Rpt != null)
                     {
@@ -221,7 +221,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 else
                 {
                     //Draft  包含有草稿,但是不一定都是草稿的数据
-                    var B_Rpt = B_MonthlyreportOperator.Instance.GetLastMonthlyReportList(SystemID.ToGuid(), Year, Month);
+                    var B_Rpt = B_MonthlyreportOperator.Instance.GetLastMonthlyReportList(SystemID.ToGuid(), Year, Month,TargetPlanID.ToGuid());
 
                     if (B_Rpt != null)
                     {
