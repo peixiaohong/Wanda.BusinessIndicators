@@ -144,6 +144,11 @@
                         <tbody id="rows">
                         </tbody>
                     </table>
+                    <table class="tab_005" id="TargetFloatTable">
+                        <thead  style="width: 100%">
+                        </thead>
+                    </table>
+
                     <table class="tab_005" id="TargetTable" style="display: none">
                         <thead id="Thead1" style="width: 100%">
 
@@ -185,7 +190,6 @@
                         <tbody id="SumTrTargetTable">
                         </tbody>
                         <tfoot id="TrTargetTable"></tfoot>
-
                     </table>
 
                 </div>

@@ -194,15 +194,19 @@ function GetList(id) {
             //  GetSumTargetPlanList(); // 指标下的明细数据 
             $("#SumTable").show();
             $("#TargetTable").hide();
-
+            var obj = $("#TargetFloatTable");
+            var head = $("#Head").html();
+            var tab = $("#SumTable");
+            obj.find("thead").html(head);
+            FloatHeader(obj, tab);
             Fake();
 
         }
     });
 
-    var obj = $("#Thead1");
-    var tab = $("#TrTargetTable");
-    FloatHeader(obj, tab);
+    //var obj = $("#Thead1");
+    //var tab = $("#TrTargetTable");
+    //FloatHeader(obj, tab);
 }
 
 //设置默认版本
@@ -276,7 +280,9 @@ function Change(adj, id) {
     //Load();
     document.getElementById('tabsum').className = "active3";
     document.getElementById('tabHistory').className = "active3";
-
+    var obj = $("#TargetFloatTable");
+    var head = "";
+    var tab = "";
     for (var i = 0; i < TargetList.length; i++) {
         if (id == TargetList[i].ID) {
             document.getElementById('tab' + TargetList[i].ID + '').className = "active3 active_sub3";
@@ -291,6 +297,8 @@ function Change(adj, id) {
         $("#SumTable").show();
         $("#TargetTable").hide();
         $("#file_upload-button1").show();
+        head = $("#Head").html();
+        tab = $("#rows");
        // $("#HistoryTable").hide();
     }
     //else if (adj == "History") {
@@ -308,9 +316,13 @@ function Change(adj, id) {
         $("#TargetTable").show();
         BangSumTargetPlanList(id);
         $("#file_upload-button1").show();
+        head = $("#Thead1").html();
+        tab = $("#TrTargetTable");
         //$("#HistoryTable").hide();
     }
     //Fake();
+    obj.find("thead").html(head);
+    FloatHeader(obj, tab);
 }
 function BangSumTargetPlanList(id) {
     $("#TrTargetTable").html("");
@@ -358,6 +370,7 @@ function BangHead(result) {
     $("#TrTarget").html("");
     for (var i = 0; i < 2; i++) {
         loadTmpl('#TrTarget').tmpl(result).appendTo('#TrTarget');
+        
     }
 
 }

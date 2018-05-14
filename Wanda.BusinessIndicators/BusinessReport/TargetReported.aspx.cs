@@ -179,6 +179,17 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         {
             HidSystemID.Value = ddlSystem.SelectedValue;
             HidAreaID.Value = ddlAreaID.Visible ? ddlAreaID.SelectedValue : Guid.Empty.ToString();
+
+            //如果存在审批中的数据，不让重复提交
+            var bmrProgress = B_MonthlyreportOperator.Instance.GetMonthlyReportModel(Guid.Parse(ddlSystem.SelectedValue), Guid.Parse(HidAreaID.Value), FinYear, FinMonth, 1, "Progress");
+            if (bmrProgress != null && bmrProgress.WFStatus == "Progress")
+            {
+                hiddenDis.Value = "1";
+                hideMonthReportID.Value = bmrProgress.ID.ToString();
+                return;
+            }
+
+
             HideProcessCode.Value = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(), DateTime.Now].Configuration.Element("ProcessCode").Value;
 
             hiddenDis.Value = "0";

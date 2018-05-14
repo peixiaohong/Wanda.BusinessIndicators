@@ -20,23 +20,32 @@ var isRpt = "Reported" //默认是上报页面，如果有其它的请修改此�
 var _floattable_H_actualindex = new Array();
 var _floattable_B_actualindex = new Array();
 
-function FloatHeader(obj,tab) {
-    var dv = $(obj), st;
-    $(tab).attr('otop', $(tab).offset().top); //存储原来的距离顶部的距离
-    dv.css({
+function FloatHeader(obj, tab) {
+    var st, wt;
+    var oleft = Number(tab.offset().left);
+    var otop = Number(tab.offset().top) - 10;
+    obj.css({
         "display": "none",
         "position": "fixed",
         "top": 0,
+        "left": oleft + "px",
+        "zIndex": 999
     })
     $(window).scroll(function () {
-        st = Math.max(document.body.scrollTop || document.documentElement.scrollTop);
-        if (st > parseInt($(tab).attr('otop'))) {
-            dv.css("display","table");
+        st = Number($(window).scrollTop());
+        wt = Number($(window).scrollLeft());
+        if (wt > 0) {
+            obj.css("left", oleft - wt + "px");
+        } else {
+            obj.css("left", oleft + "px");
+        }
+        if (st > otop) {
+            obj.css("display", "table");
         }
         else {
-            dv.css("display", "none");
+            obj.css("display", "none");
         }
-        $(obj).width($(tab).width());
+        obj.width(tab.width());
     });
 }
 //function FloatHeader(obj, tab, isFixed, _isRpt) {
@@ -112,7 +121,7 @@ function FloatHeader(obj,tab) {
 //                        counter++;
 //                    }
 //                }
-                
+
 //            });
 
 //            if (isFixedHead) {
@@ -138,7 +147,7 @@ function FloatHeader(obj,tab) {
 //                $(td).css("width", wd + "px");
 //            }
 
-           
+
 
 
 
@@ -182,14 +191,14 @@ function FloatHeader(obj,tab) {
 //                });
 //            });
 
-          
+
 
 
 //            //alert(WebUtil.jsonToString(tbar));
 //            //alert(WebUtil.jsonToString(_floattable_B_actualindex));
 //            //alert(WebUtil.jsonToString(taar));
 
-            
+
 //            if (Alltaar == undefined )
 //            {
 //                $(objHead).css("width", $(objHead).parent().css("width"));
@@ -214,7 +223,7 @@ function FloatHeader(obj,tab) {
 
 function GetActualIndex(RowIndex, ColumnIndex) {
     var currenttd = $(objHead).find("tr:eq(" + RowIndex + ")").find("th:eq(" + ColumnIndex + ")");
-    if (currenttd.css("display") == "none") return-1;
+    if (currenttd.css("display") == "none") return -1;
 
     if (RowIndex == 0 && ColumnIndex == 0) {
         _floattable_H_actualindex.push({
@@ -244,7 +253,7 @@ function GetActualIndex(RowIndex, ColumnIndex) {
     var actualIndex = 0;
 
     for (var ri = 0; ri < _floattable_H_actualindex.length; ri++) {
-        if (_floattable_H_actualindex[ri].rowindex < RowIndex && _floattable_H_actualindex[ri].rowspan>1
+        if (_floattable_H_actualindex[ri].rowindex < RowIndex && _floattable_H_actualindex[ri].rowspan > 1
             && ((_floattable_H_actualindex[ri].rowindex + _floattable_H_actualindex[ri].rowspan) > RowIndex)
             && _floattable_H_actualindex[ri].ActualIndex <= latestactualIndex) {
             actualIndex = actualIndex + _floattable_H_actualindex[ri].colspan;

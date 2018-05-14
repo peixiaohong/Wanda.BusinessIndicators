@@ -1,6 +1,7 @@
 ﻿using Aspose.Cells;
 using Lib.Config;
 using Lib.Xml;
+using LJTH.BusinessIndicators.BLL;
 using LJTH.BusinessIndicators.BLL.BizBLL;
 using LJTH.BusinessIndicators.Common;
 using LJTH.BusinessIndicators.Common.Web;
@@ -888,6 +889,13 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
             ReportInstance rpt = new ReportInstance(MonthReportID, true);
 
+            var defaultTagetPlan = StaticResource.Instance.GetDefaultTargetPlanList(rpt._SystemID, rpt.FinYear);
+            if (defaultTagetPlan == null || defaultTagetPlan.Count == 0)
+            {
+                context.Response.ContentType = "text/plain";
+                context.Response.Write("请确认有默认的分解指标计划。");
+                return;
+            }
             var blendResult = GetBlendTargets(rpt);
             //item1等于true 时，表示是混合指标
             if (blendResult.Item1)
@@ -2291,6 +2299,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         /// <param name="FileType"></param>
         public void DownDirectLyTargetPlanExcel(HttpContext context, string FileType)
         {
+            
             string templeteName = "指标上报模版V1.xlsx";
             string fileName = "指标上报";
             ReportInstance rpt = null;
@@ -2302,7 +2311,16 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             {
                 rpt = new ReportInstance(SysId, FinYear, FinMonth, true);
             }
-            bool IsTargetPlan = false;
+
+            var defaultTagetPlan = StaticResource.Instance.GetDefaultTargetPlanList(rpt._SystemID, rpt.FinYear);
+            if (defaultTagetPlan == null || defaultTagetPlan.Count == 0)
+            {
+                context.Response.ContentType = "text/plain";
+                context.Response.Write("请确认有默认的分解指标计划。");
+                return;
+            }
+
+                bool IsTargetPlan = false;
             if ("DownDirectlyTargetPlan" == FileType)
             {
                 IsTargetPlan = true;
