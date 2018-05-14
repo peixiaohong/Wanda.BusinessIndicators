@@ -182,7 +182,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
 
             //如果存在审批中的数据，不让重复提交
             var bmrProgress = B_MonthlyreportOperator.Instance.GetMonthlyReportModel(Guid.Parse(ddlSystem.SelectedValue), Guid.Parse(HidAreaID.Value), FinYear, FinMonth, 1, "Progress");
-            if (bmrProgress != null || bmrProgress.WFStatus == "Progress")
+            if (bmrProgress != null && bmrProgress.WFStatus == "Progress")
             {
                 hiddenDis.Value = "1";
                 hideMonthReportID.Value = bmrProgress.ID.ToString();
