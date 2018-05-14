@@ -1161,15 +1161,21 @@ function ShouSuo_Current(sender) {
 function DownExcelReport(sender) {
 
     if ($(sender).text().indexOf("月度经营报告") > 1) {
-        window.open("/AjaxHander/DownExcelTemplete.ashx?FileType=TargetSummary&SysId=" + SystemID + "&FinYear=" + Year + "&FinMonth=" + Month + "&MonthlyReportID=" + MonthReportID);
+        window.open("/AjaxHander/DownExcelTemplete.ashx?FileType=TargetSummary&SysId=" + SystemID + "&FinYear=" + Year + "&FinMonth=" + Month + "&MonthlyReportID=" + MonthReportID
+            + "&strBacthID=" + BatchID + "&strProType=" + ProType +"&Approve=true");
     } else if ($(sender).text().indexOf("完成情况明细") > 1) {
-        window.open("/AjaxHander/DownExcelTemplete.ashx?FileType=TargetDetail&SysId=" + SystemID + "&FinYear=" + Year + "&FinMonth=" + Month + "&MonthlyReportID=" + MonthReportID);
+        window.open("/AjaxHander/DownExcelTemplete.ashx?FileType=TargetDetail&SysId=" + SystemID + "&FinYear=" + Year + "&FinMonth=" + Month + "&MonthlyReportID=" + MonthReportID
+            + "&strBacthID=" + BatchID + "&strProType=" + ProType + "&Approve=true");
     } else if ($(sender).text().indexOf("累计未完成") > 1) {
-        window.open("/AjaxHander/DownExcelTemplete.ashx?FileType=MissTarget&SysId=" + SystemID + "&FinYear=" + Year + "&FinMonth=" + Month + "&MonthlyReportID=" + MonthReportID);
+        window.open("/AjaxHander/DownExcelTemplete.ashx?FileType=MissTarget&SysId=" + SystemID + "&FinYear=" + Year + "&FinMonth=" + Month + "&MonthlyReportID=" + MonthReportID
+            + "&strBacthID=" + BatchID + "&strProType=" + ProType + "&Approve=true");
     } else if ($(sender).text().indexOf("当月未完成") > 1) {
-        window.open("/AjaxHander/DownExcelTemplete.ashx?FileType=CurrentMissTarget&SysId=" + SystemID + "&FinYear=" + Year + "&FinMonth=" + Month + "&MonthlyReportID=" + MonthReportID);
+        window.open("/AjaxHander/DownExcelTemplete.ashx?FileType=CurrentMissTarget&SysId=" + SystemID + "&FinYear=" + Year + "&FinMonth=" + Month + "&MonthlyReportID=" + MonthReportID
+            + "&strBacthID=" + BatchID + "&strProType=" + ProType + "&Approve=true");
     }else if ($(sender).text().indexOf("回情况明细") > 1) {
-        window.open("/AjaxHander/DownExcelTemplete.ashx?FileType=TargetReturn&SysId=" + SystemID + "&FinYear=" + Year + "&FinMonth=" + Month + "&MonthlyReportID=" + MonthReportID);
+        window.open("/AjaxHander/DownExcelTemplete.ashx?FileType=TargetReturn&SysId=" + SystemID + "&FinYear=" + Year + "&FinMonth=" + Month + "&MonthlyReportID=" + MonthReportID
+            + "&strBacthID=" + BatchID + "&strProType=" + ProType + "&Approve=true");
+
     }
 
 }

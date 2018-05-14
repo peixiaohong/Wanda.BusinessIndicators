@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="TargetDirectlyReported.aspx.cs" Inherits="LJTH.BusinessIndicators.Web.BusinessReport.TargetDirectlyReported" %>
+
 <%@ Register Src="~/UserControl/MonthReportedAction.ascx" TagPrefix="MonthLyReportActionUC" TagName="MonthReportedAction" %>
 <%@ Register Src="~/UserControl/TargetReportUserControl.ascx" TagPrefix="targetReportUC" TagName="TargetReportUserControl" %>
 <%@ Register Src="~/UserControl/MutipleUpload.ascx" TagPrefix="targetReportUC" TagName="MutipleUpload" %>
@@ -13,21 +14,23 @@
     <script type="text/javascript" src="../Scripts/BusinessReport/TargetDirectlyReported.js?v=1"></script>
     <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported1.js?v=1"></script>
     <script type="text/javascript" src="../Scripts/UpLoad/jquery.uploadify.min.js"></script>
-    
+
     <uc1:wfCtrl runat="server" ID="wfCtrl" />
     <uc1:userSelectCtrl runat="server" ID="userSelectCtrl" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="main">
         <div class="form_name mb8 form_name_build" style="border-bottom-color: #ececec; text-align: center; border-bottom-style: solid;">
-            <asp:DropDownList ID="ddlSystem" ClientIDMode="Static" AutoPostBack="true" OnTextChanged="ddlSystem_TextChanged" runat="server" Style="width: 150px; height:25px;"></asp:DropDownList>
-            <asp:Label ID="lblName" Style="font-size:18px; text-indent:3px; height:26px; line-height:26px; border:none; width:200px;" runat="server" Text="月度经营报告上报 "></asp:Label>
+            <asp:DropDownList ID="ddlSystem" ClientIDMode="Static" AutoPostBack="true" OnTextChanged="ddlSystem_TextChanged" runat="server" Style="width: 150px; height: 25px;"></asp:DropDownList>
+            <asp:Label ID="lblName" Style="font-size: 18px; text-indent: 3px; height: 26px; line-height: 26px; border: none; width: 200px;" runat="server" Text="月度经营报告上报 "></asp:Label>
             <asp:HiddenField runat="server" ID="hideMonthReportID" ClientIDMode="Static" />
             <asp:HiddenField runat="server" ID="HidSystemText" ClientIDMode="Static" />
             <asp:HiddenField runat="server" ID="hideFinYear" ClientIDMode="Static" />
             <asp:HiddenField runat="server" ID="hideFinMonth" ClientIDMode="Static" />
-            <asp:HiddenField runat="server" ID="HideProcessCode" ClientIDMode="Static" /> <br />
-              <span style="color:red">注：上传excel后，若页面没有出现相应数据，请稍等几分钟再次刷新页面（数据正在后台进行计算），即可恢复正常。请勿因此重复上传数据。</span>
+            <asp:HiddenField runat="server" ID="HideProcessCode" ClientIDMode="Static" />
+            <asp:HiddenField runat="server" ID="hiddenDis" ClientIDMode="Static" />
+            <br />
+            <span style="color: red">注：上传excel后，若页面没有出现相应数据，请稍等几分钟再次刷新页面（数据正在后台进行计算），即可恢复正常。请勿因此重复上传数据。</span>
         </div>
         <!--导航栏 开始-->
         <targetReportUC:TargetReportUserControl runat="server" ID="UserControl" />
@@ -36,7 +39,7 @@
         <div id="weiwancheng1" style="margin-top: 10px;">
             <div id="DownLoadModel" class="">
                 <span style="font-size: 13px; height: 30px; line-height: 60px; display: block; top: -35px; right: 0; z-index: 100; padding-right: 0px;">
-                    <div class="uploadify-button " id="Div4" style="HEIGHT: 25px; LINE-HEIGHT: 25px; text-indent: 0px; WIDTH: 150px; cursor: pointer;">
+                    <div class="uploadify-button " id="Div4" style="height: 25px; line-height: 25px; text-indent: 0px; width: 150px; cursor: pointer;">
                         <span class="uploadify-button-text">
                             <a id="A4" style="text-decoration: none;" href="javascript:DownLoadTargetPlanExcel(this)">请点此下载填报模版</a></span>
                     </div>
@@ -77,7 +80,7 @@
 
         <!--下载按钮 结束-->
 
-       <!--下载和上报按钮 开始-->
+        <!--下载和上报按钮 开始-->
         <div id="UpLoadDataDiv" class="TClassHide">
             <div class="DownExcelDiv2 ">
                 <span class="DownExcelspan">
@@ -116,7 +119,7 @@
             </ul>
 
             <table class="tab_005" id="Tab_MissTarget">
-                <thead  id="Tab_MissTargetHead">
+                <thead id="Tab_MissTargetHead">
                 </thead>
                 <tbody id="Tbody_MissTargetData">
                 </tbody>
@@ -125,14 +128,13 @@
         </div>
         <!--未完成说明 结束-->
 
-            <!--未完成说明（当月） 开始-->
+        <!--未完成说明（当月） 开始-->
         <div class="TClassHide" id="T3_1">
             <ul class="tabs" id="U2_1" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
             </ul>
 
             <table class="tab_005" id="Tab_CurrentMissTarget">
-                <thead  id="Tab_CurrentMissTargetHead">
-                    
+                <thead id="Tab_CurrentMissTargetHead">
                 </thead>
                 <tbody id="Tbody_CurrentMissTargetData">
                 </tbody>
@@ -145,7 +147,7 @@
 
 
         <!--月报说明 开始-->
-        
+
         <div class="TClassHide" id="T4" style="padding: 10px 0px 10px 0px;">
 
             <div class="content_title1_Left" style="padding-bottom: 5px; margin-bottom: 10px; border-bottom-color: #014696; border-bottom-style: solid;">
@@ -166,7 +168,7 @@
         <!--附件上传 开始-->
 
         <div id="RptAttachments" class="TClassHide">
-              <div class="content_title1_Left" style="padding-bottom: 10px; margin-bottom: 10px; border-bottom-color: #014696; border-bottom-style: solid;">
+            <div class="content_title1_Left" style="padding-bottom: 10px; margin-bottom: 10px; border-bottom-color: #014696; border-bottom-style: solid;">
                 <span class="blue_txt">附件上传
                 </span>
             </div>
@@ -180,29 +182,38 @@
             <MonthLyReportActionUC:MonthReportedAction runat="server" />
         </div>
         <!--上报审批 开始-->
-         <div id="process">
-            </div>
+        <div id="process">
+        </div>
 
         <!--上报审批 结束-->
+        <div id="ReportedDone" class="hide">
 
+            <div class="">
+                <span style="font-size: 13px; height: 30px; line-height: 60px; display: block; top: -35px; right: 0; z-index: 100; padding-right: 0px;">提示：月报已上报，正在审批申请中，请勿重复上报。
+                    <span>
+                        <a href="DirectlyTargetApprove.aspx?BusinessID=<%=hideMonthReportID.Value %>" target="_blank" style="color: #337ab7">点击查看审批进度</a>
+                    </span>
+                </span>
+            </div>
+
+        </div>
 
         <input type="text" class="TClassHide" id="HidSystemID" runat="server" />
     </div>
     <!--编辑弹出层  开始-->
 
-   <div id="divMonthReportDetail" class="popup" style="height: auto; display: none; padding-bottom: 10px">
+    <div id="divMonthReportDetail" class="popup" style="height: auto; display: none; padding-bottom: 10px">
         <div class="pop_content" id="MonthReportDetailContent_Edit">
-
         </div>
         <div id="ssss" class="pop_operate">
             <input type="button" class="pop_btn btn_gray" value="取消" onclick="art.dialog({ id: 'MonthReportDetailContent_Edit' }).close();" />
             <input type="button" class="pop_btn btn_blue" value="确定" onclick=" SaveMonthReportDetail();" />
         </div>
-        
+
     </div>
 
 
-     
+
     <!--编辑弹出层  结束-->
 
     <input type="hidden" id="wanda_wf_hd_process" value="" />

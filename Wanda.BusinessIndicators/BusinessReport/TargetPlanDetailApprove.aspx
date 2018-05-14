@@ -4,7 +4,7 @@
 
     <link rel="stylesheet" type="text/css" href="../Scripts/UpLoad/uploadify.css" />
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
-    <script type="text/javascript" src="../Scripts/BusinessReport/TargetPlanDetailApprove.js"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/TargetPlanDetailApprove.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
 
       <script type="text/javascript">
            var SysDataJson = <%=SysDataJson%>;
