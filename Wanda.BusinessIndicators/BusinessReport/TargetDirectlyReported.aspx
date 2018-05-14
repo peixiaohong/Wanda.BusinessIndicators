@@ -191,7 +191,7 @@
             <div class="">
                 <span style="font-size: 13px; height: 30px; line-height: 60px; display: block; top: -35px; right: 0; z-index: 100; padding-right: 0px;">提示：月报已上报，正在审批申请中，请勿重复上报。
                     <span>
-                        <a href="TargetApprove.aspx?BusinessID=<%=hideMonthReportID.Value %>" target="_blank" style="color: #337ab7">点击查看审批进度</a>
+                        <a href="DirectlyTargetApprove.aspx?BusinessID=<%=hideMonthReportID.Value %>" target="_blank" style="color: #337ab7">点击查看审批进度</a>
                     </span>
                 </span>
             </div>

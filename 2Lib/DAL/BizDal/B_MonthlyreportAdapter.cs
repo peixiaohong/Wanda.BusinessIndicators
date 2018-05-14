@@ -85,6 +85,21 @@ namespace LJTH.BusinessIndicators.DAL
             List<B_MonthlyReport> list = ExecuteQuery(sql, pSystemID, pYear, pMonth);
             return (list != null && list.Count > 0) ? list.FirstOrDefault() : null;
         }
+        public B_MonthlyReport GetLastMonthlyReportList(Guid SystemID, int Year, int Month,Guid PlanId)
+        {
+            string sql = ORMapping.GetSelectSql<B_MonthlyReport>(TSqlBuilder.Instance);
+
+            sql += "WHERE " + base.NotDeleted;
+            sql += " AND SystemID=@SystemID AND FinYear=@Year AND FinMonth=@Month AND TargetPlanID=@TargetPlanID and WFStatus <>'Cancel'";
+            sql += " ORDER BY CreateTime DESC";
+
+            SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
+            SqlParameter pYear = CreateSqlParameter("@Year", System.Data.DbType.String, Year);
+            SqlParameter pMonth = CreateSqlParameter("@Month", System.Data.DbType.String, Month);
+            SqlParameter pPlanID = CreateSqlParameter("@TargetPlanID", System.Data.DbType.Guid, PlanId);
+            List<B_MonthlyReport> list = ExecuteQuery(sql, pSystemID, pYear, pMonth, pPlanID);
+            return (list != null && list.Count > 0) ? list.FirstOrDefault() : null;
+        }
 
 
         /// <summary>
@@ -248,6 +263,22 @@ namespace LJTH.BusinessIndicators.DAL
             SqlParameter pYear = CreateSqlParameter("@Year", System.Data.DbType.String, Year);
             SqlParameter pMonth = CreateSqlParameter("@Month", System.Data.DbType.String, Month);
             List<B_MonthlyReport> list = ExecuteQuery(sql, pSystemID, pYear, pMonth);
+            return (list != null && list.Count > 0) ? list.FirstOrDefault() : null;
+        }
+
+        public B_MonthlyReport GetLatestMonthlyReport(Guid SystemID, int Year, int Month,Guid TargetPlanId,string aa)
+        {
+            string sql = ORMapping.GetSelectSql<B_MonthlyReport>(TSqlBuilder.Instance);
+
+            sql += "WHERE " + base.NotDeleted;
+            sql += " AND SystemID=@SystemID AND FinYear=@Year AND FinMonth=@Month AND TargetPlanID=@TargetPlanID AND (WFStatus ='Progress' or  WFStatus ='Approved')";
+            sql += " ORDER BY CreateTime DESC";
+
+            SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
+            SqlParameter pYear = CreateSqlParameter("@Year", System.Data.DbType.String, Year);
+            SqlParameter pMonth = CreateSqlParameter("@Month", System.Data.DbType.String, Month);
+            SqlParameter pPlanID = CreateSqlParameter("@TargetPlanID", System.Data.DbType.Guid, TargetPlanId);
+            List<B_MonthlyReport> list = ExecuteQuery(sql, pSystemID, pYear, pMonth,pPlanID);
             return (list != null && list.Count > 0) ? list.FirstOrDefault() : null;
         }
         /// <summary>

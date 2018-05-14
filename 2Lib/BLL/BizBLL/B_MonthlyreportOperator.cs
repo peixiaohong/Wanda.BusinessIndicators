@@ -70,6 +70,14 @@ namespace LJTH.BusinessIndicators.BLL
             ExceptionHelper.TrueThrow<ArgumentNullException>(Month <= 0 ? true : false, "Argument Month is Empty");
             return _bMonthlyreportAdapter.GetLastMonthlyReportList(SystemID, Year, Month);
         }
+        public B_MonthlyReport GetLastMonthlyReportList(Guid SystemID, int Year, int Month,Guid TargetPlanID)
+        {
+            ExceptionHelper.TrueThrow<ArgumentNullException>(SystemID == null ? true : false, "Argument SystemID is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(Year <= 0 ? true : false, "Argument Year is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(Month <= 0 ? true : false, "Argument Month is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(TargetPlanID == null ? true : false, "Argument TargetPlanID is Empty");
+            return _bMonthlyreportAdapter.GetLastMonthlyReportList(SystemID, Year, Month, TargetPlanID);
+        }
 
         /// <summary>
         /// 
@@ -217,6 +225,14 @@ namespace LJTH.BusinessIndicators.BLL
             ExceptionHelper.TrueThrow<ArgumentNullException>(Year <= 0 ? true : false, "Argument Year is Empty");
             ExceptionHelper.TrueThrow<ArgumentNullException>(Month <= 0 ? true : false, "Argument Month is Empty");
             return _bMonthlyreportAdapter.GetLatestMonthlyReport(SystemID, Year, Month);
+        }
+        public B_MonthlyReport GetMonthlyReporNew(Guid SystemID, int Year, int Month,Guid TargetPlanId)
+        {
+            ExceptionHelper.TrueThrow<ArgumentNullException>(SystemID == null ? true : false, "Argument SystemID is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(Year <= 0 ? true : false, "Argument Year is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(Month <= 0 ? true : false, "Argument Month is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(TargetPlanId == null ? true : false, "Argument TargetPlanId is Empty");
+            return _bMonthlyreportAdapter.GetLatestMonthlyReport(SystemID, Year, Month, TargetPlanId,"");
         }
 
         public List<B_MonthlyReport> GetMonthlyReportByApproveList(int Year, int Month)

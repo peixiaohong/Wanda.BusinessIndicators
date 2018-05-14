@@ -289,6 +289,8 @@ namespace WebApi.Controllers
                 TargetPlanDetailController tp = new TargetPlanDetailController();
                 TargetController tc = new TargetController();
                 string title = Year + "年" + system.SystemName + "指标分解";
+                if (!string.IsNullOrEmpty(_BTargetPlan.VersionName))
+                    title += "-" + _BTargetPlan.VersionName;
                 if (system != null && system.Category == 3)
                 {
                     return new ResultContext(tp.GetTargetPlanDetail(SystemID, Year, BusinessID, IsLatestVersion));

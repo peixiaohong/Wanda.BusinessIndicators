@@ -110,6 +110,14 @@ $(document).ready(function () {
             Year = $("#ddlYear").val();
 
     }
+    $("#sitmap").html("您当前所在的位置：月度经营报告");
+    $("#jMenu").find("li").each(function () {
+        var text = $(this).find("span")[0];
+        $(this).removeClass("current first");
+        if (text.innerHTML == "月度经营报告") {
+            $(this).addClass("current first");
+        }
+    })
 
     TargetPlanID = $("#ddlVersionType").val();
     //默认选中
