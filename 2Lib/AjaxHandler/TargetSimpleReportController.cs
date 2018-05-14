@@ -152,8 +152,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             {
                 Data = Year,
                 Success = 1,
-                NowYear = DateTime.Now.Year,
-                NowMonth = DateTime.Now.Month,
+                NowYear = StaticResource.Instance.GetReportDateTime().Year,
+                NowMonth = StaticResource.Instance.GetReportDateTime().Month,
                 Message = "查询数据没有问题"
             };
         }
@@ -199,7 +199,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         [LibAction]
         public object GetListData(string systemID, string year, string month,string targetPlanID)
         {
-            int finYear = DateTime.Now.Year, finMonth = DateTime.Now.Month;
+            int finYear = StaticResource.Instance.GetReportDateTime().Year, finMonth = StaticResource.Instance.GetReportDateTime().Month;
             if (year != "0")
             {
                 finYear = Convert.ToInt32(year);
@@ -229,5 +229,6 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 };
             }
         }
+
     }
 }
