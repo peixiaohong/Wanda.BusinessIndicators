@@ -24,7 +24,6 @@ function FloatHeader(obj, tab) {
     var st, wt;
     var oleft = Number(tab.offset().left);
     var otop = Number(tab.offset().top);
-    alert(otop);
     obj.css({
         "display": "none",
         "position": "fixed",
