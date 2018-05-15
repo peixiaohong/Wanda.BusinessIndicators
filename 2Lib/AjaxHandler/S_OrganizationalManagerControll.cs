@@ -53,10 +53,9 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         /// <param name="type">新增 Add 修改 Edit </param>
         /// <param name="data">组织架构数据</param>
         /// <param name="IsCompany">是否添加的是项目公司</param>
-        /// <param name="companyData">如果是项目公司，传递数据</param>
         /// <returns></returns>
         [LibAction]
-        public object SaveData(string type, string data, bool IsCompany, string companyData)
+        public object SaveData(string type, string data, bool IsCompany)
         {
             string Message = string.Empty;
             int Success = 0;
@@ -80,10 +79,10 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 {
                     entity.CreateTime = entity.ModifyTime = DateTime.Now;
                     entity.CreatorName = entity.ModifierName = base.CurrentUserName;
-                    entity.ID = Guid.NewGuid();
+                    //entity.ID = Guid.NewGuid();
                     entity.IsDeleted = false;
 
-                    var disctinctNames=S_OrganizationalActionOperator.Instance.GetSystemsubsetCnName(entity.SystemID, entity.CnName);
+                    var disctinctNames=S_OrganizationalActionOperator.Instance.GetSystemsubsetCnName(entity.SystemID, entity.CnName).Where(i=>i.IsCompany==false).ToList();
                     if (disctinctNames.Count > 0)
                     {
                         return new
@@ -94,29 +93,19 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                         };
                     }
 
-                    //是项目 且名字已经存在company表
-                    if (IsCompany && companyNameNumbers > 0)
+                    ////是项目 且名字已经存在company表
+                    //if (IsCompany && companyNameNumbers > 0)
+                    //{
+                    //    return new
+                    //    {
+                    //        Data = "",
+                    //        Success = 0,
+                    //        Message = "项目名称已经存在，不允许录入重复的项目"
+                    //    };
+                    //}
+                    //是项目 
+                    if (IsCompany)
                     {
-                        return new
-                        {
-                            Data = "",
-                            Success = 0,
-                            Message = "项目名称已经存在，不允许录入重复的项目"
-                        };
-                    }
-                    //是项目 且 名字不存在项目表
-                    if (IsCompany && companyNameNumbers < 1)
-                    {
-                        //插入新的项目数据
-                        Model.C_Company company = JsonConvert.DeserializeObject<Model.C_Company>(companyData);
-                        company.ID = Guid.NewGuid();
-                        company.CreateTime = company.ModifyTime = company.OpeningTime = DateTime.Now;
-                        company.CreatorName = company.ModifierName = base.CurrentUserName;
-                        company.IsDeleted = false;
-                        company.VersionStart = DateTime.Now;
-                        company.VersionEnd = Convert.ToDateTime("9999-12-31 00:00:00.000");
-                        company.OpeningTime = DateTime.Now;
-                        entity.ID = C_CompanyOperator.Instance.AddCompany(company);
                         entity.IsCompany = true;
 
                         //插入相同的权限
@@ -136,6 +125,10 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                             //2 批量插入权限数据
                             S_Org_UserActionOperator.Instance.InsertListData(orgUserEntitys);
                         }
+                    }
+                    else
+                    {
+                        entity.ID = Guid.NewGuid();
                     }
                     //插入组织架构数据
                     int number = S_OrganizationalActionOperator.Instance.InsertData(entity);
@@ -165,30 +158,30 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                         };
                     }
 
-                    //如果是项目
-                    if (IsCompany)
-                    {
-                        Model.C_Company company = JsonConvert.DeserializeObject<Model.C_Company>(companyData);
-                        company.IsDeleted = false;
-                        company.ModifierName = base.CurrentUserName;
-                        company.ModifyTime = DateTime.Now;
-                        if (oldCompanys.Where(o => o.ID != entity.ID).Count() > 0)
-                        {
-                            return new
-                            {
-                                Data = "",
-                                Success = 0,
-                                Message = "项目名称重复"
-                            };
-                        }
-                        var oldCompany = C_CompanyOperator.Instance.GetCompany(entity.ID);
-                        company.CreateTime = oldCompany.CreateTime;
-                        company.CreatorName = oldCompany.CreatorName;
-                        company.VersionEnd = oldCompany.VersionEnd;
-                        company.VersionStart = oldCompany.VersionStart;
-                        company.ID = oldCompany.ID;
-                        C_CompanyOperator.Instance.UpdateCompany(company);
-                    }
+                    ////如果是项目
+                    //if (IsCompany)
+                    //{
+                    //    Model.C_Company company = JsonConvert.DeserializeObject<Model.C_Company>(companyData);
+                    //    company.IsDeleted = false;
+                    //    company.ModifierName = base.CurrentUserName;
+                    //    company.ModifyTime = DateTime.Now;
+                    //    if (oldCompanys.Where(o => o.ID != entity.ID).Count() > 0)
+                    //    {
+                    //        return new
+                    //        {
+                    //            Data = "",
+                    //            Success = 0,
+                    //            Message = "项目名称重复"
+                    //        };
+                    //    }
+                    //    var oldCompany = C_CompanyOperator.Instance.GetCompany(entity.ID);
+                    //    company.CreateTime = oldCompany.CreateTime;
+                    //    company.CreatorName = oldCompany.CreatorName;
+                    //    company.VersionEnd = oldCompany.VersionEnd;
+                    //    company.VersionStart = oldCompany.VersionStart;
+                    //    company.ID = oldCompany.ID;
+                    //    C_CompanyOperator.Instance.UpdateCompany(company);
+                    //}
                     int number = S_OrganizationalActionOperator.Instance.UpdateData(entity);
                     if (number > 0)
                     {
@@ -259,13 +252,13 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 //        Message = "已经授权的组织不能删除"
                 //    };
                 //}
-                if (isCompany)
-                {
-                    C_Company company= C_CompanyOperator.Instance.GetCompany(id.ToGuid());
-                    company.IsDeleted = true;
-                    company.VersionEnd = DateTime.Now;
-                    C_CompanyOperator.Instance.UpdateCompany(company);
-                }
+                //if (isCompany)
+                //{
+                //    C_Company company= C_CompanyOperator.Instance.GetCompany(id.ToGuid());
+                //    company.IsDeleted = true;
+                //    company.VersionEnd = DateTime.Now;
+                //    C_CompanyOperator.Instance.UpdateCompany(company);
+                //}
                 var number = S_OrganizationalActionOperator.Instance.DeleteData(id.ToGuid());
                 if (number > 0)
                 {
@@ -289,6 +282,71 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 return new
                 {
                     Data = "",
+                    Success = 0,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        /// <summary>
+        /// 获取板块信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [LibAction]
+        public object GetSystemInfo(string id)
+        {
+            string Message = string.Empty;
+            int Success = 0;
+            try
+            {
+                var data = C_SystemOperator.Instance.GetSystem(id.ToGuid());
+                return new
+                {
+                    Data = data,
+                    Success = 1,
+                    Message = Message
+                };
+            }
+            catch (Exception ex)
+            {
+
+                return new
+                {
+                    Data = "",
+                    Success = 0,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        /// <summary>
+        /// 获取当前板块下没有添加的项目
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="keyWord"></param>
+        /// <returns></returns>
+        [LibAction]
+        public object GetCompanyInfo(string systemID, string keyWord, int pageIndex,int pageSize)
+        {
+            int TotalCount = 0;
+            try
+            {
+                var data = C_CompanyOperator.Instance.GetCompanyInfoBySystem(systemID.ToGuid(), keyWord, pageIndex, pageSize, out TotalCount);
+                return new
+                {
+                    Data = data,
+                    TotalCount = TotalCount,
+                    Success = 1,
+                    Message = "查询成功"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new
+                {
+                    Data = "",
+                    TotalCount = TotalCount,
                     Success = 0,
                     Message = ex.Message
                 };

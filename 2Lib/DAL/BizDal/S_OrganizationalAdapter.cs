@@ -172,7 +172,6 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
             return base.DataTableToListT(ExecuteReturnTable(sql, parameters));
         }
 
-
         #region 数据权限
 
         #region 有判断项目 IsDelete=0

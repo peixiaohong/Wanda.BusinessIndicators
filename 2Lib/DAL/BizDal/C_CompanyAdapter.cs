@@ -10,6 +10,7 @@ using System.Text;
 using System.Transactions;
 using System.Data.Common;
 using System.Data;
+using System.Reflection;
 
 namespace LJTH.BusinessIndicators.DAL
 {
@@ -257,6 +258,58 @@ WHERE   SystemID = @SystemID
             return ExecuteQuery(sql,parameters);
         }
 
+        /// <summary>
+        /// 根据板块ID获取板块下没有的项目
+        /// </summary>
+        /// <param name="systemID">板块ID</param>
+        /// <param name="keyWord">模糊查询条件</param>
+        /// <param name="pageIndex">页码</param>
+        /// <param name="pageSize">显示行数</param>
+        /// <param name="TotalCount"></param>
+        /// <returns></returns>
+        public List<C_Company> GetCompanyInfoBySystem(Guid systemID, string keyWord, int pageIndex, int pageSize, out int TotalCount)
+        {
+            string sql = string.Format("Exec [dbo].[Pro_CompanyInfo] @SystemID,@KeyWord,@PageIndex,@PageSize");
+
+            DbParameter[] parameters = new DbParameter[]{
+                CreateSqlParameter("@SystemID",DbType.Guid,systemID),
+                CreateSqlParameter("@KeyWord",DbType.String,keyWord),
+                CreateSqlParameter("@PageIndex",DbType.Int32,pageIndex),
+                CreateSqlParameter("@PageSize",DbType.Int32,pageSize)
+            };
+            DataSet ds = ExecuteReturnDataSet(sql, parameters);
+            List<C_Company> list = new List<C_Company>();
+            TotalCount = 0;
+            if (ds != null)
+            {
+                DataTable returnTable = ds.Tables[0];
+                string tempName = string.Empty;
+                if (returnTable != null)
+                {
+                    foreach (DataRow dr in returnTable.Rows)
+                    {
+                        C_Company obj = new C_Company();
+                        System.Reflection.PropertyInfo[] propertys = obj.GetType().GetProperties();
+                        foreach (PropertyInfo pi in propertys)
+                        {
+                            tempName = pi.Name;
+                            if (returnTable.Columns.Contains(tempName))
+                            {
+                                if (!pi.CanWrite) continue;
+                                object value = dr[tempName];
+                                if (value != DBNull.Value)
+                                {
+                                    pi.SetValue(obj, value, null);
+                                }
+                            }
+                        }
+                        list.Add(obj);
+                    }
+                }
+                TotalCount = int.Parse(ds.Tables[1].Rows[0][0].ToString());
+            }
+            return list;
+        }
 
         #endregion
     }
