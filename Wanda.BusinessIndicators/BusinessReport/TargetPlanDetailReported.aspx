@@ -166,6 +166,10 @@
             <div class="scrolldoorFrame copy">
                 <ul class="tabs" id="Ul4" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                 </ul>
+                <table class="tab_005" id="importedDataFloatTable2">
+                    <thead>
+                    </thead>
+                </table>
                 <table class="tab_005" id="importedDataTable2">
                     <thead id="TargetPlanDetailHead">
                     </thead>
