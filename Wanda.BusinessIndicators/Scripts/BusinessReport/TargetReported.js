@@ -79,7 +79,7 @@ function SplitData(resultData) {
         if (resultData[4] != null) //当月数据
         {
             CurrentMissTargetData = resultData[4].ObjValue;
-            TmplCurrentMissTargetData(resultData[4].ObjValue, false);
+            TmplCurrentMissTargetData(CurrentMissTargetData, false);
         }
 
 
@@ -249,7 +249,7 @@ function TmplMissTargetData(MissTargetObj, isUL) { //MissTargetObj :未完成数
         }
 
         if (currentMissTarget != null) {
-            MissLiaddCss(currentMissTarget)
+            MissLiaddCss();
         }
         else {
             $("#U2 :first a").addClass("active_sub3");
@@ -276,23 +276,27 @@ function TmplMissTargetData(MissTargetObj, isUL) { //MissTargetObj :未完成数
 }
 
 var currentMissTarget = null;//在未完成编辑的时候，通过指标筛选时，停留在当前指标
+var currentMissTarget_1 = null;
 //单个指标筛选
 function MissLiaddCss(sender) {
     var m = {};
+    if (sender != undefined)
+        currentMissTarget = $(sender).html();
     $.each(MissTargetData, function (n, obj) {
-        if (obj.Name == $(sender).text()) {
+        if (obj.Name == currentMissTarget) {
             m = obj.ObjValue;
             return;
         }
     });
 
-    $("#U2 .active_sub3").each(function () {
-        $(this).removeClass("active_sub3");
+   
+    $("#U2").find("li").each(function () {
+        var t = $(this).find("a")[0];;
+         $(t).removeClass("active_sub3");
+        if (t.innerText == currentMissTarget)
+            $(t).addClass("active_sub3");
     });
-
-    $(sender).addClass("active_sub3");
-
-    currentMissTarget = sender;
+    
     $('#Tbody_MissTargetData').html("");
 
     if (m[0].TargetGroupCount == 1) {
@@ -341,8 +345,8 @@ function TmplCurrentMissTargetData(MissTargetObj, IsCUL) { //MissTargetObj :未�
             $(".Curr_Level1TdSp1").attr("colspan", 11);
         }
 
-        if (currentMissTarget != null) {
-            MissCurrentLiaddCss(currentMissTarget)
+        if (currentMissTarget_1 != null) {
+            MissCurrentLiaddCss();
         }
         else {
             $("#U2_1 :first a").addClass("active_sub3");
@@ -366,20 +370,22 @@ function TmplCurrentMissTargetData(MissTargetObj, IsCUL) { //MissTargetObj :未�
 //当月的单个指标筛选
 function MissCurrentLiaddCss(sender) {
     var m = {};
+    if (sender != undefined)
+        currentMissTarget_1 = $(sender).html();
     $.each(CurrentMissTargetData, function (n, obj) {
-        if (obj.Name == $(sender).text()) {
+        if (obj.Name == currentMissTarget_1) {
             m = obj.ObjValue;
             return;
         }
     });
-
-    $("#U2_1 .active_sub3").each(function () {
-        $(this).removeClass("active_sub3");
+   
+    $("#U2_1").find("li").each(function () {
+        var t = $(this).find("a")[0];
+        $(t).removeClass("active_sub3");
+        if (t.innerText == currentMissTarget_1)
+            $(t).addClass("active_sub3");
     });
-
-    $(sender).addClass("active_sub3");
-
-    currentMissTarget = sender;
+    
     $('#Tbody_CurrentMissTargetData').html("");
 
     if (m[0].TargetGroupCount == 1) {
@@ -1103,8 +1109,11 @@ function SaveMissTargetRpt(obj) {
     art.dialog({ id: 'divMissTargetRpt_Reason' }).close();
     art.dialog({ id: 'divMissTargetRpt_Retu' }).close();
 
-    var obj = $("#Tab_MissTargetHead");
-    var tab = $("#Tbody_MissTargetData");
+    //var obj = $("#Tab_MissTargetHead");
+    //var tab = $("#Tbody_MissTargetData");
+
+    var obj = $("#Tab_CurrentMissTargetHead");
+    var tab = $("#Tbody_CurrentMissTargetData");
     FloatHeader(obj, tab, false, "Reported")
 
 }
