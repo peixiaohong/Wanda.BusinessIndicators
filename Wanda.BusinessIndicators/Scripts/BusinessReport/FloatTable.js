@@ -21,9 +21,21 @@ var _floattable_H_actualindex = new Array();
 var _floattable_B_actualindex = new Array();
 
 function FloatHeader(obj, tab) {
-    var st, wt;
-    var oleft = Number(tab.offset().left);
-    var otop = Number(tab.offset().top);
+    var st, wt, oleft, otop;
+    var userAgent = navigator.userAgent;
+    if (userAgent.indexOf("Chrome") > -1) {
+        oleft = Number(tab.offset().left);
+        otop = Number(tab.offset().top);
+    } else {
+        oleft = Number(tab[0].offsetLeft);
+        otop = Number(tab[0].offsetTop);
+    }
+    if (oleft < 0) {
+        oleft = -oleft;
+    }
+    if (otop < 0) {
+        otop = -otop;
+    }
     obj.css({
         "display": "none",
         "position": "fixed",
