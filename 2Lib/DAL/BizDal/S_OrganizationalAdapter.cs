@@ -261,7 +261,9 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
 	                                Inner Join [getSystemData] As B On A.[ID]=B.[ParentID] And B.[IsDeleted]=0
 	                                Where A.[IsDeleted]=0
                                 )
-                                Select Distinct * From [getSystemData] Where [Level]=2";
+                               Select A.* From [getSystemData] As A 
+								Inner Join [dbo].[C_System] As B On A.[ID]=B.[ID] And B.[IsDeleted]=0
+								Where A.[Level]=2 Group By A.[ID],A.[SystemID],A.[CnName],A.[Code],A.[ParentID],A.[Level],A.[IsCompany],A.[IsDeleted],A.[CreateTime],A.[CreatorName],A.[ModifierName],A.[ModifyTime],B.[Sequence] Order By B.[Sequence]";
             DbParameter[] parameters = new DbParameter[]
             {
                 CreateSqlParameter("@LoginName",DbType.String,loginName)

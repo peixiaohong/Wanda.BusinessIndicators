@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" type="text/css" href="../Scripts/UpLoad/uploadify.css" />
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
-    <script type="text/javascript" src="../Scripts/BusinessReport/TargetApprove.js?v=4"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/TargetApprove.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="main">
@@ -96,6 +96,10 @@
                     <div class="scrolldoorFrame copy">
                         <ul class="tabs" id="Ul4" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                         </ul>
+                        <table class="tab_005" id="importedDataFloatTable2">
+                            <thead>
+                            </thead>
+                        </table>
                         <table class="tab_005" id="importedDataTable2">
                             <thead id="CompleteDetailHead" style="">
                             </thead>
@@ -111,7 +115,11 @@
                 <div class="TClassHide" id="T3_1">
                     <ul class="tabs" id="U2_1" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                     </ul>
+                    <table class="tab_005" id="Tab_CurrentMissFloatTarget">
+                        <thead>
+                        </thead>
 
+                    </table>
                     <table class="tab_005" id="Tab_CurrentMissTarget">
                         <thead id="Tab_CurrentMissTargetHead">
                         </thead>
@@ -129,7 +137,13 @@
 
                     <ul class="tabs" id="U2" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                     </ul>
+                    <table class="tab_005" id="Tab_MissFloatTarget">
+                        <thead>
+                           
+                           
+                        </thead>
 
+                    </table>
                     <table class="tab_005" id="Tab_MissTarget">
                         <thead  id="Tab_MissTargetHead" >
                            
@@ -147,7 +161,11 @@
                 <div id="T4" class="TClassHide">
                     <ul class="tabs" id="U1" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                     </ul>
-
+                    <table class="tab_005" id="Tab_FloatReturn">
+                        <thead>
+                         
+                        </thead>
+                    </table>
                     <table class="tab_005" id="Tab_Return">
                         <thead id ="Tab_ReturnHead">
                          

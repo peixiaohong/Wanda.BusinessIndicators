@@ -4,7 +4,7 @@
 
     <link rel="stylesheet" type="text/css" href="../Scripts/UpLoad/uploadify.css" />
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
-    <script type="text/javascript" src="../Scripts/BusinessReport/TargetPlanDetailApprove.js"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/TargetPlanDetailApprove.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
 
       <script type="text/javascript">
            var SysDataJson = <%=SysDataJson%>;
@@ -51,7 +51,10 @@
                                 <a class="active3 active_sub3" onclick="Change('sum','')" id="tabsum">汇总</a>
                             </li>
                         </ul>
-
+                        <table class="tab_005" id="importedDataFloatTable2">
+                            <thead>
+                            </thead>
+                        </table>
                          <table class="tab_005" id="importedDataTable2">
                             <thead id="TargetPlanDetailHead">
                             </thead>
@@ -75,6 +78,8 @@
                             <tbody id="rows">
                             </tbody>
                         </table>
+
+
 
                         <table class="tab_005" id="TargetTable" style="display: none">
                             <thead id="Thead1" style="width: 100%">

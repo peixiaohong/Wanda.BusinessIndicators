@@ -57,9 +57,9 @@ function RegisterEvent() {
 
 }
 //是否选择到板块
-function CheckOrganization(type) {
+function CheckOrganization(type, c) {
+    $(".organization-box").css("display", "none");
     var el = $(".organization_name").find("input");
-    var val = el.val();
     var isCompany = el.attr("data-isCompany");
     if (isCompany == "true") {
         isCompany = true
@@ -69,10 +69,6 @@ function CheckOrganization(type) {
     //console.log(isCompany);
     var level = el.attr("data-level");
     var id = el.attr("data-id");
-    if (!val) {
-        $.MsgBox.Alert("提示", "请选择板块");
-        return false;
-    }
     if (type == "Add") {
         if (level == 1) {
             $.MsgBox.Alert("提示", "系统板块不能新增");
@@ -82,6 +78,7 @@ function CheckOrganization(type) {
             $.MsgBox.Alert("提示", "项目类型不能新增");
             return false;
         }
+        CheckCompany(c);
         $(".organization_name").css("display", "block");
         $(".organization_edit").css("display", "block");
         $(".organization_edit_name").val("");
@@ -95,6 +92,7 @@ function CheckOrganization(type) {
             $.MsgBox.Alert("提示", "系统板块不能修改");
             return false;
         }
+        CheckCompany(c);
         $(".organization_name").css("display", "none");
         $(".organization_edit").css("display", "block");
         $(".organization_edit_name").val(el.val());
@@ -110,9 +108,34 @@ function CheckOrganization(type) {
             $.MsgBox.Alert("提示", "系统板块不能删除");
             return false;
         }
+        CheckCompany(c);
         DeleteOrganizationData(id, isCompany);
     }
 }
+
+function CheckCompany(c) {
+    if (c == "company") {
+        $(".organization-box").css("display", "block");
+        $(".select_content").css("display", "none");
+        $(".organization_content").css("display", "block");
+        $(".organization-title").html("组织名称");
+    } else {
+        $(".organization-box").css("display", "block");
+        $(".select_content").css("display", "block");
+        $(".organization_content").css("display", "none");
+        $(".organization-title").html("组织名称123");
+    }
+    var rMenu = $("#rMenu");
+    if (rMenu) {
+        rMenu.css({ "visibility": "hidden" });
+    }
+    $("body").unbind("mousedown", function (event) {
+        if (!(event.target.id == "rMenu" || $(event.target).parents("#rMenu").length > 0)) {
+            rMenu.css({ "visibility": "hidden" });
+        }
+    });
+}
+
 //确定后初始
 function initPage() {
     $(".organization_name").find("input").val("");
@@ -247,15 +270,17 @@ function Ztree(data) {
             }
         },
         callback: {
-            onClick: zTreeOnClick
+            onRightClick: OnRightClick
+
         }
     };
     $.fn.zTree.init($("#tree"), setting, zNodes);
     var zTree = $.fn.zTree.getZTreeObj("tree");
     zTree.setting.check.chkboxType = { "Y": "ps", "N": "ps" };
+    var rMenu = $("#rMenu");
     Fake();
-    function zTreeOnClick(event, treeId, treeNode) {
-        //console.log(treeNode)
+    function OnRightClick(event, treeId, treeNode) {
+        console.log(treeNode);
         var el = $(".organization_name").find("input");
         el.attr({
             "data-id": treeNode.id,
@@ -265,8 +290,32 @@ function Ztree(data) {
             "data-level": treeNode.level + 1,
             "data-isCompany": treeNode.isCompany
         });
-        el.val(treeNode.name);
-        $(".organization_name").css("display", "block");
-        $(".organization_edit").css("display", "none");
+        //el.val(treeNode.name);
+        //$(".organization_name").css("display", "block");
+        //$(".organization_edit").css("display", "none");
+        if (!treeNode && event.target.tagName.toLowerCase() != "button" && $(event.target).parents("a").length == 0) {
+            zTree.cancelSelectedNode();
+            showRMenu("root", event.clientX, event.clientY);
+        } else if (treeNode && !treeNode.noR) {
+            zTree.selectNode(treeNode);
+            showRMenu("node", event.clientX, event.clientY);
+        }
     };
+    function showRMenu(type, x, y) {
+        if (type == "root") {
+            $("#rMenu ul").hide();
+        } else {
+            $("#rMenu ul").show();
+        }
+        y += document.body.scrollTop;
+        x += document.body.scrollLeft;
+        rMenu.css({ "top": y + "px", "left": x + "px", "visibility": "visible" });
+
+        $("body").bind("mousedown", onBodyMouseDown);
+    }
+    function onBodyMouseDown(event) {
+        if (!(event.target.id == "rMenu" || $(event.target).parents("#rMenu").length > 0)) {
+            rMenu.css({ "visibility": "hidden" });
+        }
+    }
 }

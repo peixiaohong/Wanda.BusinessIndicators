@@ -108,7 +108,9 @@ function operateNav(sender) {
                 if (TargetPlanDeailData != undefined&&TargetPlanDeailData[0].ObjValue[0].ObjValue.length != 0) {
                     $("#Down1,#T2").show();
                     $("#DownLoadModel,#UpLoadData,#VersionName").hide();
-                    var obj = $("#TargetPlanDetailHead");
+                    var obj = $("#importedDataFloatTable2");
+                    var head = $("#TargetPlanDetailHead");
+                    obj.find("thead").html(head.html());
                     var tab = $("#rows");
                     FloatHeader(obj, tab);
                 } else {
@@ -189,12 +191,13 @@ function isCheckPlan() {
 
                 if (!resultData.success) {
                     alert('当前版本已存在审批版本，请勿重复操作！');
-                    TargetPlanID = resultData.TargetPlanID;
                     //$("#txt_VersionName").val("");
                     ClickItems("monthReportReady");
                     GetTargetPlanDetail();
                     ret = false;
                 }
+                TargetPlanID = resultData.TargetPlanID;
+                $("#hideTargetPlanID").val(TargetPlanID);
             }
         });
     }
@@ -391,10 +394,8 @@ function SplitData(result) {
             }
             $("#Ul4 :first a").addClass("active_sub3");
 
-            var obj = $("#TargetPlanDetailHead");
-            var tab = $("#rows");
-            FloatHeader(obj, tab);
         }
+
     }
 
 
@@ -409,6 +410,11 @@ function LoadTargetPlanDetailData(sender) {
         } else {
             loadTmplTargetPlanDetail("#TargetPlanDetailReportTemplate").tmpl(sender).appendTo("#rows");
         }
+        var obj = $("#importedDataFloatTable2");
+        var head = $("#TargetPlanDetailHead");
+        obj.find("thead").html(head.html());
+        var tab = $("#rows");
+        FloatHeader(obj, tab);
     }
 }
 
@@ -448,9 +454,7 @@ function TargetPlanDetailLiaddCss(sender) {
     }
 
     LoadTargetPlanDetailData(TemplData)
-    var obj = $("#TargetPlanDetailHead");
-    var tab = $("#rows");
-    FloatHeader(obj, tab);
+   
 }
 
 function AddSumHead(result) {
@@ -489,7 +493,7 @@ function fileUpload(name) {
         'fileSizeLimit': '10240',
         //swf文件路径
         'swf': '../Scripts/UpLoad/uploadify.swf',
-        'formData': { 'FileType': 'UpTargetPlanDetail', 'SysId': sysID, 'FinYear': FinYear, 'MonthReportID': TargetPlanID },
+        'formData': { 'FileType': 'UpTargetPlanDetail', 'SysId': sysID, 'FinYear': FinYear},
         //后台处理页面
         'uploader': '/AjaxHander/UpLoadMonthTargetDetail.ashx',
         'onUploadSuccess': function (file, data, response) {
@@ -513,7 +517,7 @@ function fileUpload(name) {
             alert("上传失败，请上传正确的文件！");
         }
         , 'onUploadStart': function (file, data, response) {
-            $("#" + name).uploadify("settings", "formData", { 'VersionName': $("#hideVersionName").val() });
+            $("#" + name).uploadify("settings", "formData", { 'VersionName': $("#hideVersionName").val(), 'MonthReportID': $("#hideTargetPlanID").val()  });
         }
     });
 }
