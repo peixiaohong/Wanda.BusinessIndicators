@@ -72,6 +72,28 @@ namespace LJTH.BusinessIndicators.Engine
             InitialData(IsLatestVersion, IsAll);
 
         }
+
+        /// <summary>
+        /// 现在导出页面使用
+        /// </summary>
+        /// <param name="MonthReportID"></param>
+        /// <param name="userPermission">是否根据用户权限控制</param>
+        /// <param name="IsLatestVersion">是否是最新的版本，true：从B表中获取，false：从A表中获取</param>
+        /// <param name="_DataSource">当从B表中获取时，这里有Draft：草稿状态， 或者是审批中状态 </param>
+        /// <param name="IsAll">是否获取全部月报数据，月报查询true,月报上报false </param>
+        public ReportInstance(Guid MonthReportID, bool userPermission, bool IsLatestVersion, string _DataSource = "Draft", bool IsAll = false)
+        {
+            UserPermission = userPermission;
+            _MonthReportID = MonthReportID;
+            B_MonthlyReport report = B_MonthlyreportOperator.Instance.GetMonthlyreport(_MonthReportID);
+            _SystemID = report.SystemID;
+            _SystemBatchID = report.SystemBatchID;
+            AreaID = report.AreaID;
+            FinYear = report.FinYear;
+            FinMonth = report.FinMonth;
+            DataSource = _DataSource;
+            InitialData(IsLatestVersion, IsAll);
+        }
         /// <summary>
         /// 审批页面使用，审批页面数据不判断权限
         /// </summary>
@@ -80,7 +102,7 @@ namespace LJTH.BusinessIndicators.Engine
         /// <param name="isAll"></param>
         public ReportInstance(Guid? monthReportID, Guid? systemBatchId, bool isAll)
         {
-            if (monthReportID != null&& monthReportID!=Guid.Empty)
+            if (monthReportID != null && monthReportID != Guid.Empty)
             {
                 _MonthReportID = monthReportID.Value;
                 B_MonthlyReport report = B_MonthlyreportOperator.Instance.GetMonthlyreport(_MonthReportID);
@@ -271,7 +293,7 @@ namespace LJTH.BusinessIndicators.Engine
                     }
                 }
                 ReportDetails = new List<MonthlyReportDetail>();
-                ReportDetails = A_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Result(_System.ID, FinYear, FinMonth,TargetPlanID);
+                ReportDetails = A_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Result(_System.ID, FinYear, FinMonth, TargetPlanID);
 
                 //ValidatedMonthlyReportDetails.ForEach(P => ReportDetails.Add(P.ToVModel()));
             }

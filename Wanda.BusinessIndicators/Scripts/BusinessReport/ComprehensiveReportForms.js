@@ -20,6 +20,9 @@ $(function () {
 
     //页面事件加载
     EventLoad();
+
+    $(".TargetVersionType").hide();
+   
 });
 
 //页面效果配置
@@ -75,6 +78,13 @@ function EventLoad()
         var systemID = $("#systemInfo").find("option:selected").attr("data-id");
         var year = $("#selectYears").find("option:selected").attr("data-id");
         var month = $("#selectMonth").find("option:selected").attr("data-id");
+        if (systemID == "00000000-0000-0000-0000-000000000000") {
+            $(".TargetVersionType").hide();
+        }
+        else
+        {
+            $(".TargetVersionType").show();
+        }
         SelectTargetVersionTypeLoad(systemID, year, month)
     });
 }

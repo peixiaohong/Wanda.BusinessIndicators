@@ -23,7 +23,7 @@ var _floattable_B_actualindex = new Array();
 function FloatHeader(obj, tab) {
     var st, wt;
     var oleft = Number(tab.offset().left);
-    var otop = Number(tab.offset().top) - 10;
+    var otop = Number(tab.offset().top);
     obj.css({
         "display": "none",
         "position": "fixed",

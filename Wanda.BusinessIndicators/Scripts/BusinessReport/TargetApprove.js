@@ -223,9 +223,9 @@ function ChangeTargetDetail(sender, TabOrSearch) {
     } else if ($(sender).text() == "完成情况明细") {
         $('#T1,#T3,#T3_1,#T4,#MonthReportExplainDiv,#ApproveAttachDiv').hide();
         $('#T2').show();
-        var obj = $("#CompleteDetailHead");
-        var tab = $("#tab2_rows");
-        FloatHeader(obj, tab, true, "Approve");
+        //var obj = $("#CompleteDetailHead");
+        //var tab = $("#tab2_rows");
+        //FloatHeader(obj, tab, true, "Approve");
 
         //完成情况明细
         if (TransitionCondition(ComplateDetailData[0], "B") == true) {
@@ -239,40 +239,44 @@ function ChangeTargetDetail(sender, TabOrSearch) {
 
         $("#T4,#T1,#T2,#T3,#MonthReportExplainDiv,#ApproveAttachDiv,#T5,#T6,#T7,#T8,#T9").hide();
         $("#T3_1").show();
-        var obj = $("#Tab_MissTargetHead");
-        var tab = $("#Tbody_MissTargetData");
+        //var obj = $("#Tab_MissTargetHead");
+        //var tab = $("#Tbody_MissTargetData");
 
         //未完成说明
         if (TransitionCondition(CurrentMissTargetData[0], "F") == true) {
             getCurrentMonthReportMissTargetData();
         }
-        FloatHeader(obj, tab, true, "Approve");
+        //FloatHeader(obj, tab, true, "Approve");
+
+        
 
     } else if ($(sender).text() == "累计未完成") {
         $("#T4,#T1,#T2,#T3_1,#MonthReportExplainDiv,#ApproveAttachDiv").hide();
         $("#T3").show();
         
-        var obj = $("#Tab_MissTargetHead");
-        var tab = $("#Tbody_MissTargetData");
+        //var obj = $("#Tab_MissTargetHead");
+        //var tab = $("#Tbody_MissTargetData");
 
         //未完成说明
         if (TransitionCondition(MissTargetData[0], "C") == true) {
             getMonthReportMissTargetData();
         }
-        FloatHeader(obj, tab, true, "Approve");
+        //FloatHeader(obj, tab, true, "Approve");
+
 
     } else if ($(sender).text() == "补回情况明细") {
         $("#T4").show();
         $("#T1,#T2,#T3,#T3_1,#MonthReportExplainDiv,#ApproveAttachDiv").hide();
 
-        var obj = $("#Tab_ReturnHead");
-        var tab = $("#Tbody_Data");
+        //var obj = $("#Tab_ReturnHead");
+        //var tab = $("#Tbody_Data");
 
         //补回情况明细
         if (TransitionCondition(ReturnData[0], "D") == true) {
             getMonthReportReturnData();
         }
-        FloatHeader(obj, tab, true, "Approve");
+        //FloatHeader(obj, tab, true, "Approve");
+
     }
 
     if ($(sender).text() != "完成情况明细") {
@@ -545,6 +549,12 @@ function SetComplateTargetDetailData(sender, Type) {
     } else {
         loadTmpl('#CompleteDetailHeadTemplate').tmpl().appendTo('#CompleteDetailHead');
     }
+
+    var obj = $("#importedDataFloatTable2");
+    var head = $('#CompleteDetailHead');
+    var tab = $("#tab2_rows");
+    obj.find("thead").html(head.html());
+    FloatHeader(obj, tab);
     //tmpl模板名称
     if (strComplateMonthReportDetilHtmlTemplate[1] != "" && strComplateMonthReportDetilHtmlTemplate[1] != undefined) {
         ComplateTargetDetailTemplate = strComplateMonthReportDetilHtmlTemplate[1];
@@ -585,6 +595,7 @@ function SetComplateTargetDetailData(sender, Type) {
         $(".Detail").attr("src", "../Images/btn_down02_w.png");
         $(".DetailCss").addClass("tabOrderBackground");
     }
+
 }
 
 //此三方法仅限于完成情况明细模板使用
@@ -688,6 +699,11 @@ function getMonthReportReturnData() {
             $(".shangyueleiji").hide();
             //$("#Tab_Return").attr({ style: "table-layout: fixed" });
             $('#CurrentMonthBackDetilDiv').text("本月累计(万元) [+]");
+            var obj = $("#Tab_FloatReturn");
+            var head = $("#Tab_ReturnHead");
+            obj.find("thead").html(head.html());
+            var tab = $("#Tbody_Data");
+            FloatHeader(obj, tab);
 
         }
 
@@ -737,9 +753,15 @@ function RtunLiaddCss(sender) {
         $(".Level1TDSL").attr("colspan", 9);
     }
 
-    var obj = $("#Tab_ReturnHead");
+    //var obj = $("#Tab_ReturnHead");
+    //var tab = $("#Tbody_Data");
+    //FloatHeader(obj, tab, true, "Approve");
+
+    var obj = $("#Tab_FloatReturn");
+    var head = $("#Tab_ReturnHead");
+    obj.find("thead").html(head.html());
     var tab = $("#Tbody_Data");
-    FloatHeader(obj, tab, true, "Approve");
+    FloatHeader(obj, tab);
 
     //显示影藏
     $(".shangyueleiji").hide();
@@ -747,9 +769,16 @@ function RtunLiaddCss(sender) {
     $(".Special_return").removeClass("Td_TopAndBottom").addClass("Td_Right"); //当出现完成率的时候，差值TD是没有右面的边线的
     $('#CurrentMonthBackDetilDiv').text("本月累计(万元) [+]");
 
-    var obj = $("#Tab_ReturnHead");
+    //var obj = $("#Tab_ReturnHead");
+    //var tab = $("#Tbody_Data");
+    //FloatHeader(obj, tab, true, "Approve");
+
+    var obj = $("#Tab_FloatReturn");
+    var head = $("#Tab_ReturnHead");
+    console.log(head.html());
+    obj.find("thead").html(head.html());
     var tab = $("#Tbody_Data");
-    FloatHeader(obj, tab, true, "Approve");
+    FloatHeader(obj, tab);
 
 }
 
@@ -814,9 +843,14 @@ function getMonthReportMissTargetData() {
             $('#CurrentMonthMissTergetDiv').text("本月累计(万元) [+]");
 
 
-            var obj = $("#Tab_MissTargetHead");
+            //var obj = $("#Tab_MissTargetHead");
+            //var tab = $("#Tbody_MissTargetData");
+            //FloatHeader(obj, tab, true, "Approve");
+            var obj = $("#Tab_MissFloatTarget");
+            var head = $("#Tab_MissTargetHead");
+            obj.find("thead").html(head.html());
             var tab = $("#Tbody_MissTargetData");
-            FloatHeader(obj, tab, true, "Approve");
+            FloatHeader(obj, tab);
 
         }
     });
@@ -880,12 +914,17 @@ function getCurrentMonthReportMissTargetData() {
             }
             $("#U2_1 :first a").addClass("active_sub3");
 
-            var obj = $("#Tab_CurrentMissTargetHead");
-            var tab = $("#Tbody_CurrentMissTargetData");
+            //var obj = $("#Tab_CurrentMissTargetHead");
+            //var tab = $("#Tbody_CurrentMissTargetData");
 
             $(".leiji").hide();
             $("#Tab_CurrentMissTarget").attr({ style: "table-layout: auto" });
             //$('#CurrentMonthMissTergetDiv').text("本月累计(万元) [+]");
+            var obj = $("#Tab_CurrentMissFloatTarget");
+            var head = $("#Tab_CurrentMissTargetHead");
+            obj.find("thead").html(head.html());
+            var tab = $("#Tbody_CurrentMissTargetData");
+            FloatHeader(obj, tab);
 
         }
     });
@@ -997,10 +1036,16 @@ function ShouSuo(sender) {
         $(".Level1TdSp1").attr("colspan", 11);
         $("#Tab_MissTarget").removeAttr("style");
         $('#CurrentMonthMissTergetDiv').text("本月累计(万元)  [+]");
-        var obj = $("#Tab_MissTargetHead");
-        var tab = $("#Tbody_MissTargetData");
+        //var obj = $("#Tab_MissTargetHead");
+        //var tab = $("#Tbody_MissTargetData");
 
-        FloatHeader(obj, tab, true, "Approve"); //浮动表头
+        //FloatHeader(obj, tab, true, "Approve"); //浮动表头
+
+        var obj = $("#Tab_MissFloatTarget");
+        var head = $("#Tab_MissTargetHead");
+        obj.find("thead").html(head.html());
+        var tab = $("#Tbody_MissTargetData");
+        FloatHeader(obj, tab);
 
     } else if (sender == 'XS') {
         var obj = $("#Tab_MissTargetHead");
@@ -1041,8 +1086,8 @@ function ShouSuo(sender) {
                 $('#CurrentMonthMissTergetDiv').text("本月累计(万元)  [+]");
             }
         }
-
-        FloatHeader(obj, tab, true, "Approve"); //浮动表头
+        FloatHeader(obj, tab);
+        //FloatHeader(obj, tab, true, "Approve"); //浮动表头
 
     } else if (sender == 'YCSY') {
         ////补回说明
@@ -1054,9 +1099,14 @@ function ShouSuo(sender) {
         $("#Tab_Return").removeAttr("style");
         $('#CurrentMonthBackDetilDiv').text("本月累计(万元)  [+]");
 
-        var obj = $("#Tab_ReturnHead");
+        //var obj = $("#Tab_ReturnHead");
+        //var tab = $("#Tbody_Data");
+        //FloatHeader(obj, tab, true, "Approve");
+        var obj = $("#Tab_FloatReturn");
+        var head = $("#Tab_ReturnHead");
+        obj.find("thead").html(head.html());
         var tab = $("#Tbody_Data");
-        FloatHeader(obj, tab, true, "Approve");
+        FloatHeader(obj, tab);
 
     } else if (sender == 'XSSY') {
 
@@ -1100,7 +1150,8 @@ function ShouSuo(sender) {
             }
         }
 
-        FloatHeader(obj, tab, true, "Approve");
+        //FloatHeader(obj, tab, true, "Approve");
+        FloatHeader(obj, tab);
     }
 
 }

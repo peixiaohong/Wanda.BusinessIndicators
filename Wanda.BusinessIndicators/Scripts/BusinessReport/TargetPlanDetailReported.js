@@ -108,7 +108,9 @@ function operateNav(sender) {
                 if (TargetPlanDeailData != undefined&&TargetPlanDeailData[0].ObjValue[0].ObjValue.length != 0) {
                     $("#Down1,#T2").show();
                     $("#DownLoadModel,#UpLoadData,#VersionName").hide();
-                    var obj = $("#TargetPlanDetailHead");
+                    var obj = $("#importedDataFloatTable2");
+                    var head = $("#TargetPlanDetailHead");
+                    obj.find("thead").html(head.html());
                     var tab = $("#rows");
                     FloatHeader(obj, tab);
                 } else {
@@ -391,10 +393,8 @@ function SplitData(result) {
             }
             $("#Ul4 :first a").addClass("active_sub3");
 
-            var obj = $("#TargetPlanDetailHead");
-            var tab = $("#rows");
-            FloatHeader(obj, tab);
         }
+
     }
 
 
@@ -409,6 +409,11 @@ function LoadTargetPlanDetailData(sender) {
         } else {
             loadTmplTargetPlanDetail("#TargetPlanDetailReportTemplate").tmpl(sender).appendTo("#rows");
         }
+        var obj = $("#importedDataFloatTable2");
+        var head = $("#TargetPlanDetailHead");
+        obj.find("thead").html(head.html());
+        var tab = $("#rows");
+        FloatHeader(obj, tab);
     }
 }
 
@@ -448,9 +453,7 @@ function TargetPlanDetailLiaddCss(sender) {
     }
 
     LoadTargetPlanDetailData(TemplData)
-    var obj = $("#TargetPlanDetailHead");
-    var tab = $("#rows");
-    FloatHeader(obj, tab);
+   
 }
 
 function AddSumHead(result) {
