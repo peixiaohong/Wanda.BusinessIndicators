@@ -217,7 +217,7 @@
                     <th style="width: 20%">操作人</th>
                     <th style="width: 20%">操作</th>
                     <th style="width: 20%">操作时间</th>
-                    <th style="width: 40%">操作原因</th>
+                    <%--<th style="width: 40%">操作原因</th>--%>
                 </tr>
             </thead>
             <tbody id="historyaction">
