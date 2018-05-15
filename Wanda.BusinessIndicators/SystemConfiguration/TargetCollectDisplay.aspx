@@ -26,7 +26,7 @@
             <table class="tab_search">
                 <tbody>
                     <tr>
-                        <th>查询系统</th>
+                        <th>板块</th>
                         <td>
                             <%--<input type="text" id="TxtSystem" style="width: 210px;" onclick="showMenu();" />--%>
                             <asp:DropDownList ID="ddlSystem" runat="server" OnSelectedIndexChanged="ddlSystem_SelectedIndexChanged" AutoPostBack="True" ClientIDMode="Static" Style="width: 120px;">

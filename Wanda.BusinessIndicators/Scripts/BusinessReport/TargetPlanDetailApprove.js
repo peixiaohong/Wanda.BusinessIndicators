@@ -63,14 +63,21 @@ function GetSumList() {
             $("#TargetTable").hide();
 
            // Fake();
+            var obj = $("#importedDataFloatTable2");
+            var head = $("#Head");
+            obj.find("thead").html(head.html());
+            var tab = $("#rows");
+            FloatHeader(obj, tab);
 
         }
     });
 
 
-    var obj = $("#Thead1");
-    var tab = $("#TrTargetTable");
-    FloatHeader(obj, tab);
+    //var obj = $("#Thead1");
+    //var tab = $("#TrTargetTable");
+    //FloatHeader(obj, tab);
+
+    
 }
 
 function GetSumTargetPlanList() {
@@ -102,7 +109,12 @@ function Change(adj, id) {
         $("#SumTable").show();
         $("#TargetTable").hide();
         $("#file_upload-button1").show();
-      
+
+        var obj = $("#importedDataFloatTable2");
+        var head = $("#Head");
+        obj.find("thead").html(head.html());
+        var tab = $("#rows");
+        FloatHeader(obj, tab);
     }
     else {
         $("#SumTable").hide();
@@ -143,7 +155,11 @@ function BangSumTargetPlanList(id) {
         });
 
     }
-
+    var obj = $("#importedDataFloatTable2");
+    var head = $("#Thead1");
+    obj.find("thead").html(head.html());
+    var tab = $("#SumTrTargetTable");
+    FloatHeader(obj, tab);
 }
 
 function BangHead(result) {
@@ -154,7 +170,6 @@ function BangHead(result) {
     for (var i = 0; i < 2; i++) {
         loadTmpl('#TrTarget').tmpl(result).appendTo('#TrTarget');
     }
-
 }
 
 //--新的写法
@@ -214,10 +229,11 @@ function SplitData(result) {
             }
             $("#Ul4 :first a").addClass("active_sub3");
 
-            var obj = $("#TargetPlanDetailHead");
-            var tab = $("#rows_old");
+            //var obj = $("#TargetPlanDetailHead");
+            //var tab = $("#rows_old");
 
-            FloatHeader(obj, tab);
+            //FloatHeader(obj, tab);
+            
         }
     }
 }
@@ -243,6 +259,11 @@ function LoadTargetPlanDetailData(sender) {
         } else {
             loadTmpl("#TargetPlanDetailReportTemplate").tmpl(sender).appendTo("#rows_old");
         }
+        var obj = $("#importedDataFloatTable2");
+        var head = $("#TargetPlanDetailHead");
+        obj.find("thead").html(head.html());
+        var tab = $("#rows_old");
+        FloatHeader(obj, tab);
     }
 }
 
@@ -268,10 +289,11 @@ function TargetPlanDetailLiaddCss(sender) {
   
 
 
-    var obj = $("#TargetPlanDetailHead");
-    var tab = $("#rows_old");
+    //var obj = $("#TargetPlanDetailHead");
+    //var tab = $("#rows_old");
 
-    FloatHeader(obj, tab);
+    //FloatHeader(obj, tab);
+ 
     $("#rows_old").empty();
     $("#TargetPlanDetailHead").empty();
 
