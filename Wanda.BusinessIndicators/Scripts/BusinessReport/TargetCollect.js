@@ -317,7 +317,7 @@ function Change(adj, id) {
         BangSumTargetPlanList(id);
         $("#file_upload-button1").show();
         head = $("#Thead1").html();
-        tab = $("#TrTargetTable");
+        tab = $("#Thead1");
         //$("#HistoryTable").hide();
     }
     //Fake();

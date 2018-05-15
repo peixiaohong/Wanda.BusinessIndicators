@@ -356,9 +356,7 @@ function ChangeTargetDetail(sender, TabOrSearch) {
         //var obj = $("#Tab_MissTargetHead");
         //var tab = $("#Tbody_MissTargetData");
         //FloatHeader(obj, tab, false, "MonthRpt");
-        var obj = $("#Tab_CurrentMissFloatTarget");
-        var tab = $("#Tbody_CurrentMissTargetData");
-        FloatHeader(obj, tab);
+        
 
         //未完成说明
         if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDTargetPlanID, CTDIsLatestVersion, CurrentMissTargetData[0], "W") == true) {
@@ -373,9 +371,7 @@ function ChangeTargetDetail(sender, TabOrSearch) {
         //var tab = $("#Tbody_MissTargetData");
 
         //FloatHeader(obj, tab, false, "MonthRpt");
-        var obj = $("#Tab_MissFloatTarget");
-        var tab = $("#Tbody_MissTargetData");
-        FloatHeader(obj, tab);
+       
         //未完成说明
         if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDTargetPlanID, CTDIsLatestVersion, MissTargetData[0], "C") == true) {
             getMonthReportMissTargetData();
@@ -390,9 +386,7 @@ function ChangeTargetDetail(sender, TabOrSearch) {
         //var tab = $("#Tbody_Data");
 
         //FloatHeader(obj, tab, false, "MonthRpt");
-        var obj = $("#Tab_FloatReturn");
-        var tab = $("#Tbody_Data");
-        FloatHeader(obj, tab);
+        
         //补回情况明细
         if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDTargetPlanID, CTDIsLatestVersion, ReturnData[0], "D") == true) {
             getMonthReportReturnData();
@@ -914,11 +908,7 @@ function SetComplateTargetDetailData(sender, Type) {
     } else {
         loadTmpl('#CompleteDetailHeadTemplate').tmpl(sender).appendTo('#CompleteDetailHead');
     }
-    var obj = $("#importedDataFloatTable2");
-    var head = $('#CompleteDetailHead');
-    var tab = $("#tab2_rows");
-    obj.find("thead").html(head.html());
-    FloatHeader(obj, tab);
+    
     //tmpl模板名称
     if (strComplateMonthReportDetilHtmlTemplate[1] != "" && strComplateMonthReportDetilHtmlTemplate[1] != undefined) {
         ComplateTargetDetailTemplate = strComplateMonthReportDetilHtmlTemplate[1];
@@ -954,6 +944,11 @@ function SetComplateTargetDetailData(sender, Type) {
             ComplateDetailLiaddCss(currentDetailTarget);
         }
     }
+    var obj = $("#importedDataFloatTable2");
+    var head = $('#CompleteDetailHead');
+    var tab = $("#tab2_rows");
+    obj.find("thead").html(head.html());
+    FloatHeader(obj, tab);
     AddBackGroundColor();
 }
 
@@ -1100,11 +1095,7 @@ function SetManageMonthReprotDetailData(sender, Type) {
     } else {
         loadTmpl('#TmplCompleteDetail_Head').tmpl(sender).appendTo('#CompleteDetailHead_1');
     }
-    var obj = $("#importedDataFloatTable2_1");
-    var head = $('#CompleteDetailHead_1');
-    var tab = $("#tab2_rows_1");
-    obj.find("thead").html(head.html());
-    FloatHeader(obj, tab);
+    
     //tmpl模板名称
     if (strManageMonthReprotDetailHtmlTemplate[1] != "" && strManageMonthReprotDetailHtmlTemplate[1] != undefined) {
         strManageMonthReprotDetailTemplate = strManageMonthReprotDetailHtmlTemplate[1];
@@ -1130,6 +1121,11 @@ function SetManageMonthReprotDetailData(sender, Type) {
             ManageMonthReprotDetailLiaddCss(currentManageReportDetailTarget);
         }
     }
+    var obj = $("#importedDataFloatTable2_1");
+    var head = $('#CompleteDetailHead_1');
+    var tab = $("#tab2_rows_1");
+    obj.find("thead").html(head.html());
+    FloatHeader(obj, tab);
     AddBackGroundColor();
 }
 function ManageMonthReprotDetailLiaddCss(sender) {
@@ -1359,6 +1355,11 @@ function getMonthReportReturnData() {
                 $(".Level1TDSL").attr("colspan", 9);
             }
 
+            var obj = $("#Tab_FloatReturn");
+            var head = $("#Tab_ReturnHead");
+            obj.find("thead").html(head.html());
+            var tab = $("#Tbody_Data");
+            FloatHeader(obj, tab);
             $("#U1 :first a").addClass("active_sub3");
             $(".shangyueleiji").hide();
             $('#CurrentMonthBackDetilDiv').text("本月累计(万元) [+]");
@@ -1484,8 +1485,13 @@ function getMonthReportMissTargetData() {
             }
             $("#U2 :first a").addClass("active_sub3");
 
-            var obj = $("#Tab_MissTargetHead");
+            //var obj = $("#Tab_MissTargetHead");
+            //var tab = $("#Tbody_MissTargetData");
+            var obj = $("#Tab_MissFloatTarget");
+            var head = $("#Tab_MissTargetHead");
+            obj.find("thead").html(head.html());
             var tab = $("#Tbody_MissTargetData");
+            FloatHeader(obj, tab);
 
             $(".shangyue").hide();
             $("#Tab_MissTarget").attr({ style: "table-layout: auto" });
@@ -1561,8 +1567,14 @@ function getCurrentMonthReportMissTargetData() {
             }
             $("#U2_1 :first a").addClass("active_sub3");
 
-            var obj = $("#Tab_CurrentMissTargetHead");
+            //var obj = $("#Tab_CurrentMissTargetHead");
+            //var tab = $("#Tbody_CurrentMissTargetData");
+
+            var obj = $("#Tab_CurrentMissFloatTarget");
+            var head = $("#Tab_CurrentMissTargetHead");
+            obj.find("thead").html(head.html());
             var tab = $("#Tbody_CurrentMissTargetData");
+            FloatHeader(obj, tab);
 
             $(".leiji").hide();
             $("#Tab_CurrentMissTarget").attr({ style: "table-layout: auto" });
@@ -1680,6 +1692,8 @@ function ShouSuo(sender) {
 
         //FloatHeader(obj, tab, false, "MonthRpt"); //浮动表头
         var obj = $("#Tab_MissFloatTarget");
+        var head = $("#Tab_MissTargetHead");
+        obj.find("thead").html(head.html());
         var tab = $("#Tbody_MissTargetData");
         FloatHeader(obj, tab);
 
@@ -1688,6 +1702,8 @@ function ShouSuo(sender) {
         //var obj = $("#Tab_MissTargetHead");
         //var tab = $("#Tbody_MissTargetData");
         var obj = $("#Tab_MissFloatTarget");
+        var head = $("#Tab_MissTargetHead");
+        obj.find("thead").html(head.html());
         var tab = $("#Tbody_MissTargetData");
 
         if ($(".newdiff_miss").is(":hidden")) {  //给商管系统用的
@@ -1748,6 +1764,8 @@ function ShouSuo(sender) {
         //var tab = $("#Tbody_Data");
         //FloatHeader(obj, tab, false, "MonthRpt");
         var obj = $("#Tab_FloatReturn");
+        var head = $("#Tab_ReturnHead");
+        obj.find("thead").html(head.html());
         var tab = $("#Tbody_Data");
         FloatHeader(obj, tab);
 
@@ -1756,6 +1774,8 @@ function ShouSuo(sender) {
         //var obj = $("#Tab_ReturnHead");
         //var tab = $("#Tbody_Data");
         var obj = $("#Tab_FloatReturn");
+        var head = $("#Tab_ReturnHead");
+        obj.find("thead").html(head.html());
         var tab = $("#Tbody_Data");
 
         if ($(".newdiff_retu").is(":hidden")) {
@@ -2708,7 +2728,9 @@ function unfoldTitle() {
         $("#importedDataTable2_1").css("width", "110%");
         $("#importedDataFloatTable2_1").find("thead").html($("#CompleteDetailHead_1").html());
         var obj = $("#importedDataFloatTable2_1");
-        var tab = $("#CompleteDetailHead_1");
+        var head = $("#CompleteDetailHead_1");
+        obj.find("thead").html(head.html());
+        var tab = $("#tab2_rows_1");
         FloatHeader(obj, tab);
         //var obj = $("#CompleteDetailHead_1");
         //var tab = $("#tab2_rows_1");
@@ -2739,7 +2761,9 @@ function unfoldTitle() {
 
         $("#importedDataFloatTable2").find("thead").html($("#CompleteDetailHead").html());
         var obj = $("#importedDataFloatTable2");
-        var tab = $("#CompleteDetailHead");
+        var head = $("#CompleteDetailHead");
+        obj.find("thead").html(head.html());
+        var tab = $("#tab2_rows");
         FloatHeader(obj, tab);
         //var obj = $("#CompleteDetailHead");
         //var tab = $("#tab2_rows");
