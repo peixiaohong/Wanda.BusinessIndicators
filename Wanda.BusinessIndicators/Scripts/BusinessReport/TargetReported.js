@@ -594,7 +594,7 @@ function EditMissTargetRpt(sender, obj, tag) {
 
     GetInfoByID(sender, tag);
 
-    currentMissTarget = $("#U2 li .active_sub3 ");
+    //currentMissTarget = $("#U2 li .active_sub3 ");
 
     if (info != null) {
 
