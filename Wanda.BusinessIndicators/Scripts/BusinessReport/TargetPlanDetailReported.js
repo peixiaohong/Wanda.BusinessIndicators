@@ -191,12 +191,13 @@ function isCheckPlan() {
 
                 if (!resultData.success) {
                     alert('当前版本已存在审批版本，请勿重复操作！');
-                    TargetPlanID = resultData.TargetPlanID;
                     //$("#txt_VersionName").val("");
                     ClickItems("monthReportReady");
                     GetTargetPlanDetail();
                     ret = false;
                 }
+                TargetPlanID = resultData.TargetPlanID;
+                $("#hideTargetPlanID").val(TargetPlanID);
             }
         });
     }
@@ -492,7 +493,7 @@ function fileUpload(name) {
         'fileSizeLimit': '10240',
         //swf文件路径
         'swf': '../Scripts/UpLoad/uploadify.swf',
-        'formData': { 'FileType': 'UpTargetPlanDetail', 'SysId': sysID, 'FinYear': FinYear, 'MonthReportID': TargetPlanID },
+        'formData': { 'FileType': 'UpTargetPlanDetail', 'SysId': sysID, 'FinYear': FinYear},
         //后台处理页面
         'uploader': '/AjaxHander/UpLoadMonthTargetDetail.ashx',
         'onUploadSuccess': function (file, data, response) {
@@ -516,7 +517,7 @@ function fileUpload(name) {
             alert("上传失败，请上传正确的文件！");
         }
         , 'onUploadStart': function (file, data, response) {
-            $("#" + name).uploadify("settings", "formData", { 'VersionName': $("#hideVersionName").val() });
+            $("#" + name).uploadify("settings", "formData", { 'VersionName': $("#hideVersionName").val(), 'MonthReportID': $("#hideTargetPlanID").val()  });
         }
     });
 }

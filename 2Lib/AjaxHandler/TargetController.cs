@@ -1242,7 +1242,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             {
                 success = false;
             }
-            else if (List.Where(x => x.WFStatus == "Draft").Count() == 0 && PlanID == "")
+            else if (List.Where(x => x.WFStatus == "Draft").Count() == 0 && string.IsNullOrEmpty(PlanID))
             {
                 B_TargetPlan _BTargetPlan = new B_TargetPlan();
                 _BTargetPlan.SystemID = Guid.Parse(SysID);
