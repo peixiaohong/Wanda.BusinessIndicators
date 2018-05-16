@@ -22,20 +22,8 @@ var _floattable_B_actualindex = new Array();
 
 function FloatHeader(obj, tab) {
     var st, wt, oleft, otop;
-    var userAgent = navigator.userAgent;
-    if (userAgent.indexOf("Chrome") > -1) {
-        oleft = Number(tab.offset().left);
-        otop = Number(tab.offset().top);
-    } else {
-        oleft = Number(tab[0].offsetLeft);
-        otop = Number(tab[0].offsetTop);
-    }
-    if (oleft < 0) {
-        oleft = -oleft;
-    }
-    if (otop < 0) {
-        otop = -otop;
-    }
+    oleft = getLeft(tab[0]);
+    otop = getTop(tab[0]);
     obj.css({
         "display": "none",
         "position": "fixed",
@@ -59,6 +47,16 @@ function FloatHeader(obj, tab) {
         }
         obj.width(tab.width());
     });
+}
+function getTop(e) {
+    var offset = e.offsetTop;
+    if (e.offsetParent != null) offset += getTop(e.offsetParent);
+    return offset;
+} 
+function getLeft(e){ 
+var offset=e.offsetLeft; 
+    if (e.offsetParent != null) offset += getLeft(e.offsetParent); 
+return offset; 
 }
 //function FloatHeader(obj, tab, isFixed, _isRpt) {
 

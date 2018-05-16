@@ -8,6 +8,9 @@ using LJTH.BusinessIndicators.Model;
 using LJTH.BusinessIndicators.Engine;
 using LJTH.BusinessIndicators.Common;
 using Lib.Web.Json;
+using Newtonsoft.Json;
+using NLog;
+using System.IO;
 
 namespace LJTH.BusinessIndicators.Web.AjaxHander
 {
@@ -16,51 +19,74 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
     /// </summary>
     public class TargetPlanProcessController : IHttpHandler
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         protected string Content { get; set; }
         int OperatorType = 1;
         public void ProcessRequest(HttpContext context)
         {
-            this.BusinessID = context.Request["BusinessID"];
-
-
-
-            
-            if (!string.IsNullOrEmpty(context.Request["OperatorType"]))
+            string logMessage = "{\"Name\":\"分解指标审批\",\"Context\":";
+            if ("post".Equals(context.Request.HttpMethod.ToLower()))
             {
-                OperatorType = int.Parse(context.Request["OperatorType"]);
+                StreamReader reader = new StreamReader(context.Request.InputStream);
+                logMessage += HttpUtility.UrlDecode(reader.ReadToEnd());
+
             }
-            string strPrcessStatus = string.Empty;
-            if (!string.IsNullOrEmpty(context.Request["PrcessStatus"]))
-            {
-                strPrcessStatus = context.Request["PrcessStatus"];
-            }
-            if (string.IsNullOrEmpty(this.BusinessID))
-            {
-                throw new Exception("BusinessID is null!");
-            }
+            // Get方式下，取得client端传过来的数据  
             else
             {
-                //添加谁点击了提交审批按钮
-                B_TargetPlan ReportModel = B_TargetplanOperator.Instance.GetTargetPlanByID(BusinessID.ToGuid());
-                if (string.IsNullOrEmpty(ReportModel.ProcessOwn))
+                // 注意，这个是需要解码的  
+                logMessage += HttpUtility.UrlDecode(context.Request.QueryString.ToString());
+
+            }
+            try
+            {
+                this.BusinessID = context.Request["BusinessID"];
+                
+                if (!string.IsNullOrEmpty(context.Request["OperatorType"]))
                 {
-                    ReportModel.ProcessOwn = this.CurrentUser;
-                    B_TargetplanOperator.Instance.UpdateTargetplan(ReportModel);
+                    OperatorType = int.Parse(context.Request["OperatorType"]);
                 }
+                string strPrcessStatus = string.Empty;
+                if (!string.IsNullOrEmpty(context.Request["PrcessStatus"]))
+                {
+                    strPrcessStatus = context.Request["PrcessStatus"];
+                }
+                if (string.IsNullOrEmpty(this.BusinessID))
+                {
+                    throw new Exception("BusinessID is null!");
+                }
+                else
+                {
+                    //添加谁点击了提交审批按钮
+                    B_TargetPlan ReportModel = B_TargetplanOperator.Instance.GetTargetPlanByID(BusinessID.ToGuid());
+                    if (string.IsNullOrEmpty(ReportModel.ProcessOwn))
+                    {
+                        ReportModel.ProcessOwn = this.CurrentUser;
+                        B_TargetplanOperator.Instance.UpdateTargetplan(ReportModel);
+                    }
+                }
+                if (strPrcessStatus != "Approved")
+                {
+                    OnProcessExecute(strPrcessStatus, OperatorType);
+                }
+                else
+                {
+                    //审批结束，调用这个
+                    OnProecssCompleted();
+                    StaticResource.Instance.Reload();
+                }
+                //处理数据
+                DisposeBusinessData(OperatorType);
             }
-            if (strPrcessStatus != "Approved")
+            catch (Exception ex)
             {
-                OnProcessExecute(strPrcessStatus, OperatorType);
+                logMessage += ",\"Exception\":" + JsonConvert.SerializeObject(ex);
+                throw;
             }
-            else
+            finally
             {
-                //审批结束，调用这个
-                OnProecssCompleted();
-                StaticResource.Instance.Reload();
+                logger.Info(logMessage + "}");
             }
-            //处理数据
-            DisposeBusinessData(OperatorType);
-            
         }
         /// <summary>
         /// 处理业务数据
@@ -160,7 +186,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             #endregion
         }
 
-        public void OnProcessExecute( string strPrcessStatus,int OperatorType)
+        public void OnProcessExecute(string strPrcessStatus, int OperatorType)
         {
             B_TargetPlan rpt = B_TargetplanOperator.Instance.GetTargetPlanByID(BusinessID.ToGuid());
             ExceptionHelper.TrueThrow(rpt == null, string.Format("cannot find the report data which id={0}", BusinessID));
@@ -218,7 +244,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
             ExceptionHelper.TrueThrow(rpt == null, string.Format("cannot find the report data which id={0}", BusinessID));
             rpt.WFStatus = "Approved";
-            if(!B_TargetplanOperator.Instance.HasDefaultVersion(rpt.SystemID,rpt.FinYear))
+            if (!B_TargetplanOperator.Instance.HasDefaultVersion(rpt.SystemID, rpt.FinYear))
             {
                 rpt.VersionDefault = 1;
             }
@@ -232,15 +258,17 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             //List<A_TargetPlanDetail> rptADetailList = null;
 
             A_TargetplanOperator.Instance.AddTargetplan(
-                new A_TargetPlan() {
+                new A_TargetPlan()
+                {
                     ID = rpt.ID,
-                    VersionName=rpt.VersionName,
-                    VersionDefault =rpt.VersionDefault,
+                    VersionName = rpt.VersionName,
+                    VersionDefault = rpt.VersionDefault,
                     FinYear = rpt.FinYear,
                     Description = rpt.Description,
                     SystemID = rpt.SystemID,
                     Status = 5,
-                    CreateTime = DateTime.Now });
+                    CreateTime = DateTime.Now
+                });
             rptDetailList.ForEach(p => rptTempDetailList.Add(p.ToAModel()));
             A_TargetplandetailOperator.Instance.AddTargetPlanDetailList(rptTempDetailList);
 

@@ -610,7 +610,12 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         private void ChangeSystem()
         {
             C_System cs = C_SystemOperator.Instance.GetSystem(Guid.Parse(ddlSystem.SelectedValue));
-            if (cs.Category == 2)
+
+            if (cs.Category == 1)
+            {
+                Response.Redirect("~/BusinessReport/TargetReported.aspx?SystemId=" + cs.ID);
+            }
+            else if (cs.Category == 2)
             {
                 //Server.Transfer("~/BusinessReport/TargetProReported.aspx?SystemId=" + cs.ID);
                 Response.Redirect("~/BusinessReport/TargetProReported.aspx?SystemId=" + cs.ID);

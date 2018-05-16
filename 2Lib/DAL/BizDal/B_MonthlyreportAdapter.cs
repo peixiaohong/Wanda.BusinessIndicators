@@ -271,7 +271,7 @@ namespace LJTH.BusinessIndicators.DAL
             string sql = ORMapping.GetSelectSql<B_MonthlyReport>(TSqlBuilder.Instance);
 
             sql += "WHERE " + base.NotDeleted;
-            sql += " AND SystemID=@SystemID AND FinYear=@Year AND FinMonth=@Month AND TargetPlanID=@TargetPlanID AND (WFStatus ='Progress' or  WFStatus ='Approved')";
+            sql += " AND SystemID=@SystemID AND FinYear=@Year AND FinMonth=@Month AND TargetPlanID=@TargetPlanID ";
             sql += " ORDER BY CreateTime DESC";
 
             SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
