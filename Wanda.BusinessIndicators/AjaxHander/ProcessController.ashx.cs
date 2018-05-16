@@ -11,71 +11,102 @@ using BPF.Workflow.Object;
 using BPF.Workflow.Client;
 using LJTH.BusinessIndicators.ViewModel;
 using Newtonsoft.Json;
+using NLog;
+using System.IO;
 
 namespace LJTH.BusinessIndicators.Web.AjaxHander
 {
+    
     /// <summary>
     /// ProcessController 的摘要说明
     /// </summary>
     public class ProcessController : IHttpHandler
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         protected string Content { get; set; }
-       public int OperatorType = 0;
+        public int OperatorType = 0;
         string VirtualUser = System.Configuration.ConfigurationManager.AppSettings["WF.VirtualUser"];
         public void ProcessRequest(HttpContext context)
         {
-            this.BusinessID = context.Request["BusinessID"];
-            this.ProType = context.Request["strProType"];
-            this.ExecType = context.Request["ExecuteType"];
-            if (!string.IsNullOrEmpty(context.Request["OperatorType"]))
+            string logMessage = "{\"Name\":\"月报审批\",\"Context\":";
+                 // Post方式下，取得client端传过来的数据  
+            if ("post".Equals(context.Request.HttpMethod.ToLower()))
             {
-                OperatorType = int.Parse(context.Request["OperatorType"]);
+                StreamReader reader = new StreamReader(context.Request.InputStream);
+                logMessage += HttpUtility.UrlDecode(reader.ReadToEnd());
+
             }
-            string strPrcessStatus = string.Empty;
-            if (!string.IsNullOrEmpty(context.Request["PrcessStatus"]))
+            // Get方式下，取得client端传过来的数据  
+            else
             {
-                strPrcessStatus = context.Request["PrcessStatus"];
+                // 注意，这个是需要解码的  
+                logMessage += HttpUtility.UrlDecode(context.Request.QueryString.ToString());
+
             }
-            #region 原有逻辑，注释
-            //if (string.IsNullOrEmpty(this.BusinessID))
-            //{
-            //    throw new Exception("BusinessID is null!");
-            //}
-            //else
-            //{
-            //    //添加谁点击了提交审批按钮,加入了获取流程信息json
-            //    B_MonthlyReport ReportModel = B_MonthlyreportOperator.Instance.GetMonthlyreport(BusinessID.ToGuid());
 
-            //    if (string.IsNullOrEmpty(ReportModel.ProcessOwn))
-            //    {
-            //        ReportModel.ProcessOwn = this.CurrentUser;
+            JsonConvert.SerializeObject(context.Request);
+            try
+            {
+                this.BusinessID = context.Request["BusinessID"];
+                this.ProType = context.Request["strProType"];
+                this.ExecType = context.Request["ExecuteType"];
+                if (!string.IsNullOrEmpty(context.Request["OperatorType"]))
+                {
+                    OperatorType = int.Parse(context.Request["OperatorType"]);
+                }
+                string strPrcessStatus = string.Empty;
+                if (!string.IsNullOrEmpty(context.Request["PrcessStatus"]))
+                {
+                    strPrcessStatus = context.Request["PrcessStatus"];
+                }
+                #region 原有逻辑，注释
+                //if (string.IsNullOrEmpty(this.BusinessID))
+                //{
+                //    throw new Exception("BusinessID is null!");
+                //}
+                //else
+                //{
+                //    //添加谁点击了提交审批按钮,加入了获取流程信息json
+                //    B_MonthlyReport ReportModel = B_MonthlyreportOperator.Instance.GetMonthlyreport(BusinessID.ToGuid());
 
-            //        B_MonthlyreportOperator.Instance.UpdateMonthlyreport(ReportModel);
-            //    }
+                //    if (string.IsNullOrEmpty(ReportModel.ProcessOwn))
+                //    {
+                //        ReportModel.ProcessOwn = this.CurrentUser;
 
-            //}
-            //if (strPrcessStatus != "Approved")
-            //{
-            //    OnProcessExecuteBusinessData(strPrcessStatus, OperatorType);
-            //}
-            //else
-            //{
-            //    //审批结束，调用这个
-            //    OnProcessCompletedBusinessData();
-            //}
+                //        B_MonthlyreportOperator.Instance.UpdateMonthlyreport(ReportModel);
+                //    }
+
+                //}
+                //if (strPrcessStatus != "Approved")
+                //{
+                //    OnProcessExecuteBusinessData(strPrcessStatus, OperatorType);
+                //}
+                //else
+                //{
+                //    //审批结束，调用这个
+                //    OnProcessCompletedBusinessData();
+                //}
 
 
-            ////处理本系统的数据
-            //DisposeBusinessData();
-            //==========================
-            #endregion
+                ////处理本系统的数据
+                //DisposeBusinessData();
+                //==========================
+                #endregion
 
-            //业务处理
-            DisposeBusinessData();
+                //业务处理
+                DisposeBusinessData();
 
-            //执行按钮事件的处理
-            ExecutionBusinessData();
-
+                //执行按钮事件的处理
+                ExecutionBusinessData();
+            }
+            catch (Exception ex)
+            {
+                logMessage +=",\"Exception\":"+ JsonConvert.SerializeObject(ex);
+                throw;
+            }
+            finally {
+                logger.Info(logMessage+"}");
+            }
         }
         /// <summary>
         /// 更新B_MonthlyReport表WFStatus字段。添加审批记录
@@ -128,7 +159,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             //RegistEvent();
         }
 
-
+      
         /// <summary>
         /// 审批结束，B表数据进A表
         /// </summary>
@@ -245,7 +276,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 #region 子流程虚拟审批人提交,是流程走完。
                 try
                 {
-                    WorkflowContext workflow = WFClientSDK.GetProcess(null, tempModel.ID.ToString(), new UserInfo() { UserCode = "$VirtualUserCode$"+VirtualUser });
+                    WorkflowContext workflow = WFClientSDK.GetProcess(null, tempModel.ID.ToString(), new UserInfo() { UserCode = "$VirtualUserCode$" + VirtualUser });
                     if (workflow.ProcessInstance.Status != 3)
                     {
                         Dictionary<string, object> formParams = new Dictionary<string, object>();
@@ -257,7 +288,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         bizContext.BusinessID = tempModel.ID.ToString();
                         bizContext.FlowCode = workflow.ProcessInstance.FlowCode;
                         bizContext.ApprovalContent = "同意";
-                        bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$"+VirtualUser };
+                        bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$" + VirtualUser };
                         bizContext.ProcessURL = "/BusinessReport/TargetApprove.aspx";
                         bizContext.FormParams = formParams;
                         bizContext.ExtensionCommond = new Dictionary<string, string>();
@@ -293,7 +324,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 CreatorName = this.CurrentUser,
                 Opinions = _BatchModel.Opinions,
                 Batch_Opinions = _BatchModel.Batch_Opinions,
-                TargetPlanID=_BatchModel.TargetPlanID
+                TargetPlanID = _BatchModel.TargetPlanID
             };
             A_SystemBatchOperator.Instance.DeleteSystemBatch(amodel);
             //将B批次表信息，添加到A表
@@ -325,7 +356,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             //判断当月主表是否是null
             if (rptA == null)
             {
-                A_MonthlyreportOperator.Instance.AddMonthlyreport(new A_MonthlyReport() { ID = rpt.ID,TargetPlanID=rpt.TargetPlanID,AreaID=rpt.AreaID, FinYear = rpt.FinYear, FinMonth = rpt.FinMonth, Description = rpt.Description, SystemID = rpt.SystemID, Status = 5, SystemBatchID = rpt.SystemBatchID, CreatorName = this.CurrentUser, CreateTime = DateTime.Now });
+                A_MonthlyreportOperator.Instance.AddMonthlyreport(new A_MonthlyReport() { ID = rpt.ID, TargetPlanID = rpt.TargetPlanID, AreaID = rpt.AreaID, FinYear = rpt.FinYear, FinMonth = rpt.FinMonth, Description = rpt.Description, SystemID = rpt.SystemID, Status = 5, SystemBatchID = rpt.SystemBatchID, CreatorName = this.CurrentUser, CreateTime = DateTime.Now });
 
                 //判断A 明细
                 if (rptADetailList.Count == 0)
@@ -360,7 +391,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 A_MonthlyreportOperator.Instance.DeleteModel(rptA);
 
                 //新增B表的主表数据
-                A_MonthlyreportOperator.Instance.AddMonthlyreport(new A_MonthlyReport() { ID = rpt.ID,TargetPlanID=rpt.TargetPlanID,AreaID=rpt.AreaID, FinYear = rpt.FinYear, FinMonth = rpt.FinMonth, Description = rpt.Description, SystemID = rpt.SystemID, Status = 5, SystemBatchID = rpt.SystemBatchID, CreatorName = this.CurrentUser, CreateTime = DateTime.Now });
+                A_MonthlyreportOperator.Instance.AddMonthlyreport(new A_MonthlyReport() { ID = rpt.ID, TargetPlanID = rpt.TargetPlanID, AreaID = rpt.AreaID, FinYear = rpt.FinYear, FinMonth = rpt.FinMonth, Description = rpt.Description, SystemID = rpt.SystemID, Status = 5, SystemBatchID = rpt.SystemBatchID, CreatorName = this.CurrentUser, CreateTime = DateTime.Now });
 
                 //B表转换到A表
                 if (rptADetailList.Count == 0)
@@ -570,13 +601,13 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
                     if (IsProBatch)
                     {
-                        WorkflowContext wfc = WFClientSDK.GetProcess(null, rpt.ID.ToString(), new UserInfo() { UserCode = "$VirtualUserCode$"+VirtualUser });
+                        WorkflowContext wfc = WFClientSDK.GetProcess(null, rpt.ID.ToString(), new UserInfo() { UserCode = "$VirtualUserCode$" + VirtualUser });
                         BizContext bizContext = new BizContext();
                         bizContext.NodeInstanceList = wfc.NodeInstanceList;
                         bizContext.ProcessRunningNodeID = wfc.ProcessInstance.RunningNodeID;
                         bizContext.BusinessID = rpt.ID.ToString();
                         bizContext.ApprovalContent = "项目汇总退回服务发起";
-                        bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$"+VirtualUser };
+                        bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$" + VirtualUser };
                         bizContext.ExtensionCommond = new Dictionary<string, string>();
                         bizContext.ExtensionCommond.Add("RejectNode", Guid.Empty.ToString());
                         WorkflowContext wf = WFClientSDK.ExecuteMethod("RejectProcess", bizContext);
@@ -922,8 +953,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         }
 
         protected string ProcessJSON { get; set; }
-        public string ProType { get;  set; }
-        public string ExecType { get;  set; }
+        public string ProType { get; set; }
+        public string ExecType { get; set; }
         public virtual string Recovery()
         {
             return ProcessJSON;
