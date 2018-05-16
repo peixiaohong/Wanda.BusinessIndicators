@@ -9,9 +9,6 @@
   <ReportMonthlyDetail>
     <TableTemplate />
   </ReportMonthlyDetail>
-  <SummaryMonthlyReport>
-    <TableTemplate TableHeadTmplName="MonthReportSummaryHeadTemplate_DZSW" TableDataTmplName="" TableExcelTemplateName="月度经营报告_大众电影V1.xlsx" />
-  </SummaryMonthlyReport>
   <ManageTargetDetail Name="经营报告明细">
     <BlendTargets IsBlendTarget="True" Senquence="1" TargetName="回款 +EBITDA" TargetValue="E89933D0-73C6-49DF-A7CB-830BED133CE7,4883BB0D-A950-4E06-9EED-35775754D4C1">
       <Target TargetName="回款 " Senquence="1" IsBlendTarget="True" TargetValue="E89933D0-73C6-49DF-A7CB-830BED133CE7" />
@@ -73,7 +70,7 @@
     </Group>
   </Misstarget>
   <MisstargetReturn Name="补回情况">
-    <Group TargetName="回款 +EBITDA" Senquence="1" TargetValue="E89933D0-73C6-49DF-A7CB-830BED133CE7,4883BB0D-A950-4E06-9EED-35775754D4C1,1E26FACC-3BE9-4F96-84BB-12F996BFE3F6">
+    <Group TargetName="回款 +EBITDA" Senquence="1" TargetValue="E89933D0-73C6-49DF-A7CB-830BED133CE7,4883BB0D-A950-4E06-9EED-35775754D4C1">
       <Counter Title="一、到期未补回" Senquence="1" Expression="GetValue(&quot;EBITDA.ReturnType&quot;)==2||GetValue(&quot;回款 .ReturnType&quot;)==2" />
       <Counter Title="二、未到期" Senquence="2" Expression="(GetStringValue(&quot;EBITDA.LastIsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;回款 .LastIsMissTarget&quot;)==&quot;True&quot;)&amp;&amp;(GetStringValue(&quot;EBITDA.IsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;回款 .IsMissTarget&quot;)==&quot;True&quot;)">
         <Counter Title="1. 回款 、EBITDA均未完成" Senquence="1" Expression="GetStringValue(&quot;EBITDA.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;回款 .IsMissTarget&quot;)==&quot;True&quot;" />

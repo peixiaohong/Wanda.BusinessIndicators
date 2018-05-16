@@ -7,7 +7,6 @@ using System.Web;
 using System.Web.UI.WebControls;
 using LJTH.BusinessIndicators.BLL;
 using LJTH.BusinessIndicators.Model;
-using NLog;
 
 namespace LJTH.BusinessIndicators.Web.BusinessReport
 {
@@ -33,7 +32,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 ViewState["TreeDataJson"] = value;
             }
         }
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -85,7 +84,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
 
                     TreeDataJson = JsonConvert.SerializeObject(TreeData);
                 }
-                logger.Info("text:"+ JsonConvert.SerializeObject(systemList));
+
                 //if (sysList.Count > 0)
                 //{
                 //    ddlSystem.DataSource = sysList.Distinct().ToList().OrderBy(or => or.Sequence).ToList();
@@ -114,7 +113,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 ddlYear.DataBind();
 
                 ddlYear.SelectedValue = finYear.ToString();
-                
+
 
                 List<int> Month = new List<int>();
                 for (int i = 1; i <= 12; i++)
