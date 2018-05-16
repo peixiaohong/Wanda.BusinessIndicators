@@ -199,10 +199,10 @@ namespace LJTH.BusinessIndicators.Engine
                     if (_MonthReportID == Guid.Empty)
                     {
                         if (DataSource == "Draft")  //获取草稿状态的
-                            _LastestMonthlyReport = B_MonthlyreportOperator.Instance.GetLastMonthlyReportList(_System.ID, FinYear, FinMonth,TargetPlanID);
+                            _LastestMonthlyReport = B_MonthlyreportOperator.Instance.GetLastMonthlyReportList(_System.ID, FinYear, FinMonth, TargetPlanID);
                         else // 获取审批中状态下的（修改为审批中和已完成两种状态的）
                             //_LastestMonthlyReport = B_MonthlyreportOperator.Instance.GetMonthlyReport(_System.ID, FinYear, FinMonth);
-                            _LastestMonthlyReport = B_MonthlyreportOperator.Instance.GetMonthlyReporNew(_System.ID, FinYear, FinMonth,TargetPlanID);
+                            _LastestMonthlyReport = B_MonthlyreportOperator.Instance.GetMonthlyReporNew(_System.ID, FinYear, FinMonth, TargetPlanID);
 
                         if (_LastestMonthlyReport != null)
                             _MonthReportID = _LastestMonthlyReport.ID;
@@ -238,7 +238,10 @@ namespace LJTH.BusinessIndicators.Engine
                 {
                     if (_MonthReportID == Guid.Empty)
                     {
-                        _ValidatedMonthlyReport = A_MonthlyreportOperator.Instance.GetAMonthlyReport(_System.ID, FinYear, FinMonth);
+                        if (TargetPlanID != Guid.Empty)
+                            _ValidatedMonthlyReport = A_MonthlyreportOperator.Instance.GetAMonthlyReport(_System.ID, FinYear, FinMonth, TargetPlanID);
+                        else
+                            _ValidatedMonthlyReport = A_MonthlyreportOperator.Instance.GetAMonthlyReport(_System.ID, FinYear, FinMonth);
 
                         if (_ValidatedMonthlyReport != null)
                         {

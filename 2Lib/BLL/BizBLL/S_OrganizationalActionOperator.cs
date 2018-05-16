@@ -75,6 +75,16 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         }
 
         /// <summary>
+        /// 批量修改数据
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public int UpdateListData(List<S_Organizational> data)
+        {
+            return _s_OrganizationalAdapter.UpdateList(data);
+        }
+
+        /// <summary>
         /// 逻辑删除单条数据
         /// </summary>
         /// <param name="id"></param>
@@ -148,19 +158,29 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
             return base.GetModelObject(ID);
         }
 
-        #endregion
-
-
-        #region 数据权限
-
-        #region 有判断项目 IsDelete=0
         /// <summary>
-        /// 根据板块拿授权的区域
+        /// 根据板块id，拿到所有的项目【包括逻辑删除】
         /// </summary>
         /// <param name="systemID"></param>
-        /// <param name="loginName"></param>
         /// <returns></returns>
-        public List<DataPermissions> GetUserAuthorizationArea(Guid systemID, string loginName)
+        public List<S_Organizational> GetCompanyInfoBySystemID(Guid systemID)
+        {
+            return _s_OrganizationalAdapter.GetCompanyInfoBySystemID(systemID);
+        }
+
+            #endregion
+
+
+            #region 数据权限
+
+            #region 有判断项目 IsDelete=0
+            /// <summary>
+            /// 根据板块拿授权的区域
+            /// </summary>
+            /// <param name="systemID"></param>
+            /// <param name="loginName"></param>
+            /// <returns></returns>
+            public List<DataPermissions> GetUserAuthorizationArea(Guid systemID, string loginName)
         {
             return _s_OrganizationalAdapter.GetUserAuthorizationArea(systemID, loginName);
         }

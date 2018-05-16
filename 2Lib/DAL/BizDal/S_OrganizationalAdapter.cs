@@ -44,6 +44,18 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
             string sql = string.Format(@"Select * From [dbo].[S_Organizational] Where SystemID=@SystemID and [IsDeleted]=0");
             return ExecuteQuery(sql, CreateSqlParameter("@SystemID", System.Data.DbType.Guid, systemID));
         }
+
+        /// <summary>
+        /// 根据板块id，拿到所有的项目【包括逻辑删除】
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetCompanyInfoBySystemID(Guid systemID)
+        {
+            string sql = string.Format(@"Select * From [dbo].[S_Organizational] Where SystemID=@SystemID and [IsCompany]=1");
+            return ExecuteQuery(sql, CreateSqlParameter("@SystemID", System.Data.DbType.Guid, systemID));
+        }
+
         /// <summary>
         /// 获取下层子节点
         /// </summary>
