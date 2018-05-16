@@ -106,7 +106,7 @@
                                     <div class="organization_name" style="display:none;">
                                         <input type="text" name="name" value="" readonly="readonly" />
                                     </div>
-                                    <div class="old_name" style="margin-top:5px;">
+                                    <div class="old_name" style="margin-top:15px;">
                                         <span>旧有名称:</span>
                                         <input type="text" name="name" value="" readonly="readonly" style="cursor:not-allowed"/>
                                     </div>

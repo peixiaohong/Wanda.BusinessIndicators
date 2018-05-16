@@ -57,10 +57,6 @@ function RegisterEvent() {
     // 项目查询
     $(".company_search").off("click").on("click", function () {
         var val = $("#companyName").val();
-        if (!val) {
-            $.MsgBox.Alert("提示", "项目名称不能为空");
-            return false;
-        }
         initCompany(val)
     })
     // 项目保存
@@ -79,9 +75,10 @@ function CheckOrganization(type, c) {
     } else if (isCompany == "false") {
         isCompany = false;
     }
-    //console.log(isCompany);
     var level = el.attr("data-level");
     var id = el.attr("data-id");
+    var name = el.attr("data-name");
+    var systemID = el.attr("data-systemID");
     if (type == "Add") {
         if (level == 1) {
             $.MsgBox.Alert("提示", "系统板块不能新增");
@@ -92,8 +89,9 @@ function CheckOrganization(type, c) {
             return false;
         }
         CheckCompany(c);
+        $(".organization-title").html(name);
+        $(".old_name").css("display", "none");
         $(".organization_edit").css("display", "block");
-        $(".organization_edit_name").val("");
         $(".add_submit").css("display", "block");
         $(".edit_submit").css("display", "none");
 
@@ -103,8 +101,10 @@ function CheckOrganization(type, c) {
             return false;
         }
         CheckCompany(c);
+        GetSystemInfo(systemID);
+        $(".old_name").css("display", "block");
         $(".organization_edit").css("display", "block");
-        $(".organization_edit_name").val(el.val());
+        $(".old_name").find("input").val(name);
         $(".add_submit").css("display", "none");
         $(".edit_submit").css("display", "block");
     } else if (type == "Delete") {
@@ -147,6 +147,25 @@ function CheckCompany(c, d) {
         }
     });
 }
+
+function GetSystemInfo(id) {
+    WebUtil.ajax({
+        async: false,
+        url: "/S_OrganizationalManagerControll/GetSystemInfo",
+        args: {
+            "id": id
+        },
+        successReturn: function (resultData) {
+            if (resultData.Success == 1) {
+                $(".organization-title").html(resultData.Data.SystemName);
+            }
+            else {
+                $.MsgBox.Alert("提示", resultData.Message);
+            }
+        }
+    });
+}
+
 var PageSize = 10;
 var PageNumber = 1;
 //初始项目列表
@@ -171,6 +190,7 @@ function initCompany(content) {
             if (resultData.Success == 1) {
                 var totalCount = resultData.TotalCount;
                 $('#CompanyMenuData').empty();
+                $("#companyName").val("");
                 loadTmpl('#OrganizationCompany').tmpl(resultData).appendTo('#CompanyMenuData');
                 $("#pager").empty();
                 $("#pager").paginationex({
@@ -335,7 +355,7 @@ function DeleteOrganizationData(id, isCompany) {
 function Ztree(data) {
     var zNodes = [];
     data.Data.forEach(function (one) {
-        var zNodesObj = { id: "", pId: "", name: "", level: "", systemID: "", isCompany: false };
+        var zNodesObj = { id: "", pId: "", name: "", level: "", systemID: "", isCompany: false, iconOpen: "../Styles/ztree/img/diy/1_open.png", iconClose: "../Styles/ztree/img/diy/1_close.png", icon: "../Styles/ztree/img/diy/2.png"};
         zNodesObj.id = one.ID;
         zNodesObj.pId = one.ParentID;
         zNodesObj.name = one.CnName;
