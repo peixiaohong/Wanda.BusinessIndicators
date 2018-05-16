@@ -92,11 +92,8 @@ function CheckOrganization(type, c) {
             return false;
         }
         CheckCompany(c);
-        $(".organization_name").css("display", "block");
         $(".organization_edit").css("display", "block");
         $(".organization_edit_name").val("");
-        $(".organization_edit").find("input[type=checkbox]").removeAttr("disabled");
-        $(".organization_edit").find("input[type=checkbox]").css("cursor", "default");
         $(".add_submit").css("display", "block");
         $(".edit_submit").css("display", "none");
 
@@ -106,17 +103,13 @@ function CheckOrganization(type, c) {
             return false;
         }
         CheckCompany(c);
-        $(".organization_name").css("display", "none");
         $(".organization_edit").css("display", "block");
         $(".organization_edit_name").val(el.val());
-        $(".organization_edit").find("input[type=checkbox]").attr({
-            "disabled": "disabled",
-            "checked": isCompany
-        });
-        $(".organization_edit").find("input[type=checkbox]").css("cursor", "not-allowed");
         $(".add_submit").css("display", "none");
         $(".edit_submit").css("display", "block");
     } else if (type == "Delete") {
+        $(".organization_content").css("display", "none");
+        $(".select_content").css("display", "none");
         if (level == 1 || level == 2) {
             $.MsgBox.Alert("提示", "系统板块不能删除");
             return false;
@@ -128,20 +121,21 @@ function CheckOrganization(type, c) {
 
 function CheckCompany(c, d) {
     if (c == "company") {
-        $(".organization-box").css("display", "block");
-        $(".select_content").css("display", "none");
-        $(".organization_content").css("display", "block");
-        $(".organization-title").html("组织名称");
-    } else {
         if (d == "del") {
             $(".organization-box").css("display", "none");
             $(".select_content").css("display", "none");
         } else {
             $(".organization-box").css("display", "block");
-            $(".select_content").css("display", "block");
-            $(".organization_content").css("display", "none");
-            initCompany();
+            $(".select_content").css("display", "none");
+            $(".organization_content").css("display", "block");
+            $(".organization-title").html("组织名称");
         }
+        
+    } else {
+        $(".organization-box").css("display", "block");
+        $(".select_content").css("display", "block");
+        $(".organization_content").css("display", "none");
+        initCompany();
     }
     var rMenu = $("#rMenu");
     if (rMenu) {
@@ -175,7 +169,6 @@ function initCompany(content) {
         },
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
-                console.log(resultData);
                 var totalCount = resultData.TotalCount;
                 $('#CompanyMenuData').empty();
                 loadTmpl('#OrganizationCompany').tmpl(resultData).appendTo('#CompanyMenuData');
@@ -236,6 +229,8 @@ function SaveCompany() {
         },
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
+                initCompany();
+                initPage(); 
                 $.MsgBox.Alert("提示", resultData.Message);
                 LoadPage();
             }
@@ -256,8 +251,8 @@ function initPage() {
         "data-level": "",
         "data-isCompany": ""
     });
-    $(".organization_name").css("display", "block");
-    $(".organization_edit").css("display", "none");
+    $(".organization_content").css("display", "none");
+    $(".select_content").css("display", "none");
 }
 //保存数据
 function SaveOrganization(type) {
@@ -293,13 +288,13 @@ function SaveOrganization(type) {
         args: {
             "type": type,
             "data": JSON.stringify(data),
-            "IsCompany": isCompany,
+            "IsCompany": false,
         },
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
-                initPage();
+                initPage(); 
                 $.MsgBox.Alert("提示", resultData.Message);
-                LoadPage();
+                LoadPage();                
             }
             else {
                 $.MsgBox.Alert("提示", resultData.Message);
@@ -386,9 +381,6 @@ function Ztree(data) {
                 "data-isCompany": treeNode.isCompany
             });
         }
-        //el.val(treeNode.name);
-        //$(".organization_name").css("display", "block");
-        //$(".organization_edit").css("display", "none");
         if (!treeNode && event.target.tagName.toLowerCase() != "button" && $(event.target).parents("a").length == 0) {
             zTree.cancelSelectedNode();
             showRMenu("root", event.clientX, event.clientY, treeNode);

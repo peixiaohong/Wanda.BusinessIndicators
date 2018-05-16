@@ -7,7 +7,7 @@
 
     <div class="main clear">
         <div>
-            <div style="width: 20%; min-height: 400px; float: left">
+            <div style="width: 20%; min-height: 560px; float: left">
                 <div class="margin_t10">
                     <div class="tabs_m">
                         <ul>
@@ -17,7 +17,7 @@
                     <div class="tabs_content user-content" style="height: auto">
                         <!--内容-->
                         <div style="margin-top: 5px;">
-                            <ul id="tree" class="ztree ztree_defined"></ul>
+                            <ul id="tree" class="ztree ztree_defined" style="height:480px"></ul>
                         </div>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                     <li id="m_del" onclick="CheckOrganization('Delete','company')">删除</li>
                 </ul>
             </div>
-            <div style="width: 75%; min-height: 400px; float: left; margin-left: 30px; display: none" class="organization-box">
+            <div style="width: 75%; min-height: 560px; float: left; margin-left: 30px; display: none" class="organization-box">
                 <div class="select_content" style="margin-top:15px">
                     <div class="">
                         <div class="title">
@@ -69,7 +69,7 @@
                         <div class="tabs_content">
                             <!--内容-->
                             <div style="margin-top: 5px;">
-                                <div class="scrolldoorFrame copy">
+                                <div class="scrolldoorFrame copy" style="min-height:300px;overflow-y:auto;">
                                     <table class="tab_005 role-list">
                                         <thead style="width: 100%">
                                             <tr class="tab_5_row_alt">
@@ -101,11 +101,14 @@
                     <div class="tabs_content user-content" style="height: auto">
                         <!--内容-->
                         <div style="margin-top: 5px;">
-                            <div class="ztree_defined">
+                            <div class="ztree_defined" style="height:480px">
                                 <div>
-                                    <div class="organization_name">
-                                        <span>板块名称:</span>
+                                    <div class="organization_name" style="display:none;">
                                         <input type="text" name="name" value="" readonly="readonly" />
+                                    </div>
+                                    <div class="old_name" style="margin-top:5px;">
+                                        <span>旧有名称:</span>
+                                        <input type="text" name="name" value="" readonly="readonly" style="cursor:not-allowed"/>
                                     </div>
                                     <ul class="organization_edit">
                                         <li>
