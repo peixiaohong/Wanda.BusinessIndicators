@@ -69,6 +69,7 @@ namespace LJTH.BusinessIndicators.Engine
             FinYear = report.FinYear;
             FinMonth = report.FinMonth;
             DataSource = _DataSource;
+            TargetPlanID = report.TargetPlanID;
             InitialData(IsLatestVersion, IsAll);
 
         }
