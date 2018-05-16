@@ -295,6 +295,21 @@ WHERE   A_MonthlyReportDetail.SystemID = @SystemID
             return ExecuteQuery(sql, pSystemID, pYear, pMonth, pTargetID);
         }
 
+        internal IList<A_MonthlyReportDetail> GetAMonthlyReportDetailListForTargetPlanID(Guid SystemID, int Year, int Month, Guid TargetPlanID)
+        {
+            string sql = ORMapping.GetSelectSql<A_MonthlyReportDetail>(TSqlBuilder.Instance);
+
+            sql += "WHERE " + base.NotDeleted;
+            sql += " AND SystemID=@SystemID AND FinYear=@Year AND FinMonth=@Month and TargetPlanID=@TargetPlanID";
+
+            SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
+            SqlParameter pYear = CreateSqlParameter("@Year", System.Data.DbType.String, Year);
+            SqlParameter pMonth = CreateSqlParameter("@Month", System.Data.DbType.String, Month);
+            SqlParameter pTargetPlanID = CreateSqlParameter("@TargetPlanID", System.Data.DbType.Guid, TargetPlanID);
+
+            return ExecuteQuery(sql, pSystemID, pYear, pMonth, pTargetPlanID);
+        }
+
         internal IList<A_MonthlyReportDetail> GetAMonthlyreportdetailList(Guid MonthlyReportID)
         {
             string sql = ORMapping.GetSelectSql<A_MonthlyReportDetail>(TSqlBuilder.Instance);
