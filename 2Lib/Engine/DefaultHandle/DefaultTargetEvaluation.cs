@@ -34,6 +34,7 @@ namespace LJTH.BusinessIndicators
             B_MonthlyReportDetail ReportDetail = obj as B_MonthlyReportDetail;
             if (ReportDetail == null) return null;
 
+            C_System system = StaticResource.Instance[ReportDetail.SystemID, ReportDetail.CreateTime];
             C_TargetKpi Kpi = StaticResource.Instance.GetKpiList(ReportDetail.SystemID, ReportDetail.FinYear).Find(K => K.TargetID == ReportDetail.TargetID);
             C_Target Target = StaticResource.Instance.GetTargetListBySysID(ReportDetail.SystemID).Where(p => p.ID == ReportDetail.TargetID).ToList()[0];
             string strUnit = "万元";
@@ -67,8 +68,10 @@ namespace LJTH.BusinessIndicators
                 {
                     DisplayRate = Math.Abs((ReportDetail.NActualAmmount - ReportDetail.NPlanAmmount) / ReportDetail.NPlanAmmount);
                     ReportDetail.NActualRate = JsonHelper.Serialize(new ActualRate(2, DisplayRate));
-
-                    ReportDetail.NDisplayRate = "增亏" + Utility.Instance.CalculateDisplayRate(DisplayRate, Kpi.MeasureRate,strUnit, 2);
+                    if (system.Category == 2 || system.GroupType == "ProSystem")
+                        ReportDetail.NDisplayRate = "退房" + ReportDetail.NActualAmmount.ToString("f1") + strUnit;
+                    else
+                        ReportDetail.NDisplayRate = "增亏" + Utility.Instance.CalculateDisplayRate(DisplayRate, Kpi.MeasureRate, strUnit, 2);
                     ReportDetail.IsMissTargetCurrent = true;
                 }
 
@@ -95,9 +98,9 @@ namespace LJTH.BusinessIndicators
                     ReportDetail.IsMissTargetCurrent = true;
                 }
             }
-            /// A<0&B≥0，完成率=减亏|(B-A)/A|%
-            /// A<B<0，完成率=减亏|(B-A)/A|%
-            /// B<A<0，完成率=增亏|(B-A)/A|%
+            // A<0&B≥0，完成率=减亏|(B-A)/A|%
+            // A<B<0，完成率=减亏|(B-A)/A|%
+            // B<A<0，完成率=增亏|(B-A)/A|%
             else if (ReportDetail.NPlanAmmount < 0)
             {
                 if (ReportDetail.NPlanAmmount < ReportDetail.NActualAmmount)//A<0,B≥0:减亏|(B-A)/A|%
@@ -154,7 +157,10 @@ namespace LJTH.BusinessIndicators
                 {
                     DisplayRate = Math.Abs((ReportDetail.NAccumulativeActualAmmount - ReportDetail.NAccumulativePlanAmmount) / ReportDetail.NAccumulativePlanAmmount);
                     ReportDetail.NAccumulativeActualRate = JsonHelper.Serialize(new ActualRate(2, DisplayRate));
-                    ReportDetail.NAccumulativeDisplayRate = "增亏" + Utility.Instance.CalculateDisplayRate(DisplayRate, Kpi.MeasureRate, strUnit, 2);
+                    if (system.Category == 2 || system.GroupType == "ProSystem")
+                        ReportDetail.NAccumulativeDisplayRate = "退房" + ReportDetail.NAccumulativeActualAmmount.ToString("f1") + strUnit;
+                    else
+                        ReportDetail.NAccumulativeDisplayRate = "增亏" + Utility.Instance.CalculateDisplayRate(DisplayRate, Kpi.MeasureRate, strUnit, 2);
 
                     ReportDetail.IsMissTarget = true;
                 }
@@ -185,9 +191,9 @@ namespace LJTH.BusinessIndicators
 
 
             }
-            /// A<0&B≥0，完成率=减亏|(B-A)/A|%
-            /// A<B<0，完成率=减亏|(B-A)/A|%
-            /// B<A<0，完成率=增亏|(B-A)/A|%
+            // A<0&B≥0，完成率=减亏|(B-A)/A|%
+            // A<B<0，完成率=减亏|(B-A)/A|%
+            // B<A<0，完成率=增亏|(B-A)/A|%
             else if (ReportDetail.NAccumulativePlanAmmount < 0)
             {
                 if (ReportDetail.NAccumulativePlanAmmount < ReportDetail.NAccumulativeActualAmmount)//A<0,B≥0:减亏|(B-A)/A|%
@@ -666,8 +672,8 @@ namespace LJTH.BusinessIndicators
                 {
                     DisplayRate = 0;
                     ReportDetail.NActualRate = JsonHelper.Serialize(new ActualRate(1, DisplayRate));
-
-                    ReportDetail.NDisplayRate = "/";
+                    //裴晓红修改 完成率显示为“退房B万元”
+                    ReportDetail.NDisplayRate = "退房" + ReportDetail.NActualAmmount + strUnit;
                     ReportDetail.IsMissTargetCurrent = true;
                 }
 
@@ -711,7 +717,7 @@ namespace LJTH.BusinessIndicators
             DisplayRate = 0;
 
             #region 累计
-            if (ReportDetail.NAccumulativePlanAmmount > 0)
+            if (ReportDetail.NAccumulativePlanAmmount > 0) //A>0
             {
                 if (ReportDetail.NAccumulativeActualAmmount >= 0) //A>0&B≥0，完成率=B/A
                 {
@@ -729,13 +735,15 @@ namespace LJTH.BusinessIndicators
 
                     ReportDetail.NAccumulativeDisplayRate = Utility.Instance.Pro_CalculateDisplayRate(DisplayRate, Kpi.MeasureRate, strUnit);
                 }
-                else
+                else //A>0 B<0 退房 B万元
                 {
                     DisplayRate = 0;
                     ReportDetail.NAccumulativeActualRate = JsonHelper.Serialize(new ActualRate(1, DisplayRate));
 
-                    ReportDetail.NAccumulativeDisplayRate = "/";
-                    ReportDetail.IsMissTarget = false;
+                    //ReportDetail.NAccumulativeDisplayRate = "/";
+                    //ReportDetail.IsMissTarget = false;
+                    ReportDetail.NAccumulativeDisplayRate = "退房" + ReportDetail.NAccumulativeActualAmmount + strUnit;
+                    ReportDetail.IsMissTarget = true;
                 }
 
             }

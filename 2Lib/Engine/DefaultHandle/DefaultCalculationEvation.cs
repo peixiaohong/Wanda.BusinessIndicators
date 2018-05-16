@@ -747,6 +747,25 @@ namespace LJTH.BusinessIndicators.Engine
                 rpt.NAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
                 rpt.OAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
             }
+            else
+            {
+                //当没有上月数据的时候
+                if (WithCounter)
+                {
+
+                    //这里总是从最新的指标计划获取
+                    //IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear).FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID && P.FinMonth <= rpt.FinMonth);
+                    IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear)
+                        .FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID
+                        && P.FinMonth <= rpt.FinMonth && P.TargetPlanID == rpt.TargetPlanID);
+                    rpt.NAccumulativePlanAmmount = ATPD.Sum(p => p.Target); //计划值从这里取到
+                    rpt.OAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
+
+                    rpt.NAccumulativeActualAmmount = rpt.NActualAmmount;
+                    rpt.OAccumulativeActualAmmount = rpt.OActualAmmount;
+
+                }
+            }
 
             rpt.NAccumulativeDifference = rpt.NAccumulativeActualAmmount - rpt.NAccumulativePlanAmmount;
             rpt.OAccumulativeDifference = rpt.OAccumulativeActualAmmount - rpt.OAccumulativePlanAmmount;
