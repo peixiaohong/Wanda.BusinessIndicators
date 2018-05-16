@@ -66,164 +66,166 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             List<S_Org_User> orgUserEnitity = new List<S_Org_User>();//变量用于存放：新增项目，该需要同步当前大区的权限
 
             //因为需要插入/修改 多张表数据，因此开启事物
-            TransactionScope scope = TransactionScopeFactory.Create(TransactionScopeOption.Required);
-            try
+            using (TransactionScope scope = TransactionScopeFactory.Create(TransactionScopeOption.Required))
             {
-                //放序列化前端传递过来的数据，得到要新增或者修改的数据的对象集合
-                List<S_Organizational> entitys = JsonConvert.DeserializeObject<List<S_Organizational>>(data);
-                //初步判断是否有数据
-                if (entitys == null || entitys.Count <= 0)
+                try
                 {
-                    return new
-                    {
-                        Data = "",
-                        Success = 0,
-                        Message = "参数丢失"
-                    };
-                }
-
-                //新增数据
-                if (type == "Add")
-                {
-                    //循环数据集，更新默认字段值
-                    foreach (var entity in entitys)
-                    {
-                        entity.CreateTime = entity.ModifyTime = DateTime.Now;
-                        entity.CreatorName = entity.ModifierName = base.CurrentUserName;
-                        entity.IsDeleted = false;
-                        //是项目 
-                        if (IsCompany)
-                        {
-                            //新增项目需要插入当前大区下项目一样的权限
-                            //得到 这个大区授权的人
-                            List<S_Org_User> orgUserEntitys = S_Org_UserActionOperator.Instance.GetRegionalPermissions(entity.ParentID);
-                            if (orgUserEntitys != null && orgUserEntitys.Count > 0)
-                            {
-                                foreach (var item in orgUserEntitys)
-                                {
-                                    item.CreateTime = item.ModifyTime = DateTime.Now;
-                                    item.CreatorName = item.ModifierName = base.CurrentUserName;
-                                    item.IsDeleted = false;
-                                    item.ID = Guid.NewGuid();
-                                    item.SystemID = entity.SystemID;
-                                    item.CompanyID = entity.ID;
-
-                                    orgUserEnitity.Add(item);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            //得到这个板块下面不是项目的数据
-                            var disctinctNames = S_OrganizationalActionOperator.Instance.GetSystemsubsetCnName(entity.SystemID, entity.CnName).Where(i => i.IsCompany == false).ToList();
-                            if (disctinctNames.Count > 0)
-                            {
-                                return new
-                                {
-                                    Data = "",
-                                    Success = 0,
-                                    Message = "同一个板块一下大区的名称不能重复"
-                                };
-                            }
-                            //大区的ID是自动生成的
-                            entity.ID = Guid.NewGuid();
-                        }
-                    }
-
-                    if (IsCompany)
-                    {
-                        //获取数据库中当前板块下面的项目数据
-                        var oldData = S_OrganizationalActionOperator.Instance.GetCompanyInfoBySystemID(entitys[0].SystemID);
-
-                        //如果项目在数据库中存在
-                        if (oldData != null && oldData.Count > 0)
-                        {
-                            for (int i = 0; i < oldData.Count; i++)
-                            {
-                                foreach (var item in entitys)
-                                {
-                                    //如果项目在数据库中存在且又存在于新增的项目数据集中
-                                    if (oldData[i].SystemID == item.SystemID && oldData[i].ID == item.ID)
-                                    {
-                                        oldData[i].CnName = item.CnName;
-                                        oldData[i].CreateTime = oldData[i].ModifyTime = DateTime.Now;
-                                        oldData[i].CreatorName = oldData[i].ModifierName = base.CurrentUserName;
-                                        oldData[i].Level = item.Level;
-                                        oldData[i].IsDeleted = false;
-                                        oldData[i].ParentID = item.ParentID;
-                                        oldData[i].Code = item.Code;
-                                        updateEntity.Add(oldData[i]);
-                                        removeEntity.Add(oldData[i]);
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-
-                    //插入组织架构数据
-                    if (IsCompany)
-                    {
-                        if (updateEntity.Count > 0)
-                        {
-                            S_OrganizationalActionOperator.Instance.UpdateListData(updateEntity);
-                        }
-                        if (removeEntity.Count > 0)
-                        {
-                            foreach (var item in removeEntity)
-                            {
-                                entitys.Remove(item);
-                            }
-                        }
-                        if (orgUserEnitity.Count > 0)
-                        {
-                            S_Org_UserActionOperator.Instance.InsertListData(orgUserEnitity);
-                        }
-                    }
-                    int number = S_OrganizationalActionOperator.Instance.InsertListData(entitys);
-
-                    scope.Complete();
-
-                    Success = 1;
-                    Message = "添加成功";
-                }
-
-                //修改数据
-                else
-                {
-                    //修改数据只会一次性改一条
-                    var disctinctNames = S_OrganizationalActionOperator.Instance.GetSystemsubsetCnName(entitys[0].SystemID, entitys[0].CnName);
-                    if (disctinctNames.Where(i => i.ID != entitys[0].ID).Count() > 0)
+                    //放序列化前端传递过来的数据，得到要新增或者修改的数据的对象集合
+                    List<S_Organizational> entitys = JsonConvert.DeserializeObject<List<S_Organizational>>(data);
+                    //初步判断是否有数据
+                    if (entitys == null || entitys.Count <= 0)
                     {
                         return new
                         {
                             Data = "",
                             Success = 0,
-                            Message = "同一个板块一下不能有重复的名称"
+                            Message = "参数丢失"
                         };
                     }
-                    int number = S_OrganizationalActionOperator.Instance.UpdateData(entitys[0]);
-                    scope.Complete();
-                    Success = 1;
-                    Message = "修改成功";
 
+                    //新增数据
+                    if (type == "Add")
+                    {
+                        //循环数据集，更新默认字段值
+                        foreach (var entity in entitys)
+                        {
+                            entity.CreateTime = entity.ModifyTime = DateTime.Now;
+                            entity.CreatorName = entity.ModifierName = base.CurrentUserName;
+                            entity.IsDeleted = false;
+                            //是项目 
+                            if (IsCompany)
+                            {
+                                //新增项目需要插入当前大区下项目一样的权限
+                                //得到 这个大区授权的人
+                                List<S_Org_User> orgUserEntitys = S_Org_UserActionOperator.Instance.GetRegionalPermissions(entity.ParentID);
+                                if (orgUserEntitys != null && orgUserEntitys.Count > 0)
+                                {
+                                    foreach (var item in orgUserEntitys)
+                                    {
+                                        item.CreateTime = item.ModifyTime = DateTime.Now;
+                                        item.CreatorName = item.ModifierName = base.CurrentUserName;
+                                        item.IsDeleted = false;
+                                        item.ID = Guid.NewGuid();
+                                        item.SystemID = entity.SystemID;
+                                        item.CompanyID = entity.ID;
+
+                                        orgUserEnitity.Add(item);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                //得到这个板块下面不是项目的数据
+                                var disctinctNames = S_OrganizationalActionOperator.Instance.GetSystemsubsetCnName(entity.SystemID, entity.CnName).Where(i => i.IsCompany == false).ToList();
+                                if (disctinctNames.Count > 0)
+                                {
+                                    return new
+                                    {
+                                        Data = "",
+                                        Success = 0,
+                                        Message = "同一个板块一下大区的名称不能重复"
+                                    };
+                                }
+                                //大区的ID是自动生成的
+                                entity.ID = Guid.NewGuid();
+                            }
+                        }
+
+                        if (IsCompany)
+                        {
+                            //获取数据库中当前板块下面的项目数据
+                            var oldData = S_OrganizationalActionOperator.Instance.GetCompanyInfoBySystemID(entitys[0].SystemID);
+
+                            //如果项目在数据库中存在
+                            if (oldData != null && oldData.Count > 0)
+                            {
+                                for (int i = 0; i < oldData.Count; i++)
+                                {
+                                    foreach (var item in entitys)
+                                    {
+                                        //如果项目在数据库中存在且又存在于新增的项目数据集中
+                                        if (oldData[i].SystemID == item.SystemID && oldData[i].ID == item.ID)
+                                        {
+                                            oldData[i].CnName = item.CnName;
+                                            oldData[i].CreateTime = oldData[i].ModifyTime = DateTime.Now;
+                                            oldData[i].CreatorName = oldData[i].ModifierName = base.CurrentUserName;
+                                            oldData[i].Level = item.Level;
+                                            oldData[i].IsDeleted = false;
+                                            oldData[i].ParentID = item.ParentID;
+                                            oldData[i].Code = item.Code;
+                                            updateEntity.Add(oldData[i]);
+                                            removeEntity.Add(oldData[i]);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+
+                        //插入组织架构数据
+                        if (IsCompany)
+                        {
+                            if (updateEntity.Count > 0)
+                            {
+                                S_OrganizationalActionOperator.Instance.UpdateListData(updateEntity);
+                            }
+                            if (removeEntity.Count > 0)
+                            {
+                                foreach (var item in removeEntity)
+                                {
+                                    entitys.Remove(item);
+                                }
+                            }
+                            if (orgUserEnitity.Count > 0)
+                            {
+                                S_Org_UserActionOperator.Instance.InsertListData(orgUserEnitity);
+                            }
+                        }
+                        int number = S_OrganizationalActionOperator.Instance.InsertListData(entitys);
+
+                        scope.Complete();
+
+                        Success = 1;
+                        Message = "添加成功";
+                    }
+
+                    //修改数据
+                    else
+                    {
+                        //修改数据只会一次性改一条
+                        var disctinctNames = S_OrganizationalActionOperator.Instance.GetSystemsubsetCnName(entitys[0].SystemID, entitys[0].CnName);
+                        if (disctinctNames.Where(i => i.ID != entitys[0].ID).Count() > 0)
+                        {
+                            return new
+                            {
+                                Data = "",
+                                Success = 0,
+                                Message = "同一个板块一下不能有重复的名称"
+                            };
+                        }
+                        int number = S_OrganizationalActionOperator.Instance.UpdateData(entitys[0]);
+                        scope.Complete();
+                        Success = 1;
+                        Message = "修改成功";
+
+                    }
+                    return new
+                    {
+                        Data = "",
+                        Success = Success,
+                        Message = Message
+                    };
                 }
-                return new
+                catch (Exception ex)
                 {
-                    Data = "",
-                    Success = Success,
-                    Message = Message
-                };
-            }
-            catch (Exception ex)
-            {
-                scope.Dispose();
-                return new
-                {
-                    Data = "",
-                    Success = 0,
-                    Message = ex.Message
-                };
+                    scope.Dispose();
+                    return new
+                    {
+                        Data = "",
+                        Success = 0,
+                        Message = ex.Message
+                    };
+                }
             }
 
         }
