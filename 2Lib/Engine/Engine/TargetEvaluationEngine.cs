@@ -357,7 +357,7 @@ namespace LJTH.BusinessIndicators.Engine
             }
             
 
-            if (sys.Category == 2) //如果系统是项目系统
+            if (sys.Category == 2||sys.GroupType== "ProSystem") //如果系统是项目系统
             {
                 InterfaceName = "Project"; //项目公司有单独的计算
             }
@@ -404,7 +404,7 @@ namespace LJTH.BusinessIndicators.Engine
 
             C_System sys = StaticResource.Instance[RptDetail.SystemID, DateTime.Now];
 
-            if (sys.Category == 2) //如果系统是项目系统
+            if (sys.Category == 2||sys.GroupType=="ProSystem") //如果系统是项目系统
             {
                 InterfaceName = "RProject"; //项目公司有单独的计算
             }

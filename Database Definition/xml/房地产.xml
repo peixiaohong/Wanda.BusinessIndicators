@@ -2,8 +2,9 @@
 	<ProcessCode ShowProcessNodeName="true">YY_ZBGK-FDC</ProcessCode>
 	<ProcessCode ShowProcessNodeName="true">YY_ZBGK-FDC-ZB</ProcessCode>
 	<Interfaces>
-		
-	</Interfaces>
+    <ICalculationEvaluation TemplateType="ProCalculationEvation" InterfaceName="ProCalculationEvation" />
+
+  </Interfaces>
 	<ManageTargetDetail Name="经营报告明细">
 		<BlendTargets IsBlendTarget="True" Senquence="1" TargetName="销售额+销售回款" TargetValue="7049CFD3-F6E4-4DDC-8D15-664E65B1B2C5,BB758856-A380-47AF-8A76-09BB39C1BC22">
 			<Target TargetName="销售额" Senquence="1" IsBlendTarget="True" TargetValue="7049CFD3-F6E4-4DDC-8D15-664E65B1B2C5" />
