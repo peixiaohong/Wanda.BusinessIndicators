@@ -118,6 +118,34 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                                 //2 批量插入权限数据
                                 S_Org_UserActionOperator.Instance.InsertListData(orgUserEntitys);
                             }
+                            //获取数据库中当前板块下面的项目数据
+                            var oldData = S_OrganizationalActionOperator.Instance.GetCompanyInfoBySystemID(entitys[0].SystemID);
+                            List<S_Organizational> updateEntity = new List<S_Organizational>();
+                            if (oldData != null && oldData.Count > 0)
+                            {
+                                for (int i = 0; i < oldData.Count; i++)
+                                {
+                                    foreach (var item in entitys)
+                                    {
+                                        if (oldData[i].SystemID == item.SystemID && oldData[i].ID == item.ID)
+                                        {
+                                            oldData[i].CnName = item.CnName;
+                                            oldData[i].CreateTime = oldData[i].ModifyTime = DateTime.Now;
+                                            oldData[i].CreatorName = oldData[i].ModifierName = base.CurrentUserName;
+                                            oldData[i].Level = item.Level;
+                                            oldData[i].IsDeleted = false;
+                                            oldData[i].ParentID = item.ParentID;
+                                            oldData[i].Code = item.Code;
+                                            updateEntity.Add(oldData[i]);
+                                            entitys.Remove(item);
+                                        }
+                                    }
+                                }
+                                if (updateEntity.Count > 0)
+                                {
+                                    S_OrganizationalActionOperator.Instance.UpdateListData(updateEntity);
+                                }
+                            }
                         }
                         else
                         {
@@ -153,31 +181,6 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                             Message = "同一个板块一下不能有重复的名称"
                         };
                     }
-
-                    ////如果是项目
-                    //if (IsCompany)
-                    //{
-                    //    Model.C_Company company = JsonConvert.DeserializeObject<Model.C_Company>(companyData);
-                    //    company.IsDeleted = false;
-                    //    company.ModifierName = base.CurrentUserName;
-                    //    company.ModifyTime = DateTime.Now;
-                    //    if (oldCompanys.Where(o => o.ID != entity.ID).Count() > 0)
-                    //    {
-                    //        return new
-                    //        {
-                    //            Data = "",
-                    //            Success = 0,
-                    //            Message = "项目名称重复"
-                    //        };
-                    //    }
-                    //    var oldCompany = C_CompanyOperator.Instance.GetCompany(entity.ID);
-                    //    company.CreateTime = oldCompany.CreateTime;
-                    //    company.CreatorName = oldCompany.CreatorName;
-                    //    company.VersionEnd = oldCompany.VersionEnd;
-                    //    company.VersionStart = oldCompany.VersionStart;
-                    //    company.ID = oldCompany.ID;
-                    //    C_CompanyOperator.Instance.UpdateCompany(company);
-                    //}
                     int number = S_OrganizationalActionOperator.Instance.UpdateData(entitys[0]);
                     if (number > 0)
                     {

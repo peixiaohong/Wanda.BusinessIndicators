@@ -663,7 +663,8 @@ namespace LJTH.BusinessIndicators.Engine
                     lastFinMonth = FinMonth - 1;
 
                 //找到上个月的数据 , 上个月的数据只能在A表中
-                List<A_MonthlyReportDetail> AList = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetailList(RptModel._System.ID, FinYear, lastFinMonth).ToList();
+                //List<A_MonthlyReportDetail> AList = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetailList(RptModel._System.ID, FinYear, lastFinMonth).ToList();
+                List<A_MonthlyReportDetail> AList = A_MonthlyreportdetailOperator.Instance.GetAMonthlyReportDetailListForTargetPlanID(RptModel._System.ID, FinYear, lastFinMonth,RptModel.TargetPlanID).ToList();
 
 
                 // 获取各个公司全年的总指标数据

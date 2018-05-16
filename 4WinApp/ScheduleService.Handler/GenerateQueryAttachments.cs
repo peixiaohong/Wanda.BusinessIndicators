@@ -1288,7 +1288,7 @@ namespace ScheduleService.Handler
                 }
             }
             C_System sys = StaticResource.Instance[rpt._SystemID, Dt];
-            
+
             switch (sys.Category)
             {
                 case 1:
@@ -2076,7 +2076,7 @@ namespace ScheduleService.Handler
                     rowStart = rowStartR;
                 }
             }
-            
+
 
             if (Directory.Exists(filePath) == false)
             {
@@ -3260,7 +3260,7 @@ namespace ScheduleService.Handler
         }
 
         #endregion
-        
+
         #region 月度报告 Excel
 
         private void DownTarget_Summary(ReportInstance rpt)
@@ -3364,13 +3364,13 @@ namespace ScheduleService.Handler
                             p.NAccDiffereStr = string.Format("{0:N2}", p.NAccumulativeDifference) + "\r\n (累计欠收)";
                         }
 
-                     
+
                         double temp = 0;
                         if (double.TryParse(p.MeasureRate, out temp))
                         {
                             p.MeasureRate1 = Convert.ToDouble(p.MeasureRate);
                         }
-                       
+
                     }
                     else
                     {
@@ -3391,7 +3391,7 @@ namespace ScheduleService.Handler
 
 
 
-                  
+
                 });
             }
 
@@ -3441,7 +3441,7 @@ namespace ScheduleService.Handler
 
 
         #endregion
-        
+
 
         #region 完成明细 Excel
 

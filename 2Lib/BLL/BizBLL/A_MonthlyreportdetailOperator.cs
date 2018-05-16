@@ -248,6 +248,11 @@ namespace LJTH.BusinessIndicators.BLL
             return result;
         }
 
+        public IList<A_MonthlyReportDetail> GetAMonthlyReportDetailListForTargetPlanID(Guid SystemID, int Year, int Month, Guid TargetPlanID)
+        {
+            IList<A_MonthlyReportDetail> result = _aMonthlyreportdetailAdapter.GetAMonthlyReportDetailListForTargetPlanID(SystemID, Year, Month, TargetPlanID);
+            return result;
+        }
         public IList<A_MonthlyReportDetail> GetAMonthlyreportdetailList(Guid MonthlyReportID)
         {
             IList<A_MonthlyReportDetail> result = _aMonthlyreportdetailAdapter.GetAMonthlyreportdetailList(MonthlyReportID);
