@@ -54,6 +54,19 @@ function RegisterEvent() {
     $(".edit_submit").off("click").on("click", function () {
         SaveOrganization("Edit");
     });
+    // 项目查询
+    $(".company_search").off("click").on("click", function () {
+        var val = $("#companyName").val();
+        if (!val) {
+            $.MsgBox.Alert("提示", "项目名称不能为空");
+            return false;
+        }
+        initCompany(val)
+    })
+    // 项目保存
+    $(".company_sumbit").off("click").on("click", function () {
+        SaveCompany();
+    })
 
 }
 //是否选择到板块
@@ -108,22 +121,27 @@ function CheckOrganization(type, c) {
             $.MsgBox.Alert("提示", "系统板块不能删除");
             return false;
         }
-        CheckCompany(c);
+        CheckCompany(c, "del");
         DeleteOrganizationData(id, isCompany);
     }
 }
 
-function CheckCompany(c) {
+function CheckCompany(c, d) {
     if (c == "company") {
         $(".organization-box").css("display", "block");
         $(".select_content").css("display", "none");
         $(".organization_content").css("display", "block");
         $(".organization-title").html("组织名称");
     } else {
-        $(".organization-box").css("display", "block");
-        $(".select_content").css("display", "block");
-        $(".organization_content").css("display", "none");
-        $(".organization-title").html("组织名称123");
+        if (d == "del") {
+            $(".organization-box").css("display", "none");
+            $(".select_content").css("display", "none");
+        } else {
+            $(".organization-box").css("display", "block");
+            $(".select_content").css("display", "block");
+            $(".organization_content").css("display", "none");
+            initCompany();
+        }
     }
     var rMenu = $("#rMenu");
     if (rMenu) {
@@ -135,7 +153,98 @@ function CheckCompany(c) {
         }
     });
 }
+var PageSize = 10;
+var PageNumber = 1;
+//初始项目列表
+function initCompany(content) {
+    Load();
+    var el = $(".organization_name").find("input");
+    var systemID = el.attr("data-systemID");
+    var keyWord = "";
+    if (content) {
+        keyWord = content;
+    }
+    WebUtil.ajax({
+        async: false,
+        url: "/S_OrganizationalManagerControll/GetCompanyInfo",
+        args: {
+            "systemID": systemID,
+            "keyWord": keyWord,
+            "pageIndex": PageNumber,
+            "pageSize": PageSize
+        },
+        successReturn: function (resultData) {
+            if (resultData.Success == 1) {
+                console.log(resultData);
+                var totalCount = resultData.TotalCount;
+                $('#CompanyMenuData').empty();
+                loadTmpl('#OrganizationCompany').tmpl(resultData).appendTo('#CompanyMenuData');
+                $("#pager").empty();
+                $("#pager").paginationex({
+                    current: PageNumber,
+                    pageSize: PageSize,
+                    totalCount: totalCount,
+                    navTo: function (pageIndex) {
+                        PageNumber = pageIndex;
+                        initCompany();
+                    }
+                });
+            }
+            else {
+                //console.log(resultData.Message);
+            }
+            Fake();
+        }
+    });
+}
 
+// 项目选中保存
+function SaveCompany() {
+    var el = $(".organization_name").find("input");
+    var systemID = el.attr("data-systemID");
+    var pid = el.attr("data-id");
+    var level = Number(el.attr("data-level")) + 1;
+    var elCompany = $(".companyChecked");
+    var data = [];
+    for (var i = 0; i < elCompany.length; i++) {
+        var id = elCompany.eq(i).attr("data-id");
+        var name = elCompany.eq(i).attr("data-name");
+        if (elCompany.eq(i).attr("checked") == "checked") {
+            var obj = {
+                "ID": id,
+                "SystemID": systemID,
+                "CnName": name,
+                "Code": "",
+                "ParentID": pid,
+                "Level": level,
+                "IsCompany": true
+            }
+            data.push(obj);
+        }
+    }
+    if (!data.length) {
+        $.MsgBox.Alert("提示", "请选择项目");
+        return false;
+    }
+    WebUtil.ajax({
+        async: false,
+        url: "/S_OrganizationalManagerControll/SaveData",
+        args: {
+            "type": "Add",
+            "data": JSON.stringify(data),
+            "IsCompany": true,
+        },
+        successReturn: function (resultData) {
+            if (resultData.Success == 1) {
+                $.MsgBox.Alert("提示", resultData.Message);
+                LoadPage();
+            }
+            else {
+                $.MsgBox.Alert("提示", resultData.Message);
+            }
+        }
+    });
+}
 //确定后初始
 function initPage() {
     $(".organization_name").find("input").val("");
@@ -157,20 +266,13 @@ function SaveOrganization(type) {
     var pid = el.attr("data-id");
     var id = "00000000-0000-0000-0000-000000000000";
     var level = Number(el.attr("data-level")) + 1;
-    var isCompany = $(".organization_edit").find("input[type=checkbox]").attr("checked");
     var val = $(".organization_edit_name").val();
     if (type == "Edit") {
         level = Number(el.attr("data-level"));
         id = el.attr("data-id");
         pid = el.attr("data-pid");
-        isCompany = el.attr("data-isCompany");
     }
     //console.log(isCompany);
-    if (isCompany == "true" || isCompany == "checked") {
-        isCompany = true;
-    } else {
-        isCompany = false;
-    }
     var data = {
         "ID": id,
         "SystemID": systemID,
@@ -178,14 +280,8 @@ function SaveOrganization(type) {
         "Code": "",
         "ParentID": pid,
         "Level": level,
-        "IsCompany": isCompany
+        "IsCompany": false
     }
-    var companyData = {
-        "ID": id,
-        "SystemID": systemID,
-        "CompanyName": val
-    }
-
     if (!val) {
         $.MsgBox.Alert("提示", "组织名称不能为空");
         return false;
@@ -198,7 +294,6 @@ function SaveOrganization(type) {
             "type": type,
             "data": JSON.stringify(data),
             "IsCompany": isCompany,
-            "companyData": JSON.stringify(companyData),
         },
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
@@ -280,32 +375,59 @@ function Ztree(data) {
     var rMenu = $("#rMenu");
     Fake();
     function OnRightClick(event, treeId, treeNode) {
-        console.log(treeNode);
         var el = $(".organization_name").find("input");
-        el.attr({
-            "data-id": treeNode.id,
-            "data-pid": treeNode.pId,
-            "data-name": treeNode.name,
-            "data-systemID": treeNode.systemID,
-            "data-level": treeNode.level + 1,
-            "data-isCompany": treeNode.isCompany
-        });
+        if (treeNode) {
+            el.attr({
+                "data-id": treeNode.id,
+                "data-pid": treeNode.pId,
+                "data-name": treeNode.name,
+                "data-systemID": treeNode.systemID,
+                "data-level": treeNode.level + 1,
+                "data-isCompany": treeNode.isCompany
+            });
+        }
         //el.val(treeNode.name);
         //$(".organization_name").css("display", "block");
         //$(".organization_edit").css("display", "none");
         if (!treeNode && event.target.tagName.toLowerCase() != "button" && $(event.target).parents("a").length == 0) {
             zTree.cancelSelectedNode();
-            showRMenu("root", event.clientX, event.clientY);
+            showRMenu("root", event.clientX, event.clientY, treeNode);
         } else if (treeNode && !treeNode.noR) {
             zTree.selectNode(treeNode);
-            showRMenu("node", event.clientX, event.clientY);
+            showRMenu("node", event.clientX, event.clientY, treeNode);
         }
     };
-    function showRMenu(type, x, y) {
-        if (type == "root") {
+    function showRMenu(type, x, y, treeNode) {
+        var level = 0;
+        var company = false;
+        if (treeNode) {
+            level = treeNode.level + 1;
+            company = treeNode.isCompany;
+        }
+        if (type == "root" || level == 1) {
             $("#rMenu ul").hide();
         } else {
             $("#rMenu ul").show();
+            if (level == 2) {
+                $("#m_add").show();
+                $("#m_addC").show();
+                $("#m_edit").hide();
+                $("#m_del").hide();
+            } else if (level >= 3) {
+                if (company) {
+                    $("#m_add").hide();
+                    $("#m_addC").hide();
+                    $("#m_edit").hide();
+                    $("#m_del").show();
+                } else {
+                    $("#m_add").show();
+                    $("#m_addC").show();
+                    $("#m_edit").show();
+                    $("#m_del").show();
+                }
+
+            }
+
         }
         y += document.body.scrollTop;
         x += document.body.scrollLeft;

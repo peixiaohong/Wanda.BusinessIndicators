@@ -75,3 +75,15 @@
     </tr>
     {{/each}}
 </script>
+<!--组织架构项目列表-->
+<script type="text/x-jquery-tmpl" id="OrganizationCompany">
+    {{each(i,item) Data}}
+    <tr>
+        <td>
+            <input type="checkbox" data-id="${item.ID}" data-name="${item.CompanyName}" value="" class="companyChecked" />
+        </td>
+        <td>${i+1}</td>
+        <td>${item.CompanyName}</td>
+    </tr>
+    {{/each}}
+</script>
