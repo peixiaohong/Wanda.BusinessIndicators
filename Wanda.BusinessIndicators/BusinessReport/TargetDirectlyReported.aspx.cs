@@ -337,6 +337,11 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 //Server.Transfer("~/BusinessReport/TargetGroupReported.aspx?SystemId=" + cs.ID);
                 Response.Redirect("~/BusinessReport/TargetGroupReported.aspx?SystemId=" + cs.ID);
             }
+            else if (cs.Category == 4)
+            {
+                //Server.Transfer("~/BusinessReport/TargetDirectlyReported.aspx?SystemId=" + cs.ID);
+                Response.Redirect("~/BusinessReport/TargetDirectlyReported.aspx?SystemId=" + cs.ID);
+            }
         }
     }
 }
