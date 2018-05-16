@@ -43,6 +43,16 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         }
 
         /// <summary>
+        /// 插入批量数据
+        /// </summary>
+        /// <param name="datas"></param>
+        /// <returns></returns>
+        public int InsertListData(List<S_Organizational> datas)
+        {
+            return _s_OrganizationalAdapter.InsertList(datas);
+        }
+
+        /// <summary>
         /// 获取全部有效的数据
         /// </summary>
         /// <returns></returns>

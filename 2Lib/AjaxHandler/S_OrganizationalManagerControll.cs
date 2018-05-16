@@ -61,77 +61,73 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             int Success = 0;
             try
             {
-                //变量，用来判断如果是项目  在company表中存在的数据
-                int companyNameNumbers = 0;
                 //存放 如果是项目，根据项目名称查询到项目表的数据
                 List<Model.C_Company> oldCompanys = new List<Model.C_Company>();
 
-                S_Organizational entity = JsonConvert.DeserializeObject<S_Organizational>(data);
-                //如果用户添加的是项目
-                if (IsCompany)
+                List<S_Organizational> entitys = JsonConvert.DeserializeObject<List<S_Organizational>>(data);
+                if (entitys == null || entitys.Count <= 0)
                 {
-                    //得到用户保存的项目名称在company中存在的数量
-                    oldCompanys = C_CompanyOperator.Instance.GetCompanyInfoByName(entity.CnName,entity.SystemID);
-                    companyNameNumbers = oldCompanys.Count();
+                    return new
+                    {
+                        Data = "",
+                        Success = 0,
+                        Message = "参数丢失"
+                    };
                 }
                 //新增数据
                 if (type == "Add")
                 {
-                    entity.CreateTime = entity.ModifyTime = DateTime.Now;
-                    entity.CreatorName = entity.ModifierName = base.CurrentUserName;
-                    //entity.ID = Guid.NewGuid();
-                    entity.IsDeleted = false;
-
-                    var disctinctNames=S_OrganizationalActionOperator.Instance.GetSystemsubsetCnName(entity.SystemID, entity.CnName).Where(i=>i.IsCompany==false).ToList();
-                    if (disctinctNames.Count > 0)
+                    foreach (var entity in entitys)
                     {
-                        return new
-                        {
-                            Data = "",
-                            Success = 0,
-                            Message = "同一个板块一下不能有重复的名称"
-                        };
-                    }
 
-                    ////是项目 且名字已经存在company表
-                    //if (IsCompany && companyNameNumbers > 0)
-                    //{
-                    //    return new
-                    //    {
-                    //        Data = "",
-                    //        Success = 0,
-                    //        Message = "项目名称已经存在，不允许录入重复的项目"
-                    //    };
-                    //}
-                    //是项目 
-                    if (IsCompany)
-                    {
-                        entity.IsCompany = true;
+                        entity.CreateTime = entity.ModifyTime = DateTime.Now;
+                        entity.CreatorName = entity.ModifierName = base.CurrentUserName;
+                        //entity.ID = Guid.NewGuid();
+                        entity.IsDeleted = false;
 
-                        //插入相同的权限
-                        //1.得到 这个大区授权的人
-                        List<S_Org_User> orgUserEntitys = S_Org_UserActionOperator.Instance.GetRegionalPermissions(entity.ParentID);
-                        if (orgUserEntitys != null && orgUserEntitys.Count > 0)
+                        var disctinctNames = S_OrganizationalActionOperator.Instance.GetSystemsubsetCnName(entity.SystemID, entity.CnName).Where(i => i.IsCompany == false).ToList();
+                        if (disctinctNames.Count > 0)
                         {
-                            foreach (var item in orgUserEntitys)
+                            return new
                             {
-                                item.CreateTime = item.ModifyTime = DateTime.Now;
-                                item.CreatorName = item.ModifierName = base.CurrentUserName;
-                                item.IsDeleted = false;
-                                item.ID = Guid.NewGuid();
-                                item.SystemID = entity.SystemID;
-                                item.CompanyID = entity.ID;
-                            }
-                            //2 批量插入权限数据
-                            S_Org_UserActionOperator.Instance.InsertListData(orgUserEntitys);
+                                Data = "",
+                                Success = 0,
+                                Message = "同一个板块一下不能有重复的名称"
+                            };
                         }
-                    }
-                    else
-                    {
-                        entity.ID = Guid.NewGuid();
+
+                        //是项目 
+                        if (IsCompany)
+                        {
+                            entity.IsCompany = true;
+
+                            //插入相同的权限
+                            //1.得到 这个大区授权的人
+                            List<S_Org_User> orgUserEntitys = S_Org_UserActionOperator.Instance.GetRegionalPermissions(entity.ParentID);
+                            if (orgUserEntitys != null && orgUserEntitys.Count > 0)
+                            {
+                                foreach (var item in orgUserEntitys)
+                                {
+                                    item.CreateTime = item.ModifyTime = DateTime.Now;
+                                    item.CreatorName = item.ModifierName = base.CurrentUserName;
+                                    item.IsDeleted = false;
+                                    item.ID = Guid.NewGuid();
+                                    item.SystemID = entity.SystemID;
+                                    item.CompanyID = entity.ID;
+                                }
+                                //2 批量插入权限数据
+                                S_Org_UserActionOperator.Instance.InsertListData(orgUserEntitys);
+                            }
+                        }
+                        else
+                        {
+                            entity.ID = Guid.NewGuid();
+                        }
+
+
                     }
                     //插入组织架构数据
-                    int number = S_OrganizationalActionOperator.Instance.InsertData(entity);
+                    int number = S_OrganizationalActionOperator.Instance.InsertListData(entitys);
                     if (number > 0)
                     {
                         Success = 1;
@@ -146,9 +142,9 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 //修改数据
                 else
                 {
-
-                    var disctinctNames = S_OrganizationalActionOperator.Instance.GetSystemsubsetCnName(entity.SystemID, entity.CnName);
-                    if (disctinctNames.Where(i=>i.ID!=entity.ID).Count() > 0)
+                    //修改数据只会一次性改一条
+                    var disctinctNames = S_OrganizationalActionOperator.Instance.GetSystemsubsetCnName(entitys[0].SystemID, entitys[0].CnName);
+                    if (disctinctNames.Where(i => i.ID != entitys[0].ID).Count() > 0)
                     {
                         return new
                         {
@@ -182,7 +178,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     //    company.ID = oldCompany.ID;
                     //    C_CompanyOperator.Instance.UpdateCompany(company);
                     //}
-                    int number = S_OrganizationalActionOperator.Instance.UpdateData(entity);
+                    int number = S_OrganizationalActionOperator.Instance.UpdateData(entitys[0]);
                     if (number > 0)
                     {
                         Success = 1;
@@ -219,7 +215,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         /// <param name="id"></param>
         /// <returns></returns>
         [LibAction]
-        public object DeleteData(string id,bool isCompany)
+        public object DeleteData(string id, bool isCompany)
         {
             if (id == "")
             {
@@ -327,7 +323,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         /// <param name="keyWord"></param>
         /// <returns></returns>
         [LibAction]
-        public object GetCompanyInfo(string systemID, string keyWord, int pageIndex,int pageSize)
+        public object GetCompanyInfo(string systemID, string keyWord, int pageIndex, int pageSize)
         {
             int TotalCount = 0;
             try
