@@ -43,8 +43,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 logMessage += HttpUtility.UrlDecode(context.Request.QueryString.ToString());
 
             }
-
-            JsonConvert.SerializeObject(context.Request);
+            
             try
             {
                 this.BusinessID = context.Request["BusinessID"];
