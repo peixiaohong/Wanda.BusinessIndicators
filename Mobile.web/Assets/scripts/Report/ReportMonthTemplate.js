@@ -26,9 +26,9 @@
                         "TargetName": decodeURI(utils.getQueryString("name")),
                         "TargetPlanID": utils.getQueryString("versionID"),
                         "IncludeHaveDetail": false,
-                        "IsLatestVersion": true,
+                        "IsLatestVersion": false,
                         "DataSource": "Draft",
-                        "IsAll": true
+                        "IsAll": false
                     },
                     success: function (res) {
                         if (res.IsSuccess && res.StatusCode == 200) {
