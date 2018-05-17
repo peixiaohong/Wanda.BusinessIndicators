@@ -102,7 +102,7 @@
 
         <!--完成情况明细 start-->
         <div class="TClassHide" id="T2">
-            <ul class="tabs" id="Ul4" style="border-bottom-color: #FFF; margin-top: 5px; height: 20px; margin-bottom: 0px;">
+            <ul class="tabs" id="Ul4" style="border-bottom-color: #FFF; margin-top: 5px; height: 20px;">
             </ul>
             <table class="tab_005" id="importedDataTable2">
                 <thead id="CompleteDetailHead">
@@ -115,7 +115,7 @@
 
         <!--未完成说明 累计 开始-->
         <div class="TClassHide" id="T3">
-            <ul class="tabs" id="U2" style="border-bottom-color: #FFF; margin-top: 5px; height: 20px; margin-bottom: 0px;">
+            <ul class="tabs" id="U2" style="border-bottom-color: #FFF; margin-top: 5px; height: 20px;">
             </ul>
 
             <table class="tab_005" id="Tab_MissFloatTarget" style="display:none;">
@@ -134,7 +134,7 @@
 
         <!--未完成说明（当月） 开始-->
         <div class="TClassHide" id="T3_1">
-            <ul class="tabs" id="U2_1" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
+            <ul class="tabs" id="U2_1" style="border-bottom-color: #FFF; margin-top: 5px; height: auto;">
             </ul>
 
             <table class="tab_005" id="Tab_CurrentMissTarget">
