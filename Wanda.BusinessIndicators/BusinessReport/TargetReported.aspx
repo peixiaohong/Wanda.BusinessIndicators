@@ -112,7 +112,7 @@
             <div class="scrolldoorFrame copy">
                 <ul class="tabs" id="Ul4" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                 </ul>
-                <table class="tab_005" id="importedDataFloatTable2">
+                <table class="tab_005" id="importedDataFloatTable2" style="display:none;">
                     <thead>
                     </thead>
                 </table>
@@ -130,7 +130,7 @@
         <div class="TClassHide" id="T3">
             <ul class="tabs" id="U2" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
             </ul>
-            <table class="tab_005" id="Tab_MissFloatTarget">
+            <table class="tab_005" id="Tab_MissFloatTarget" style="display:none;">
                 <thead>
                 </thead>
             </table>
@@ -150,7 +150,7 @@
         <div class="TClassHide" id="T3_1">
             <ul class="tabs" id="U2_1" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
             </ul>
-            <table class="tab_005" id="Tab_CurrentMissFloatTarget">
+            <table class="tab_005" id="Tab_CurrentMissFloatTarget" style="display:none;">
                 <thead>
                     
                 </thead>

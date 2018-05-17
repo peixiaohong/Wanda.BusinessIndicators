@@ -118,6 +118,10 @@
             <ul class="tabs" id="U2" style="border-bottom-color: #FFF; margin-top: 5px; height: 20px; margin-bottom: 0px;">
             </ul>
 
+            <table class="tab_005" id="Tab_MissFloatTarget" style="display:none;">
+                <thead>
+                </thead>
+            </table>
             <table class="tab_005" id="Tab_MissTarget">
                 <thead id="Tab_MissTargetHead">
                 </thead>

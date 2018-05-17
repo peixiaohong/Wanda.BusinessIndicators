@@ -90,15 +90,11 @@ namespace WebApi.Controllers
                 Guid.TryParse(SystemID, out result);
                 if (result == Guid.Empty)
                     return new ResultContext((int)StatusCodeEnum.isFalse, "系统编码错误");
-                List<B_MonthlyReport> li = B_MonthlyreportOperator.Instance.GetMonthlyReportBySysIDList(result, Year, Month);
-                string Dis = "";
-                if (li.Count > 0)
-                    Dis = li.FirstOrDefault().Description;
                 DictionaryVmodel dv = new DictionaryVmodel();
                 if (listM.Count > 0)
                     dv = listM[2];
 
-                return new ResultContext(new { title = Dis, list = JsonConvert.SerializeObject(listM[2]) });
+                return new ResultContext(new { title = listM[1].ObjValue, list = JsonConvert.SerializeObject(dv) });
             }
             catch (Exception ex)
             {

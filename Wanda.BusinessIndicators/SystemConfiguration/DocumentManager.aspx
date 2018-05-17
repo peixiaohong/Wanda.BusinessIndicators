@@ -42,7 +42,7 @@
     <div class="content_m" style="padding-left: 0px !important; padding-right: 0px !important;">
         <table style="width: 100%">
             <tr>
-                <td style="width: 28%; display: none" id="TreeTD">
+                <td style="width: auto; display: block" id="TreeTD">
                     <div class="leftCon" style="padding-top: 0px; margin: 0px;">
                         <div style="padding-top: 0" class="leftCon">
                             <div style="margin-top: 0; margin-bottom: 0px;" class="con">
@@ -98,7 +98,7 @@
                     <div class="rightCon" style="padding-bottom: 5px; padding-top: 47px; margin-left: 8px; display: inline;">
                         <div id="Div4" style="padding-bottom: 1px;">
                             <input type="text" id="Text1" style="width: 790px; height: 22px; vertical-align: top; line-height: 22px; color: gray" value="输入文档名称" onfocus="if (value =='输入文档名称'){value ='';this.style.color='black'}" onclick="Click()" onblur="if (value ==''){value='输入文档名称'; this.style.color='gray'}" />
-                            <a class="btn_search" id="A1" href="#" style="margin-left: 20px" onclick="SelectData();"><span class="Search">查 询</span></a>
+                            <a class="btn_search" id="A1" href="#" style="margin-left: 20px;color:#cb5c61;" onclick="SelectData();"><span><i class="fa fa-search"></i>&nbsp;查询</span></a>
                         </div>
                     </div>
                     <div class="rightCon" style="padding-top: 0; margin: 0px;">

@@ -86,7 +86,7 @@
                                 <tr> <th colspan="16" > <asp:Label ID="lblVersionName1"  runat="server" Text=""></asp:Label></th></tr>
                                 <tr>
                                     <th rowspan="2" style="width: 4%">序号</th>
-                                    <th rowspan="2" style="width: 11%">门店</th>
+                                    <th rowspan="2" style="width: 11%">项目</th>
                                     <th rowspan="2" style="width: 7%">开业时间</th>
                                     <th rowspan="2" style="width: 7%">年度指标</th>
                                     
