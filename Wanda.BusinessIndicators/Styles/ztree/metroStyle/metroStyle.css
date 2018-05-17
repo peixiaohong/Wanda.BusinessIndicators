@@ -24,7 +24,7 @@ website:    http://code.google.com/p/jquerytree/
 .ztree_new li a.tmpTargetNode_next {}
 .ztree_new li a input.rename {height:14px; width:80px; padding:0; margin:0;
   font-size:12px; border:1px #585956 solid; *border:0px}
-.ztree_new li span {line-height:21px; margin-right:2px}
+.ztree_new li span {display:inline-block;width:100px;line-height:21px; margin-right:2px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
 .ztree_new li span.button {line-height:0; margin:0; padding: 0; width:21px; height:21px; display: inline-block; vertical-align:middle;
   border:0 none; cursor: pointer;outline:none;
   background-color:transparent; background-repeat:no-repeat; background-attachment: scroll;

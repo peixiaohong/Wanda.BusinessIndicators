@@ -144,7 +144,7 @@
                         <tbody id="rows">
                         </tbody>
                     </table>
-                    <table class="tab_005" id="TargetFloatTable">
+                    <table class="tab_005" id="TargetFloatTable" style="display:none;">
                         <thead  style="width: 100%">
                         </thead>
                     </table>

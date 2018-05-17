@@ -48,9 +48,9 @@
                         "Year": Number(self.yearSelect),
                         "Month": Number(self.monthSelect),
                         "TargetPlanID": self.versionSelect,
-                        "IsLatestVersion": true,
+                        "IsLatestVersion": false,
                         "DataSource": "Draft",
-                        "IsAll": true,
+                        "IsAll": false,
                     },
                     success: function (res) {
                         if (res.IsSuccess && res.StatusCode == 200) {
@@ -86,7 +86,7 @@
                     success: function (res) {
                         if (res.IsSuccess && res.StatusCode == 200) {
                             if (res.Data.length) {
-                                console.log(res);
+                                //console.log(res);
                                 self.versions = res.Data;
                                 self.versionSelect = self.versions[0].ID;
                             }                           
