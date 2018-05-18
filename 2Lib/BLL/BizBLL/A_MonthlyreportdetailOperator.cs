@@ -350,6 +350,20 @@ namespace LJTH.BusinessIndicators.BLL
 
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="SystemID"></param>
+        /// <param name="FinYear"></param>
+        /// <param name="TargetPlanID"></param>
+        /// <returns></returns>
+        public List<A_MonthlyReportDetail> GetAMonthlyreportdetailList(Guid SystemID, int FinYear,  Guid TargetPlanID)
+        {
+            List<A_MonthlyReportDetail> result = _aMonthlyreportdetailAdapter.GetAMonthlyreportdetailList(SystemID, FinYear, TargetPlanID);
+            return result;
+        }
+
+
+        /// <summary>
         /// 添加指标数据
         /// </summary>
         /// <param name="list">指标数据</param>
