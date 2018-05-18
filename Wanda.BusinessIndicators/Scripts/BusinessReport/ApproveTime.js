@@ -111,9 +111,9 @@ function ChangeTab(result) {
             NowMissList = result;
             //loadTmpl('#TargetReportBody').tmpl(result).appendTo('#TData1');//客户版本不支持tmpl
             AddView(result);
-            var obj = $("#TbH1");
-            var tab = $("#TData1");
-            FloatHeader(obj, tab);
+            //var obj = $("#TbH1");
+            //var tab = $("#TData1");
+            //FloatHeader(obj, tab);
             
         }
     });
@@ -157,6 +157,11 @@ function AddView(result) {
 
     }
     $("#TData1").html(detail);
+    var obj = $("#Tab_FloatReturn");
+    var head = $("#TbH1");
+    obj.find("thead").html(head.html());
+    var tab = $("#TData1");
+    FloatHeader(obj, tab);
 }
 var arrresult = [];
 var Companyid = "";
@@ -619,7 +624,7 @@ function Returned() {
 
 function FormatTime(values) {
     if (values != null && values != "0001/1/1 0:00:00") {
-        var Y = new Date(values).getYear();
+        var Y = new Date(values).getFullYear();
         var X = new Date(values).getMonth() + 1;
         if (X < 10) {
             return Y + "-0" + X;
