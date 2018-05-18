@@ -29,23 +29,22 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         public void ProcessRequest(HttpContext context)
         {
             string logMessage = "{\"Name\":\"月报审批\",\"Context\":";
-                 // Post方式下，取得client端传过来的数据  
-            if ("post".Equals(context.Request.HttpMethod.ToLower()))
-            {
-                StreamReader reader = new StreamReader(context.Request.InputStream);
-                logMessage += HttpUtility.UrlDecode(reader.ReadToEnd());
-
-            }
-            // Get方式下，取得client端传过来的数据  
-            else
-            {
-                // 注意，这个是需要解码的  
-                logMessage += HttpUtility.UrlDecode(context.Request.QueryString.ToString());
-
-            }
-            
             try
-            {
+            {      
+                // Post方式下，取得client端传过来的数据  
+                if ("post".Equals(context.Request.HttpMethod.ToLower()))
+                {
+                    StreamReader reader = new StreamReader(context.Request.InputStream);
+                    logMessage += HttpUtility.UrlDecode(reader.ReadToEnd());
+
+                }
+                // Get方式下，取得client端传过来的数据  
+                else
+                {
+                    // 注意，这个是需要解码的  
+                    logMessage += HttpUtility.UrlDecode(context.Request.QueryString.ToString());
+
+                }
                 this.BusinessID = context.Request["BusinessID"];
                 this.ProType = context.Request["strProType"];
                 this.ExecType = context.Request["ExecuteType"];
@@ -101,7 +100,6 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             catch (Exception ex)
             {
                 logMessage +=",\"Exception\":"+ JsonConvert.SerializeObject(ex);
-                throw;
             }
             finally {
                 logger.Info(logMessage+"}");

@@ -25,23 +25,23 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         public void ProcessRequest(HttpContext context)
         {
             string logMessage = "{\"Name\":\"分解指标审批\",\"Context\":";
-            if ("post".Equals(context.Request.HttpMethod.ToLower()))
-            {
-                StreamReader reader = new StreamReader(context.Request.InputStream);
-                logMessage += HttpUtility.UrlDecode(reader.ReadToEnd());
-
-            }
-            // Get方式下，取得client端传过来的数据  
-            else
-            {
-                // 注意，这个是需要解码的  
-                logMessage += HttpUtility.UrlDecode(context.Request.QueryString.ToString());
-
-            }
             try
             {
+                if ("post".Equals(context.Request.HttpMethod.ToLower()))
+                {
+                    StreamReader reader = new StreamReader(context.Request.InputStream);
+                    logMessage += HttpUtility.UrlDecode(reader.ReadToEnd());
+
+                }
+                // Get方式下，取得client端传过来的数据  
+                else
+                {
+                    // 注意，这个是需要解码的  
+                    logMessage += HttpUtility.UrlDecode(context.Request.QueryString.ToString());
+
+                }
                 this.BusinessID = context.Request["BusinessID"];
-                
+
                 if (!string.IsNullOrEmpty(context.Request["OperatorType"]))
                 {
                     OperatorType = int.Parse(context.Request["OperatorType"]);
@@ -81,7 +81,6 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             catch (Exception ex)
             {
                 logMessage += ",\"Exception\":" + JsonConvert.SerializeObject(ex);
-                throw;
             }
             finally
             {
