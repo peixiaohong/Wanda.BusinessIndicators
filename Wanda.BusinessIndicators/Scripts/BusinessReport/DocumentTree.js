@@ -25,16 +25,10 @@ $(document).ready(function () {
     //Ztree的初始化设置
     var setting = {
         view: {
-            //addHoverDom: addHoverDom,
-            //removeHoverDom: removeHoverDom,
             selectedMulti: false
         },
         callback: {
-            //    onRemove: zTreeOnRemove,
-            onClick: docTreeOnClick,
-            beforeClick: docTreeBeforeClick,
-            //    onRename: docTreeOnRename,
-            //    beforeRemove: docTreeBeforeRemove
+            onClick: docTreeOnClick
         },
         check: {
             enable: false
@@ -52,8 +46,6 @@ $(document).ready(function () {
         },
         edit: {
             enable: false
-            // showRenameBtn: true,
-            // showRemoveBtn: true
         }
     };
 
@@ -70,41 +62,6 @@ $(document).ready(function () {
             $.fn.zTree.init($("#DocTree"), setting, zzNodes);
 
             GetDocAttachmentsList(zzNodes);
-        }
-    });
-    WebUtil.ajax({
-        async: true,
-        url: "/DocumentManagerControll/GetTypeList",
-
-        args: { ParentID: '99999999-9999-9999-9999-FFFFFFFFFFFF' },
-
-        successReturn: function (result) {
-            if (result != "" || result != null) {
-                for (var i = 0; i < result.length; i++) {
-                    if (i != 0) {
-                        loadTmpl('#DocTypeTmpl').tmpl(result[i]).appendTo('#Ul3');
-                    }
-                    else {
-                        loadTmpl('#DocTypeTmplCheck').tmpl(result[i]).appendTo('#Ul3');
-                    }
-                }
-                WebUtil.ajax({
-                    async: false,
-                    url: "/DocumentManagerControll/GetDTreeListByID",
-                    args: { ParentID: result[0].ID },
-                    successReturn: function (ResultData) {
-                        $("#DivSelect1").empty();
-                        if (ResultData.TreeList != "" && ResultData.TreeList != null ) {
-                            $("#DivSelect1").html('请选择产业集团:');
-                            loadTmpl('#DocSelect1Tmpl').tmpl(ResultData).appendTo('#DivSelect1');
-
-                        }
-                    }
-                });
-                ValueA = result[0].ID;
-
-            }
-
         }
     });
 
@@ -125,40 +82,23 @@ function GetYear() {
 
 }
 
-
+var TNodesId;
 //通过节点获取，文档List
 function GetDocAttachmentsList(TNodes) {
-    var TNodesId;
-
-    if (TNodes.length > 1) {
-        TNodesId = TNodes[0].ID;
-        $("#hideTerrNodeId").val(TNodes[0].ID);
+  
+    TNodesId = $("#hideTerrNodeId").val();
+    var zTree = $.fn.zTree.getZTreeObj("DocTree");
+    if (TNodesId == "" || TNodesId == undefined) {
+        var nodes = zTree.getNodes();
+        TNodesId=nodes[0].children[0].ID; //获取第一个子节点
     }
-    else {
-        TNodesId = TNodes.ID;
-        $("#hideTerrNodeId").val(TNodes.ID);
-    }
+   
+    var node = zTree.getNodeByParam("ID", TNodesId);
+    zTree.selectNode(node);
+
+    SelectData();
 
 
-
-    //加载附件List
-    WebUtil.ajax({
-        async: true,
-        url: "/DocumentManagerControll/GetDocAttachmentsList",
-        args: { TreeNodeID: TNodesId },
-        successReturn: function (ResultData) {
-
-            ObjValue.DocManagerData = ResultData;
-
-            $("#AttaTableThead").empty();
-            $("#AttaTableTBody").empty();
-
-            loadTmpl('#DocManageTHeadTmpl').tmpl().appendTo('#AttaTableThead');
-
-            loadTmpl('#DocManageTBodyTmpl').tmpl(ObjValue).appendTo('#AttaTableTBody');
-
-        }
-    });
 }
 
 
@@ -170,150 +110,23 @@ var newCount = 1;
 
 var newDCount = 1;
 
-//加载 编辑和删除图标
-function addHoverDom(treeId, treeNode) {
-
-    var sObj = $("#" + treeNode.tId + "_span");
-
-    if (treeNode.editNameFlag || $("#addBtn_" + treeNode.tId).length > 0) return;
-
-    var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
-        + "' title='add node' onfocus='this.blur();'></span>";
-
-    sObj.after(addStr);
-
-    var btn = $("#addBtn_" + treeNode.tId);
-
-    if (btn) btn.bind("click", function () {
-
-        var zTree = $.fn.zTree.getZTreeObj("DocTree");
-
-        // 将数的节点数据添加到数据库中
-        WebUtil.ajax({
-            async: true,
-            url: "/DocumentManagerControll/AddDocumentTreeNode",
-            args: { TreeNodeID: treeNode.ID, SysID: $("#ddlSystem").val(), NodeNmae: "新的节点" + (newDCount++) },
-            successReturn: function (newNodeID) {
-                if (newNodeID != null) {   //添加节点
-
-                    $("#hideTerrNodeId").val(newNodeID);
-
-                    zTree.addNodes(treeNode, { ID: newNodeID, ParentID: treeNode.ID, TreeNodeName: "新的节点" + (newCount++) });
-                }
-            }
-        });
-
-        return false;
-    });
-};
-
-//删除操作
-function removeHoverDom(treeId, treeNode) {
-
-    //alert("删除节点");
-    $("#addBtn_" + treeNode.tId).unbind().remove();
-};
-
-
-
-//删除之前操作
-function docTreeBeforeRemove(treeId, treeNode) {
-    var ret = false;
-    var doc = false;
-    var zui = false;
-
-    //首先判断树的节点
-    WebUtil.ajax({
-        async: false,
-        url: "/DocumentManagerControll/GetDocTreeListByParentID",
-        args: { TreeNodeID: treeNode.ID, SysID: $("#ddlSystem").val() },
-        successReturn: function (result) {
-            if (result.length > 0) {
-                ret = false;
-            } else {
-                ret = true;
-            }
-
-            WebUtil.ajax({
-                async: false,
-                url: "/DocumentManagerControll/GetDocAttachmentsList",
-                args: { TreeNodeID: treeNode.ID },
-                successReturn: function (ResultData) {
-
-                    if (ResultData.length > 0)
-                        doc = false;
-                    else
-                        doc = true;
-
-
-                    //判断节点下是否含有文档
-                    if (ret == true && doc == true) {
-                        zui = true;
-                    } else {
-                        alert("当前节点不能删除，因当前节点含有子节点或者是当前节点已存在文档!");
-                        zui = false;
-                    }
-
-                }
-            });
-
-        }
-    });
-
-    return zui;
-
-}
 
 
 
 
-//删除节点操作
-function zTreeOnRemove(event, treeId, treeNode) {
-
-    WebUtil.ajax({
-        async: true,
-        url: "/DocumentManagerControll/DelDocumentTreeNode",
-        args: { TreeNodeID: treeNode.ID, SysID: $("#ddlSystem").val(), NodeNmae: treeNode.TreeNodeName },
-        successReturn: function (ResultData) {
-
-        }
-    });
-
-    return false;
-}
 
 
-//修改Node名字
-function docTreeOnRename(event, treeId, treeNode, isCancel) {
-
-    WebUtil.ajax({
-        async: true,
-        url: "/DocumentManagerControll/UpdateDocumentTreeNode",
-        args: { TreeNodeID: treeNode.ID, SysID: $("#ddlSystem").val(), NodeNmae: treeNode.TreeNodeName },
-        successReturn: function (ResultData) {
-
-        }
-    });
-}
-
-//点击Node节点之前
-function docTreeBeforeClick(treeId, treeNode, clickFlag) {
-
-    $("#hideTerrNodeId").val(treeNode.ID);
 
 
-    return true;
-}
 
 //单击事件
 function docTreeOnClick(event, treeId, treeNode) {
 
     var treeObj = $.fn.zTree.getZTreeObj("DocTree");
     var nodeName = treeObj.getSelectedNodes();
-
-    NodeID = nodeName[0].ID;
-    GetDocAttachmentsList(treeNode);
-
+    $("#hideTerrNodeId").val(treeNode.ID);
+    TNodesId = treeNode.ID;
+    SelectData();
     return true;
 }
 
@@ -373,29 +186,6 @@ function SaveDocManage() {
 }
 
 
-//搜索文档文件
-function SearchData() {
-    var _TNodeId = $("#hideTerrNodeId").val();
-
-    var _FileName = $("#TxtDocSearch").val();
-
-    WebUtil.ajax({
-        async: true,
-        url: "/DocumentManagerControll/GetAttachmentsBySearch",
-        args: { BusinessID: _TNodeId, FileName: _FileName },
-        successReturn: function (ResultData) {
-
-            ObjValue.DocManagerData = ResultData;
-
-            $("#AttaTableThead").empty();
-            $("#AttaTableTBody").empty();
-
-            loadTmpl('#DocManageTHeadTmpl').tmpl().appendTo('#AttaTableThead');
-
-            loadTmpl('#DocManageTBodyTmpl').tmpl(ObjValue).appendTo('#AttaTableTBody');
-        }
-    });
-}
 
 
 
@@ -443,168 +233,8 @@ function FormatDate(obj, displayTime, local) {
 
 }
 
-//第一行类型的改变方法
-function ChangeSelect1(sender, TabOrSearch) {
-    $("#DivSelect1").empty();
-    $("#DivSelect2").empty();
-    $("#DivSelect3").empty();
-    $("#DivYear").empty();
-    YearValue = "";
-    ValueB = "";
-    ValueC = "";
-    ValueD = "";
-    ValueA = TabOrSearch;
-    $(".active_sub2").each(function () {
-        $(this).removeClass("active_sub2");
-        $(this).parent().removeClass("selected");
-    });
-    WebUtil.ajax({
-        async: false,
-        url: "/DocumentManagerControll/GetDTreeListByID",
-        args: { ParentID: TabOrSearch },
-        successReturn: function (ResultData) {
-            if (ResultData.TreeList != "" && ResultData.TreeList != null&& ResultData.IsChildLastTree==false) {
-                $("#DivSelect1").html('请选择产业集团:');
-                loadTmpl('#DocSelect1Tmpl').tmpl(ResultData).appendTo('#DivSelect1');
-            }
-            else {
-                GetYear();
-            }
-            $(sender).addClass("active_sub2");
-            $(sender).parent().addClass("selected");
-        }
-    });
-}
-function ChangeSelectA(ID) {
-    ValueB = ID;
-    ValueC = "";
-    ValueD = "";
-    YearValue = "";
-    $("#DivSelect2").empty();
-    $("#DivSelect3").empty();
-    $("#DivYear").empty();
-    WebUtil.ajax({
-        async: false,
-        url: "/DocumentManagerControll/GetDTreeListByID",
-        args: { ParentID: ID },
-        successReturn: function (ResultData) {
-            if (!ResultData.IsLastTree && !ResultData.IsChildLastTree) {
-                $("#DivSelect2").html('请选择系统:');
-                loadTmpl('#DocSelect2Tmpl').tmpl(ResultData).appendTo('#DivSelect2');
-            }
-            else {
-                GetYear();
-            }
-        }
-    });
-    WebUtil.ajax({
-        async: false,
-        url: "/DocumentManagerControll/GetAttachmentsByType",
-        args: { ValueA: ValueA, ValueB: ValueB, ValueC: ValueC, ValueD: ValueD, Year: YearValue },
-        successReturn: function (ResultData) {
-            ObjValue.DocManagerData = ResultData;
-
-            $("#AttaTableThead").empty();
-            $("#AttaTableTBody").empty();
-
-            loadTmpl('#DocManageTHeadTmpl').tmpl().appendTo('#AttaTableThead');
-
-            loadTmpl('#DocManageTBodyTmpl').tmpl(ObjValue).appendTo('#AttaTableTBody');
-
-        }
-    });
-
-}
-function ChangeSelectB(ID) {
-    YearValue = "";
-    ValueC = ID;
-    ValueD = "";
-    $("#DivSelect3").empty();
-    $("#DivYear").empty();
-    WebUtil.ajax({
-        async: false,
-        url: "/DocumentManagerControll/GetDTreeListByID",
-        args: { ParentID: ID },
-        successReturn: function (ResultData) {
-            if (!ResultData.IsLastTree && !ResultData.IsChildLastTree) {
-                $("#DivSelect3").html('请选择公司:');
-                loadTmpl('#DocSelect3Tmpl').tmpl(ResultData).appendTo('#DivSelect3');
-            }
-            else {
-                GetYear();
-            }
-        }
-    });
-    WebUtil.ajax({
-        async: false,
-        url: "/DocumentManagerControll/GetAttachmentsByType",
-        args: { ValueA: ValueA, ValueB: ValueB, ValueC: ValueC, ValueD: ValueD, Year: YearValue },
-        successReturn: function (ResultData) {
-            ObjValue.DocManagerData = ResultData;
-
-            $("#AttaTableThead").empty();
-            $("#AttaTableTBody").empty();
-
-            loadTmpl('#DocManageTHeadTmpl').tmpl().appendTo('#AttaTableThead');
-
-            loadTmpl('#DocManageTBodyTmpl').tmpl(ObjValue).appendTo('#AttaTableTBody');
-
-        }
-    });
-   
-}
-function ChangeSelectC(value) {
-    YearValue = "";
-    ValueD = value;
-    WebUtil.ajax({
-        async: false,
-        url: "/DocumentManagerControll/GetAttachmentsByType",
-        args: { ValueA: ValueA, ValueB: ValueB, ValueC: ValueC, ValueD: ValueD, Year: YearValue },
-        successReturn: function (ResultData) {
-            ObjValue.DocManagerData = ResultData;
-
-            $("#AttaTableThead").empty();
-            $("#AttaTableTBody").empty();
-
-            loadTmpl('#DocManageTHeadTmpl').tmpl().appendTo('#AttaTableThead');
-
-            loadTmpl('#DocManageTBodyTmpl').tmpl(ObjValue).appendTo('#AttaTableTBody');
-
-        }
-    });
-    GetYear();
-
-}
-function ChangeYear(Year) {
-    YearValue = Year;
-    WebUtil.ajax({
-        async: false,
-        url: "/DocumentManagerControll/GetAttachmentsByType",
-        args: { ValueA: ValueA, ValueB: ValueB, ValueC: ValueC, ValueD: ValueD, Year: YearValue },
-        successReturn: function (ResultData) {
-            ObjValue.DocManagerData = ResultData;
-
-            $("#AttaTableThead").empty();
-            $("#AttaTableTBody").empty();
-
-            loadTmpl('#DocManageTHeadTmpl').tmpl().appendTo('#AttaTableThead');
-
-            loadTmpl('#DocManageTBodyTmpl').tmpl(ObjValue).appendTo('#AttaTableTBody');
-
-        }
-    });
-}
-
 function SelectData() {
-    $("#DivSelect1").empty();
-    $("#DivSelect2").empty();
-    $("#DivSelect3").empty();
-    $("#DivYear").empty();
-    YearValue = "";
-    ValueB = "";
-    ValueC = "";
-    ValueD = "";
-    ValueA = "";
+
     var FileName = $("#Text1").val();
     if (FileName == "输入文档名称") {
         FileName = "";
@@ -612,7 +242,7 @@ function SelectData() {
     WebUtil.ajax({
         async: false,
         url: "/DocumentManagerControll/GetAttachmentsByName",
-        args: { Value: FileName },
+        args: { Value: FileName, Year: $("#FinsYear").val(), BusinessID: TNodesId, SystemID: $("#ddlSystem").val() },
         successReturn: function (ResultData) {
             ObjValue.DocManagerData = ResultData;
             $("#AttaTableThead").empty();
@@ -625,26 +255,6 @@ function SelectData() {
 
 }
 
-function AttachmentsList_Show() {
-    //加载附件List
-    WebUtil.ajax({
-        async: true,
-        url: "/DocumentManagerControll/GetDocAttachmentsList",
-        args: { TreeNodeID: $("#hideTerrNodeId").val() },
-        successReturn: function (ResultData) {
-
-            ObjValue.DocManagerData = ResultData;
-
-            $("#AttaTableThead").empty();
-            $("#AttaTableTBody").empty();
-
-            loadTmpl('#DocManageTHeadTmpl').tmpl().appendTo('#AttaTableThead');
-
-            loadTmpl('#DocManageTBodyTmpl').tmpl(ObjValue).appendTo('#AttaTableTBody');
-
-        }
-    });
-}
 
 function HideZTree() {
     $("#HideTree").hide();
@@ -655,16 +265,4 @@ function ShowZTree() {
     $("#ShowTree").hide();
     $("#HideTree").show();
     $("#TreeTD").fadeToggle();
-}
-
-function Click() {
-    $("#DivSelect1").empty();
-    $("#DivSelect2").empty();
-    $("#DivSelect3").empty();
-    $("#DivYear").empty();
-    YearValue = "";
-    ValueB = "";
-    ValueC = "";
-    ValueD = "";
-    ValueA = "";
 }

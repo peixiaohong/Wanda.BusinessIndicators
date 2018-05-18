@@ -60,9 +60,29 @@ namespace LJTH.BusinessIndicators.BLL
             _ReportDateTime = null;
             _TargetPlanDetail = new Dictionary<int, List<A_TargetPlanDetail>>();
             _DefaultTargetPlanDetail = new Dictionary<int, List<A_TargetPlanDetail>>();
-
+            _MonthlyReportDetailList = new Dictionary<string, IList<A_MonthlyReportDetail>>();
             _instance.timer = DateTime.Now;
         }
+        public Dictionary<string, IList<A_MonthlyReportDetail>> _MonthlyReportDetailList = new Dictionary<string, IList<A_MonthlyReportDetail>>();
+
+
+        /// <summary>
+        /// 获取全年的月报（现主要用于计算累计实际值）
+        /// </summary>
+        /// <param name="SystemID"></param>
+        /// <param name="FinYear"></param>
+        /// <returns></returns>
+        public IList<A_MonthlyReportDetail> GetMonthlyReportDetails(Guid SystemID, int FinYear, Guid TargetPlanID)
+        {
+            var key = FinYear + "&" + SystemID + "&" + TargetPlanID;
+            if (_MonthlyReportDetailList == null || _MonthlyReportDetailList.Count <= 0 || !_MonthlyReportDetailList.Keys.Contains(key))
+            {
+                var list = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetailList(SystemID, FinYear, TargetPlanID);
+                _MonthlyReportDetailList[key] = list;
+            }
+            return _MonthlyReportDetailList[key];
+        }
+
 
         public C_System this[Guid Key, DateTime CurrentDate]
         {

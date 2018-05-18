@@ -34,47 +34,19 @@ namespace WebApi.Controllers
         public ResultContext TargetPlanProcessRequest(string BusinessID, int OperatorType, string PrcessStatus)
         {
             LJTH.BusinessIndicators.Web.AjaxHander.TargetPlanProcessController tp = new LJTH.BusinessIndicators.Web.AjaxHander.TargetPlanProcessController();
-            HttpContext context = HttpContext.Current;
-            SSOClaimsIdentity claimsIdentity = new SSOClaimsIdentity
-            {
-                UserName = WebHelper.GetCurrentLoginUser()
-
-            };
-            SSOClaimsPrincipal claimsPrincipal = new SSOClaimsPrincipal(claimsIdentity);
-            context.User = claimsPrincipal;
-
-            tp.BusinessID = BusinessID;
+            
             try
             {
-                Guid ID = Guid.Empty;
-                Guid.TryParse(BusinessID, out ID);
-                if (string.IsNullOrEmpty(BusinessID))
+                HttpContext context = HttpContext.Current;
+                SSOClaimsIdentity claimsIdentity = new SSOClaimsIdentity
                 {
-                    throw new Exception("BusinessID is null!");
-                }
-                else if (ID == Guid.Empty)
-                    throw new Exception("系统编码错误");
-                else
-                {
-                    //添加谁点击了提交审批按钮
-                    B_TargetPlan ReportModel = B_TargetplanOperator.Instance.GetTargetPlanByID(BusinessID.ToGuid());
-                    if (string.IsNullOrEmpty(ReportModel.ProcessOwn))
-                    {
-                        ReportModel.ProcessOwn = this.CurrentUser;
-                        B_TargetplanOperator.Instance.UpdateTargetplan(ReportModel);
-                    }
-                }
-                if (PrcessStatus != "Approved")
-                {
-                    tp.OnProcessExecute(PrcessStatus, OperatorType);
-                }
-                else
-                {
-                    //审批结束，调用这个
-                    tp.OnProecssCompleted();
-                }
-                //处理数据
-                tp.DisposeBusinessData(OperatorType);
+                    UserName = WebHelper.GetCurrentLoginUser()
+
+                };
+                SSOClaimsPrincipal claimsPrincipal = new SSOClaimsPrincipal(claimsIdentity);
+                context.User = claimsPrincipal;
+
+                tp.ProcessRequest(context);
                 return new ResultContext();
             }
             catch (Exception ex)

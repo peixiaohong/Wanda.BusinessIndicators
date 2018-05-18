@@ -33,7 +33,8 @@
             'swf': '<%=this.ResolveClientUrl("~/Scripts/Upload/uploadify.swf")%>',
             //后台处理页面
             'uploader': '<%=this.ResolveClientUrl("~/UserControl/DocUpLoad1.ashx")%>',
-            'formData': { "action": "<%=AttachmentType%>", "businessID": $("#hideTerrNodeId").val(), "ValueA": '<%=this.ValueA%>', "ValueB": "<%=this.ValueB%>", "ValueC": "<%=this.ValueC%>", "ValueD": "<%=this.ValueD%>", "FileYear": "<%=this.FinValueYear%>" },
+            //, "ValueA": '<%=this.ValueA%>', "ValueB": "<%=this.ValueB%>", "ValueC": "<%=this.ValueC%>", "ValueD": "<%=this.ValueD%>"
+            'formData': { "action": "<%=AttachmentType%>", "businessID": $("#hideTerrNodeId").val(),"SystemID":"<%=this.SystemId%>", "FileYear": "<%=this.FinValueYear%>" },
             'onUploadSuccess': function (file, data, response) {
 
             },
@@ -69,7 +70,7 @@
         WebUtil.ajax({
             async: true,
             url: "/DocumentManagerControll/GetDocAttachmentsList",
-            args: { TreeNodeID: $("#hideTerrNodeId").val() },
+            args: { TreeNodeID: $("#hideTerrNodeId").val(), SystemId: $("#ddlSystem").val(), Year: $("#FinsYear").val() },
             successReturn: function (ResultData) {
 
                 ObjValue.DocManagerData = ResultData;

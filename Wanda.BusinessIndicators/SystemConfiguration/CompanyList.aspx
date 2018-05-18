@@ -58,7 +58,7 @@
                                 <label class="DownExcelLabel" id="Label1">导出数据</label></span>
                         </div>
 
-                        <div style="width: 80px; float: right; display: inline; padding-right: 25px" id="UpLoadData">
+                        <div style="width: 80px; float: right; display: inline; padding-right: 25px;margin-right:13px;" id="UpLoadData">
                             <span>
                                 <span>
                                     <input type="file" name="upload" id="file1" value="导入数据" />
@@ -71,7 +71,9 @@
             </table>
 
         </div>
-        <div id="tab"></div>
+        <div id="tab">
+            
+        </div>
     </div>
 
 

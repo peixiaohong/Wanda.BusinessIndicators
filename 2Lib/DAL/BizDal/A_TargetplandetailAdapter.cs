@@ -279,10 +279,66 @@ ORDER BY A1.Sequence ASC
         }
 
         /// <summary>
+        /// 根据TargetPlanID获取A表汇总数据
+        /// </summary>
+        /// <returns></returns>
+        internal DataTable GetSumMonthTargetDetailByTID_A(int FinMonth,Guid TargetPlanID,DateTime Date)
+        {
+            string sql = string.Empty;
+            //是否查询累计值
+            sql += @"
+SELECT  A1.TargetName ,
+        A1.TargetID ,
+        A2.target ,
+        A1.SumTarget ,
+        A1.Sequence
+FROM    ( SELECT    t1.TargetName ,
+                    TargetID ,
+                    t2.SumTarget ,
+                    t1.Sequence
+          FROM      dbo.C_Target t1
+                    RIGHT JOIN ( SELECT TargetID ,
+                                        SUM(Target) SumTarget
+                                 FROM   dbo.A_TargetPlanDetail
+                                 WHERE  FinMonth <= @FinMonth
+                                        AND TargetPlanID = @TargetPlanID
+                                        AND IsDeleted = 0
+                                 GROUP BY TargetID
+                               ) t2 ON t1.ID = t2.TargetID
+          WHERE     t1.IsDeleted = 0
+                    AND t1.VersionStart <= @CurrentDate
+                    AND @CurrentDate < t1.VersionEnd
+        ) A1
+        LEFT JOIN ( SELECT  t1.TargetName ,
+                            TargetID ,
+                            t2.target
+                    FROM    dbo.C_Target t1
+                            RIGHT JOIN ( SELECT TargetID ,
+                                                SUM(Target) target
+                                         FROM   dbo.A_TargetPlanDetail
+                                         WHERE  FinMonth = @FinMonth
+                                                AND TargetPlanID = @TargetPlanID
+                                                AND IsDeleted = 0
+                                         GROUP BY TargetID
+                                       ) t2 ON t1.ID = t2.TargetID
+                    WHERE   t1.IsDeleted = 0
+                            AND t1.VersionStart <= @CurrentDate
+                            AND @CurrentDate < t1.VersionEnd
+                  ) A2 ON A1.TargetID = A2.TargetID
+ORDER BY A1.Sequence ASC
+";
+            SqlParameter pTargetPlanID = CreateSqlParameter("@TargetPlanID", System.Data.DbType.Guid, TargetPlanID);
+            SqlParameter pMonth = CreateSqlParameter("@FinMonth", System.Data.DbType.Int32, FinMonth);
+            SqlParameter pCurrentDate = CreateSqlParameter("@CurrentDate", System.Data.DbType.DateTime, Date);
+            return ExecuteReturnTable(sql, pTargetPlanID, pMonth, pCurrentDate);
+        }
+
+
+        /// <summary>
         /// 根据TargetPlanID获取汇总数据
         /// </summary>
         /// <returns></returns>
-        internal DataTable GetSumMonthTargetDetailByTID(int FinMonth,Guid TargetPlanID,DateTime Date)
+        internal DataTable GetSumMonthTargetDetailByTID(int FinMonth, Guid TargetPlanID, DateTime Date)
         {
             string sql = string.Empty;
             //是否查询累计值
@@ -430,6 +486,55 @@ ORDER BY A1.Sequence
             return ExecuteReturnTable(sql, pTargetPlanID, pMonth, pCompanyID, pCurrentDate);
         }
 
+        /// <summary>
+        /// 根绝TargetPlanID获取A表累计指标汇总数据(经营系统)
+        /// </summary>
+        /// <param name="FinYear"></param>
+        /// <param name="FinMonth"></param>
+        /// <param name="CompanyID"></param>
+        /// <returns></returns>
+        internal DataTable GetSumMonthTargetDetailProById_A(int FinMonth, Guid CompanyID, Guid TargetPlanID, DateTime Time)
+        {
+            string sql = string.Empty;
+            //是否查询累计值
+            sql += @"
+
+SELECT  A1.TargetName ,
+        A1.TargetID ,
+        Target ,
+        SumTarget ,
+        Sequence
+FROM    ( SELECT    TargetName ,
+                    TargetID ,
+                    Target ,
+                    Sequence
+          FROM      dbo.A_TargetPlanDetail
+                    LEFT JOIN dbo.C_Target ON C_Target.ID = A_TargetPlanDetail.TargetID
+          WHERE     CompanyID = @CompanyID
+                    AND FinMonth = @FinMonth
+                    AND TargetPlanID = @TargetPlanID
+                    AND dbo.C_Target.VersionStart <= @CurrentDate
+                    AND @CurrentDate < dbo.C_Target.VersionEnd
+        ) A1
+        LEFT JOIN ( SELECT  TargetID ,
+                            SUM(Target) SumTarget
+                    FROM    dbo.A_TargetPlanDetail
+                            LEFT JOIN dbo.C_Target ON C_Target.ID = A_TargetPlanDetail.TargetID
+                    WHERE   CompanyID = @CompanyID
+                            AND TargetPlanID = @TargetPlanID
+                            AND FinMonth <= @FinMonth
+                            AND dbo.C_Target.VersionStart <= @CurrentDate
+                            AND @CurrentDate < dbo.C_Target.VersionEnd
+                    GROUP BY TargetID
+                  ) t2 ON A1.TargetID = t2.TargetID
+ORDER BY A1.Sequence
+";
+            SqlParameter pTargetPlanID = CreateSqlParameter("@TargetPlanID", System.Data.DbType.Guid, TargetPlanID);
+            SqlParameter pCompanyID = CreateSqlParameter("@CompanyID", System.Data.DbType.Guid, CompanyID);
+            SqlParameter pMonth = CreateSqlParameter("@FinMonth", System.Data.DbType.String, FinMonth);
+            SqlParameter pCurrentDate = CreateSqlParameter("@CurrentDate", System.Data.DbType.DateTime, Time);
+            return ExecuteReturnTable(sql, pTargetPlanID, pMonth, pCompanyID, pCurrentDate);
+        }
         /// <summary>
         /// 获取累计指标分解数据(按指标分解)
         /// </summary>

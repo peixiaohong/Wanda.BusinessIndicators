@@ -148,6 +148,7 @@
     <Content Include="Scripts\SystemConfiguration\RoleManager.js" />
     <Content Include="Scripts\SystemConfiguration\RoleUsers.js" />
     <Content Include="Scripts\SystemConfiguration\UserInfoManager.js" />
+    <Content Include="Scripts\TextApprove.js" />
     <Content Include="Scripts\TreeGrid\1.html" />
     <Content Include="Scripts\TreeGrid\application.js" />
     <Content Include="Scripts\TreeGrid\images\defaultLeaf.gif" />
@@ -163,6 +164,7 @@
     <Content Include="Styles\fonts\fontawesome-webfont.svg" />
     <Content Include="Styles\ljth\login.css" />
     <Content Include="Styles\TreeGrid.css" />
+    <Content Include="Styles\ztree\img\diy\logo.png" />
     <Content Include="SystemConfiguration\OrganizationalManager.aspx" />
     <Content Include="SystemConfiguration\RoleManager.aspx" />
     <Content Include="SystemConfiguration\RoleManagerTmpl.html" />

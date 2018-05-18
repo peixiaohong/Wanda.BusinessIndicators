@@ -354,8 +354,9 @@ function DeleteOrganizationData(id, isCompany) {
 
 function Ztree(data) {
     var zNodes = [];
+    var iconD = "../Styles/ztree/img/diy/logo.png";
     data.Data.forEach(function (one) {
-        var zNodesObj = { id: "", pId: "", name: "", level: "", systemID: "", isCompany: false, iconOpen: "../Styles/ztree/img/diy/1_open.png", iconClose: "../Styles/ztree/img/diy/1_close.png", icon: "../Styles/ztree/img/diy/2.png"};
+        var zNodesObj = { id: "", pId: "", name: "", level: "", systemID: "", isCompany: false,};
         zNodesObj.id = one.ID;
         zNodesObj.pId = one.ParentID;
         zNodesObj.name = one.CnName;
@@ -363,10 +364,13 @@ function Ztree(data) {
         zNodesObj.systemID = one.SystemID;
         zNodesObj.isCompany = one.IsCompany;
         if (one.Level >= 2 && !one.IsCompany) {
-            zNodesObj.icon = "../Styles/ztree/img/diy/3.png";
+            zNodesObj.icon = "../Styles/ztree/img/diy/2.png";
         }
         zNodes.push(zNodesObj);
         zNodes[0].open = true;
+        zNodes[0].iconOpen = iconD;
+        zNodes[0].iconClose = iconD;
+        zNodes[0].icon = iconD;
     });
     var setting = {
         view: {

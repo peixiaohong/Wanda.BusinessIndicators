@@ -98,14 +98,15 @@ function operateNav(sender) {
     $("#process").hide();
     switch (sender) {
         case "downLoadTemplate":
-            $("#DownLoadModel").show();
-            $("#UpLoadData,#Down1,#T2,#VersionName").hide();
-            if (isCheckPlan())
+            if (isCheckPlan()) {
+                $("#DownLoadModel").show();
+                $("#UpLoadData,#Down1,#T2,#VersionName").hide();
                 setStlye("dataUploadSpan");
+            }
             break;
         case "dataUpload":
             if (isCheckPlan()) {
-                if (TargetPlanDeailData != undefined&&TargetPlanDeailData[0].ObjValue[0].ObjValue.length != 0) {
+                if (TargetPlanDeailData != undefined && TargetPlanDeailData[0].ObjValue[0].ObjValue.length != 0) {
                     $("#Down1,#T2").show();
                     $("#DownLoadModel,#UpLoadData,#VersionName").hide();
                     var obj = $("#importedDataFloatTable2");
@@ -343,11 +344,11 @@ function GetReportTime() {
 function GetTargetPlanDetail() {
     TargetPlanID = $("#hideTargetPlanID").val();
     if (TargetPlanID != "") {
-    WebUtil.ajax({
-        async: true,
-        url: "/TargetPlanDetailController/GetTargetPlanDetail",
-        args: { strSystemID: sysID, strFinYear: FinYear, strTargetPlanID: TargetPlanID, IsLatestVersion: true },
-        successReturn: SplitData
+        WebUtil.ajax({
+            async: true,
+            url: "/TargetPlanDetailController/GetTargetPlanDetail",
+            args: { strSystemID: sysID, strFinYear: FinYear, strTargetPlanID: TargetPlanID, IsLatestVersion: true },
+            successReturn: SplitData
         });
     }
 }
@@ -366,7 +367,7 @@ function SplitData(result) {
     });
 
 
-    if (TargetPlanDeailData != undefined &&TargetPlanDeailData[0] != null) {
+    if (TargetPlanDeailData != undefined && TargetPlanDeailData[0] != null) {
         if (TargetPlanDeailData[0].HtmlTemplate != undefined) {
             strTemplate = TargetPlanDeailData[0].HtmlTemplate.split(',');
         }
@@ -454,7 +455,7 @@ function TargetPlanDetailLiaddCss(sender) {
     }
 
     LoadTargetPlanDetailData(TemplData)
-   
+
 }
 
 function AddSumHead(result) {
@@ -493,7 +494,7 @@ function fileUpload(name) {
         'fileSizeLimit': '10240',
         //swf文件路径
         'swf': '../Scripts/UpLoad/uploadify.swf',
-        'formData': { 'FileType': 'UpTargetPlanDetail', 'SysId': sysID, 'FinYear': FinYear},
+        'formData': { 'FileType': 'UpTargetPlanDetail', 'SysId': sysID, 'FinYear': FinYear },
         //后台处理页面
         'uploader': '/AjaxHander/UpLoadMonthTargetDetail.ashx',
         'onUploadSuccess': function (file, data, response) {
@@ -517,7 +518,7 @@ function fileUpload(name) {
             alert("上传失败，请上传正确的文件！");
         }
         , 'onUploadStart': function (file, data, response) {
-            $("#" + name).uploadify("settings", "formData", { 'VersionName': $("#hideVersionName").val(), 'MonthReportID': $("#hideTargetPlanID").val()  });
+            $("#" + name).uploadify("settings", "formData", { 'VersionName': $("#hideVersionName").val(), 'MonthReportID': $("#hideTargetPlanID").val() });
         }
     });
 }

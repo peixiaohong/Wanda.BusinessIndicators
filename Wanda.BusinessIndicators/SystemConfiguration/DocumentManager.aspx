@@ -42,18 +42,17 @@
     <div class="content_m" style="padding-left: 0px !important; padding-right: 0px !important;">
         <table style="width: 100%">
             <tr>
-                <td style="width: 28%; display: none" id="TreeTD">
+                <td style="width: auto;" id="TreeTD">
                     <div class="leftCon" style="padding-top: 0px; margin: 0px;">
                         <div style="padding-top: 0" class="leftCon">
                             <div style="margin-top: 0; margin-bottom: 0px;" class="con">
                                 <div class="menutree">
-                                    <div style="border-bottom: 1px solid #deedf2; padding: 8px 0; display: none">
+                                    <div style="border-bottom: 1px solid #deedf2; padding: 8px 0;">
 
-                                        <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlSystem" AutoPostBack="true" Style="width: 180px; display: none;" OnSelectedIndexChanged="ddlSystem_SelectedIndexChanged"></asp:DropDownList>
+                                        <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlSystem" AutoPostBack="true" Style="width: 180px;" OnSelectedIndexChanged="ddlSystem_SelectedIndexChanged"></asp:DropDownList>
 
-                                        <input type="text" id="TxtDocSearch" style="width: 45%; height: 22px; vertical-align: top; line-height: 22px; color: gray" value="输入文档名称" onfocus="if (value =='输入文档名称'){value ='';this.style.color='black'}" onblur="if (value ==''){value='输入文档名称'; this.style.color='gray'}" />
-                                        <a class="btn_search" id="btnSearch" href="#" onclick="SearchData();"><span class="Search">查 询</span></a>
-
+                                        <%--  <input type="text" id="TxtDocSearch" style="width: 45%; height: 22px; vertical-align: top; line-height: 22px; color: gray" value="输入文档名称" onfocus="if (value =='输入文档名称'){value ='';this.style.color='black'}" onblur="if (value ==''){value='输入文档名称'; this.style.color='gray'}" />
+                                        <a class="btn_search" id="btnSearch" href="#" onclick="SearchData();"><span class="Search">查 询</span></a>--%>
                                     </div>
                                     <div id="DivLeft" style="padding: 4px 0 0 4px; height: 544px; overflow: auto; overflow-x: hidden;">
                                         <ul id="DocTree" class="ztree_new">
@@ -66,11 +65,11 @@
                     </div>
                 </td>
                 <td style="width: 0%">
-                    <img src="../Images/images1/Left.png" id="HideTree" onclick="HideZTree()" title="隐藏树桩列表" style="display: none; cursor: pointer" />
-                    <img src="../Images/images1/Right.png" id="ShowTree" style="cursor: pointer" onclick="ShowZTree()" title="显示树桩列表" />
+                    <img src="../Images/images1/Left.png" id="HideTree" onclick="HideZTree()" title="隐藏树桩列表" style="cursor: pointer" />
+                    <img src="../Images/images1/Right.png" id="ShowTree" style="display: none; cursor: pointer" onclick="ShowZTree()" title="显示树桩列表" />
                 </td>
                 <td style="margin: 0; padding: 0">
-                    <div class="rightCon" style="padding-top: 0px; margin: 0px;">
+                    <%--<div class="rightCon" style="padding-top: 0px; margin: 0px;">
                         <div style="margin-top: 0; margin-bottom: 0px; text-align: left" class="con">
 
 
@@ -89,17 +88,17 @@
                                     </div>
                                      <div style="border: 2px solid #ccc;border-bottom:0;border-top:0; min-height: 20px; padding-bottom: 5px; width: 950px; margin-top: 1px; top: 2px" id="DivSelect3">
                                     </div>
-                                    <div id="DivYear" style="border: 2px solid #ccc; border-top:0; min-height: 20px; width: 950px">            
-                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="rightCon" style="padding-bottom: 5px; padding-top: 47px; margin-left: 8px; display: inline;">
-                        <div id="Div4" style="padding-bottom: 1px;">
-                            <input type="text" id="Text1" style="width: 790px; height: 22px; vertical-align: top; line-height: 22px; color: gray" value="输入文档名称" onfocus="if (value =='输入文档名称'){value ='';this.style.color='black'}" onclick="Click()" onblur="if (value ==''){value='输入文档名称'; this.style.color='gray'}" />
-                            <a class="btn_search" id="A1" href="#" style="margin-left: 20px" onclick="SelectData();"><span class="Search">查 询</span></a>
-                        </div>
+                    </div>--%>
+                    <div class="rightCon" style="padding-bottom: 5px;  margin-left: 8px; display: inline;">
+                        <span>年份:</span>
+                        <asp:DropDownList ID="FinsYear" runat="server" ClientIDMode="Static" AutoPostBack="true" ></asp:DropDownList>
+                        &nbsp;&nbsp;<span>文档名称:</span>
+                        <input type="text" id="Text1" style="width: 450px; height: 22px; vertical-align: top; line-height: 22px; color: gray" value="输入文档名称" onfocus="if (value =='输入文档名称'){value ='';this.style.color='black'}" onblur="if (value ==''){value='输入文档名称'; this.style.color='gray'}" />
+                        <a class="btn_search" id="A1" href="#" style="margin-left: 20px; color: #cb5c61;" onclick="SelectData();"><span><i class="fa fa-search"></i>&nbsp;查询</span></a>
                     </div>
                     <div class="rightCon" style="padding-top: 0; margin: 0px;">
                         <div style="margin-top: 0; margin-bottom: 0px;" class="con">

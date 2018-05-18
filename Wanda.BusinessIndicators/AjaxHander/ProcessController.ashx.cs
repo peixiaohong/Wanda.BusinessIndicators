@@ -29,24 +29,22 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         public void ProcessRequest(HttpContext context)
         {
             string logMessage = "{\"Name\":\"月报审批\",\"Context\":";
-                 // Post方式下，取得client端传过来的数据  
-            if ("post".Equals(context.Request.HttpMethod.ToLower()))
-            {
-                StreamReader reader = new StreamReader(context.Request.InputStream);
-                logMessage += HttpUtility.UrlDecode(reader.ReadToEnd());
-
-            }
-            // Get方式下，取得client端传过来的数据  
-            else
-            {
-                // 注意，这个是需要解码的  
-                logMessage += HttpUtility.UrlDecode(context.Request.QueryString.ToString());
-
-            }
-
-            JsonConvert.SerializeObject(context.Request);
             try
-            {
+            {      
+                // Post方式下，取得client端传过来的数据  
+                if ("post".Equals(context.Request.HttpMethod.ToLower()))
+                {
+                    StreamReader reader = new StreamReader(context.Request.InputStream);
+                    logMessage += HttpUtility.UrlDecode(reader.ReadToEnd());
+
+                }
+                // Get方式下，取得client端传过来的数据  
+                else
+                {
+                    // 注意，这个是需要解码的  
+                    logMessage += HttpUtility.UrlDecode(context.Request.QueryString.ToString());
+
+                }
                 this.BusinessID = context.Request["BusinessID"];
                 this.ProType = context.Request["strProType"];
                 this.ExecType = context.Request["ExecuteType"];
@@ -102,7 +100,6 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             catch (Exception ex)
             {
                 logMessage +=",\"Exception\":"+ JsonConvert.SerializeObject(ex);
-                throw;
             }
             finally {
                 logger.Info(logMessage+"}");
@@ -448,17 +445,17 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                         ReportModel.ProcessOwn = this.CurrentUser;
                         B_MonthlyreportOperator.Instance.UpdateMonthlyreport(ReportModel);
                     }
-                    B_MonthlyReportAction _bMonthlyReportAction = new B_MonthlyReportAction();
-                    _bMonthlyReportAction.SystemID = ReportModel.SystemID;
-                    _bMonthlyReportAction.MonthlyReportID = ReportModel.ID;
-                    _bMonthlyReportAction.FinYear = ReportModel.FinYear;
-                    _bMonthlyReportAction.FinMonth = ReportModel.FinMonth;
-                    _bMonthlyReportAction.Action = EnumHelper.GetEnumDescription(typeof(MonthlyReportLogActionType), (int)MonthlyReportLogActionType.Submit);
-                    _bMonthlyReportAction.Operator = this.CurrentUser;
-                    _bMonthlyReportAction.OperatorTime = DateTime.Now;
-                    _bMonthlyReportAction.ModifierName = this.CurrentUser;
-                    _bMonthlyReportAction.CreatorName = this.CurrentUser;
-                    B_MonthlyReportActionOperator.Instance.AddMonthlyReportAction(_bMonthlyReportAction);
+                    //B_MonthlyReportAction _bMonthlyReportAction = new B_MonthlyReportAction();
+                    //_bMonthlyReportAction.SystemID = ReportModel.SystemID;
+                    //_bMonthlyReportAction.MonthlyReportID = ReportModel.ID;
+                    //_bMonthlyReportAction.FinYear = ReportModel.FinYear;
+                    //_bMonthlyReportAction.FinMonth = ReportModel.FinMonth;
+                    //_bMonthlyReportAction.Action = EnumHelper.GetEnumDescription(typeof(MonthlyReportLogActionType), (int)MonthlyReportLogActionType.Submit);
+                    //_bMonthlyReportAction.Operator = this.CurrentUser;
+                    //_bMonthlyReportAction.OperatorTime = DateTime.Now;
+                    //_bMonthlyReportAction.ModifierName = this.CurrentUser;
+                    //_bMonthlyReportAction.CreatorName = this.CurrentUser;
+                    //B_MonthlyReportActionOperator.Instance.AddMonthlyReportAction(_bMonthlyReportAction);
 
                 }
                 else
@@ -470,17 +467,17 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     _BatchModel.ModifierName = this.CurrentUser;
                     B_SystemBatchOperator.Instance.UpdateSystemBatch(_BatchModel);
 
-                    B_MonthlyReportAction _bMonthlyReportAction = new B_MonthlyReportAction();
-                    _bMonthlyReportAction.SystemID = Guid.Empty;
-                    _bMonthlyReportAction.MonthlyReportID = _BatchModel.ID;
-                    _bMonthlyReportAction.FinYear = _BatchModel.FinYear;
-                    _bMonthlyReportAction.FinMonth = _BatchModel.FinMonth;
-                    _bMonthlyReportAction.Action = EnumHelper.GetEnumDescription(typeof(MonthlyReportLogActionType), (int)MonthlyReportLogActionType.Submit);
-                    _bMonthlyReportAction.Operator = this.CurrentUser;
-                    _bMonthlyReportAction.OperatorTime = DateTime.Now;
-                    _bMonthlyReportAction.ModifierName = this.CurrentUser;
-                    _bMonthlyReportAction.CreatorName = this.CurrentUser;
-                    B_MonthlyReportActionOperator.Instance.AddMonthlyReportAction(_bMonthlyReportAction);
+                    //B_MonthlyReportAction _bMonthlyReportAction = new B_MonthlyReportAction();
+                    //_bMonthlyReportAction.SystemID = Guid.Empty;
+                    //_bMonthlyReportAction.MonthlyReportID = _BatchModel.ID;
+                    //_bMonthlyReportAction.FinYear = _BatchModel.FinYear;
+                    //_bMonthlyReportAction.FinMonth = _BatchModel.FinMonth;
+                    //_bMonthlyReportAction.Action = EnumHelper.GetEnumDescription(typeof(MonthlyReportLogActionType), (int)MonthlyReportLogActionType.Submit);
+                    //_bMonthlyReportAction.Operator = this.CurrentUser;
+                    //_bMonthlyReportAction.OperatorTime = DateTime.Now;
+                    //_bMonthlyReportAction.ModifierName = this.CurrentUser;
+                    //_bMonthlyReportAction.CreatorName = this.CurrentUser;
+                    //B_MonthlyReportActionOperator.Instance.AddMonthlyReportAction(_bMonthlyReportAction);
                 }
 
             }
@@ -580,7 +577,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 //工作流状态
                 WorkFlowStatus(rpt, false);
 
-                new MonthlyReportLog().AddMonthlyReportAction((int)MonthlyReportLogActionType.Submit, rpt.SystemID, rpt.FinYear, rpt.FinMonth, BusinessID.ToGuid());
+               // new MonthlyReportLog().AddMonthlyReportAction((int)MonthlyReportLogActionType.Submit, rpt.SystemID, rpt.FinYear, rpt.FinMonth, BusinessID.ToGuid());
             }
         }
         /// <summary>
