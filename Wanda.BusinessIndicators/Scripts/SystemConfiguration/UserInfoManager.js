@@ -132,7 +132,7 @@ function SaveRoleFun(data) {
             if (resultData.Success == 1) {
                 $(".user-model").css("display", "none");
                 $.MsgBox.Alert("提示", "添加成功");
-                LoadPage();
+                UsersLoadPage();
                 //console.log("添加成功" + resultData.Message);
             }
             else {
