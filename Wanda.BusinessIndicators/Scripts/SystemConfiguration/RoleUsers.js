@@ -22,6 +22,17 @@ $(document).ready(function () {
 
     //数据加载
     LoadPage();
+    var pathname = "/SystemConfiguration/RoleUsers.aspx";
+    if (location.pathname == pathname) {
+        $("#sitmap").html('您当前所在的位置：系统管理<img src="../images/btn08.png">角色管理<img src="../images/btn08.png">人员设置');
+        $("#jMenu").find("li").each(function () {
+            var text = $(this).find("span")[0];
+            $(this).removeClass("current first");
+            if (text && text.innerHTML == "系统管理") {
+                $(this).addClass("current first");
+            }
+        })
+    }
 
 });
 
