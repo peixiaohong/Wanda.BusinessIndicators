@@ -164,6 +164,7 @@
     <Content Include="Styles\fonts\fontawesome-webfont.svg" />
     <Content Include="Styles\ljth\login.css" />
     <Content Include="Styles\TreeGrid.css" />
+    <Content Include="Styles\ztree\img\diy\logo.png" />
     <Content Include="SystemConfiguration\OrganizationalManager.aspx" />
     <Content Include="SystemConfiguration\RoleManager.aspx" />
     <Content Include="SystemConfiguration\RoleManagerTmpl.html" />
