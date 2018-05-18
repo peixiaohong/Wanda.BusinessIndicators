@@ -125,6 +125,21 @@ namespace LJTH.BusinessIndicators.Web.UserControl
                 ViewState["FinValueYear"] = value;
             }
         }
+        public string SystemId
+        {
+            get
+            {
+                if (ViewState["SystemId"] == null)
+                {
+                    ViewState["SystemId"] = "";
+                }
+                return ViewState["SystemId"].ToString();
+            }
+            set
+            {
+                ViewState["SystemId"] = value;
+            }
+        }
         public bool ShowOnly
         {
             get;

@@ -247,8 +247,8 @@ namespace WebApi.Controllers
             {
                 CompanyController cc = new CompanyController();
                 List<C_Target> result = cc.GetVerTargetList(SysID, FinYear);
-                TargetController tc = new TargetController();
-                List<TargetDetail> list = tc.GetSumMonthTargetDetailByTID(TargetPlanID);
+                A_TargetplandetailOperator tc = new A_TargetplandetailOperator();
+                List<TargetDetail> list = tc.GetSumMonthTargetDetailByTID_A(TargetPlanID.ToGuid());
                 return new ResultContext(new { head = result, list });
             }
             catch (Exception ex)

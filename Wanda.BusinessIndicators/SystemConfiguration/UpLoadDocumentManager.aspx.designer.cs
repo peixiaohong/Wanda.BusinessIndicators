@@ -22,42 +22,6 @@ namespace LJTH.BusinessIndicators.Web.SystemConfiguration {
         protected global::System.Web.UI.WebControls.DropDownList ddlSystem;
         
         /// <summary>
-        /// ValueA 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ValueA;
-        
-        /// <summary>
-        /// ValueB 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ValueB;
-        
-        /// <summary>
-        /// ValueC 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ValueC;
-        
-        /// <summary>
-        /// ValueD 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ValueD;
-        
-        /// <summary>
         /// FinsYear 控件。
         /// </summary>
         /// <remarks>

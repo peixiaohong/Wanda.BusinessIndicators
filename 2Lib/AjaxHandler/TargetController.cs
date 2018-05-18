@@ -1224,7 +1224,18 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             bool success = true;
             IList<B_TargetPlan> List = new List<B_TargetPlan>();
             List = B_TargetplanOperator.Instance.GetTargetPlanByApprovedList(Guid.Parse(SysID), int.Parse(Year));
-            if (List.Where(x => (x.WFStatus == "Progress" || x.WFStatus == "Approved") && x.ID == PlanID.ToGuid()).Count() > 0)
+            if (List.Where(x => x.WFStatus == "Draft").Count() == 0 && string.IsNullOrEmpty(PlanID))
+            {
+                B_TargetPlan _BTargetPlan = new B_TargetPlan();
+                _BTargetPlan.SystemID = Guid.Parse(SysID);
+                //bmr.FinMonth = FinMonth;
+                _BTargetPlan.FinYear = int.Parse(Year);
+                _BTargetPlan.Status = 2;
+                _BTargetPlan.VersionStart = DateTime.Now;
+                _BTargetPlan.Versionend = new DateTime(9999, 01, 01);
+                _BTargetPlan.WFStatus = "Draft";
+                PlanID = B_TargetplanOperator.Instance.AddTargetplan(_BTargetPlan).ToString();
+            }else if (List.Where(x => (x.WFStatus == "Progress" || x.WFStatus == "Approved") && x.ID == PlanID.ToGuid()).Count() > 0)
             {
                 success = false;
                 B_TargetPlan _BTargetPlan = new B_TargetPlan();
@@ -1241,18 +1252,6 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             else if (List.Where(x => (x.WFStatus == "Progress" || x.WFStatus == "Approved") && x.VersionName == VersionName).Count() > 0)
             {
                 success = false;
-            }
-            else if (List.Where(x => x.WFStatus == "Draft").Count() == 0 && string.IsNullOrEmpty(PlanID))
-            {
-                B_TargetPlan _BTargetPlan = new B_TargetPlan();
-                _BTargetPlan.SystemID = Guid.Parse(SysID);
-                //bmr.FinMonth = FinMonth;
-                _BTargetPlan.FinYear = int.Parse(Year);
-                _BTargetPlan.Status = 2;
-                _BTargetPlan.VersionStart = DateTime.Now;
-                _BTargetPlan.Versionend = new DateTime(9999, 01, 01);
-                _BTargetPlan.WFStatus = "Draft";
-                PlanID = B_TargetplanOperator.Instance.AddTargetplan(_BTargetPlan).ToString();
             }
             else if(List.Where(x => x.WFStatus == "Draft").Count() > 0)
             {

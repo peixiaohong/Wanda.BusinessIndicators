@@ -19,6 +19,17 @@ namespace LJTH.BusinessIndicators.Web.SystemConfiguration
         {
             if (!IsPostBack)
             {
+                DateTime datetime = StaticResource.Instance.GetReportDateTime();
+                int finYear = datetime.Year;
+                List<int> Year = new List<int>();
+                for (int i = -5; i < 5; i++)
+                {
+                    Year.Add(DateTime.Now.Year + i);
+                }
+                FinsYear.DataSource = Year;
+                FinsYear.DataBind();
+
+                FinsYear.SelectedValue = finYear.ToString();
                 List<C_System> sysList = new List<C_System>();
                 if (PermissionList != null && PermissionList.Count > 0)
                 {
@@ -50,6 +61,8 @@ namespace LJTH.BusinessIndicators.Web.SystemConfiguration
         protected void ddlSystem_SelectedIndexChanged(object sender, EventArgs e)
         {
             string SysID = ddlSystem.SelectedValue;
+            hideTerrNodeId.Value = "";
         }
+       
     }
 }
