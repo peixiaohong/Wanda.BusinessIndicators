@@ -60,7 +60,7 @@ namespace LJTH.BusinessIndicators.DAL
 
         public IList<B_DocumentAttachments> GetListByBID(Guid BusinessID)
         {
-            string sql = ORMapping.GetSelectSql<B_DocumentAttachments>(TSqlBuilder.Instance);
+            string sql =  ORMapping.GetSelectSql<B_DocumentAttachments>(TSqlBuilder.Instance);
             sql += "WHERE " + base.NotDeleted;
 
             sql += " AND BusinessID=@BusinessID ";
@@ -70,6 +70,32 @@ namespace LJTH.BusinessIndicators.DAL
             return ExecuteQuery(sql, new SqlParameter[] { _BusinessID });
 
         }
+
+        public IList<B_DocumentAttachments> GetListByBID(Guid BusinessID,Guid SystemId,string Year="")
+        {
+            string sql = @";with cr as ( 
+    select ID from C_DocumentTree  
+	 where SystemID=@SystemID AND  id=@BusinessID AND IsDeleted=0
+	UNION ALL
+    SELECT e.ID from C_DocumentTree e 
+	INNER JOIN cr 
+        ON e.ParentID = cr.ID 
+	 and e.SystemID=@SystemID AND e.IsDeleted=0) ";
+             sql += ORMapping.GetSelectSql<B_DocumentAttachments>(TSqlBuilder.Instance);
+
+            sql += "WHERE " + base.NotDeleted;
+            if (!string.IsNullOrEmpty(Year))
+                sql += " AND FinYear=@Year ";
+            sql += " AND BusinessID IN (SELECT ID FROM cr) ";
+
+            sql += " ORDER BY CreateTime DESC";
+            SqlParameter _SystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemId);
+            SqlParameter _Year = CreateSqlParameter("@Year", System.Data.DbType.String, Year);
+            SqlParameter _BusinessID = CreateSqlParameter("@BusinessID", System.Data.DbType.Guid, BusinessID);
+            return ExecuteQuery(sql, new SqlParameter[] { _SystemID, _BusinessID, _Year });
+
+        }
+       
 
         public IList<B_DocumentAttachments> GetListByValueA(Guid ValueA)
         {

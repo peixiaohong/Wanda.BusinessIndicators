@@ -48,6 +48,13 @@ namespace LJTH.BusinessIndicators.BLL
 
             return result;
         }
+        public List<B_DocumentAttachments> GetListByBID(Guid BusinessID,Guid SystemID,string Year="")
+        {
+            List<B_DocumentAttachments> result = _bDocumentAttachmentsAdapter.GetListByBID(BusinessID, SystemID, Year).ToList();
+
+            return result;
+        }
+       
 
         public B_DocumentAttachments GetDocumentAttachments(Guid bDocumentAttachmentsID)
         {
@@ -84,6 +91,27 @@ namespace LJTH.BusinessIndicators.BLL
                 list = GetListByBID(BusinessID);
             }
         
+
+
+            return list;
+
+        }
+
+        /// <summary>
+        /// 获取List
+        /// </summary>
+        /// <param name="bDocumentAttachmentsID"></param>
+        /// <returns></returns>
+        public List<B_DocumentAttachments> GetDocAttachmentsList(Guid BusinessID,Guid SystemID,string Year)
+        {
+            ExceptionHelper.TrueThrow<ArgumentNullException>(BusinessID == null, "Argument TreeNodeID is Empty");
+            ExceptionHelper.TrueThrow<ArgumentNullException>(SystemID == null, "Argument TreeNodeID is Empty");
+            List<B_DocumentAttachments> list = new List<B_DocumentAttachments>();
+            if (BusinessID != Guid.Empty&& SystemID!=Guid.Empty)
+            {
+                list = GetListByBID(BusinessID,SystemID, Year);
+            }
+
 
 
             return list;

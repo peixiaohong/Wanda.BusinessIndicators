@@ -35,12 +35,12 @@
                         <div style="padding-top: 0" class="leftCon">
                             <div style="margin-top: 0; margin-bottom: 0px;" class="con">
                                 <div class="menutree">
-                                    <div style="border-bottom: 1px solid #deedf2; padding: 8px 0; display: none">
+                                    <div style="border-bottom: 1px solid #deedf2; padding: 8px 0;">
 
-                                        <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlSystem" AutoPostBack="true" Style="width: 180px; display: none;" OnSelectedIndexChanged="ddlSystem_SelectedIndexChanged"></asp:DropDownList>
+                                        <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlSystem" AutoPostBack="true" Style="width: 180px;" OnSelectedIndexChanged="ddlSystem_SelectedIndexChanged"></asp:DropDownList>
 
-                                        <input type="text" id="TxtDocSearch" style="width: 45%; height: 22px; vertical-align: top; line-height: 22px; color: gray" value="输入文档名称" onfocus="if (value =='输入文档名称'){value ='';this.style.color='black'}" onblur="if (value ==''){value='输入文档名称'; this.style.color='gray'}" />
-                                        <a class="btn_search" id="btnSearch" href="#" onclick="SearchData();"><span class="Search">查 询</span></a>
+                                       <%-- <input type="text" id="TxtDocSearch" style="width: 45%; height: 22px; vertical-align: top; line-height: 22px; color: gray" value="输入文档名称" onfocus="if (value =='输入文档名称'){value ='';this.style.color='black'}" onblur="if (value ==''){value='输入文档名称'; this.style.color='gray'}" />
+                                        <a class="btn_search" id="btnSearch" href="#" onclick="SearchData();"><span class="Search">查 询</span></a>--%>
 
                                     </div>
                                     <div id="DivLeft" style="padding: 4px 0 0 4px; height: 544px; overflow: auto; overflow-x: hidden;">
@@ -62,7 +62,7 @@
                             <div id="DivRight" style="padding: 4px 8px 0 8px; height: 90px; text-align: left; width:98%;  float: left">
                                 <table class="tab_search">
                                     <tr>
-                                        <th style="width:10%">文件类型:</th>
+                                        <%--<th style="width:10%">文件类型:</th>
                                         <td style="width:10%">
                                               <asp:DropDownList ID="ValueA" runat="server" ClientIDMode="Static" AutoPostBack="true" OnSelectedIndexChanged="ValueA_SelectedIndexChanged" ></asp:DropDownList>
                                         </td>
@@ -82,7 +82,7 @@
                                             <asp:DropDownList ID="ValueD" runat="server" ClientIDMode="Static" AutoPostBack="true" OnSelectedIndexChanged="ValueD_SelectedIndexChanged">
                                                  <asp:ListItem Value="0" Selected="True">请选择</asp:ListItem>
                                             </asp:DropDownList>
-                                        </td>
+                                        </td>--%>
                                          <th style="width:10%">年份:</th>
                                         <td style="width:10%"> <asp:DropDownList ID="FinsYear" runat="server" ClientIDMode="Static" AutoPostBack="true" OnSelectedIndexChanged="FinYear_SelectedIndexChanged"></asp:DropDownList>
                                         </td>
