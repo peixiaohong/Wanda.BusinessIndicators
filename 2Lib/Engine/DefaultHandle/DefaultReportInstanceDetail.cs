@@ -16,7 +16,7 @@ using System.Collections;
 namespace LJTH.BusinessIndicators.Engine
 {
     /// <summary>
-    /// 更具获取系统，填充某个系统的补充项
+    /// 填充某个系统的补充项
     /// </summary>
     public class DefaultReportInstanceDetail : IReportInstanceDetail
     {

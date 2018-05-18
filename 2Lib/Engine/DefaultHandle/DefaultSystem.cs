@@ -11,12 +11,12 @@ using LJTH.BusinessIndicators.ViewModel;
 namespace LJTH.BusinessIndicators.Engine
 {
     /// <summary>
-    /// 更具获取系统，填充某个系统的补充项
+    /// 
     /// </summary>
     public class DefaultSystem : ISystem
     {
         /// <summary>
-        /// 商管专用
+        /// 
         /// </summary>
         /// <param name="VModel">筛选出来的结果</param>
         /// <param name="_SystemID">系统ID</param>
