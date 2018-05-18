@@ -53,6 +53,7 @@ function LoadPage() {
             if (resultData.Success == 1) {           
                 $('#ShowMenuUsersData').empty();
                 loadTmpl('#ShowMenuUsersDataTmpl').tmpl(resultData).appendTo('#ShowMenuUsersData');
+                $("#InitPager").empty();
                 $("#InitPager").paginationex({
                     current: PageNumber,
                     pageSize: PageSize,
