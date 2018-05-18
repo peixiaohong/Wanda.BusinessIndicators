@@ -31,9 +31,13 @@ namespace WebApi.Controllers
         {
             try
             {
-                List<string> Year = new List<string>();
-
-                B_MonthlyreportOperator.Instance.GetMonthlyReportYearList().ForEach(x => Year.Add(x.FinYear.ToString()));
+                DateTime datetime = StaticResource.Instance.GetReportDateTime();
+                int finYear = datetime.Year;
+                List<int> Year = new List<int>();
+                for (int i = -5; i < 5; i++)
+                {
+                    Year.Add(DateTime.Now.Year + i);
+                }
 
                 var _SystemIds = S_OrganizationalActionOperator.Instance.GetUserSystemData(WebHelper.GetCurrentLoginUser()).Select(v => v.SystemID).ToList();
                 
@@ -195,9 +199,14 @@ namespace WebApi.Controllers
         {
             try
             {
-                List<string> Year = new List<string>();
-
-                A_TargetplanOperator.Instance.GetPlanYearList().ForEach(x => Year.Add(x.FinYear.ToString()));
+                DateTime datetime = StaticResource.Instance.GetReportDateTime();
+                int finYear = datetime.Year;
+                List<int> Year = new List<int>();
+                for (int i = -5; i < 5; i++)
+                {
+                    Year.Add(DateTime.Now.Year + i);
+                }
+               
                 var _SystemIds = S_OrganizationalActionOperator.Instance.GetUserSystemData(WebHelper.GetCurrentLoginUser()).Select(v => v.SystemID).ToList();
 
                 //获取当前人拥有的系统板块
@@ -223,8 +232,8 @@ namespace WebApi.Controllers
         {
             try
             {
-                TargetController tc = new TargetController();
-                List<B_TargetPlan> list = tc.GetTargetVersionList(SystemID, Year);
+                MonthlyReportController tc = new MonthlyReportController();
+                List<A_TargetPlan> list = (List<A_TargetPlan>)tc.GetTargetVersionType(SystemID, int.Parse(Year));
 
                 return new ResultContext(list);
             }
