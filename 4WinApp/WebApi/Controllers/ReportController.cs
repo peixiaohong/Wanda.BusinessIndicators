@@ -44,7 +44,7 @@ namespace WebApi.Controllers
                 //获取当前人拥有的系统板块
                 List<C_System> c_SystemList = StaticResource.Instance.SystemList.Where(p => _SystemIds.Contains(p.ID)).OrderBy(x => x.Sequence).ToList();
 
-                return new ResultContext(new { Year, System= c_SystemList });
+                return new ResultContext(new { Year,SelectYear=finYear, System= c_SystemList });
             }
             catch (Exception ex)
             {
@@ -212,7 +212,7 @@ namespace WebApi.Controllers
                 //获取当前人拥有的系统板块
                 List<C_System> c_SystemList = StaticResource.Instance.SystemList.Where(p => _SystemIds.Contains(p.ID)).OrderBy(x => x.Sequence).ToList();
 
-                return new ResultContext(new { Year, System= c_SystemList });
+                return new ResultContext(new { Year, SelectYear = finYear, System = c_SystemList });
             }
             catch (Exception ex)
             {
