@@ -597,6 +597,12 @@ function getMonthReportReturnData() {
             $("#Tab_ReturnHead").empty();
 
             loadTmpl_1('#TmplHeadReturn').tmpl().appendTo('#Tab_ReturnHead');  //加载裂头
+            if (ReturnData.length == 0) {
+                $(".newdiff_retu").show();
+                $(".Level1TDSL").attr("colspan", 9);
+                $('#Tab_ReturnHead tr th').eq(14).hide();
+                return;
+            }
 
             if (ReturnData.length > 1) {  //判断指标有几个分组，如果是2个一上默认选择第一个
                 loadTmpl_1('#TmplTargerList').tmpl(ReturnData).appendTo('#U1');

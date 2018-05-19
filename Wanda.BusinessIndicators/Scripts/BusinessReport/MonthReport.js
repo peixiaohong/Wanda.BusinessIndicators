@@ -32,7 +32,7 @@ var currentManageReportDetailTarget = null;
 var unit = "";  //单位
 var unfoldTitleList = []; //折叠完成情况明细与经营报告明细三级表头
 var shrinkageTitleList = [];//展开完成情况明细与经营报告明细三级表头
-var showMonthReprot = undefined; 
+var showMonthReprot = undefined;
 
 function SearchData() {
     var temp;
@@ -356,7 +356,7 @@ function ChangeTargetDetail(sender, TabOrSearch) {
         //var obj = $("#Tab_MissTargetHead");
         //var tab = $("#Tbody_MissTargetData");
         //FloatHeader(obj, tab, false, "MonthRpt");
-        
+
 
         //未完成说明
         if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDTargetPlanID, CTDIsLatestVersion, CurrentMissTargetData[0], "W") == true) {
@@ -371,7 +371,7 @@ function ChangeTargetDetail(sender, TabOrSearch) {
         //var tab = $("#Tbody_MissTargetData");
 
         //FloatHeader(obj, tab, false, "MonthRpt");
-       
+
         //未完成说明
         if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDTargetPlanID, CTDIsLatestVersion, MissTargetData[0], "C") == true) {
             getMonthReportMissTargetData();
@@ -386,7 +386,7 @@ function ChangeTargetDetail(sender, TabOrSearch) {
         //var tab = $("#Tbody_Data");
 
         //FloatHeader(obj, tab, false, "MonthRpt");
-        
+
         //补回情况明细
         if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDTargetPlanID, CTDIsLatestVersion, ReturnData[0], "D") == true) {
             getMonthReportReturnData();
@@ -908,7 +908,7 @@ function SetComplateTargetDetailData(sender, Type) {
     } else {
         loadTmpl('#CompleteDetailHeadTemplate').tmpl(sender).appendTo('#CompleteDetailHead');
     }
-    
+
     //tmpl模板名称
     if (strComplateMonthReportDetilHtmlTemplate[1] != "" && strComplateMonthReportDetilHtmlTemplate[1] != undefined) {
         ComplateTargetDetailTemplate = strComplateMonthReportDetilHtmlTemplate[1];
@@ -1095,7 +1095,7 @@ function SetManageMonthReprotDetailData(sender, Type) {
     } else {
         loadTmpl('#TmplCompleteDetail_Head').tmpl(sender).appendTo('#CompleteDetailHead_1');
     }
-    
+
     //tmpl模板名称
     if (strManageMonthReprotDetailHtmlTemplate[1] != "" && strManageMonthReprotDetailHtmlTemplate[1] != undefined) {
         strManageMonthReprotDetailTemplate = strManageMonthReprotDetailHtmlTemplate[1];
@@ -1323,10 +1323,7 @@ function getMonthReportReturnData() {
                 $(".Level1TDSL").attr("colspan", 9);
                 $('#Tab_ReturnHead tr th').eq(14).hide();
                 return;
-            }
-
-
-            if (ReturnData.length > 1) {  //判断指标有几个分组，如果是2个一上默认选择第一个
+            } else if (ReturnData.length > 1) {  //判断指标有几个分组，如果是2个一上默认选择第一个
 
                 loadTmpl_1('#TmplTargerList').tmpl(ReturnData).appendTo('#U1'); //加载补回指标 Tab
 
@@ -1390,7 +1387,7 @@ function RtunLiaddCss(sender) {
     $(sender).addClass("active_sub3");
     $('#Tbody_Data').html("");
 
-    if (m[0].TargetGroupCount == 1) {
+    if (m.length > 0 && m[0].TargetGroupCount == 1) {
         //单个补回 ，（代表：商管，物管）
         if (ReturnData[0].HtmlTemplate != "") {
             var tempstr = '#' + ReturnData[0].HtmlTemplate; //获取tmpl的名称
@@ -1456,9 +1453,7 @@ function getMonthReportMissTargetData() {
 
                 return;
             }
-
-            //（拆分单个指标）
-            if (MissTargetData.length > 1) {
+            else if (MissTargetData.length > 1) {//（拆分单个指标）
 
                 loadTmpl_1('#TmplMissTargerList').tmpl(MissTargetData).appendTo('#U2'); //指标标签
 
@@ -1537,11 +1532,7 @@ function getCurrentMonthReportMissTargetData() {
                 $('#Tab_CurrentMissTargetHead tr th').eq(15).hide();
                 return;
             }
-
-
-
-            //（拆分单个指标）
-            if (CurrentMissTargetData.length > 1) {
+            else if (CurrentMissTargetData.length > 1) {
 
                 loadTmpl_1('#TmplCurrentMissTargerList').tmpl(CurrentMissTargetData).appendTo('#U2_1'); //指标标签
 
@@ -1606,7 +1597,7 @@ function MissLiaddCss(sender) { //未完成指标筛选（代表：商管体统�
     $(sender).addClass("active_sub3");
     $('#Tbody_MissTargetData').html("");
 
-    if (m[0].TargetGroupCount == 1) {
+    if (m.length > 0 && m[0].TargetGroupCount == 1) {
         //单个指标（代表：商管，物管）
         loadTmpl_1('#TmplMissTarget_SG').tmpl(m).appendTo('#Tbody_MissTargetData');
         $(".newdiff_miss").hide();
@@ -1646,7 +1637,7 @@ function MissCurrentLiaddCss(sender) {
     currentMissTarget = sender;
     $('#Tbody_CurrentMissTargetData').html("");
 
-    if (m[0].TargetGroupCount == 1) {
+    if (m.length>0&&m[0].TargetGroupCount == 1) {
         //单个指标（代表：商管，物管）
         loadTmpl_1('#TmplCurrentMissTarget_SG').tmpl(m).appendTo('#Tbody_CurrentMissTargetData');
 
