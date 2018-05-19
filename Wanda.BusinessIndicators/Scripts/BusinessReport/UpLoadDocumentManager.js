@@ -26,7 +26,7 @@ $(document).ready(function () {
             onRemove: zTreeOnRemove,
             onClick: docTreeOnClick,
             beforeClick: docTreeBeforeClick,
-            beforeRename:BeforeRename,
+            beforeRename: BeforeRename,
             onRename: docTreeOnRename,
             beforeRemove: docTreeBeforeRemove
         },
@@ -66,7 +66,7 @@ $(document).ready(function () {
             GetDocAttachmentsList(zzNodes);
         }
     });
-   
+
 
 });
 
@@ -81,9 +81,11 @@ function GetDocAttachmentsList(TNodes) {
     var zTree = $.fn.zTree.getZTreeObj("DocTree");
     if (TNodesId == "" || TNodesId == undefined) {
         var nodes = zTree.getNodes();
-        TNodesId = nodes[0].children[0].ID; //获取第一个子节点
+        if (nodes[0].children)
+            TNodesId = nodes[0].children[0].ID; //获取第一个子节点
+        else
+            TNodesId = nodes[0].ID;
     }
-
     var node = zTree.getNodeByParam("ID", TNodesId);
     zTree.selectNode(node);
 
@@ -92,7 +94,7 @@ function GetDocAttachmentsList(TNodes) {
     WebUtil.ajax({
         async: true,
         url: "/DocumentManagerControll/GetDocAttachmentsList",
-        args: { TreeNodeID: TNodesId, SystemId: $("#ddlSystem").val(), Year: $("#FinsYear").val()},
+        args: { TreeNodeID: TNodesId, SystemId: $("#ddlSystem").val(), Year: $("#FinsYear").val() },
         successReturn: function (ResultData) {
 
             ObjValue.DocManagerData = ResultData;
@@ -184,7 +186,7 @@ function docTreeBeforeRemove(treeId, treeNode) {
             WebUtil.ajax({
                 async: false,
                 url: "/DocumentManagerControll/GetDocAttachmentsList",
-                args: { TreeNodeID: treeNode.ID, SystemId: $("#ddlSystem").val()},
+                args: { TreeNodeID: treeNode.ID, SystemId: $("#ddlSystem").val() },
                 successReturn: function (ResultData) {
 
                     if (ResultData.length > 0)

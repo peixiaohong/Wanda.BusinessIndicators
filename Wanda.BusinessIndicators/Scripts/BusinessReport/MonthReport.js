@@ -712,8 +712,14 @@ function getMonthReprotDetailData() {
         url: "/MonthlyReportController/GetDetailRptDataSource",
         args: { rpts: WebUtil.jsonToString(ReportInstance), strCompanyProperty: CompanyProperty, strMonthReportOrderType: MonthReportOrderType, IncludeHaveDetail: IncludeHaveDetail },
         successReturn: function (ResultData) {
-            if (ResultData.length == 0)
+            if (ResultData.length == 0) {
+                $("#CompleteDetailHead").empty();
+                loadTmpl('#CompleteDetailHeadTemplate').tmpl().appendTo('#CompleteDetailHead');
+                $("#Ul4").empty();
+                $("#tab2_rows").empty();
+                currentDetailTarget = null;
                 return;
+            }
             ComplateDetailData = ResultData;
             SetComplateTargetDetailData(ComplateDetailData[0], 1);
         }
