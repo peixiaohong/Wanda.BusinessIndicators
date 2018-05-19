@@ -1055,8 +1055,12 @@ table.dstab_5 tr.dstab_5_row_alt th, table.tab_2 tr.tab_2_row_alt td { /*backgro
 }
 
 .menutree {
-    border: 1px solid #b6d4e9;
+    border: 1px solid #9d2328;
     margin: 0 8px;
     background: #fff;
 }
 .hide{ display:none !important;}
+#ddlSystem {
+    display: block;
+    margin: 0 auto;
+}
