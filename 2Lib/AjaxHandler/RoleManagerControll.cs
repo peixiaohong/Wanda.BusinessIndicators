@@ -356,6 +356,44 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         }
 
         /// <summary>
+        /// 获取点击新增用户的时候用户数据
+        /// </summary>
+        /// <param name="roleID"></param>
+        /// <returns></returns>
+        [LibAction]
+        public object GetAddUserInfo(string data)
+        {
+            string Message = string.Empty;
+            int Success = 0;
+            int TotalCount = 0;
+
+            try
+            {
+                AllUserPermissionsFilter filter = JsonConvert.DeserializeObject<AllUserPermissionsFilter>(data);
+                var resultData = EmployeeActionOperator.Instance.GetAddUserInfo(filter, out TotalCount);
+                Success = 1;
+                Message = "查询成功";
+                return new
+                {
+                    Data = resultData,
+                    TotalCount = TotalCount,
+                    Success = Success,
+                    Message = Message
+                };
+            }
+            catch (Exception ex)
+            {
+                return new
+                {
+                    Data = "",
+                    TotalCount = TotalCount,
+                    Success = 0,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        /// <summary>
         /// 保存角色—用户信息
         /// </summary>
         /// <param name="data"></param>

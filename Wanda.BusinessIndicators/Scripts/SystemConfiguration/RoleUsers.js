@@ -78,13 +78,14 @@ function UsersLoadPage() {
     Load();
     var keyword = $("#UsersNameAdd").val();
     var roleData = {
+        "RoleID": getQueryString("RoleId"),
         "keyWord": keyword,
         "PageIndex": PageNumber,
         "PageSize": PageSize
     }
     WebUtil.ajax({
         async: false,
-        url: "/RoleManagerControll/GetAllUser",
+        url: "/RoleManagerControll/GetAddUserInfo",
         args: { data: JSON.stringify(roleData) },
         successReturn: function (resultData) {
             var totalCount = resultData.TotalCount;
