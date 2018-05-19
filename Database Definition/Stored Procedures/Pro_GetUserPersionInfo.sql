@@ -88,13 +88,23 @@ Begin
 		CnName NVarchar(Max)--组织架构名称
 	)
 	Exec('
-		Insert Into [#User_OrgInfo_Templ]
-				( [LoginName], [CnName] )
-		Select A.[LoginName],C.[CnName] From [dbo].[Employee] As A 
-		Inner Join [dbo].[S_Org_User] As B On A.[LoginName]=B.[LoginName] And B.[IsDeleted]=0
-		Inner Join [dbo].[S_Organizational] As C On B.[CompanyID]=C.[ID] And C.[IsDeleted]=0
-		Inner Join [dbo].[C_System] As D On B.[SystemID]=D.[ID] And D.[IsDeleted]=0
-		Where A.[IsDeleted]=0'+@fileter2)
+		With getSystemData
+    	As 
+    	(
+    		Select A.*,B.[LoginName],C.[EmployeeName],C.[JobTitle] From [dbo].[S_Organizational] As A 
+    		Inner Join [S_Org_User] As B On A.[ID]=B.[CompanyID] And B.[IsDeleted]=0
+    		Inner Join [dbo].[Employee] As C On B.[LoginName]=C.[LoginName] And C.[IsDeleted]=0
+    		Union All
+    		 Select A.*,B.[LoginName],B.[EmployeeName],B.[JobTitle] From [dbo].[S_Organizational] As A
+    		Inner Join [getSystemData] As B On A.[ID]=B.[ParentID] And B.[IsDeleted]=0
+    		Where A.[IsDeleted]=0
+    	)
+    	Insert Into [#User_OrgInfo_Templ]
+    	 ( [LoginName], [CnName] )
+    	Select A.[LoginName],A.[CnName] From [getSystemData] As A 
+    	Inner Join [dbo].[C_System] As B On A.[ID]=B.[ID] And B.[IsDeleted]=0
+    	Where A.[Level]=2 '+@fileter2+'
+    	Group By A.[LoginName],A.[CnName] Order By A.[LoginName]')
 
 	Insert Into [#User_OrgInfo]
 	        ( [LoginName], [OrgName] )

@@ -396,7 +396,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     {
                         if (oldLoginNames.Contains(item))
                         {
-                            break;
+                            continue;
                         }
                     }
                     S_Role_User su = new S_Role_User();
