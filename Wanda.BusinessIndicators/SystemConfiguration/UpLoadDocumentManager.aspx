@@ -10,7 +10,7 @@
     <script type="text/javascript" src="../Scripts/ztree/jquery.ztree.excheck-3.5.js"></script>
     <script type="text/javascript" src="../Scripts/ztree/jquery.ztree.exedit-3.5.js"></script>
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
-    <script src="../Scripts/BusinessReport/UpLoadDocumentManager.js"></script>
+    <script src="../Scripts/BusinessReport/UpLoadDocumentManager.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
     <link href="../Styles/css/NavStlye.css" type="text/css" rel="stylesheet" />
 
     <link href="../ProcessResource/css/wfStyle-201.88.css" rel="stylesheet" />
