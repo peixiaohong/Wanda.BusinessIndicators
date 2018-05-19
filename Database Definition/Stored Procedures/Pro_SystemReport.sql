@@ -30,7 +30,8 @@ Begin
 		(
 			ID UniqueIdentifier,
 			SystemID UniqueIdentifier,
-			CnName NVarchar(50)
+			CnName NVarchar(50),
+			[Sequence] Int
 		);
 		
 
@@ -46,8 +47,11 @@ Begin
 			Where A.[IsDeleted]=0
 		)
 		Insert Into [#UserPermissionsSystem]
-		        ( [ID], [SystemID], [CnName] )
-		Select Distinct [getSystemData].[ID],[getSystemData].[SystemID],[getSystemData].[CnName]  From [getSystemData] Where [Level]=2
+		        ( [ID], [SystemID], [CnName],[Sequence] )
+		Select Distinct [getSystemData].[ID],[getSystemData].[SystemID],[getSystemData].[CnName],B.[Sequence] 
+		From [getSystemData]
+		Inner Join [dbo].[C_System] As B On [getSystemData].[SystemID]=B.[ID] And B.[IsDeleted]=0   
+		Where [Level]=2
 	End
 
 	Begin --获取有效的指标
@@ -57,10 +61,11 @@ Begin
 		(
 			ID UniqueIdentifier,
 			SystemID UniqueIdentifier,
-			TargetName NVarchar(50)
+			TargetName NVarchar(50),
+			[Sequence] Int
 		);
 		Insert Into #cTargetTempl
-		Select C.[ID],C.[SystemID],C.[TargetName] From [dbo].[C_Target] As C
+		Select C.[ID],C.[SystemID],C.[TargetName],C.[Sequence] From [dbo].[C_Target] As C
 		Inner Join [#UserPermissionsSystem] As B On [B].[SystemID] = [C].[SystemID]
 		Where C.[IsDeleted]=0 And DateDiff(Day,C.[VersionStart],GetDate())>=0 And DateDiff(Day,GetDate(),C.[VersionEnd])>=0
  
@@ -83,14 +88,16 @@ Begin
 			NAccumulativePlanAmmount Decimal(37,7),
 			NAccumulativeActualAmmount Decimal(37,7),
 			NAccumulativeDifference Decimal(37,7),
-			NAccumulativeDisplayRate NVarchar(100)
+			NAccumulativeDisplayRate NVarchar(100),
+			SystemSequence Int,--板块排序
+			TargetSequence Int --指标排序
 		 )
 
 
 		Exec('
 			 Insert Into [#resultData]
 						 ( [SystemID] ,[CnName] ,[TargetName] ,[FinYear] ,[FinMonth] ,[NPlanAmmount] ,[NActualAmmount] ,[NDifference]
-						  ,[NDisplayRate] ,[NAccumulativePlanAmmount] ,[NAccumulativeActualAmmount] ,[NAccumulativeDifference] ,[NAccumulativeDisplayRate])
+						  ,[NDisplayRate] ,[NAccumulativePlanAmmount] ,[NAccumulativeActualAmmount] ,[NAccumulativeDifference] ,[NAccumulativeDisplayRate],[SystemSequence],[TargetSequence])
 			Select
 				  [A].[SystemID]
 				 ,[B].[CnName]
@@ -100,19 +107,23 @@ Begin
 				 ,Sum([NPlanAmmount])																										   As [NPlanAmmount]
 				 ,Sum([NActualAmmount])																										   As [NActualAmmount]
 				 ,(Sum([NActualAmmount])-Sum([NPlanAmmount]))																				   As [NDifference]
-				 ,Convert(NVarchar(10), Cast(Round((Sum([NActualAmmount])/ Sum([NPlanAmmount])* 100), 0) As Real))+''%''						   As [NDisplayRate]
+				 ,Case When Sum([NPlanAmmount])=0 then ''0.00%''
+					   Else Convert(NVarchar(10), Cast(Round((Sum([NActualAmmount])/ Sum([NPlanAmmount])* 100), 0) As Real))+''%''
+					   End  As [NDisplayRate]
 				 ,Sum([NAccumulativePlanAmmount])																							   As [NAccumulativePlanAmmount]
 				 ,Sum([NAccumulativeActualAmmount])																							   As [NAccumulativeActualAmmount]
 				 ,(Sum([NAccumulativeActualAmmount])-Sum([NAccumulativePlanAmmount]))														   As [NAccumulativeDifference]
-				 ,Convert(NVarchar(10), Cast(Round((Sum([NAccumulativeActualAmmount])/ Sum([NAccumulativePlanAmmount])* 100), 0) As Real))+''%'' As [NAccumulativeDisplayRate]
+				 ,Case  When Sum([NAccumulativePlanAmmount])=0 Then ''0.00%''
+						Else Convert(NVarchar(10), Cast(Round((Sum([NAccumulativeActualAmmount])/ Sum([NAccumulativePlanAmmount])* 100), 0) As Real))+''%''
+						End  As [NAccumulativeDisplayRate]
+				 ,B.[Sequence],C.[Sequence]
 			From  [dbo].[A_MonthlyReportDetail] As A
 			Inner Join [#UserPermissionsSystem] As B On A.[SystemID]=B.[SystemID]
 			Inner Join [#cTargetTempl] As C On A.[TargetID]=C.[ID]
 			Inner Join [dbo].[A_TargetPlan] As D On A.TargetPlanID=D.ID And D.[IsDeleted]=0
 			Where 1=1'+@Filter+' 
-			group by [A].[SystemID],[B].[CnName],C.[TargetName],A.[FinYear],[FinMonth]
-			order by A.SystemID asc ')
+			group by [A].[SystemID],[B].[CnName],C.[TargetName],A.[FinYear],[FinMonth],B.[Sequence],C.[Sequence]')
 	End 
-	Select *,(Select Count(*) From [#resultData] As B Where A.SystemID=B.[SystemID]) As Number  From [#resultData] As A Order By A.[SystemID] Asc,A.[TargetName] Asc
+	Select *,(Select Count(*) From [#resultData] As B Where A.SystemID=B.[SystemID]) As Number  From [#resultData] As A Order By A.[SystemSequence] Asc,A.[TargetSequence] Asc 
 End 
 

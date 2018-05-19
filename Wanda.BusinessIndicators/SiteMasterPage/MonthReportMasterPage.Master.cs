@@ -228,11 +228,11 @@ namespace LJTH.BusinessIndicators.Web
         #region 读取数据库中配置的菜单
         private List<NavSiteMapNode> GetMenus()
         {
-            bool isPageExist = false;
             List<S_Menu> menus = S_MenuActionOperator.Instance.GetLoinNameMenu(HttpContext.Current.User.Identity.Name);
-            if (menus.Count < 1)
+            if (!this.Request.Url.AbsoluteUri.ToLower().Contains("nopermission.aspx"))
             {
-                Response.Redirect("../NoPermission.aspx");
+                if (menus.Count < 1)
+                    Response.Redirect("~/NoPermission.aspx");
             }
             List<NavSiteMapNode> list_node = new List<NavSiteMapNode>();
             Guid parentMenuID = "00000000-0000-0000-0000-000000000000".ToGuid();
@@ -253,19 +253,13 @@ namespace LJTH.BusinessIndicators.Web
                     if (IsSelect)
                     {
                         nm.Selected = IsSelect;
-                        isPageExist = true;
                     }
                     if (nm.Nodes.Count < 1)
                     {
                         nm.Selected = true;
-                        isPageExist = true;
                     }
                 }
                 list_node.Add(nm);
-            }
-            if (!isPageExist)
-            {
-                //Response.Redirect("../NoPermission.aspx");
             }
             return list_node;
         }

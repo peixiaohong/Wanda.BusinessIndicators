@@ -91,8 +91,8 @@
                             <tr>
                                 <th class="Td_Right" rowspan="2">板块</th>
                                 <th class="Td_Right" rowspan="2">考核指标</th>
-                                <th class="Td_Right" colspan="4">本月发生</th>
-                                <th class="Td_Right" colspan="4">本年累计</th>
+                                <th class="Td_Right" colspan="4">本月发生（万元）</th>
+                                <th class="Td_Right" colspan="4">本年累计（万元）</th>
                             </tr>
                             <tr>
                                 <th class="Td_Right">计划数</th>

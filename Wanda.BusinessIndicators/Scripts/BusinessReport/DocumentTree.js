@@ -90,7 +90,10 @@ function GetDocAttachmentsList(TNodes) {
     var zTree = $.fn.zTree.getZTreeObj("DocTree");
     if (TNodesId == "" || TNodesId == undefined) {
         var nodes = zTree.getNodes();
-        TNodesId=nodes[0].children[0].ID; //获取第一个子节点
+        if (nodes[0].children)
+            TNodesId = nodes[0].children[0].ID; //获取第一个子节点
+        else
+            TNodesId = nodes[0].ID;
     }
    
     var node = zTree.getNodeByParam("ID", TNodesId);

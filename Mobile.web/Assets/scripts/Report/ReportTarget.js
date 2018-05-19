@@ -51,12 +51,15 @@
                     },
                     success: function (res) {
                         if (res.IsSuccess && res.StatusCode == 200) {
+                            self.versions = res.Data;
                             if (res.Data.length) {
-                                self.versions = res.Data;
-                                self.versionSelect = self.versions[0].ID;                              
+                                self.versionSelect = self.versions[0].ID;
+                            } else {
+                                self.versionSelect = "";
                             }
                             self.LoadData();
                         } else {
+
                             utils.alertMessage(res.StatusMessage)
                         }
                     }
@@ -64,6 +67,11 @@
             },
             LoadData: function () {
                 var self = this;
+                if (!self.systemID || !self.yearSelect || !self.versionSelect) {
+                    self.head = [];
+                    self.list = [];
+                    return false;
+                }
                 var url = api_url + 'Report/GetTargetPlanList';
                 utils.ajax({
                     type: 'GET',

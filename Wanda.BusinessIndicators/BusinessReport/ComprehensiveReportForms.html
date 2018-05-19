@@ -60,13 +60,13 @@
             <td rowspan="${item.Number}" class="Td_Right">{{= item.CnName}}</td>
             {{/if}}
             <td class="Td_Right">${item.TargetName}</td>
-            <td class="Td_Right">${item.NPlanAmmount}</td>
-            <td class="Td_Right">${item.NActualAmmount}</td>
-            <td class="Td_Right">${item.NDifference}</td>
+            <td class="Td_Right">${item.NPlanAmmount.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Right">${item.NActualAmmount.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Right">${item.NDifference.thousandize0OrEmpty(0)}</td>
             <td class="Td_Right">${item.NDisplayRate}</td>
-            <td class="Td_Right">${item.NAccumulativePlanAmmount}</td>
-            <td class="Td_Right">${item.NAccumulativeActualAmmount}</td>
-            <td class="Td_Right">${item.NAccumulativeDifference}</td>
+            <td class="Td_Right">${item.NAccumulativePlanAmmount.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Right">${item.NAccumulativeActualAmmount.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Right">${item.NAccumulativeDifference.thousandize0OrEmpty(0)}</td>
             <td class="Td_Right">${item.NAccumulativeDisplayRate}</td>
         </tr>
         {{/each}}
