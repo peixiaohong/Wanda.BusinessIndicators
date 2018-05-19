@@ -67,7 +67,15 @@ namespace LJTH.BusinessIndicators.Web
             //  result = (List<NavSiteMapNode>) HttpContext.Current.Cache[cacheKey];
             if (result == null)
             {
-                result = GetMenus();
+                bool isPageExist = false;
+                result = GetMenus(ref isPageExist);
+                if (!this.Request.Url.AbsoluteUri.ToLower().Contains("nopermission.aspx"))
+                {
+                    if (isPageExist)
+                    {
+                        Response.Redirect("~/NoPermission.aspx");
+                    }
+                }
                 CacheDependency fileDependency = new CacheDependency(Server.MapPath(WebHelper.AuthCacheDependencyFile));
                 HttpContext.Current.Cache.Insert(cacheKey, result, fileDependency);
             }
@@ -109,7 +117,10 @@ namespace LJTH.BusinessIndicators.Web
                     }
                 }
             }
-            sitmap.InnerHtml = "您当前所在的位置：" + first + two;
+            if (!this.Request.Url.AbsoluteUri.ToLower().Contains("nopermission.aspx"))
+            {
+                sitmap.InnerHtml = "您当前所在的位置：" + first + two;
+            }
 
 
         }
@@ -231,13 +242,13 @@ namespace LJTH.BusinessIndicators.Web
         }
 
         #region 读取数据库中配置的菜单
-        private List<NavSiteMapNode> GetMenus()
+        private List<NavSiteMapNode> GetMenus(ref bool isPageExist)
         {
-            bool isPageExist = false;
             List<S_Menu> menus = S_MenuActionOperator.Instance.GetLoinNameMenu(WebHelper.GetCurrentLoginUser());
-            if (menus.Count < 1)
+            if (!this.Request.Url.AbsoluteUri.ToLower().Contains("nopermission.aspx"))
             {
-                Response.Redirect("../NoPermission.aspx");
+                if (menus.Count < 1)
+                    Response.Redirect("~/NoPermission.aspx");
             }
             List<NavSiteMapNode> list_node = new List<NavSiteMapNode>();
             Guid parentMenuID = "00000000-0000-0000-0000-000000000000".ToGuid();
@@ -267,10 +278,6 @@ namespace LJTH.BusinessIndicators.Web
                     }
                 }
                 list_node.Add(nm);
-            }
-            if (!isPageExist)
-            {
-                //Response.Redirect("../NoPermission.aspx");
             }
             return list_node;
         }
