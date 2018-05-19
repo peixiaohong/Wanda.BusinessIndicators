@@ -39,6 +39,11 @@
             },
             ChangeData: function () {
                 var self = this;
+                if (!self.systemID || !self.yearSelect || !self.monthSelect || !self.versionSelect) {
+                    self.title = "";
+                    self.list = {};
+                    return false;
+                }
                 var url = api_url + 'Report/GetMonthList';
                 utils.ajax({
                     type: 'GET',
