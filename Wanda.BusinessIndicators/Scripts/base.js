@@ -1235,7 +1235,7 @@ function InitTabs() {
                 pager.find("a.prev").attr("disabled", false);
             }
 
-            if (_setting.current == _setting.pageCount - 1) {
+            if (_setting.current == _setting.pageCount) {
                 pager.find("a.next").attr("disabled", true);
                 pager.find("a.last").attr("disabled", true);
 
@@ -1245,7 +1245,7 @@ function InitTabs() {
             }
             //分页操作事件
             pager.find("a.first")
-                .attr("title", "快捷键 HOME")
+                //.attr("title", "快捷键 HOME")
                 .click(function () {
                     if (_setting.totalCount == 0) return;
                     _setting.navTo(1, _setting.pageSize);
@@ -1256,7 +1256,7 @@ function InitTabs() {
 
                 });
             pager.find("a.prev")
-                .attr("title", "快捷键 <-")
+                //.attr("title", "快捷键 <-")
                 .click(function () {
                     if (_setting.current > 1)
                         _setting.navTo(_setting.current - 1, _setting.pageSize);
@@ -1275,7 +1275,7 @@ function InitTabs() {
 
                 });
             pager.find("a.next")
-                .attr("title", "快捷键 ->")
+                //.attr("title", "快捷键 ->")
                 .click(function () {
                     if (_setting.current < _setting.pageCount)
                         _setting.navTo(_setting.current + 1, _setting.pageSize);
@@ -1285,7 +1285,7 @@ function InitTabs() {
                     //}
                 });
             pager.find("a.last")
-                .attr("title", "快捷键 END")
+                //.attr("title", "快捷键 END")
                 .click(function () {
                     _setting.navTo(_setting.pageCount, _setting.pageSize);
                     //var btn = context.find("a.last");
