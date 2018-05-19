@@ -605,5 +605,10 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         {
             return A_TargetplanOperator.Instance.GetTargetVersionType(SystemID, FinYear, FinMonth);
         }
+        [LibAction]
+        public object GetTargetVersionType(string SystemID, int FinYear)
+        {
+            return A_TargetplanOperator.Instance.GetTargetVersionType(SystemID, FinYear);
+        }
     }
 }

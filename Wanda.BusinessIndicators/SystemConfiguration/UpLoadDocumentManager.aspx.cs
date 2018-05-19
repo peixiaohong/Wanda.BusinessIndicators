@@ -54,13 +54,13 @@ namespace LJTH.BusinessIndicators.Web.SystemConfiguration
 
 
 
-                List<C_DocumentTree> Select1 = new List<C_DocumentTree>();
-                Select1 = C_DocumentTreeOperator.Instance.GetTypeList(Guid.Parse("99999999-9999-9999-9999-FFFFFFFFFFFF"));
-                ValueA.DataSource = Select1;
-                ValueA.DataTextField = "TreeNodeName";
-                ValueA.DataValueField = "ID";
-                ValueA.DataBind();//绑定前台下拉框
-                ValueA.Items.Insert(0, new ListItem("请选择", "0"));
+                //List<C_DocumentTree> Select1 = new List<C_DocumentTree>();
+                //Select1 = C_DocumentTreeOperator.Instance.GetTypeList(Guid.Parse("99999999-9999-9999-9999-FFFFFFFFFFFF"));
+                //ValueA.DataSource = Select1;
+                //ValueA.DataTextField = "TreeNodeName";
+                //ValueA.DataValueField = "ID";
+                //ValueA.DataBind();//绑定前台下拉框
+                //ValueA.Items.Insert(0, new ListItem("请选择", "0"));
 
             }
         }
@@ -68,95 +68,97 @@ namespace LJTH.BusinessIndicators.Web.SystemConfiguration
         protected void ddlSystem_SelectedIndexChanged(object sender, EventArgs e)
         {
             string SysID = ddlSystem.SelectedValue;
-        }
-
-        protected void ValueA_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DocMutipleUpload.ValueA = ValueA.SelectedValue;
-            hidefile.Value = ValueA.SelectedValue;
-            ValueB.Items.Clear();
-            ValueB.Items.Insert(0, new ListItem("请选择", "0"));
-            DocMutipleUpload.ValueB = "0";
-          
-            ValueC.Items.Clear();
-            ValueC.Items.Insert(0, new ListItem("请选择", "0"));
-            DocMutipleUpload.ValueC = "0";
-
-            ValueD.Items.Clear();
-            ValueD.Items.Insert(0, new ListItem("请选择", "0"));
-            DocMutipleUpload.ValueD = "0";
-            if (ValueA.SelectedValue != "0")
-            {
-                ValueB.Items.Clear();
-                DocumentTree Select1 = new DocumentTree();
-                Select1 = C_DocumentTreeOperator.Instance.GetList(Guid.Parse(ValueA.SelectedValue));
-                if (!Select1.IsChildLastTree)
-                {
-                    ValueB.DataSource = Select1.TreeList;
-                    ValueB.DataTextField = "TreeNodeName";
-                    ValueB.DataValueField = "ID";
-                    ValueB.DataBind();//绑定前台下拉框
-                }
-
-               ValueB.Items.Insert(0, new ListItem("请选择", "0"));
-            }
-        }
-
-        protected void ValueB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DocMutipleUpload.ValueB = ValueB.SelectedValue;
-            ValueC.Items.Clear();
-            ValueC.Items.Insert(0, new ListItem("请选择", "0"));
-            DocMutipleUpload.ValueC = "0";
-
-            ValueD.Items.Clear();
-            ValueD.Items.Insert(0, new ListItem("请选择", "0"));
-            DocMutipleUpload.ValueD = "0";
-            if (ValueB.SelectedValue != "0")
-            {
-                ValueC.Items.Clear();
-                DocumentTree Select1 = new DocumentTree();
-                Select1 = C_DocumentTreeOperator.Instance.GetList(Guid.Parse(ValueB.SelectedValue));
-                if (!Select1.IsChildLastTree)
-                {
-                    ValueC.DataSource = Select1.TreeList;
-                    ValueC.DataTextField = "TreeNodeName";
-                    ValueC.DataValueField = "ID";
-                    ValueC.DataBind();//绑定前台下拉框
-                }
-                ValueC.Items.Insert(0, new ListItem("请选择", "0"));
-            }
-        }
-        protected void ValueC_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DocMutipleUpload.ValueC = ValueC.SelectedValue;
-            ValueD.Items.Clear();
-            ValueD.Items.Insert(0, new ListItem("请选择", "0"));
-            DocMutipleUpload.ValueD = "0";
-            if (ValueC.SelectedValue != "0")
-            {
-                ValueD.Items.Clear();
-                DocumentTree Select1 = new DocumentTree();
-                Select1 = C_DocumentTreeOperator.Instance.GetList(Guid.Parse(ValueC.SelectedValue));
-                if (!Select1.IsChildLastTree)
-                {
-                    ValueD.DataSource = Select1.TreeList;
-                    ValueD.DataTextField = "TreeNodeName";
-                    ValueD.DataValueField = "ID";
-                    ValueD.DataBind();//绑定前台下拉框
-                }
-                ValueD.Items.Insert(0, new ListItem("请选择", "0"));
-            }
+            hideTerrNodeId.Value = "";
+            DocMutipleUpload.SystemId = SysID;
         }
         protected void FinYear_SelectedIndexChanged(object sender, EventArgs e)
         {
             DocMutipleUpload.FinValueYear = FinsYear.SelectedValue;
         }
+        //protected void ValueA_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    DocMutipleUpload.ValueA = ValueA.SelectedValue;
+        //    hidefile.Value = ValueA.SelectedValue;
+        //    ValueB.Items.Clear();
+        //    ValueB.Items.Insert(0, new ListItem("请选择", "0"));
+        //    DocMutipleUpload.ValueB = "0";
 
-        protected void ValueD_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DocMutipleUpload.ValueD = ValueD.SelectedValue;
-        }
+        //    ValueC.Items.Clear();
+        //    ValueC.Items.Insert(0, new ListItem("请选择", "0"));
+        //    DocMutipleUpload.ValueC = "0";
+
+        //    ValueD.Items.Clear();
+        //    ValueD.Items.Insert(0, new ListItem("请选择", "0"));
+        //    DocMutipleUpload.ValueD = "0";
+        //    if (ValueA.SelectedValue != "0")
+        //    {
+        //        ValueB.Items.Clear();
+        //        DocumentTree Select1 = new DocumentTree();
+        //        Select1 = C_DocumentTreeOperator.Instance.GetList(Guid.Parse(ValueA.SelectedValue));
+        //        if (!Select1.IsChildLastTree)
+        //        {
+        //            ValueB.DataSource = Select1.TreeList;
+        //            ValueB.DataTextField = "TreeNodeName";
+        //            ValueB.DataValueField = "ID";
+        //            ValueB.DataBind();//绑定前台下拉框
+        //        }
+
+        //       ValueB.Items.Insert(0, new ListItem("请选择", "0"));
+        //    }
+        //}
+
+        //protected void ValueB_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    DocMutipleUpload.ValueB = ValueB.SelectedValue;
+        //    ValueC.Items.Clear();
+        //    ValueC.Items.Insert(0, new ListItem("请选择", "0"));
+        //    DocMutipleUpload.ValueC = "0";
+
+        //    ValueD.Items.Clear();
+        //    ValueD.Items.Insert(0, new ListItem("请选择", "0"));
+        //    DocMutipleUpload.ValueD = "0";
+        //    if (ValueB.SelectedValue != "0")
+        //    {
+        //        ValueC.Items.Clear();
+        //        DocumentTree Select1 = new DocumentTree();
+        //        Select1 = C_DocumentTreeOperator.Instance.GetList(Guid.Parse(ValueB.SelectedValue));
+        //        if (!Select1.IsChildLastTree)
+        //        {
+        //            ValueC.DataSource = Select1.TreeList;
+        //            ValueC.DataTextField = "TreeNodeName";
+        //            ValueC.DataValueField = "ID";
+        //            ValueC.DataBind();//绑定前台下拉框
+        //        }
+        //        ValueC.Items.Insert(0, new ListItem("请选择", "0"));
+        //    }
+        //}
+        //protected void ValueC_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    DocMutipleUpload.ValueC = ValueC.SelectedValue;
+        //    ValueD.Items.Clear();
+        //    ValueD.Items.Insert(0, new ListItem("请选择", "0"));
+        //    DocMutipleUpload.ValueD = "0";
+        //    if (ValueC.SelectedValue != "0")
+        //    {
+        //        ValueD.Items.Clear();
+        //        DocumentTree Select1 = new DocumentTree();
+        //        Select1 = C_DocumentTreeOperator.Instance.GetList(Guid.Parse(ValueC.SelectedValue));
+        //        if (!Select1.IsChildLastTree)
+        //        {
+        //            ValueD.DataSource = Select1.TreeList;
+        //            ValueD.DataTextField = "TreeNodeName";
+        //            ValueD.DataValueField = "ID";
+        //            ValueD.DataBind();//绑定前台下拉框
+        //        }
+        //        ValueD.Items.Insert(0, new ListItem("请选择", "0"));
+        //    }
+        //}
+
+
+        //protected void ValueD_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    DocMutipleUpload.ValueD = ValueD.SelectedValue;
+        //}
 
 
     }

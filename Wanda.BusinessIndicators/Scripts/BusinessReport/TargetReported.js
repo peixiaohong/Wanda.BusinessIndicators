@@ -149,7 +149,7 @@ function MissTagetExcelReport() {
         'height': 25,
         'successTimeout': 50,
         'fileTypeDesc': 'office file',
-        'fileTypeExts': '*.doc; *.docx; *.xls;*.xlsx',
+        'fileTypeExts': '*.xls;*.xlsx',
         'fileSizeLimit': '10240',
         'swf': '../Scripts/UpLoad/uploadify.swf',
         'uploader': '../AjaxHander/ExcelReport.ashx?FileType=' + MissType + '&SysId=' + sysID + '&MonthReportID=' + MonthReportID + "&FinYear=" + FinYear + "&FinMonth=" + FinMonth,

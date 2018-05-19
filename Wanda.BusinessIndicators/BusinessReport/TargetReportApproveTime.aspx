@@ -39,7 +39,7 @@
                                 <asp:DropDownList ID="ddlMonth" ClientIDMode="Static" runat="server" Style="width: 120px;"></asp:DropDownList>
                             </td>
                             <th>
-                                <a class="btn_search" id="ContentPlaceHolder1_LinkButton1" style="cursor: pointer" onclick="BangList()"><span>查询</span></a>
+                                <a class="btn_search" id="ContentPlaceHolder1_LinkButton1" style="cursor: pointer" onclick="BangList()"><span><i class="fa fa-search"></i>&nbsp;查询</span></a>
                             </th>
                         </tr>
                     </tbody>
@@ -67,7 +67,7 @@
                                     <label class="DownExcelLabel" id="LabelDownload">导出数据</label></span>
                             </div>
 
-                            <div style="width: 80px; float: right; display: inline; padding-right: 25px" id="UpLoadData">
+                            <div style="width: 80px; float: right; display: inline; padding-right: 25px;margin-right:40px;" id="UpLoadData">
                                 <span>
                                     <span>
                                         <input type="file" name="upload" id="file1" value="导入补回期限" />
@@ -88,7 +88,10 @@
 
 
 
-
+            <table class="tab_005" id="Tab_FloatReturn">
+                <thead>
+                </thead>
+            </table>
 
             <table class="tab_005" id="Tab_Return">
                 <thead id="TbH1">

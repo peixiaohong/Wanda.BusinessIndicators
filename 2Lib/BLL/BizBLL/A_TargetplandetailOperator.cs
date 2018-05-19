@@ -280,6 +280,69 @@ namespace LJTH.BusinessIndicators.BLL
             return result;
 
         }
+
+
+
+        public List<TargetDetail> GetSumMonthTargetDetailByTID_A(Guid TargetPlanID)
+        {
+            List<TargetDetail> result = new List<TargetDetail>();
+
+            A_TargetPlan TargetPlan = A_TargetplanOperator.Instance.GetTargetplan(TargetPlanID);
+
+            C_System Sys = StaticResource.Instance[TargetPlan.SystemID, TargetPlan.CreateTime];
+
+            for (int Month = 1; Month <= 12; Month++)
+            {
+                TargetDetail model = new TargetDetail();
+                List<TargetDetailList> TargetDetailList = new List<TargetDetailList>();
+                model.FinMonth = Month;
+                DataTable ds = new DataTable();
+                if (Sys.Category != 2)
+                {
+                    ds = _aTargetplandetailAdapter.GetSumMonthTargetDetailByTID_A(Month, TargetPlanID, TargetPlan.CreateTime);
+                }
+                else
+                {
+                    C_Company com = C_CompanyOperator.Instance.ProCompanyAll(Sys.ID);
+                    ds = _aTargetplandetailAdapter.GetSumMonthTargetDetailProById_A(Month, com.ID, TargetPlanID, TargetPlan.CreateTime);
+                }
+                if (ds != null)
+                {
+                    for (int i = 0; i < ds.Rows.Count; i++)
+                    {
+                        TargetDetailList view = new TargetDetailList() { Target = 0, SumTarget = 0 };
+                        view.TargetName = ds.Rows[i]["TargetName"].ToString();
+                        view.TargetID = ds.Rows[i]["TargetID"].ToString().ToGuid();
+                        if (ds.Rows[i]["target"].ToString() != null)
+                        {
+                            view.Target = decimal.Parse(ds.Rows[i]["target"].ToString());
+                        }
+                        if (ds.Rows[i]["SumTarget"].ToString() != null)
+                        {
+                            view.SumTarget = decimal.Parse(ds.Rows[i]["SumTarget"].ToString());
+                        }
+
+                        TargetDetailList.Add(view);
+                    }
+                }
+                else
+                {
+                    List<C_Target> TargetList = StaticResource.Instance.GetTargetList(Sys.ID, TargetPlan.CreateTime).ToList();
+
+                    foreach (C_Target item in TargetList)
+                    {
+                        TargetDetailList view = new TargetDetailList() { Target = null, SumTarget = null };
+                        view.TargetName = item.TargetName;
+                        view.TargetID = item.ID;
+                        TargetDetailList.Add(view);
+                    }
+                }
+                model.TargetDetailList = TargetDetailList;
+                result.Add(model);
+            }
+            return result;
+
+        }
         public List<TargetPlanDetailVList> GetSumTargetDetail(int FinYear, Guid SystemID)
         {
             List<TargetPlanDetailVList> result = new List<TargetPlanDetailVList>();

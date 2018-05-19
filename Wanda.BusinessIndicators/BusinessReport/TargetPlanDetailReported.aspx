@@ -166,7 +166,7 @@
             <div class="scrolldoorFrame copy">
                 <ul class="tabs" id="Ul4" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                 </ul>
-                <table class="tab_005" id="importedDataFloatTable2">
+                <table class="tab_005" id="importedDataFloatTable2" style="display:none;">
                     <thead>
                     </thead>
                 </table>

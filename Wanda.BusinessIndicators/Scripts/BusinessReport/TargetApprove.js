@@ -1048,9 +1048,12 @@ function ShouSuo(sender) {
         FloatHeader(obj, tab);
 
     } else if (sender == 'XS') {
-        var obj = $("#Tab_MissTargetHead");
+        //var obj = $("#Tab_MissTargetHead");
+        //var tab = $("#Tbody_MissTargetData");
+        var obj = $("#Tab_MissFloatTarget");
+        var head = $("#Tab_MissTargetHead");
+        obj.find("thead").html(head.html());
         var tab = $("#Tbody_MissTargetData");
-
         if ($(".newdiff_miss").is(":hidden")) {  //给商管系统用的
             if ($(".Level1TdSp1").attr("colspan").toInt() == 10) {
                 $(".shangyue").show();
@@ -1110,7 +1113,9 @@ function ShouSuo(sender) {
 
     } else if (sender == 'XSSY') {
 
-        var obj = $("#Tab_ReturnHead");
+        var obj = $("#Tab_FloatReturn");
+        var head = $("#Tab_ReturnHead");
+        obj.find("thead").html(head.html());
         var tab = $("#Tbody_Data");
 
         if ($(".newdiff_retu").is(":hidden")) {

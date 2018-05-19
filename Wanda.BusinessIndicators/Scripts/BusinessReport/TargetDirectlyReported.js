@@ -130,6 +130,19 @@ $(function () {
     $("#MonthGetDescription").focus(function () {
         $("#MonthGetDescription").css("background-color", "#D6D6FF");
     });
+    // 所在位置
+    var pathname = "/BusinessReport/TargetDirectlyReported.aspx";
+    if (location.pathname == pathname && GetQueryString("SystemId") == "SystemId") {
+        $("#sitmap").html("您当前所在的位置：月度经营报告上报");
+        $("#jMenu").find("li").each(function () {
+            var text = $(this).find("span")[0];
+            $(this).removeClass("current first");
+            if (text && text.innerHTML == "月度经营报告上报") {
+                $(this).addClass("current first");
+            }
+        })
+    }
+
 })
 
 
@@ -147,7 +160,7 @@ function MissTagetExcelReport() {
         'height': 25,
         'successTimeout': 20,
         'fileTypeDesc': 'office file',
-        'fileTypeExts': '*.doc; *.docx; *.xls;*.xlsx',
+        'fileTypeExts': '*.xls;*.xlsx',
         'fileSizeLimit': '10240',
         'swf': '../Scripts/UpLoad/uploadify.swf',
         'uploader': '../AjaxHander/ExcelReport.ashx?FileType=' + MissType + '&SysId=' + sysID + '&MonthReportID=' + MonthReportID + "&FinYear=" + FinYear + "&FinMonth=" + FinMonth,
@@ -809,9 +822,15 @@ function SaveMissTargetRpt(obj) {
     art.dialog({ id: 'divMissTargetRpt_Reason' }).close();
     art.dialog({ id: 'divMissTargetRpt_Retu' }).close();
 
-    var obj = $("#Tab_MissTargetHead");
+    //var obj = $("#Tab_MissTargetHead");
+    //var tab = $("#Tbody_MissTargetData");
+    //FloatHeader(obj, tab, false, "Reported");
+
+    var obj = $("#Tab_MissFloatTarget");
+    var head = $("#Tab_MissTargetHead");
+    obj.find("thead").html(head.html());
     var tab = $("#Tbody_MissTargetData");
-    FloatHeader(obj, tab, false, "Reported")
+    FloatHeader(obj, tab);
 
 }
 
@@ -1274,3 +1293,9 @@ function getGroupCount(obj, send) {
     } else { return 0; }
 }
 
+//用正则表达式获取URL参数
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[0].split("=")[0]); return null;
+}

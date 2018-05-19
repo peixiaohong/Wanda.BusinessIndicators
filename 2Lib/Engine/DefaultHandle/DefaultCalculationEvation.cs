@@ -41,8 +41,8 @@ namespace LJTH.BusinessIndicators.Engine
             #region //是否能够改动计划，如果能改，取Excel数据，不能改取系统计划数(在Taget Configuration配置)
             //List<A_TargetPlanDetail> listCurrentMonthData = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear).ToList().Where(p => p.FinMonth == rpt.FinMonth && p.CompanyID == rpt.CompanyID).ToList();
             List<A_TargetPlanDetail> listCurrentMonthData = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear).ToList()
-                .Where(p => p.FinMonth == rpt.FinMonth && p.CompanyID == rpt.CompanyID 
-                && p.TargetPlanID==rpt.TargetPlanID).ToList();
+                .Where(p => p.FinMonth == rpt.FinMonth && p.CompanyID == rpt.CompanyID
+                && p.TargetPlanID == rpt.TargetPlanID).ToList();
             if (listCurrentMonthData.Count > 0)
             {
                 A_TargetPlanDetail currentMonthData = listCurrentMonthData[0];
@@ -78,7 +78,7 @@ namespace LJTH.BusinessIndicators.Engine
             //这里获取上月的实际上报数，和年计划指标的计划数
             //A_MonthlyReportDetail lastMonthData = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetail(rpt.SystemID, rpt.CompanyID, rpt.TargetID, rpt.FinYear, rpt.FinMonth - 1);
             A_MonthlyReportDetail lastMonthData = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetail
-                (rpt.SystemID, rpt.CompanyID, rpt.TargetID, rpt.FinYear, rpt.FinMonth - 1,rpt.TargetPlanID);
+                (rpt.SystemID, rpt.CompanyID, rpt.TargetID, rpt.FinYear, rpt.FinMonth - 1, rpt.TargetPlanID);
 
             if (lastMonthData != null)
             {
@@ -96,8 +96,8 @@ namespace LJTH.BusinessIndicators.Engine
                 //这里总是从最新的指标计划获取
                 //IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear).FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID && P.FinMonth <= rpt.FinMonth);
                 IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear)
-                    .FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID 
-                    && P.FinMonth <= rpt.FinMonth && P.TargetPlanID==rpt.TargetPlanID);
+                    .FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID
+                    && P.FinMonth <= rpt.FinMonth && P.TargetPlanID == rpt.TargetPlanID);
                 rpt.NAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
                 rpt.OAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
 
@@ -111,8 +111,8 @@ namespace LJTH.BusinessIndicators.Engine
                     //这里总是从最新的指标计划获取
                     //IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear).FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID && P.FinMonth <= rpt.FinMonth);
                     IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear)
-                        .FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID 
-                        && P.FinMonth <= rpt.FinMonth && P.TargetPlanID==rpt.TargetPlanID);
+                        .FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID
+                        && P.FinMonth <= rpt.FinMonth && P.TargetPlanID == rpt.TargetPlanID);
                     rpt.NAccumulativePlanAmmount = ATPD.Sum(p => p.Target); //计划值从这里取到
                     rpt.OAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
 
@@ -122,6 +122,15 @@ namespace LJTH.BusinessIndicators.Engine
                 }
             }
 
+            //获取累计实际值
+            var amrList = StaticResource.Instance.GetMonthlyReportDetails(rpt.SystemID, rpt.FinYear, rpt.TargetPlanID);
+            if (amrList != null && amrList.Count > 0)
+            {
+                rpt.NAccumulativeActualAmmount = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID
+                && v.FinMonth < rpt.FinMonth).Sum(v => v.NActualAmmount) + rpt.NActualAmmount;
+                rpt.OAccumulativeActualAmmount = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID
+                  && v.FinMonth < rpt.FinMonth).Sum(v => v.OActualAmmount) + rpt.OActualAmmount;
+            }
             rpt.NAccumulativeDifference = rpt.NAccumulativeActualAmmount - rpt.NAccumulativePlanAmmount;
             rpt.OAccumulativeDifference = rpt.OAccumulativeActualAmmount - rpt.OAccumulativePlanAmmount;
             rpt.NDifference = rpt.NActualAmmount - rpt.NPlanAmmount;
@@ -232,6 +241,7 @@ namespace LJTH.BusinessIndicators.Engine
             //{
             //    RptDetail.Display = false;
             //}
+
             //判断异常指标
             rpt = ExceptionTargetEvaluationEngine.ExceptionTargetEvaluationService.Calculation(rpt, "");
 
@@ -458,7 +468,6 @@ namespace LJTH.BusinessIndicators.Engine
             //{
             //    RptDetail.Display = false;
             //}
-
             //判断异常指标
             rpt = ExceptionTargetEvaluationEngine.ExceptionTargetEvaluationService.Calculation(rpt, "");
             return rpt;
@@ -658,7 +667,7 @@ namespace LJTH.BusinessIndicators.Engine
             //if (RptDetail.NActualAmmount == 0 && RptDetail.NPlanAmmount == 0 && RptDetail.NAccumulativePlanAmmount == 0 && RptDetail.NAccumulativeActualAmmount == 0)
             //{
             //    RptDetail.Display = false;
-            //}
+            //}            
             //判断异常指标
             rpt = ExceptionTargetEvaluationEngine.ExceptionTargetEvaluationService.Calculation(rpt, "");
 
@@ -747,7 +756,35 @@ namespace LJTH.BusinessIndicators.Engine
                 rpt.NAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
                 rpt.OAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
             }
+            else
+            {
+                //当没有上月数据的时候
+                if (WithCounter)
+                {
 
+                    //这里总是从最新的指标计划获取
+                    //IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear).FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID && P.FinMonth <= rpt.FinMonth);
+                    IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear)
+                        .FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID
+                        && P.FinMonth <= rpt.FinMonth && P.TargetPlanID == rpt.TargetPlanID);
+                    rpt.NAccumulativePlanAmmount = ATPD.Sum(p => p.Target); //计划值从这里取到
+                    rpt.OAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
+
+                    rpt.NAccumulativeActualAmmount = rpt.NActualAmmount;
+                    rpt.OAccumulativeActualAmmount = rpt.OActualAmmount;
+
+                }
+            }
+
+            //获取累计实际值
+            var amrList = StaticResource.Instance.GetMonthlyReportDetails(rpt.SystemID, rpt.FinYear, rpt.TargetPlanID);
+            if (amrList != null && amrList.Count > 0)
+            {
+                rpt.NAccumulativeActualAmmount = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID
+                && v.FinMonth < rpt.FinMonth).Sum(v => v.NActualAmmount) + rpt.NActualAmmount;
+                rpt.OAccumulativeActualAmmount = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID
+                  && v.FinMonth < rpt.FinMonth).Sum(v => v.OActualAmmount) + rpt.OActualAmmount;
+            }
             rpt.NAccumulativeDifference = rpt.NAccumulativeActualAmmount - rpt.NAccumulativePlanAmmount;
             rpt.OAccumulativeDifference = rpt.OAccumulativeActualAmmount - rpt.OAccumulativePlanAmmount;
             rpt.NDifference = rpt.NActualAmmount - rpt.NPlanAmmount;
@@ -865,7 +902,6 @@ namespace LJTH.BusinessIndicators.Engine
             //}
 
             #endregion
-
             //判断异常指标
             rpt = ExceptionTargetEvaluationEngine.ExceptionTargetEvaluationService.Calculation(rpt, "");
 
@@ -950,6 +986,15 @@ namespace LJTH.BusinessIndicators.Engine
                 }
             }
 
+            //获取累计实际值
+            var amrList = StaticResource.Instance.GetMonthlyReportDetails(rpt.SystemID, rpt.FinYear, rpt.TargetPlanID);
+            if (amrList != null && amrList.Count > 0)
+            {
+                rpt.NAccumulativeActualAmmount = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID
+                && v.FinMonth < rpt.FinMonth).Sum(v => v.NActualAmmount) + rpt.NActualAmmount;
+                rpt.OAccumulativeActualAmmount = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID
+                  && v.FinMonth < rpt.FinMonth).Sum(v => v.OActualAmmount) + rpt.OActualAmmount;
+            }
             rpt.NAccumulativeDifference = rpt.NAccumulativeActualAmmount - rpt.NAccumulativePlanAmmount;
             rpt.OAccumulativeDifference = rpt.OAccumulativeActualAmmount - rpt.OAccumulativePlanAmmount;
             rpt.NDifference = rpt.NActualAmmount - rpt.NPlanAmmount;
@@ -1063,7 +1108,6 @@ namespace LJTH.BusinessIndicators.Engine
             //}
 
             #endregion
-
             //判断异常指标
             rpt = ExceptionTargetEvaluationEngine.ExceptionTargetEvaluationService.Calculation(rpt, "");
 
@@ -1100,7 +1144,7 @@ namespace LJTH.BusinessIndicators.Engine
             #region //是否能够改动计划，如果能改，取Excel数据，不能改取系统计划数(在Taget Configuration配置)
             //List<A_TargetPlanDetail> listCurrentMonthData = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear).ToList().Where(p => p.FinMonth == rpt.FinMonth && p.CompanyID == rpt.CompanyID).ToList();
             List<A_TargetPlanDetail> listCurrentMonthData = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear).ToList()
-                .Where(p => p.FinMonth == rpt.FinMonth && p.CompanyID == rpt.CompanyID&& p.TargetPlanID==rpt.TargetPlanID).ToList();
+                .Where(p => p.FinMonth == rpt.FinMonth && p.CompanyID == rpt.CompanyID && p.TargetPlanID == rpt.TargetPlanID).ToList();
             if (listCurrentMonthData.Count > 0)
             {
                 A_TargetPlanDetail currentMonthData = listCurrentMonthData[0];
@@ -1134,7 +1178,7 @@ namespace LJTH.BusinessIndicators.Engine
 
             //A_MonthlyReportDetail lastMonthData = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetail(rpt.SystemID, rpt.CompanyID, rpt.TargetID, rpt.FinYear, rpt.FinMonth - 1);
             A_MonthlyReportDetail lastMonthData = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetail
-                (rpt.SystemID, rpt.CompanyID, rpt.TargetID, rpt.FinYear, rpt.FinMonth - 1,rpt.TargetPlanID);
+                (rpt.SystemID, rpt.CompanyID, rpt.TargetID, rpt.FinYear, rpt.FinMonth - 1, rpt.TargetPlanID);
             if (lastMonthData != null)
             {
                 rpt.NAccumulativeActualAmmount = lastMonthData.NAccumulativeActualAmmount + rpt.NActualAmmount;
@@ -1147,8 +1191,8 @@ namespace LJTH.BusinessIndicators.Engine
 
                     //IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear).FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID && P.FinMonth <= rpt.FinMonth);
                     IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear)
-                        .FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID 
-                        && P.FinMonth <= rpt.FinMonth && P.TargetPlanID==rpt.TargetPlanID);
+                        .FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID
+                        && P.FinMonth <= rpt.FinMonth && P.TargetPlanID == rpt.TargetPlanID);
                     rpt.NAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
                     rpt.OAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
 
@@ -1160,8 +1204,8 @@ namespace LJTH.BusinessIndicators.Engine
 
                     //IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear).FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID && P.FinMonth <= rpt.FinMonth);
                     IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear)
-                        .FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID 
-                        && P.FinMonth <= rpt.FinMonth && P.TargetPlanID==rpt.TargetPlanID);
+                        .FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID
+                        && P.FinMonth <= rpt.FinMonth && P.TargetPlanID == rpt.TargetPlanID);
                     rpt.NAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
                     rpt.OAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
                 }
@@ -1175,14 +1219,23 @@ namespace LJTH.BusinessIndicators.Engine
                     //这里总是从最新的指标计划获取
                     //IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear).FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID && P.FinMonth <= rpt.FinMonth);
                     IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear)
-                        .FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID 
-                        && P.FinMonth <= rpt.FinMonth && P.TargetPlanID==rpt.TargetPlanID);
+                        .FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID
+                        && P.FinMonth <= rpt.FinMonth && P.TargetPlanID == rpt.TargetPlanID);
                     rpt.NAccumulativePlanAmmount = ATPD.Sum(p => p.Target); //计划值从这里取到
                     rpt.OAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
 
                     rpt.NAccumulativeActualAmmount = rpt.NActualAmmount;
                     rpt.OAccumulativeActualAmmount = rpt.OActualAmmount;
                 }
+            }
+            //获取累计实际值
+            var amrList = StaticResource.Instance.GetMonthlyReportDetails(rpt.SystemID, rpt.FinYear, rpt.TargetPlanID);
+            if (amrList != null && amrList.Count > 0)
+            {
+                rpt.NAccumulativeActualAmmount = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID
+                && v.FinMonth < rpt.FinMonth).Sum(v => v.NActualAmmount) + rpt.NActualAmmount;
+                rpt.OAccumulativeActualAmmount = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID
+                  && v.FinMonth < rpt.FinMonth).Sum(v => v.OActualAmmount) + rpt.OActualAmmount;
             }
             rpt.NAccumulativeDifference = rpt.NAccumulativeActualAmmount - rpt.NAccumulativePlanAmmount;
             rpt.OAccumulativeDifference = rpt.OAccumulativeActualAmmount - rpt.OAccumulativePlanAmmount;
@@ -1291,6 +1344,7 @@ namespace LJTH.BusinessIndicators.Engine
             //{
             //    RptDetail.Display = false;
             //}
+
             //判断异常指标
             rpt = ExceptionTargetEvaluationEngine.ExceptionTargetEvaluationService.Calculation(rpt, "");
 
@@ -1350,7 +1404,7 @@ namespace LJTH.BusinessIndicators.Engine
                     //上月累计未完成
                     //A_MonthlyReportDetail lastMonthData = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetail(p.SystemID, p.CompanyID, p.TargetID, p.FinYear, p.FinMonth - 1);
                     A_MonthlyReportDetail lastMonthData = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetail
-                    (p.SystemID, p.CompanyID, p.TargetID, p.FinYear, p.FinMonth - 1,rpt.TargetPlanID);
+                    (p.SystemID, p.CompanyID, p.TargetID, p.FinYear, p.FinMonth - 1, rpt.TargetPlanID);
 
                     if (!IsBaseline)  //从1月开始重新计算
                     {

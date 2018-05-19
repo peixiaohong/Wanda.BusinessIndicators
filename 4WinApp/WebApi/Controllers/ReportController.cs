@@ -31,16 +31,20 @@ namespace WebApi.Controllers
         {
             try
             {
-                List<string> Year = new List<string>();
-
-                B_MonthlyreportOperator.Instance.GetMonthlyReportYearList().ForEach(x => Year.Add(x.FinYear.ToString()));
+                DateTime datetime = StaticResource.Instance.GetReportDateTime();
+                int finYear = datetime.Year;
+                List<int> Year = new List<int>();
+                for (int i = -5; i < 5; i++)
+                {
+                    Year.Add(DateTime.Now.Year + i);
+                }
 
                 var _SystemIds = S_OrganizationalActionOperator.Instance.GetUserSystemData(WebHelper.GetCurrentLoginUser()).Select(v => v.SystemID).ToList();
                 
                 //获取当前人拥有的系统板块
                 List<C_System> c_SystemList = StaticResource.Instance.SystemList.Where(p => _SystemIds.Contains(p.ID)).OrderBy(x => x.Sequence).ToList();
 
-                return new ResultContext(new { Year, System= c_SystemList });
+                return new ResultContext(new { Year,SelectYear=finYear, System= c_SystemList });
             }
             catch (Exception ex)
             {
@@ -90,15 +94,11 @@ namespace WebApi.Controllers
                 Guid.TryParse(SystemID, out result);
                 if (result == Guid.Empty)
                     return new ResultContext((int)StatusCodeEnum.isFalse, "系统编码错误");
-                List<B_MonthlyReport> li = B_MonthlyreportOperator.Instance.GetMonthlyReportBySysIDList(result, Year, Month);
-                string Dis = "";
-                if (li.Count > 0)
-                    Dis = li.FirstOrDefault().Description;
                 DictionaryVmodel dv = new DictionaryVmodel();
                 if (listM.Count > 0)
                     dv = listM[2];
 
-                return new ResultContext(new { title = Dis, list = JsonConvert.SerializeObject(listM[2]) });
+                return new ResultContext(new { title = listM[1].ObjValue, list = JsonConvert.SerializeObject(dv) });
             }
             catch (Exception ex)
             {
@@ -199,15 +199,20 @@ namespace WebApi.Controllers
         {
             try
             {
-                List<string> Year = new List<string>();
-
-                A_TargetplanOperator.Instance.GetPlanYearList().ForEach(x => Year.Add(x.FinYear.ToString()));
+                DateTime datetime = StaticResource.Instance.GetReportDateTime();
+                int finYear = datetime.Year;
+                List<int> Year = new List<int>();
+                for (int i = -5; i < 5; i++)
+                {
+                    Year.Add(DateTime.Now.Year + i);
+                }
+               
                 var _SystemIds = S_OrganizationalActionOperator.Instance.GetUserSystemData(WebHelper.GetCurrentLoginUser()).Select(v => v.SystemID).ToList();
 
                 //获取当前人拥有的系统板块
                 List<C_System> c_SystemList = StaticResource.Instance.SystemList.Where(p => _SystemIds.Contains(p.ID)).OrderBy(x => x.Sequence).ToList();
 
-                return new ResultContext(new { Year, System= c_SystemList });
+                return new ResultContext(new { Year, SelectYear = finYear, System = c_SystemList });
             }
             catch (Exception ex)
             {
@@ -227,8 +232,8 @@ namespace WebApi.Controllers
         {
             try
             {
-                TargetController tc = new TargetController();
-                List<B_TargetPlan> list = tc.GetTargetVersionList(SystemID, Year);
+                MonthlyReportController tc = new MonthlyReportController();
+                List<A_TargetPlan> list = (List<A_TargetPlan>)tc.GetTargetVersionType(SystemID, int.Parse(Year));
 
                 return new ResultContext(list);
             }
@@ -251,8 +256,8 @@ namespace WebApi.Controllers
             {
                 CompanyController cc = new CompanyController();
                 List<C_Target> result = cc.GetVerTargetList(SysID, FinYear);
-                TargetController tc = new TargetController();
-                List<TargetDetail> list = tc.GetSumMonthTargetDetailByTID(TargetPlanID);
+                A_TargetplandetailOperator tc = new A_TargetplandetailOperator();
+                List<TargetDetail> list = tc.GetSumMonthTargetDetailByTID_A(TargetPlanID.ToGuid());
                 return new ResultContext(new { head = result, list });
             }
             catch (Exception ex)

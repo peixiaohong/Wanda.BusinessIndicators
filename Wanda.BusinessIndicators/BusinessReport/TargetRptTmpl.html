@@ -607,18 +607,18 @@
         </td>
         {{/if}}
         <td colspan="2" class="Td_Left Td_Merge" style="font-weight: bold; text-align: center !important; width: 18%!important">${itemDetail.Name}</td>
-        <td class="Td_Left Td_Merge">${(itemDetail.BMonthReportDetail.NPlanAmmount).thousandize0OrEmpty(0)}</td>
-        <td class="Td_TopAndBottom Td_Merge">${(data.ObjValue[1].ObjValue[i].ObjValue[j].BMonthReportDetail.NPlanAmmount).thousandize0OrEmpty(0)}</td>
-        <td class="Td_Left Td_Merge">${(itemDetail.BMonthReportDetail.NActualAmmount).thousandize0OrEmpty(0)}</td>
-        <td class="Td_TopAndBottom Td_Merge">${(data.ObjValue[1].ObjValue[i].ObjValue[j].BMonthReportDetail.NActualAmmount).thousandize0OrEmpty(0)}</td>
-        <td class="Td_Left Td_Merge" style="text-align: center !important; padding: 5px">${itemDetail.BMonthReportDetail.NDisplayRate}</td>
-        <td class="Td_TopAndBottom Td_Merge" style="text-align: center !important; padding: 5px">${data.ObjValue[1].ObjValue[i].ObjValue[j].BMonthReportDetail.NDisplayRate}</td>
-        <td class="Td_Left Td_Merge">${(itemDetail.BMonthReportDetail.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
-        <td class="Td_TopAndBottom Td_Merge">${(data.ObjValue[1].ObjValue[i].ObjValue[j].BMonthReportDetail.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
-        <td class="Td_Left Td_Merge">${(itemDetail.BMonthReportDetail.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
-        <td class="Td_TopAndBottom Td_Merge">${(data.ObjValue[1].ObjValue[i].ObjValue[j].BMonthReportDetail.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
-        <td class="Td_Left align_right Td_Merge">${itemDetail.BMonthReportDetail.NAccumulativeDisplayRate}</td>
-        <td class="Td_TopAndBottom align_right Td_Merge">${data.ObjValue[1].ObjValue[i].ObjValue[j].BMonthReportDetail.NAccumulativeDisplayRate}</td>
+        <td class="Td_Left Td_Merge" title="${(itemDetail.BMonthReportDetail.NPlanAmmount).thousandize0OrEmpty(0)}">${(itemDetail.BMonthReportDetail.NPlanAmmount).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom Td_Merge" title="${(data.ObjValue[1].ObjValue[i].ObjValue[j].BMonthReportDetail.NPlanAmmount).thousandize0OrEmpty(0)}">${(data.ObjValue[1].ObjValue[i].ObjValue[j].BMonthReportDetail.NPlanAmmount).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Left Td_Merge" title="${(itemDetail.BMonthReportDetail.NActualAmmount).thousandize0OrEmpty(0)}">${(itemDetail.BMonthReportDetail.NActualAmmount).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom Td_Merge" title="${(data.ObjValue[1].ObjValue[i].ObjValue[j].BMonthReportDetail.NActualAmmount).thousandize0OrEmpty(0)}">${(data.ObjValue[1].ObjValue[i].ObjValue[j].BMonthReportDetail.NActualAmmount).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Left Td_Merge" style="text-align: center !important; padding: 5px" title="${itemDetail.BMonthReportDetail.NDisplayRate}">${itemDetail.BMonthReportDetail.NDisplayRate}</td>
+        <td class="Td_TopAndBottom Td_Merge" style="text-align: center !important; padding: 5px" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].BMonthReportDetail.NDisplayRate}">${data.ObjValue[1].ObjValue[i].ObjValue[j].BMonthReportDetail.NDisplayRate}</td>
+        <td class="Td_Left Td_Merge" title="${(itemDetail.BMonthReportDetail.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}">${(itemDetail.BMonthReportDetail.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom Td_Merge" title="${(data.ObjValue[1].ObjValue[i].ObjValue[j].BMonthReportDetail.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}">${(data.ObjValue[1].ObjValue[i].ObjValue[j].BMonthReportDetail.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Left Td_Merge" title="${(itemDetail.BMonthReportDetail.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}">${(itemDetail.BMonthReportDetail.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+        <td class="Td_TopAndBottom Td_Merge" title="${(data.ObjValue[1].ObjValue[i].ObjValue[j].BMonthReportDetail.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}">${(data.ObjValue[1].ObjValue[i].ObjValue[j].BMonthReportDetail.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Left align_right Td_Merge" title="${itemDetail.BMonthReportDetail.NAccumulativeDisplayRate}">${itemDetail.BMonthReportDetail.NAccumulativeDisplayRate}</td>
+        <td class="Td_TopAndBottom align_right Td_Merge" title="${data.ObjValue[1].ObjValue[i].ObjValue[j].BMonthReportDetail.NAccumulativeDisplayRate}">${data.ObjValue[1].ObjValue[i].ObjValue[j].BMonthReportDetail.NAccumulativeDisplayRate}</td>
         <td class="Td_Left Td_Merge" style="text-align: center !important; padding: 5px"></td>
         <td class="Td_Right Td_Merge" style="text-align: center !important; padding: 5px"></td>
     </tr>
@@ -626,7 +626,7 @@
     {{each(k,itemDetailChild) itemDetail.ObjValue}}
     <tr style="display: none">
         <td class="Td_Left" style="text-align: center!important">${k+1}</td>
-        <td class="Td_Left" style="text-align: left !important;">
+        <td class="Td_Left" style="text-align: left !important;" title="${itemDetailChild.CompanyName}">
             {{if showMonthReprot==undefined}}
             <a href="javascript:void(0)" onclick="showMonthReprotDetail('${itemDetailChild.CompanyID}');" data-name="forMonthlyReport"
                data-isblend="${data.IsBlendTarget}" data-detailId="${ID}">${itemDetailChild.CompanyName}</a>
@@ -740,12 +740,12 @@
         </td>
         {{/if}}
         <td colspan="2" class="Td_Left Td_Merge" style="font-weight: bold; text-align: center !important; width: 18%!important">${itemDetail.Name}</td>
-        <td class="Td_Left Td_Merge">${(itemDetail.BMonthReportDetail.NPlanAmmount).thousandize0OrEmpty(0)}</td>
-        <td class="Td_Left Td_Merge">${(itemDetail.BMonthReportDetail.NActualAmmount).thousandize0OrEmpty(0)}</td>
-        <td class="Td_Left Td_Merge" style="text-align: center !important; padding: 5px">${itemDetail.BMonthReportDetail.NDisplayRate}</td>
-        <td class="Td_Left Td_Merge">${(itemDetail.BMonthReportDetail.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
-        <td class="Td_Left Td_Merge">${(itemDetail.BMonthReportDetail.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
-        <td class="Td_Left align_right Td_Merge">${itemDetail.BMonthReportDetail.NAccumulativeDisplayRate}</td>
+        <td class="Td_Left Td_Merge" title="${(itemDetail.BMonthReportDetail.NPlanAmmount).thousandize0OrEmpty(0)}">${(itemDetail.BMonthReportDetail.NPlanAmmount).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Left Td_Merge" title="${(itemDetail.BMonthReportDetail.NActualAmmount).thousandize0OrEmpty(0)}">${(itemDetail.BMonthReportDetail.NActualAmmount).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Left Td_Merge" style="text-align: center !important; padding: 5px" title="${itemDetail.BMonthReportDetail.NDisplayRate}">${itemDetail.BMonthReportDetail.NDisplayRate}</td>
+        <td class="Td_Left Td_Merge" title="${(itemDetail.BMonthReportDetail.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}">${(itemDetail.BMonthReportDetail.NAccumulativePlanAmmount).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Left Td_Merge" title="${(itemDetail.BMonthReportDetail.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}">${(itemDetail.BMonthReportDetail.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Left align_right Td_Merge" title="${itemDetail.BMonthReportDetail.NAccumulativeDisplayRate}">${itemDetail.BMonthReportDetail.NAccumulativeDisplayRate}</td>
         <td class="Td_Right Td_Merge" style="text-align: center !important; padding: 5px"></td>
     </tr>
     {{if itemDetail.Mark=='DetailHide'}}

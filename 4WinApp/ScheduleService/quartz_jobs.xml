@@ -105,7 +105,7 @@
         <group>ProjectMergeProcess</group>
         <job-name>ProjectMergeProcess</job-name>
         <job-group>ProjectMergeProcess</job-group>
-        <cron-expression>* 1/1 * * * ? *</cron-expression>
+        <cron-expression>0 0/1 * * * ?</cron-expression>
         <!--[秒] [分] [小时] [日] [月] [周] [年]-->
       </cron>
     </trigger>
@@ -168,7 +168,7 @@
         <group>ProjectCompleteProcess</group>
         <job-name>ProjectCompleteProcess</job-name>
         <job-group>ProjectCompleteProcess</job-group>
-        <cron-expression>* 1/1 * * * ? *</cron-expression>
+        <cron-expression>0 0/1 * * * ?</cron-expression>
       </cron>
     </trigger>
 

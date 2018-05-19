@@ -21,9 +21,23 @@ $(document).ready(
         BangTab();
         BangList();
         Change(TargetList[0].ID);
-        var obj = $("#Tabhead");
+        var obj = $("#FloateTable2");
+        var head = $("#Tabhead");
+        obj.find("thead").html(head.html());
         var tab = $("#Tab2");
         FloatHeader(obj, tab);
+
+        var pathname = "/SystemConfiguration/IfContrastCompany.aspx";
+        if (location.pathname == pathname) {
+            $("#sitmap").html('您当前所在的位置：系统管理<img src="../images/btn08.png">公司属性管理<img src="../images/btn08.png">可比属性管理');
+            $("#jMenu").find("li").each(function () {
+                var text = $(this).find("span")[0];
+                $(this).removeClass("current first");
+                if (text && text.innerHTML == "系统管理") {
+                    $(this).addClass("current first");
+                }
+            })
+        }
 
         Fake();
     });

@@ -16,16 +16,19 @@ namespace LJTH.BusinessIndicators.Engine
 
             List<Guid> Companies = new List<Guid>();
 
-            foreach (A_MonthlyReportDetail item in ReportDetailList_A)
-            {
-                if (item.IsMissTarget)
-                {
-                    if (!Companies.Contains(item.CompanyID))
-                    {
-                        Companies.Add(item.CompanyID);
-                    }
-                }
-            }
+
+            Companies= ReportDetailList_A.Where(x => x.IsMissTarget == true).GroupBy(x => x.CompanyID).Select(x => x.Key).ToList();
+
+            //foreach (A_MonthlyReportDetail item in ReportDetailList_A)
+            //{
+            //    if (item.IsMissTarget)
+            //    {
+            //        if (!Companies.Contains(item.CompanyID))
+            //        {
+            //            Companies.Add(item.CompanyID);
+            //        }
+            //    }
+            //}
 
             return Companies;
         }

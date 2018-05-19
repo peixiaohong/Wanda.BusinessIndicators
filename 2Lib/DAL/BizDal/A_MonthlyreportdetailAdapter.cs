@@ -462,6 +462,27 @@ WHERE   A_MonthlyReportDetail.SystemID = @SystemID
         }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="SystemID"></param>
+        /// <param name="FinYear"></param>
+        /// <param name="pTargetPlanID"></param>
+        /// <returns></returns>
+        public List<A_MonthlyReportDetail> GetAMonthlyreportdetailList(Guid SystemID, int FinYear,  Guid TargetPlanID)
+        {
+            string sql = ORMapping.GetSelectSql<A_MonthlyReportDetail>(TSqlBuilder.Instance);
+
+            sql += "WHERE " + base.NotDeleted;
+            sql += " AND SystemID=@SystemID AND FinYear=@FinYear AND TargetPlanID=@TargetPlanID";
+
+            SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
+            SqlParameter pFinYear = CreateSqlParameter("@FinYear", System.Data.DbType.Int64, FinYear);
+            SqlParameter pTargetPlanID = CreateSqlParameter("@TargetPlanID", System.Data.DbType.Guid, TargetPlanID);
+
+            return ExecuteQuery(sql, pSystemID, pFinYear, pTargetPlanID);
+        }
+
         internal int DeleteMonthlyreportdetailLisr(List<A_MonthlyReportDetail> List)
         {
             StringBuilder sb = new StringBuilder();

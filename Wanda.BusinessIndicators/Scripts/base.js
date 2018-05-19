@@ -1309,7 +1309,7 @@ function InitTabs() {
                 else if (targetIndex > _setting.pageCount) {
                     targetIndex = _setting.pageCount;
                 }
-                _setting.navTo(targetIndex - 1, _setting.pageSize);
+                _setting.navTo(targetIndex, _setting.pageSize);
 
                 //var input = context.find("input.targetIndex");
                 //if (input.length > 0) {

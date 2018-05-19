@@ -17,7 +17,18 @@ $(document).ready(function () {
         $("#ddlSystem").val($("#SysID").val());
     }
     reload();
-    CheckCompanyTmpl(TargetList[0].ID)
+    CheckCompanyTmpl(TargetList[0].ID);
+    var pathname = "/SystemConfiguration/CompanyList.aspx";
+    if (location.pathname == pathname) {
+        $("#sitmap").html('您当前所在的位置：系统管理<img src="../images/btn08.png">公司属性管理<img src="../images/btn08.png">公司属性管理');
+        $("#jMenu").find("li").each(function () {
+            var text = $(this).find("span")[0];
+            $(this).removeClass("current first");
+            if (text && text.innerHTML == "系统管理") {
+                $(this).addClass("current first");
+            }
+        })
+    }
 });
 
 //加载动画开始
@@ -330,8 +341,11 @@ function BangTable(alljson, SystemJson, id) {
             table += '</tbody></table>';
             }
         }
-        document.getElementById('tab').innerHTML = table;
-        var obj = $("#CompanyHead");
+        var floatTab = '<table class="tab_005" id="tabFloate"><thead ></thead></table >'
+        document.getElementById('tab').innerHTML = floatTab + table;
+        var obj = $("#tabFloate");
+        var head = $("#CompanyHead");
+        obj.find("thead").html(head.html());
         var tab = $("#CompanyRows");
         FloatHeader(obj, tab);
     }
