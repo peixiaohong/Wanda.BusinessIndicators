@@ -136,6 +136,7 @@ function ShowReportDataLoad(systemID, year, month, targetPlanID) {
         url: "/TargetSimpleReportController/GetListData",
         args: { systemID: systemID, year: year, month: month, targetPlanID: targetPlanID },
         successReturn: function (resultData) {
+            $('#ShowReportData').empty();
             if (resultData.Success == 1) {
                 $('#ShowReportData').empty();
                 loadTmpl('#showReportData_Tmpl').tmpl(resultData).appendTo('#ShowReportData');
