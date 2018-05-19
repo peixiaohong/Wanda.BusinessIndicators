@@ -154,7 +154,7 @@ function BusinessDataHandle(ExecuteType,instanceID, args) {
         // 审批结束
         if (args.WorkflowContext.CurrentUserNodeID != null && args.WorkflowContext.CurrentUserNodeID != "") {
             var nodeInfo = args.WorkflowContext.NodeInstanceList[args.WorkflowContext.CurrentUserNodeID];
-            if (nodeInfo != null && (nodeInfo.NodeType == 1 || nodeInfo.NodeType == 2 || nodeInfo.NodeType == 7)) {
+            if (nodeInfo != null && (nodeInfo.NodeType == 0 ||nodeInfo.NodeType == 1 || nodeInfo.NodeType == 2 || nodeInfo.NodeType == 7)) {
                 strPrcessStatus = "Approved";
             } else {
                 strPrcessStatus = null;

@@ -1170,24 +1170,27 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                                 else
                                     model.RptTime = NVlist[0].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss");
 
+                                if (NVlist[NVlist.Count - 1].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss") != "0001-01-01 00:00:00")
+                                    model.EndTime = NVlist[NVlist.Count - 1].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss");
+
                                 //指标结束时间赋值。
-                                for (int i = 0; i < NVlist.Count(); i++)
-                                {
-                                    if (NVlist[NVlist.Count() - 1].ActivityName == "通知" && NVlist[NVlist.Count() - 2].ActivityName == "审批")
-                                    {
-                                        if (NVlist[NVlist.Count() - 2].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss") != "0001-01-01 00:00:00")
-                                        {
-                                            model.EndTime = NVlist[NVlist.Count() - 2].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss");
-                                        }
-                                    }
-                                    else if (NVlist[i].ActivityName == "审批" && i + 1 == NVlist.Count())
-                                    {
-                                        if (NVlist[i].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss") != "0001-01-01 00:00:00")
-                                        {
-                                            model.EndTime = NVlist[i].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss");
-                                        }
-                                    }
-                                }
+                                //for (int i = 0; i < NVlist.Count(); i++)
+                                //{
+                                //    if (NVlist[NVlist.Count() - 1].ActivityName == "通知" && NVlist[NVlist.Count() - 2].ActivityName == "审批")
+                                //    {
+                                //        if (NVlist[NVlist.Count() - 2].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss") != "0001-01-01 00:00:00")
+                                //        {
+                                //            model.EndTime = NVlist[NVlist.Count() - 2].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss");
+                                //        }
+                                //    }
+                                //    else if (NVlist[i].ActivityName == "审批" && i + 1 == NVlist.Count())
+                                //    {
+                                //        if (NVlist[i].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss") != "0001-01-01 00:00:00")
+                                //        {
+                                //            model.EndTime = NVlist[i].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss");
+                                //        }
+                                //    }
+                                //}
 
                                 //model.RptTime = M.CreateTime.ToString("yyyy-MM-dd HH:mm:ss");
                                 model.WFStause = M.WFStatus;
