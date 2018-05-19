@@ -25,11 +25,23 @@ $(document).ready(
         reload()
 
 
-        var obj = $("#head");
+        var obj = $("#FloatTable2");
+        var head = $("#head");
+        obj.find("thead").html(head.html());
         var tab = $("#Tbody1");
         FloatHeader(obj, tab);
         //SystemID = "15EE2C18-5C7A-402E-92B8-277CFF78E210";
-       
+        var pathname = "/SystemConfiguration/ExceptionTarget.aspx";
+        if (location.pathname == pathname) {
+            $("#sitmap").html('您当前所在的位置：系统管理<img src="../images/btn08.png">指标信息基本管理<img src="../images/btn08.png">指标管理');
+            $("#jMenu").find("li").each(function () {
+                var text = $(this).find("span")[0];
+                $(this).removeClass("current first");
+                if (text && text.innerHTML == "系统管理") {
+                    $(this).addClass("current first");
+                }
+            })
+        }
 
     });
 function reload() {

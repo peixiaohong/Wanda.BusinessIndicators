@@ -72,6 +72,7 @@ function LoadPage() {
     });
 
 }
+var LoginNamesArr = [];
 // 用户加载
 function UsersLoadPage() {
     Load();
@@ -90,6 +91,8 @@ function UsersLoadPage() {
             if (resultData.Success == 1) {
                 $('#UsersData').empty();
                 loadTmpl('#UsersDataTmpl').tmpl(resultData).appendTo('#UsersData');
+                var els = $(".userChecked");
+                filterName(LoginNamesArr, els, true);
                 $("#pager").empty();
                 $("#pager").paginationex({
                     current: PageNumber,
@@ -135,18 +138,56 @@ function RegisterEvent() {
     $(".user_add_cancel").off('click').on('click', function () {
         $(".user-model").css("display", "none");
         $("#UsersNameAdd").val("");
+        LoginNamesArr = [];
     })
 }
+//分页用户存储
 
+function storeNames(el) {
+    var checked = $(el).attr("checked");
+    var name = $(el).attr("name");
+    if (checked) {
+        LoginNamesArr.push(name);
+    } else {
+        filterName(LoginNamesArr,name,false);
+    }
+}
+//取消选中，用户更新
+function filterName(data,name,bol) {
+    if (data.length) {
+        if (!bol) {
+            data.forEach(function (one, index) {
+                if (one == name) {
+                    data.remove(data[index])
+                }
+            })
+            return data;
+        } else {
+            data.forEach(function (one) {
+                name.map(function (index, val) {
+                    var loginName = $(val).attr("name");
+                    if (one == loginName) {
+                        $(val).attr("checked", "checked");
+                    }
+                })
+            })
+        }
+        
+    }
+}
 //保存数据
 function SaveRole() {
     var el = $(".userChecked");
     var LoginNames = "";
-    for (var i = 0; i < el.length; i++) {
-        var name = el.eq(i).attr("name");
-        if (el.eq(i).attr("checked") == "checked") {
-            LoginNames += name + ",";
+    if (!LoginNamesArr.length) {
+        for (var i = 0; i < el.length; i++) {
+            var name = el.eq(i).attr("name");
+            if (el.eq(i).attr("checked") == "checked") {
+                LoginNames += name + ",";
+            }
         }
+    } else {
+        LoginNames = LoginNamesArr.join(",") + ",";
     }
     var S_Role = {
         "PageLoginNames": LoginNames.slice(0, LoginNames.length-1),
@@ -174,12 +215,15 @@ function SaveRoleFun(data) {
                 $(".user-model").css("display", "none");
                 $("#UsersNameAdd").val("");
                 $.MsgBox.Alert("提示", "添加成功");
+                LoginNamesArr = [];
+                PageNumber = 1;
                 LoadPage();
                 //console.log("添加成功" + resultData.Message);
             }
             else {
                 $(".user-model").css("display", "none");
                 $.MsgBox.Alert("提示", "添加失败");
+                LoginNamesArr = [];
                 //console.log("添加失败:" + resultData.Message);
             }
             Fake();

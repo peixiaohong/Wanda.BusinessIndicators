@@ -24,7 +24,7 @@
         <td>${item.JobTitle}</td>
         <td><span title="${item.DeptFullName}">${item.DeptFullName}</span></td>
         <td>${item.RoleName}</td>
-        <td>${item.OrgName}</td>
+        <td><span title="${item.OrgName}">${item.OrgName}</span></td>
         <td>
             <span class="role-delete-icon" data-name="${item.LoginName}" onclick="DeleteRoleUserData(this)"><i class="fa fa-times"></i></span>
         </td>
@@ -36,7 +36,7 @@
     {{each(i,item) Data}}
     <tr>
         <td>
-            <input type="checkbox" name="${item.LoginName}" value="" class="userChecked" />
+            <input type="checkbox" name="${item.LoginName}" value="" class="userChecked" onclick="storeNames(this)"/>
         </td>
         <td>${item.EmployeeName}</td>
         <td>${item.LoginName}</td>

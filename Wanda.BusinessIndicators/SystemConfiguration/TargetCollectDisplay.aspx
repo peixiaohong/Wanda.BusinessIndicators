@@ -154,7 +154,7 @@
 
                             <tr>
                                 <th rowspan="2" style="width: 6%">序号</th>
-                                <th rowspan="2" style="width: 11%">门店</th>
+                                <th rowspan="2" style="width: 11%">项目</th>
                                 <th rowspan="2" style="width: 11%">年度指标</th>
                                 <th colspan="12" class="sum" style="cursor: pointer" onclick="ClickChange('sum')">累计数  &nbsp;  &nbsp;<img src="../Images/btn02.png" /></th>
                                 <th colspan="12" style="display: none; cursor: pointer" class="dan" onclick="ClickChange('dan')">当月数  &nbsp;  &nbsp;<img src="../Images/btn02.png" /></th>

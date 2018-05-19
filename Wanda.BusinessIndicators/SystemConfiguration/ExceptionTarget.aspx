@@ -33,7 +33,11 @@
 
 
         <div>
+            <table class="tab_005" style="width: 100%" id="FloatTable2">
+                <thead>
+                </thead>           
 
+            </table>
             <table class="tab_005" style="width: 100%" id="Table2">
                 <thead id="head" style="width: 100%">
                     <tr>

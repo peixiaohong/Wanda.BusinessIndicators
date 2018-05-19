@@ -113,7 +113,7 @@
                             <table class="tab_005 role-list">
                                 <thead style="width: 100%">
                                     <tr class="tab_5_row_alt">
-                                        <th style="width: 5%;">序号</th>
+                                        <th style="width: 5%;"></th>
                                         <th style="width: 20%;">员工名称</th>
                                         <th style="width: 20%;">用户名称</th>
                                         <th style="width: 20%">岗位</th>
