@@ -278,7 +278,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             //因为是系统默认页面，如果没有权限，进入系统这块回报错，所以如果没有数据直接去系统的提示页面
             if (sysModel == null)
             {
-                Response.Redirect("~/NoPermission.aspx");
+                return;
             }
 
             if (sysModel.Category == 1)
