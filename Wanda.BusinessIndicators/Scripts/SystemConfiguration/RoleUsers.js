@@ -162,7 +162,6 @@ function RegisterEvent() {
     $(".user_add_cancel").off('click').on('click', function () {
         $(".user-model").css("display", "none");
         $("#UsersNameAdd").val("");
-        LoginNamesArr = [];
     })
 }
 //分页用户存储
