@@ -514,6 +514,10 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                         {
                             p.ObjValue = GetMissTargetList(CurrentRpt, MonthReportID.ToString(), true);
                         }
+                        if (p.Name == "CurrentMissTargetList")
+                        {
+                            p.ObjValue = GetCurrentMissTargetList(CurrentRpt, MonthReportID.ToString(), true);
+                        }
                     });
                 }
 
