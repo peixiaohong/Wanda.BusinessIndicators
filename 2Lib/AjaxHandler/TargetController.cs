@@ -1172,7 +1172,10 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
 
                                 if (NVlist[NVlist.Count - 1].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss") != "0001-01-01 00:00:00")
                                     model.EndTime = NVlist[NVlist.Count - 1].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss");
-
+                                if(M.WFStatus== "Cancel")
+                                {
+                                    model.EndTime = M.ModifyTime.ToString("yyyy-MM-dd HH:mm:ss");
+                                }
                                 //指标结束时间赋值。
                                 //for (int i = 0; i < NVlist.Count(); i++)
                                 //{

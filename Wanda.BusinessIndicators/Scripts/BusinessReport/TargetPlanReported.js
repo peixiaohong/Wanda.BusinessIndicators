@@ -196,11 +196,11 @@ function BangList(List) {
                     if (List[i].WFStatus == "Approved") {
                         th += "<td class=\"Td_Center\">审批通过</td>";
                     } else if (List[i].WFStatus == "Progress") {
-                        th += "<td class=\"Td_Center\"  style=\"color:red\">审批中</td>";
+                        th += "<td class=\"Td_Center\"  style=\"color:#9d2328\">审批中</td>";
                     } else if (List[i].WFStatus == "Draft") {
-                        th += "<td class=\"Td_Center\"  style=\"color:red\">退回</td>";
+                        th += "<td class=\"Td_Center\"  style=\"color:#9d2328\">退回</td>";
                     } else if (List[i].WFStatus == "Cancel") {
-                        th += "<td class=\"Td_Center\"  style=\"color:red\">作废</td>";
+                        th += "<td class=\"Td_Center\"  style=\"color:#9d2328\">作废</td>";
                     }
                     th += "</tr>";
                 } else if (List[i].Group == 0) //除每个系统第一个需要合并的Td外其余本系统Group皆为0
@@ -214,11 +214,11 @@ function BangList(List) {
                     if (List[i].WFStatus == "Approved") {
                         th += "<td class=\"Td_Center\">审批通过</td>";
                     } else if (List[i].WFStatus == "Progress") {
-                        th += "<td class=\"Td_Center\"  style=\"color:red\">审批中</td>";
+                        th += "<td class=\"Td_Center\"  style=\"color:#9d2328\">审批中</td>";
                     } else if (List[i].WFStatus == "Draft") {
-                        th += "<td class=\"Td_Center\"  style=\"color:red\">退回</td>";
+                        th += "<td class=\"Td_Center\"  style=\"color:#9d2328\">退回</td>";
                     } else if (List[i].WFStatus == "Cancel") {
-                        th += "<td class=\"Td_Center\"  style=\"color:red\">作废</td>";
+                        th += "<td class=\"Td_Center\"  style=\"color:#9d2328\">作废</td>";
                     }
                     th += "</tr>";
                 }
@@ -234,11 +234,11 @@ function BangList(List) {
                     if (List[i].WFStatus == "Approved") {
                         th += "<td class=\"Td_Center\">审批通过</td>";
                     } else if (List[i].WFStatus == "Progress") {
-                        th += "<td class=\"Td_Center\"  style=\"color:red\">审批中</td>";
+                        th += "<td class=\"Td_Center\"  style=\"color:#9d2328\">审批中</td>";
                     } else if (List[i].WFStatus == "Draft") {
-                        th += "<td class=\"Td_Center\"  style=\"color:red\">退回</td>";
+                        th += "<td class=\"Td_Center\"  style=\"color:#9d2328\">退回</td>";
                     } else if (List[i].WFStatus == "Cancel") {
-                        th += "<td class=\"Td_Center\"  style=\"color:red\">作废</td>";
+                        th += "<td class=\"Td_Center\"  style=\"color:#9d2328\">作废</td>";
                     }
                     th += "</tr>";
                 }
@@ -471,7 +471,7 @@ var config = {
     itemClick: "itemClickEvent",
     columns: [
     {
-        headerText: "系统名称",
+        headerText: "板块名称",
         dataField: "Name",
         headerAlign: "center",
         width: "10%",
