@@ -35,7 +35,7 @@ $(document).ready(function () {
     }
 
 });
-
+var LoginNamesArr = [];
 //页面数据加载
 function LoadPage() {
     Load();
@@ -50,7 +50,8 @@ function LoadPage() {
         args: { data: JSON.stringify(roleData)},
         successReturn: function (resultData) {
             var totalCount = resultData.TotalCount;
-            if (resultData.Success == 1) {           
+            if (resultData.Success == 1) {        
+                checkedData();
                 $('#ShowMenuUsersData').empty();
                 loadTmpl('#ShowMenuUsersDataTmpl').tmpl(resultData).appendTo('#ShowMenuUsersData');
                 $("#InitPager").empty();
@@ -72,7 +73,29 @@ function LoadPage() {
     });
 
 }
-var LoginNamesArr = [];
+// 获取所有用户数据
+function checkedData() {
+    var roleData = {
+        "RoleID": getQueryString("RoleId"),
+        "PageIndex": 1,
+        "PageSize": 2147483647
+    }
+    WebUtil.ajax({
+        async: false,
+        url: "/RoleManagerControll/GetAllUser",
+        args: { data: JSON.stringify(roleData) },
+        successReturn: function (resultData) {
+            if (resultData.Success == 1) {
+                resultData.Data.forEach(function (one) {
+                    LoginNamesArr.push(one.LoginName);
+                })
+            }
+            else {
+                //console.log(resultData.Message);
+            }
+        }
+    });
+}
 // 用户加载
 function UsersLoadPage() {
     Load();
@@ -208,6 +231,7 @@ function SaveRole() {
     }
     
 }
+
 function SaveRoleFun(data) {
     WebUtil.ajax({
         async: false,
@@ -217,15 +241,16 @@ function SaveRoleFun(data) {
             if (resultData.Success == 1) {
                 $(".user-model").css("display", "none");
                 $("#UsersNameAdd").val("");
-                $.MsgBox.Alert("提示", resultData.Message);
+                $.MsgBox.Alert("提示", "添加成功");
                 LoginNamesArr = [];
                 PageNumber = 1;
                 LoadPage();
                 //console.log("添加成功" + resultData.Message);
+                //console.log(resultData);
             }
             else {
                 $(".user-model").css("display", "none");
-                $.MsgBox.Alert("提示", resultData.Message);
+                $.MsgBox.Alert("提示", "添加失败");
                 LoginNamesArr = [];
                 //console.log("添加失败:" + resultData.Message);
             }
