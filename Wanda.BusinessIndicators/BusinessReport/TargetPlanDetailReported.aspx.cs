@@ -22,7 +22,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             datetime = StaticResource.Instance.GetReportDateTime();
             FinYear = datetime.Year;
             HideFinYear.Value = datetime.Year.ToString();
-            lblName.Text = datetime.Year.ToString() + "年年计划指标上报";
+            lblName.Text = datetime.Year.ToString() + "年 年计划指标上报";
             //JS_WF_JY_Starter
             if (!IsPostBack)
             {

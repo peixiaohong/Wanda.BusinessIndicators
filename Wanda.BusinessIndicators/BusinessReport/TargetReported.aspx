@@ -10,8 +10,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
-    <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
-    <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported1.js"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported.js?v=1"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported1.js?v=2"></script>
     <script type="text/javascript" src="../Scripts/UpLoad/jquery.uploadify.min.js"></script>
 
     <uc1:wfCtrl runat="server" ID="wfCtrl" />
@@ -36,7 +36,7 @@
             <asp:HiddenField runat="server" ID="hiddenDis" ClientIDMode="Static" />
 
             <br />
-            <span style="color: red">注：上传excel后，若页面没有出现相应数据，请稍等几分钟再次刷新页面（数据正在后台进行计算），即可恢复正常。请勿因此重复上传数据。</span>
+            <span style="color: #9d2328">注：上传excel后，若页面没有出现相应数据，请稍等几分钟再次刷新页面（数据正在后台进行计算），即可恢复正常。请勿因此重复上传数据。</span>
         </div>
 
         <!--导航栏 开始-->

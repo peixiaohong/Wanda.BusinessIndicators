@@ -754,6 +754,8 @@ function SaveMissTargetRpt(obj) {
 
             } else
             {
+                info.MIssTargetReason = MisstargetInfo.MIssTargetReason;
+                info.MIssTargetDescription = MisstargetInfo.MIssTargetDescription;
                 info.CurrentMIssTargetReason = "\n" + $("#rpt_info_step").val();  //未完成原因
                 info.CurrentMIssTargetDescription = "\n" + $("#rpt_info_desc").val(); //采取措施
             }
@@ -841,6 +843,7 @@ function GetInfoByID(sender, tag) {
     if (tag == 'current') // 如果tag的标签是 ‘current’代表的是当前月，反之则是累计的
     {
         A(CurrentMissTargetData, sender);
+        C(MissTargetData, sender); 
     } else {
         A(MissTargetData, sender); //如果是累计的时候编辑，同时改变当前月的数据
         B(CurrentMissTargetData, sender);
@@ -887,6 +890,24 @@ function B(o, id) {
 }
 
 
+//用于修改当月未完成原因时不丢失累计的
+var MisstargetInfo = null;
+
+function C(o, id) {
+    for (var i = 0; i < o.length; i++) {
+        if (o[i].Mark != null) {
+            A(o[i].ObjValue, id);
+        }
+        else {
+            for (var j = 0; j < o[i].ObjValue.length; j++) {
+                if (o[i].ObjValue[j].ID == id) {
+                    MisstargetInfo = o[i].ObjValue[j];
+                    break;
+                }
+            }
+        }
+    }
+}
 
 var currentMissTarget = null;//在未完成编辑的时候，通过指标筛选时，停留在当前指标
 //单个指标筛选
@@ -1122,6 +1143,7 @@ $(function () {
             if (data == "" || data == null) {
                 GetReportInstance();
                 if (ReportInstance != null) {
+                    $("#UpLoadData").hide();
                     $("#T2,#UpLoadDataDiv").show();
                     setStlye('missTargetReportSpan,missCurrentTargetReportSpan,monthReportSpan,monthReportReadySpan');
                 }

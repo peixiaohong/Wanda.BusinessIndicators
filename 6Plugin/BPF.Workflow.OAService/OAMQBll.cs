@@ -235,7 +235,8 @@ namespace BPF.OAMQServices
             }
             else
             {
-                paramList.Add("appurl", SSOToolkit.Instance.GetAuthOAUrlWithSSO(message.MobileUrl.Trim(), message.Userid, message.FlowID));
+                var url = System.Configuration.ConfigurationManager.AppSettings["WebURL"];
+                paramList.Add("appurl", url + SSOToolkit.Instance.GetAuthOAUrlWithSSO(message.MobileUrl.Trim(), message.Userid, message.FlowID));
             }
             //paramList.Add("appurl", SSOToolkit.Instance.GetAuthOAUrlWithSSO(message.MobileUrl.Trim(), message.Userid, message.FlowID));
             paramList.Add("creator", message.Creator);

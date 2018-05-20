@@ -36,7 +36,12 @@
     {{each(i,item) Data}}
     <tr>
         <td>
-            <input type="checkbox" name="${item.LoginName}" value="" class="userChecked" onclick="storeNames(this)"/>
+            {{if item.IsChecked}}
+            <input type="checkbox" name="${item.LoginName}" value="" class="userChecked" onclick="storeNames(this)" checked/>
+            {{else}}
+            <input type="checkbox" name="${item.LoginName}" value="" class="userChecked" onclick="storeNames(this)" />
+            {{/if}}
+            
         </td>
         <td>${item.EmployeeName}</td>
         <td>${item.LoginName}</td>

@@ -27,7 +27,7 @@
         <td class="Td_Right">${FormatTime(CreateTime)}</td>
         <td class="Td_Center"><a href="#" onclick="DownLoad('${ID}')">下载 </a></td>
         {{if IfCurrentTarget==true}}
-        <td class="Td_Center" style="color: red">已激活</td>
+        <td class="Td_Center" style="color: #9d2328">已激活</td>
         <td class="Td_Center"></td>
         {{else}}
         <td class="Td_Center" style="color: gray">未激活</td>
@@ -58,7 +58,7 @@
             <a href="#" onclick="IsDeleteA('${ID}')">禁用</a>
         </td>
         {{else}}
-        <td class="Td_Center" style="color: red">是</td>
+        <td class="Td_Center" style="color: #9d2328">是</td>
         <td class="Td_Center"></td>
         {{/if}}
         {{else}}
