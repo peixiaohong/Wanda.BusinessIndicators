@@ -12,7 +12,7 @@
     <link href="../ProcessResource/css/wfStyle-201.88.css" rel="stylesheet" />
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
     <script type="text/javascript" src="../Scripts/BusinessReport/TargetDirectlyReported.js?v=1"></script>
-    <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported1.js?v=1"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported1.js?v=2"></script>
     <script type="text/javascript" src="../Scripts/UpLoad/jquery.uploadify.min.js"></script>
 
     <uc1:wfCtrl runat="server" ID="wfCtrl" />
@@ -30,7 +30,7 @@
             <asp:HiddenField runat="server" ID="HideProcessCode" ClientIDMode="Static" />
             <asp:HiddenField runat="server" ID="hiddenDis" ClientIDMode="Static" />
             <br />
-            <span style="color: red">注：上传excel后，若页面没有出现相应数据，请稍等几分钟再次刷新页面（数据正在后台进行计算），即可恢复正常。请勿因此重复上传数据。</span>
+            <span style="color: #9d2328">注：上传excel后，若页面没有出现相应数据，请稍等几分钟再次刷新页面（数据正在后台进行计算），即可恢复正常。请勿因此重复上传数据。</span>
         </div>
         <!--导航栏 开始-->
         <targetReportUC:TargetReportUserControl runat="server" ID="UserControl" />

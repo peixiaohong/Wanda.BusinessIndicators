@@ -54,14 +54,14 @@
                             <th style="width: 85%; text-align: left; padding:10px; ">
                                 <input type="radio" name="btu" id="opentadio" value="2" onclick="ClickChange(this)"  title="请选择日期!" />立即开放
                                 <input type="text" id="OpenDate" style="width: 150px; margin-left: 20px"  class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM', minDate: '%y-%M'})" />
-                                <a  id="closeTips2" style="color: red; text-decoration: none">上报月为：日期控件选择的月份!</a>
+                                <a  id="closeTips2" style="color: #9d2328; text-decoration: none">上报月为：日期控件选择的月份!</a>
                                 </th>
                         </tr>
                         <tr >
                             <th ></th>
                             <th style="width: 85%; text-align: left;padding:10px;">
                                 <input type="radio" name="btu" id="closeradio" value="3" onclick="ClickChange(this)" title="默认为自然月的上个月" /> 关闭
-                                <a  id="closeTips3" style="color: red; text-decoration: none">上报月为：自然月的上个月!</a>
+                                <a  id="closeTips3" style="color: #9d2328; text-decoration: none">上报月为：自然月的上个月!</a>
                             </th>
                         </tr>
 

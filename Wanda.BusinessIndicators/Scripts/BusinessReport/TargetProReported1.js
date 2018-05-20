@@ -180,6 +180,7 @@ $(function () {
 
 var Month
 function GetProcess(key, instanceID) {
+    var title = ($('select#ddlSystem').find('option:selected').text() != "境外项目" ? "项目系统" : $('select#ddlSystem').find('option:selected').text()) + $("#hideFinYear").val() + "年" + Month + "月度报告";
     Month = $("#hideFinMonth").val() * 1 > 9 ? $("#hideFinMonth").val() : "0" + $("#hideFinMonth").val();
     FlowCode = key;
     var businessID = bpf_wf_tool.getQueryString("BusinessID");
@@ -197,7 +198,7 @@ function GetProcess(key, instanceID) {
             bpf_wf_client.createProcess({
                 FlowCode: FlowCode,
                 BusinessID: instanceID,
-                ProcessTitle: ($('select#ddlSystem').find('option:selected').text() != "境外项目" ? "项目系统" : $('select#ddlSystem').find('option:selected').text()) + $("#hideFinYear").val() + "年" + Month + "月度报告",
+                ProcessTitle: title,
                 FormParams: { ProcessKey: FlowCode }
                 
             });

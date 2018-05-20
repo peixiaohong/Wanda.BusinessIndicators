@@ -160,7 +160,7 @@ $(function () {
         OnAfterExecute: afterAction,
         IsShowContextMenu: true,
         PageContextMenu: true,
-        EnableDebug: true,
+        EnableDebug: false,
         ShowNodeName: ShowProecessNodeName == true ? true : false,
         ButtonCssType: "middle",
         CustomerSceneSetting: {
@@ -219,10 +219,12 @@ function GetProcess(key, instanceID) {
                 $.unblockUI();
             })
         }, function () {
+            var name = '(' + $("#txt_VersionName").val() + ')';
+            var title = $('select#ddlSystem').find('option:selected').text() + $("#HideFinYear").val() + "年计划指标" + name + "上报";
             bpf_wf_client.createProcess({
                 FlowCode: FlowCode,
                 BusinessID: instanceID,
-                ProcessTitl: $('select#ddlSystem').find('option:selected').text() + $("#HideFinYear").val() + "年计划指标上报",
+                ProcessTitle: title,
                 FormParams: { ProcessKey: FlowCode }
             });
             $.unblockUI();
@@ -257,7 +259,7 @@ function BusinessDataHandle(instanceID, args) {
         // 审批结束
         if (args.WorkflowContext.CurrentUserNodeID != null && args.WorkflowContext.CurrentUserNodeID != "") {
             var nodeInfo = args.WorkflowContext.NodeInstanceList[args.WorkflowContext.CurrentUserNodeID];
-            if (nodeInfo != null && (nodeInfo.NodeType == 1 || nodeInfo.NodeType == 2 || nodeInfo.NodeType == 7)) {
+            if (nodeInfo != null && (nodeInfo.NodeType == 0||nodeInfo.NodeType == 1 || nodeInfo.NodeType == 2 || nodeInfo.NodeType == 7)) {
                 strPrcessStatus = "Approved";
             } else {
                 strPrcessStatus = null;

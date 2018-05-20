@@ -217,7 +217,7 @@ function SaveRoleFun(data) {
             if (resultData.Success == 1) {
                 $(".user-model").css("display", "none");
                 $("#UsersNameAdd").val("");
-                $.MsgBox.Alert("提示", "添加成功");
+                $.MsgBox.Alert("提示", resultData.Message);
                 LoginNamesArr = [];
                 PageNumber = 1;
                 LoadPage();
@@ -225,7 +225,7 @@ function SaveRoleFun(data) {
             }
             else {
                 $(".user-model").css("display", "none");
-                $.MsgBox.Alert("提示", "添加失败");
+                $.MsgBox.Alert("提示", resultData.Message);
                 LoginNamesArr = [];
                 //console.log("添加失败:" + resultData.Message);
             }

@@ -474,7 +474,7 @@ var config = {
         headerText: "系统名称",
         dataField: "Name",
         headerAlign: "center",
-        width: "20%",
+        width: "10%",
         handler: "customTargetSysName"
     },
     {
@@ -490,7 +490,7 @@ var config = {
         dataField: "RptTime",
         headerAlign: "center",
         dataAlign: "center",
-        width: "150"
+        width: "150px"
     },
     {
         headerText: "审批情况",
@@ -504,14 +504,14 @@ var config = {
         dataField: "EndTime",
         headerAlign: "center",
         dataAlign: "center",
-        width: "150"
+        width: "150px"
     },
     {
         headerText: "审批状态",
         dataField: "WFStause",
         headerAlign: "center",
         dataAlign: "center",
-        width: "150"
+        width: "150px"
     }],
     data: []
 };
