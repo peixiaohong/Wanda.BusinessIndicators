@@ -356,6 +356,44 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         }
 
         /// <summary>
+        /// 获取点击新增用户的时候用户数据
+        /// </summary>
+        /// <param name="roleID"></param>
+        /// <returns></returns>
+        [LibAction]
+        public object GetAddUserInfo(string data)
+        {
+            string Message = string.Empty;
+            int Success = 0;
+            int TotalCount = 0;
+
+            try
+            {
+                AllUserPermissionsFilter filter = JsonConvert.DeserializeObject<AllUserPermissionsFilter>(data);
+                var resultData = EmployeeActionOperator.Instance.GetAddUserInfo(filter, out TotalCount);
+                Success = 1;
+                Message = "查询成功";
+                return new
+                {
+                    Data = resultData,
+                    TotalCount = TotalCount,
+                    Success = Success,
+                    Message = Message
+                };
+            }
+            catch (Exception ex)
+            {
+                return new
+                {
+                    Data = "",
+                    TotalCount = TotalCount,
+                    Success = 0,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        /// <summary>
         /// 保存角色—用户信息
         /// </summary>
         /// <param name="data"></param>
@@ -396,6 +434,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     {
                         if (oldLoginNames.Contains(item))
                         {
+                            Message += "人员重复：" + item + ";不添加。";
                             continue;
                         }
                     }
@@ -410,18 +449,36 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     su.ID = Guid.NewGuid();
                     entitys.Add(su);
                 }
+
+                foreach (var item in oldLoginNames)
+                {
+                    if (!LoginNames.Contains(item))
+                    {
+                        if (S_Role_UserActionOperator.Instance.DeleteDAtaByLoginNameAndRoleID(RoleID.ToGuid(), item) > 0)
+                        {
+                            Message += "已经取消人员：" + item + "的角色权限。";
+                        }
+
+                    }
+                }
+
                 int resultData = S_Role_UserActionOperator.Instance.InsertListData(entitys);
                 //清除缓存
                 WebHelper.InvalidAuthCache();
-                if (resultData > 0)
+                if (entitys.Count <= 0)
                 {
                     Success = 1;
-                    Message = "保存成功";
+                    Message += "没有新增任何用户";
+                }
+                else if (resultData > 0)
+                {
+                    Success = 1;
+                    Message += "保存成功";
                 }
                 else
                 {
                     Success = 0;
-                    Message = "保存失败";
+                    Message += "新增用户信息保存失败";
                 }
                 return new
                 {

@@ -78,13 +78,14 @@ function UsersLoadPage() {
     Load();
     var keyword = $("#UsersNameAdd").val();
     var roleData = {
+        "RoleID": getQueryString("RoleId"),
         "keyWord": keyword,
         "PageIndex": PageNumber,
         "PageSize": PageSize
     }
     WebUtil.ajax({
         async: false,
-        url: "/RoleManagerControll/GetAllUser",
+        url: "/RoleManagerControll/GetAddUserInfo",
         args: { data: JSON.stringify(roleData) },
         successReturn: function (resultData) {
             var totalCount = resultData.TotalCount;
@@ -143,14 +144,27 @@ function RegisterEvent() {
 }
 //分页用户存储
 
-function storeNames(el) {
-    var checked = $(el).attr("checked");
-    var name = $(el).attr("name");
-    if (checked) {
-        LoginNamesArr.push(name);
-    } else {
-        filterName(LoginNamesArr,name,false);
+function storeNames() {
+    var el = $(".userChecked");
+    for (var i = 0; i < el.length; i++) {
+        var name = el.eq(i).attr("name");
+        if (el.eq(i).attr("checked") == "checked") {
+            LoginNamesArr.push(name);
+            LoginNamesArr = unique(LoginNamesArr);
+        } else {
+            filterName(LoginNamesArr, name, false);
+        }
     }
+}
+//数组去重
+function unique(array) {
+    var r = [];
+    for (var i = 0, l = array.length; i < l; i++) {
+        for (var j = i + 1; j < l; j++)
+            if (array[i] === array[j]) j = ++i;
+        r.push(array[i]);
+    }
+    return r;
 }
 //取消选中，用户更新
 function filterName(data,name,bol) {
@@ -178,22 +192,11 @@ function filterName(data,name,bol) {
 //保存数据
 function SaveRole() {
     var el = $(".userChecked");
-    var LoginNames = "";
-    if (!LoginNamesArr.length) {
-        for (var i = 0; i < el.length; i++) {
-            var name = el.eq(i).attr("name");
-            if (el.eq(i).attr("checked") == "checked") {
-                LoginNames += name + ",";
-            }
-        }
-    } else {
-        LoginNames = LoginNamesArr.join(",") + ",";
-    }
+    var LoginNames = LoginNamesArr.join(",");
     var S_Role = {
-        "PageLoginNames": LoginNames.slice(0, LoginNames.length-1),
+        "PageLoginNames": LoginNames,
         "RoleID": getQueryString("RoleId")
     }
-
     if (!LoginNames.length) {
         $.MsgBox.Confirm("提示", "没有选中", "", function () {
             $("#mb_box,#mb_con").remove();
@@ -214,7 +217,7 @@ function SaveRoleFun(data) {
             if (resultData.Success == 1) {
                 $(".user-model").css("display", "none");
                 $("#UsersNameAdd").val("");
-                $.MsgBox.Alert("提示", "添加成功");
+                $.MsgBox.Alert("提示", resultData.Message);
                 LoginNamesArr = [];
                 PageNumber = 1;
                 LoadPage();
@@ -222,7 +225,7 @@ function SaveRoleFun(data) {
             }
             else {
                 $(".user-model").css("display", "none");
-                $.MsgBox.Alert("提示", "添加失败");
+                $.MsgBox.Alert("提示", resultData.Message);
                 LoginNamesArr = [];
                 //console.log("添加失败:" + resultData.Message);
             }

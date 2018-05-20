@@ -27,7 +27,7 @@
     <div class="content_t_l">
         <div class="content_t_r"></div>
     </div>
-    <div class="content_m" style="padding-left: 0px !important; padding-right: 0px !important;">
+    <div class="content_m" style="padding-left: 0px !important; padding-right: 0px !important;border-right: 0 solid !important; border-left:0 solid !important;">
         <table style="width: 100%">
             <tr>
                 <td style="width: 20%;" id="TreeTD">
@@ -35,7 +35,7 @@
                         <div style="padding-top: 0" class="leftCon">
                             <div style="margin-top: 0; margin-bottom: 0px;" class="con">
                                 <div class="menutree">
-                                    <div style="border-bottom: 1px solid #deedf2; padding: 8px 0;">
+                                    <div style="border-bottom: 1px solid #9d2328; padding: 8px 0;">
 
                                         <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlSystem" AutoPostBack="true" Style="width: 180px;" OnSelectedIndexChanged="ddlSystem_SelectedIndexChanged"></asp:DropDownList>
 
@@ -43,7 +43,7 @@
                                         <a class="btn_search" id="btnSearch" href="#" onclick="SearchData();"><span class="Search">查 询</span></a>--%>
 
                                     </div>
-                                    <div id="DivLeft" style="padding: 4px 0 0 4px; height: 544px; overflow: auto; overflow-x: hidden;">
+                                    <div id="DivLeft" style="padding: 4px 0 0 4px; height: 506px; overflow: auto; overflow-x: hidden;">
                                         <ul id="DocTree" class="ztree_new">
                                         </ul>
                                     </div>
@@ -107,7 +107,7 @@
             </tr>
         </table>
     </div>
-    <div class="content_b_l">
+    <div class="content_b_l" style="height:0 !important; overflow:hidden;">
         <div class="content_b_r">
             <asp:HiddenField runat="server" ID="hideTerrNodeId" ClientIDMode="Static" />
             <asp:HiddenField runat="server" ID="hidefile" ClientIDMode="Static" Value="0" /> 

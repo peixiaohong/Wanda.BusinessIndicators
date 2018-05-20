@@ -1122,6 +1122,7 @@ $(function () {
             if (data == "" || data == null) {
                 GetReportInstance();
                 if (ReportInstance != null) {
+                    $("#UpLoadData").hide();
                     $("#T2,#UpLoadDataDiv").show();
                     setStlye('missTargetReportSpan,missCurrentTargetReportSpan,monthReportSpan,monthReportReadySpan');
                 }
