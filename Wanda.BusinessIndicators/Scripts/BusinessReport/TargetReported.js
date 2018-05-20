@@ -509,6 +509,15 @@ function SetComplateTargetDetailData(sender, Type) {
                 "target1": sender.ObjValue[0].Name, "target2": sender.ObjValue[1].Name
             });
         }
+    }if (sender.IsBlendTarget && unfoldTitleList.length == 0) {
+        for (var i = 0; i < 9; i++) {
+            if (i < 7) {
+                unfoldTitleList.push({ "target1": sender.ObjValue[0].Name, "target2": sender.ObjValue[1].Name });
+            }
+            shrinkageTitleList.push({
+                "target1": sender.ObjValue[0].Name, "target2": sender.ObjValue[1].Name
+            });
+        }
     }
     if (strComplateMonthReportDetilHtmlTemplate[0] != "" && strComplateMonthReportDetilHtmlTemplate[0] != undefined) {
         loadTmpl('#' + strComplateMonthReportDetilHtmlTemplate[0]).tmpl(sender).appendTo('#CompleteDetailHead');

@@ -140,7 +140,7 @@
                     <input type="radio" id="radio1" value="月" name="time" checked="checked" onclick="MonthShow();" />按月份
                     <input type="radio" id="radio2" value="日" name="time" onclick="DateShow();" />按日期
                     <input type="radio" id="radio3" value="补回" name="time" onclick="Yaershow()" />年内未补回
-                    <span style="color: red" id="redtext">选择日期后,此指标将被设置为完成状态</span>
+                    <span style="color: #9d2328" id="redtext">选择日期后,此指标将被设置为完成状态</span>
                 </td>
                 <td id="Yearselect" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
                     <input type="radio" id="radio4" value="月" name="time" onclick="MonthShow();" />按月份
@@ -162,7 +162,7 @@
                 <th style="width: 40%; padding: 5px; padding-right: 10px; text-align: right;">实际金额</th>
                 <td style="width: 25%; padding: 5px; padding-left: 20px; text-align: left;">
                     <div id="yearshow">
-                        <input type="text" id="rpt_info_CommitInt" runat="server" clientidmode="Static" style="width: 150px;" onblur="Returned()" value="" /><span style="color: red" id="tip"></span>
+                        <input type="text" id="rpt_info_CommitInt" runat="server" clientidmode="Static" style="width: 150px;" onblur="Returned()" value="" /><span style="color: #9d2328" id="tip"></span>
                     </div>
                 </td>
             </tr>

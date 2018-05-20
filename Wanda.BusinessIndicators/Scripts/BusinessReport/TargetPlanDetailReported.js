@@ -219,10 +219,12 @@ function GetProcess(key, instanceID) {
                 $.unblockUI();
             })
         }, function () {
+            var name = '(' + $("#txt_VersionName").val() + ')';
+            var title = $('select#ddlSystem').find('option:selected').text() + $("#HideFinYear").val() + "年计划指标" + name + "上报";
             bpf_wf_client.createProcess({
                 FlowCode: FlowCode,
                 BusinessID: instanceID,
-                ProcessTitl: $('select#ddlSystem').find('option:selected').text() + $("#HideFinYear").val() + "年计划指标上报",
+                ProcessTitle: title,
                 FormParams: { ProcessKey: FlowCode }
             });
             $.unblockUI();

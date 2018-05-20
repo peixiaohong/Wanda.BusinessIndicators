@@ -126,6 +126,7 @@ $(function () {
 
 var Month;
 function GetProcess(key, instanceID) {
+    
     Month = $("#hideFinMonth").val() * 1 > 9 ? $("#hideFinMonth").val() : "0" + $("#hideFinMonth").val();
     FlowCode = key;
     var businessID = bpf_wf_tool.getQueryString("BusinessID");
@@ -140,10 +141,17 @@ function GetProcess(key, instanceID) {
                 $.unblockUI();
             })
         }, function () {
+            var sysName = $('select#ddlSystem').find('option:selected').text();
+            var areaName = '';
+            if ($('#ddlAreaID').val() != undefined) {
+                areaName = "-" + $('select#ddlAreaID').find('option:selected').text();
+            }
+            var title = sysName + areaName + $("#hideFinYear").val() + "年" + Month + "月度报告";
+
             bpf_wf_client.createProcess({
                 FlowCode: FlowCode,
                 BusinessID: instanceID,
-                ProcessTitle: $('select#ddlSystem').find('option:selected').text() + $("#hideFinYear").val() + "年" + Month + "月度报告",
+                ProcessTitle: title,
                 FormParams: { ProcessKey: FlowCode }
             });
             $.unblockUI();

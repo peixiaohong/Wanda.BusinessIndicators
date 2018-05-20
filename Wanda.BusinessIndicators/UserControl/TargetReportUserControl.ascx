@@ -8,7 +8,7 @@
 
       <style type="text/css">
         .Tishi {
-            color: red;
+            color: #9d2328;
             font-weight: 700;
         }
     </style>
