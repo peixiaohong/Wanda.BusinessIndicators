@@ -1060,7 +1060,7 @@ table.dstab_5 tr.dstab_5_row_alt th, table.tab_2 tr.tab_2_row_alt td { /*backgro
     background: #fff;
 }
 .hide{ display:none !important;}
-#ddlSystem {
+.menutree #ddlSystem {
     display: block;
     margin: 0 auto;
 }
