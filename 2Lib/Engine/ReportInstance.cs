@@ -255,6 +255,7 @@ namespace LJTH.BusinessIndicators.Engine
                 }
                 return _ValidatedMonthlyReport;
             }
+            
         }
         private A_MonthlyReport _ValidatedMonthlyReport = null;
 
@@ -309,6 +310,21 @@ namespace LJTH.BusinessIndicators.Engine
                 if (companyIDArray.Length > 0)
                 {
                     ReportDetails = ReportDetails.Where(m => companyIDArray.Contains(m.CompanyID)).ToList();
+                    if (ReportDetails.Any())
+                    {
+                        _MonthReportID = ReportDetails[0].MonthlyReportID;
+                        if (IsLatestVersion)
+                        {
+                            _LastestMonthlyReport = B_MonthlyreportOperator.Instance.GetMonthlyreport(ReportDetails[0].MonthlyReportID);
+                            Report = LastestMonthlyReport.ToVModel();
+                        }
+                        else
+                        {
+                            _ValidatedMonthlyReport = A_MonthlyreportOperator.Instance.GetMonthlyreport(ReportDetails[0].MonthlyReportID);
+                            Report = ValidatedMonthlyReport.ToVModel();
+                        }
+                    }
+
                 }
                 else
                 {
