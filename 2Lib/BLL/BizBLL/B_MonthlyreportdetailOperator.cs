@@ -286,9 +286,9 @@ namespace LJTH.BusinessIndicators.BLL
         /// <param name="SysId"></param>
         /// <param name="MonthReportID"></param>
         /// <returns></returns>
-        public List<B_MonthlyReportDetail> GetMonthlyReportDetail_ByAToB(int FinYear, int FinMonth, Guid SysId, Guid MonthReportID,Guid TargetPlanID)
+        public List<B_MonthlyReportDetail> GetMonthlyReportDetail_ByAToB(int FinYear, int FinMonth, Guid SysId,Guid AreaID, Guid MonthReportID,Guid TargetPlanID)
         {
-            return _bMonthlyreportdetailAdapter.GetMonthlyReportDetail_ByAToB(FinYear, FinMonth, SysId, MonthReportID, TargetPlanID);
+            return _bMonthlyreportdetailAdapter.GetMonthlyReportDetail_ByAToB(FinYear, FinMonth, SysId,AreaID, MonthReportID, TargetPlanID);
         }
 
         /// <summary>

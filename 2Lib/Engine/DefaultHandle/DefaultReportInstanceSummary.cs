@@ -33,7 +33,9 @@ namespace LJTH.BusinessIndicators.Engine
             FinYear = RptModel.FinYear;
             FinMonth = RptModel.FinMonth;
             ReportDetails = RptModel.ReportDetails;
-
+            string MonthlyReportIDs = "";
+            ReportDetails.GroupBy(x => x.MonthlyReportID).Select(x =>x.Key).ToList().ForEach(x=> MonthlyReportIDs+=","+x);
+            MonthlyReportIDs = MonthlyReportIDs.Trim(',');
             //这里对系统和指标再次做一次验证
             //if (ReportDetails != null && ReportDetails.Count() > 0)
             //{
@@ -43,7 +45,8 @@ namespace LJTH.BusinessIndicators.Engine
             //}
 
             List<MonthReportSummaryViewModel> listMRSVM = GetMonthlyReportDetailSummaryList(IsTargetPlan);
-            List<B_Attachment> listAtt = GetListAtt(_System.ID);
+            // List<B_Attachment> listAtt = GetListAtt(_System.ID);
+            List<B_Attachment> listAtt = GetListAtt(MonthlyReportIDs);
             List<DictionaryVmodel> listMonthReportSummary = new List<DictionaryVmodel>();
             string strReportDescription = "";
             #region 月报说明
@@ -228,6 +231,15 @@ namespace LJTH.BusinessIndicators.Engine
             }
             return listAtt;
         }
+        private List<B_Attachment> GetListAtt(string BusinessIDs)
+        {
+            List<B_Attachment> listAtt = null;
+            if (Report != null)
+            {
+                listAtt = B_AttachmentOperator.Instance.GetAttachmentList(BusinessIDs, "月报上传").ToList();
+            }
+            return listAtt;
+        }
 
         /// <summary>
         /// 获取表头名称和tmpl名称
@@ -319,7 +331,9 @@ namespace LJTH.BusinessIndicators.Engine
             FinYear = RptModel.FinYear;
             FinMonth = RptModel.FinMonth;
             ReportDetails = RptModel.ReportDetails;
-
+            string MonthlyReportIDs = "";
+            ReportDetails.GroupBy(x => x.MonthlyReportID).Select(x => x.Key).ToList().ForEach(x => MonthlyReportIDs += "," + x);
+            MonthlyReportIDs = MonthlyReportIDs.Trim(',');
             if (ReportDetails != null && ReportDetails.Count() > 0)
             {
                 _System = StaticResource.Instance[_System.ID, ReportDetails[0].CreateTime];
@@ -327,7 +341,8 @@ namespace LJTH.BusinessIndicators.Engine
             }
 
             List<MonthReportSummaryViewModel> listMRSVM = GetMonthlyReportDetailSummaryList();
-            List<B_Attachment> listAtt = GetListAtt(_System.ID);
+            //List<B_Attachment> listAtt = GetListAtt(_System.ID);
+            List<B_Attachment> listAtt = GetListAtt(MonthlyReportIDs);
             List<DictionaryVmodel> listMonthReportSummary = new List<DictionaryVmodel>();
             string strReportDescription = "";
             if (Report != null)
@@ -420,7 +435,21 @@ namespace LJTH.BusinessIndicators.Engine
             }
             return listAtt;
         }
-
+        /// <summary>
+        /// 获取附件
+        /// </summary>
+        /// <param name="systemID">系统ID</param>
+        /// <param name="IsLatestVersion"></param>
+        /// <returns></returns>
+        private List<B_Attachment> GetListAtt(string businessIDs)
+        {
+            List<B_Attachment> listAtt = null;
+            if (Report != null)
+            {
+                listAtt = B_AttachmentOperator.Instance.GetAttachmentList(businessIDs, "月报上传").ToList();
+            }
+            return listAtt;
+        }
         /// <summary>
         /// 读取集团总部xml
         /// </summary>
@@ -535,7 +564,9 @@ namespace LJTH.BusinessIndicators.Engine
             FinYear = RptModel.FinYear;
             FinMonth = RptModel.FinMonth;
             ReportDetails = RptModel.ReportDetails;
-
+            string MonthlyReportIDs = "";
+            ReportDetails.GroupBy(x => x.MonthlyReportID).Select(x => x.Key).ToList().ForEach(x => MonthlyReportIDs += "," + x);
+            MonthlyReportIDs = MonthlyReportIDs.Trim(',');
             if (ReportDetails != null && ReportDetails.Count() > 0)
             {
                 _System = StaticResource.Instance[_System.ID, ReportDetails[0].CreateTime];
@@ -545,7 +576,8 @@ namespace LJTH.BusinessIndicators.Engine
             bool IsReported = false;
 
             List<MonthReportSummaryViewModel> listMRSVM = GetMonthlyReportDetailSummaryList(IsTargetPlan, IsReported);
-            List<B_Attachment> listAtt = GetListAtt(_System.ID);
+            //List<B_Attachment> listAtt = GetListAtt(_System.ID);
+            List<B_Attachment> listAtt = GetListAtt(MonthlyReportIDs);
             List<DictionaryVmodel> listMonthReportSummary = new List<DictionaryVmodel>();
             string strReportDescription = "";
             if (Report != null)
@@ -700,7 +732,15 @@ namespace LJTH.BusinessIndicators.Engine
             }
             return listAtt;
         }
-
+        private List<B_Attachment> GetListAtt(string IDs)
+        {
+            List<B_Attachment> listAtt = null;
+            if (Report != null)
+            {
+                listAtt = B_AttachmentOperator.Instance.GetAttachmentList(IDs, "月报上传").ToList();
+            }
+            return listAtt;
+        }
         /// <summary>
         /// 读取集团总部xml
         /// </summary>
@@ -815,7 +855,9 @@ namespace LJTH.BusinessIndicators.Engine
             FinYear = RptModel.FinYear;
             FinMonth = RptModel.FinMonth;
             ReportDetails = RptModel.ReportDetails;
-
+            string MonthlyReportIDs = "";
+            ReportDetails.GroupBy(x => x.MonthlyReportID).Select(x => x.Key).ToList().ForEach(x => MonthlyReportIDs += "," + x);
+            MonthlyReportIDs = MonthlyReportIDs.Trim(',');
             if (ReportDetails != null && ReportDetails.Count() > 0)
             {
                 _System = StaticResource.Instance[_System.ID, ReportDetails[0].CreateTime];
@@ -826,7 +868,8 @@ namespace LJTH.BusinessIndicators.Engine
 
             List<MonthReportSummaryViewModel> listMRSVM = new List<MonthReportSummaryViewModel>();
 
-            List<B_Attachment> listAtt = GetListAtt(_System.ID);
+            //List<B_Attachment> listAtt = GetListAtt(_System.ID);
+            List<B_Attachment> listAtt = GetListAtt(MonthlyReportIDs);
             List<DictionaryVmodel> listMonthReportSummary = new List<DictionaryVmodel>();
             string strReportDescription = "";
             if (Report != null)
@@ -853,6 +896,15 @@ namespace LJTH.BusinessIndicators.Engine
             if (Report != null)
             {
                 listAtt = B_AttachmentOperator.Instance.GetAttachmentList(Report.ID, "月报上传").ToList();
+            }
+            return listAtt;
+        }
+        private List<B_Attachment> GetListAtt(string IDs)
+        {
+            List<B_Attachment> listAtt = null;
+            if (Report != null)
+            {
+                listAtt = B_AttachmentOperator.Instance.GetAttachmentList(IDs, "月报上传").ToList();
             }
             return listAtt;
         }

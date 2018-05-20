@@ -35,7 +35,11 @@ namespace LJTH.BusinessIndicators.BLL
             IList<B_Attachment> result = _bAttachmentAdapter.GetAttachmentList(businessID);
             return result;
         }
-
+        public IList<B_Attachment> GetAttachmentList(string businessIDs, string businessType)
+        {
+            IList<B_Attachment> result = _bAttachmentAdapter.GetAttachmentList(businessIDs, businessType);
+            return result;
+        }
 
         public IList<B_Attachment> GetAttachmentList(Guid businessID,string businessType)
         {

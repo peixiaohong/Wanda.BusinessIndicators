@@ -60,14 +60,14 @@
             <td rowspan="${item.Number}" class="Td_Right">{{= item.CnName}}</td>
             {{/if}}
             <td class="Td_Right">${item.TargetName}</td>
-            <td class="Td_Right">${item.NPlanAmmount.thousandize0OrEmpty(0)}</td>
-            <td class="Td_Right">${item.NActualAmmount.thousandize0OrEmpty(0)}</td>
-            <td class="Td_Right">${item.NDifference.thousandize0OrEmpty(0)}</td>
-            <td class="Td_Right">${item.NDisplayRate}</td>
-            <td class="Td_Right">${item.NAccumulativePlanAmmount.thousandize0OrEmpty(0)}</td>
-            <td class="Td_Right">${item.NAccumulativeActualAmmount.thousandize0OrEmpty(0)}</td>
-            <td class="Td_Right">${item.NAccumulativeDifference.thousandize0OrEmpty(0)}</td>
-            <td class="Td_Right">${item.NAccumulativeDisplayRate}</td>
+            <td class="Td_Right" title="${item.NPlanAmmount}">${item.NPlanAmmount.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Right" title="${item.NActualAmmount}">${item.NActualAmmount.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Right" title="${item.NDifference}">${item.NDifference.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Right" title="${item.NDisplayRate}">${item.NDisplayRate}</td>
+            <td class="Td_Right" title="${item.NAccumulativePlanAmmount}">${item.NAccumulativePlanAmmount.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Right" title="${item.NAccumulativeActualAmmount}">${item.NAccumulativeActualAmmount.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Right" title="${item.NAccumulativeDifference}">${item.NAccumulativeDifference.thousandize0OrEmpty(0)}</td>
+            <td class="Td_Right" title="${item.NAccumulativeDisplayRate}">${item.NAccumulativeDisplayRate}</td>
         </tr>
         {{/each}}
     </script>

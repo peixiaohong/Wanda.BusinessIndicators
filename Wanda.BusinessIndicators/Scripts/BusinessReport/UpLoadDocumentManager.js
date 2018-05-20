@@ -245,7 +245,7 @@ function docTreeOnRename(event, treeId, treeNode, isCancel) {
 }
 //修改Node名字判断是否为空
 function BeforeRename(event, treeId, treeNode, isCancel) {
-    if (treeNode.TreeNodeName == "" || treeNode.TreeNodeName == null) {
+    if (treeNode == "" || treeNode == null) {
         alert("节点名称不能为空");
         return false;
     }
