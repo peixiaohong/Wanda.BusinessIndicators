@@ -465,15 +465,15 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 int resultData = S_Role_UserActionOperator.Instance.InsertListData(entitys);
                 //清除缓存
                 WebHelper.InvalidAuthCache();
-                if (resultData > 0)
+                if (entitys.Count <= 0)
+                {
+                    Success = 1;
+                    Message += "没有新增任何用户";
+                }
+                else if (resultData > 0)
                 {
                     Success = 1;
                     Message += "保存成功";
-                }
-                if (entitys.Count > 0)
-                {
-                    Success = 0;
-                    Message += "没有新增任何用户";
                 }
                 else
                 {
