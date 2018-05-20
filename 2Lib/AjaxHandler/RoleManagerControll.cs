@@ -434,6 +434,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     {
                         if (oldLoginNames.Contains(item))
                         {
+                            Message += "人员重复：" + item + ";不添加。";
                             continue;
                         }
                     }
@@ -448,18 +449,36 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     su.ID = Guid.NewGuid();
                     entitys.Add(su);
                 }
+
+                foreach (var item in oldLoginNames)
+                {
+                    if (!LoginNames.Contains(item))
+                    {
+                        if (S_Role_UserActionOperator.Instance.DeleteDAtaByLoginNameAndRoleID(RoleID.ToGuid(), item) > 0)
+                        {
+                            Message += "已经取消人员：" + item + "的角色权限。";
+                        }
+
+                    }
+                }
+
                 int resultData = S_Role_UserActionOperator.Instance.InsertListData(entitys);
                 //清除缓存
                 WebHelper.InvalidAuthCache();
                 if (resultData > 0)
                 {
                     Success = 1;
-                    Message = "保存成功";
+                    Message += "保存成功";
+                }
+                if (entitys.Count > 0)
+                {
+                    Success = 0;
+                    Message += "没有新增任何用户";
                 }
                 else
                 {
                     Success = 0;
-                    Message = "保存失败";
+                    Message += "新增用户信息保存失败";
                 }
                 return new
                 {
