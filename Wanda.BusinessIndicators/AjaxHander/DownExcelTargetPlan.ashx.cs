@@ -783,7 +783,10 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     rowStart++;
 
                 }
-                worksheets[sheetIndex].Protect(ProtectionType.All);
+            }
+            for (int i = 0; i < worksheets.Count; i++)
+            {
+                worksheets[i].Protect(ProtectionType.All);
             }
             string Titles = FinYear + "年" + strSystemName + "经营指标分解汇总表";//表头名称
 
