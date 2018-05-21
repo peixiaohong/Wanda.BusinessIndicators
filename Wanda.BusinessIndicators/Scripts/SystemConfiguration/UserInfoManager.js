@@ -77,6 +77,12 @@ function RegisterEvent() {
     $(".QueryUsers_Button").off('click').on('click', function () {
         UsersLoadPage();
     })
+    // 用户键盘Enter
+    $("#UsersName").keydown(function (e) {
+        if (e.keyCode == 13) {
+            UsersLoadPage();
+        }
+    })
     // 设置角色确定
     $(".set_role_sumbit").off('click').on('click', function () {
         SaveRole();
