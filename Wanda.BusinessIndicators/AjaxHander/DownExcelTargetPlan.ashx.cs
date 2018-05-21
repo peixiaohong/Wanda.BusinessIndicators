@@ -356,7 +356,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 if (_SysModel.Category == 3)
                 {
                     #region 设置样式
-                    
+
                     StyleFlag flg = new StyleFlag();
                     flg.All = true;
                     Range range = worksheets[sheetIndex + 1].Cells.CreateRange(rowStart, colStart, 1, 2);
@@ -374,7 +374,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
                     #endregion
                 }
-                
+
                 //worksheets[sheetIndex].Protect(ProtectionType.All);
             }
             worksheets.RemoveAt(0);
@@ -846,7 +846,9 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
                 //给表格内部赋值
 
-                List<TargetDetail> TargetDetail = A_TargetplandetailOperator.Instance.GetSumMonthTargetDetailByTID(TargetPlanID);
+                List<TargetDetail> TargetDetail = new List<TargetDetail>();
+                if (TargetPlanID != null && TargetPlanID != Guid.Empty)
+                    TargetDetail = A_TargetplandetailOperator.Instance.GetSumMonthTargetDetailByTID(TargetPlanID);
                 for (int a = 0; a < 12; a++)
                 {
                     worksheets[0].Cells[4 + a, 1].PutValue(a + 1 + "月");
@@ -854,7 +856,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 }
                 for (int i = 0; i < listDV.Count; i++)
                 {
-                    if (i + 1 <= TargetDetail[0].TargetDetailList.Count)
+                    if (TargetDetail.Any() && i + 1 <= TargetDetail[0].TargetDetailList.Count)
                     {
                         for (int a = 0; a < TargetDetail.Count; a++)
                         {
@@ -897,7 +899,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 worksheets[0].Cells[16, 1].SetStyle(hejistyle);
                 for (int i = 0; i < listDV.Count; i++)
                 {
-                    if (i + 1 <= TargetDetail[11].TargetDetailList.Count)
+                    if (TargetDetail.Any() && i + 1 <= TargetDetail[11].TargetDetailList.Count)
                     {
                         if (TargetDetail[11].TargetDetailList[i].SumTarget != null)
                         {
