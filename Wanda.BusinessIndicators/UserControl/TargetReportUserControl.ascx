@@ -61,19 +61,19 @@
                     </div>
                 </li>
 
-                <li class="qi6" id="monthReportReady" onclick="ClickItems('monthReportReady')">
+          <%--      <li class="qi6" id="monthReportReady" onclick="ClickItems('monthReportReady')">
                     <div class="btn_l">
                         <div class="btn_r">
                             <span class="postion_num" id="monthReportReady">6</span>
                             <span id="monthReportReadySpan" class="txtdisable">月报保存</span>
                         </div>
                     </div>
-                </li>
+                </li>--%>
 
                 <li class="qi5" id="monthReportSubmit" onclick="ClickItems('monthReportSubmit')">
                     <div class="btn_l">
                         <div class="btn_r">
-                            <span class="postion_num" id="monthReportSubmitTitle">7</span>
+                            <span class="postion_num" id="monthReportSubmitTitle">6</span>
                             <span id="monthReportSubmitSpan" class="txtdisable">月报提交</span>
                         </div>
                     </div>

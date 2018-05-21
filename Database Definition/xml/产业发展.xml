@@ -1,114 +1,116 @@
 ﻿<Root>
-	<ProcessCode ShowProcessNodeName="true">YY_ZBGK-CYFZ</ProcessCode>
-	<ProcessCode ShowProcessNodeName="true">YY_ZBGK-CYFZ-ZB</ProcessCode>
+  <ProcessCode ShowProcessNodeName="true">YY_ZBGK-CYFZ</ProcessCode>
+  <ProcessCode ShowProcessNodeName="true">YY_ZBGK-CYFZ-ZB</ProcessCode>
 	<Interfaces>
+		<ISequence TemplateType="MissTarget" InterfaceName="MissTargetSequence" />
+		<ISequence TemplateType="Return" InterfaceName="ReturnSequence" />
 	</Interfaces>
-	<ReportMonthlyDetail>
-		<TableTemplate />
-	</ReportMonthlyDetail>
-	<SummaryMonthlyReport>
-		<TableTemplate />
-	</SummaryMonthlyReport>
-	<ManageTargetDetail Name="经营报告明细">
-		<BlendTargets IsBlendTarget="True" Senquence="1" TargetName="招商额+回款额" TargetValue="79A7B776-1F52-4664-BCD6-D4C602AEFB12,01C34924-F1A0-423E-ACAA-66112F89620C">
-			<Target TargetName="招商额" Senquence="1" IsBlendTarget="True" TargetValue="79A7B776-1F52-4664-BCD6-D4C602AEFB12" />
-			<Target TargetName="回款额" Senquence="2" IsBlendTarget="True" TargetValue="01C34924-F1A0-423E-ACAA-66112F89620C" />
-		</BlendTargets>
-		<Target TargetName="经营净利润" Senquence="3" IsBlendTarget="False" TargetValue="2DDC3E68-3655-437B-A1DE-73BB177BF885" />
-		<Target TargetName="大机构招商" Senquence="4" IsBlendTarget="False" TargetValue="0D29321E-C43B-4039-A5D1-AFE008DB8F86" />
-		<Target TargetName="工业用地拓展" Senquence="5" IsBlendTarget="False" TargetValue="F1774BC4-FB64-4E26-82AF-EE78C06CD0B5" />
-	</ManageTargetDetail>
-	<ComplateTargetDetail Name="完成情况明细">
-		<BlendTargets IsBlendTarget="True" Senquence="1" TargetName="招商额+回款额" TargetValue="79A7B776-1F52-4664-BCD6-D4C602AEFB12,01C34924-F1A0-423E-ACAA-66112F89620C">
-			<Target TargetName="招商额" Senquence="1" IsBlendTarget="True" TargetValue="79A7B776-1F52-4664-BCD6-D4C602AEFB12">
-				<Counter Title="总部" Senquence="1" Display="false" HaveDetail="false" DetailMonthlyExpression="GetStringValue(&quot;招商额.CompanyName&quot;)==&quot;总部&quot;" DetailExpression="GetStringValue(&quot;招商额.CompanyName&quot;)==&quot;总部&quot;" />
-				<Counter Title="完成部分" Senquence="2" Display="false" DetailMonthlyExpression="GetStringValue(&quot;招商额.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;招商额.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;招商额.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
-				<Counter Title="未完成部分" Senquence="3" Display="true" DetailMonthlyExpression="GetStringValue(&quot;招商额.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;招商额.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;招商额.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
-			</Target>
-			<Target TargetName="回款额" Senquence="2" IsBlendTarget="True" TargetValue="01C34924-F1A0-423E-ACAA-66112F89620C">
-				<Counter Title="总部" Senquence="1" Display="false" HaveDetail="false" DetailMonthlyExpression="GetStringValue(&quot;回款额.CompanyName&quot;)==&quot;总部&quot;" DetailExpression="GetStringValue(&quot;回款额.CompanyName&quot;)==&quot;总部&quot;" />
-				<Counter Title="完成部分" Senquence="2" Display="false" DetailMonthlyExpression="GetStringValue(&quot;回款额.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;回款额.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;回款额.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
-				<Counter Title="未完成部分" Senquence="3" Display="true" DetailMonthlyExpression="GetStringValue(&quot;回款额.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;回款额.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;回款额.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
-			</Target>
-		</BlendTargets>
-		<Target TargetName="经营净利润" Senquence="3" IsBlendTarget="False" TargetValue="2DDC3E68-3655-437B-A1DE-73BB177BF885">
-			<Counter Title="总部" Senquence="1" Display="false" HaveDetail="false" DetailMonthlyExpression="GetStringValue(&quot;经营净利润.CompanyName&quot;)==&quot;总部&quot;" DetailExpression="GetStringValue(&quot;经营净利润.CompanyName&quot;)==&quot;总部&quot;" />
-			<Counter Title="完成部分" Senquence="2" Display="false" DetailMonthlyExpression="GetStringValue(&quot;经营净利润.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;经营净利润.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;经营净利润.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;经营净利润.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
-			<Counter Title="未完成部分" Senquence="3" Display="true" DetailMonthlyExpression="GetStringValue(&quot;经营净利润.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;经营净利润.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;经营净利润.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;经营净利润.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
-		</Target>
-		<Target TargetName="大机构招商" Senquence="4" IsBlendTarget="False" TargetValue="0D29321E-C43B-4039-A5D1-AFE008DB8F86">
-			<Counter Title="总部" Senquence="1" Display="false" HaveDetail="false" DetailMonthlyExpression="GetStringValue(&quot;大机构招商.CompanyName&quot;)==&quot;总部&quot;" DetailExpression="GetStringValue(&quot;大机构招商.CompanyName&quot;)==&quot;总部&quot;" />
-			<Counter Title="完成部分" Senquence="2" Display="false" DetailMonthlyExpression="GetStringValue(&quot;大机构招商.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;大机构招商.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;大机构招商.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;大机构招商.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
-			<Counter Title="未完成部分" Senquence="3" Display="true" DetailMonthlyExpression="GetStringValue(&quot;大机构招商.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;大机构招商.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;大机构招商.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;大机构招商.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
-		</Target>
-		<Target TargetName="工业用地拓展" Senquence="5" IsBlendTarget="False" TargetValue="F1774BC4-FB64-4E26-82AF-EE78C06CD0B5">
-			<Counter Title="总部" Senquence="1" Display="false" HaveDetail="false" DetailMonthlyExpression="GetStringValue(&quot;工业用地拓展.CompanyName&quot;)==&quot;总部&quot;" DetailExpression="GetStringValue(&quot;工业用地拓展.CompanyName&quot;)==&quot;总部&quot;" />
-			<Counter Title="完成部分" Senquence="2" Display="false" DetailMonthlyExpression="GetStringValue(&quot;工业用地拓展.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;工业用地拓展.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;工业用地拓展.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;工业用地拓展.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
-			<Counter Title="未完成部分" Senquence="3" Display="true" DetailMonthlyExpression="GetStringValue(&quot;工业用地拓展.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;工业用地拓展.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;工业用地拓展.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;工业用地拓展.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
-		</Target>
-		<TableTemplate TableHeadTmplName="TmplCompleteDetail_Head" TableDataTmplName="TmplCompleteDetail_Data" TableExcelTemplateName="" />
-	</ComplateTargetDetail>
-	<CurrentMisstarget Name="当月未完成">
-		<Group TargetName="招商额+回款额" Senquence="1" TargetValue="79A7B776-1F52-4664-BCD6-D4C602AEFB12,01C34924-F1A0-423E-ACAA-66112F89620C">
-			<Counter Title="一、回款额、招商额均未完成公司【当月未完成{本月GetStringValue(&quot;招商额.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;回款额.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="1" Expression="GetStringValue(&quot;招商额.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;回款额.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
-			<Counter Title="二、仅招商额未完成公司【当月未完成{本月GetStringValue(&quot;招商额.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="2" Expression="GetStringValue(&quot;招商额.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
-			<Counter Title="三、仅回款额未完成公司【当月未完成{本月GetStringValue(&quot;回款额.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;回款额.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
-		</Group>
-		<Group TargetName="经营净利润" Senquence="2" TargetValue="2DDC3E68-3655-437B-A1DE-73BB177BF885">
-			<Counter Title="经营净利润未完成公司【当月未完成{本月GetStringValue(&quot;经营净利润.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;经营净利润.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;经营净利润.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
-		</Group>
-		<Group TargetName="大机构招商" Senquence="3" TargetValue="0D29321E-C43B-4039-A5D1-AFE008DB8F86">
-			<Counter Title="大机构招商未完成公司【当月未完成{本月GetStringValue(&quot;大机构招商.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;大机构招商.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;大机构招商.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
-		</Group>
-		<Group TargetName="工业用地拓展" Senquence="4" TargetValue="F1774BC4-FB64-4E26-82AF-EE78C06CD0B5">
-			<Counter Title="工业用地拓展未完成公司【当月未完成{本月GetStringValue(&quot;工业用地拓展.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;工业用地拓展.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;工业用地拓展.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
-		</Group>
-	</CurrentMisstarget>
-	<Misstarget Name="累计未完成">
-		<Group TargetName="招商额+回款额" Senquence="1" TargetValue="79A7B776-1F52-4664-BCD6-D4C602AEFB12,01C34924-F1A0-423E-ACAA-66112F89620C">
-			<Counter Title="一、回款额、招商额均未完成公司【上月累计未完成{上双GetStringValue(&quot;招商额.LastIsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;回款额.LastIsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上双(GetValue(&quot;回款额.LastIsCommitDate&quot;)==1&amp;&amp;GetValue(&quot;招商额.LastIsCommitDate&quot;)==1)||(GetValue(&quot;回款额.LastIsCommitDate&quot;)==1&amp;&amp;GetValue(&quot;招商额.ReturnType&quot;)==5)||(GetValue(&quot;招商额.LastIsCommitDate&quot;)==1&amp;&amp;GetValue(&quot;回款额.ReturnType&quot;)==5)}家，实际补回{上双GetValue(&quot;招商额.ReturnType&quot;)&gt;=6&amp;&amp;GetValue(&quot;回款额.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;招商额.ReturnType&quot;)==5&amp;&amp;GetValue(&quot;回款额.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="1" Expression="GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;" />
-			<Counter Title="二、仅招商额未完成公司【上月累计未完成{上单(GetStringValue(&quot;招商额.LastIsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;回款额.LastIsMissTarget&quot;)==&quot;True&quot;)&amp;&amp;(GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;||(GetValue(&quot;招商额.ReturnType&quot;)&gt;=6&amp;&amp;GetValue(&quot;回款额.ReturnType&quot;)==0))}家（要求本月补回{上单(GetValue(&quot;招商额.LastIsCommitDate&quot;)==1&amp;&amp;GetValue(&quot;回款额.LastIsCommitDate&quot;)==1)||(GetValue(&quot;招商额.LastIsCommitDate&quot;)==1&amp;&amp;GetValue(&quot;回款额.ReturnType&quot;)==0)||(GetValue(&quot;招商额.ReturnType&quot;)==5&amp;&amp;GetValue(&quot;回款额.LastIsCommitDate&quot;)==1)}家，实际补回{上单GetValue(&quot;招商额.ReturnType&quot;)&gt;=6&amp;&amp;GetValue(&quot;回款额.ReturnType&quot;)==0}家）；本月新增{本月GetValue(&quot;招商额.ReturnType&quot;)==5&amp;&amp;GetValue(&quot;回款额.ReturnType&quot;)==0}家，累计未完成{本月GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="2" Expression="GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;" />
-			<Counter Title="三、仅回款额未完成公司【上月累计未完成{上单(GetStringValue(&quot;回款额.LastIsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;招商额.LastIsMissTarget&quot;)==&quot;True&quot;)&amp;&amp;(GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;||(GetValue(&quot;回款额.ReturnType&quot;)&gt;=6&amp;&amp;GetValue(&quot;招商额.ReturnType&quot;)==0))}家（要求本月补回{上单(GetValue(&quot;招商额.LastIsCommitDate&quot;)==1&amp;&amp;GetValue(&quot;回款额.LastIsCommitDate&quot;)==1)||(GetValue(&quot;招商额.ReturnType&quot;)==0&amp;&amp;GetValue(&quot;回款额.LastIsCommitDate&quot;)==1)||(GetValue(&quot;回款额.ReturnType&quot;)==5&amp;&amp;GetValue(&quot;招商额.LastIsCommitDate&quot;)==1)}家，实际补回{上单GetValue(&quot;回款额.ReturnType&quot;)&gt;=6&amp;&amp;GetValue(&quot;招商额.ReturnType&quot;)==0}家）；本月新增{本月GetValue(&quot;回款额.ReturnType&quot;)==5&amp;&amp;GetValue(&quot;招商额.ReturnType&quot;)==0}家，累计未完成{本月GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;" />
-			<Counter Title="四、本月补回公司【{本月(GetValue(&quot;招商额.ReturnType&quot;)&gt;=6||GetValue(&quot;招商额.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;回款额.ReturnType&quot;)&gt;=6||GetValue(&quot;回款额.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;回款额.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;招商额.ReturnType&quot;)&lt;&gt;0)}家】" Senquence="3" Expression="(GetValue(&quot;回款额.ReturnType&quot;)&gt;=6||GetValue(&quot;回款额.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;招商额.ReturnType&quot;)&gt;=6||GetValue(&quot;招商额.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;回款额.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;招商额.ReturnType&quot;)&lt;&gt;0)" TextExpression="Return" />
-		</Group>
-		<Group TargetName="经营净利润" Senquence="2" TargetValue="2DDC3E68-3655-437B-A1DE-73BB177BF885">
-			<Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;经营净利润.LastIsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;经营净利润.LastIsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;经营净利润.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;经营净利润.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;经营净利润.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;经营净利润.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;经营净利润.IsMissTarget&quot;)==&quot;True&quot; " />
-		</Group>
-		<Group TargetName="大机构招商" Senquence="3" TargetValue="0D29321E-C43B-4039-A5D1-AFE008DB8F86">
-			<Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;大机构招商.LastIsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;大机构招商.LastIsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;大机构招商.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;大机构招商.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;大机构招商.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;大机构招商.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;大机构招商.IsMissTarget&quot;)==&quot;True&quot; " />
-		</Group>
-		<Group TargetName="工业用地拓展" Senquence="4" TargetValue="F1774BC4-FB64-4E26-82AF-EE78C06CD0B5">
-			<Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;工业用地拓展.LastIsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;工业用地拓展.LastIsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;工业用地拓展.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;工业用地拓展.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;工业用地拓展.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;工业用地拓展.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;工业用地拓展.IsMissTarget&quot;)==&quot;True&quot; " />
-		</Group>
-	</Misstarget>
-	<MisstargetReturn Name="补回情况">
-		<Group TargetName="招商额+回款额" Senquence="1" TargetValue="79A7B776-1F52-4664-BCD6-D4C602AEFB12,01C34924-F1A0-423E-ACAA-66112F89620C,2DDC3E68-3655-437B-A1DE-73BB177BF885">
-			<Counter Title="一、到期未补回" Senquence="1" Expression="GetValue(&quot;回款额.ReturnType&quot;)==2||GetValue(&quot;招商额.ReturnType&quot;)==2" />
-			<Counter Title="二、未到期" Senquence="2" Expression="(GetStringValue(&quot;回款额.LastIsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;招商额.LastIsMissTarget&quot;)==&quot;True&quot;)&amp;&amp;(GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;)">
-				<Counter Title="1. 招商额、回款额均未完成" Senquence="1" Expression="GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;" />
-				<Counter Title="2. 仅招商额未完成" Senquence="2" Expression="GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;" />
-				<Counter Title="3. 仅回款额未完成" Senquence="3" Expression="GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;" />
-			</Counter>
-			<Counter Title="三、已补回" Senquence="3" Expression="(GetValue(&quot;回款额.ReturnType&quot;)&gt;=6||GetValue(&quot;回款额.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;招商额.ReturnType&quot;)&gt;=6||GetValue(&quot;招商额.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;回款额.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;招商额.ReturnType&quot;)&lt;&gt;0)" />
-		</Group>
-		<Group TargetName="经营净利润" Senquence="2" TargetValue="2DDC3E68-3655-437B-A1DE-73BB177BF885">
-			<Counter Title="一、到期未补回公司" Senquence="1" Expression="GetValue(&quot;经营净利润.ReturnType&quot;)==2&amp;&amp;GetValue(&quot;经营净利润.LastNAccumulativeDifference&quot;)&lt;0" />
-			<Counter Title="二、未到期公司" Senquence="2" Expression="GetValue(&quot;经营净利润.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;经营净利润.LastNAccumulativeDifference&quot;)&lt;0" />
-			<Counter Title="三、已补回公司" Senquence="3" Expression="GetValue(&quot;经营净利润.ReturnType&quot;)&gt;=6" />
-		</Group>
-		<Group TargetName="大机构招商" Senquence="3" TargetValue="0D29321E-C43B-4039-A5D1-AFE008DB8F86">
-			<Counter Title="一、到期未补回公司" Senquence="1" Expression="GetValue(&quot;大机构招商.ReturnType&quot;)==2&amp;&amp;GetValue(&quot;大机构招商.LastNAccumulativeDifference&quot;)&lt;0" />
-			<Counter Title="二、未到期公司" Senquence="2" Expression="GetValue(&quot;大机构招商.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;大机构招商.LastNAccumulativeDifference&quot;)&lt;0" />
-			<Counter Title="三、已补回公司" Senquence="3" Expression="GetValue(&quot;大机构招商.ReturnType&quot;)&gt;=6" />
-		</Group>
-		<Group TargetName="工业用地拓展" Senquence="4" TargetValue="F1774BC4-FB64-4E26-82AF-EE78C06CD0B5">
-			<Counter Title="一、到期未补回公司" Senquence="1" Expression="GetValue(&quot;工业用地拓展.ReturnType&quot;)==2&amp;&amp;GetValue(&quot;工业用地拓展.LastNAccumulativeDifference&quot;)&lt;0" />
-			<Counter Title="二、未到期公司" Senquence="2" Expression="GetValue(&quot;工业用地拓展.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;工业用地拓展.LastNAccumulativeDifference&quot;)&lt;0" />
-			<Counter Title="三、已补回公司" Senquence="3" Expression="GetValue(&quot;工业用地拓展.ReturnType&quot;)&gt;=6" />
-		</Group>
-	</MisstargetReturn>
-	<Report>
-		<Rgroup Name="产业发展">
+  <ReportMonthlyDetail>
+    <TableTemplate />
+  </ReportMonthlyDetail>
+  <SummaryMonthlyReport>
+    <TableTemplate />
+  </SummaryMonthlyReport>
+  <ManageTargetDetail Name="经营报告明细">
+    <BlendTargets IsBlendTarget="True" Senquence="1" TargetName="招商额+回款额" TargetValue="79A7B776-1F52-4664-BCD6-D4C602AEFB12,01C34924-F1A0-423E-ACAA-66112F89620C">
+      <Target TargetName="招商额" Senquence="1" IsBlendTarget="True" TargetValue="79A7B776-1F52-4664-BCD6-D4C602AEFB12" />
+      <Target TargetName="回款额" Senquence="2" IsBlendTarget="True" TargetValue="01C34924-F1A0-423E-ACAA-66112F89620C" />
+    </BlendTargets>
+    <Target TargetName="经营净利润" Senquence="3" IsBlendTarget="False" TargetValue="2DDC3E68-3655-437B-A1DE-73BB177BF885" />
+    <Target TargetName="大机构招商" Senquence="4" IsBlendTarget="False" TargetValue="0D29321E-C43B-4039-A5D1-AFE008DB8F86" />
+    <Target TargetName="工业用地拓展" Senquence="5" IsBlendTarget="False" TargetValue="F1774BC4-FB64-4E26-82AF-EE78C06CD0B5" />
+  </ManageTargetDetail>
+  <ComplateTargetDetail Name="完成情况明细">
+    <BlendTargets IsBlendTarget="True" Senquence="1" TargetName="招商额+回款额" TargetValue="79A7B776-1F52-4664-BCD6-D4C602AEFB12,01C34924-F1A0-423E-ACAA-66112F89620C">
+      <Target TargetName="招商额" Senquence="1" IsBlendTarget="True" TargetValue="79A7B776-1F52-4664-BCD6-D4C602AEFB12">
+        <Counter Title="总部" Senquence="1" Display="false" HaveDetail="false" DetailMonthlyExpression="GetStringValue(&quot;招商额.CompanyName&quot;)==&quot;总部&quot;" DetailExpression="GetStringValue(&quot;招商额.CompanyName&quot;)==&quot;总部&quot;" />
+        <Counter Title="完成部分" Senquence="2" Display="false" DetailMonthlyExpression="GetStringValue(&quot;招商额.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;招商额.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;招商额.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+        <Counter Title="未完成部分" Senquence="3" Display="true" DetailMonthlyExpression="GetStringValue(&quot;招商额.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;招商额.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;招商额.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+      </Target>
+      <Target TargetName="回款额" Senquence="2" IsBlendTarget="True" TargetValue="01C34924-F1A0-423E-ACAA-66112F89620C">
+        <Counter Title="总部" Senquence="1" Display="false" HaveDetail="false" DetailMonthlyExpression="GetStringValue(&quot;回款额.CompanyName&quot;)==&quot;总部&quot;" DetailExpression="GetStringValue(&quot;回款额.CompanyName&quot;)==&quot;总部&quot;" />
+        <Counter Title="完成部分" Senquence="2" Display="false" DetailMonthlyExpression="GetStringValue(&quot;回款额.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;回款额.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;回款额.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+        <Counter Title="未完成部分" Senquence="3" Display="true" DetailMonthlyExpression="GetStringValue(&quot;回款额.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;回款额.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;回款额.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+      </Target>
+    </BlendTargets>
+    <Target TargetName="经营净利润" Senquence="3" IsBlendTarget="False" TargetValue="2DDC3E68-3655-437B-A1DE-73BB177BF885">
+      <Counter Title="总部" Senquence="1" Display="false" HaveDetail="false" DetailMonthlyExpression="GetStringValue(&quot;经营净利润.CompanyName&quot;)==&quot;总部&quot;" DetailExpression="GetStringValue(&quot;经营净利润.CompanyName&quot;)==&quot;总部&quot;" />
+      <Counter Title="完成部分" Senquence="2" Display="false" DetailMonthlyExpression="GetStringValue(&quot;经营净利润.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;经营净利润.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;经营净利润.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;经营净利润.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+      <Counter Title="未完成部分" Senquence="3" Display="true" DetailMonthlyExpression="GetStringValue(&quot;经营净利润.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;经营净利润.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;经营净利润.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;经营净利润.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+    </Target>
+    <Target TargetName="大机构招商" Senquence="4" IsBlendTarget="False" TargetValue="0D29321E-C43B-4039-A5D1-AFE008DB8F86">
+      <Counter Title="总部" Senquence="1" Display="false" HaveDetail="false" DetailMonthlyExpression="GetStringValue(&quot;大机构招商.CompanyName&quot;)==&quot;总部&quot;" DetailExpression="GetStringValue(&quot;大机构招商.CompanyName&quot;)==&quot;总部&quot;" />
+      <Counter Title="完成部分" Senquence="2" Display="false" DetailMonthlyExpression="GetStringValue(&quot;大机构招商.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;大机构招商.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;大机构招商.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;大机构招商.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+      <Counter Title="未完成部分" Senquence="3" Display="true" DetailMonthlyExpression="GetStringValue(&quot;大机构招商.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;大机构招商.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;大机构招商.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;大机构招商.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+    </Target>
+    <Target TargetName="工业用地拓展" Senquence="5" IsBlendTarget="False" TargetValue="F1774BC4-FB64-4E26-82AF-EE78C06CD0B5">
+      <Counter Title="总部" Senquence="1" Display="false" HaveDetail="false" DetailMonthlyExpression="GetStringValue(&quot;工业用地拓展.CompanyName&quot;)==&quot;总部&quot;" DetailExpression="GetStringValue(&quot;工业用地拓展.CompanyName&quot;)==&quot;总部&quot;" />
+      <Counter Title="完成部分" Senquence="2" Display="false" DetailMonthlyExpression="GetStringValue(&quot;工业用地拓展.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;工业用地拓展.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;工业用地拓展.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;工业用地拓展.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+      <Counter Title="未完成部分" Senquence="3" Display="true" DetailMonthlyExpression="GetStringValue(&quot;工业用地拓展.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;工业用地拓展.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;工业用地拓展.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;工业用地拓展.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+    </Target>
+    <TableTemplate TableHeadTmplName="TmplCompleteDetail_Head" TableDataTmplName="TmplCompleteDetail_Data" TableExcelTemplateName="" />
+  </ComplateTargetDetail>
+  <CurrentMisstarget Name="当月未完成">
+    <Group TargetName="招商额+回款额" Senquence="1" TargetValue="79A7B776-1F52-4664-BCD6-D4C602AEFB12,01C34924-F1A0-423E-ACAA-66112F89620C">
+      <Counter Title="一、回款额、招商额均未完成公司【当月未完成{本月GetStringValue(&quot;招商额.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;回款额.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="1" Expression="GetStringValue(&quot;招商额.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;回款额.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+      <Counter Title="二、仅招商额未完成公司【当月未完成{本月GetStringValue(&quot;招商额.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="2" Expression="GetStringValue(&quot;招商额.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+      <Counter Title="三、仅回款额未完成公司【当月未完成{本月GetStringValue(&quot;回款额.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;回款额.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+    </Group>
+    <Group TargetName="经营净利润" Senquence="2" TargetValue="2DDC3E68-3655-437B-A1DE-73BB177BF885">
+      <Counter Title="经营净利润未完成公司【当月未完成{本月GetStringValue(&quot;经营净利润.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;经营净利润.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;经营净利润.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+    </Group>
+    <Group TargetName="大机构招商" Senquence="3" TargetValue="0D29321E-C43B-4039-A5D1-AFE008DB8F86">
+      <Counter Title="大机构招商未完成公司【当月未完成{本月GetStringValue(&quot;大机构招商.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;大机构招商.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;大机构招商.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+    </Group>
+    <Group TargetName="工业用地拓展" Senquence="4" TargetValue="F1774BC4-FB64-4E26-82AF-EE78C06CD0B5">
+      <Counter Title="工业用地拓展未完成公司【当月未完成{本月GetStringValue(&quot;工业用地拓展.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;工业用地拓展.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;工业用地拓展.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+    </Group>
+  </CurrentMisstarget>
+  <Misstarget Name="累计未完成">
+    <Group TargetName="招商额+回款额" Senquence="1" TargetValue="79A7B776-1F52-4664-BCD6-D4C602AEFB12,01C34924-F1A0-423E-ACAA-66112F89620C">
+      <Counter Title="一、回款额、招商额均未完成公司【上月累计未完成{上双GetStringValue(&quot;招商额.LastIsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;回款额.LastIsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上双(GetValue(&quot;回款额.LastIsCommitDate&quot;)==1&amp;&amp;GetValue(&quot;招商额.LastIsCommitDate&quot;)==1)||(GetValue(&quot;回款额.LastIsCommitDate&quot;)==1&amp;&amp;GetValue(&quot;招商额.ReturnType&quot;)==5)||(GetValue(&quot;招商额.LastIsCommitDate&quot;)==1&amp;&amp;GetValue(&quot;回款额.ReturnType&quot;)==5)}家，实际补回{上双GetValue(&quot;招商额.ReturnType&quot;)&gt;=6&amp;&amp;GetValue(&quot;回款额.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;招商额.ReturnType&quot;)==5&amp;&amp;GetValue(&quot;回款额.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="1" Expression="GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;" />
+      <Counter Title="二、仅招商额未完成公司【上月累计未完成{上单(GetStringValue(&quot;招商额.LastIsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;回款额.LastIsMissTarget&quot;)==&quot;True&quot;)&amp;&amp;(GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;||(GetValue(&quot;招商额.ReturnType&quot;)&gt;=6&amp;&amp;GetValue(&quot;回款额.ReturnType&quot;)==0))}家（要求本月补回{上单(GetValue(&quot;招商额.LastIsCommitDate&quot;)==1&amp;&amp;GetValue(&quot;回款额.LastIsCommitDate&quot;)==1)||(GetValue(&quot;招商额.LastIsCommitDate&quot;)==1&amp;&amp;GetValue(&quot;回款额.ReturnType&quot;)==0)||(GetValue(&quot;招商额.ReturnType&quot;)==5&amp;&amp;GetValue(&quot;回款额.LastIsCommitDate&quot;)==1)}家，实际补回{上单GetValue(&quot;招商额.ReturnType&quot;)&gt;=6&amp;&amp;GetValue(&quot;回款额.ReturnType&quot;)==0}家）；本月新增{本月GetValue(&quot;招商额.ReturnType&quot;)==5&amp;&amp;GetValue(&quot;回款额.ReturnType&quot;)==0}家，累计未完成{本月GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="2" Expression="GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;" />
+      <Counter Title="三、仅回款额未完成公司【上月累计未完成{上单(GetStringValue(&quot;回款额.LastIsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;招商额.LastIsMissTarget&quot;)==&quot;True&quot;)&amp;&amp;(GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;||(GetValue(&quot;回款额.ReturnType&quot;)&gt;=6&amp;&amp;GetValue(&quot;招商额.ReturnType&quot;)==0))}家（要求本月补回{上单(GetValue(&quot;招商额.LastIsCommitDate&quot;)==1&amp;&amp;GetValue(&quot;回款额.LastIsCommitDate&quot;)==1)||(GetValue(&quot;招商额.ReturnType&quot;)==0&amp;&amp;GetValue(&quot;回款额.LastIsCommitDate&quot;)==1)||(GetValue(&quot;回款额.ReturnType&quot;)==5&amp;&amp;GetValue(&quot;招商额.LastIsCommitDate&quot;)==1)}家，实际补回{上单GetValue(&quot;回款额.ReturnType&quot;)&gt;=6&amp;&amp;GetValue(&quot;招商额.ReturnType&quot;)==0}家）；本月新增{本月GetValue(&quot;回款额.ReturnType&quot;)==5&amp;&amp;GetValue(&quot;招商额.ReturnType&quot;)==0}家，累计未完成{本月GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;" />
+      <Counter Title="四、本月补回公司【{本月(GetValue(&quot;招商额.ReturnType&quot;)&gt;=6||GetValue(&quot;招商额.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;回款额.ReturnType&quot;)&gt;=6||GetValue(&quot;回款额.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;回款额.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;招商额.ReturnType&quot;)&lt;&gt;0)}家】" Senquence="3" Expression="(GetValue(&quot;回款额.ReturnType&quot;)&gt;=6||GetValue(&quot;回款额.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;招商额.ReturnType&quot;)&gt;=6||GetValue(&quot;招商额.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;回款额.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;招商额.ReturnType&quot;)&lt;&gt;0)" TextExpression="Return" />
+    </Group>
+    <Group TargetName="经营净利润" Senquence="2" TargetValue="2DDC3E68-3655-437B-A1DE-73BB177BF885">
+      <Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;经营净利润.LastIsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;经营净利润.LastIsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;经营净利润.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;经营净利润.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;经营净利润.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;经营净利润.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;经营净利润.IsMissTarget&quot;)==&quot;True&quot; " />
+    </Group>
+    <Group TargetName="大机构招商" Senquence="3" TargetValue="0D29321E-C43B-4039-A5D1-AFE008DB8F86">
+      <Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;大机构招商.LastIsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;大机构招商.LastIsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;大机构招商.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;大机构招商.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;大机构招商.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;大机构招商.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;大机构招商.IsMissTarget&quot;)==&quot;True&quot; " />
+    </Group>
+    <Group TargetName="工业用地拓展" Senquence="4" TargetValue="F1774BC4-FB64-4E26-82AF-EE78C06CD0B5">
+      <Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;工业用地拓展.LastIsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;工业用地拓展.LastIsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;工业用地拓展.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;工业用地拓展.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;工业用地拓展.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;工业用地拓展.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;工业用地拓展.IsMissTarget&quot;)==&quot;True&quot; " />
+    </Group>
+  </Misstarget>
+  <MisstargetReturn Name="补回情况">
+    <Group TargetName="招商额+回款额" Senquence="1" TargetValue="79A7B776-1F52-4664-BCD6-D4C602AEFB12,01C34924-F1A0-423E-ACAA-66112F89620C,2DDC3E68-3655-437B-A1DE-73BB177BF885">
+      <Counter Title="一、到期未补回" Senquence="1" Expression="GetValue(&quot;回款额.ReturnType&quot;)==2||GetValue(&quot;招商额.ReturnType&quot;)==2" />
+      <Counter Title="二、未到期" Senquence="2" Expression="(GetStringValue(&quot;回款额.LastIsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;招商额.LastIsMissTarget&quot;)==&quot;True&quot;)&amp;&amp;(GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;)">
+        <Counter Title="1. 招商额、回款额均未完成" Senquence="1" Expression="GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;" />
+        <Counter Title="2. 仅招商额未完成" Senquence="2" Expression="GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;" />
+        <Counter Title="3. 仅回款额未完成" Senquence="3" Expression="GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;" />
+      </Counter>
+      <Counter Title="三、已补回" Senquence="3" Expression="(GetValue(&quot;回款额.ReturnType&quot;)&gt;=6||GetValue(&quot;回款额.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;招商额.ReturnType&quot;)&gt;=6||GetValue(&quot;招商额.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;回款额.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;招商额.ReturnType&quot;)&lt;&gt;0)" />
+    </Group>
+    <Group TargetName="经营净利润" Senquence="2" TargetValue="2DDC3E68-3655-437B-A1DE-73BB177BF885">
+      <Counter Title="一、到期未补回公司" Senquence="1" Expression="GetValue(&quot;经营净利润.ReturnType&quot;)==2&amp;&amp;GetValue(&quot;经营净利润.LastNAccumulativeDifference&quot;)&lt;0" />
+      <Counter Title="二、未到期公司" Senquence="2" Expression="GetValue(&quot;经营净利润.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;经营净利润.LastNAccumulativeDifference&quot;)&lt;0" />
+      <Counter Title="三、已补回公司" Senquence="3" Expression="GetValue(&quot;经营净利润.ReturnType&quot;)&gt;=6" />
+    </Group>
+    <Group TargetName="大机构招商" Senquence="3" TargetValue="0D29321E-C43B-4039-A5D1-AFE008DB8F86">
+      <Counter Title="一、到期未补回公司" Senquence="1" Expression="GetValue(&quot;大机构招商.ReturnType&quot;)==2&amp;&amp;GetValue(&quot;大机构招商.LastNAccumulativeDifference&quot;)&lt;0" />
+      <Counter Title="二、未到期公司" Senquence="2" Expression="GetValue(&quot;大机构招商.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;大机构招商.LastNAccumulativeDifference&quot;)&lt;0" />
+      <Counter Title="三、已补回公司" Senquence="3" Expression="GetValue(&quot;大机构招商.ReturnType&quot;)&gt;=6" />
+    </Group>
+    <Group TargetName="工业用地拓展" Senquence="4" TargetValue="F1774BC4-FB64-4E26-82AF-EE78C06CD0B5">
+      <Counter Title="一、到期未补回公司" Senquence="1" Expression="GetValue(&quot;工业用地拓展.ReturnType&quot;)==2&amp;&amp;GetValue(&quot;工业用地拓展.LastNAccumulativeDifference&quot;)&lt;0" />
+      <Counter Title="二、未到期公司" Senquence="2" Expression="GetValue(&quot;工业用地拓展.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;工业用地拓展.LastNAccumulativeDifference&quot;)&lt;0" />
+      <Counter Title="三、已补回公司" Senquence="3" Expression="GetValue(&quot;工业用地拓展.ReturnType&quot;)&gt;=6" />
+    </Group>
+  </MisstargetReturn>
+  <Report>
+    <Rgroup Name="产业发展">
 			1-【当前月】月累计经营指标完成情况：
 
 			1、1-【当前月】月经营净利润指标为【经营净利润.累计计划总数】万元，实际完成【经营净利润.累计实际总数】万元，差额【经营净利润.累计亏损率】万元，累计完成【经营净利润.累计累计完成率】
@@ -118,5 +120,5 @@
 			5、1-【当前月】月工业用地拓展指标为【工业用地拓展.累计计划总数】万元，实际完成【工业用地拓展.累计实际总数】万元，差额【工业用地拓展.累计亏损率】万元，累计完成【工业用地拓展.累计累计完成率】
 
 		</Rgroup>
-	</Report>
+  </Report>
 </Root>
