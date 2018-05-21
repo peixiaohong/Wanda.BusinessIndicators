@@ -7,6 +7,7 @@ using Lib.Data;
 using System.Data;
 using Lib.Core;
 using System.Web;
+using System.Configuration;
 
 namespace LJTH.Lib.Data.AppBase
 {
@@ -31,21 +32,13 @@ namespace LJTH.Lib.Data.AppBase
 
         private string GetWebLoginUserName()
         {
-            string result = "unknown";
-            if (HttpContext.Current == null)
-            {
-                return result;
-            }
-            // WandaSSO用法
-            string ssoUsername = HttpContext.Current.Items["WD_SSO_UserName"] != null ? HttpContext.Current.Items["WD_SSO_UserName"].ToString() : string.Empty;
+            string ssoUsername = HttpContext.Current.Request["LoginUser"];
+            //string ssoUsername = HttpContext.Current.Items["WD_SSO_UserName"] != null ? HttpContext.Current.Items["WD_SSO_UserName"].ToString() : string.Empty;
             string strUserName = HttpContext.Current.User.Identity != null ? HttpContext.Current.User.Identity.Name : ssoUsername;
-
             if (string.IsNullOrEmpty(strUserName))
-            {
-                return result;
-            }
-            result = strUserName;
-            return result;
+                strUserName = ssoUsername;
+             
+            return strUserName;
         }
 
         public event Func<DateTime> GetNowTime;
