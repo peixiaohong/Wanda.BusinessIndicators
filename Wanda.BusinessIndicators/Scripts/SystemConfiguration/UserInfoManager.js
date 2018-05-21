@@ -29,6 +29,9 @@ function UsersLoadPage() {
     Load();
     var keyword = $("#UsersName").val();
     //console.log(keyword)
+    if (keyword) {
+        PageNumber = 1;
+    }
     var roleData = {
         "keyWord": keyword,
         "PageIndex": PageNumber,
