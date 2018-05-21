@@ -29,6 +29,9 @@ function UsersLoadPage() {
     Load();
     var keyword = $("#UsersName").val();
     //console.log(keyword)
+    if (keyword) {
+        PageNumber = 1;
+    }
     var roleData = {
         "keyWord": keyword,
         "PageIndex": PageNumber,
@@ -76,6 +79,12 @@ function RegisterEvent() {
     //用户查询 
     $(".QueryUsers_Button").off('click').on('click', function () {
         UsersLoadPage();
+    })
+    // 用户键盘Enter
+    $("#UsersName").keydown(function (e) {
+        if (e.keyCode == 13) {
+            UsersLoadPage();
+        }
     })
     // 设置角色确定
     $(".set_role_sumbit").off('click').on('click', function () {
