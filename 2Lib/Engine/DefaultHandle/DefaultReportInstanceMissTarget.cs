@@ -21,8 +21,17 @@ namespace LJTH.BusinessIndicators.Engine
     /// </summary>
     public class DefaultReportInstanceMissTarget : IReportInstanceMissTarget
     {
+        /// <summary>
+        /// 当月未完成列表
+        /// </summary>
         List<MonthlyReportDetail> MissTargetList = null;
+        /// <summary>
+        /// 上个月未完成列表
+        /// </summary>
         List<MonthlyReportDetail> LastMissTargetList = null;
+        /// <summary>
+        /// 
+        /// </summary>
         List<MonthlyReportDetail> MissTargetTextList = null;
 
         List<MonthlyReportDetail> ReportDetails = null;
