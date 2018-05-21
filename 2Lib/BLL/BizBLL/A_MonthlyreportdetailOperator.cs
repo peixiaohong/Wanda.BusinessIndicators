@@ -193,12 +193,12 @@ namespace LJTH.BusinessIndicators.BLL
             Model = StaticResource.Instance.GetTargetList(SystemID, t).Where(s => s.ID == TargetID).FirstOrDefault();
             if (Model.Configuration.Elements("IsMissTargetConfigration").ToList().Count > 0)
             {
-                result = _aMonthlyreportdetailAdapter.GetVMissDetail(SystemID, Year, Month, Model.ID, true).ToList();
+                result = _aMonthlyreportdetailAdapter.GetVMissDetail_defaultPlan(SystemID, Year, Month, Model.ID, true).ToList();
 
             }
             else
             {
-                result = _aMonthlyreportdetailAdapter.GetVMissDetail(SystemID, Year, Month, Model.ID, false).ToList();
+                result = _aMonthlyreportdetailAdapter.GetVMissDetail_defaultPlan(SystemID, Year, Month, Model.ID, false).ToList();
 
             }
             if (result.Count>0)

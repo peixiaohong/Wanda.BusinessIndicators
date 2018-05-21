@@ -32,6 +32,8 @@ namespace LJTH.BusinessIndicators.DAL
         }
         public IList<B_Attachment> GetAttachmentList(string businessIDs, string businessType)
         {
+            if (string.IsNullOrEmpty(businessIDs))
+                return new List<B_Attachment>();
             string sql = ORMapping.GetSelectSql<B_Attachment>(TSqlBuilder.Instance);
 
             sql += "WHERE " + base.NotDeleted;
