@@ -533,6 +533,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             RowStyle.HorizontalAlignment = TextAlignmentType.Center;
             RowStyle.Pattern = BackgroundType.Solid;
             RowStyle.Number = 1;
+            RowStyle.Custom = "_ * #,##0_ ;_ * -#,##0_ ;_ * \" - \"??_ ;_ @_ ";
             RowStyle.Borders[BorderType.TopBorder].LineStyle = CellBorderType.Thin;
             RowStyle.Borders[BorderType.TopBorder].Color = System.Drawing.Color.Black;
             RowStyle.Borders[BorderType.BottomBorder].LineStyle = CellBorderType.Thin; ;
@@ -547,6 +548,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             RowSumStyle.Font.Size = 12;
             RowSumStyle.Font.Name = "Arial";
             RowSumStyle.Number = 1;
+            RowSumStyle.Custom = "_ * #,##0_ ;_ * -#,##0_ ;_ * \" - \"??_ ;_ @_ ";
             RowSumStyle.ForegroundColor = Color.FromArgb(217, 217, 217);
             RowSumStyle.HorizontalAlignment = TextAlignmentType.Center;
             RowSumStyle.Pattern = BackgroundType.Solid;
@@ -585,6 +587,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             TargetSumstyle.Font.IsBold = true;
             TargetSumstyle.HorizontalAlignment = TextAlignmentType.Center;
             TargetSumstyle.Pattern = BackgroundType.Solid;
+            TargetSumstyle.Custom = "_ * #,##0_ ;_ * -#,##0_ ;_ * \" - \"??_ ;_ @_ ";
             TargetSumstyle.ForegroundColor = Color.FromArgb(253, 213, 180);
             TargetSumstyle.Borders[BorderType.TopBorder].LineStyle = CellBorderType.Thin;
             TargetSumstyle.Borders[BorderType.TopBorder].Color = System.Drawing.Color.Black;
@@ -610,6 +613,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             lastStyle.Borders[BorderType.LeftBorder].Color = System.Drawing.Color.Black;
             lastStyle.Borders[BorderType.RightBorder].LineStyle = CellBorderType.Thin;
             lastStyle.Borders[BorderType.RightBorder].Color = System.Drawing.Color.Black;
+            lastStyle.Custom = "_ * #,##0_ ;_ * -#,##0_ ;_ * \" - \"??_ ;_ @_ ";
 
             Aspose.Cells.Style hejistyle = designer.Workbook.Styles[designer.Workbook.Styles.Add()];
             hejistyle.Font.Size = 12;
@@ -627,6 +631,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             hejistyle.Borders[BorderType.LeftBorder].Color = System.Drawing.Color.Black;
             hejistyle.Borders[BorderType.RightBorder].LineStyle = CellBorderType.Thin;
             hejistyle.Borders[BorderType.RightBorder].Color = System.Drawing.Color.Black;
+            hejistyle.Custom = "_ * #,##0_ ;_ * -#,##0_ ;_ * \" - \"??_ ;_ @_ ";
 
 
 
