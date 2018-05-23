@@ -6,7 +6,9 @@ Create   PROCEDURE [dbo].[GetMonthlyReportDetailList]
 @SystemID UNIQUEIDENTIFIER,
 @FinYear INT,
 @FinMonth INT,
-@TargetPlanID UNIQUEIDENTIFIER
+@TargetPlanID UNIQUEIDENTIFIER,
+@SystemBatchID UNIQUEIDENTIFIER
+
 AS
 BEGIN
 
@@ -16,9 +18,10 @@ Select @IsHaveArea=count(1) From [dbo].[S_Organizational] Where [ParentID]=@Syst
 IF @IsHaveArea>0
 --获取最新批次ID,根据最新批次ID查找MonthlyReportID,然后关联出所有的月报明细
 	BEGIN 
-		DECLARE @SystemBatchID UNIQUEIDENTIFIER--批次ID
+	IF @SystemBatchID IS NULL OR @SystemBatchID='00000000-0000-0000-0000-000000000000'
 		SET  @SystemBatchID=(SELECT TOP 1 SystemBatchID FROM B_MonthlyReport WHERE SystemID=@SystemID AND FinYear=@FinYear AND FinMonth=@FinMonth AND TargetPlanID=@TargetPlanID ORDER BY CreateTime DESC);
-	   SELECT a.[ID]
+	  
+	  SELECT a.[ID]
       , a.[SystemID]
       ,a.[FinYear]
       ,a.[FinMonth]
@@ -45,7 +48,9 @@ IF @IsHaveArea>0
       ,a.[Counter]
       ,a.[FirstMissTargetDate]
       ,a.[PromissDate]
-      ,a.[CommitDate]
+      ,(SELECT TOP 1 CASE WHEN PromissDate IS NOT NULL THEN PromissDate ELSE
+	  CurrentMonthCommitDate END FROM  dbo.A_MonthlyReportDetail WHERE SystemID=a.[SystemID] AND TargetID=a.[TargetID]
+					AND FinMonth=a.[FinMonth] AND FinYear=a.[FinYear] AND  CompanyID=a.CompanyID AND (PromissDate IS NOT NULL OR CurrentMonthCommitDate IS NOT NULL))  [CommitDate]
       ,a.[MIssTargetReason]
       ,a.[MIssTargetDescription]
 	  ,a.CurrentMIssTargetReason
@@ -81,7 +86,7 @@ IF @IsHaveArea>0
 	   ,(SELECT TargetType FROM  dbo.C_Target WHERE id= a.TargetID AND SystemID =a.SystemID AND  VersionStart <= GETDATE() AND GETDATE() < VersionEnd    AND IsDeleted =0 ) AS TargetType
 	   ,(SELECT sum(Target) FROM A_TargetPlanDetail WHERE SystemID=a.SystemID AND CompanyID=a.CompanyID AND FinYear=a.FinYear AND TargetID=a.TargetID AND TargetPlanID=a.TargetPlanID  AND IsDeleted=0 GROUP BY SystemID,CompanyID,FinYear,TargetID,TargetPlanID ) AS NPlanAmmountByYear--全年指标	   
 	  FROM [dbo].[B_MonthlyReportDetail] a INNER JOIN B_MonthlyReport b ON a.MonthlyReportID=b.ID  
-	  WHERE b.SystemBatchID=@SystemBatchID  AND B.TargetPlanID=@TargetPlanID
+	  WHERE b.SystemBatchID=@SystemBatchID AND B.FinYear=@FinYear AND B.FinMonth=@FinMonth   AND B.TargetPlanID=@TargetPlanID
 	END 
 ELSE 
 	BEGIN 
@@ -114,7 +119,9 @@ ELSE
       ,[Counter]
       ,[FirstMissTargetDate]
       ,[PromissDate]
-      ,[CommitDate]
+      ,(SELECT TOP 1 CASE WHEN PromissDate IS NOT NULL THEN PromissDate ELSE
+	  CurrentMonthCommitDate END FROM  dbo.A_MonthlyReportDetail WHERE SystemID=b.SystemID AND TargetID=b.TargetID
+					AND FinMonth=b.FinMonth AND FinYear=b.FinYear AND  CompanyID=b.CompanyID AND (PromissDate IS NOT NULL OR CurrentMonthCommitDate IS NOT NULL))  [CommitDate]
       ,[MIssTargetReason]
       ,[MIssTargetDescription]
 	  ,CurrentMIssTargetReason
@@ -153,5 +160,6 @@ ELSE
 	  WHERE MonthlyReportID=@lastMonthlyReportID
 	END 
 END
+
 GO
 

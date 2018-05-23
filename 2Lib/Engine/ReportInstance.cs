@@ -281,9 +281,9 @@ namespace LJTH.BusinessIndicators.Engine
                 ReportDetails = new List<MonthlyReportDetail>();
 
                 if (DataSource == "Draft")
-                    ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Draft(_System.ID, FinYear, FinMonth, _MonthReportID, TargetPlanID, IsAll);
+                    ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Draft(_System.ID, FinYear, FinMonth, _MonthReportID, TargetPlanID, _SystemBatchID, IsAll);
                 else
-                    ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Approve(_System.ID, FinYear, FinMonth, _MonthReportID, TargetPlanID, IsAll);
+                    ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Approve(_System.ID, FinYear, FinMonth, _MonthReportID, TargetPlanID, _SystemBatchID, IsAll);
 
                 //LastestMonthlyReportDetails.ForEach(P => ReportDetails.Add(P.ToVModel()));
             }
@@ -338,7 +338,7 @@ namespace LJTH.BusinessIndicators.Engine
         /// </summary>
         public void GetReportDetail()
         {
-            ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Draft(_System.ID, FinYear, FinMonth, _MonthReportID, TargetPlanID, true);
+            ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailList_Draft(_System.ID, FinYear, FinMonth, _MonthReportID, TargetPlanID, _SystemBatchID, true);
         }
         #endregion Private Method
     }
