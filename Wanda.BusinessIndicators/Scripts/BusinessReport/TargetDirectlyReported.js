@@ -72,7 +72,7 @@ function SplitData(resultData) {
             }
 
             if (ReportInstance.ReportDetails.length > 0) {
-                setStlye('missTargetReportSpan,monthReportSpan,missCurrentTargetReportSpan,monthReportReadySpan');
+                setStlye('missTargetReportSpan,monthReportSpan,missCurrentTargetReportSpan,monthReportReadySpan,monthReportSubmitSpan');
             }
         }
         if (resultData[2] != null) {
