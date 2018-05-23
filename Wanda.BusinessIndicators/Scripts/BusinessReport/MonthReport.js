@@ -461,6 +461,7 @@ function ChangeTargetDetail(sender, TabOrSearch) {
 }
 function f_search() {
     IsNewDataIndex = "";
+    $('#listAttDiv').empty();
     ChangeTargetDetail($(".defaultTarget"), "Tab");
 }
 //

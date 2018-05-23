@@ -1571,7 +1571,7 @@ $(function () {
         'height': 25,
         'successTimeout': 60,
         'fileTypeDesc': 'office file',
-        'fileTypeExts': '*.doc; *.docx; *.xls;*.xlsx;',
+        'fileTypeExts': '*.xls;*.xlsx;',
         'fileSizeLimit': '10240',
         //swf文件路径
         'swf': '../Scripts/UpLoad/uploadify.swf',

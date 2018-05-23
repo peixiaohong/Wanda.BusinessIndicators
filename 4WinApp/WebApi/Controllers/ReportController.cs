@@ -33,18 +33,17 @@ namespace WebApi.Controllers
             {
                 DateTime datetime = StaticResource.Instance.GetReportDateTime();
                 int finYear = datetime.Year;
+                int finMonth = datetime.Month;
                 List<int> Year = new List<int>();
                 for (int i = -5; i < 5; i++)
                 {
                     Year.Add(DateTime.Now.Year + i);
                 }
 
-                var _SystemIds = S_OrganizationalActionOperator.Instance.GetUserSystemData(WebHelper.GetCurrentLoginUser()).Select(v => v.SystemID).ToList();
+                var _SystemIds = S_OrganizationalActionOperator.Instance.GetUserSystemData(WebHelper.GetCurrentLoginUser());
                 
-                //获取当前人拥有的系统板块
-                List<C_System> c_SystemList = StaticResource.Instance.SystemList.Where(p => _SystemIds.Contains(p.ID)).OrderBy(x => x.Sequence).ToList();
 
-                return new ResultContext(new { Year,SelectYear=finYear, System= c_SystemList });
+                return new ResultContext(new { Year,SelectYear=finYear, SelectMonth= finMonth, System= _SystemIds.Select(x => new { SystemID = x.SystemID, SystemName = x.CnName }).ToList() });
             }
             catch (Exception ex)
             {
@@ -206,13 +205,11 @@ namespace WebApi.Controllers
                 {
                     Year.Add(DateTime.Now.Year + i);
                 }
-               
-                var _SystemIds = S_OrganizationalActionOperator.Instance.GetUserSystemData(WebHelper.GetCurrentLoginUser()).Select(v => v.SystemID).ToList();
 
-                //获取当前人拥有的系统板块
-                List<C_System> c_SystemList = StaticResource.Instance.SystemList.Where(p => _SystemIds.Contains(p.ID)).OrderBy(x => x.Sequence).ToList();
-
-                return new ResultContext(new { Year, SelectYear = finYear, System = c_SystemList });
+                var _SystemIds = S_OrganizationalActionOperator.Instance.GetUserSystemData(WebHelper.GetCurrentLoginUser());
+                
+                return new ResultContext(new { Year, SelectYear = finYear, System = _SystemIds.Select(x => new { SystemID = x.SystemID, SystemName = x.CnName }).ToList() });
+                
             }
             catch (Exception ex)
             {

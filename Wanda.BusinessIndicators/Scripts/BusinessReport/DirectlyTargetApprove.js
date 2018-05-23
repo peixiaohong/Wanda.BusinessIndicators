@@ -327,7 +327,7 @@ function SplitData(resultData) {
                 loadTmpl('#' + strSummaryTabel[0]).tmpl().appendTo('#MonthReportSummaryHead');
 
             } else {
-                loadTmpl('#MonthReportSummaryHeadTemplate').tmpl().appendTo('#MonthReportSummaryHead');
+                loadTmpl('#MonthReportSummaryHeadTemplate_DZSW').tmpl().appendTo('#MonthReportSummaryHead');
 
             }
 

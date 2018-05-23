@@ -503,7 +503,7 @@ function BangDetail() {
                 for (var j = 0; j < SumMonthTargetList[i].TargetDetailList.length; j++) {
                     if (TargetList[n].ID == SumMonthTargetList[i].TargetDetailList[j].TargetID) {
                         if (SumMonthTargetList[i].TargetDetailList[j].Target != null) {
-                            row += "<td class=\"Td_Right\"title=" + SumMonthTargetList[i].TargetDetailList[j].Target + ">" + MathTarget(SumMonthTargetList[i].TargetDetailList[j].Target) + "</td>";
+                            row += "<td class=\"Td_Right\"title=" + SumMonthTargetList[i].TargetDetailList[j].Target + ">" + MathTarget(SumMonthTargetList[i].TargetDetailList[j].Target).thousandize0OrEmpty(0) + "</td>";
                         }
                         else {
                             row += "<td class=\"Td_Right\">--</td>";
@@ -516,7 +516,7 @@ function BangDetail() {
                 for (var j = 0; j < SumMonthTargetList[i].TargetDetailList.length; j++) {
                     if (TargetList[n].ID == SumMonthTargetList[i].TargetDetailList[j].TargetID) {
                         if (SumMonthTargetList[i].TargetDetailList[j].SumTarget != null) {
-                            row += "<td class=\"Td_Right\" title=" + SumMonthTargetList[i].TargetDetailList[j].SumTarget + ">" + MathTarget(SumMonthTargetList[i].TargetDetailList[j].SumTarget) + "</td>";
+                            row += "<td class=\"Td_Right\" title=" + SumMonthTargetList[i].TargetDetailList[j].SumTarget + ">" + MathTarget(SumMonthTargetList[i].TargetDetailList[j].SumTarget).thousandize0OrEmpty(0) + "</td>";
                         }
                         else {
                             row += "<td class=\"Td_Right\">--</td>";
@@ -531,7 +531,7 @@ function BangDetail() {
             for (var j = 0; j < SumMonthTargetList[11].TargetDetailList.length; j++) {
                 if (TargetList[i].ID == SumMonthTargetList[11].TargetDetailList[j].TargetID) {
                     if (SumMonthTargetList[11].TargetDetailList[j].SumTarget != null) {
-                        row += "<th class=\"th_Sub2\" style=\"text-align:right\" title=" + SumMonthTargetList[11].TargetDetailList[j].SumTarget + ">" + MathTarget(SumMonthTargetList[11].TargetDetailList[j].SumTarget) + "</th>";
+                        row += "<th class=\"th_Sub2\" style=\"text-align:right\" title=" + SumMonthTargetList[11].TargetDetailList[j].SumTarget + ">" + MathTarget(SumMonthTargetList[11].TargetDetailList[j].SumTarget).thousandize0OrEmpty(0) + "</th>";
                     }
                     else {
                         row += "<td class=\"th_Sub2\" style=\"text-align:right\">--</td>";

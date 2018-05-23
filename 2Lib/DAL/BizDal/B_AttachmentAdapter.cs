@@ -35,13 +35,10 @@ namespace LJTH.BusinessIndicators.DAL
             if (string.IsNullOrEmpty(businessIDs))
                 return new List<B_Attachment>();
             string sql = ORMapping.GetSelectSql<B_Attachment>(TSqlBuilder.Instance);
-
             sql += "WHERE " + base.NotDeleted;
-            sql += " AND businessID in (@BusinessID)  and BusinessType =@BusinessType";
+            sql += " AND businessID in ('"+ businessIDs.Replace("','", ",").Replace(",", "','") + "')  and BusinessType ='月报上传'";
             sql += " ORDER BY CreateTime DESC";
-            SqlParameter pBusinessID = CreateSqlParameter("@BusinessID", System.Data.DbType.String, businessIDs);
-            SqlParameter pBusinessType = CreateSqlParameter("@BusinessType", System.Data.DbType.String, businessType);
-            return ExecuteQuery(sql, pBusinessID, pBusinessType);
+            return ExecuteQuery(sql);
         }
 
         public IList<B_Attachment> GetAttachmentList(Guid businessID , string businessType )
