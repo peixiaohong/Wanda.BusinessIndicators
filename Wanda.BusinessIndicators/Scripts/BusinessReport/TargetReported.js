@@ -64,7 +64,7 @@ function SplitData(resultData) {
 
             SetComplateTargetDetailData(ReportedComplateDetailData[0], 1);
             if (ReportInstance.ReportDetails.length > 0) {
-                setStlye('missTargetReportSpan,missCurrentTargetReportSpan,monthReportSpan,monthReportReadySpan');
+                setStlye('missTargetReportSpan,missCurrentTargetReportSpan,monthReportSpan,monthReportReadySpan,monthReportSubmitSpan');
             }
         }
         if (resultData[2] != null) {
