@@ -64,7 +64,7 @@ function SplitData(resultData) {
 
             SetComplateTargetDetailData(ReportedComplateDetailData[0], 1);
             if (ReportInstance.ReportDetails.length > 0) {
-                setStlye('missTargetReportSpan,missCurrentTargetReportSpan,monthReportSpan,monthReportReadySpan');
+                setStlye('missTargetReportSpan,missCurrentTargetReportSpan,monthReportSpan,monthReportReadySpan,monthReportSubmitSpan');
             }
         }
         if (resultData[2] != null) {
@@ -1571,7 +1571,7 @@ $(function () {
         'height': 25,
         'successTimeout': 60,
         'fileTypeDesc': 'office file',
-        'fileTypeExts': '*.doc; *.docx; *.xls;*.xlsx;',
+        'fileTypeExts': '*.xls;*.xlsx;',
         'fileSizeLimit': '10240',
         //swf文件路径
         'swf': '../Scripts/UpLoad/uploadify.swf',
@@ -1584,7 +1584,7 @@ $(function () {
                 GetReportInstance();
                 $("#UpLoadData").hide();
                 $("#T2,#UpLoadDataDiv").show();
-                setStlye('missTargetReportSpan,missCurrentTargetReportSpan,monthReportSpan,monthReportReadySpan');
+                setStlye('missTargetReportSpan,missCurrentTargetReportSpan,monthReportSpan,monthReportReadySpan,monthReportSubmitSpan');
             } else {
                 alert(data);
             }

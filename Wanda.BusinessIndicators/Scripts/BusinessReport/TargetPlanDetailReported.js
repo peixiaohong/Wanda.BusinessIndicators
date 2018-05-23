@@ -182,7 +182,7 @@ function isCheckPlan() {
     $("#hideVersionName").val(VersionName);
     var ret = true;
     var businessID = bpf_wf_tool.getQueryString("BusinessID");
-    if (businessID == "") {
+    if (businessID == "" || TargetPlanID=="") {
         WebUtil.ajax({
             async: false,
             url: "/TargetController/isCheckPlan",

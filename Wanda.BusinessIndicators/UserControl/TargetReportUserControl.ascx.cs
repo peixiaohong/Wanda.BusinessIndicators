@@ -108,6 +108,7 @@ namespace LJTH.BusinessIndicators.Web.UserControl
                             if (monthReportReadyState  == true || itemID ==5)
                             {
                                 showSpanID += "monthReportReadySpan,";
+                                showSpanID += "monthReportSubmitSpan,";
 
                                 //if (monthReportSubmitState == true || itemID == 5)
                                 //{

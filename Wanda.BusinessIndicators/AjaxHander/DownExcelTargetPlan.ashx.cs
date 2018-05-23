@@ -356,7 +356,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 if (_SysModel.Category == 3)
                 {
                     #region 设置样式
-                    
+
                     StyleFlag flg = new StyleFlag();
                     flg.All = true;
                     Range range = worksheets[sheetIndex + 1].Cells.CreateRange(rowStart, colStart, 1, 2);
@@ -374,7 +374,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
                     #endregion
                 }
-                
+
                 //worksheets[sheetIndex].Protect(ProtectionType.All);
             }
             worksheets.RemoveAt(0);
@@ -533,6 +533,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             RowStyle.HorizontalAlignment = TextAlignmentType.Center;
             RowStyle.Pattern = BackgroundType.Solid;
             RowStyle.Number = 1;
+            RowStyle.Custom = "_ * #,##0_ ;_ * -#,##0_ ;_ * \" - \"??_ ;_ @_ ";
             RowStyle.Borders[BorderType.TopBorder].LineStyle = CellBorderType.Thin;
             RowStyle.Borders[BorderType.TopBorder].Color = System.Drawing.Color.Black;
             RowStyle.Borders[BorderType.BottomBorder].LineStyle = CellBorderType.Thin; ;
@@ -547,6 +548,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             RowSumStyle.Font.Size = 12;
             RowSumStyle.Font.Name = "Arial";
             RowSumStyle.Number = 1;
+            RowSumStyle.Custom = "_ * #,##0_ ;_ * -#,##0_ ;_ * \" - \"??_ ;_ @_ ";
             RowSumStyle.ForegroundColor = Color.FromArgb(217, 217, 217);
             RowSumStyle.HorizontalAlignment = TextAlignmentType.Center;
             RowSumStyle.Pattern = BackgroundType.Solid;
@@ -585,6 +587,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             TargetSumstyle.Font.IsBold = true;
             TargetSumstyle.HorizontalAlignment = TextAlignmentType.Center;
             TargetSumstyle.Pattern = BackgroundType.Solid;
+            TargetSumstyle.Custom = "_ * #,##0_ ;_ * -#,##0_ ;_ * \" - \"??_ ;_ @_ ";
             TargetSumstyle.ForegroundColor = Color.FromArgb(253, 213, 180);
             TargetSumstyle.Borders[BorderType.TopBorder].LineStyle = CellBorderType.Thin;
             TargetSumstyle.Borders[BorderType.TopBorder].Color = System.Drawing.Color.Black;
@@ -610,6 +613,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             lastStyle.Borders[BorderType.LeftBorder].Color = System.Drawing.Color.Black;
             lastStyle.Borders[BorderType.RightBorder].LineStyle = CellBorderType.Thin;
             lastStyle.Borders[BorderType.RightBorder].Color = System.Drawing.Color.Black;
+            lastStyle.Custom = "_ * #,##0_ ;_ * -#,##0_ ;_ * \" - \"??_ ;_ @_ ";
 
             Aspose.Cells.Style hejistyle = designer.Workbook.Styles[designer.Workbook.Styles.Add()];
             hejistyle.Font.Size = 12;
@@ -627,6 +631,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             hejistyle.Borders[BorderType.LeftBorder].Color = System.Drawing.Color.Black;
             hejistyle.Borders[BorderType.RightBorder].LineStyle = CellBorderType.Thin;
             hejistyle.Borders[BorderType.RightBorder].Color = System.Drawing.Color.Black;
+            hejistyle.Custom = "_ * #,##0_ ;_ * -#,##0_ ;_ * \" - \"??_ ;_ @_ ";
 
 
 
@@ -783,7 +788,10 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     rowStart++;
 
                 }
-                worksheets[sheetIndex].Protect(ProtectionType.All);
+            }
+            for (int i = 0; i < worksheets.Count; i++)
+            {
+                worksheets[i].Protect(ProtectionType.All);
             }
             string Titles = FinYear + "年" + strSystemName + "经营指标分解汇总表";//表头名称
 
@@ -846,7 +854,9 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
                 //给表格内部赋值
 
-                List<TargetDetail> TargetDetail = A_TargetplandetailOperator.Instance.GetSumMonthTargetDetailByTID(TargetPlanID);
+                List<TargetDetail> TargetDetail = new List<TargetDetail>();
+                if (TargetPlanID != null && TargetPlanID != Guid.Empty)
+                    TargetDetail = A_TargetplandetailOperator.Instance.GetSumMonthTargetDetailByTID(TargetPlanID);
                 for (int a = 0; a < 12; a++)
                 {
                     worksheets[0].Cells[4 + a, 1].PutValue(a + 1 + "月");
@@ -854,7 +864,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 }
                 for (int i = 0; i < listDV.Count; i++)
                 {
-                    if (i + 1 <= TargetDetail[0].TargetDetailList.Count)
+                    if (TargetDetail.Any() && i + 1 <= TargetDetail[0].TargetDetailList.Count)
                     {
                         for (int a = 0; a < TargetDetail.Count; a++)
                         {
@@ -897,7 +907,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 worksheets[0].Cells[16, 1].SetStyle(hejistyle);
                 for (int i = 0; i < listDV.Count; i++)
                 {
-                    if (i + 1 <= TargetDetail[11].TargetDetailList.Count)
+                    if (TargetDetail.Any() && i + 1 <= TargetDetail[11].TargetDetailList.Count)
                     {
                         if (TargetDetail[11].TargetDetailList[i].SumTarget != null)
                         {

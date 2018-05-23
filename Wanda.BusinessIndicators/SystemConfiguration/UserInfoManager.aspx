@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="UserInfoManager.aspx.cs" Inherits="Wanda.BusinessIndicators.Web.SystemConfiguration.UserInfoManager" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <script src="../Scripts/SystemConfiguration/UserInfoManager.js"></script>
+    <script src="../Scripts/SystemConfiguration/UserInfoManager.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="main">

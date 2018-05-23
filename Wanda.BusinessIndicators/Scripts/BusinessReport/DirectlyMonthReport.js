@@ -146,6 +146,7 @@ $(document).ready(function () {
 
 function f_search() {
     IsNewDataIndex = "";
+    $('#listAttDiv').empty();
     ChangeTargetDetail($(".defaultTarget"), "Tab");
 }
 
@@ -600,7 +601,7 @@ function getMonthReportReturnData() {
             if (ReturnData.length == 0) {
                 $(".newdiff_retu").show();
                 $(".Level1TDSL").attr("colspan", 9);
-                $('#Tab_ReturnHead tr th').eq(14).hide();
+                $('#Tab_ReturnHead tr th').eq(11).hide();
                 return;
             }
 

@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="../Scripts/BusinessReport/FloatTable.js"></script>
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
-    <script type="text/javascript" src="../Scripts/BusinessReport/ApproveTime.js"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/ApproveTime.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
     <script type="text/javascript" src="../Scripts/My97DatePicker/WdatePicker.js"></script>
     <script type="text/javascript" src="../Scripts/UpLoad/jquery.uploadify.min.js"></script>
 </asp:Content>

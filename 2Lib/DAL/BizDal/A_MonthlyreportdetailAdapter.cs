@@ -269,6 +269,41 @@ WHERE   A_MonthlyReportDetail.SystemID = @SystemID
             });
             return data;
         }
+        internal IList<MonthlyReportDetail> GetVMissDetail_defaultPlan(Guid SystemID, int Year, int Month, Guid TargetID, bool IsSpecial)
+        {
+            string sql = @"SELECT * FROM (
+ SELECT A_MonthlyReportDetail.*,C_Company.CompanyName,C_Company.NeedEvaluation,C_Company.Sequence FROM dbo.A_MonthlyReportDetail 
+INNER JOIN dbo.A_TargetPlan ON dbo.A_MonthlyReportDetail.TargetPlanID=A_TargetPlan.ID AND A_TargetPlan.VersionDefault=1 
+INNER JOIN dbo.C_Company ON 
+                dbo.A_MonthlyReportDetail.SystemID = dbo.C_Company.SystemID AND 
+                    dbo.A_MonthlyReportDetail.CompanyID = dbo.C_Company.ID ) aa 
+					WHERE  aa.SystemID=@SystemID AND aa.TargetID=@TargetID
+					AND aa.FinMonth=@Month AND aa.FinYear=@Year";
+
+            if (IsSpecial == false)
+            {
+                sql += " AND IsMissTarget=1";
+                sql += " ORDER BY Sequence DESC ";
+            }
+            else
+            {
+                sql += " AND NAccumulativeDifference<0 ";
+                sql += " ORDER BY Sequence DESC ";
+            }
+            SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
+            SqlParameter pYear = CreateSqlParameter("@Year", System.Data.DbType.String, Year);
+            SqlParameter pMonth = CreateSqlParameter("@Month", System.Data.DbType.String, Month);
+            SqlParameter pTargetID = CreateSqlParameter("@TargetID", System.Data.DbType.Guid, TargetID);
+            var ds = DbHelper.RunSqlReturnDS(sql, ConnectionName, pTargetID, pSystemID, pYear, pMonth);
+            List<MonthlyReportDetail> data = new List<MonthlyReportDetail>();
+            ds.Tables[0].Rows.Cast<System.Data.DataRow>().ForEach(row =>
+            {
+                MonthlyReportDetail item = new MonthlyReportDetail();
+                ORMapping.DataRowToObject(row, item);
+                data.Add(item);
+            });
+            return data;
+        }
         internal IList<A_MonthlyReportDetail> GetAMReportDetailDifferenceList(Guid SystemID, int Year, int Month, Guid TargetID)
         {
             string sql = ORMapping.GetSelectSql<A_MonthlyReportDetail>(TSqlBuilder.Instance);

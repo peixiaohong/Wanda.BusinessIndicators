@@ -201,7 +201,7 @@ namespace LJTH.BusinessIndicators.BLL
         /// <param name="Month"></param>
         /// <param name="MonthReportID"></param>
         /// <returns></returns>
-        public List<MonthlyReportDetail> GetMonthlyReportDetailList_Draft(Guid SystemID, int Year, int Month, Guid MonthlyReportID, Guid TargetPlanID, bool IsAll = false)
+        public List<MonthlyReportDetail> GetMonthlyReportDetailList_Draft(Guid SystemID, int Year, int Month, Guid MonthlyReportID, Guid TargetPlanID,Guid SystemBatchID, bool IsAll = false)
         {
             //B_MonthlyReport report = null;
             //if (MonthReportID == Guid.Empty)
@@ -218,7 +218,7 @@ namespace LJTH.BusinessIndicators.BLL
             //    return result;
             //}
             //return new List<MonthlyReportDetail>();
-            return _bMonthlyreportdetailAdapter.GetMonthlyReportDetailList(SystemID, Year, Month, MonthlyReportID, TargetPlanID, IsAll);
+            return _bMonthlyreportdetailAdapter.GetMonthlyReportDetailList(SystemID, Year, Month, MonthlyReportID, TargetPlanID, SystemBatchID, IsAll);
         }
 
         /// <summary>
@@ -230,7 +230,7 @@ namespace LJTH.BusinessIndicators.BLL
         /// <param name="MonthReportID"></param>
         /// <param name="IsAll"></param>
         /// <returns></returns>
-        public List<MonthlyReportDetail> GetMonthlyReportDetailList_Approve(Guid SystemID, int Year, int Month, Guid MonthlyReportID, Guid TargetPlanID,bool IsAll=false)
+        public List<MonthlyReportDetail> GetMonthlyReportDetailList_Approve(Guid SystemID, int Year, int Month, Guid MonthlyReportID, Guid TargetPlanID, Guid SystemBatchID, bool IsAll=false)
         {
             //B_MonthlyReport report = null;
             //if (MonthReportID == Guid.Empty)
@@ -247,7 +247,7 @@ namespace LJTH.BusinessIndicators.BLL
             //    return result;
             //}
             //return new List<MonthlyReportDetail>();
-            return _bMonthlyreportdetailAdapter.GetMonthlyReportDetailList(SystemID,  Year, Month, MonthlyReportID, TargetPlanID, IsAll);
+            return _bMonthlyreportdetailAdapter.GetMonthlyReportDetailList(SystemID,  Year, Month, MonthlyReportID, TargetPlanID,  SystemBatchID, IsAll);
 
         }
 

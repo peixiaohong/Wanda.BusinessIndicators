@@ -461,6 +461,7 @@ function ChangeTargetDetail(sender, TabOrSearch) {
 }
 function f_search() {
     IsNewDataIndex = "";
+    $('#listAttDiv').empty();
     ChangeTargetDetail($(".defaultTarget"), "Tab");
 }
 //
@@ -1099,7 +1100,7 @@ function SetManageMonthReprotDetailData(sender, Type) {
     if (strManageMonthReprotDetailHtmlTemplate[0] != "" && strManageMonthReprotDetailHtmlTemplate[0] != undefined) {
         loadTmpl('#' + strManageMonthReprotDetailHtmlTemplate[0]).tmpl(sender).appendTo('#CompleteDetailHead_1');
     } else {
-        loadTmpl('#TmplCompleteDetail_Head').tmpl(sender).appendTo('#CompleteDetailHead_1');
+        loadTmpl('#TmplCompleteDetail_Head_S').tmpl(sender).appendTo('#CompleteDetailHead_1');
     }
 
     //tmpl模板名称
@@ -2789,7 +2790,7 @@ function shrinkageTitle() {
             }
         });
         //加载表头
-        loadTmpl('#TmplCompleteDetail_Head').tmpl(TemplData).appendTo('#CompleteDetailHead_1'); //加载列头 
+        loadTmpl('#TmplCompleteDetail_Head_S').tmpl(TemplData).appendTo('#CompleteDetailHead_1'); //加载列头 
 
         var dataArray = [];
         var data = { "data": TemplData };

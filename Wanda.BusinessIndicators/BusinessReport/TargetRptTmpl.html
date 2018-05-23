@@ -395,8 +395,18 @@
     {{if IsBlendTarget}}
     <tr>
         <th colspan='2' rowspan='3' style="width:18%">名称</th>
-        <th colspan='6' rowspan='1' style="width:35%;">本月发生(${GetUnit()})</th>
-        <th colspan='6' rowspan='1' style="width:35%;">本年累计(${GetUnit()})</th>
+        <th colspan='6' rowspan='1' style='width: 35%'>
+            <a href='javascript:MonthReportOrder(&quot;DetailMonthly&quot;)' style='text-decoration: none; color: #ffffff'>
+                本月发生(${GetUnit()})
+                <img id='imgDetailMonthly' class="DetailMonthly" src='../Images/btn_down02_w.png' />
+            </a>
+        </th>
+        <th colspan='6' rowspan='1' style='width: 35%'>
+            <a href='javascript:MonthReportOrder(&quot;Detail&quot;)' style='text-decoration: none; color: #ffffff'>
+                本年累计(${GetUnit()})
+                <img id='imgDetail' class="Detail" src='../Images/btn_down03_w.png' />
+            </a>
+        </th>
         <th colspan='2' rowspan='2' style="width: 12%;cursor:pointer;" onclick="unfoldTitle();">警示灯&nbsp;&nbsp;>></th>
     </tr>
     <tr>
@@ -419,8 +429,71 @@
     {{else}}
     <tr>
         <th colspan='2' rowspan='2' style="width: 18%">名称</th>
-        <th colspan='3' rowspan='1' style="width:35%;">本月发生(${GetUnit()})</th>
-        <th colspan='3' rowspan='1' style="width:35%;">本年累计(${GetUnit()})</th>
+        <th colspan='3' rowspan='1' style='width: 35%'>
+            <a href='javascript:MonthReportOrder(&quot;DetailMonthly&quot;)' style='text-decoration: none; color: #ffffff'>
+                本月发生(${GetUnit()})
+                <img id='imgDetailMonthly' class="DetailMonthly" src='../Images/btn_down02_w.png' />
+            </a>
+        </th>
+        <th colspan='3' rowspan='1' style='width: 35%'>
+            <a href='javascript:MonthReportOrder(&quot;Detail&quot;)' style='text-decoration: none; color: #ffffff'>
+                本年累计(${GetUnit()})
+                <img id='imgDetail' class="Detail" src='../Images/btn_down03_w.png' />
+            </a>
+        </th>
+        <th rowspan='2' style="width: 12%;cursor:pointer;" onclick="unfoldTitle();">警示灯&nbsp;&nbsp;>></th>
+    </tr>
+    <tr>
+        <!--当月-->
+        <th colspan="1" style="width:12%;">计划</th>
+        <th colspan="1" style="width:12%;">实际</th>
+        <th colspan="1" style="width:11%;">完成率</th>
+        <!--月累计-->
+        <th colspan="1" style="width:12%;">计划</th>
+        <th colspan="1" style="width:12%;">实际</th>
+        <th colspan="1" style="width:11%;">完成率</th>
+    </tr>
+    {{/if}}
+</script>
+
+<script id="TmplCompleteDetail_Head_S" type="text/x-jquery-tmpl">
+    {{if IsBlendTarget}}
+    <tr>
+        <th colspan='2' rowspan='3' style="width:18%">名称</th>
+        <th colspan='6' rowspan='1' style='width: 35%'>
+                本月发生(${GetUnit()})
+        </th>
+        <th colspan='6' rowspan='1' style='width: 35%'>
+                本年累计(${GetUnit()})
+        </th>
+        <th colspan='2' rowspan='2' style="width: 12%;cursor:pointer;" onclick="unfoldTitle();">警示灯&nbsp;&nbsp;>></th>
+    </tr>
+    <tr>
+        <!--当月-->
+        <th colspan="2" style="width:12%;">计划</th>
+        <th colspan="2" style="width:12%;">实际</th>
+        <th colspan="2" style="width:11%;">完成率</th>
+
+        <!--月累计-->
+        <th colspan="2" style="width:12%;">计划</th>
+        <th colspan="2" style="width:12%;">实际</th>
+        <th colspan="2" style="width:11%;">完成率</th>
+    </tr>
+    <tr>
+        {{each GetunfoldTitleList()}}
+        <th class="th_Sub">${target1}</th>
+        <th class="th_Sub2">${target2}</th>
+        {{/each}}
+    </tr>
+    {{else}}
+    <tr>
+        <th colspan='2' rowspan='2' style="width: 18%">名称</th>
+        <th colspan='3' rowspan='1' style='width: 35%'>
+                本月发生(${GetUnit()})
+        </th>
+        <th colspan='3' rowspan='1' style='width: 35%'>
+                本年累计(${GetUnit()})
+        </th>
         <th rowspan='2' style="width: 12%;cursor:pointer;" onclick="unfoldTitle();">警示灯&nbsp;&nbsp;>></th>
     </tr>
     <tr>

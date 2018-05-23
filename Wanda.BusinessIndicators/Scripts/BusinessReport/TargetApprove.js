@@ -581,7 +581,7 @@ function SetComplateTargetDetailData(sender, Type) {
 
     var obj = $("#importedDataFloatTable2");
     var head = $('#CompleteDetailHead');
-    var tab = $("#tab2_rows");
+    var tab = $("#CompleteDetailHead");
     obj.find("thead").html(head.html());
     FloatHeader(obj, tab);
     //tmpl模板名称

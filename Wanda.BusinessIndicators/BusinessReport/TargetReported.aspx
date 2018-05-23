@@ -10,8 +10,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
-    <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported.js?v=1"></script>
-    <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported1.js?v=2"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported1.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
     <script type="text/javascript" src="../Scripts/UpLoad/jquery.uploadify.min.js"></script>
 
     <uc1:wfCtrl runat="server" ID="wfCtrl" />

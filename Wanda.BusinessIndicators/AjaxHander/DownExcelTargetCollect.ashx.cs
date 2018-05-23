@@ -156,6 +156,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             RowStyle.HorizontalAlignment = TextAlignmentType.Center;
             RowStyle.Pattern = BackgroundType.Solid;
             RowStyle.Number = 1;
+            RowStyle.Custom = "_ * #,##0_ ;_ * -#,##0_ ;_ * \" - \"??_ ;_ @_ ";
             RowStyle.Borders[BorderType.TopBorder].LineStyle = CellBorderType.Thin;
             RowStyle.Borders[BorderType.TopBorder].Color = System.Drawing.Color.Black;
             RowStyle.Borders[BorderType.BottomBorder].LineStyle = CellBorderType.Thin; ;
@@ -170,6 +171,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             RowSumStyle.Font.Size = 12;
             RowSumStyle.Font.Name = "Arial";
             RowSumStyle.Number = 1;
+            RowSumStyle.Custom = "_ * #,##0_ ;_ * -#,##0_ ;_ * \" - \"??_ ;_ @_ ";
             RowSumStyle.ForegroundColor = Color.FromArgb(217, 217, 217);
             RowSumStyle.HorizontalAlignment = TextAlignmentType.Center;
             RowSumStyle.Pattern = BackgroundType.Solid;
@@ -205,6 +207,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             TargetSumstyle.Font.Size = 12;
             TargetSumstyle.Font.Name = "Arial";
             TargetSumstyle.Number = 1;
+            TargetSumstyle.Custom = "_ * #,##0_ ;_ * -#,##0_ ;_ * \" - \"??_ ;_ @_ ";
             TargetSumstyle.Font.IsBold = true;
             TargetSumstyle.HorizontalAlignment = TextAlignmentType.Center;
             TargetSumstyle.Pattern = BackgroundType.Solid;
@@ -239,6 +242,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             hejistyle.Font.Name = "Arial";
             hejistyle.Font.IsBold = true;
             hejistyle.Number = 1;
+            hejistyle.Custom = "_ * #,##0_ ;_ * -#,##0_ ;_ * \" - \"??_ ;_ @_ ";
             hejistyle.HorizontalAlignment = TextAlignmentType.Center;
             hejistyle.Pattern = BackgroundType.Solid;
             hejistyle.ForegroundColor = Color.FromArgb(189, 215, 238);

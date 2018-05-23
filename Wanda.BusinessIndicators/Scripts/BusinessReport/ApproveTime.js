@@ -222,7 +222,7 @@ function change(CompanyID) {
             $("input[type='radio']:checked").val();
             $("#datetime").hide();
             $("#YearInt").show();
-            $("#rpt_info_CommitReason").attr("readonly", "readonly");
+            //$("#rpt_info_CommitReason").attr("readonly", "readonly");
             $("#rpt_info_CommitReason").css({ "backgroundColor": "#ececec" });
             $("#rpt_info_CommitReason").html(arr[0].CurrentMonthCommitReason);
         } else {
@@ -231,7 +231,7 @@ function change(CompanyID) {
             $("input[type='radio']:checked").val();
             $("#datetime").show();
             $("#YearInt").hide();
-            $("#rpt_info_CommitReason").attr("readonly", "readonly");
+            //$("#rpt_info_CommitReason").attr("readonly", "readonly");
             $("#rpt_info_CommitReason").css({ "backgroundColor": "#ececec" });
             $("#rpt_info_CommitReason").val("");
             $("#rpt_info_CommitReason").html("");
@@ -548,7 +548,7 @@ function MonthShow() {
         $("input[type='radio']:checked").val();
         $("#YearInt").hide();
         $("#datetime").show();
-        $("#rpt_info_CommitReason").attr("readonly", "readonly");
+        //$("#rpt_info_CommitReason").attr("readonly", "readonly");
         $("#rpt_info_CommitReason").css({ "backgroundColor": "#ececec" });
         $("#rpt_info_CommitReason").val("");
     } else {
@@ -559,7 +559,7 @@ function MonthShow() {
         $("#datetime").show();
         $("#monthshow").show();
         $("#redtext").hide();
-        $("#rpt_info_CommitReason").attr("readonly", "readonly");
+        //$("#rpt_info_CommitReason").attr("readonly", "readonly");
         $("#rpt_info_CommitReason").css({ "backgroundColor": "#ececec" });
         $("#rpt_info_CommitReason").val("");
     }
@@ -572,7 +572,7 @@ function DateShow() {
     $("#datetime").show();
     $("#dateshow").show();
     $("#redtext").show();
-    $("#rpt_info_CommitReason").attr("readonly", "readonly");
+   // $("#rpt_info_CommitReason").attr("readonly", "readonly");
     $("#rpt_info_CommitReason").css({ "backgroundColor": "#ececec" });
     $("#rpt_info_CommitReason").val("");
 }
@@ -583,7 +583,7 @@ function Yaershow() {
         $("input[type='radio']:checked").val();
         $("#datetime").hide();
         $("#YearInt").show();
-        $("#rpt_info_CommitReason").attr("readonly", "readonly");
+        //$("#rpt_info_CommitReason").attr("readonly", "readonly");
         $("#rpt_info_CommitReason").css({ "backgroundColor": "#ececec" });
         $("#rpt_info_CommitReason").val("预计年内无法补回必保全年完成【】万(指标" + AnnualTarget + "万，差额【】万)");
     } else {
@@ -594,7 +594,7 @@ function Yaershow() {
         $("#datetime").hide();
         $("#redtext").hide();
         $("#YearInt").show();
-        $("#rpt_info_CommitReason").attr("readonly", "readonly");
+        //$("#rpt_info_CommitReason").attr("readonly", "readonly");
         $("#rpt_info_CommitReason").css({ "backgroundColor": "#ececec" });
         $("#rpt_info_CommitReason").val("预计年内无法补回必保全年完成【】万(指标" + AnnualTarget + "万，差额【】万)");
 

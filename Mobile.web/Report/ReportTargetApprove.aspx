@@ -20,7 +20,7 @@
                                         <table class="from-table">
                                             <tbody>
                                                 <tr>
-                                                    <td width="35%">上报系统</td>
+                                                    <td width="35%">上报板块</td>
                                                     <td>{{systemName}}</td>
                                                 </tr>
                                                 <tr>

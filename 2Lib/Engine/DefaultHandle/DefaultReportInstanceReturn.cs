@@ -344,7 +344,7 @@ namespace LJTH.BusinessIndicators.Engine
 
                 //上月A表的数据
                 // List<A_MonthlyReportDetail> Lastlist = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetailList(_System.ID, FinYear, lastFinMonth).ToList();
-                List<A_MonthlyReportDetail> Lastlist = A_MonthlyreportdetailOperator.Instance.GetAMonthlyReportDetailListForTargetPlanID(_System.ID, FinYear, lastFinMonth, ReportDetails[0].TargetPlanID).ToList();
+                List<A_MonthlyReportDetail> Lastlist = A_MonthlyreportdetailOperator.Instance.GetAMonthlyReportDetailListForTargetPlanID(_System.ID, FinYear, lastFinMonth, RptModel.TargetPlanID).ToList();
 
                 List<Guid> Companies = new List<Guid>();
 
