@@ -1584,7 +1584,7 @@ $(function () {
                 GetReportInstance();
                 $("#UpLoadData").hide();
                 $("#T2,#UpLoadDataDiv").show();
-                setStlye('missTargetReportSpan,missCurrentTargetReportSpan,monthReportSpan,monthReportReadySpan');
+                setStlye('missTargetReportSpan,missCurrentTargetReportSpan,monthReportSpan,monthReportReadySpan,monthReportSubmitSpan');
             } else {
                 alert(data);
             }
