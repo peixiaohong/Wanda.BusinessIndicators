@@ -30,7 +30,7 @@
                 <br />
                 <br />
                 <br />
-                <table class="tab_search" style="width: 45%; text-align: center; border: solid; margin: auto; border-color: #014696">
+                <table class="tab_search" style="width: 45%; text-align: center; border: solid; margin: auto; border-color: #aaa">
                     <tbody>
                         <tr style="height: 60px">
                             <th class="auto-style1"></th>

@@ -12,19 +12,10 @@ namespace Mobile.web.Common
         {
             try
             {
-
                 var request = HttpContext.Current.Request;
                 var param1 = "";
-                if(string.IsNullOrEmpty(param1))
-                {
-                    if (HttpContext.Current.User != null)
-                        param1 = HttpContext.Current.User.Identity.Name;
-                }
-                if(string.IsNullOrEmpty(param1))
-                {
-                    param1 = HttpContext.Current.Request.Cookies["loginId"].ToString() ;
-                }
-                if(string.IsNullOrEmpty(param1))
+
+                if (string.IsNullOrEmpty(param1))
                 {
                     if (HttpContext.Current.Request.Cookies["user"] != null)
                     {
@@ -34,6 +25,15 @@ namespace Mobile.web.Common
                             param1 = DecryptBase64(t.Substring(10));
                         }
                     }
+                }
+                if (string.IsNullOrEmpty(param1))
+                {
+                    if (HttpContext.Current.User != null)
+                        param1 = HttpContext.Current.User.Identity.Name;
+                }
+                if(string.IsNullOrEmpty(param1))
+                {
+                    param1 = HttpContext.Current.Request.Cookies["loginId"].ToString() ;
                 }
 
                 //if (string.IsNullOrEmpty(param1) || param1.Length < 11)

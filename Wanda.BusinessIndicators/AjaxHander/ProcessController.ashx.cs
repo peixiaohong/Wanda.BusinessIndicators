@@ -804,7 +804,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     if (p.CurrentUserNodeID != null && p.CurrentUserNodeID != "")
                     {
                         var nodeInfo = p.NodeInstanceList[p.CurrentUserNodeID];
-                        if (nodeInfo != null && (nodeInfo.NodeType == 1 || nodeInfo.NodeType == 2 || nodeInfo.NodeType == 7))
+                        if (nodeInfo != null && (nodeInfo.NodeType == 0 || nodeInfo.NodeType == 1 || nodeInfo.NodeType == 2 || nodeInfo.NodeType == 7))
                         {
                             OnProcessCompletedBusinessData();
                         }

@@ -77,8 +77,7 @@ namespace LJTH.BusinessIndicators.Engine
 
             //这里获取上月的实际上报数，和年计划指标的计划数
             //A_MonthlyReportDetail lastMonthData = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetail(rpt.SystemID, rpt.CompanyID, rpt.TargetID, rpt.FinYear, rpt.FinMonth - 1);
-            A_MonthlyReportDetail lastMonthData = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetail
-                (rpt.SystemID, rpt.CompanyID, rpt.TargetID, rpt.FinYear, rpt.FinMonth - 1, rpt.TargetPlanID);
+            A_MonthlyReportDetail lastMonthData = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetail(rpt.SystemID, rpt.CompanyID, rpt.TargetID, rpt.FinYear, rpt.FinMonth - 1, rpt.TargetPlanID);
 
             if (lastMonthData != null)
             {

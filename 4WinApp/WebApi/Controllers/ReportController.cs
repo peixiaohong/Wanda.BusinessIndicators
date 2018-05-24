@@ -43,7 +43,7 @@ namespace WebApi.Controllers
                 var _SystemIds = S_OrganizationalActionOperator.Instance.GetUserSystemData(WebHelper.GetCurrentLoginUser());
                 
 
-                return new ResultContext(new { Year,SelectYear=finYear, SelectMonth= finMonth, System= _SystemIds.Select(x => new { SystemID = x.SystemID, SystemName = x.CnName }).ToList() });
+                return new ResultContext(new { Year,SelectYear=finYear, SelectMonth= finMonth, System= _SystemIds.Select(x => new { ID = x.SystemID, SystemName = x.CnName }).ToList() });
             }
             catch (Exception ex)
             {
@@ -208,7 +208,7 @@ namespace WebApi.Controllers
 
                 var _SystemIds = S_OrganizationalActionOperator.Instance.GetUserSystemData(WebHelper.GetCurrentLoginUser());
                 
-                return new ResultContext(new { Year, SelectYear = finYear, System = _SystemIds.Select(x => new { SystemID = x.SystemID, SystemName = x.CnName }).ToList() });
+                return new ResultContext(new { Year, SelectYear = finYear, System = _SystemIds.Select(x => new { ID = x.SystemID, SystemName = x.CnName }).ToList() });
                 
             }
             catch (Exception ex)

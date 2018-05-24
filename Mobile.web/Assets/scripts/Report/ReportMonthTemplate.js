@@ -28,7 +28,7 @@
                         "IncludeHaveDetail": false,
                         "IsLatestVersion": false,
                         "DataSource": "Draft",
-                        "IsAll": false
+                        "IsAll": true
                     },
                     success: function (res) {
                         if (res.IsSuccess && res.StatusCode == 200) {

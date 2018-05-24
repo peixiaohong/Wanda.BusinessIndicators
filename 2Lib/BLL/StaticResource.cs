@@ -398,7 +398,7 @@ namespace LJTH.BusinessIndicators.BLL
             {
                 _ReportDateTime = C_ReportTimeOperator.Instance.GetReportTime().ReportTime;
                 if (_ReportDateTime == null)
-                    _ReportDateTime = DateTime.Now.AddMonths(-1);
+                    _ReportDateTime = DateTime.Now;
             }
             return _ReportDateTime.Value;
 

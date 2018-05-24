@@ -9,7 +9,7 @@
             currentState: false,
             totalState: false,
             yearlyState: false,
-            systemID: "a00ad17d-57da-4f8b-9c60-807a5e83d7a7",
+            systemID: "",
             yearSelect: "",
             monthSelect: "",
             versions: [],
@@ -72,9 +72,13 @@
             },
             InitYM: function () {
                 var self = this;
-                var date = new Date();
-                self.yearSelect = date.getFullYear();
-                self.monthSelect = date.getMonth();
+                self.yearSelect = self.systemAndYearList.SelectYear;
+                self.monthSelect = self.systemAndYearList.SelectMonth;
+                if (self.systemAndYearList.System.length > 0)
+                    self.systemID = self.systemAndYearList.System[0].ID;
+                //var date = new Date();
+                //self.yearSelect = date.getFullYear();
+                //self.monthSelect = date.getMonth() + 1;
                 self.ChangeVersion();
             },
             ChangeVersion: function () {
