@@ -78,7 +78,11 @@ namespace LJTH.BusinessIndicators.BLL
             ExceptionHelper.TrueThrow<ArgumentNullException>(TargetPlanID == null ? true : false, "Argument TargetPlanID is Empty");
             return _bMonthlyreportAdapter.GetLastMonthlyReportList(SystemID, Year, Month, TargetPlanID);
         }
-
+        public List<B_MonthlyReport> GetLastMonthlyReportList(Guid TargetPlanID)
+        {
+            ExceptionHelper.TrueThrow<ArgumentNullException>(TargetPlanID == null ? true : false, "Argument TargetPlanID is Empty");
+            return _bMonthlyreportAdapter.GetLastMonthlyReportList(TargetPlanID);
+        }
         /// <summary>
         /// 
         /// </summary>

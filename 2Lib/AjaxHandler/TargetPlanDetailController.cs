@@ -131,6 +131,10 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             Guid result = Guid.Empty;
             using (TransactionScope scope = TransactionScopeFactory.Create())
             {
+                //查询当前板本是否有月报数据
+                List<B_MonthlyReport> reports= B_MonthlyreportOperator.Instance.GetLastMonthlyReportList(Guid.Parse(ID));
+                if (reports.Any())
+                    return "1";
                 //删除a表数据，物理删除
                 A_TargetplanOperator.Instance.DeletePlan(Guid.Parse(ID));
                 A_TargetplandetailOperator.Instance.DeletePlanDetail(Guid.Parse(ID));

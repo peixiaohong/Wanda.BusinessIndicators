@@ -29,7 +29,7 @@ function loadTmplhistory(selector) {
 
 $(document).ready(function () {
 
-   // InitSysTree()  //初始化树控件
+    // InitSysTree()  //初始化树控件
 
     GetSumList();
 
@@ -237,6 +237,8 @@ function IsDeleteA(id) {
             GetSumList();
             if (result == "true")
                 alert("禁用成功");
+            else if (result == "1")
+                alert("该板本已存在月报数据，不可禁用！");
             else
                 alert("操作失败,请联系管理员！");
             Fake();
@@ -299,7 +301,7 @@ function Change(adj, id) {
         $("#file_upload-button1").show();
         head = $("#Head").html();
         tab = $("#rows");
-       // $("#HistoryTable").hide();
+        // $("#HistoryTable").hide();
     }
     //else if (adj == "History") {
     //    document.getElementById('tabHistory').className = "active3 active_sub3";
@@ -370,7 +372,7 @@ function BangHead(result) {
     $("#TrTarget").html("");
     for (var i = 0; i < 2; i++) {
         loadTmpl('#TrTarget').tmpl(result).appendTo('#TrTarget');
-        
+
     }
 
 }

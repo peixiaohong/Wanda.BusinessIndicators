@@ -100,7 +100,18 @@ namespace LJTH.BusinessIndicators.DAL
             List<B_MonthlyReport> list = ExecuteQuery(sql, pSystemID, pYear, pMonth, pPlanID);
             return (list != null && list.Count > 0) ? list.FirstOrDefault() : null;
         }
+        public List<B_MonthlyReport> GetLastMonthlyReportList(Guid PlanId)
+        {
+            string sql = ORMapping.GetSelectSql<B_MonthlyReport>(TSqlBuilder.Instance);
 
+            sql += "WHERE " + base.NotDeleted;
+            sql += " AND TargetPlanID=@TargetPlanID and WFStatus <>'Cancel'";
+            sql += " ORDER BY CreateTime DESC";
+            
+            SqlParameter pPlanID = CreateSqlParameter("@TargetPlanID", System.Data.DbType.Guid, PlanId);
+            List<B_MonthlyReport> list = ExecuteQuery(sql, pPlanID);
+            return list;
+        }
 
         /// <summary>
         /// 
