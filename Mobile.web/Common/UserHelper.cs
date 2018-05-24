@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using NLog;
 
 namespace Mobile.web.Common
 {
     public static class UserHelper
     {
+        static ILogger logger = LogManager.GetCurrentClassLogger();
         public static string GetUserName()
         {
             try
@@ -20,7 +22,7 @@ namespace Mobile.web.Common
                     if (HttpContext.Current.Request.Cookies["user"] != null)
                     {
                         var t = HttpContext.Current.Request.Cookies["user"].Value;
-                        if (!string.IsNullOrEmpty(t) && t.Length < 11)
+                        if (!string.IsNullOrEmpty(t) && t.Length > 11)
                         {
                             param1 = DecryptBase64(t.Substring(10));
                         }
