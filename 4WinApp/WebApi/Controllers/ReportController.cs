@@ -41,9 +41,9 @@ namespace WebApi.Controllers
                 }
 
                 var _SystemIds = S_OrganizationalActionOperator.Instance.GetUserSystemData(WebHelper.GetCurrentLoginUser());
-                
 
-                return new ResultContext(new { Year,SelectYear=finYear, SelectMonth= finMonth, System= _SystemIds.Select(x => new { ID = x.SystemID, SystemName = x.CnName }).ToList() });
+
+                return new ResultContext(new { Year, SelectYear = finYear, SelectMonth = finMonth, System = _SystemIds.Select(x => new { SystemID = x.SystemID, SystemName = x.CnName }).ToList() });
             }
             catch (Exception ex)
             {
@@ -126,10 +126,11 @@ namespace WebApi.Controllers
                     return new ResultContext();
                 List<DictionaryVmodel> listM = new List<DictionaryVmodel>();
                 bool type = true;
-                if (oa.GetAllDataBySystemID(SystemID.ToGuid()).Count > 0)
+                if (StaticResource.Instance.GetSystem_Regional(SystemID.ToGuid()))
                     //经营报告明细
                     listM = ms.GetManageDetailRptDataSource((ReportInstance)li[0].ObjValue, "", "Detail", IncludeHaveDetail);
-                else {
+                else
+                {
                     type = false;
                     //完成情况明细
                     listM = ms.GetDetailRptDataSource((ReportInstance)li[0].ObjValue, "", "Detail", IncludeHaveDetail);
@@ -143,7 +144,7 @@ namespace WebApi.Controllers
                 C_System system = new C_System();
                 system = StaticResource.Instance[SystemID.ToGuid(), DateTime.Now];
 
-                return new ResultContext(new { title = system.SystemName,type ,list = listM });
+                return new ResultContext(new { title = system.SystemName, type, list = listM });
             }
             catch (Exception ex)
             {
@@ -207,9 +208,9 @@ namespace WebApi.Controllers
                 }
 
                 var _SystemIds = S_OrganizationalActionOperator.Instance.GetUserSystemData(WebHelper.GetCurrentLoginUser());
-                
-                return new ResultContext(new { Year, SelectYear = finYear, System = _SystemIds.Select(x => new { ID = x.SystemID, SystemName = x.CnName }).ToList() });
-                
+
+                return new ResultContext(new { Year, SelectYear = finYear, System = _SystemIds.Select(x => new { SystemID = x.SystemID, SystemName = x.CnName }).ToList() });
+
             }
             catch (Exception ex)
             {
