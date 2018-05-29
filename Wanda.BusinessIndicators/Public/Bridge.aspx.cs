@@ -21,7 +21,7 @@ namespace WebApplication.WebPortal.Public
             }
             else
             {
-                Response.Redirect("~/Application/Task/TaskList.aspx");
+                Response.Redirect("~/BusinessReport/TargetRpt.aspx");
             }
         }
     }

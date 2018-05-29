@@ -84,7 +84,7 @@
     </Group>
   </Misstarget>
   <MisstargetReturn Name="补回情况">
-    <Group TargetName="招商额+回款额" Senquence="1" TargetValue="79A7B776-1F52-4664-BCD6-D4C602AEFB12,01C34924-F1A0-423E-ACAA-66112F89620C,2DDC3E68-3655-437B-A1DE-73BB177BF885">
+    <Group TargetName="招商额+回款额" Senquence="1" TargetValue="79A7B776-1F52-4664-BCD6-D4C602AEFB12,01C34924-F1A0-423E-ACAA-66112F89620C">
       <Counter Title="一、到期未补回" Senquence="1" Expression="GetValue(&quot;回款额.ReturnType&quot;)==2||GetValue(&quot;招商额.ReturnType&quot;)==2" />
       <Counter Title="二、未到期" Senquence="2" Expression="(GetStringValue(&quot;回款额.LastIsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;招商额.LastIsMissTarget&quot;)==&quot;True&quot;)&amp;&amp;(GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;)">
         <Counter Title="1. 招商额、回款额均未完成" Senquence="1" Expression="GetStringValue(&quot;回款额.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;招商额.IsMissTarget&quot;)==&quot;True&quot;" />
@@ -111,14 +111,19 @@
   </MisstargetReturn>
   <Report>
     <Rgroup Name="产业发展">
-			1-【当前月】月累计经营指标完成情况：
+      <![CDATA[
+      一、1-【当前月】月累计经营指标完成情况：
+      1. 经营净利润指标为<span class="descNumber">【经营净利润.累计计划总数】</span>万元，实际完成【经营净利润.累计实际总数】万元，差额【经营净利润.累计亏损率】万元，累计完成【经营净利润.累计累计完成率】
+      2. 招商额指标为【招商额.累计计划总数】万元，实际完成【招商额.累计实际总数】万元，差额【招商额.累计亏损率】万元，累计完成【招商额.累计累计完成率】
+      3. 回款额指标为【回款额.累计计划总数】万元，实际完成【回款额.累计实际总数】万元，差额【回款额.累计亏损率】万元，累计完成【回款额.累计累计完成率】
+      4. 月大机构招商指标为【大机构招商.累计计划总数】万元，实际完成【大机构招商.累计实际总数】万元，差额【大机构招商.累计亏损率】万元，累计完成【大机构招商.累计累计完成率】
+      5. 工业用地拓展指标为【工业用地拓展.累计计划总数】万元，实际完成【工业用地拓展.累计实际总数】万元，差额【工业用地拓展.累计亏损率】万元，累计完成【工业用地拓展.累计累计完成率】
 
-			1、1-【当前月】月经营净利润指标为【经营净利润.累计计划总数】万元，实际完成【经营净利润.累计实际总数】万元，差额【经营净利润.累计亏损率】万元，累计完成【经营净利润.累计累计完成率】
-			2、1-【当前月】月招商额指标为【招商额.累计计划总数】万元，实际完成【招商额.累计实际总数】万元，差额【招商额.累计亏损率】万元，累计完成【招商额.累计累计完成率】
-			3、1-【当前月】月回款额指标为【回款额.累计计划总数】万元，实际完成【回款额.累计实际总数】万元，差额【回款额.累计亏损率】万元，累计完成【回款额.累计累计完成率】
-			4、1-【当前月】月大机构招商指标为【大机构招商.累计计划总数】万元，实际完成【大机构招商.累计实际总数】万元，差额【大机构招商.累计亏损率】万元，累计完成【大机构招商.累计累计完成率】
-			5、1-【当前月】月工业用地拓展指标为【工业用地拓展.累计计划总数】万元，实际完成【工业用地拓展.累计实际总数】万元，差额【工业用地拓展.累计亏损率】万元，累计完成【工业用地拓展.累计累计完成率】
+      二、【当前月】月当月经营指标完成情况：
+      
+      
+      ]]>
 
-		</Rgroup>
+    </Rgroup>
   </Report>
 </Root>

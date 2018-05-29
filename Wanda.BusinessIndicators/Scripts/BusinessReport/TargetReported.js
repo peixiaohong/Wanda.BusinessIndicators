@@ -74,6 +74,7 @@ function SplitData(resultData) {
         }
         if (resultData[3] != null) {
             Description = resultData[3].ObjValue;
+            Description = Description.replace(/\n/g, "<br/>").replace(/ /g, "&nbsp;").replace(/&quot;/g, '"').replace(/<span&nbsp;/g, '<span ');
             $("#MonthGetDescription").html(Description);
         }
         if (resultData[4] != null) //当月数据

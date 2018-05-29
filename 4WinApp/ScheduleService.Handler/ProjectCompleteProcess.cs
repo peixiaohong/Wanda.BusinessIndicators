@@ -16,6 +16,12 @@ namespace ScheduleService.Handler
     [Quartz.PersistJobDataAfterExecution]
     public class ProjectCompleteProcess: Quartz.IJob
     {
+        public string CurrentUser
+        {
+            //get { return "虚拟"; }
+            get { return System.Configuration.ConfigurationManager.AppSettings["virtualUser"]; }
+        }
+
         private string userName = System.Configuration.ConfigurationManager.AppSettings["virtualUser"];
         public void Execute(Quartz.IJobExecutionContext context)
         {
@@ -51,7 +57,7 @@ namespace ScheduleService.Handler
                                         bizContext.BusinessID = vs.ReportID.ToString();
                                         bizContext.FlowCode = ChildrenWorkflow.ProcessInstance.FlowCode;
                                         bizContext.ApprovalContent = "同意";
-                                        bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$等待汇总" };
+                                        bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$" + CurrentUser };
                                         bizContext.ProcessURL = "/BusinessReport/TargetApprove.aspx";
                                         bizContext.FormParams = formParams;
                                         bizContext.ExtensionCommond = new Dictionary<string, string>();

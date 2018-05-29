@@ -10,7 +10,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
-    <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported.js?"></script>
     <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported1.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
     <script type="text/javascript" src="../Scripts/UpLoad/jquery.uploadify.min.js"></script>
 
@@ -180,8 +180,8 @@
 
             <div style="width: 100%; position: relative; padding-bottom: 5px;"></div>
             <div style="padding: 0px;">
-                <textarea id="MonthGetDescription" rows="4" cols="5">
-                  </textarea>
+                <div id="MonthGetDescription" rows="4" cols="5">
+                </div>
             </div>
 
         </div>

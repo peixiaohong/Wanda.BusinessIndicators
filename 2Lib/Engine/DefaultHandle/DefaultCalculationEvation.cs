@@ -751,7 +751,7 @@ namespace LJTH.BusinessIndicators.Engine
                 }
 
                 //如果中途指标更换, 则重新计算更换后的指标
-                IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear).FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID && P.FinMonth <= rpt.FinMonth);
+                IList<A_TargetPlanDetail> ATPD = StaticResource.Instance.GetTargetPlanList(rpt.SystemID, rpt.FinYear).FindAll(P => P.CompanyID == rpt.CompanyID && P.TargetID == rpt.TargetID && P.FinMonth <= rpt.FinMonth && P.TargetPlanID == rpt.TargetPlanID);
                 rpt.NAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
                 rpt.OAccumulativePlanAmmount = ATPD.Sum(p => p.Target);
             }
