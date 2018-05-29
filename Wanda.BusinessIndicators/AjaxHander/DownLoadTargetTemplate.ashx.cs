@@ -921,7 +921,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             if (rpt._SystemID == Guid.Parse(_sysMovie))
                 listTargetPlanView = rpt.GetTagetPlanViewModel(Guid.Parse(_sysMovie));  //院线同步数据
             else
-                listTargetPlanView = rpt.GetTagetPlanViewModel();  // 其他系统
+                listTargetPlanView = rpt.GetTagetPlanViewModelForDefaultTargetID(rpt.TargetPlanID);  // 其他系统
 
 
 
@@ -1170,7 +1170,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             if (rpt._SystemID == Guid.Parse(_sysMovie))
                 listTargetPlanView = rpt.GetTagetPlanViewModel(Guid.Parse(_sysMovie));  //院线同步数据
             else
-                listTargetPlanView = rpt.GetTagetPlanViewModel();  // 其他系统
+                listTargetPlanView = rpt.GetTagetPlanViewModelForDefaultTargetID(rpt.TargetPlanID);  // 其他系统
 
 
             if (listTargetPlanView.Count > 0)

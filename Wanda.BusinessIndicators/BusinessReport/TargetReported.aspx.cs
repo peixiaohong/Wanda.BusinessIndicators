@@ -306,7 +306,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
 
                         #endregion
                     }
-                    UserControl.SetButtonSpanStyle(bmr == null ? 2 : bmr.Status);
+                    UserControl.SetButtonSpanStyle(bmr == null ? -1: bmr.Status);
                 }
                 else
                 {
@@ -374,6 +374,11 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     MutipleUpload.LoadByBusinessID(bmr.ID.ToString());
                     UserControl.SetButtonSpanStyle(bmr.Status);
                 }
+                else
+                {
+                    UserControl.SetButtonSpanStyle(-1);
+                }
+
             }
         }
         /// <summary>
@@ -453,6 +458,8 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             var targetPlanDetail = StaticResource.Instance.GetDefaultTargetPlanList(bmr.SystemID, bmr.FinYear).FirstOrDefault();
             if (targetPlanDetail != null && targetPlanDetail.TargetPlanID != null)
                 bmr.TargetPlanID = targetPlanDetail.TargetPlanID;
+            else
+                return null;
             bmr.ID = B_MonthlyreportOperator.Instance.AddMonthlyreport(bmr);
             return bmr;
         }
@@ -487,7 +494,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     //从A表获取数据插入B表
                     bmr.Description = AMonthlyReport.Description;//月报说明
                     B_MonthlyreportOperator.Instance.UpdateMonthlyreport(bmr);//更新月报说明
-                    B_ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetail_ByAToB(FinYear, FinMonth, AMonthlyReport.SystemID,bmr.AreaID, bmr.ID, targetPlanId);
+                    B_ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetail_ByAToB(FinYear, FinMonth, AMonthlyReport.SystemID, bmr.AreaID, bmr.ID, targetPlanId);
                 }
                 else
                 {

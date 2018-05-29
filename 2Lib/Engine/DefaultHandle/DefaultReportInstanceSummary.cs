@@ -693,8 +693,9 @@ namespace LJTH.BusinessIndicators.Engine
             List<MonthlyReportDetail> lstmrd = new List<MonthlyReportDetail>();
             if (IsTargetPlan)
             {
-                //List<A_TargetPlanDetail> listTargetPlan = StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear, FinMonth);
-                List<A_TargetPlanDetail> listTargetPlan = StaticResource.Instance.GetDefaultTargetPlanList(_System.ID, FinYear, FinMonth);
+                List<A_TargetPlanDetail> listTargetPlan = StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear, FinMonth)
+                   .Where(v => v.TargetPlanID == ReportDetails.FirstOrDefault().TargetPlanID).ToList();
+                // List<A_TargetPlanDetail> listTargetPlan = StaticResource.Instance.GetDefaultTargetPlanList(_System.ID, FinYear, FinMonth);
                 if (listTargetPlan.Count() > 0)
                 {
                     MonthlyReportDetail mrd = new MonthlyReportDetail();
