@@ -56,10 +56,10 @@ $(function () {
 
         if (ReportInstance.LastestMonthlyReport != undefined) {
             monthRpt = ReportInstance.LastestMonthlyReport;
-            monthRpt.Description = $("#MonthGetDescription").val();
+            monthRpt.Description = $("#MonthGetDescription").html();
         }
 
-        if (Description != $("#MonthGetDescription").val()) {
+        if (Description != $("#MonthGetDescription").html()) {
             // alert("入库");
             WebUtil.ajax({
                 async: true,
@@ -70,7 +70,7 @@ $(function () {
                 }
             });
 
-            Description = $("#MonthGetDescription").val();
+            Description = $("#MonthGetDescription").html();
         } else {
 
         }
@@ -148,7 +148,7 @@ function SplitData(resultData) {
         }
         if (resultData[3] != null) {
             Description = resultData[3].ObjValue;
-            $("#MonthGetDescription").val(Description);
+            $("#MonthGetDescription").html(Description);
         }
         if (resultData[4] != null) //当月数据
         {
@@ -188,7 +188,7 @@ function GetMonthGetDescription() {
         url: "/TargetReportedControll/GetMonthTRptDescription",
         args: { rpts: WebUtil.jsonToString(ReportInstance) },
         successReturn: function (result) {
-            $("#MonthGetDescription").val(result);
+            $("#MonthGetDescription").html(result);
             Description = result;
         }
     });
