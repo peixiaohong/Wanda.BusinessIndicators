@@ -58,7 +58,7 @@
                         </div>
                     </li>
                     <li>
-                        <h3 v-bind:class="{'bottom': !reportState}">月度说明<span v-bind:class="{'collection-updown-icon': true, 'collection-up-icon': reportState}" v-on:click="if(title.length){reportState = !reportState}"></span></h3>
+                        <h3 v-bind:class="{'bottom': !reportState}">月报说明<span v-bind:class="{'collection-updown-icon': true, 'collection-up-icon': reportState}" v-on:click="if(title.length){reportState = !reportState}"></span></h3>
                         <div class="showBox report-state" v-if="reportState" v-html="Vue.Trim(title)"></div>
                     </li>
 
@@ -69,7 +69,7 @@
                             <table class="from-table alignCenter">
                                 <thead>
                                     <tr>
-                                        <th>项目</th>
+                                        <th>指标</th>
                                         <th>计划</th>
                                         <th>实际</th>
                                         <th>完成率</th>
@@ -93,7 +93,7 @@
                             <table class="from-table alignCenter">
                                 <thead>
                                     <tr>
-                                        <th>项目</th>
+                                        <th>指标</th>
                                         <th>计划</th>
                                         <th>实际</th>
                                         <th>完成率</th>
@@ -117,7 +117,7 @@
                             <table class="from-table alignCenter">
                                 <thead>
                                     <tr>
-                                        <th>项目</th>
+                                        <th>指标</th>
                                         <th>计划</th>
                                         <th>实际</th>
                                         <th>完成率</th>
