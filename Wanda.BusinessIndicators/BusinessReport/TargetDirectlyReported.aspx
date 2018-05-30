@@ -162,8 +162,8 @@
 
             <div style="width: 100%; position: relative; padding-bottom: 5px;"></div>
             <div style="padding: 0px;">
-                <textarea id="MonthGetDescription" rows="4" cols="5">
-                  </textarea>
+                <div id="MonthGetDescription">
+                  </div>
             </div>
 
         </div>
