@@ -356,9 +356,9 @@ namespace LJTH.BusinessIndicators.BLL
         /// <param name="FinYear"></param>
         /// <param name="TargetPlanID"></param>
         /// <returns></returns>
-        public List<A_MonthlyReportDetail> GetAMonthlyreportdetailList(Guid SystemID, int FinYear,  Guid TargetPlanID)
+        public List<A_MonthlyReportDetail> GetAMonthlyReportDetailListForActualAmmount(Guid SystemID, int FinYear,int FinMonth)
         {
-            List<A_MonthlyReportDetail> result = _aMonthlyreportdetailAdapter.GetAMonthlyreportdetailList(SystemID, FinYear, TargetPlanID);
+            List<A_MonthlyReportDetail> result = _aMonthlyreportdetailAdapter.GetAMonthlyReportDetailListForActualAmmount(SystemID, FinYear,FinMonth);
             return result;
         }
 

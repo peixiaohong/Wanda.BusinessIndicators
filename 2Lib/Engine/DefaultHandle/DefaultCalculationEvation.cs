@@ -122,13 +122,20 @@ namespace LJTH.BusinessIndicators.Engine
             }
 
             //获取累计实际值
-            var amrList = StaticResource.Instance.GetMonthlyReportDetails(rpt.SystemID, rpt.FinYear, rpt.TargetPlanID);
+            var amrList = StaticResource.Instance.GetMonthlyReportDetails(rpt.SystemID, rpt.FinYear, rpt.FinMonth);
             if (amrList != null && amrList.Count > 0)
             {
-                rpt.NAccumulativeActualAmmount = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID
-                && v.FinMonth < rpt.FinMonth).Sum(v => v.NActualAmmount) + rpt.NActualAmmount;
-                rpt.OAccumulativeActualAmmount = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID
-                  && v.FinMonth < rpt.FinMonth).Sum(v => v.OActualAmmount) + rpt.OActualAmmount;
+                var item = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID).FirstOrDefault();
+                if (item != null)
+                {
+                    rpt.NAccumulativeActualAmmount = item.NAccumulativeActualAmmount + rpt.NActualAmmount;
+                    rpt.OAccumulativeActualAmmount = item.OAccumulativeActualAmmount + rpt.OActualAmmount;
+                }
+                else
+                {
+                    rpt.NAccumulativeActualAmmount = rpt.NActualAmmount;
+                    rpt.OAccumulativeActualAmmount = rpt.OActualAmmount;
+                }
             }
             else
             {
@@ -781,13 +788,20 @@ namespace LJTH.BusinessIndicators.Engine
             }
 
             //获取累计实际值
-            var amrList = StaticResource.Instance.GetMonthlyReportDetails(rpt.SystemID, rpt.FinYear, rpt.TargetPlanID);
+            var amrList = StaticResource.Instance.GetMonthlyReportDetails(rpt.SystemID, rpt.FinYear, rpt.FinMonth);
             if (amrList != null && amrList.Count > 0)
             {
-                rpt.NAccumulativeActualAmmount = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID
-                && v.FinMonth < rpt.FinMonth).Sum(v => v.NActualAmmount) + rpt.NActualAmmount;
-                rpt.OAccumulativeActualAmmount = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID
-                  && v.FinMonth < rpt.FinMonth).Sum(v => v.OActualAmmount) + rpt.OActualAmmount;
+                var item = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID).FirstOrDefault();
+                if (item != null)
+                {
+                    rpt.NAccumulativeActualAmmount = item.NAccumulativeActualAmmount + rpt.NActualAmmount;
+                    rpt.OAccumulativeActualAmmount = item.OAccumulativeActualAmmount + rpt.OActualAmmount;
+                }
+                else
+                {
+                    rpt.NAccumulativeActualAmmount = rpt.NActualAmmount;
+                    rpt.OAccumulativeActualAmmount = rpt.OActualAmmount;
+                }
             }
             else
             {
@@ -996,13 +1010,20 @@ namespace LJTH.BusinessIndicators.Engine
             }
 
             //获取累计实际值
-            var amrList = StaticResource.Instance.GetMonthlyReportDetails(rpt.SystemID, rpt.FinYear, rpt.TargetPlanID);
+            var amrList = StaticResource.Instance.GetMonthlyReportDetails(rpt.SystemID, rpt.FinYear, rpt.FinMonth);
             if (amrList != null && amrList.Count > 0)
             {
-                rpt.NAccumulativeActualAmmount = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID
-                && v.FinMonth < rpt.FinMonth).Sum(v => v.NActualAmmount) + rpt.NActualAmmount;
-                rpt.OAccumulativeActualAmmount = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID
-                  && v.FinMonth < rpt.FinMonth).Sum(v => v.OActualAmmount) + rpt.OActualAmmount;
+                var item = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID).FirstOrDefault();
+                if (item != null)
+                {
+                    rpt.NAccumulativeActualAmmount = item.NAccumulativeActualAmmount + rpt.NActualAmmount;
+                    rpt.OAccumulativeActualAmmount = item.OAccumulativeActualAmmount + rpt.OActualAmmount;
+                }
+                else
+                {
+                    rpt.NAccumulativeActualAmmount = rpt.NActualAmmount;
+                    rpt.OAccumulativeActualAmmount = rpt.OActualAmmount;
+                }
             }
             else
             {
@@ -1243,13 +1264,20 @@ namespace LJTH.BusinessIndicators.Engine
                 }
             }
             //获取累计实际值
-            var amrList = StaticResource.Instance.GetMonthlyReportDetails(rpt.SystemID, rpt.FinYear, rpt.TargetPlanID);
+            var amrList = StaticResource.Instance.GetMonthlyReportDetails(rpt.SystemID, rpt.FinYear,rpt.FinMonth);
             if (amrList != null && amrList.Count > 0)
             {
-                rpt.NAccumulativeActualAmmount = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID
-                && v.FinMonth < rpt.FinMonth).Sum(v => v.NActualAmmount) + rpt.NActualAmmount;
-                rpt.OAccumulativeActualAmmount = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID
-                  && v.FinMonth < rpt.FinMonth).Sum(v => v.OActualAmmount) + rpt.OActualAmmount;
+                var item = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID).FirstOrDefault();
+                if (item != null)
+                {
+                    rpt.NAccumulativeActualAmmount = item.NAccumulativeActualAmmount + rpt.NActualAmmount;
+                    rpt.OAccumulativeActualAmmount = item.OAccumulativeActualAmmount + rpt.OActualAmmount;
+                }
+                else
+                {
+                    rpt.NAccumulativeActualAmmount = rpt.NActualAmmount;
+                    rpt.OAccumulativeActualAmmount = rpt.OActualAmmount;
+                }
             }
             else
             {
