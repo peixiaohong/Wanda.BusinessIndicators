@@ -19,7 +19,20 @@ var isFixedHead = true;
 var isRpt = "Reported" //默认是上报页面，如果有其它的请修改此处的变量
 var _floattable_H_actualindex = new Array();
 var _floattable_B_actualindex = new Array();
-
+function FloatHeaderWidth(obj, head) {
+    var trObj = obj.find("thead").find("tr");
+    var trHead = head.find("tr");
+    for (var i = 0; i < trHead.length; i++) {
+        var thHead = trHead.eq(i).find("th");
+        //console.log(thHead);
+        for (var j = 0; j < thHead.length; j++) {
+            var thWidth = thHead.eq(j).outerWidth() + "px";
+            console.log(thWidth);
+            trObj.eq(i).find("th").eq(j).css("width", thWidth)
+        }
+    }
+    
+}
 function FloatHeader(obj, tab) {
     var st, wt, oleft, otop;
     oleft = getLeft(tab[0]);
