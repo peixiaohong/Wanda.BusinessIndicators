@@ -130,6 +130,11 @@ namespace LJTH.BusinessIndicators.Engine
                 rpt.OAccumulativeActualAmmount = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID
                   && v.FinMonth < rpt.FinMonth).Sum(v => v.OActualAmmount) + rpt.OActualAmmount;
             }
+            else
+            {
+                rpt.NAccumulativeActualAmmount = rpt.NActualAmmount;
+                rpt.OAccumulativeActualAmmount = rpt.OActualAmmount;
+            }
             rpt.NAccumulativeDifference = rpt.NAccumulativeActualAmmount - rpt.NAccumulativePlanAmmount;
             rpt.OAccumulativeDifference = rpt.OAccumulativeActualAmmount - rpt.OAccumulativePlanAmmount;
             rpt.NDifference = rpt.NActualAmmount - rpt.NPlanAmmount;
@@ -784,6 +789,11 @@ namespace LJTH.BusinessIndicators.Engine
                 rpt.OAccumulativeActualAmmount = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID
                   && v.FinMonth < rpt.FinMonth).Sum(v => v.OActualAmmount) + rpt.OActualAmmount;
             }
+            else
+            {
+                rpt.NAccumulativeActualAmmount = rpt.NActualAmmount;
+                rpt.OAccumulativeActualAmmount = rpt.OActualAmmount;
+            }
             rpt.NAccumulativeDifference = rpt.NAccumulativeActualAmmount - rpt.NAccumulativePlanAmmount;
             rpt.OAccumulativeDifference = rpt.OAccumulativeActualAmmount - rpt.OAccumulativePlanAmmount;
             rpt.NDifference = rpt.NActualAmmount - rpt.NPlanAmmount;
@@ -993,6 +1003,11 @@ namespace LJTH.BusinessIndicators.Engine
                 && v.FinMonth < rpt.FinMonth).Sum(v => v.NActualAmmount) + rpt.NActualAmmount;
                 rpt.OAccumulativeActualAmmount = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID
                   && v.FinMonth < rpt.FinMonth).Sum(v => v.OActualAmmount) + rpt.OActualAmmount;
+            }
+            else
+            {
+                rpt.NAccumulativeActualAmmount = rpt.NActualAmmount;
+                rpt.OAccumulativeActualAmmount = rpt.OActualAmmount;
             }
             rpt.NAccumulativeDifference = rpt.NAccumulativeActualAmmount - rpt.NAccumulativePlanAmmount;
             rpt.OAccumulativeDifference = rpt.OAccumulativeActualAmmount - rpt.OAccumulativePlanAmmount;
@@ -1235,6 +1250,11 @@ namespace LJTH.BusinessIndicators.Engine
                 && v.FinMonth < rpt.FinMonth).Sum(v => v.NActualAmmount) + rpt.NActualAmmount;
                 rpt.OAccumulativeActualAmmount = amrList.Where(v => v.CompanyID == rpt.CompanyID && v.TargetID == rpt.TargetID
                   && v.FinMonth < rpt.FinMonth).Sum(v => v.OActualAmmount) + rpt.OActualAmmount;
+            }
+            else
+            {
+                rpt.NAccumulativeActualAmmount = rpt.NActualAmmount;
+                rpt.OAccumulativeActualAmmount = rpt.OActualAmmount;
             }
             rpt.NAccumulativeDifference = rpt.NAccumulativeActualAmmount - rpt.NAccumulativePlanAmmount;
             rpt.OAccumulativeDifference = rpt.OAccumulativeActualAmmount - rpt.OAccumulativePlanAmmount;
