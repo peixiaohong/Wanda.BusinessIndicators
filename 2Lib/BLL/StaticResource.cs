@@ -72,12 +72,12 @@ namespace LJTH.BusinessIndicators.BLL
         /// <param name="SystemID"></param>
         /// <param name="FinYear"></param>
         /// <returns></returns>
-        public IList<A_MonthlyReportDetail> GetMonthlyReportDetails(Guid SystemID, int FinYear, Guid TargetPlanID)
+        public IList<A_MonthlyReportDetail> GetMonthlyReportDetails(Guid SystemID, int FinYear, int FinMonth)
         {
-            var key = FinYear + "&" + SystemID + "&" + TargetPlanID;
+            var key = FinYear + "&" + SystemID + "&" + FinMonth;
             if (_MonthlyReportDetailList == null || _MonthlyReportDetailList.Count <= 0 || !_MonthlyReportDetailList.Keys.Contains(key))
             {
-                var list = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetailList(SystemID, FinYear, TargetPlanID);
+                var list = A_MonthlyreportdetailOperator.Instance.GetAMonthlyReportDetailListForActualAmmount(SystemID, FinYear, FinMonth);
                 _MonthlyReportDetailList[key] = list;
             }
             return _MonthlyReportDetailList[key];

@@ -81,7 +81,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="NLog.config" />
     <None Include="packages.config" />
     <Content Include="Assets\images\62.jpg" />
     <Content Include="Assets\images\action-icon.png" />
@@ -283,7 +282,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>5072</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:82/app</IISUrl>
+          <IISUrl>http://localhost:8081/app</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

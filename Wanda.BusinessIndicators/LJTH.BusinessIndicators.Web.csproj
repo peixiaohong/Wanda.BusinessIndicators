@@ -144,6 +144,7 @@
     <Content Include="Scripts\multiple-select-master\multiple-select.css" />
     <Content Include="Scripts\multiple-select-master\multiple-select.js" />
     <Content Include="Scripts\multiple-select-master\multiple-select.png" />
+    <Content Include="Scripts\pako\pako-1.0.3.min.js" />
     <Content Include="Scripts\SystemConfiguration\OrganizationalManager.js" />
     <Content Include="Scripts\SystemConfiguration\RoleManager.js" />
     <Content Include="Scripts\SystemConfiguration\RoleUsers.js" />
