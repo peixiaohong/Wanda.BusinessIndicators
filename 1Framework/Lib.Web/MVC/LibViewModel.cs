@@ -138,6 +138,12 @@ namespace Lib.Web.Mvc
         /// <summary>
         /// 拒绝访问
         /// </summary>
-        Detect = 3
+        Detect = 3,
+
+        /// <summary>
+        /// json经过Gzip压缩，并base64编码
+        /// </summary>
+        GZip=4
+
     }
 }

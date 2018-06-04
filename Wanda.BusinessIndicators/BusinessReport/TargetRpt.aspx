@@ -2,9 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" type="text/css" href="../Scripts/UpLoad/uploadify.css" />
-    <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
-
-
     <script type="text/javascript" src="../Scripts/ztree/jquery.ztree.all-3.5.min.js"></script>
     <script type="text/javascript" src="../Scripts/ztree/jquery.ztree.core-3.5.min.js"></script>
     <script type="text/javascript" src="../Scripts/ztree/jquery.ztree.excheck-3.5.min.js"></script>
@@ -105,7 +102,7 @@
                     <li id="BHhide1"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>其它情况</span></a></li>
                     <li id="detailmana" style="display: none" runat="server" clientidmode="Static"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>上报日志</span></a></li>
 
-                    <%--                <li id="BHhide2"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>指标完成情况明细</span></a></li>
+                    <%--<li id="BHhide2"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>指标完成情况明细</span></a></li>
                     <li id="BHhide3"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>补回指标缺口情况</span></a></li>
                     <li id="BHhide4"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>新增未完成门店情况</span></a></li>--%>
                 </ul>

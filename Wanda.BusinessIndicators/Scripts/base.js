@@ -3,6 +3,7 @@
 
 
 
+
 //-----------------------------------------------------------一上都是原来的，升级2.0版本的下面----------------------------------------------------------------------------------------
 
 // 注意， 在给html 只读标记绑定值的时候， 一定要做此转换
@@ -234,6 +235,31 @@ var GenerateHtml = function (type, title, sketchErrorMessage, msg) {
     }
 //田振建添加错误提示框实现 End
 
+var GZipType = {
+    NO: 0,
+    Both: 1,
+    Param: 2,
+    ReturnData: 3,
+}
+var GZip = {
+    gzip: function (str) {
+        var binaryString = pako.gzip(str, { to: 'string' });
+        return btoa(binaryString);
+    },
+
+    ungzip: function (b64Data) {
+        var strData = atob(b64Data);
+        // Convert binary string to character-number array
+        var charData = strData.split('').map(function (x) { return x.charCodeAt(0); });
+        // Turn number array into byte-array
+        var binData = new Uint8Array(charData);
+        var uncompressed = pako.inflate(binData, { to: 'string' });
+
+        // Convert utf8 -> utf16 (native JavaScript string format)
+        //var decoded = decodeURIComponent(escape(uncompressed));
+        return uncompressed;
+    }
+}
 var WebUtil = {
 
     //将文本域换行符替换为HTML换行标签：
@@ -331,13 +357,14 @@ Requirements:
 */
     ajax: function (options) {
         var setting = {
+            gzip: GZipType.NO,
             async: false,
             asyncBlock: true,
             cache: true,
             type: "post", //"get",//"post",
             dataType: "json", //默认使用json， 除非指定为html
             url: "", // /{controller}/{action}.jx 
-            args: { }, //*3 action arguments. It is suggested to use below 3 level json object. 
+            args: {}, //*3 action arguments. It is suggested to use below 3 level json object. 
             before: function (beforeOptions) {
                 // check data before ajax sending
                 if (CommonUtil.isNA(beforeOptions.url)) {
@@ -369,26 +396,26 @@ Requirements:
                     if (i > 0) errormsg = "<p>" + errorMsg.substring(0, i) + "</p>";
                     errormsg = errormsg + "<p style='display:none' class='detail'>" + errorMsg + "</p>";
                     //errormsg = errormsg + "<p><a href='javascript:void(0)' onclick='copyContent(this)' class='btn_orange'>复制</a></p>";
-                    WebUtil.alertWarn(errormsg,errormsg);
+                    WebUtil.alertWarn(errormsg, errormsg);
                 }
             },
             errorHandlers: {
                 "0": function (msg) {
                     WebUtil.confirm("没有登录或者会话已过期！\r\n点确定重新登录。", function () {
                         window.location = '/public/login.aspx?returnurl='
-                                 + encodeURIComponent(window.location.pathname + window.location.search); //重新跳转, 系统会转到Login.aspx?ReturnUrl=...
+                            + encodeURIComponent(window.location.pathname + window.location.search); //重新跳转, 系统会转到Login.aspx?ReturnUrl=...
                     });
                 },
-                "1": function (msg) { WebUtil.alertWarn("请求被拒绝！",""); },
-                "2": function (msg) { WebUtil.alertWarn("没有权限访问此方法！",""); },
-                "3": function (msg) { WebUtil.alertWarn("数据库操作失败！" ,msg); },
-                "4": function (msg) { WebUtil.alertWarn("结果数据转化为JSON失败！",""); },
-                "5": function (msg) { WebUtil.alertWarn("非法的Ajax Action！",msg); },
+                "1": function (msg) { WebUtil.alertWarn("请求被拒绝！", ""); },
+                "2": function (msg) { WebUtil.alertWarn("没有权限访问此方法！", ""); },
+                "3": function (msg) { WebUtil.alertWarn("数据库操作失败！", msg); },
+                "4": function (msg) { WebUtil.alertWarn("结果数据转化为JSON失败！", ""); },
+                "5": function (msg) { WebUtil.alertWarn("非法的Ajax Action！", msg); },
                 "6": function (msg) { WebUtil.alertWarn("缺少某些参数！", msg); },
                 "7": function (msg) { WebUtil.alertWarn("没找到匹配的数据！", ""); },
                 "8": function (msg) {
                     WebUtil.alertWarn(msg, msg
-                        );
+                    );
                 }
             }
         };
@@ -414,12 +441,17 @@ Requirements:
                 args[p] = setting.args[p];
             }
         }
-
+        if (setting.gzip == GZipType.Param || setting.gzip == GZipType.Both) {
+            args = { param: GZip.gzip(WebUtil.jsonToString(args)) };
+        }
         // 传递操作系统信息和浏览器信息
         $.extend(args, {
             __1osInfo: WebUtil.getOSInfo(),
             __2browserInfo: WebUtil.getBrowserInfo().description
         });
+        
+
+        var headers = { UseGZip: setting.gzip };
 
         jQuery.ajax({
             async: setting.async,
@@ -428,6 +460,7 @@ Requirements:
             cache: setting.cache,
             url: setting.url,
             data: args,
+            headers: headers,
             success: function (result) {
                 //setTimeout($.unblockUI, 10, null);
 
@@ -437,8 +470,7 @@ Requirements:
                     }
 
                 } else if (setting.dataType == "json") {
-
-
+                    
                     if (result == null) {
                         callAjaxFailed({ ErrorCode: -300, ErrorMessage: "Failed to get data.", callback: setting.failureReturn });
                     }
@@ -493,6 +525,14 @@ Requirements:
             timeout: function () {
                 var msg = "Time out.";
                 callAjaxFailed({ ErrorCode: -200, ErrorMessage: msg, callback: setting.failureReturn });
+            },
+            dataFilter: function (data, dataType) {
+                if (setting.gzip == GZipType.Both || setting.gzip == GZipType.ReturnData) {
+                    var json = GZip.ungzip(data);
+                    //return $.parseJSON(json);
+                    return json;
+                }
+                return data;
             }
         });
 

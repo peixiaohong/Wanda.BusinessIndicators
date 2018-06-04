@@ -1,4 +1,5 @@
 ﻿using Lib.Core;
+using Lib.Web.Json;
 using Lib.Web.Mvc;
 using Lib.Web.MVC.Controller;
 using System;
@@ -48,8 +49,11 @@ namespace Lib.Web.MVC
         {
 
             object[] arguments = PrepareActionParams(context, methodInfo);
-
+            DateTime s = DateTime.Now;
             object result = methodInfo.Invoke(baseController, arguments);
+            DateTime e = DateTime.Now;
+            TimeSpan span = e - s;
+            context.Response.Headers.Add("Invoke-Time", span.TotalMilliseconds.ToString());
             return result;
         }
 
@@ -57,6 +61,7 @@ namespace Lib.Web.MVC
 
         private object[] PrepareActionParams(HttpContext context, MethodInfo mi)
         {
+
             HttpRequest request = context.Request;
             ParameterInfo[] parameters = mi.GetParameters();
             object[] paramValues = new object[parameters.Length];
@@ -65,18 +70,45 @@ namespace Lib.Web.MVC
 
             if (InternalArgsHandler != null) InternalArgsHandler(requestParams);
 
-            for (int i = 0; i < parameters.Length; i++)
+            if (request.Headers["UseGZip"] == ((int)UseGZip.Param).ToString() || request.Headers["UseGZip"] == ((int)UseGZip.Both).ToString())
             {
-                string queryValue = requestParams[parameters[i].Name];
-
-                if (string.IsNullOrEmpty(queryValue))
-                    paramValues[i] = null;
-                else
-                    paramValues[i] = DataConverter.ChangeType(queryValue, parameters[i].ParameterType);
-
-                if (parameters[i].ParameterType == typeof(string) && paramValues[i] != null)
+                DateTime s = DateTime.Now;
+                var param = GZipHelper.GZipDecompressString(request.Params["param"]);
+                DateTime e = DateTime.Now;
+                TimeSpan span = e - s;
+                context.Response.Headers.Add("UnGZip-Time",span.TotalMilliseconds.ToString());
+                var dic = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(param);
+                for (int i = 0; i < parameters.Length; i++)
                 {
-                    paramValues[i] = HtmlDecode(paramValues[i].ToString());
+                    string queryValue = dic[parameters[i].Name];
+
+                    if (string.IsNullOrEmpty(queryValue))
+                        paramValues[i] = null;
+                    else
+                        paramValues[i] = DataConverter.ChangeType(queryValue, parameters[i].ParameterType);
+
+                    if (parameters[i].ParameterType == typeof(string) && paramValues[i] != null)
+                    {
+                        paramValues[i] = HtmlDecode(paramValues[i].ToString());
+                    }
+                }
+            }
+            else
+            {
+
+                for (int i = 0; i < parameters.Length; i++)
+                {
+                    string queryValue = requestParams[parameters[i].Name];
+
+                    if (string.IsNullOrEmpty(queryValue))
+                        paramValues[i] = null;
+                    else
+                        paramValues[i] = DataConverter.ChangeType(queryValue, parameters[i].ParameterType);
+
+                    if (parameters[i].ParameterType == typeof(string) && paramValues[i] != null)
+                    {
+                        paramValues[i] = HtmlDecode(paramValues[i].ToString());
+                    }
                 }
             }
             return paramValues;

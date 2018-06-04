@@ -38,6 +38,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -73,6 +76,7 @@
     <Compile Include="Download\ExcelGenerator.cs" />
     <Compile Include="Download\ExcelHttpHandler.cs" />
     <Compile Include="Exception\CustomizedException.cs" />
+    <Compile Include="Json\GZipHelper.cs" />
     <Compile Include="Json\JavaScriptConverterAttribute.cs" />
     <Compile Include="MVC\ActionResult\JsonResut.cs" />
     <Compile Include="MVC\Controller\BaseController.cs" />
@@ -141,6 +145,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

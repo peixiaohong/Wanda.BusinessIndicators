@@ -688,6 +688,7 @@ function getMonthReportSummaryData() {
 
     //加载月度报告说明
     WebUtil.ajax({
+        gzip: GZipType.ReturnData,
         async: true,
         url: "/MonthlyReportController/GetReportInstance",
         args: { SystemID: $("#ddlSystem").val(), Year: $("#ddlYear").val(), Month: $("#ddlMonth").val(), TargetPlanID: $("#ddlVersionType").val(), IsLatestVersion: latest, DataSource: dataSource, IsAll: true },
@@ -709,6 +710,7 @@ function getMonthReprotDetailData() {
     GetMonthReportDetailSearchCondition();
     //加载月度报告说明
     WebUtil.ajax({
+        gzip: GZipType.Both,
         async: true,
         url: "/MonthlyReportController/GetDetailRptDataSource",
         args: { rpts: WebUtil.jsonToString(ReportInstance), strCompanyProperty: CompanyProperty, strMonthReportOrderType: MonthReportOrderType, IncludeHaveDetail: IncludeHaveDetail },
@@ -1053,6 +1055,7 @@ function getManageReprotDetailData() {
     GetMonthReportDetailSearchCondition();
     //经营报告明细
     WebUtil.ajax({
+        gzip: GZipType.Both,
         async: true,
         url: "/MonthlyReportController/GetManageDetailRptDataSource",
         args: { rpts: WebUtil.jsonToString(ReportInstance), strCompanyProperty: CompanyProperty, strMonthReportOrderType: MonthReportOrderType, IncludeHaveDetail: IncludeHaveDetail },
@@ -1312,6 +1315,7 @@ function getMonthReportReturnData() {
         latest = true;
     }
     WebUtil.ajax({
+        gzip: GZipType.Both,
         async: true,
         url: "/MonthlyReportController/GetTargetReturnList",
         args: { rpts: WebUtil.jsonToString(ReportInstance), IsLatestVersion: latest },
@@ -1429,6 +1433,7 @@ function getMonthReportMissTargetData() {
     }
     //未完成说明
     WebUtil.ajax({
+        gzip: GZipType.Both,
         async: true,
         url: "/MonthlyReportController/GetMissTargetList",
         args: { rpts: WebUtil.jsonToString(ReportInstance), IsLatestVersion: latest },
@@ -1515,6 +1520,7 @@ function getCurrentMonthReportMissTargetData() {
     }
     //未完成说明
     WebUtil.ajax({
+        gzip: GZipType.Both,
         async: true,
         url: "/MonthlyReportController/GetCurrentMissTargetList",
         args: { rpts: WebUtil.jsonToString(ReportInstance), IsLatestVersion: latest },

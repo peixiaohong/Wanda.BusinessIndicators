@@ -24,8 +24,11 @@ namespace Lib.Web.Mvc
             }
             try
             {
+                DateTime s = DateTime.Now;
                 ControllerHelper.ExecuteProcess(context);
-
+                DateTime e = DateTime.Now;
+                TimeSpan span = e - s;
+                context.Response.Headers.Add("All-Time", span.TotalMilliseconds.ToString());
             }
             catch (Exception ex)
             {
@@ -37,8 +40,7 @@ namespace Lib.Web.Mvc
                 else
                 {
 
-                    if (innerEx is ApplicationException
-                        )
+                    if (innerEx is ApplicationException)
                     {
                         ResponseException(innerEx, context, GetErrorMsg);
                     }
