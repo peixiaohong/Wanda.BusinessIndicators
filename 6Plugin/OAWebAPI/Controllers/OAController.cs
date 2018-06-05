@@ -11,11 +11,11 @@ namespace OAWebAPI.Controllers
 {
     public class OAController : BaseController
     {
-        [HttpPost]
-        public string test(OAMessageVM p)
+        [HttpGet]
+        public string test()
         {
-            //return "Success!";
-            throw new Exception("CESHI ");
+            return "Success!";
+            
         }
         /// <summary>
         /// 创建待办
@@ -46,8 +46,8 @@ namespace OAWebAPI.Controllers
         [HttpPost]
         public commonResult ReceiveDone(OAMessageVM p)
         {
-            //if (p == null || string.IsNullOrWhiteSpace(p.syscode) || string.IsNullOrWhiteSpace(p.flowid) || string.IsNullOrWhiteSpace(p.nodename) || string.IsNullOrWhiteSpace(p.receiver))
-            //    return commonResult.NullParameter();
+            if (p == null || string.IsNullOrWhiteSpace(p.syscode) || string.IsNullOrWhiteSpace(p.flowid) || string.IsNullOrWhiteSpace(p.nodename) || string.IsNullOrWhiteSpace(p.receiver))
+                return commonResult.NullParameter();
             string res = OAMessageBuilder.ReceiveDone(p.syscode,p.flowid,p.nodename,p.receiver);
             return commonResult.Success(res);
         }
@@ -59,8 +59,8 @@ namespace OAWebAPI.Controllers
         [HttpPost]
         public commonResult ReceiveOver(OAMessageVM p)
         {
-            //if (p == null || string.IsNullOrWhiteSpace(p.syscode) || string.IsNullOrWhiteSpace(p.flowid) || string.IsNullOrWhiteSpace(p.nodename) || string.IsNullOrWhiteSpace(p.receiver))
-            //    return commonResult.NullParameter();
+            if (p == null || string.IsNullOrWhiteSpace(p.syscode) || string.IsNullOrWhiteSpace(p.flowid) || string.IsNullOrWhiteSpace(p.nodename) || string.IsNullOrWhiteSpace(p.receiver))
+                return commonResult.NullParameter();
 
             string res = OAMessageBuilder.ReceiveOver(p.syscode, p.flowid, p.nodename, p.receiver);
             return commonResult.Success(res);
@@ -73,8 +73,8 @@ namespace OAWebAPI.Controllers
         [HttpPost]
         public commonResult ReceiveDirectOver(OAMessageVM p)
         {
-            //if (p == null || string.IsNullOrWhiteSpace(p.syscode) || string.IsNullOrWhiteSpace(p.flowid) || string.IsNullOrWhiteSpace(p.nodename) || string.IsNullOrWhiteSpace(p.receiver))
-            //    return commonResult.NullParameter();
+            if (p == null || string.IsNullOrWhiteSpace(p.syscode) || string.IsNullOrWhiteSpace(p.flowid) || string.IsNullOrWhiteSpace(p.nodename) || string.IsNullOrWhiteSpace(p.receiver))
+                return commonResult.NullParameter();
 
             string res = OAMessageBuilder.ReceiveDirectOver(p.syscode, p.flowid, p.nodename, p.receiver);
             return commonResult.Success(res);
