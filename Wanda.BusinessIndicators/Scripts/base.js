@@ -244,17 +244,17 @@ var GZipType = {
 var GZip = {
     gzip: function (str) {
         var binaryString = pako.gzip(str, { to: 'string' });
-        return btoa(binaryString);
+        return $.base64.btoa(binaryString);
     },
 
     ungzip: function (b64Data) {
-        var strData = atob(b64Data);
+        var strData = $.base64.atob(b64Data);
         // Convert binary string to character-number array
-        var charData = strData.split('').map(function (x) { return x.charCodeAt(0); });
+        //var charData = strData.split('').map(function (x) { return x.charCodeAt(0); });
         // Turn number array into byte-array
-        var binData = new Uint8Array(charData);
-        var uncompressed = pako.inflate(binData, { to: 'string' });
-
+        //var binData = new Uint8Array(charData);
+        // var uncompressed = pako.inflate(binData, { to: 'string' });
+        var uncompressed = pako.inflate(strData, { to: 'string' });
         // Convert utf8 -> utf16 (native JavaScript string format)
         //var decoded = decodeURIComponent(escape(uncompressed));
         return uncompressed;

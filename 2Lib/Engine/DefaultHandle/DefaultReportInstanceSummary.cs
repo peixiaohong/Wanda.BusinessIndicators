@@ -694,7 +694,10 @@ namespace LJTH.BusinessIndicators.Engine
             if (IsTargetPlan)
             {
                 List<A_TargetPlanDetail> listTargetPlan = StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear, FinMonth)
-                   .Where(v => v.TargetPlanID == ReportDetails.FirstOrDefault().TargetPlanID).ToList();
+                   .Where(v => v.TargetPlanID == Report.TargetPlanID).ToList();
+
+                //List<A_TargetPlanDetail> listTargetPlan = StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear, FinMonth)
+                //   .Where(v => v.TargetPlanID == ReportDetails.FirstOrDefault().TargetPlanID).ToList();
                 // List<A_TargetPlanDetail> listTargetPlan = StaticResource.Instance.GetDefaultTargetPlanList(_System.ID, FinYear, FinMonth);
                 if (listTargetPlan.Count() > 0)
                 {

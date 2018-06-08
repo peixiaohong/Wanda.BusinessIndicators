@@ -44,7 +44,13 @@ function GetReportInstance() {
         $('#weiwancheng1').addClass('hide');
         return;
     }
+    if ($("#hiddenDis").val() == "2") {
+        $('#PromptMessage').html('未查询到有效的分解指标，暂时无法上报');
+        $('#DownLoadModel').addClass('hide');
+        return;
+    }
     WebUtil.ajax({
+        gzip: GZipType.ReturnData,
         async: true,
         url: "/TargetReportedControll/GetReportInstance",
         args: { strSystemID: sysID, strMonthReportID: MonthReportID, strMonthReportOrderType: MonthReportOrderType, IncludeHaveDetail: IncludeHaveDetail, UploadStr: Upload },
@@ -115,6 +121,7 @@ $(function () {
         if (Description != $("#MonthGetDescription").html()) {
             // alert("入库");
             WebUtil.ajax({
+                gzip: GZipType.Param,
                 async: true,
                 url: "/TargetReportedControll/ModifyMonthTRptDescription",
                 args: { rpts: WebUtil.jsonToString(monthRpt) },
@@ -171,6 +178,7 @@ function MissTagetExcelReport() {
 //月报说明
 function GetMonthGetDescription() {
     WebUtil.ajax({
+        gzip: GZipType.Param,
         async: false,
         url: "/TargetReportedControll/GetMonthTRptDescription",
         args: { rpts: WebUtil.jsonToString(ReportInstance) },
@@ -199,6 +207,7 @@ function getMonthReportMissTargetData(Upload) {
 
     //未完成说明
     WebUtil.ajax({
+        gzip: GZipType.Both,
         async: true,
         url: "/TargetReportedControll/GetMissTargetList_Reported",
         args: { rpts: "", monthRptID: $("#hideMonthReportID").val(), UploadStr: Upload },
@@ -1335,6 +1344,7 @@ function getMonthReprotDetailData() {
 
     //加载月度报告说明
     WebUtil.ajax({
+        gzip: GZipType.Both,
         async: true,
         url: "/TargetReportedControll/GetTargetDetailList",
         args: { rpts: WebUtil.jsonToString(ReportInstance), strCompanyProperty: "", strMonthReportOrderType: MonthReportOrderType, IncludeHaveDetail: IncludeHaveDetail },
@@ -1521,6 +1531,7 @@ function SaveMonthReportDetail() {
     }
     art.dialog({ id: 'divMonthReportDetail' }).close();
     WebUtil.ajax({
+        gzip: GZipType.Both,
         async: true,
         url: "/TargetReportedControll/UpdateMonthReportDetail",
         args: { rpts: WebUtil.jsonToString(ReportInstance), strMonthReportOrderType: MonthReportOrderType, info: WebUtil.jsonToString(detail), strMonthReportID: MonthReportID, IncludeHaveDetail: IncludeHaveDetail },

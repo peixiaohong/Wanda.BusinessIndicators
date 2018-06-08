@@ -196,6 +196,24 @@ namespace LJTH.BusinessIndicators.DAL
             return ExecuteQuery(sql, CreateSqlParameter("@SystemID", System.Data.DbType.Guid, systemID.ToGuid()), CreateSqlParameter("@FinYear", System.Data.DbType.Int32, year), CreateSqlParameter("@FinMonth", System.Data.DbType.Int32, month));
         }
 
+        /// <summary>
+        /// 获取分解指标版本类型集合
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <returns></returns>
+        public IList<B_TargetPlan> GetTargetVersion(string systemID, int year, int month,string wfStatus)
+        {
+            var start = new DateTime(year, month + 1, 1);
+            var end = new DateTime(year, month + 1, 1).AddDays(-1);
+            string sql = ORMapping.GetSelectSql<B_TargetPlan>(TSqlBuilder.Instance);
+
+            sql += "WHERE " + base.NotDeleted;
+            sql += " and SystemID =@SystemID AND VersionStart<@StartDate and Versionend>@EndDate and WFStatus=@WFStatus";
+            return ExecuteQuery(sql, CreateSqlParameter("@SystemID", System.Data.DbType.Guid, systemID.ToGuid()), CreateSqlParameter("@StartDate", System.Data.DbType.DateTime, start), CreateSqlParameter("@EndDate", System.Data.DbType.DateTime, end), CreateSqlParameter("@WFStatus", System.Data.DbType.String, wfStatus));
+        }
+
         public int UpdateVersionDefault(Guid PlanID)
         {
             string sql = @"

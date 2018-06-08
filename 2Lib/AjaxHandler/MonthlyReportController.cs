@@ -603,7 +603,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         [LibAction]
         public object GetTargetVersionType(string SystemID, int FinYear, int FinMonth)
         {
-            return A_TargetplanOperator.Instance.GetTargetVersionType(SystemID, FinYear, FinMonth);
+            return B_TargetplanOperator.Instance.GetTargetVersion(SystemID, FinYear, FinMonth, "Approved");
+            //return A_TargetplanOperator.Instance.GetTargetVersionType(SystemID, FinYear, FinMonth);
         }
         [LibAction]
         public object GetTargetVersionType(string SystemID, int FinYear)

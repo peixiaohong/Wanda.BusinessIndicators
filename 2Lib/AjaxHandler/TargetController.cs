@@ -678,7 +678,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             for (int i = 0; i < result.Count; i++)
             {
 
-                var a = BPF.Workflow.Client.WFClientSDK.GetProcess(null, result[i].ID.ToString());
+                //var a = BPF.Workflow.Client.WFClientSDK.GetProcess(null, result[i].ID.ToString());
                 Process Pro = WFClientSDK.GetProcess(null, result[i].ID.ToString()).ProcessInstance;//从工作流获取上报时间
                 if (Pro != null)
                 {

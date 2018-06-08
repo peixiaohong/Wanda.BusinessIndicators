@@ -19,16 +19,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             //JS_WF_JY_Starter
             try
             {
-                //if (FinMonth == 12)
-                //    FinYear = FinYear - 1;
-
                 DateTime datetime = new DateTime();
-                //if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["TestReportDateTime"]))
-                //{
-                //    datetime = DateTime.Parse(ConfigurationManager.AppSettings["TestReportDateTime"]);
-                //    FinYear = datetime.Year;
-                //    FinMonth = datetime.Month;
-                //}
                 datetime = StaticResource.Instance.GetReportDateTime();
                 FinYear = datetime.Year;
                 FinMonth = datetime.Month;
@@ -40,50 +31,6 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
 
             if (!IsPostBack)
             {
-                #region 原来的权限控制
-
-                //List<C_System> sysList = new List<C_System>();
-                //if (PermissionList != null && PermissionList.Count > 0)
-                //{
-                //    foreach (var item in PermissionList)
-                //    {
-                //        sysList.AddRange(StaticResource.Instance.SystemList.Where(p => p.SystemName == item.ToString()).ToList());
-                //    }
-                //}
-
-
-                //if (sysList.Count > 0)
-                //{
-                //    //Category ==4 代表的是直管系统
-                //    //ddlSystem.DataSource = sysList.Where(p => p.Category == 4).Distinct().ToList().OrderBy(or => or.Sequence).ToList();
-                //    List<C_System> listSys = sysList.Where(or => or.Category == 4).Distinct().ToList().OrderBy(or => or.Sequence).ToList();
-                //    ddlSystem.DataSource = listSys;
-                //    if(string.IsNullOrEmpty(Request.QueryString["BusinessID"]))
-                //    {
-                //        if (listSys.Count == 0 && sysList.Count > 0)
-                //        {
-                //            C_System cs = sysList.FirstOrDefault();
-                //            if (cs.Category == 1)
-                //            {
-                //                Server.Transfer("~/BusinessReport/TargetReported.aspx");
-                //            }
-                //            else if (cs.Category == 2)
-                //            {
-                //                Server.Transfer("~/BusinessReport/TargetProReported.aspx");
-                //            }
-                //            else if (cs.Category == 3)
-                //            {
-                //                Server.Transfer("~/BusinessReport/TargetGroupReported.aspx");
-                //            }
-                //        }
-                //    }
-                //}
-                //else
-                //{
-                //    ddlSystem.DataSource = StaticResource.Instance.SystemList.Where(p => p.Category == 4).ToList();
-                //}
-                #endregion
-
                 var _SystemIds = S_OrganizationalActionOperator.Instance.GetUserSystemData(WebHelper.GetCurrentLoginUser()).Select(v => v.SystemID).ToList();
 
                 if (_SystemIds == null || _SystemIds.Count == 0)
@@ -101,33 +48,18 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 ddlSystem.DataBind();
                 if (string.IsNullOrEmpty(Request.QueryString["BusinessID"]))
                 {
-                    C_System cs;
                     if (!string.IsNullOrEmpty(Request["SystemId"]) && Guid.Parse(Request["SystemId"]) != Guid.Empty)
                     {
-                        cs = sysList.Where(v => v.ID == Guid.Parse(Request["SystemId"])).FirstOrDefault();
-                        ddlSystem.SelectedIndex = ddlSystem.Items.IndexOf(ddlSystem.Items.FindByValue(cs.ID.ToString()));
+                        ddlSystem.SelectedIndex = ddlSystem.Items.IndexOf(ddlSystem.Items.FindByValue(Request["SystemId"]));
                     }
-                    else
-                    {
-                        cs = sysList.FirstOrDefault();
-                    }
-                    if (cs.Category == 1)
-                    {
-                        //Server.Transfer("~/BusinessReport/TargetReported.aspx?SystemId=" + cs.ID);
-                        Response.Redirect("~/BusinessReport/TargetReported.aspx?SystemId=" + cs.ID);
-                    }
-                    else if (cs.Category == 2)
-                    {
-                        //Server.Transfer("~/BusinessReport/TargetProReported.aspx?SystemId=" + cs.ID);
-                        Response.Redirect("~/BusinessReport/TargetProReported.aspx?SystemId=" + cs.ID);
-                    }
-                    else if (cs.Category == 3)
-                    {
-                        //Server.Transfer("~/BusinessReport/TargetGroupReported.aspx?SystemId=" + cs.ID);
-                        Response.Redirect("~/BusinessReport/TargetGroupReported.aspx?SystemId=" + cs.ID);
-                    }
+                    ChangeSystem();
                 }
-
+                var targetPlanDetail = StaticResource.Instance.GetDefaultTargetPlanList(ddlSystem.SelectedValue.ToGuid(), FinYear).FirstOrDefault();
+                if (targetPlanDetail == null || targetPlanDetail.TargetPlanID == Guid.Empty)
+                {
+                    hiddenDis.Value = "2";
+                    return;
+                }
                 lblName.Text = FinYear + "-" + FinMonth + "月度经营报告上报";
                 if (string.IsNullOrEmpty(Request.QueryString["BusinessID"])) //如果BusinessID是Null，代表不是从OA进来的
                 {
@@ -156,6 +88,12 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         protected void ddlSystem_TextChanged(object sender, EventArgs e)
         {
             ChangeSystem();
+            var targetPlanDetail = StaticResource.Instance.GetDefaultTargetPlanList(ddlSystem.SelectedValue.ToGuid(), FinYear).FirstOrDefault();
+            if (targetPlanDetail == null || targetPlanDetail.TargetPlanID == Guid.Empty)
+            {
+                hiddenDis.Value = "2";
+                return;
+            }
             AddMonthlyReport();
         }
 
@@ -344,11 +282,6 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             {
                 //Server.Transfer("~/BusinessReport/TargetGroupReported.aspx?SystemId=" + cs.ID);
                 Response.Redirect("~/BusinessReport/TargetGroupReported.aspx?SystemId=" + cs.ID);
-            }
-            else if (cs.Category == 4)
-            {
-                //Server.Transfer("~/BusinessReport/TargetDirectlyReported.aspx?SystemId=" + cs.ID);
-                Response.Redirect("~/BusinessReport/TargetDirectlyReported.aspx?SystemId=" + cs.ID);
             }
         }
     }

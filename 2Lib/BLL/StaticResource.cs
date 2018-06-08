@@ -88,11 +88,16 @@ namespace LJTH.BusinessIndicators.BLL
         {
             get
             {
+                if (CurrentDate == new DateTime())
+                    CurrentDate = DateTime.Now;
                 if (SystemList != null && SystemList.Count > 0)
                 {
-                    return SystemList.ToList().Find(S => S.ID == Key);
-                    //return C_SystemOperator.Instance.GetSystemList(CurrentDate).ToList().Find(S => S.ID == Key);
-
+                    var system= SystemList.ToList().Find(S => S.ID == Key);
+                    if (system.VersionStart > CurrentDate || system.VersionEnd < CurrentDate)
+                    {
+                        return C_SystemOperator.Instance.GetSystemList(CurrentDate).ToList().Find(S => S.ID == Key);
+                    }
+                    return system;
                 }
                 return null;
             }

@@ -425,6 +425,7 @@ function getMonthReportSummaryData(asyncBlock) {
     // if (MonthReportID != "") {
     //加载月度报告说明
     WebUtil.ajax({
+        gzip: GZipType.ReturnData,
         async: true,
         asyncBlock: block,
         url: "/TargetApproveController/GetReportInstance",
@@ -458,6 +459,7 @@ function getMonthReprotDetailData() {
     //加载月度报告说明
     
     WebUtil.ajax({
+        gzip: GZipType.Both,
         async: true,
         url: "/TargetApproveController/GetDetailRptDataSource",
         //url:"/MonthlyReportController/GetDetailRptDataSource",
@@ -674,6 +676,7 @@ function getMonthReportReturnData() {
         latest = true;
     }
     WebUtil.ajax({
+        gzip: GZipType.Both,
         async: true,
         url: "/TargetApproveController/GetTargetReturnList",
         //url: "/MonthlyReportController/GetTargetReturnList",
@@ -820,6 +823,7 @@ function getMonthReportMissTargetData() {
     }
     //未完成说明
     WebUtil.ajax({
+        gzip: GZipType.Both,
         async: true,
         url: "/TargetApproveController/GetMissTargetList",
         //url: "/MonthlyReportController/GetMissTargetList",
@@ -899,6 +903,7 @@ function getCurrentMonthReportMissTargetData() {
     }
     //未完成说明
     WebUtil.ajax({
+        gzip: GZipType.Both,
         async: true,
         url: "/MonthlyReportController/GetCurrentMissTargetList",
         args: { rpts: WebUtil.jsonToString(ReportInstance), IsLatestVersion: latest },
