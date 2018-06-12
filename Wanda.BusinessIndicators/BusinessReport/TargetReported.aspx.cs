@@ -160,7 +160,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         public void AddMonthlyReport()
         {
             //HidSystemID.Value = ddlSystem.SelectedValue;
-            //HidAreaID.Value = ddlAreaID.Visible ? ddlAreaID.SelectedValue : Guid.Empty.ToString();
+            //HidAreaID.Value = ddlAreaID.Visible ? ddlAreaID.SelectedValue : Guid.Empty.ToString(); 
 
             //如果存在审批中的数据，不让重复提交
             var bmrProgress = B_MonthlyreportOperator.Instance.GetMonthlyReportModel(Guid.Parse(ddlSystem.SelectedValue), Guid.Parse(HidAreaID.Value), FinYear, FinMonth, 1, "Progress");
@@ -543,6 +543,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         /// <param name="e"></param>
         protected void ddlAreaID_TextChanged(object sender, EventArgs e)
         {
+            HidAreaID.Value = ddlAreaID.SelectedValue;
             AddMonthlyReport();
         }
 

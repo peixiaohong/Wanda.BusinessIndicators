@@ -507,8 +507,8 @@ INNER JOIN dbo.C_Company ON
         public List<A_MonthlyReportDetail> GetAMonthlyReportDetailListForActualAmmount(Guid SystemID, int FinYear, int FinMonth)
         {
             string sql = @"
-            SELECT  *
-            FROM    dbo.B_MonthlyReportDetail AS A
+            SELECT  A.*
+            FROM    dbo.A_MonthlyReportDetail AS A
                     INNER JOIN ( SELECT TOP 1
                                         FinYear ,
                                         FinMonth ,
