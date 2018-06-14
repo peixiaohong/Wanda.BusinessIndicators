@@ -25,16 +25,17 @@ namespace ScheduleService.Handler
         private string userName = System.Configuration.ConfigurationManager.AppSettings["virtualUser"];
         public void Execute(Quartz.IJobExecutionContext context)
         {
-            Common.ScheduleService.Log.Instance.Info("子流程处理开始！");
+            Common.ScheduleService.Log.Instance.Info("提交虚拟暂挂节点处理开始！");
             bool IsChildrenSubmit=false;
             List<B_SystemBatch> listBSB= B_SystemBatchOperator.Instance.GetSystemBatchList().ToList();
-            try
+
+            foreach (B_SystemBatch Bsystembatch in listBSB)
             {
-                foreach (B_SystemBatch Bsystembatch in listBSB)
+                try
                 {
                     if (BPF.Workflow.Client.WFClientSDK.Exist(Bsystembatch.ID.ToString()))
                     {
-                        WorkflowContext SummaryProcessWorkflow = WFClientSDK.GetProcess(null, Bsystembatch.ID.ToString(), new UserInfo() { UserCode = "$VirtualUserCode$"+userName });
+                        WorkflowContext SummaryProcessWorkflow = WFClientSDK.GetProcess(null, Bsystembatch.ID.ToString(), new UserInfo() { UserCode = "$VirtualUserCode$" + userName });
                         //WorkflowContext SummaryProcessWorkflow = WFClientSDK.GetProcess(null, Bsystembatch.ID.ToString(), new UserInfo() { UserLoginID = "fanbing" });
                         if (SummaryProcessWorkflow.ProcessInstance.Status == 3)
                         {
@@ -43,11 +44,11 @@ namespace ScheduleService.Handler
                             {
                                 if (BPF.Workflow.Client.WFClientSDK.Exist(vs.ReportID.ToString()))
                                 {
-                                     WorkflowContext ChildrenWorkflow = WFClientSDK.GetProcess(null, vs.ReportID.ToString(), new UserInfo() { UserCode = "$VirtualUserCode$"+userName });
+                                    WorkflowContext ChildrenWorkflow = WFClientSDK.GetProcess(null, vs.ReportID.ToString(), new UserInfo() { UserCode = "$VirtualUserCode$" + userName });
                                     // WorkflowContext ChildrenWorkflow = WFClientSDK.GetProcess(null, vs.ReportID.ToString(), new UserInfo() { UserLoginID = "fanbing" });
                                     if (ChildrenWorkflow.ProcessInstance.Status != 3)
                                     {
-                                        Common.ScheduleService.Log.Instance.Info("项目系统子流程,流程开始提交！ID="+vs.ReportID.ToString());
+                                        Common.ScheduleService.Log.Instance.Info("项目系统子流程,流程开始提交！ID=" + vs.ReportID.ToString());
                                         Dictionary<string, object> formParams = new Dictionary<string, object>();
                                         formParams.Add("ReportName", ChildrenWorkflow.ProcessInstance.ProcessTitle);
                                         formParams.Add("ProcessKey", ChildrenWorkflow.ProcessInstance.FlowCode);
@@ -66,11 +67,11 @@ namespace ScheduleService.Handler
                                         if (wfc.StatusCode != 0)
                                         {
                                             //throw wfc.LastException;
-                                            Common.ScheduleService.Log.Instance.Info("项目系统子流程,流程提交失败！ID=" + vs.ReportID.ToString());
+                                            Common.ScheduleService.Log.Instance.Info(Bsystembatch.BatchType+"版块分支流程提交失败，原因："+wfc.StatusMessage+"！ID=" + vs.ReportID.ToString());
                                         }
                                         else
                                         {
-                                            Common.ScheduleService.Log.Instance.Info("项目系统子流程,流程提交成功！ID=" + vs.ReportID.ToString());
+                                            Common.ScheduleService.Log.Instance.Info(Bsystembatch.BatchType + "版块分支流程提交成功！ID=" + vs.ReportID.ToString());
                                         }
                                     }
                                     else
@@ -82,15 +83,16 @@ namespace ScheduleService.Handler
                         }
                         if (IsChildrenSubmit)
                         {
-                            Common.ScheduleService.Log.Instance.Info("项目系统子流程,没有子流程提交！");
+                            Common.ScheduleService.Log.Instance.Info(Bsystembatch.BatchType + "版块子流程,没有子流程提交！");
                         }
                     }
                 }
+                catch (Exception ex)
+                {
+                    Common.ScheduleService.Log.Instance.Error(Bsystembatch.BatchType+ "版块子流程,流程提交失败！" + ex.ToString());
+                }
             }
-            catch (Exception ex) {
-                Common.ScheduleService.Log.Instance.Error("项目系统子流程,流程提交失败！"+ex.ToString());
-            }
-            Common.ScheduleService.Log.Instance.Info("项目系统子流程处理结束！");
+            Common.ScheduleService.Log.Instance.Info("提交虚拟暂挂节点处理结束！");
         }
     }
 }
