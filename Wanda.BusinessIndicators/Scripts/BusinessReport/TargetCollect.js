@@ -238,7 +238,7 @@ function IsDeleteA(id) {
             if (result == "true")
                 alert("禁用成功");
             else if (result == "1")
-                alert("该板本已存在月报数据，不可禁用！");
+                alert("该版本已存在月报数据，不可禁用！");
             else
                 alert("操作失败,请联系管理员！");
             Fake();

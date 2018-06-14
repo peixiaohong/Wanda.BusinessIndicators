@@ -17,6 +17,8 @@ namespace LJTH.BusinessIndicators.DAL
 
             sql += "WHERE " + base.NotDeleted;
 
+            sql += " and WFBatchStatus='Approved'";
+
             return ExecuteQuery(sql);
         }
 

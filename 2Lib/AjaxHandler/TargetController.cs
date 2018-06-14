@@ -679,7 +679,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             {
 
                 //var a = BPF.Workflow.Client.WFClientSDK.GetProcess(null, result[i].ID.ToString());
-                Process Pro = WFClientSDK.GetProcess(null, result[i].ID.ToString()).ProcessInstance;//从工作流获取上报时间
+                Process Pro = WFClientSDK.GetProcess(null, result[i].ID.ToString(),result[i].ProcessOwn).ProcessInstance;//从工作流获取上报时间
                 if (Pro != null)
                 {
                     result[i].CreateTime = Pro.CreateDateTime;

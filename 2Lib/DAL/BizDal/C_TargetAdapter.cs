@@ -40,7 +40,7 @@ namespace LJTH.BusinessIndicators.DAL
 
             sql += "WHERE " + base.NotDeleted;
             sql += " AND  VersionStart <= GETDATE() AND GETDATE()< VersionEnd ";
-            sql += " ORDER BY Sequence DESC";
+            sql += " ORDER BY Sequence";
             return ExecuteQuery(sql);
         }
 

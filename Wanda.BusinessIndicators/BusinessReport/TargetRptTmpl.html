@@ -817,7 +817,8 @@
         <td class="Td_Left Td_Merge" title="${itemDetail.BMonthReportDetail.NActualAmmount}">${(itemDetail.BMonthReportDetail.NActualAmmount).thousandize0OrEmpty(0)}</td>
         <!--高亮设置-->
         {{if parseInt(itemDetail.BMonthReportDetail.NDisplayRate) < 100}}
-        <td class="Td_Left Td_Merge" style="text-align: center !important; padding: 5px;background:#fabf8f" title="${itemDetail.BMonthReportDetail.NDisplayRate}">${itemDetail.BMonthReportDetail.NDisplayRate}</td>
+        <!--<td class="Td_Left Td_Merge" style="text-align: center !important; padding: 5px;background:#fabf8f" title="${itemDetail.BMonthReportDetail.NDisplayRate}">${itemDetail.BMonthReportDetail.NDisplayRate}</td>-->
+        <td class="Td_Left Td_Merge" style="text-align: center !important; padding: 5px;" title="${itemDetail.BMonthReportDetail.NDisplayRate}">${itemDetail.BMonthReportDetail.NDisplayRate}</td>
         {{else}}
         <td class="Td_Left Td_Merge" style="text-align: center !important; padding: 5px;" title="${itemDetail.BMonthReportDetail.NDisplayRate}">${itemDetail.BMonthReportDetail.NDisplayRate}</td>
         {{/if}}
@@ -825,7 +826,8 @@
         <td class="Td_Left Td_Merge" title="${itemDetail.BMonthReportDetail.NAccumulativeActualAmmount}">${(itemDetail.BMonthReportDetail.NAccumulativeActualAmmount).thousandize0OrEmpty(0)}</td>
         <!--高亮设置-->
         {{if parseInt(itemDetail.BMonthReportDetail.NAccumulativeDisplayRate) < 100}}
-        <td class="Td_Left align_right Td_Merge" style="background:#fabf8f" title="${itemDetail.BMonthReportDetail.NAccumulativeDisplayRate}">${itemDetail.BMonthReportDetail.NAccumulativeDisplayRate}</td>
+        <!--<td class="Td_Left align_right Td_Merge" style="background:#fabf8f" title="${itemDetail.BMonthReportDetail.NAccumulativeDisplayRate}">${itemDetail.BMonthReportDetail.NAccumulativeDisplayRate}</td>-->
+        <td class="Td_Left align_right Td_Merge" title="${itemDetail.BMonthReportDetail.NAccumulativeDisplayRate}">${itemDetail.BMonthReportDetail.NAccumulativeDisplayRate}</td>
         {{else}}
         <td class="Td_Left align_right Td_Merge" title="${itemDetail.BMonthReportDetail.NAccumulativeDisplayRate}">${itemDetail.BMonthReportDetail.NAccumulativeDisplayRate}</td>
         {{/if}}

@@ -371,6 +371,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             }
             worksheets.RemoveAt(0);
             worksheets.RemoveAt(TargetPlanDetailVList.Count);
+            if (worksheets.Count > 0)
+                worksheets.ActiveSheetIndex = 0;
             MemoryStream stream = designer.Workbook.SaveToStream();
             fileStream.Close();
             fileStream.Dispose();
