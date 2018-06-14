@@ -82,11 +82,11 @@
 <script type="text/x-jquery-tmpl" id="DocManageTHeadTmpl">
     <tr>
         <th style="width: 5%; word-break: keep-all">序号</th>
-        <th style="width: 10%; word-break: keep-all">文件类型</th>
+        <!--<th style="width: 10%; word-break: keep-all">文件类型</th>-->
         <th style="width: 8%; word-break: keep-all">年份</th>
-        <th style="width: 13%; word-break: keep-all">产业集团</th>
+        <!--<th style="width: 13%; word-break: keep-all">产业集团</th>
         <th style="width: 8%; word-break: keep-all">系统</th>
-        <th style="width: 8%; word-break: keep-all">公司</th>
+        <th style="width: 8%; word-break: keep-all">公司</th>-->
         <th style="width: 15%; word-break: keep-all">附件名称</th>
         <th style="width: 13%; word-break: keep-all">上传时间</th>
         <th style="width: 13%; word-break: keep-all">备注</th>
@@ -100,11 +100,11 @@
     {{each DocManagerData}}
      <tr>
          <td class="Td_Left" style="text-align: center!important">${$index+1}</td>
-         <td class="Td_Left" style="text-align: center!important">${ValueAString}</td>
+         <!--<td class="Td_Left" style="text-align: center!important">${ValueAString}</td>-->
          <td class="Td_Left" style="text-align: center!important">${FinYear}年</td>
-         <td class="Td_Left" style="text-align: center!important">${ValueBString}</td>
+         <!--<td class="Td_Left" style="text-align: center!important">${ValueBString}</td>
          <td class="Td_Left" style="text-align: center!important">${ValueCString}</td>
-         <td class="Td_Left" style="text-align: center!important">${ValueDString}</td>
+         <td class="Td_Left" style="text-align: center!important">${ValueDString}</td>-->
          <td class="Td_Left" style="text-align: left!important;"><a title="${FileName}" href='/AjaxHander/DownLoadFile.ashx?path=${Url}&FileName=${FileName}' style="cursor: pointer;">${FileName} </a></td>
          <td class="Td_Left" style="text-align: center!important">${FormatDate(CreateTime,"") }</td>
 

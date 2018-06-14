@@ -44,6 +44,18 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
             string sql = string.Format(@"Select * From [dbo].[S_Organizational] Where SystemID=@SystemID and [IsDeleted]=0");
             return ExecuteQuery(sql, CreateSqlParameter("@SystemID", System.Data.DbType.Guid, systemID));
         }
+
+        /// <summary>
+        /// 根据板块id，拿到所有的项目【包括逻辑删除】
+        /// </summary>
+        /// <param name="systemID"></param>
+        /// <returns></returns>
+        public List<S_Organizational> GetCompanyInfoBySystemID(Guid systemID)
+        {
+            string sql = string.Format(@"Select * From [dbo].[S_Organizational] Where SystemID=@SystemID and [IsCompany]=1");
+            return ExecuteQuery(sql, CreateSqlParameter("@SystemID", System.Data.DbType.Guid, systemID));
+        }
+
         /// <summary>
         /// 获取下层子节点
         /// </summary>
@@ -172,7 +184,6 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
             return base.DataTableToListT(ExecuteReturnTable(sql, parameters));
         }
 
-
         #region 数据权限
 
         #region 有判断项目 IsDelete=0
@@ -189,7 +200,6 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
                           (
 	                          Select A.* From [dbo].[S_Organizational] As A
 	                          Inner Join [dbo].[S_Org_User] As B On A.[ID]=B.[CompanyID] And [B].[IsDeleted]=0
-	                          Inner Join [dbo].[Employee] As C On B.[LoginName]=C.[LoginName] And C.[IsDeleted]=0
 	                          Where A.[IsDeleted]=0 And A.[SystemID]=@SystemID And B.[LoginName]=@LoginName
 	                          Union All
                               Select A.* From [dbo].[S_Organizational] As A 
@@ -255,13 +265,14 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
                                 (
 	                                Select A.* From [dbo].[S_Organizational] As A 
 	                                Inner Join [S_Org_User] As B On A.[ID]=B.[CompanyID] And B.[IsDeleted]=0 And B.[LoginName]=@LoginName
-	                                Inner Join [dbo].[Employee] As C On B.[LoginName]=C.[LoginName] And C.[IsDeleted]=0
 	                                Union All
                                     Select A.* From [dbo].[S_Organizational] As A
 	                                Inner Join [getSystemData] As B On A.[ID]=B.[ParentID] And B.[IsDeleted]=0
 	                                Where A.[IsDeleted]=0
                                 )
-                                Select Distinct * From [getSystemData] Where [Level]=2";
+                               Select A.* From [getSystemData] As A 
+								Inner Join [dbo].[C_System] As B On A.[ID]=B.[ID] And B.[IsDeleted]=0
+								Where A.[Level]=2 Group By A.[ID],A.[SystemID],A.[CnName],A.[Code],A.[ParentID],A.[Level],A.[IsCompany],A.[IsDeleted],A.[CreateTime],A.[CreatorName],A.[ModifierName],A.[ModifyTime],B.[Sequence] Order By B.[Sequence]";
             DbParameter[] parameters = new DbParameter[]
             {
                 CreateSqlParameter("@LoginName",DbType.String,loginName)
@@ -280,7 +291,6 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
         {
             string sql = @"Select Distinct A.* From [dbo].[S_Organizational] As A
 	                       Inner Join [dbo].[S_Org_User] As B On A.[ID]=B.[CompanyID] And [B].[IsDeleted]=0
-	                       Inner Join [dbo].[Employee] As C On B.[LoginName]=C.[LoginName] And C.[IsDeleted]=0
 	                       Where A.[IsDeleted]=0 And A.[SystemID]=@SystemID And B.[LoginName]=@LoginName And A.[IsCompany]=1";
             DbParameter[] parameters = new DbParameter[]
             {
@@ -303,7 +313,6 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
                            (
 	                           Select A.* From [dbo].[S_Organizational] As A
 	                           Inner Join [dbo].[S_Org_User] As B On A.[ID]=B.[CompanyID] And [B].[IsDeleted]=0
-	                           Inner Join [dbo].[Employee] As C On B.[LoginName]=C.[LoginName] And C.[IsDeleted]=0
 	                           Where A.[IsDeleted]=0 And A.[SystemID]=@SystemID And B.[LoginName]=@LoginName
 	                           Union All
                                Select A.* From [dbo].[S_Organizational] As A 
@@ -339,7 +348,6 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
                           (
 	                          Select A.* From [dbo].[S_Organizational] As A
 	                          Inner Join [dbo].[S_Org_User] As B On A.[ID]=B.[CompanyID] And [B].[IsDeleted]=0
-	                          Inner Join [dbo].[Employee] As C On B.[LoginName]=C.[LoginName] And C.[IsDeleted]=0
 	                          Where A.[SystemID]=@SystemID And B.[LoginName]=@LoginName
 	                          Union All
                               Select A.* From [dbo].[S_Organizational] As A 
@@ -402,7 +410,6 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
                                 (
 	                                Select A.* From [dbo].[S_Organizational] As A 
 	                                Inner Join [S_Org_User] As B On A.[ID]=B.[CompanyID] And B.[IsDeleted]=0 And B.[LoginName]=@LoginName
-	                                Inner Join [dbo].[Employee] As C On B.[LoginName]=C.[LoginName] And C.[IsDeleted]=0
 	                                Union All
                                     Select A.* From [dbo].[S_Organizational] As A
 	                                Inner Join [getSystemData] As B On A.[ID]=B.[ParentID] And B.[IsDeleted]=0
@@ -426,7 +433,6 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
         {
             string sql = @"Select Distinct A.* From [dbo].[S_Organizational] As A
 	                       Inner Join [dbo].[S_Org_User] As B On A.[ID]=B.[CompanyID] And [B].[IsDeleted]=0
-	                       Inner Join [dbo].[Employee] As C On B.[LoginName]=C.[LoginName] And C.[IsDeleted]=0
 	                       Where A.[SystemID]=@SystemID And B.[LoginName]=@LoginName And A.[IsCompany]=1";
             DbParameter[] parameters = new DbParameter[]
             {
@@ -449,7 +455,6 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
                            (
 	                           Select A.* From [dbo].[S_Organizational] As A
 	                           Inner Join [dbo].[S_Org_User] As B On A.[ID]=B.[CompanyID] And [B].[IsDeleted]=0
-	                           Inner Join [dbo].[Employee] As C On B.[LoginName]=C.[LoginName] And C.[IsDeleted]=0
 	                           Where A.[SystemID]=@SystemID And B.[LoginName]=@LoginName
 	                           Union All
                                Select A.* From [dbo].[S_Organizational] As A 

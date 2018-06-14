@@ -67,7 +67,17 @@ namespace LJTH.BusinessIndicators.Web
             //  result = (List<NavSiteMapNode>) HttpContext.Current.Cache[cacheKey];
             if (result == null)
             {
-                result = GetMenus();
+                bool isPageExist = false;
+                result = GetMenus(ref isPageExist);
+                if (!this.Request.Url.AbsoluteUri.ToLower().Contains("nopermission.aspx"))
+                {
+                    if (result.Count < 1)
+                    {
+                        Response.Redirect("~/NoPermission.aspx");
+                    }
+                    if (result.Count > 0 && !isPageExist)
+                        SetDefaultPage(result);
+                }
                 CacheDependency fileDependency = new CacheDependency(Server.MapPath(WebHelper.AuthCacheDependencyFile));
                 HttpContext.Current.Cache.Insert(cacheKey, result, fileDependency);
             }
@@ -75,6 +85,9 @@ namespace LJTH.BusinessIndicators.Web
             return result;
         }
 
+        /// <summary>
+        /// 设置菜单选中
+        /// </summary>
         protected void bangsitmap()
         {
 
@@ -109,10 +122,14 @@ namespace LJTH.BusinessIndicators.Web
                     }
                 }
             }
-            sitmap.InnerHtml = "您当前所在的位置：" + first + two;
+            if (!this.Request.Url.AbsoluteUri.ToLower().Contains("nopermission.aspx"))
+            {
+                sitmap.InnerHtml = "您当前所在的位置：" + first + two;
+            }
 
 
         }
+
         private List<NavSiteMapNode> GetNavNodesAfterCheck(NavSiteMap siteMap)
         {
 
@@ -231,14 +248,9 @@ namespace LJTH.BusinessIndicators.Web
         }
 
         #region 读取数据库中配置的菜单
-        private List<NavSiteMapNode> GetMenus()
+        private List<NavSiteMapNode> GetMenus(ref bool isPageExist)
         {
-            bool isPageExist = false;
             List<S_Menu> menus = S_MenuActionOperator.Instance.GetLoinNameMenu(WebHelper.GetCurrentLoginUser());
-            if (menus.Count < 1)
-            {
-                Response.Redirect("../NoPermission.aspx");
-            }
             List<NavSiteMapNode> list_node = new List<NavSiteMapNode>();
             Guid parentMenuID = "00000000-0000-0000-0000-000000000000".ToGuid();
             foreach (var item in menus.Where(o => o.ParentMenuID == parentMenuID))
@@ -255,12 +267,13 @@ namespace LJTH.BusinessIndicators.Web
                 nm.Nodes = GetSubmenu(menus, item.ID, ref IsSelect);
                 if (this.Request.Url.AbsoluteUri.ToLower().Contains(item.Url.ToLower()))
                 {
-                    if (IsSelect)
-                    {
-                        nm.Selected = IsSelect;
-                        isPageExist = true;
-                    }
-                    if (nm.Nodes.Count < 1)
+                    nm.Selected = IsSelect;
+                    isPageExist = true;
+
+                }
+                else
+                {
+                    if (nm.Nodes.Count > 0 && IsSelect)
                     {
                         nm.Selected = true;
                         isPageExist = true;
@@ -268,16 +281,11 @@ namespace LJTH.BusinessIndicators.Web
                 }
                 list_node.Add(nm);
             }
-            if (!isPageExist)
-            {
-                //Response.Redirect("../NoPermission.aspx");
-            }
             return list_node;
         }
 
         private List<NavSiteMapNode> GetSubmenu(List<S_Menu> menuInfo, Guid parentMenuID, ref bool IsSelect)
         {
-            IsSelect = false;
             List<NavSiteMapNode> list_node = new List<NavSiteMapNode>();
             foreach (var item in menuInfo.Where(o => o.ParentMenuID == parentMenuID))
             {
@@ -303,7 +311,23 @@ namespace LJTH.BusinessIndicators.Web
             return list_node;
         }
 
-        #endregion 
+
+        /// <summary>
+        /// 设置默认首页
+        /// </summary>
+        /// <param name="navigatorNodes"></param>
+        private void SetDefaultPage(List<NavSiteMapNode>  navigatorNodes)
+        {
+            if (navigatorNodes[0].Nodes.Count <= 0)
+            {
+                Response.Redirect("~" + navigatorNodes[0].Url);
+            }
+            else
+            {
+                SetDefaultPage(navigatorNodes[0].Nodes);
+            }
+        }
+        #endregion
         //private bool _enabledSSO = true;
 
         //protected void Button1_Click(object sender, EventArgs e)

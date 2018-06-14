@@ -327,7 +327,7 @@ function SplitData(resultData) {
                 loadTmpl('#' + strSummaryTabel[0]).tmpl().appendTo('#MonthReportSummaryHead');
 
             } else {
-                loadTmpl('#MonthReportSummaryHeadTemplate').tmpl().appendTo('#MonthReportSummaryHead');
+                loadTmpl('#MonthReportSummaryHeadTemplate_DZSW').tmpl().appendTo('#MonthReportSummaryHead');
 
             }
 
@@ -713,13 +713,17 @@ function DownExcelReport(sender) {
     Year = date.getFullYear();
     Month = date.getMonth() - 1;
     if ($(sender).text().indexOf("月度经营报告") > 1) {
-        window.open("/AjaxHander/DownExcelTemplete.ashx?FileType=TargetSummary&SysId=" + SystemID + "&FinYear=" + Year + "&FinMonth=" + Month + "&MonthlyReportID=" + MonthReportID);
+        window.open("/AjaxHander/DownExcelTemplete.ashx?FileType=TargetSummary&SysId=" + SystemID + "&FinYear=" + Year + "&FinMonth=" + Month + "&MonthlyReportID=" + MonthReportID
+           + "&Approve=true");
     } else if ($(sender).text().indexOf("累计未完成") > 1) {
-        window.open("/AjaxHander/DownExcelTemplete.ashx?FileType=MissTarget&SysId=" + SystemID + "&FinYear=" + Year + "&FinMonth=" + Month + "&MonthlyReportID=" + MonthReportID);
+        window.open("/AjaxHander/DownExcelTemplete.ashx?FileType=MissTarget&SysId=" + SystemID + "&FinYear=" + Year + "&FinMonth=" + Month + "&MonthlyReportID=" + MonthReportID
+           + "&Approve=true");
     } else if ($(sender).text().indexOf("当月未完成") > 1) {
-        window.open("/AjaxHander/DownExcelTemplete.ashx?FileType=CurrentMissTarget&SysId=" + SystemID + "&FinYear=" + Year + "&FinMonth=" + Month + "&MonthlyReportID=" + MonthReportID);
+        window.open("/AjaxHander/DownExcelTemplete.ashx?FileType=CurrentMissTarget&SysId=" + SystemID + "&FinYear=" + Year + "&FinMonth=" + Month + "&MonthlyReportID=" + MonthReportID
+           + "&Approve=true");
     } else if ($(sender).text().indexOf("回情况明细") > 1) {
-        window.open("/AjaxHander/DownExcelTemplete.ashx?FileType=TargetReturn&SysId=" + SystemID + "&FinYear=" + Year + "&FinMonth=" + Month + "&MonthlyReportID=" + MonthReportID);
+        window.open("/AjaxHander/DownExcelTemplete.ashx?FileType=TargetReturn&SysId=" + SystemID + "&FinYear=" + Year + "&FinMonth=" + Month + "&MonthlyReportID=" + MonthReportID
+           + "&Approve=true");
     }
 
 }

@@ -678,7 +678,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             for (int i = 0; i < result.Count; i++)
             {
 
-                var a = BPF.Workflow.Client.WFClientSDK.GetProcess(null, result[i].ID.ToString());
+                //var a = BPF.Workflow.Client.WFClientSDK.GetProcess(null, result[i].ID.ToString());
                 Process Pro = WFClientSDK.GetProcess(null, result[i].ID.ToString()).ProcessInstance;//从工作流获取上报时间
                 if (Pro != null)
                 {
@@ -1170,24 +1170,30 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                                 else
                                     model.RptTime = NVlist[0].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss");
 
-                                //指标结束时间赋值。
-                                for (int i = 0; i < NVlist.Count(); i++)
+                                if (NVlist[NVlist.Count - 1].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss") != "0001-01-01 00:00:00")
+                                    model.EndTime = NVlist[NVlist.Count - 1].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss");
+                                if(M.WFStatus== "Cancel")
                                 {
-                                    if (NVlist[NVlist.Count() - 1].ActivityName == "通知" && NVlist[NVlist.Count() - 2].ActivityName == "审批")
-                                    {
-                                        if (NVlist[NVlist.Count() - 2].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss") != "0001-01-01 00:00:00")
-                                        {
-                                            model.EndTime = NVlist[NVlist.Count() - 2].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss");
-                                        }
-                                    }
-                                    else if (NVlist[i].ActivityName == "审批" && i + 1 == NVlist.Count())
-                                    {
-                                        if (NVlist[i].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss") != "0001-01-01 00:00:00")
-                                        {
-                                            model.EndTime = NVlist[i].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss");
-                                        }
-                                    }
+                                    model.EndTime = M.ModifyTime.ToString("yyyy-MM-dd HH:mm:ss");
                                 }
+                                //指标结束时间赋值。
+                                //for (int i = 0; i < NVlist.Count(); i++)
+                                //{
+                                //    if (NVlist[NVlist.Count() - 1].ActivityName == "通知" && NVlist[NVlist.Count() - 2].ActivityName == "审批")
+                                //    {
+                                //        if (NVlist[NVlist.Count() - 2].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss") != "0001-01-01 00:00:00")
+                                //        {
+                                //            model.EndTime = NVlist[NVlist.Count() - 2].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss");
+                                //        }
+                                //    }
+                                //    else if (NVlist[i].ActivityName == "审批" && i + 1 == NVlist.Count())
+                                //    {
+                                //        if (NVlist[i].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss") != "0001-01-01 00:00:00")
+                                //        {
+                                //            model.EndTime = NVlist[i].Opinions[0].CreateDate.ToString("yyyy-MM-dd HH:mm:ss");
+                                //        }
+                                //    }
+                                //}
 
                                 //model.RptTime = M.CreateTime.ToString("yyyy-MM-dd HH:mm:ss");
                                 model.WFStause = M.WFStatus;
@@ -1224,7 +1230,18 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             bool success = true;
             IList<B_TargetPlan> List = new List<B_TargetPlan>();
             List = B_TargetplanOperator.Instance.GetTargetPlanByApprovedList(Guid.Parse(SysID), int.Parse(Year));
-            if (List.Where(x => (x.WFStatus == "Progress" || x.WFStatus == "Approved") && x.ID == PlanID.ToGuid()).Count() > 0)
+            if (List.Where(x => x.WFStatus == "Draft").Count() == 0 && string.IsNullOrEmpty(PlanID))
+            {
+                B_TargetPlan _BTargetPlan = new B_TargetPlan();
+                _BTargetPlan.SystemID = Guid.Parse(SysID);
+                //bmr.FinMonth = FinMonth;
+                _BTargetPlan.FinYear = int.Parse(Year);
+                _BTargetPlan.Status = 2;
+                _BTargetPlan.VersionStart = DateTime.Now;
+                _BTargetPlan.Versionend = new DateTime(9999, 01, 01);
+                _BTargetPlan.WFStatus = "Draft";
+                PlanID = B_TargetplanOperator.Instance.AddTargetplan(_BTargetPlan).ToString();
+            }else if (List.Where(x => (x.WFStatus == "Progress" || x.WFStatus == "Approved") && x.ID == PlanID.ToGuid()).Count() > 0)
             {
                 success = false;
                 B_TargetPlan _BTargetPlan = new B_TargetPlan();
@@ -1241,18 +1258,6 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             else if (List.Where(x => (x.WFStatus == "Progress" || x.WFStatus == "Approved") && x.VersionName == VersionName).Count() > 0)
             {
                 success = false;
-            }
-            else if (List.Where(x => x.WFStatus == "Draft").Count() == 0 && PlanID == "")
-            {
-                B_TargetPlan _BTargetPlan = new B_TargetPlan();
-                _BTargetPlan.SystemID = Guid.Parse(SysID);
-                //bmr.FinMonth = FinMonth;
-                _BTargetPlan.FinYear = int.Parse(Year);
-                _BTargetPlan.Status = 2;
-                _BTargetPlan.VersionStart = DateTime.Now;
-                _BTargetPlan.Versionend = new DateTime(9999, 01, 01);
-                _BTargetPlan.WFStatus = "Draft";
-                PlanID = B_TargetplanOperator.Instance.AddTargetplan(_BTargetPlan).ToString();
             }
             else if(List.Where(x => x.WFStatus == "Draft").Count() > 0)
             {

@@ -30,7 +30,16 @@ namespace LJTH.BusinessIndicators.DAL
             SqlParameter pBusinessID = CreateSqlParameter("@BusinessID", System.Data.DbType.Guid, businessID);
             return ExecuteQuery(sql,pBusinessID);
         }
-
+        public IList<B_Attachment> GetAttachmentList(string businessIDs, string businessType)
+        {
+            if (string.IsNullOrEmpty(businessIDs))
+                return new List<B_Attachment>();
+            string sql = ORMapping.GetSelectSql<B_Attachment>(TSqlBuilder.Instance);
+            sql += "WHERE " + base.NotDeleted;
+            sql += " AND businessID in ('"+ businessIDs.Replace("','", ",").Replace(",", "','") + "')  and BusinessType ='月报上传'";
+            sql += " ORDER BY CreateTime DESC";
+            return ExecuteQuery(sql);
+        }
 
         public IList<B_Attachment> GetAttachmentList(Guid businessID , string businessType )
         {

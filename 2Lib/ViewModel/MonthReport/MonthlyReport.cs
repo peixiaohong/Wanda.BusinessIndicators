@@ -16,6 +16,7 @@ namespace LJTH.BusinessIndicators.ViewModel
         public int Status { get; set; }
         public string WFStatus { get; set; }
         public Guid SystemBatchID { get; set; }
+        public Guid TargetPlanID { get; set; }
 
     }
 }

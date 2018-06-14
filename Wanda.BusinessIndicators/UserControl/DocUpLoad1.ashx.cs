@@ -59,6 +59,7 @@ namespace LJTH.BusinessIndicators.Web.UserControl
             string action = context.Request["action"];
             string BizID = context.Request["BusinessID"];
             string ValueA = context.Request["ValueA"];
+            string sysID = context.Request["SystemID"];
             string ValueB = context.Request["ValueB"];
             string ValueC = context.Request["ValueC"];
             string ValueD = context.Request["ValueD"];
@@ -84,7 +85,7 @@ namespace LJTH.BusinessIndicators.Web.UserControl
                     Guid ID = B_DocumentAttachmentsOperator.Instance.AddDocumentAttachments(_attachment);
 
 
-                    if (ValueA != "0" && ValueA != null)
+                    if (ValueA != "0" && !string.IsNullOrEmpty(ValueA))
                     {
                         C_DocumentTree Model = C_DocumentTreeOperator.Instance.GetDocumentTree(Guid.Parse(ValueA));
                         _attachment.ValueAString = Model.TreeNodeName;
@@ -92,30 +93,33 @@ namespace LJTH.BusinessIndicators.Web.UserControl
                     }
 
              
-                    if (ValueB != "0" && ValueB != null)
+                    if (!string.IsNullOrEmpty(ValueB) && ValueB != null)
                     {
                         C_DocumentTree Model = C_DocumentTreeOperator.Instance.GetDocumentTree(Guid.Parse(ValueB));
                         _attachment.ValueBString = Model.TreeNodeName;
                         _attachment.ValueB = ValueB.ToGuid() ;
 
                     }
-                    if (ValueC != null && ValueC != "0")
+                    if (!string.IsNullOrEmpty(ValueC) && ValueC != "0")
                     {
                         C_DocumentTree Model = C_DocumentTreeOperator.Instance.GetDocumentTree(Guid.Parse(ValueC));
                         _attachment.ValueCString = Model.TreeNodeName;
                         _attachment.ValueC = ValueC.ToGuid();
                     }
-                    if (ValueD != null && ValueD != "0")
+                    if (!string.IsNullOrEmpty(ValueD) && ValueD != "0")
                     {
                         C_DocumentTree Model = C_DocumentTreeOperator.Instance.GetDocumentTree(Guid.Parse(ValueD));
                         _attachment.ValueDString = Model.TreeNodeName;
                         _attachment.ValueD = ValueD.ToGuid();
                     }
-                    if (FileYear != null && FileYear != "0")
+                    if (!string.IsNullOrEmpty(FileYear) && FileYear != "0")
                     {
                         _attachment.FinYear = int.Parse(FileYear);
                     }
-                   
+                    if (!string.IsNullOrEmpty(sysID) && sysID != "0")
+                    {
+                        _attachment.SystemID = sysID.ToGuid();
+                    }
                     string filename = ID + Path.GetExtension(file.FileName);
                     _attachment.ID = ID;
 

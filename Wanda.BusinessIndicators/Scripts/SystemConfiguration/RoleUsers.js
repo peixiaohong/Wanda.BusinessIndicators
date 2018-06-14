@@ -22,9 +22,20 @@ $(document).ready(function () {
 
     //数据加载
     LoadPage();
+    var pathname = "/SystemConfiguration/RoleUsers.aspx";
+    if (location.pathname == pathname) {
+        $("#sitmap").html('您当前所在的位置：系统管理<img src="../images/btn08.png">角色管理<img src="../images/btn08.png">人员设置');
+        $("#jMenu").find("li").each(function () {
+            var text = $(this).find("span")[0];
+            $(this).removeClass("current first");
+            if (text && text.innerHTML == "系统管理") {
+                $(this).addClass("current first");
+            }
+        })
+    }
 
 });
-
+var LoginNamesArr = [];
 //页面数据加载
 function LoadPage() {
     Load();
@@ -39,9 +50,11 @@ function LoadPage() {
         args: { data: JSON.stringify(roleData)},
         successReturn: function (resultData) {
             var totalCount = resultData.TotalCount;
-            if (resultData.Success == 1) {           
+            if (resultData.Success == 1) {        
+                checkedData();
                 $('#ShowMenuUsersData').empty();
                 loadTmpl('#ShowMenuUsersDataTmpl').tmpl(resultData).appendTo('#ShowMenuUsersData');
+                $("#InitPager").empty();
                 $("#InitPager").paginationex({
                     current: PageNumber,
                     pageSize: PageSize,
@@ -60,24 +73,50 @@ function LoadPage() {
     });
 
 }
-// 用户加载
-function UsersLoadPage() {
-    Load();
-    var keyword = $("#UsersNameAdd").val();
+// 获取所有用户数据
+function checkedData() {
     var roleData = {
-        "keyWord": keyword,
-        "PageIndex": PageNumber,
-        "PageSize": PageSize
+        "RoleID": getQueryString("RoleId"),
+        "PageIndex": 1,
+        "PageSize": 2147483647
     }
     WebUtil.ajax({
         async: false,
         url: "/RoleManagerControll/GetAllUser",
         args: { data: JSON.stringify(roleData) },
         successReturn: function (resultData) {
+            if (resultData.Success == 1) {
+                resultData.Data.forEach(function (one) {
+                    LoginNamesArr.push(one.LoginName);
+                })
+            }
+            else {
+                //console.log(resultData.Message);
+            }
+        }
+    });
+}
+// 用户加载
+function UsersLoadPage() {
+    Load();
+    var keyword = $("#UsersNameAdd").val();
+    var roleData = {
+        "RoleID": getQueryString("RoleId"),
+        "keyWord": keyword,
+        "PageIndex": PageNumber,
+        "PageSize": PageSize
+    }
+    WebUtil.ajax({
+        async: false,
+        url: "/RoleManagerControll/GetAddUserInfo",
+        args: { data: JSON.stringify(roleData) },
+        successReturn: function (resultData) {
             var totalCount = resultData.TotalCount;
             if (resultData.Success == 1) {
                 $('#UsersData').empty();
                 loadTmpl('#UsersDataTmpl').tmpl(resultData).appendTo('#UsersData');
+                var els = $(".userChecked");
+                filterName(LoginNamesArr, els, true);
                 $("#pager").empty();
                 $("#pager").paginationex({
                     current: PageNumber,
@@ -125,22 +164,61 @@ function RegisterEvent() {
         $("#UsersNameAdd").val("");
     })
 }
+//分页用户存储
 
-//保存数据
-function SaveRole() {
+function storeNames() {
     var el = $(".userChecked");
-    var LoginNames = "";
     for (var i = 0; i < el.length; i++) {
         var name = el.eq(i).attr("name");
         if (el.eq(i).attr("checked") == "checked") {
-            LoginNames += name + ",";
+            LoginNamesArr.push(name);
+            LoginNamesArr = unique(LoginNamesArr);
+        } else {
+            filterName(LoginNamesArr, name, false);
         }
     }
+}
+//数组去重
+function unique(array) {
+    var r = [];
+    for (var i = 0, l = array.length; i < l; i++) {
+        for (var j = i + 1; j < l; j++)
+            if (array[i] === array[j]) j = ++i;
+        r.push(array[i]);
+    }
+    return r;
+}
+//取消选中，用户更新
+function filterName(data,name,bol) {
+    if (data.length) {
+        if (!bol) {
+            data.forEach(function (one, index) {
+                if (one == name) {
+                    data.remove(data[index])
+                }
+            })
+            return data;
+        } else {
+            data.forEach(function (one) {
+                name.map(function (index, val) {
+                    var loginName = $(val).attr("name");
+                    if (one == loginName) {
+                        $(val).attr("checked", "checked");
+                    }
+                })
+            })
+        }
+        
+    }
+}
+//保存数据
+function SaveRole() {
+    var el = $(".userChecked");
+    var LoginNames = LoginNamesArr.join(",");
     var S_Role = {
-        "PageLoginNames": LoginNames.slice(0, LoginNames.length-1),
+        "PageLoginNames": LoginNames,
         "RoleID": getQueryString("RoleId")
     }
-
     if (!LoginNames.length) {
         $.MsgBox.Confirm("提示", "没有选中", "", function () {
             $("#mb_box,#mb_con").remove();
@@ -152,6 +230,7 @@ function SaveRole() {
     }
     
 }
+
 function SaveRoleFun(data) {
     WebUtil.ajax({
         async: false,
@@ -162,12 +241,16 @@ function SaveRoleFun(data) {
                 $(".user-model").css("display", "none");
                 $("#UsersNameAdd").val("");
                 $.MsgBox.Alert("提示", "添加成功");
+                LoginNamesArr = [];
+                PageNumber = 1;
                 LoadPage();
                 //console.log("添加成功" + resultData.Message);
+                //console.log(resultData);
             }
             else {
                 $(".user-model").css("display", "none");
                 $.MsgBox.Alert("提示", "添加失败");
+                LoginNamesArr = [];
                 //console.log("添加失败:" + resultData.Message);
             }
             Fake();

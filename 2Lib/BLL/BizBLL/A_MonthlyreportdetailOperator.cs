@@ -193,12 +193,12 @@ namespace LJTH.BusinessIndicators.BLL
             Model = StaticResource.Instance.GetTargetList(SystemID, t).Where(s => s.ID == TargetID).FirstOrDefault();
             if (Model.Configuration.Elements("IsMissTargetConfigration").ToList().Count > 0)
             {
-                result = _aMonthlyreportdetailAdapter.GetVMissDetail(SystemID, Year, Month, Model.ID, true).ToList();
+                result = _aMonthlyreportdetailAdapter.GetVMissDetail_defaultPlan(SystemID, Year, Month, Model.ID, true).ToList();
 
             }
             else
             {
-                result = _aMonthlyreportdetailAdapter.GetVMissDetail(SystemID, Year, Month, Model.ID, false).ToList();
+                result = _aMonthlyreportdetailAdapter.GetVMissDetail_defaultPlan(SystemID, Year, Month, Model.ID, false).ToList();
 
             }
             if (result.Count>0)
@@ -248,6 +248,11 @@ namespace LJTH.BusinessIndicators.BLL
             return result;
         }
 
+        public IList<A_MonthlyReportDetail> GetAMonthlyReportDetailListForTargetPlanID(Guid SystemID, int Year, int Month, Guid TargetPlanID)
+        {
+            IList<A_MonthlyReportDetail> result = _aMonthlyreportdetailAdapter.GetAMonthlyReportDetailListForTargetPlanID(SystemID, Year, Month, TargetPlanID);
+            return result;
+        }
         public IList<A_MonthlyReportDetail> GetAMonthlyreportdetailList(Guid MonthlyReportID)
         {
             IList<A_MonthlyReportDetail> result = _aMonthlyreportdetailAdapter.GetAMonthlyreportdetailList(MonthlyReportID);
@@ -342,6 +347,20 @@ namespace LJTH.BusinessIndicators.BLL
         }
 
 
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="SystemID"></param>
+        /// <param name="FinYear"></param>
+        /// <param name="TargetPlanID"></param>
+        /// <returns></returns>
+        public List<A_MonthlyReportDetail> GetAMonthlyReportDetailListForActualAmmount(Guid SystemID, int FinYear,int FinMonth)
+        {
+            List<A_MonthlyReportDetail> result = _aMonthlyreportdetailAdapter.GetAMonthlyReportDetailListForActualAmmount(SystemID, FinYear,FinMonth);
+            return result;
+        }
 
 
         /// <summary>

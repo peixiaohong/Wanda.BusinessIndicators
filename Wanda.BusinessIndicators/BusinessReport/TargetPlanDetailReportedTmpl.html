@@ -1,7 +1,7 @@
 ﻿<script id="TargetPlanDetailReportTableHeadTemplate" type="text/x-jquery-tmpl">
     <tr class='tab_5_row_alt'>
         <th rowspan='2' style='width: 4%'>序号</th>
-        <th rowspan='2'>门店</th>
+        <th rowspan='2'>项目</th>
         <th rowspan='2' style='width: 7%'>开业日期</th>
         <th rowspan='2' style='width: 7%'>年度指标</th>
         <th colspan='12' style='width: 70%'>当月数</th>
@@ -28,7 +28,7 @@
     </tr>
     <tr >
         <th rowspan='2' style='width: 4%'>序号</th>
-        <th rowspan='2'>门店</th>
+        <th rowspan='2'>项目</th>
         <th rowspan='2' style='width: 7%'>开业日期</th>
         <th rowspan='2' style='width: 7%'>年度指标</th>
         <th colspan='12' style='width: 70%'>当月数</th>
@@ -63,7 +63,7 @@
 <script id="TargetPlanDetailReportTableHeadTemplate_ToYear" type="text/x-jquery-tmpl">
     <tr class='tab_5_row_alt' style="width: 200px;">
         <th style='width: 5%'>序号</th>
-        <th>门店</th>
+        <th>项目</th>
         <th style='width: 30%'>年度指标</th>
     </tr>
 </script>
@@ -131,20 +131,20 @@
         <td class="Td_Center">${seq}</td>
         <td class="Td_Right">${CompanyName}</td>
         <td class="Td_Center" title="${OpenTime}">{{if OpenTime =='--'}}${OpenTime}{{else}}${FormatDate(OpenTime,false)}{{/if}}</td>
-        <td class="Td_Right" title="${TargetSum12}">${MathTarget(TargetSum12)}</td>
+        <td class="Td_Right" title="${TargetSum12}">${MathTarget(TargetSum12).thousandize0OrEmpty(0)}</td>
     
-        <td class="Td_Right dan"  title="${Target1}">${MathTarget(Target1)}</td>
-        <td class="Td_Right dan"  title="${Target2}">${MathTarget(Target2)}</td>
-        <td class="Td_Right dan"  title="${Target3}">${MathTarget(Target3)}</td>
-        <td class="Td_Right dan"  title="${Target4}">${MathTarget(Target4)}</td>
-        <td class="Td_Right dan"  title="${Target5}">${MathTarget(Target5)}</td>
-        <td class="Td_Right dan"  title="${Target6}">${MathTarget(Target6)}</td>
-        <td class="Td_Right dan"  title="${Target7}">${MathTarget(Target7)}</td>
-        <td class="Td_Right dan"  title="${Target8}">${MathTarget(Target8)}</td>
-        <td class="Td_Right dan"  title="${Target9}">${MathTarget(Target9)}</td>
-        <td class="Td_Right dan"  title="${Target10}">${MathTarget(Target10)}</td>
-        <td class="Td_Right dan"  title="${Target11}">${MathTarget(Target11)}</td>
-        <td class="Td_Right dan"  title="${Target12}">${MathTarget(Target12)}</td>
+        <td class="Td_Right dan" title="${Target1}">${MathTarget(Target1).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right dan" title="${Target2}">${MathTarget(Target2).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right dan" title="${Target3}">${MathTarget(Target3).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right dan" title="${Target4}">${MathTarget(Target4).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right dan" title="${Target5}">${MathTarget(Target5).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right dan" title="${Target6}">${MathTarget(Target6).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right dan" title="${Target7}">${MathTarget(Target7).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right dan" title="${Target8}">${MathTarget(Target8).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right dan" title="${Target9}">${MathTarget(Target9).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right dan" title="${Target10}">${MathTarget(Target10).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right dan" title="${Target11}">${MathTarget(Target11).thousandize0OrEmpty(0)}</td>
+        <td class="Td_Right dan" title="${Target12}">${MathTarget(Target12).thousandize0OrEmpty(0)}</td>
 
     </tr>
 </script>

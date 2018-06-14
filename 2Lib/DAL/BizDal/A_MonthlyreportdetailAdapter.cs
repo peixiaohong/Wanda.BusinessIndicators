@@ -179,7 +179,7 @@ FROM    dbo.C_Target CT
         internal List<MonthlyReportDetail> GetMonthlyReportDetailList_Result(Guid SystemID, int Year, int Month, Guid TargetPlanID)
         {
             string sql = "GetMonthlyReportDetailList_Result ";
-           
+
             var ds = DbHelper.RunSPReturnDS(sql, ConnectionName, CreateSqlParameter("@SystemID", DbType.Guid, SystemID), CreateSqlParameter("@FinYear", DbType.Int32, Year), CreateSqlParameter("@FinMonth", DbType.Int32, Month), CreateSqlParameter("@TargetPlanID", DbType.Guid, TargetPlanID));
             List<MonthlyReportDetail> data = new List<MonthlyReportDetail>();
             ds.Tables[0].Rows.Cast<System.Data.DataRow>().ForEach(row =>
@@ -269,6 +269,41 @@ WHERE   A_MonthlyReportDetail.SystemID = @SystemID
             });
             return data;
         }
+        internal IList<MonthlyReportDetail> GetVMissDetail_defaultPlan(Guid SystemID, int Year, int Month, Guid TargetID, bool IsSpecial)
+        {
+            string sql = @"SELECT * FROM (
+ SELECT A_MonthlyReportDetail.*,C_Company.CompanyName,C_Company.NeedEvaluation,C_Company.Sequence FROM dbo.A_MonthlyReportDetail 
+INNER JOIN dbo.A_TargetPlan ON dbo.A_MonthlyReportDetail.TargetPlanID=A_TargetPlan.ID AND A_TargetPlan.VersionDefault=1 
+INNER JOIN dbo.C_Company ON 
+                dbo.A_MonthlyReportDetail.SystemID = dbo.C_Company.SystemID AND 
+                    dbo.A_MonthlyReportDetail.CompanyID = dbo.C_Company.ID ) aa 
+					WHERE  aa.SystemID=@SystemID AND aa.TargetID=@TargetID
+					AND aa.FinMonth=@Month AND aa.FinYear=@Year";
+
+            if (IsSpecial == false)
+            {
+                sql += " AND IsMissTarget=1";
+                sql += " ORDER BY Sequence DESC ";
+            }
+            else
+            {
+                sql += " AND NAccumulativeDifference<0 ";
+                sql += " ORDER BY Sequence DESC ";
+            }
+            SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
+            SqlParameter pYear = CreateSqlParameter("@Year", System.Data.DbType.String, Year);
+            SqlParameter pMonth = CreateSqlParameter("@Month", System.Data.DbType.String, Month);
+            SqlParameter pTargetID = CreateSqlParameter("@TargetID", System.Data.DbType.Guid, TargetID);
+            var ds = DbHelper.RunSqlReturnDS(sql, ConnectionName, pTargetID, pSystemID, pYear, pMonth);
+            List<MonthlyReportDetail> data = new List<MonthlyReportDetail>();
+            ds.Tables[0].Rows.Cast<System.Data.DataRow>().ForEach(row =>
+            {
+                MonthlyReportDetail item = new MonthlyReportDetail();
+                ORMapping.DataRowToObject(row, item);
+                data.Add(item);
+            });
+            return data;
+        }
         internal IList<A_MonthlyReportDetail> GetAMReportDetailDifferenceList(Guid SystemID, int Year, int Month, Guid TargetID)
         {
             string sql = ORMapping.GetSelectSql<A_MonthlyReportDetail>(TSqlBuilder.Instance);
@@ -293,6 +328,21 @@ WHERE   A_MonthlyReportDetail.SystemID = @SystemID
             SqlParameter pTargetID = CreateSqlParameter("@TargetID", System.Data.DbType.Guid, TargetID);
 
             return ExecuteQuery(sql, pSystemID, pYear, pMonth, pTargetID);
+        }
+
+        internal IList<A_MonthlyReportDetail> GetAMonthlyReportDetailListForTargetPlanID(Guid SystemID, int Year, int Month, Guid TargetPlanID)
+        {
+            string sql = ORMapping.GetSelectSql<A_MonthlyReportDetail>(TSqlBuilder.Instance);
+
+            sql += "WHERE " + base.NotDeleted;
+            sql += " AND SystemID=@SystemID AND FinYear=@Year AND FinMonth=@Month and TargetPlanID=@TargetPlanID";
+
+            SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
+            SqlParameter pYear = CreateSqlParameter("@Year", System.Data.DbType.String, Year);
+            SqlParameter pMonth = CreateSqlParameter("@Month", System.Data.DbType.String, Month);
+            SqlParameter pTargetPlanID = CreateSqlParameter("@TargetPlanID", System.Data.DbType.Guid, TargetPlanID);
+
+            return ExecuteQuery(sql, pSystemID, pYear, pMonth, pTargetPlanID);
         }
 
         internal IList<A_MonthlyReportDetail> GetAMonthlyreportdetailList(Guid MonthlyReportID)
@@ -340,7 +390,7 @@ WHERE   A_MonthlyReportDetail.SystemID = @SystemID
 
             return ExecuteQuery(sql, pSystemID, pCompanyID, pYear, pMonth, pTargetID).FirstOrDefault();
         }
-   internal A_MonthlyReportDetail GetAMonthlyreportdetail(Guid SystemID, Guid CompanyID, Guid TargetID, int Year, int Month,Guid TargetPlanID)
+        internal A_MonthlyReportDetail GetAMonthlyreportdetail(Guid SystemID, Guid CompanyID, Guid TargetID, int Year, int Month, Guid TargetPlanID)
         {
             string sql = ORMapping.GetSelectSql<A_MonthlyReportDetail>(TSqlBuilder.Instance);
 
@@ -446,6 +496,43 @@ WHERE   A_MonthlyReportDetail.SystemID = @SystemID
             return ExecuteQuery(sql, pSystemID, pFinYear, pFinMonth, pTargetID);
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="SystemID"></param>
+        /// <param name="FinYear"></param>
+        /// <param name="pTargetPlanID"></param>
+        /// <returns></returns>
+        public List<A_MonthlyReportDetail> GetAMonthlyReportDetailListForActualAmmount(Guid SystemID, int FinYear, int FinMonth)
+        {
+            string sql = @"
+            SELECT  A.*
+            FROM    dbo.A_MonthlyReportDetail AS A
+                    INNER JOIN ( SELECT TOP 1
+                                        FinYear ,
+                                        FinMonth ,
+                                        TargetPlanID
+                                 FROM   dbo.A_MonthlyReport
+                                 WHERE  SystemID = @SystemID
+                                        AND IsDeleted = 0
+                                        AND FinYear = @FinYear
+                                        AND FinMonth<@FinMonth
+                                 ORDER BY CreateTime DESC
+                               ) AS T ON A.FinYear = T.FinYear
+                                         AND A.FinMonth = T.FinMonth
+                                         AND A.TargetPlanID = T.TargetPlanID
+            WHERE   A.IsDeleted = 0
+                    AND A.SystemID = @SystemID
+                    AND A.FinYear = @FinYear;";
+
+
+            SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
+            SqlParameter pFinYear = CreateSqlParameter("@FinYear", System.Data.DbType.Int64, FinYear);
+            SqlParameter pFinMonth = CreateSqlParameter("@FinMonth", System.Data.DbType.Int64, FinMonth);
+
+            return ExecuteQuery(sql, pSystemID, pFinYear, pFinMonth);
+        }
 
         internal int DeleteMonthlyreportdetailLisr(List<A_MonthlyReportDetail> List)
         {

@@ -60,19 +60,44 @@ namespace LJTH.BusinessIndicators.BLL
             _ReportDateTime = null;
             _TargetPlanDetail = new Dictionary<int, List<A_TargetPlanDetail>>();
             _DefaultTargetPlanDetail = new Dictionary<int, List<A_TargetPlanDetail>>();
-
+            _MonthlyReportDetailList = new Dictionary<string, IList<A_MonthlyReportDetail>>();
             _instance.timer = DateTime.Now;
         }
+        public Dictionary<string, IList<A_MonthlyReportDetail>> _MonthlyReportDetailList = new Dictionary<string, IList<A_MonthlyReportDetail>>();
+
+
+        /// <summary>
+        /// 获取全年的月报（现主要用于计算累计实际值）
+        /// </summary>
+        /// <param name="SystemID"></param>
+        /// <param name="FinYear"></param>
+        /// <returns></returns>
+        public IList<A_MonthlyReportDetail> GetMonthlyReportDetails(Guid SystemID, int FinYear, int FinMonth)
+        {
+            var key = FinYear + "&" + SystemID + "&" + FinMonth;
+            if (_MonthlyReportDetailList == null || _MonthlyReportDetailList.Count <= 0 || !_MonthlyReportDetailList.Keys.Contains(key))
+            {
+                var list = A_MonthlyreportdetailOperator.Instance.GetAMonthlyReportDetailListForActualAmmount(SystemID, FinYear, FinMonth);
+                _MonthlyReportDetailList[key] = list;
+            }
+            return _MonthlyReportDetailList[key];
+        }
+
 
         public C_System this[Guid Key, DateTime CurrentDate]
         {
             get
             {
+                if (CurrentDate == new DateTime())
+                    CurrentDate = DateTime.Now;
                 if (SystemList != null && SystemList.Count > 0)
                 {
-                    return SystemList.ToList().Find(S => S.ID == Key);
-                    //return C_SystemOperator.Instance.GetSystemList(CurrentDate).ToList().Find(S => S.ID == Key);
-
+                    var system= SystemList.ToList().Find(S => S.ID == Key);
+                    if (system.VersionStart > CurrentDate || system.VersionEnd < CurrentDate)
+                    {
+                        return C_SystemOperator.Instance.GetSystemList(CurrentDate).ToList().Find(S => S.ID == Key);
+                    }
+                    return system;
                 }
                 return null;
             }
@@ -378,7 +403,7 @@ namespace LJTH.BusinessIndicators.BLL
             {
                 _ReportDateTime = C_ReportTimeOperator.Instance.GetReportTime().ReportTime;
                 if (_ReportDateTime == null)
-                    _ReportDateTime = DateTime.Now.AddMonths(-1);
+                    _ReportDateTime = DateTime.Now;
             }
             return _ReportDateTime.Value;
 

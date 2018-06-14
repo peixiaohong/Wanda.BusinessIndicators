@@ -2,15 +2,12 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" type="text/css" href="../Scripts/UpLoad/uploadify.css" />
-    <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
-
-
     <script type="text/javascript" src="../Scripts/ztree/jquery.ztree.all-3.5.min.js"></script>
     <script type="text/javascript" src="../Scripts/ztree/jquery.ztree.core-3.5.min.js"></script>
     <script type="text/javascript" src="../Scripts/ztree/jquery.ztree.excheck-3.5.min.js"></script>
 
     <link href="/Styles/ztree/metroStyle/metroStyle.css" rel="stylesheet" />
-    <script type="text/javascript" src="../Scripts/BusinessReport/MonthReport.js?v=1"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/MonthReport.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
     <script type="text/javascript" src="../Scripts/jquery.base64.js"></script>
     <script type="text/javascript" src="../Scripts/linq.min.js"></script>
     <script type="text/javascript">
@@ -105,7 +102,7 @@
                     <li id="BHhide1"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>其它情况</span></a></li>
                     <li id="detailmana" style="display: none" runat="server" clientidmode="Static"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>上报日志</span></a></li>
 
-                    <%--                <li id="BHhide2"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>指标完成情况明细</span></a></li>
+                    <%--<li id="BHhide2"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>指标完成情况明细</span></a></li>
                     <li id="BHhide3"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>补回指标缺口情况</span></a></li>
                     <li id="BHhide4"><a class="active_sub2" onclick="ChangeTargetDetail(this,'Tab');"><span>新增未完成门店情况</span></a></li>--%>
                 </ul>
@@ -154,7 +151,7 @@
                     <div class="scrolldoorFrame copy">
                         <ul class="tabs" id="Ul4_1" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                         </ul>
-                        <table id="importedDataFloatTable2_1" class="tab_005">
+                        <table id="importedDataFloatTable2_1" class="tab_005" style="display:none">
                             <thead style="width: 100%">
                             </thead>
                         </table>
@@ -173,7 +170,7 @@
                     <div class="scrolldoorFrame copy">
                         <ul class="tabs" id="Ul4" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                         </ul>
-                        <table class="tab_005" id="importedDataFloatTable2">
+                        <table class="tab_005" id="importedDataFloatTable2" style="display:none">
                             <thead style="width: 100%">
                             </thead>
                         </table>
@@ -192,7 +189,7 @@
                 <div class="TClassHide" id="T3_1">
                     <ul class="tabs" id="U2_1" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                     </ul>
-                    <table class="tab_005" id="Tab_CurrentMissFloatTarget">
+                    <table class="tab_005" id="Tab_CurrentMissFloatTarget" style="display:none">
                         <thead>
                             <tr>
                                 <th rowspan="2" style="min-width: 20px; width: 4%; word-break: keep-all">序号</th>
@@ -243,7 +240,7 @@
                 <div id="T3" class="TClassHide">
                     <ul class="tabs" id="U2" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                     </ul>
-                    <table class="tab_005" id="Tab_MissFloatTarget">
+                    <table class="tab_005" id="Tab_MissFloatTarget" style="display:none">
                         <thead>
                             <tr>
                                 <th rowspan="2" style="min-width: 20px; width: 4%; word-break: keep-all">序号</th>
@@ -291,7 +288,7 @@
                 <div id="T4" class="TClassHide">
                     <ul class="tabs" id="U1" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                     </ul>
-                    <table class="tab_005" id="Tab_FloatReturn">
+                    <table class="tab_005" id="Tab_FloatReturn" style="display:none">
                         <thead>
                             <tr>
                                 <th rowspan="2" style="width: 4%; min-width: 40px;">序号</th>

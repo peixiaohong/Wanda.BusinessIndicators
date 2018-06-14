@@ -36,10 +36,10 @@ namespace WebApi.Controllers
         public ResultContext MonthProcessRequest(string BusinessID, string strProType, string ExecuteType, int OperatorType, string PrcessStatus)
         {
             ProcessController pc = new ProcessController();
-            pc.BusinessID = BusinessID;
-            pc.ProType = strProType;
-            pc.ExecType = ExecuteType;
-            pc.OperatorType = OperatorType;
+            //pc.BusinessID = BusinessID;
+            //pc.ProType = strProType;
+            //pc.ExecType = ExecuteType;
+            //pc.OperatorType = OperatorType;
             try
             {
                 //写入用户信息
@@ -51,11 +51,19 @@ namespace WebApi.Controllers
                 };
                 SSOClaimsPrincipal claimsPrincipal = new SSOClaimsPrincipal(claimsIdentity);
                 context.User = claimsPrincipal;
-                //业务处理
-                pc.DisposeBusinessData();
-                
-                //执行按钮事件的处理
-                pc.ExecutionBusinessData();
+                //context.Items.Add("BusinessID", BusinessID);
+                //context.Items.Add("ProType", strProType);
+                //context.Items.Add("ExecType", ExecuteType);
+                //context.Items.Add("OperatorType", OperatorType);
+                //context.Items.Add("PrcessStatus", PrcessStatus);
+                //HttpRequest  Request = context.Request;
+                pc.ProcessRequest(context);
+
+                ////业务处理
+                //pc.DisposeBusinessData();
+
+                ////执行按钮事件的处理
+                //pc.ExecutionBusinessData();
                 return new ResultContext();
             }
             catch (Exception ex)

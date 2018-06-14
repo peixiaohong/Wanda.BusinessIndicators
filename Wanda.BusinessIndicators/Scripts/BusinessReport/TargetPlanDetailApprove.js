@@ -63,14 +63,22 @@ function GetSumList() {
             $("#TargetTable").hide();
 
            // Fake();
+            var obj = $("#importedDataFloatTable2");
+            var head = $("#Head");
+            obj.find("thead").html(head.html());
+            //FloatHeaderWidth(obj, head);
+            var tab = $("#Head");
+            FloatHeader(obj, tab);
 
         }
     });
 
 
-    var obj = $("#Thead1");
-    var tab = $("#TrTargetTable");
-    FloatHeader(obj, tab);
+    //var obj = $("#Thead1");
+    //var tab = $("#TrTargetTable");
+    //FloatHeader(obj, tab);
+
+    
 }
 
 function GetSumTargetPlanList() {
@@ -102,7 +110,13 @@ function Change(adj, id) {
         $("#SumTable").show();
         $("#TargetTable").hide();
         $("#file_upload-button1").show();
-      
+
+        var obj = $("#importedDataFloatTable2");
+        var head = $("#Head");
+        obj.find("thead").html(head.html());
+        //FloatHeaderWidth(obj, head);
+        var tab = $("#Head");
+        FloatHeader(obj, tab);
     }
     else {
         $("#SumTable").hide();
@@ -143,7 +157,12 @@ function BangSumTargetPlanList(id) {
         });
 
     }
-
+    var obj = $("#importedDataFloatTable2");
+    var head = $("#Thead1");
+    obj.find("thead").html(head.html());
+    //FloatHeaderWidth(obj, head);
+    var tab = $("#Thead1");
+    FloatHeader(obj, tab);
 }
 
 function BangHead(result) {
@@ -154,7 +173,6 @@ function BangHead(result) {
     for (var i = 0; i < 2; i++) {
         loadTmpl('#TrTarget').tmpl(result).appendTo('#TrTarget');
     }
-
 }
 
 //--新的写法
@@ -214,10 +232,11 @@ function SplitData(result) {
             }
             $("#Ul4 :first a").addClass("active_sub3");
 
-            var obj = $("#TargetPlanDetailHead");
-            var tab = $("#rows_old");
+            //var obj = $("#TargetPlanDetailHead");
+            //var tab = $("#rows_old");
 
-            FloatHeader(obj, tab);
+            //FloatHeader(obj, tab);
+            
         }
     }
 }
@@ -243,6 +262,12 @@ function LoadTargetPlanDetailData(sender) {
         } else {
             loadTmpl("#TargetPlanDetailReportTemplate").tmpl(sender).appendTo("#rows_old");
         }
+        var obj = $("#importedDataFloatTable2");
+        var head = $("#TargetPlanDetailHead");
+        obj.find("thead").html(head.html());
+        //FloatHeaderWidth(obj, head);
+        var tab = $("#TargetPlanDetailHead");
+        FloatHeader(obj, tab);
     }
 }
 
@@ -268,10 +293,11 @@ function TargetPlanDetailLiaddCss(sender) {
   
 
 
-    var obj = $("#TargetPlanDetailHead");
-    var tab = $("#rows_old");
+    //var obj = $("#TargetPlanDetailHead");
+    //var tab = $("#rows_old");
 
-    FloatHeader(obj, tab);
+    //FloatHeader(obj, tab);
+ 
     $("#rows_old").empty();
     $("#TargetPlanDetailHead").empty();
 
@@ -395,7 +421,7 @@ function BusinessDataHandle(instanceID, args) {
         // 审批结束
         if (args.WorkflowContext.CurrentUserNodeID != null && args.WorkflowContext.CurrentUserNodeID != "") {
             var nodeInfo = args.WorkflowContext.NodeInstanceList[args.WorkflowContext.CurrentUserNodeID];
-            if (nodeInfo != null && (nodeInfo.NodeType == 1 || nodeInfo.NodeType == 2 || nodeInfo.NodeType == 7)) {
+            if (nodeInfo != null && (nodeInfo.NodeType == 0 ||nodeInfo.NodeType == 1 || nodeInfo.NodeType == 2 || nodeInfo.NodeType == 7)) {
                 strPrcessStatus = "Approved";
 
 
@@ -481,7 +507,7 @@ function BangDetail() {
                 for (var j = 0; j < SumMonthTargetList[i].TargetDetailList.length; j++) {
                     if (TargetList[n].ID == SumMonthTargetList[i].TargetDetailList[j].TargetID) {
                         if (SumMonthTargetList[i].TargetDetailList[j].Target != null) {
-                            row += "<td class=\"Td_Right\"title=" + SumMonthTargetList[i].TargetDetailList[j].Target + ">" + MathTarget(SumMonthTargetList[i].TargetDetailList[j].Target) + "</td>";
+                            row += "<td class=\"Td_Right\"title=" + SumMonthTargetList[i].TargetDetailList[j].Target + ">" + MathTarget(SumMonthTargetList[i].TargetDetailList[j].Target).thousandize0OrEmpty(0) + "</td>";
                         }
                         else {
                             row += "<td class=\"Td_Right\">--</td>";
@@ -494,7 +520,7 @@ function BangDetail() {
                 for (var j = 0; j < SumMonthTargetList[i].TargetDetailList.length; j++) {
                     if (TargetList[n].ID == SumMonthTargetList[i].TargetDetailList[j].TargetID) {
                         if (SumMonthTargetList[i].TargetDetailList[j].SumTarget != null) {
-                            row += "<td class=\"Td_Right\" title=" + SumMonthTargetList[i].TargetDetailList[j].SumTarget + ">" + MathTarget(SumMonthTargetList[i].TargetDetailList[j].SumTarget) + "</td>";
+                            row += "<td class=\"Td_Right\" title=" + SumMonthTargetList[i].TargetDetailList[j].SumTarget + ">" + MathTarget(SumMonthTargetList[i].TargetDetailList[j].SumTarget).thousandize0OrEmpty(0) + "</td>";
                         }
                         else {
                             row += "<td class=\"Td_Right\">--</td>";
@@ -509,7 +535,7 @@ function BangDetail() {
             for (var j = 0; j < SumMonthTargetList[11].TargetDetailList.length; j++) {
                 if (TargetList[i].ID == SumMonthTargetList[11].TargetDetailList[j].TargetID) {
                     if (SumMonthTargetList[11].TargetDetailList[j].SumTarget != null) {
-                        row += "<th class=\"th_Sub2\" style=\"text-align:right\" title=" + SumMonthTargetList[11].TargetDetailList[j].SumTarget + ">" + MathTarget(SumMonthTargetList[11].TargetDetailList[j].SumTarget) + "</th>";
+                        row += "<th class=\"th_Sub2\" style=\"text-align:right\" title=" + SumMonthTargetList[11].TargetDetailList[j].SumTarget + ">" + MathTarget(SumMonthTargetList[11].TargetDetailList[j].SumTarget).thousandize0OrEmpty(0) + "</th>";
                     }
                     else {
                         row += "<td class=\"th_Sub2\" style=\"text-align:right\">--</td>";

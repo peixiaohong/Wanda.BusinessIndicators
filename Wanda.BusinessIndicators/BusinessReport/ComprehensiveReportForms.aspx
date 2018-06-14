@@ -22,7 +22,7 @@
             <div class="content_m">
                 <table class="tab_search">
                     <tbody>
-                        <th>上报系统</th>
+                        <th>上报板块</th>
                         <td>
                             <select id="systemInfo" class="PreDataChange">
                                 <option data-id="00000000-0000-0000-0000-000000000000" selected="selected">全部</option>
@@ -50,8 +50,8 @@
                                 <option data-id="12">12月</option>
                             </select>
                         </td>
-                        <th>版本类型</th>
-                        <td>
+                        <th class="TargetVersionType">版本类型</th>
+                        <td class="TargetVersionType">
                             <select id="selectTargetVersionType"></select>
                         </td>
                         <th>
@@ -91,8 +91,8 @@
                             <tr>
                                 <th class="Td_Right" rowspan="2">板块</th>
                                 <th class="Td_Right" rowspan="2">考核指标</th>
-                                <th class="Td_Right" colspan="4">本月发生</th>
-                                <th class="Td_Right" colspan="4">本年累计</th>
+                                <th class="Td_Right" colspan="4">本月发生（万元）</th>
+                                <th class="Td_Right" colspan="4">本年累计（万元）</th>
                             </tr>
                             <tr>
                                 <th class="Td_Right">计划数</th>

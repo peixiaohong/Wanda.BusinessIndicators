@@ -14,6 +14,9 @@ using System.Xml.Linq;
 
 namespace LJTH.BusinessIndicators.Engine
 {
+    /// <summary>
+    /// MonthReportDetail 各个字段的计算引擎
+    /// </summary>
     [Serializable]
     public class CalculationEvaluationEngine
     {

@@ -47,16 +47,16 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         }
 
         //获取上传文档List
+       
         [LibAction]
-        public List<B_DocumentAttachments> GetDocAttachmentsList(string TreeNodeID)
+        public List<B_DocumentAttachments> GetDocAttachmentsList(string TreeNodeID,string SystemId,string Year)
         {
             Guid _TreeNodeID = TreeNodeID.ToGuid();
 
-            List<B_DocumentAttachments> docList = B_DocumentAttachmentsOperator.Instance.GetDocAttachmentsList(_TreeNodeID).ToList();
+            List<B_DocumentAttachments> docList = B_DocumentAttachmentsOperator.Instance.GetDocAttachmentsList(_TreeNodeID,SystemId.ToGuid(), Year).ToList();
             return docList;
 
         }
-
         //通过父ID 获取其子节点List
         [LibAction]
         public List<C_DocumentTree> GetDocTreeListByParentID(string TreeNodeID, string SysID)
@@ -207,16 +207,29 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
             return AllList;
         }
         //通过名称模糊查询
+        //[LibAction]
+        //public List<B_DocumentAttachments> GetAttachmentsByName(string Value)
+        //{
+        //    List<B_DocumentAttachments> result = new List<B_DocumentAttachments>();
+        //    result = B_DocumentAttachmentsOperator.Instance.GetAllFile();
+        //    if (Value!=null&&result.Count>0)
+        //    {
+        //        result = result.Where(adj => adj.FileName.Contains(Value.Trim())).ToList();
+        //    }
+            
+        //    return result;
+        //}
+        //通过名称模糊查询
         [LibAction]
-        public List<B_DocumentAttachments> GetAttachmentsByName(string Value)
+        public List<B_DocumentAttachments> GetAttachmentsByName(string Value,string Year,string BusinessID,string SystemID)
         {
             List<B_DocumentAttachments> result = new List<B_DocumentAttachments>();
-            result = B_DocumentAttachmentsOperator.Instance.GetAllFile();
-            if (Value!=null&&result.Count>0)
+            result = B_DocumentAttachmentsOperator.Instance.GetListByBID(BusinessID.ToGuid(),SystemID.ToGuid(),Year);
+            if (Value != null && result.Count > 0)
             {
                 result = result.Where(adj => adj.FileName.Contains(Value.Trim())).ToList();
             }
-            
+
             return result;
         }
         /// <summary>

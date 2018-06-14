@@ -458,9 +458,9 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
 
             //保存Json , 开始
 
-            //ReportInstance rpt = new ReportInstance(detail.MonthlyReportID, true);
+            ReportInstance rpt = new ReportInstance(detail.MonthlyReportID, true);
 
-            //SaveJsonData(detail.MonthlyReportID, rpt);
+            SaveJsonData(detail.MonthlyReportID, rpt);
 
             //保存Json ，结束
             return result;
@@ -513,6 +513,10 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                         if (p.Name == "Misstarget")
                         {
                             p.ObjValue = GetMissTargetList(CurrentRpt, MonthReportID.ToString(), true);
+                        }
+                        if (p.Name == "CurrentMissTargetList")
+                        {
+                            p.ObjValue = GetCurrentMissTargetList(CurrentRpt, MonthReportID.ToString(), true);
                         }
                     });
                 }

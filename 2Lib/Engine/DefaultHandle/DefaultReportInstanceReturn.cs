@@ -64,12 +64,14 @@ namespace LJTH.BusinessIndicators.Engine
                     lastFinMonth = FinMonth - 1;
 
                 //上月A表的数据
-                List<A_MonthlyReportDetail> Lastlist = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetailList(_System.ID, FinYear, lastFinMonth).ToList();
+                //List<A_MonthlyReportDetail> Lastlist = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetailList(_System.ID, FinYear, lastFinMonth).ToList();
+                List<A_MonthlyReportDetail> Lastlist = A_MonthlyreportdetailOperator.Instance.GetAMonthlyReportDetailListForTargetPlanID(_System.ID, FinYear, lastFinMonth,RptModel.TargetPlanID).ToList();
                 //当月A表数据
-                List<A_MonthlyReportDetail> list_A = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetailList(_System.ID, FinYear, FinMonth).ToList();
+                //List<A_MonthlyReportDetail> list_A = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetailList(_System.ID, FinYear, FinMonth).ToList();
+                List<A_MonthlyReportDetail> list_A = A_MonthlyreportdetailOperator.Instance.GetAMonthlyReportDetailListForTargetPlanID(_System.ID, FinYear, FinMonth,RptModel.TargetPlanID).ToList();
 
                 //当月B表数据
-                List<B_MonthlyReportDetail> list_B = B_MonthlyreportdetailOperator.Instance.GetMonthlyreportdetailList(_System.ID, FinYear, FinMonth, RptModel._MonthReportID).ToList();
+                 List<B_MonthlyReportDetail> list_B = B_MonthlyreportdetailOperator.Instance.GetMonthlyreportdetailList(_System.ID, FinYear, FinMonth, RptModel._MonthReportID).ToList();
 
                 List<Guid> Companies = new List<Guid>();
 
@@ -341,7 +343,8 @@ namespace LJTH.BusinessIndicators.Engine
                     lastFinMonth = FinMonth - 1;
 
                 //上月A表的数据
-                List<A_MonthlyReportDetail> Lastlist = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetailList(_System.ID, FinYear, lastFinMonth).ToList();
+                // List<A_MonthlyReportDetail> Lastlist = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetailList(_System.ID, FinYear, lastFinMonth).ToList();
+                List<A_MonthlyReportDetail> Lastlist = A_MonthlyreportdetailOperator.Instance.GetAMonthlyReportDetailListForTargetPlanID(_System.ID, FinYear, lastFinMonth, RptModel.TargetPlanID).ToList();
 
                 List<Guid> Companies = new List<Guid>();
 

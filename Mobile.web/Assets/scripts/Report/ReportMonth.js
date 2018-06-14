@@ -9,7 +9,7 @@
             currentState: false,
             totalState: false,
             yearlyState: false,
-            systemID: "a00ad17d-57da-4f8b-9c60-807a5e83d7a7",
+            systemID: "",
             yearSelect: "",
             monthSelect: "",
             versions: [],
@@ -39,6 +39,11 @@
             },
             ChangeData: function () {
                 var self = this;
+                if (!self.systemID || !self.yearSelect || !self.monthSelect || !self.versionSelect) {
+                    self.title = "";
+                    self.list = {};
+                    return false;
+                }
                 var url = api_url + 'Report/GetMonthList';
                 utils.ajax({
                     type: 'GET',
@@ -48,9 +53,9 @@
                         "Year": Number(self.yearSelect),
                         "Month": Number(self.monthSelect),
                         "TargetPlanID": self.versionSelect,
-                        "IsLatestVersion": true,
+                        "IsLatestVersion": false,
                         "DataSource": "Draft",
-                        "IsAll": true,
+                        "IsAll": false,
                     },
                     success: function (res) {
                         if (res.IsSuccess && res.StatusCode == 200) {
@@ -67,9 +72,13 @@
             },
             InitYM: function () {
                 var self = this;
-                var date = new Date();
-                self.yearSelect = date.getFullYear();
-                self.monthSelect = date.getMonth();
+                self.yearSelect = self.systemAndYearList.SelectYear;
+                self.monthSelect = self.systemAndYearList.SelectMonth;
+                if (self.systemAndYearList.System.length > 0)
+                    self.systemID = self.systemAndYearList.System[0].ID;
+                //var date = new Date();
+                //self.yearSelect = date.getFullYear();
+                //self.monthSelect = date.getMonth() + 1;
                 self.ChangeVersion();
             },
             ChangeVersion: function () {
@@ -86,7 +95,7 @@
                     success: function (res) {
                         if (res.IsSuccess && res.StatusCode == 200) {
                             if (res.Data.length) {
-                                console.log(res);
+                                //console.log(res);
                                 self.versions = res.Data;
                                 self.versionSelect = self.versions[0].ID;
                             }                           

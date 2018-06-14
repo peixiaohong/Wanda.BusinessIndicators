@@ -32,7 +32,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 FinYear = datetime.Year;
                 FinMonth = datetime.Month;
             }
-            catch (System.FormatException )
+            catch (System.FormatException)
             { }
             hideFinYear.Value = FinYear.ToString();
             hideFinMonth.Value = FinMonth.ToString();
@@ -43,7 +43,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 List<C_System> sysList = new List<C_System>();
                 if (PermissionList != null && PermissionList.Count > 0)
                 {
-                    
+
                     foreach (var item in PermissionList)
                     {
                         sysList.AddRange(StaticResource.Instance.SystemList.Where(p => p.SystemName == item.ToString()).ToList());
@@ -99,8 +99,8 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     ddlSystem.SelectedValue = bmr.SystemID.ToString();
                     HidSystemID.Value = ddlSystem.SelectedValue;
                 }
-                
-                HideProcessCode.Value = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(),DateTime.Now].Configuration.Element("ProcessCode").Value;
+
+                HideProcessCode.Value = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(), DateTime.Now].Configuration.Element("ProcessCode").Value;
                 AddMonthlyReport();//如果当前月不存在月度报告数据，添加一条数据
             }
         }
@@ -121,7 +121,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         public void AddMonthlyReport()
         {
             HidSystemID.Value = ddlSystem.SelectedValue;
-            HideProcessCode.Value = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(),DateTime.Now].Configuration.Element("ProcessCode").Value;
+            HideProcessCode.Value = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(), DateTime.Now].Configuration.Element("ProcessCode").Value;
 
             B_MonthlyReport bmr = null;
             //判断当前URL是否存在BusinessID
@@ -186,10 +186,18 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             bool IsExistence = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailCount(bmr.ID);
 
             List<B_MonthlyReportDetail> B_ReportDetails = new List<B_MonthlyReportDetail>();
-            var targetPlanId = StaticResource.Instance.GetDefaultTargetPlanList(Guid.Parse(ddlSystem.SelectedValue), FinYear).FirstOrDefault().TargetPlanID;
+            var targetPlan = StaticResource.Instance.GetDefaultTargetPlanList(Guid.Parse(ddlSystem.SelectedValue), FinYear).FirstOrDefault();
+
+            if (targetPlan == null || targetPlan.TargetPlanID == null || targetPlan.TargetPlanID == Guid.Empty)
+            {
+                UserControl.SetButtonSpanStyle(-1);
+                return;
+            }
+            var targetPlanId = targetPlan.TargetPlanID;
+
             if (IsExistence == false)
             {
-                A_MonthlyReport AMonthlyReport = A_MonthlyreportOperator.Instance.GetAMonthlyReport(Guid.Parse(ddlSystem.SelectedValue),Guid.Empty, FinYear, FinMonth,targetPlanId);
+                A_MonthlyReport AMonthlyReport = A_MonthlyreportOperator.Instance.GetAMonthlyReport(Guid.Parse(ddlSystem.SelectedValue), Guid.Empty, FinYear, FinMonth, targetPlanId);
                 //如果A表有数据从A表取数据，否则取B表上一版本的数据。
                 if (AMonthlyReport != null)
                 {
@@ -197,18 +205,18 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     bmr.Description = AMonthlyReport.Description;//月报说明
                     B_MonthlyreportOperator.Instance.UpdateMonthlyreport(bmr);//更新月报说明
 
-                    B_ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetail_ByAToB(FinYear, FinMonth, AMonthlyReport.SystemID, bmr.ID,targetPlanId);
-                    
+                    B_ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetail_ByAToB(FinYear, FinMonth, AMonthlyReport.SystemID, AMonthlyReport.AreaID, bmr.ID, targetPlanId);
+
                 }
                 else
                 {
                     //获取最新的，审批中计划ID
-                    B_MonthlyReport BMonthlyReport = B_MonthlyreportOperator.Instance.GetMonthlyReport(Guid.Parse(ddlSystem.SelectedValue),Guid.Empty,FinYear, FinMonth, bmr.ID,targetPlanId);
+                    B_MonthlyReport BMonthlyReport = B_MonthlyreportOperator.Instance.GetMonthlyReport(Guid.Parse(ddlSystem.SelectedValue), Guid.Empty, FinYear, FinMonth, bmr.ID, targetPlanId);
                     if (BMonthlyReport != null)
                     {
                         //从B表获取上一版本数据插入B表
                         B_ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetail_ByBToB(FinYear, FinMonth, BMonthlyReport.SystemID, BMonthlyReport.ID, bmr.ID);
-                        
+
                     }
                 }
 
@@ -217,7 +225,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 {
                     bmr.Status = 5;
                     B_MonthlyreportOperator.Instance.UpdateMonthlyreport(bmr);//更新月度经营表
-                   // B_MonthlyreportdetailOperator.Instance.AddOrUpdateTargetDetail(B_ReportDetails, "Insert");//更新月度经营明细表
+                                                                              // B_MonthlyreportdetailOperator.Instance.AddOrUpdateTargetDetail(B_ReportDetails, "Insert");//更新月度经营明细表
                 }
             }
         }
@@ -232,7 +240,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 {
                     var host = new LJTH.BusinessIndicators.Web.AjaxHander.ProcessController();
                     host.BusinessID = Request["BusinessID"];
-                      if (BPF.Workflow.Client.WFClientSDK.Exist(host.BusinessID))
+                    if (BPF.Workflow.Client.WFClientSDK.Exist(host.BusinessID))
                     {
                         BPF.Workflow.Object.WorkflowContext wc = BPF.Workflow.Client.WFClientSDK.GetProcess(null, host.BusinessID);
                         if (!wc.CurrentUserHasTodoTask)

@@ -133,7 +133,7 @@ var Task = {
             {
                 Approval: function (args) { Task.Approve(args); setTimeout(function () { location.href = '/APP/todoListMobile.html'; }, 1000) },
                 Return: function (args) { Task.Reject(args); setTimeout(function () { location.href = '/APP/todoListMobile.html'; }, 1000) },
-                Redirect: function (args) { setTimeout(function () { location.href = '/APP/todoListMobile.html'; }, 1000) }
+                Redirect: function (args) { Task.Approve(args); setTimeout(function () { location.href = '/APP/todoListMobile.html'; }, 1000) }
             });
     },
     LoadData: function (businessId, callback) {

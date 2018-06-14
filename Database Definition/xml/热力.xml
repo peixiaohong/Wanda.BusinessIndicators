@@ -14,9 +14,9 @@
   </SummaryMonthlyReport>
   <MisstargetReturn Name="补回情况">
     <Group TargetName="补回情况" Senquence="1" TargetValue="475CEFAD-4051-4AFA-B181-5F4FDAB4B587,D36BF8EF-93E2-448B-9724-C593310132FD,1DAF783B-8DA3-450E-859E-22EA309FADAE">
-      <Counter Title="一、到期未补回项目" Senquence="1" Expression="GetValue(&quot;经营性回款.ReturnType&quot;)==2||GetValue(&quot;EBITDA.ReturnType&quot;)==2||GetValue(&quot;经营收入.ReturnType&quot;)==2" />
-      <Counter Title="二、未到期项目" Senquence="2" Expression="(GetValue(&quot;经营性回款.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;经营性回款.ReturnType&quot;)&lt;&gt;0)||(GetValue(&quot;EBITDA.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;EBITDA.ReturnType&quot;)&lt;&gt;0)||(GetValue(&quot;经营收入.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;经营收入.ReturnType&quot;)&lt;&gt;0)" />
-      <Counter Title="三、已补回项目" Senquence="3" Expression="(GetValue(&quot;经营性回款.ReturnType&quot;)&gt;=6||GetValue(&quot;经营性回款.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;EBITDA.ReturnType&quot;)&gt;=6||GetValue(&quot;EBITDA.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;经营收入.ReturnType&quot;)&gt;=6||GetValue(&quot;经营收入.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;经营性回款.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;EBITDA.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;经营收入.ReturnType&quot;)&lt;&gt;0)" />
+      <Counter Title="一、到期未补回" Senquence="1" Expression="GetValue(&quot;经营性回款.ReturnType&quot;)==2||GetValue(&quot;EBITDA.ReturnType&quot;)==2||GetValue(&quot;经营收入.ReturnType&quot;)==2" />
+      <Counter Title="二、未到期" Senquence="2" Expression="(GetValue(&quot;经营性回款.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;经营性回款.ReturnType&quot;)&lt;&gt;0)||(GetValue(&quot;EBITDA.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;EBITDA.ReturnType&quot;)&lt;&gt;0)||(GetValue(&quot;经营收入.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;经营收入.ReturnType&quot;)&lt;&gt;0)" />
+      <Counter Title="三、已补回" Senquence="3" Expression="(GetValue(&quot;经营性回款.ReturnType&quot;)&gt;=6||GetValue(&quot;经营性回款.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;EBITDA.ReturnType&quot;)&gt;=6||GetValue(&quot;EBITDA.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;经营收入.ReturnType&quot;)&gt;=6||GetValue(&quot;经营收入.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;经营性回款.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;EBITDA.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;经营收入.ReturnType&quot;)&lt;&gt;0)" />
     </Group>
   </MisstargetReturn>
   <Misstarget Name="未完成">
@@ -37,10 +37,12 @@
   </CurrentMisstarget>
   <Report>
     <Rgroup Name="热力公司">
-		1、1-【当前月】月经营性回款指标为【经营性回款.累计计划总数】万元，实际完成【经营性回款.累计实际总数】万元，差额【经营性回款.累计亏损率】万元，累计完成【经营性回款.累计累计完成率】
-		2、1-【当前月】月EBITDA指标为【EBITDA.累计计划总数】万元，实际完成【EBITDA.累计实际总数】万元，差额【EBITDA.累计亏损率】万元，累计完成【EBITDA.累计累计完成率】
-		3、1-【当前月】月经营收入指标为【经营收入.累计计划总数】万元，实际完成【经营收入.累计实际总数】万元，差额【经营收入.累计亏损率】万元，累计完成【经营收入.累计累计完成率】
-		4、1-【当前月】月经营收入指标为【2#热源厂节点达成率.累计计划总数】万元，实际完成【2#热源厂节点达成率.累计实际总数】万元，差额【2#热源厂节点达成率.累计亏损率】万元，累计完成【2#热源厂节点达成率.累计累计完成率】
-	</Rgroup>
+      <![CDATA[
+      		1. 1-【当前月】月经营性回款指标为<span class="descNumber2">【经营性回款.累计计划总数】</span>万元，实际完成<span class="descNumber2">【经营性回款.累计实际总数】</span>万元，差额<span class="descNumber2">【经营性回款.累计亏损率】</span>万元，累计完成<span class="descNumber2">【经营性回款.累计累计完成率】</span>
+		      2. 1-【当前月】月EBITDA指标为<span class="descNumber2">【EBITDA.累计计划总数】</span>万元，实际完成<span class="descNumber2">【EBITDA.累计实际总数】</span>万元，差额<span class="descNumber2">【EBITDA.累计亏损率】</span>万元，累计完成<span class="descNumber2">【EBITDA.累计累计完成率】</span>
+		      3. 1-【当前月】月经营收入指标为<span class="descNumber2">【经营收入.累计计划总数】</span>万元，实际完成<span class="descNumber2">【经营收入.累计实际总数】</span>万元，差额<span class="descNumber2">【经营收入.累计亏损率】</span>万元，累计完成<span class="descNumber2">【经营收入.累计累计完成率】</span>
+		      4. 1-【当前月】月经营收入指标为<span class="descNumber2">【2#热源厂节点达成率.累计计划总数】</span>万元，实际完成<span class="descNumber2">【2#热源厂节点达成率.累计实际总数】</span>万元，差额<span class="descNumber2">【2#热源厂节点达成率.累计亏损率】</span>万元，累计完成<span class="descNumber2">【2#热源厂节点达成率.累计累计完成率】</span>
+      ]]>
+	  </Rgroup>
   </Report>
 </Root>

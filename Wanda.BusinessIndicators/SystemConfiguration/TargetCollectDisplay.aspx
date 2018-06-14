@@ -26,7 +26,7 @@
             <table class="tab_search">
                 <tbody>
                     <tr>
-                        <th>查询系统</th>
+                        <th>板块</th>
                         <td>
                             <%--<input type="text" id="TxtSystem" style="width: 210px;" onclick="showMenu();" />--%>
                             <asp:DropDownList ID="ddlSystem" runat="server" OnSelectedIndexChanged="ddlSystem_SelectedIndexChanged" AutoPostBack="True" ClientIDMode="Static" Style="width: 120px;">
@@ -144,7 +144,7 @@
                         <tbody id="rows">
                         </tbody>
                     </table>
-                    <table class="tab_005" id="TargetFloatTable">
+                    <table class="tab_005" id="TargetFloatTable" style="display:none;">
                         <thead  style="width: 100%">
                         </thead>
                     </table>
@@ -154,7 +154,7 @@
 
                             <tr>
                                 <th rowspan="2" style="width: 6%">序号</th>
-                                <th rowspan="2" style="width: 11%">门店</th>
+                                <th rowspan="2" style="width: 11%">项目</th>
                                 <th rowspan="2" style="width: 11%">年度指标</th>
                                 <th colspan="12" class="sum" style="cursor: pointer" onclick="ClickChange('sum')">累计数  &nbsp;  &nbsp;<img src="../Images/btn02.png" /></th>
                                 <th colspan="12" style="display: none; cursor: pointer" class="dan" onclick="ClickChange('dan')">当月数  &nbsp;  &nbsp;<img src="../Images/btn02.png" /></th>
@@ -217,7 +217,7 @@
                     <th style="width: 20%">操作人</th>
                     <th style="width: 20%">操作</th>
                     <th style="width: 20%">操作时间</th>
-                    <th style="width: 40%">操作原因</th>
+                    <%--<th style="width: 40%">操作原因</th>--%>
                 </tr>
             </thead>
             <tbody id="historyaction">

@@ -110,6 +110,14 @@ $(document).ready(function () {
             Year = $("#ddlYear").val();
 
     }
+    $("#sitmap").html("您当前所在的位置：月度经营报告");
+    $("#jMenu").find("li").each(function () {
+        var text = $(this).find("span")[0];
+        $(this).removeClass("current first");
+        if (text && text.innerHTML == "月度经营报告") {
+            $(this).addClass("current first");
+        }
+    })
 
     TargetPlanID = $("#ddlVersionType").val();
     //默认选中
@@ -138,6 +146,7 @@ $(document).ready(function () {
 
 function f_search() {
     IsNewDataIndex = "";
+    $('#listAttDiv').empty();
     ChangeTargetDetail($(".defaultTarget"), "Tab");
 }
 
@@ -294,9 +303,9 @@ function ChangeTargetDetail(sender, TabOrSearch) {
 
         $('#T1,#T3,#T3_1,#T4,#MonthReportExplainDiv,#ApproveAttachDiv,#T5').hide();
         $('#T2,#DownExcel').show();
-        var obj = $("#CompleteDetailHead");
-        var tab = $("#tab2_rows");
-        FloatHeader(obj, tab, false, "MonthRpt");
+        //var obj = $("#CompleteDetailHead");
+        //var tab = $("#tab2_rows");
+        //FloatHeader(obj, tab, false, "MonthRpt");
 
         //完成情况明细
         GetMonthReportDetailSearchCondition();
@@ -308,9 +317,9 @@ function ChangeTargetDetail(sender, TabOrSearch) {
         $("#T4,#T1,#T2,#T3,#MonthReportExplainDiv,#ApproveAttachDiv,#T5").hide();
         $("#T3_1,#DownExcel").show();
 
-        var obj = $("#Tab_MissTargetHead");
-        var tab = $("#Tbody_MissTargetData");
-        FloatHeader(obj, tab, false, "MonthRpt");
+        //var obj = $("#Tab_MissTargetHead");
+        //var tab = $("#Tbody_MissTargetData");
+        //FloatHeader(obj, tab, false, "MonthRpt");
         //未完成说明
         if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDIsLatestVersion, CurrentMissTargetData[0], "F") == true) {
             getCurrentMonthReportMissTargetData();
@@ -321,9 +330,9 @@ function ChangeTargetDetail(sender, TabOrSearch) {
         $("#T4,#T1,#T2,#T3_1,#MonthReportExplainDiv,#ApproveAttachDiv,#T5").hide();
         $("#T3,#DownExcel").show();
 
-        var obj = $("#Tab_MissTargetHead");
-        var tab = $("#Tbody_MissTargetData");
-        FloatHeader(obj, tab, false, "MonthRpt");
+        //var obj = $("#Tab_MissTargetHead");
+        //var tab = $("#Tbody_MissTargetData");
+        //FloatHeader(obj, tab, false, "MonthRpt");
         //未完成说明
         if (TransitionCondition(CTDYear, CTDMonth, CTDSystemID, CTDIsLatestVersion, MissTargetData[0], "C") == true) {
             getMonthReportMissTargetData();
@@ -335,8 +344,8 @@ function ChangeTargetDetail(sender, TabOrSearch) {
         $("#T1,#T2,#T3,#T3_1,#MonthReportExplainDiv,#ApproveAttachDiv,#T5").hide();
 
         //$("#Tab_Return").removeAttr("style");
-        var obj = $("#Tab_ReturnHead");
-        var tab = $("#Tbody_Data");
+        //var obj = $("#Tab_ReturnHead");
+        //var tab = $("#Tbody_Data");
 
 
         //补回情况明细
@@ -589,6 +598,12 @@ function getMonthReportReturnData() {
             $("#Tab_ReturnHead").empty();
 
             loadTmpl_1('#TmplHeadReturn').tmpl().appendTo('#Tab_ReturnHead');  //加载裂头
+            if (ReturnData.length == 0) {
+                $(".newdiff_retu").show();
+                $(".Level1TDSL").attr("colspan", 9);
+                $('#Tab_ReturnHead tr th').eq(11).hide();
+                return;
+            }
 
             if (ReturnData.length > 1) {  //判断指标有几个分组，如果是2个一上默认选择第一个
                 loadTmpl_1('#TmplTargerList').tmpl(ReturnData).appendTo('#U1');
@@ -604,6 +619,12 @@ function getMonthReportReturnData() {
             $("#U1 :first a").addClass("active_sub3");
 
             $(".shangyueleiji").hide();
+
+            var obj = $("#Tab_FloatReturn");
+            var head = $("#Tab_ReturnHead");
+            obj.find("thead").html(head.html());
+            var tab = $("#Tbody_Data");
+            FloatHeader(obj, tab);
 
             //$("#Tab_Return").attr({ style: "table-layout: fixed" });
             $('#CurrentMonthBackDetilDiv').text("本月累计(万元) [+]");
@@ -691,8 +712,15 @@ function getMonthReportMissTargetData() {
             }
             $("#U2 :first a").addClass("active_sub3");
 
-            var obj = $("#Tab_MissTargetHead");
+            //var obj = $("#Tab_MissTargetHead");
+            //var tab = $("#Tbody_MissTargetData");
+
+
+            var obj = $("#Tab_MissFloatTarget");
+            var head = $("#Tab_MissTargetHead");
+            obj.find("thead").html(head.html());
             var tab = $("#Tbody_MissTargetData");
+            FloatHeader(obj, tab);
 
             $(".shangyue").hide();
             $("#Tab_MissTarget").attr({ style: "table-layout: auto" });
@@ -849,8 +877,14 @@ function getCurrentMonthReportMissTargetData() {
             }
             $("#U2_1 :first a").addClass("active_sub3");
 
-            var obj = $("#Tab_CurrentMissTargetHead");
+            //var obj = $("#Tab_CurrentMissTargetHead");
+            //var tab = $("#Tbody_CurrentMissTargetData");
+
+            var obj = $("#Tab_CurrentMissFloatTarget");
+            var head = $("#Tab_CurrentMissTargetHead");
+            obj.find("thead").html(head.html());
             var tab = $("#Tbody_CurrentMissTargetData");
+            FloatHeader(obj, tab);
 
             $(".leiji").hide();
             $("#Tab_CurrentMissTarget").attr({ style: "table-layout: auto" });

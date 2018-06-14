@@ -35,11 +35,16 @@ namespace LJTH.BusinessIndicators.BLL
             IList<B_Attachment> result = _bAttachmentAdapter.GetAttachmentList(businessID);
             return result;
         }
-
-
-        public IList<B_Attachment> GetAttachmentList(Guid businessID,string businessType)
+        public IList<B_Attachment> GetAttachmentList(string businessIDs, string businessType)
         {
-            IList<B_Attachment> result = _bAttachmentAdapter.GetAttachmentList(businessID , businessType );
+           
+            IList<B_Attachment> result = _bAttachmentAdapter.GetAttachmentList(businessIDs, businessType);
+            return result;
+        }
+
+        public IList<B_Attachment> GetAttachmentList(Guid businessID, string businessType)
+        {
+            IList<B_Attachment> result = _bAttachmentAdapter.GetAttachmentList(businessID, businessType);
             return result;
         }
 
@@ -65,7 +70,7 @@ namespace LJTH.BusinessIndicators.BLL
             return result;
         }
 
-        public Guid RemoveAttachment(Guid bAttachmentID) 
+        public Guid RemoveAttachment(Guid bAttachmentID)
         {
             ExceptionHelper.TrueThrow<ArgumentNullException>(bAttachmentID == null, "Argument aTargetplanID is Empty");
             Guid result = base.RemoveObject(bAttachmentID);

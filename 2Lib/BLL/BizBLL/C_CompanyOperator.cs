@@ -220,6 +220,20 @@ namespace LJTH.BusinessIndicators.BLL
         {
             return _cCompanyAdapter.GetCompanyInfoByName(name,systemID);
         }
+
+        /// <summary>
+        /// 根据板块ID获取板块下没有的项目
+        /// </summary>
+        /// <param name="systemID">板块ID</param>
+        /// <param name="keyWord">模糊查询条件</param>
+        /// <param name="pageIndex">页码</param>
+        /// <param name="pageSize">显示行数</param>
+        /// <param name="TotalCount"></param>
+        /// <returns></returns>
+        public List<C_Company> GetCompanyInfoBySystem(Guid systemID, string keyWord, int pageIndex, int pageSize, out int TotalCount)
+        {
+            return _cCompanyAdapter.GetCompanyInfoBySystem(systemID, keyWord, pageIndex, pageSize, out TotalCount);
+        }
         #endregion
     }
 }

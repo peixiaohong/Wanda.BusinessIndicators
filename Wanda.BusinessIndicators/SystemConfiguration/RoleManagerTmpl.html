@@ -24,7 +24,7 @@
         <td>${item.JobTitle}</td>
         <td><span title="${item.DeptFullName}">${item.DeptFullName}</span></td>
         <td>${item.RoleName}</td>
-        <td>${item.OrgName}</td>
+        <td><span title="${item.OrgName}">${item.OrgName}</span></td>
         <td>
             <span class="role-delete-icon" data-name="${item.LoginName}" onclick="DeleteRoleUserData(this)"><i class="fa fa-times"></i></span>
         </td>
@@ -36,7 +36,12 @@
     {{each(i,item) Data}}
     <tr>
         <td>
-            <input type="checkbox" name="${item.LoginName}" value="" class="userChecked" />
+            {{if item.IsChecked}}
+            <input type="checkbox" name="${item.LoginName}" value="" class="userChecked" onclick="storeNames(this)" checked/>
+            {{else}}
+            <input type="checkbox" name="${item.LoginName}" value="" class="userChecked" onclick="storeNames(this)" />
+            {{/if}}
+            
         </td>
         <td>${item.EmployeeName}</td>
         <td>${item.LoginName}</td>
@@ -72,6 +77,18 @@
         </td>
         <td>${item.CnName}</td>
         <td>${item.Description}</td>
+    </tr>
+    {{/each}}
+</script>
+<!--组织架构项目列表-->
+<script type="text/x-jquery-tmpl" id="OrganizationCompany">
+    {{each(i,item) Data}}
+    <tr>
+        <td>
+            <input type="checkbox" data-id="${item.ID}" data-name="${item.CompanyName}" value="" class="companyChecked" style="cursor:pointer"/>
+        </td>
+        <td>${i+1}</td>
+        <td>${item.CompanyName}</td>
     </tr>
     {{/each}}
 </script>

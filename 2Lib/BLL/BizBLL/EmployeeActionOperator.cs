@@ -41,6 +41,17 @@ namespace LJTH.BusinessIndicators.BLL.BizBLL
         {
             return _smployeeAdapter.GetAllUser(filter, out TotalCount);
         }
+
+        /// <summary>
+        /// 查询员工信息,角色添加用户用
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="TotalCount"></param>
+        /// <returns></returns>
+        public List<AllUserPermissions> GetAddUserInfo(AllUserPermissionsFilter filter, out int TotalCount)
+        {
+            return _smployeeAdapter.GetAddUserInfo(filter, out TotalCount);
+        }
         #endregion
     }
 }

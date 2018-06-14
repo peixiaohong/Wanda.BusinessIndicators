@@ -44,7 +44,10 @@
 
 
         <div>
-
+            <table class="tab_005" style="width: 100%" id="FloateTable2">
+                <thead style="width:100%">
+                </thead>
+            </table>
             <table class="tab_005" style="width: 100%" id="Table2">
                 <thead  id="Tabhead" style="width:100%">
                     <tr>

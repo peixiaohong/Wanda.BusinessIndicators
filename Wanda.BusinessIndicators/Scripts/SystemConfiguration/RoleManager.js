@@ -83,7 +83,7 @@ function SaveRole(type,data)
         datamsg = JSON.stringify(data);
     } 
     $.MsgBox.Confirm(title, datamsg, type, function () {
-        var CnName = $("#CnName").val();
+        var CnName = $("#CnName").val().replace(/\s+/g, "");
         var Description = $("#Description").val();
         $(".CnNameAction").css("display", "none");
         if (!CnName) {

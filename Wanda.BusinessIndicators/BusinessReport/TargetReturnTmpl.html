@@ -22,7 +22,7 @@
             </th>
             <th colspan="3" class="shangyue" onclick="if(MissH){ShouSuo('YC');}" style="min-width:180px; width:18%;  cursor: pointer; word-break:keep-all">上月累计(万元)&nbsp; [-]</th>
             <th colspan="3" style="min-width:180px; width:18%; cursor: pointer;word-break:keep-all" class="TT2" onclick='if(MissH) {ShouSuo("XS");}'>
-                <div id="CurrentMonthMissTergetDiv">本月累计(万元)</div>
+                <div id="CurrentMonthMissTergetDiv">本月累计(万元)&nbsp; [+]</div>
             </th>
 
             <th rowspan="2" style="" class="maindata">
@@ -1755,9 +1755,19 @@
             <!--本月完成率-->
             <td class="Td_Right shangyue" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
 
-
-            {{if TargetGroupCount ==1}}
             {{if MIssTargetReason!="" && MIssTargetDescription!=""}} <!--原因和说明-->
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (MIssTargetReason +"<br /> <span style='font-weight:bold;'>采取措施：</span>"+ MIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            {{else}}
+            {{if MIssTargetReason !=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (MIssTargetReason).replace(/\n/g, "<br/>") +"<br /><span style='font-weight:bold;'>采取措施：</span>"+ MIssTargetDescription }}</td>
+            {{else MIssTargetDescription!=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html MIssTargetReason + "<br /><span style='font-weight:bold;'>采取措施：</span>"+ (MIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            {{else}}
+            <td class="Td_Right"></td>
+            {{/if}}
+            {{/if}}
+            <!--{{if TargetGroupCount ==1}}
+            {{if MIssTargetReason!="" && MIssTargetDescription!=""}}
             <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (MIssTargetReason +"<br /> <span style='font-weight:bold;'>采取措施：</span>"+ MIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
             {{else}}
             {{if MIssTargetReason !=""}}
@@ -1771,7 +1781,7 @@
 
             {{else}}
             {{if ($index+1)%TargetGroupCount ==1 }}
-            {{if MIssTargetReason!="" && MIssTargetDescription!=""}} <!--原因和说明 组合指标-->
+            {{if MIssTargetReason!="" && MIssTargetDescription!=""}}
             <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (MIssTargetReason +"<br /><span style='font-weight:bold;'>采取措施：</span>"+ MIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
             {{else}}
             {{if MIssTargetReason !=""}}
@@ -1783,8 +1793,7 @@
             {{/if}}
             {{/if}}
             {{/if}}
-            {{/if}}
-
+            {{/if}}-->
             <!--要求时间 如果要求说明是""显示时间，反之显示本身-->
             <td class="Td_Right" style="text-align: center !important;">
                 {{if CommitReason==""}}
@@ -1912,9 +1921,20 @@
             <!--本月完成率-->
             <td class="Td_Right shangyue" {{if NAccumulativeDifference < 0}} style="white-space: nowrap;color:red;" {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDisplayRate}">${NAccumulativeDisplayRate}</td>
 
-
-            {{if TargetGroupCount ==1}}
-            {{if MIssTargetReason!="" && MIssTargetDescription!=""}} <!--原因和说明-->
+            <!--原因和说明-->
+            {{if MIssTargetReason!="" && MIssTargetDescription!=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (MIssTargetReason +"<br /> <span style='font-weight:bold;'>采取措施：</span>"+ MIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            {{else}}
+            {{if MIssTargetReason !=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (MIssTargetReason).replace(/\n/g, "<br/>") +"<br /><span style='font-weight:bold;'>采取措施：</span>"+ MIssTargetDescription }}</td>
+            {{else MIssTargetDescription !=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html MIssTargetReason + "<br /><span style='font-weight:bold;'>采取措施：</span>"+ (MIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            {{else}}
+            <td class="Td_Right"></td>
+            {{/if}}
+            {{/if}}
+            <!--{{if TargetGroupCount ==1}}
+            {{if MIssTargetReason!="" && MIssTargetDescription!=""}}
             <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (MIssTargetReason +"<br /> <span style='font-weight:bold;'>采取措施：</span>"+ MIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
             {{else}}
             {{if MIssTargetReason !=""}}
@@ -1927,7 +1947,7 @@
             {{/if}}
             {{else}}
             {{if ($index+1)%TargetGroupCount ==1 }}
-            {{if MIssTargetReason!="" && MIssTargetDescription!=""}} <!--原因和说明 组合指标-->
+            {{if MIssTargetReason!="" && MIssTargetDescription!=""}}
             <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (MIssTargetReason +"<br /><span style='font-weight:bold;'>采取措施：</span>"+ MIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
             {{else}}
             {{if MIssTargetReason !=""}}
@@ -1939,9 +1959,7 @@
             {{/if}}
             {{/if}}
             {{/if}}
-            {{/if}}
-
-
+            {{/if}}-->
             <!--要求时间 如果要求说明是""显示时间，反之显示本身-->
             <td class="Td_Right" style="text-align: center !important;">
                 {{if CommitReason==""}}
@@ -2110,10 +2128,20 @@
 
             <!--本月累计差值-->
             <td class="Td_Right" {{if NAccumulativeDifference <0}} style="white-space: nowrap; color:red; " {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
+            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (CurrentMIssTargetReason +"<br /> <span style='font-weight:bold;'>采取措施：</span>"+ CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            {{else}}
+            {{if CurrentMIssTargetReason !=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (CurrentMIssTargetReason).replace(/\n/g, "<br/>") +"<br /><span style='font-weight:bold;'>采取措施：</span>"+ CurrentMIssTargetDescription }}</td>
+            {{else CurrentMIssTargetDescription !=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html CurrentMIssTargetReason + "<br /><span style='font-weight:bold;'>采取措施：</span>"+ (CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            {{else}}
+            <td class="Td_Right"></td>
+            {{/if}}
+            {{/if}}
 
-
-            {{if TargetGroupCount ==1}}
-            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}} <!--原因和说明-->
+            <!--{{if TargetGroupCount ==1}}
+            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}}
             <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (CurrentMIssTargetReason +"<br /> <span style='font-weight:bold;'>采取措施：</span>"+ CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
             {{else}}
             {{if CurrentMIssTargetReason !=""}}
@@ -2127,7 +2155,7 @@
 
             {{else}}
             {{if ($index+1)%TargetGroupCount ==1 }}
-            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}} <!--原因和说明 组合指标-->
+            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}}
             <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (CurrentMIssTargetReason +"<br /><span style='font-weight:bold;'>采取措施：</span>"+ CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
             {{else}}
             {{if CurrentMIssTargetReason !=""}}
@@ -2139,8 +2167,7 @@
             {{/if}}
             {{/if}}
             {{/if}}
-            {{/if}}
-
+            {{/if}}-->
             <!--要求时间 如果要求说明是""显示时间，反之显示本身-->
             <td class="Td_Right" style="text-align: center !important;">
                 {{if CommitReason==""}}
@@ -2265,8 +2292,19 @@
             <!--本月累计差值-->
             <td class="Td_Right" {{if NAccumulativeDifference <0}} style="white-space: nowrap; color:red; " {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
 
-            {{if TargetGroupCount ==1}}
-            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}} <!--原因和说明-->
+            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (CurrentMIssTargetReason +"<br /> <span style='font-weight:bold;'>采取措施：</span>"+ CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            {{else}}
+            {{if CurrentMIssTargetReason !=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (CurrentMIssTargetReason).replace(/\n/g, "<br/>") +"<br /><span style='font-weight:bold;'>采取措施：</span>"+ CurrentMIssTargetDescription }}</td>
+            {{else CurrentMIssTargetDescription !=""}}
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html CurrentMIssTargetReason + "<br /><span style='font-weight:bold;'>采取措施：</span>"+ (CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            {{else}}
+            <td class="Td_Right"></td>
+            {{/if}}
+            {{/if}}
+            <!--{{if TargetGroupCount ==1}}
+            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}}
             <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (CurrentMIssTargetReason +"<br /> <span style='font-weight:bold;'>采取措施：</span>"+ CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
             {{else}}
             {{if CurrentMIssTargetReason !=""}}
@@ -2279,7 +2317,7 @@
             {{/if}}
             {{else}}
             {{if ($index+1)%TargetGroupCount ==1 }}
-            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}} <!--原因和说明 组合指标-->
+            {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}}
             <td class="Td_Right" rowspan="${TargetGroupCount}" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (CurrentMIssTargetReason +"<br /><span style='font-weight:bold;'>采取措施：</span>"+ CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
             {{else}}
             {{if CurrentMIssTargetReason !=""}}
@@ -2291,9 +2329,7 @@
             {{/if}}
             {{/if}}
             {{/if}}
-            {{/if}}
-
-
+            {{/if}}-->
             <!--要求时间 如果要求说明是""显示时间，反之显示本身-->
             <td class="Td_Right" style="text-align: center !important;">
                 {{if CommitReason==""}}
@@ -2420,38 +2456,38 @@
                 </td>
                 <th style="width: 25%; padding: 5px; padding-right: 10px; text-align: right;">本月补回/新增差额</th>
                 <td style="width: 25%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${AddDifference.thousandize0OrEmpty(0)}
+                    ${AddDifference}
                 </td>
             </tr>
 
             <tr>
                 <th style=" padding: 5px; padding-right: 10px; text-align: right;">上月累计计划</th>
                 <td style=" padding: 5px; padding-left: 20px; text-align: left;">
-                    ${LastNAccumulativePlanAmmount.thousandize0OrEmpty(0)}
+                    ${LastNAccumulativePlanAmmount}
                 </td>
                 <th style=" padding: 5px; padding-right: 10px; text-align: right;">本月累计计划</th>
                 <td style=" padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}
+                    ${NAccumulativePlanAmmount}
                 </td>
             </tr>
             <tr>
                 <th style=" padding: 5px; padding-right: 10px; text-align: right;">上月累计实际</th>
                 <td style=" padding: 5px; padding-left: 20px; text-align: left;">
-                    ${LastNAccumulativeActualAmmount.thousandize0OrEmpty(0)}
+                    ${LastNAccumulativeActualAmmount}
                 </td>
                 <th style=" padding: 5px; padding-right: 10px; text-align: right;">本月累计实际</th>
                 <td style=" padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NAccumulativeActualAmmount.thousandize0OrEmpty(0)}
+                    ${NAccumulativeActualAmmount}
                 </td>
             </tr>
             <tr>
                 <th style=" padding: 5px; padding-right: 10px; text-align: right;">上月累计差额</th>
                 <td style=" padding: 5px; padding-left: 20px; text-align: left;">
-                    ${LastNAccumulativeDifference.thousandize0OrEmpty(0)}
+                    ${LastNAccumulativeDifference}
                 </td>
                 <th style=" padding: 5px; padding-right: 10px; text-align: right;">本月累计差额</th>
                 <td style=" padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NAccumulativeDifference.thousandize0OrEmpty(0)}
+                    ${NAccumulativeDifference}
                 </td>
             </tr>
 
@@ -2566,31 +2602,31 @@
             <tr>
                 <th style=" padding: 5px; padding-right: 10px; text-align: right;">当月计划</th>
                 <td style=" padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NPlanAmmount.thousandize0OrEmpty(0)}
+                    ${NPlanAmmount}
                 </td>
                 <th style=" padding: 5px; padding-right: 10px; text-align: right;">本月累计计划</th>
                 <td style=" padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}
+                    ${NAccumulativePlanAmmount}
                 </td>
             </tr>
             <tr>
                 <th style=" padding: 5px; padding-right: 10px; text-align: right;">当月实际</th>
                 <td style=" padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NActualAmmount.thousandize0OrEmpty(0)}
+                    ${NActualAmmount}
                 </td>
                 <th style=" padding: 5px; padding-right: 10px; text-align: right;">本月累计实际</th>
                 <td style=" padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NAccumulativeActualAmmount.thousandize0OrEmpty(0)}
+                    ${NAccumulativeActualAmmount}
                 </td>
             </tr>
             <tr>
                 <th style=" padding: 5px; padding-right: 10px; text-align: right;">当月差额</th>
                 <td style=" padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NDifference.thousandize0OrEmpty(0)}
+                    ${NDifference}
                 </td>
                 <th style=" padding: 5px; padding-right: 10px; text-align: right;">本月累计差额</th>
                 <td style=" padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NAccumulativeDifference.thousandize0OrEmpty(0)}
+                    ${NAccumulativeDifference}
                 </td>
             </tr>
 
@@ -2720,43 +2756,43 @@
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月补回/新增差额</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${AddDifference.thousandize0OrEmpty(0)}
+                    ${AddDifference}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">上月累计计划</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${LastNAccumulativePlanAmmount.thousandize0OrEmpty(0)}
+                    ${LastNAccumulativePlanAmmount}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">上月累计实际</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${LastNAccumulativeActualAmmount.thousandize0OrEmpty(0)}
+                    ${LastNAccumulativeActualAmmount}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">上月累计差额</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${LastNAccumulativeDifference.thousandize0OrEmpty(0)}
+                    ${LastNAccumulativeDifference}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计计划</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}
+                    ${NAccumulativePlanAmmount}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计实际</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NAccumulativeActualAmmount.thousandize0OrEmpty(0)}
+                    ${NAccumulativeActualAmmount}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计差额</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NAccumulativeDifference.thousandize0OrEmpty(0)}
+                    ${NAccumulativeDifference}
                 </td>
             </tr>
             <tr>
@@ -2843,43 +2879,43 @@
             <!--<tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月补回/新增差额</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${AddDifference.thousandize0OrEmpty(0)}
+                    ${AddDifference}
                 </td>
             </tr>-->
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">当月计划</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NPlanAmmount.thousandize0OrEmpty(0)}
+                    ${NPlanAmmount}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">当月实际</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NActualAmmount.thousandize0OrEmpty(0)}
+                    ${NActualAmmount}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">当月差额</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NDifference.thousandize0OrEmpty(0)}
+                    ${NDifference}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计计划</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}
+                    ${NAccumulativePlanAmmount}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计实际</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NAccumulativeActualAmmount.thousandize0OrEmpty(0)}
+                    ${NAccumulativeActualAmmount}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计差额</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NAccumulativeDifference.thousandize0OrEmpty(0)}
+                    ${NAccumulativeDifference}
                 </td>
             </tr>
             <tr>
@@ -2975,43 +3011,43 @@
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月补回/新增差额</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${AddDifference.thousandize0OrEmpty(0)}
+                    ${AddDifference}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">上月累计计划</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${LastNAccumulativePlanAmmount.thousandize0OrEmpty(0)}
+                    ${LastNAccumulativePlanAmmount}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">上月累计实际</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${LastNAccumulativeActualAmmount.thousandize0OrEmpty(0)}
+                    ${LastNAccumulativeActualAmmount}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">上月累计差额</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${LastNAccumulativeDifference.thousandize0OrEmpty(0)}
+                    ${LastNAccumulativeDifference}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计计划</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}
+                    ${NAccumulativePlanAmmount}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计实际</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NAccumulativeActualAmmount.thousandize0OrEmpty(0)}
+                    ${NAccumulativeActualAmmount}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计差额</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NAccumulativeDifference.thousandize0OrEmpty(0)}
+                    ${NAccumulativeDifference}
                 </td>
             </tr>
             <tr>
@@ -3043,43 +3079,43 @@
             <!--<tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月补回/新增差额</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${AddDifference.thousandize0OrEmpty(0)}
+                    ${AddDifference}
                 </td>
             </tr>-->
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">当月计划</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NPlanAmmount.thousandize0OrEmpty(0)}
+                    ${NPlanAmmount}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">当月实际</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NActualAmmount.thousandize0OrEmpty(0)}
+                    ${NActualAmmount}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">当月差额</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NDifference.thousandize0OrEmpty(0)}
+                    ${NDifference}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计计划</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NAccumulativePlanAmmount.thousandize0OrEmpty(0)}
+                    ${NAccumulativePlanAmmount}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计实际</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NAccumulativeActualAmmount.thousandize0OrEmpty(0)}
+                    ${NAccumulativeActualAmmount}
                 </td>
             </tr>
             <tr>
                 <th style="width: 35%; padding: 5px; padding-right: 60px; text-align: right;">本月累计差额</th>
                 <td style="width: 65%; padding: 5px; padding-left: 20px; text-align: left;">
-                    ${NAccumulativeDifference.thousandize0OrEmpty(0)}
+                    ${NAccumulativeDifference}
                 </td>
             </tr>
             <tr>

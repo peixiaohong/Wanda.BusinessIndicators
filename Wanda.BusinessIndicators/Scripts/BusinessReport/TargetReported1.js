@@ -15,9 +15,14 @@ function operateNav(sender) {
                 if (ReportInstance.ReportDetails.length > 0) {
                     $("#T2,#UpLoadDataDiv").show();
                     $("#UpLoadData").hide();
-                    var obj = $("#CompleteDetailHead");
+                    //var obj = $("#CompleteDetailHead");
+                    //var tab = $("#tab2_rows");
+                    //FloatHeader(obj, tab, true);
+                    var obj = $("#importedDataFloatTable2");
+                    var head = $("#CompleteDetailHead");
+                    obj.find("thead").html(head.html());
                     var tab = $("#tab2_rows");
-                    FloatHeader(obj, tab, true);
+                    FloatHeader(obj, tab);
 
                 } else {
                     $("#UpLoadData").show();
@@ -27,14 +32,19 @@ function operateNav(sender) {
                 $("#UpLoadData").show();
                 $("#T2,#UpLoadDataDiv").hide();
             }
-
             break;
         case "missTargetReport"://未完成（累计）
             $("#T2,#UpLoadDataDiv,#DownLoadModel,#UpLoadData,#T4,#T3_1,#RptAttachments,#divMonthLyReportAction").hide();
             $("#T3,#Down1").show();
-            var obj = $("#Tab_MissTargetHead");
-            var tab = $("#Tbody_MissTargetData");
+            //var obj = $("#Tab_MissTargetHead");
+            //var tab = $("#Tbody_MissTargetData");
             // FloatHeader(obj, tab, false);
+            var obj = $("#Tab_MissFloatTarget");
+            var head = $("#Tab_MissTargetHead");
+            obj.find("thead").html(head.html());
+            var tab = $("#Tbody_MissTargetData");
+            FloatHeader(obj, tab);
+
             DownLoadTag = "missTargetReport"; // 判断下载的模版
             MissTagetExcelReport();
 
@@ -42,9 +52,14 @@ function operateNav(sender) {
         case "missCurrentTargetReport": //未完成（当月）
             $("#T2,#UpLoadDataDiv,#DownLoadModel,#UpLoadData,#T4,#T3,#Down1,#RptAttachments,#divMonthLyReportAction,#Down1").hide();
             $("#T3_1,#Down1").show();
-            var obj = $("#Tab_CurrentMissTargetHead");
-            var tab = $("#Tbody_CurrentMissTargetData");
+            //var obj = $("#Tab_CurrentMissTargetHead");
+            //var tab = $("#Tbody_CurrentMissTargetData");
             // FloatHeader(obj, tab, false);
+            var obj = $("#Tab_CurrentMissFloatTarget");
+            var head = $("#Tab_CurrentMissTargetHead");
+            obj.find("thead").html(head.html());
+            var tab = $("#Tbody_CurrentMissTargetData");
+            FloatHeader(obj, tab);
 
             DownLoadTag = "missCurrentTargetReport"; // 判断下载的模版
 
@@ -111,6 +126,7 @@ $(function () {
 
 var Month;
 function GetProcess(key, instanceID) {
+    
     Month = $("#hideFinMonth").val() * 1 > 9 ? $("#hideFinMonth").val() : "0" + $("#hideFinMonth").val();
     FlowCode = key;
     var businessID = bpf_wf_tool.getQueryString("BusinessID");
@@ -125,10 +141,17 @@ function GetProcess(key, instanceID) {
                 $.unblockUI();
             })
         }, function () {
+            var sysName = $('select#ddlSystem').find('option:selected').text();
+            var areaName = '';
+            if ($('#ddlAreaID').val() != undefined) {
+                areaName = "-" + $('select#ddlAreaID').find('option:selected').text();
+            }
+            var title = sysName + areaName + $("#hideFinYear").val() + "年" + Month + "月度报告";
+
             bpf_wf_client.createProcess({
                 FlowCode: FlowCode,
                 BusinessID: instanceID,
-                ProcessTitle: $('select#ddlSystem').find('option:selected').text() + $("#hideFinYear").val() + "年" + Month + "月度报告",
+                ProcessTitle: title,
                 FormParams: { ProcessKey: FlowCode }
             });
             $.unblockUI();
@@ -164,7 +187,7 @@ function BusinessDataHandle(instanceID, args) {
         // 审批结束
         if (args.WorkflowContext.CurrentUserNodeID != null && args.WorkflowContext.CurrentUserNodeID != "") {
             var nodeInfo = args.WorkflowContext.NodeInstanceList[args.WorkflowContext.CurrentUserNodeID];
-            if (nodeInfo != null && (nodeInfo.NodeType == 1 || nodeInfo.NodeType == 2 || nodeInfo.NodeType == 7)) {
+            if (nodeInfo != null && (nodeInfo.NodeType == 0 ||nodeInfo.NodeType == 1 || nodeInfo.NodeType == 2 || nodeInfo.NodeType == 7)) {
                 strPrcessStatus = "Approved";
             } else {
                 strPrcessStatus = null;

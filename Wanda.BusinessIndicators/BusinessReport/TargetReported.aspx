@@ -10,8 +10,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
-    <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported.js?v=1"></script>
-    <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported1.js"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported.js?ver=1"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported1.js?ver=1"></script>
     <script type="text/javascript" src="../Scripts/UpLoad/jquery.uploadify.min.js"></script>
 
     <uc1:wfCtrl runat="server" ID="wfCtrl" />
@@ -36,7 +36,7 @@
             <asp:HiddenField runat="server" ID="hiddenDis" ClientIDMode="Static" />
 
             <br />
-            <span style="color: red">注：上传excel后，若页面没有出现相应数据，请稍等几分钟再次刷新页面（数据正在后台进行计算），即可恢复正常。请勿因此重复上传数据。</span>
+            <span style="color: #9d2328">注：上传excel后，若页面没有出现相应数据，请稍等几分钟再次刷新页面（数据正在后台进行计算），即可恢复正常。请勿因此重复上传数据。</span>
         </div>
 
         <!--导航栏 开始-->
@@ -112,6 +112,10 @@
             <div class="scrolldoorFrame copy">
                 <ul class="tabs" id="Ul4" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                 </ul>
+                <table class="tab_005" id="importedDataFloatTable2" style="display:none;">
+                    <thead>
+                    </thead>
+                </table>
                 <table class="tab_005" id="importedDataTable2">
                     <thead id="CompleteDetailHead">
                     </thead>
@@ -124,9 +128,12 @@
 
         <!--未完成说明 开始-->
         <div class="TClassHide" id="T3">
-            <ul class="tabs" id="U2" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
+            <ul class="tabs" id="U2" style="border-bottom-color: #FFF; margin-top: 5px; height: auto;">
             </ul>
-
+            <table class="tab_005" id="Tab_MissFloatTarget" style="display:none;">
+                <thead>
+                </thead>
+            </table>
             <table class="tab_005" id="Tab_MissTarget">
                 <thead id="Tab_MissTargetHead">
                 </thead>
@@ -141,9 +148,13 @@
 
            <!--未完成说明（当月） 开始-->
         <div class="TClassHide" id="T3_1">
-            <ul class="tabs" id="U2_1" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
+            <ul class="tabs" id="U2_1" style="border-bottom-color: #FFF; margin-top: 5px; height: auto;">
             </ul>
-
+            <table class="tab_005" id="Tab_CurrentMissFloatTarget" style="display:none;">
+                <thead>
+                    
+                </thead>
+            </table>
             <table class="tab_005" id="Tab_CurrentMissTarget">
                 <thead  id="Tab_CurrentMissTargetHead">
                     
@@ -169,8 +180,8 @@
 
             <div style="width: 100%; position: relative; padding-bottom: 5px;"></div>
             <div style="padding: 0px;">
-                <textarea id="MonthGetDescription" rows="4" cols="5">
-                  </textarea>
+                <div id="MonthGetDescription">
+                  </div>
             </div>
 
         </div>
@@ -217,16 +228,6 @@
         <input type="text" class="TClassHide" id="HidSystemID" runat="server" />
         <input type="text" class="TClassHide" id="HidAreaID" runat="server" />
     </div>
-
-
-
-
-
-
-
-
-
-
 
 
 

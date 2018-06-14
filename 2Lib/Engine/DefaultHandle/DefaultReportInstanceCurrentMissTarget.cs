@@ -17,7 +17,7 @@ using Lib.Config;
 namespace LJTH.BusinessIndicators.Engine
 {
     /// <summary>
-    /// 更具获取系统，填充某个系统的补充项
+    /// 获取当月未完成数据
     /// </summary>
     public class DefaultReportInstanceCurrentMissTarget : IReportInstanceCurrentMissTarget
     {
@@ -134,7 +134,7 @@ namespace LJTH.BusinessIndicators.Engine
 
             List<DictionaryVmodel> ReturnList = new List<DictionaryVmodel>();
 
-            //补回情况，分组List
+            
             foreach (var Group in GroupList.OrderBy(G => G.Senquence))
             {
                 DictionaryVmodel Vmodel = new DictionaryVmodel();
@@ -152,10 +152,11 @@ namespace LJTH.BusinessIndicators.Engine
         List<MonthlyReportDetail> VLastList = new List<MonthlyReportDetail>();
 
         /// <summary>
-        /// 分组数据
+        /// 
         /// </summary>
-        /// <param name="Group">分组条件</param>
-        /// <param name="XmlType">补回情况/未完成说明</param>
+        /// <param name="Group">页面显示的指标分组</param>
+        /// <param name="XmlType">"CurrentMisstarget"</param>
+        /// <param name="GroupStr">分组显示的指标名称</param>
         /// <returns></returns>
         List<DictionaryVmodel> FormartVData(VGroup Group, string XmlType, string GroupStr)
         {
@@ -210,7 +211,7 @@ namespace LJTH.BusinessIndicators.Engine
 
 
         /// <summary>
-        /// 未完成说明
+        /// 
         /// </summary>
         /// <param name="counter"></param>
         /// <param name="TargetIDs"></param>
@@ -224,7 +225,9 @@ namespace LJTH.BusinessIndicators.Engine
 
             List<MonthlyReportDetail> Result = new List<MonthlyReportDetail>();
             List<MonthlyReportDetail> Filter = new List<MonthlyReportDetail>();
+            //var groupList = MissTargetList.GroupBy(x => x.CompanyID);
             foreach (MonthlyReportDetail d in MissTargetList)
+           // foreach(var item in groupList)
             {
                 if (TargetIDs.Contains(d.TargetID)) //上月指标包含当前指标
                 {
@@ -324,7 +327,8 @@ namespace LJTH.BusinessIndicators.Engine
 
 
             //这里只有项目系统需要单独处理，其它系统都是需要合并的
-            if (_System.GroupType != "ProSystem")
+            //if (_System.GroupType != "ProSystem")
+            if(_System.Category != 2)
             {
                 //未完成说明的合并
                 for (int i = TargetIDs.Count; i <= ResultTempSum.Count; i = i + TargetIDs.Count)
@@ -663,7 +667,8 @@ namespace LJTH.BusinessIndicators.Engine
                     lastFinMonth = FinMonth - 1;
 
                 //找到上个月的数据 , 上个月的数据只能在A表中
-                List<A_MonthlyReportDetail> AList = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetailList(RptModel._System.ID, FinYear, lastFinMonth).ToList();
+                //List<A_MonthlyReportDetail> AList = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetailList(RptModel._System.ID, FinYear, lastFinMonth).ToList();
+                List<A_MonthlyReportDetail> AList = A_MonthlyreportdetailOperator.Instance.GetAMonthlyReportDetailListForTargetPlanID(RptModel._System.ID, FinYear, lastFinMonth,RptModel.TargetPlanID).ToList();
 
 
                 // 获取各个公司全年的总指标数据

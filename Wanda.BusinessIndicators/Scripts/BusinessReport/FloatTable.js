@@ -19,11 +19,24 @@ var isFixedHead = true;
 var isRpt = "Reported" //默认是上报页面，如果有其它的请修改此处的变量
 var _floattable_H_actualindex = new Array();
 var _floattable_B_actualindex = new Array();
-
+function FloatHeaderWidth(obj, head) {
+    var trObj = obj.find("thead").find("tr");
+    var trHead = head.find("tr");
+    for (var i = 0; i < trHead.length; i++) {
+        var thHead = trHead.eq(i).find("th");
+        //console.log(thHead);
+        for (var j = 0; j < thHead.length; j++) {
+            var thWidth = thHead.eq(j).outerWidth() + "px";
+            console.log(thWidth);
+            trObj.eq(i).find("th").eq(j).css("width", thWidth)
+        }
+    }
+    
+}
 function FloatHeader(obj, tab) {
-    var st, wt;
-    var oleft = Number(tab.offset().left);
-    var otop = Number(tab.offset().top) - 10;
+    var st, wt, oleft, otop;
+    oleft = getLeft(tab[0]);
+    otop = getTop(tab[0]);
     obj.css({
         "display": "none",
         "position": "fixed",
@@ -47,6 +60,16 @@ function FloatHeader(obj, tab) {
         }
         obj.width(tab.width());
     });
+}
+function getTop(e) {
+    var offset = e.offsetTop;
+    if (e.offsetParent != null) offset += getTop(e.offsetParent);
+    return offset;
+} 
+function getLeft(e){ 
+var offset=e.offsetLeft; 
+    if (e.offsetParent != null) offset += getLeft(e.offsetParent); 
+return offset; 
 }
 //function FloatHeader(obj, tab, isFixed, _isRpt) {
 

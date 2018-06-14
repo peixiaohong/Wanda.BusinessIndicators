@@ -6,12 +6,12 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/css/NavStlye.css" type="text/css" rel="stylesheet" />
-    <script type="text/javascript" src="../Scripts/BusinessReport/TargetPlanDetailReported.js?v=15"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/TargetPlanDetailReported.js?ver=2"></script>
     <script type="text/javascript" src="../Scripts/UpLoad/jquery.uploadify.min.js"></script>
 
     <style type="text/css">
         .Tishi {
-            color: red;
+            color: #9d2328;
             font-weight: 700;
         }
     </style>
@@ -166,6 +166,10 @@
             <div class="scrolldoorFrame copy">
                 <ul class="tabs" id="Ul4" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
                 </ul>
+                <table class="tab_005" id="importedDataFloatTable2" style="display:none;">
+                    <thead>
+                    </thead>
+                </table>
                 <table class="tab_005" id="importedDataTable2">
                     <thead id="TargetPlanDetailHead">
                     </thead>

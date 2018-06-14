@@ -32,8 +32,8 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 FinYear = datetime.Year;
                 FinMonth = datetime.Month;
             }
-            catch (System.FormatException )
-            {}
+            catch (System.FormatException)
+            { }
             hideFinYear.Value = FinYear.ToString();
             hideFinMonth.Value = FinMonth.ToString();
 
@@ -98,9 +98,9 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     ddlSystem.SelectedValue = bmr.SystemID.ToString();
                     HidSystemID.Value = ddlSystem.SelectedValue;
                 }
-            
-                HideProcessCode.Value = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(),DateTime.Now].Configuration.Element("ProcessCode").Value;
-               
+
+                HideProcessCode.Value = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(), DateTime.Now].Configuration.Element("ProcessCode").Value;
+
                 AddMonthlyReport();//如果当前月不存在月度报告数据，添加一条数据
             }
         }
@@ -124,15 +124,15 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         public void AddMonthlyReport()
         {
             HidSystemID.Value = ddlSystem.SelectedValue;
-       
-            HideProcessCode.Value = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(),DateTime.Now].Configuration.Element("ProcessCode").Value;
+
+            HideProcessCode.Value = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(), DateTime.Now].Configuration.Element("ProcessCode").Value;
 
             B_SystemBatch BatchModel = null; // 公用的批次 实体
 
             B_MonthlyReport bmr = null;  // 公用B_MonthlyReport 实体
-       
+
             //首先判断系统, 是否是包含在批次里
-            string Gtypt = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(),DateTime.Now].GroupType;
+            string Gtypt = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(), DateTime.Now].GroupType;
 
             if (!string.IsNullOrEmpty(Gtypt))
             {
@@ -157,21 +157,21 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                         List<V_SubReport> V_SubReportList = JsonConvert.DeserializeObject<List<V_SubReport>>(BatchModel.SubReport);
 
                         //获取上报月报的ID
-                        var  subRpt = V_SubReportList.Find(SR => SR.SystemID == HidSystemID.Value.ToGuid());
+                        var subRpt = V_SubReportList.Find(SR => SR.SystemID == HidSystemID.Value.ToGuid());
 
                         B_MonthlyReport monthRpt = B_MonthlyreportOperator.Instance.GetMonthlyreport(subRpt.ReportID);
 
-                        
+
 
                         #region  批次存在
-                        
+
                         //审批进行中,是要被跳转到审批页面的，但是审批完成就需要重新开启新的流程
                         if (BatchModel.WFBatchStatus == "Progress" || monthRpt.WFStatus == "Progress")
                         {
                             //批次是草稿状态
-                            var model =  V_SubReportList.Find(p => p.SystemID == HidSystemID.Value.ToGuid());
+                            var model = V_SubReportList.Find(p => p.SystemID == HidSystemID.Value.ToGuid());
 
-//---------------------------------------------------------------------------------------------------------------------------------------------
+                            //---------------------------------------------------------------------------------------------------------------------------------------------
                             //这里批次需要控制，每次审批的状态只能是唯一的
                             // 暂时注销掉  BatchModel = AddSystemBatch();
 
@@ -198,7 +198,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                             //    Server.Transfer("~/BusinessReport/ProTargetApprove.aspx?BusinessID=" + host.BusinessID);
                             //}
 
-//---------------------------------------------------------------------------------------------------------------------------------------------
+                            //---------------------------------------------------------------------------------------------------------------------------------------------
                         }
                         else if (BatchModel.WFBatchStatus == "Approved") //如果审批是完成状态，重新生产
                         {
@@ -207,7 +207,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                         else
                         {
                             //批次是草稿状态
-                           
+
                             V_SubReportList.ForEach(p =>
                             {   //选择的是那个系统？
                                 if (p.SystemID == Guid.Parse(ddlSystem.SelectedValue))
@@ -271,7 +271,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                         UserControl.SetButtonSpanStyle(bmr.Status);
                     }
                 }
-                
+
                 #endregion
 
             }
@@ -314,14 +314,15 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 {
                     MutipleUpload.LoadByBusinessID(bmr.ID.ToString());
                     UserControl.SetButtonSpanStyle(bmr.Status);
-                    
+
                 }
 
                 #endregion
-            
+
             }
-            if (bmr != null) {
-                List<BPF.Workflow.Object.ProcessLog> lstBatchProcessLog=new List<BPF.Workflow.Object.ProcessLog>();
+            if (bmr != null)
+            {
+                List<BPF.Workflow.Object.ProcessLog> lstBatchProcessLog = new List<BPF.Workflow.Object.ProcessLog>();
                 if (bmr.SystemBatchID != Guid.Empty)
                 {
 
@@ -331,7 +332,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     //}
                 }
                 //List<BPF.Workflow.Object.ProcessLog> lstCurrentProcessLog = BPF.Workflow.Client.WFClientSDK.GetProcessLogList(bmr.ID.ToString());
-                
+
                 //if (lstBatchProcessLog!=null)
                 //{
                 //    lstCurrentProcessLog.AddRange(lstBatchProcessLog);
@@ -339,7 +340,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 //HideOpinions.Value = JsonConvert.SerializeObject(lstCurrentProcessLog.OrderByDescending(p => p.FinishDateTime));
             }
 
-         
+
 
         }
 
@@ -375,8 +376,8 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
 
             List<V_SubReport> SubReportList = new List<V_SubReport>();
             //获取项目系统的公司
-            List<C_System> ProSysList = StaticResource.Instance.SystemList.Where(p => p.GroupType == "ProSystem").OrderBy(PR=>PR.Sequence).ToList();
-            
+            List<C_System> ProSysList = StaticResource.Instance.SystemList.Where(p => p.GroupType == "ProSystem").OrderBy(PR => PR.Sequence).ToList();
+
             //循环添加B_MonthlyReport表数据
             foreach (var item in ProSysList)
             {
@@ -407,7 +408,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 }
             }
 
-            BatchModel.SubReport =JsonConvert.SerializeObject(SubReportList);
+            BatchModel.SubReport = JsonConvert.SerializeObject(SubReportList);
 
             BatchModel.ID = B_SystemBatchOperator.Instance.AddSystemBatch(BatchModel);
 
@@ -425,15 +426,23 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         public void AddBMRD(B_MonthlyReport bmr)
         {
             IList<B_MonthlyReportDetail> listBMRD = B_MonthlyreportdetailOperator.Instance.GetMonthlyreportdetailList(bmr.ID);
-            
+
             bool IsExistence = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetailCount(bmr.ID);
 
             List<B_MonthlyReportDetail> B_ReportDetails = new List<B_MonthlyReportDetail>();
 
-            var targetPlanId = StaticResource.Instance.GetDefaultTargetPlanList(Guid.Parse(ddlSystem.SelectedValue), FinYear).FirstOrDefault().TargetPlanID;
+            var targetPlan = StaticResource.Instance.GetDefaultTargetPlanList(Guid.Parse(ddlSystem.SelectedValue), FinYear).FirstOrDefault();
+            if (targetPlan == null || targetPlan.TargetPlanID == null || targetPlan.TargetPlanID == Guid.Empty)
+            {
+                UserControl.SetButtonSpanStyle(-1);
+                return;
+            }
+
+            var targetPlanId = targetPlan.TargetPlanID;
+
             if (IsExistence == false)
             {
-                A_MonthlyReport AMonthlyReport = A_MonthlyreportOperator.Instance.GetAMonthlyReport(Guid.Parse(ddlSystem.SelectedValue),Guid.Empty,FinYear, FinMonth,targetPlanId);
+                A_MonthlyReport AMonthlyReport = A_MonthlyreportOperator.Instance.GetAMonthlyReport(Guid.Parse(ddlSystem.SelectedValue), Guid.Empty, FinYear, FinMonth, targetPlanId);
                 //如果A表有数据从A表取数据，否则取B表上一版本的数据。
                 if (AMonthlyReport != null)
                 {
@@ -441,16 +450,16 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     bmr.Description = AMonthlyReport.Description;//月报说明
                     B_MonthlyreportOperator.Instance.UpdateMonthlyreport(bmr);//更新月报说明
 
-                    B_ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetail_ByAToB(FinYear, FinMonth, AMonthlyReport.SystemID, bmr.ID,targetPlanId);
+                    B_ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetail_ByAToB(FinYear, FinMonth, AMonthlyReport.SystemID, bmr.AreaID, bmr.ID, targetPlanId);
                 }
                 else
                 {
                     //获取B表的审批中的数据，做成草稿
-                    B_MonthlyReport BMonthlyReport = B_MonthlyreportOperator.Instance.GetMonthlyReport(Guid.Parse(ddlSystem.SelectedValue),Guid.Empty, FinYear, FinMonth,bmr.ID,targetPlanId);
+                    B_MonthlyReport BMonthlyReport = B_MonthlyreportOperator.Instance.GetMonthlyReport(Guid.Parse(ddlSystem.SelectedValue), Guid.Empty, FinYear, FinMonth, bmr.ID, targetPlanId);
                     if (BMonthlyReport != null)
                     {
                         //从B表获取上一版本数据插入B表
-                        B_ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetail_ByBToB(FinYear, FinMonth, BMonthlyReport.SystemID, BMonthlyReport.ID, bmr.ID);   
+                        B_ReportDetails = B_MonthlyreportdetailOperator.Instance.GetMonthlyReportDetail_ByBToB(FinYear, FinMonth, BMonthlyReport.SystemID, BMonthlyReport.ID, bmr.ID);
                     }
                 }
 
@@ -480,7 +489,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     {
                         BPF.Workflow.Object.WorkflowContext wc = BPF.Workflow.Client.WFClientSDK.GetProcess(null, host.BusinessID);
                         if (!wc.CurrentUserHasTodoTask)
-                        Server.Transfer("~/BusinessReport/ProTargetApprove.aspx?BusinessID=" + host.BusinessID);
+                            Server.Transfer("~/BusinessReport/ProTargetApprove.aspx?BusinessID=" + host.BusinessID);
                     }
                     //WfClientListener.Listen(host, null);
                     //if (WfClientContext.Current.ProcessResponse.FromReadOnly)

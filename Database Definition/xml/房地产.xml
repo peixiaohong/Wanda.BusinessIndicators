@@ -2,8 +2,11 @@
 	<ProcessCode ShowProcessNodeName="true">YY_ZBGK-FDC</ProcessCode>
 	<ProcessCode ShowProcessNodeName="true">YY_ZBGK-FDC-ZB</ProcessCode>
 	<Interfaces>
-		
-	</Interfaces>
+    <ICalculationEvaluation TemplateType="ProCalculationEvation" InterfaceName="ProCalculationEvation" />
+    <ISequence TemplateType="MissTarget" InterfaceName="MissTargetSequence" />
+    <ISequence TemplateType="Return" InterfaceName="ReturnSequence" />
+    <ISequence TemplateType="DetailMonthly" InterfaceName="CurrentMonthSequence" />
+  </Interfaces>
 	<ManageTargetDetail Name="经营报告明细">
 		<BlendTargets IsBlendTarget="True" Senquence="1" TargetName="销售额+销售回款" TargetValue="7049CFD3-F6E4-4DDC-8D15-664E65B1B2C5,BB758856-A380-47AF-8A76-09BB39C1BC22">
 			<Target TargetName="销售额" Senquence="1" IsBlendTarget="True" TargetValue="7049CFD3-F6E4-4DDC-8D15-664E65B1B2C5" />
@@ -62,17 +65,17 @@
 			<Counter Title="四、本月补回公司【{本月(GetValue(&quot;销售额.ReturnType&quot;)&gt;=6||GetValue(&quot;销售额.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;销售回款.ReturnType&quot;)&gt;=6||GetValue(&quot;销售回款.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;销售回款.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;销售额.ReturnType&quot;)&lt;&gt;0)}家】" Senquence="3" Expression="(GetValue(&quot;销售回款.ReturnType&quot;)&gt;=6||GetValue(&quot;销售回款.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;销售额.ReturnType&quot;)&gt;=6||GetValue(&quot;销售额.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;销售回款.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;销售额.ReturnType&quot;)&lt;&gt;0)" TextExpression="Return" />
 		</Group>
 		<Group TargetName="利润额" Senquence="2" TargetValue="481A168A-0DC3-4181-B260-191D9918FB0D">
-			<Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;利润额.IsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;利润额.IsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;利润额.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;利润额.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;利润额.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;利润额.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;利润额.IsMissTarget&quot;)==&quot;True&quot; " />
+			<Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;利润额.LastIsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;利润额.LastIsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;利润额.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;利润额.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;利润额.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;利润额.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;利润额.IsMissTarget&quot;)==&quot;True&quot; " />
 		</Group>
 		<Group TargetName="关键节点达成率" Senquence="3" TargetValue="F0110B64-34FB-4E9A-96D0-7A43670D2856">
-			<Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;关键节点达成率.IsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;关键节点达成率.IsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;关键节点达成率.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;关键节点达成率.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;关键节点达成率.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;关键节点达成率.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;关键节点达成率.IsMissTarget&quot;)==&quot;True&quot; " />
+			<Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;关键节点达成率.LastIsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;关键节点达成率.LastIsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;关键节点达成率.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;关键节点达成率.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;关键节点达成率.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;关键节点达成率.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;关键节点达成率.IsMissTarget&quot;)==&quot;True&quot; " />
 		</Group>
 		<Group TargetName="维修事项达成率" Senquence="4" TargetValue="97279959-BD58-4026-ADCD-48FB193CAE99">
-			<Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;维修事项达成率.IsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;维修事项达成率.IsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;维修事项达成率.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;维修事项达成率.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;维修事项达成率.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;维修事项达成率.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;维修事项达成率.IsMissTarget&quot;)==&quot;True&quot; " />
+			<Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;维修事项达成率.LastIsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;维修事项达成率.LastIsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;维修事项达成率.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;维修事项达成率.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;维修事项达成率.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;维修事项达成率.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;维修事项达成率.IsMissTarget&quot;)==&quot;True&quot; " />
 		</Group>
 	</Misstarget>
 	<MisstargetReturn Name="补回情况">
-		<Group TargetName="销售额+销售回款" Senquence="1" TargetValue="7049CFD3-F6E4-4DDC-8D15-664E65B1B2C5,BB758856-A380-47AF-8A76-09BB39C1BC22,481A168A-0DC3-4181-B260-191D9918FB0D">
+		<Group TargetName="销售额+销售回款" Senquence="1" TargetValue="7049CFD3-F6E4-4DDC-8D15-664E65B1B2C5,BB758856-A380-47AF-8A76-09BB39C1BC22">
 			<Counter Title="一、到期未补回" Senquence="1" Expression="GetValue(&quot;销售回款.ReturnType&quot;)==2||GetValue(&quot;销售额.ReturnType&quot;)==2" />
 			<Counter Title="二、未到期" Senquence="2" Expression="(GetStringValue(&quot;销售回款.LastIsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;销售额.LastIsMissTarget&quot;)==&quot;True&quot;)&amp;&amp;(GetStringValue(&quot;销售回款.IsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;销售额.IsMissTarget&quot;)==&quot;True&quot;)">
 				<Counter Title="1. 销售额、销售回款均未完成" Senquence="1" Expression="GetStringValue(&quot;销售回款.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;销售额.IsMissTarget&quot;)==&quot;True&quot;" />
@@ -99,19 +102,22 @@
 	</MisstargetReturn>
 	<Report>
 		<Rgroup Name="房地产事业部">
+      <![CDATA[
 			一、1-【当前月】月累计经营指标完成情况：
-			1、销售额收入：计划【销售额.累计计划总数】万元，实际完成 【销售额.累计实际总数】万元，累计完成率【销售额.累计累计完成率】，【销售额.累计未完成公司数量】家公司未完成累计销售额收入指标
-			2、销售回款收入：计划【销售回款.累计计划总数】万元，实际完成【销售回款.累计实际总数】万元，累计完成率【销售回款.累计累计完成率】，【销售回款.累计未完成公司数量】家公司未完成累计销售回款收入指标
-			3、利润额收入：计划【利润额.累计计划总数】万元，实际完成【利润额.累计实际总数】万元，累计完成率【利润额.累计累计完成率】，【利润额.累计未完成公司数量】家公司未完成累计利润额收入指标
-			4、关键节点达成率收入：计划【关键节点达成率.累计计划总数】个，实际完成【关键节点达成率.累计实际总数】个，累计完成率【关键节点达成率.累计累计完成率】，【关键节点达成率.累计未完成公司数量】家公司未完成累计关键节点达成率收入指标
-			5、维修事项达成率收入：计划【维修事项达成率.累计计划总数】个，实际完成【维修事项达成率.累计实际总数】个，累计完成率【维修事项达成率.累计累计完成率】，【维修事项达成率.累计未完成公司数量】家公司未完成累计维修事项达成率收入指标
+			1. 销售额收入：计划<span class="descNumber">【销售额.累计计划总数】</span>万元，实际完成 <span class="descNumber">【销售额.累计实际总数】</span>万元，累计完成率<span class="descNumber">【销售额.累计累计完成率】</span>，<span class="descNumber">【销售额.累计未完成公司数量】</span>家公司未完成累计销售额收入指标
+			2. 销售回款收入：计划<span class="descNumber">【销售回款.累计计划总数】</span>万元，实际完成<span class="descNumber">【销售回款.累计实际总数】</span>万元，累计完成率<span class="descNumber">【销售回款.累计累计完成率】</span>，<span class="descNumber">【销售回款.累计未完成公司数量】</span>家公司未完成累计销售回款收入指标
+			3. 利润额收入：计划<span class="descNumber">【利润额.累计计划总数】</span>万元，实际完成<span class="descNumber">【利润额.累计实际总数】</span>万元，累计完成率<span class="descNumber">【利润额.累计累计完成率】</span>，<span class="descNumber">【利润额.累计未完成公司数量】</span>家公司未完成累计利润额收入指标
+			4. 关键节点达成率收入：计划<span class="descNumber">【关键节点达成率.累计计划总数】</span>个，实际完成<span class="descNumber">【关键节点达成率.累计实际总数】</span>个，累计完成率<span class="descNumber">【关键节点达成率.累计累计完成率】</span>，<span class="descNumber">【关键节点达成率.累计未完成公司数量】</span>家公司未完成累计关键节点达成率收入指标
+			5. 维修事项达成率收入：计划<span class="descNumber">【维修事项达成率.累计计划总数】</span>个，实际完成<span class="descNumber">【维修事项达成率.累计实际总数】</span>个，累计完成率<span class="descNumber">【维修事项达成率.累计累计完成率】</span>，<span class="descNumber">【维修事项达成率.累计未完成公司数量】</span>家公司未完成累计维修事项达成率收入指标
 
 			二、【当前月】月当月经营指标完成情况：
-			1、销售额收入：计划【销售额.当月计划总数】万元，实际完成 【销售额.当月实际总数】万元，当月完成率【销售额.当月累计完成率】，【销售额.当月未完成公司数量】家公司未完成当月销售额收入指标
-			2、销售回款收入：计划【销售回款.当月计划总数】万元，实际完成【销售回款.当月实际总数】万元，当月完成率【销售回款.当月累计完成率】，【销售回款.当月未完成公司数量】家公司未完成当月销售回款收入指标
-			3、利润额收入：计划【利润额.当月计划总数】万元，实际完成【利润额.当月实际总数】万元，当月完成率【利润额.当月累计完成率】，【利润额.当月未完成公司数量】家公司未完成当月利润额收入指标
-			4、关键节点达成率收入：计划【关键节点达成率.当月计划总数】个，实际完成【关键节点达成率.当月实际总数】个，当月完成率【关键节点达成率.当月累计完成率】，【关键节点达成率.当月未完成公司数量】家公司未完成当月关键节点达成率收入指标
-			5、维修事项达成率收入：计划【维修事项达成率.当月计划总数】个，实际完成【维修事项达成率.当月实际总数】个，当月完成率【维修事项达成率.当月累计完成率】，【维修事项达成率.当月未完成公司数量】家公司未完成当月维修事项达成率收入指标
+			1. 销售额收入：计划<span class="descNumber2">【销售额.当月计划总数】</span>万元，实际完成 <span class="descNumber2">【销售额.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【销售额.当月累计完成率】</span>，<span class="descNumber2">【销售额.当月未完成公司数量】</span>家公司未完成当月销售额收入指标
+			2. 销售回款收入：计划<span class="descNumber2">【销售回款.当月计划总数】</span>万元，实际完成<span class="descNumber2">【销售回款.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【销售回款.当月累计完成率】</span>，<span class="descNumber2">【销售回款.当月未完成公司数量】</span>家公司未完成当月销售回款收入指标
+			3. 利润额收入：计划<span class="descNumber2">【利润额.当月计划总数】</span>万元，实际完成<span class="descNumber2">【利润额.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【利润额.当月累计完成率】</span>，<span class="descNumber2">【利润额.当月未完成公司数量】</span>家公司未完成当月利润额收入指标
+			4. 关键节点达成率收入：计划<span class="descNumber2">【关键节点达成率.当月计划总数】</span>个，实际完成<span class="descNumber2">【关键节点达成率.当月实际总数】</span>个，当月完成率<span class="descNumber2">【关键节点达成率.当月累计完成率】</span>，<span class="descNumber2">【关键节点达成率.当月未完成公司数量】</span>家公司未完成当月关键节点达成率收入指标
+			5. 维修事项达成率收入：计划<span class="descNumber2">【维修事项达成率.当月计划总数】</span>个，实际完成<span class="descNumber2">【维修事项达成率.当月实际总数】</span>个，当月完成率<span class="descNumber2">【维修事项达成率.当月累计完成率】</span>，<span class="descNumber2">【维修事项达成率.当月未完成公司数量】</span>家公司未完成当月维修事项达成率收入指标
+
+      ]]>
 		</Rgroup>
 	</Report>
 </Root>

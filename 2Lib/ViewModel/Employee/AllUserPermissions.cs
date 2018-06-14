@@ -37,5 +37,10 @@ namespace LJTH.BusinessIndicators.ViewModel.Employee
         /// 部门名称集合
         /// </summary>
         public string OrgName { get; set; }
+
+        /// <summary>
+        /// 用户是否已经存在某一个角色下面
+        /// </summary>
+        public int IsChecked { get; set; }
     }
 }

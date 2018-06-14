@@ -251,7 +251,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                             || CurrentRpt._Target.Where(p => p.TargetName == targetNames[0]).ToList().Count < 0
                             || CurrentRpt._Target.Where(p => p.TargetName == targetNames[1]).ToList().Count < 0)
                         {
-                            error = "上传数据中的混合指标不是当前系统的指标，请重新添加！";
+                            error = "上传数据中的混合指标不是当前板块的指标，请重新添加！";
                             return;
                         }
                     }
@@ -259,7 +259,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     {
                         if (CurrentRpt._Target.Where(p => p.TargetName == book.Worksheets[j].Name).ToList().Count < 0)
                         {
-                            error = "上传数据中的指标不是当前系统的指标，请重新添加！";
+                            error = "上传数据中的指标不是当前板块的指标，请重新添加！";
                             return;
                         }
                     }
@@ -441,7 +441,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 }
                 if (excel.GetStringCustomProperty(book.Worksheets[0], "SystemID") != SysId.ToString())
                 {
-                    error = "请下载当前系统的模板！";
+                    error = "请下载当前板块的模板！";
                     return;
                 }
                 List<DictionaryVmodel> ListDV = new List<DictionaryVmodel>();
@@ -676,7 +676,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 }
                 if (excel.GetStringCustomProperty(book.Worksheets[0], "SystemID") != SysId.ToString())
                 {
-                    error = "请下载当前系统的模板！";
+                    error = "请下载当前板块的模板！";
                     return;
                 }
                 List<DictionaryVmodel> ListDV = new List<DictionaryVmodel>();
@@ -695,12 +695,13 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     List<MonthlyReportDetail> listMrd = new List<MonthlyReportDetail>();
 
                     //获取当年指标计划ID
-                    Guid targetPlanID = Guid.Empty;
-                    List<A_TargetPlan> CurrentYearTargetPlan = LJTH.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetDefaultTargetplanList(CurrentRpt._System.ID, FinYear).ToList();
-                    if (CurrentYearTargetPlan.Count > 0)
-                    {
-                        targetPlanID = CurrentYearTargetPlan[0].ID;
-                    }
+                    //Guid targetPlanID = Guid.Empty;
+                    //List<A_TargetPlan> CurrentYearTargetPlan = LJTH.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetDefaultTargetplanList(CurrentRpt._System.ID, FinYear).ToList();
+                    //if (CurrentYearTargetPlan.Count > 0)
+                    //{
+                    //    targetPlanID = CurrentYearTargetPlan[0].ID;
+                    //}
+                    Guid targetPlanID = CurrentRpt.TargetPlanID;
 
                     foreach (DataRow dr in dt.Rows)
                     {
@@ -826,7 +827,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 }
                 if (excel.GetStringCustomProperty(book.Worksheets[0], "SystemID") != SysId.ToString())
                 {
-                    error = "请下载当前系统的模板！";
+                    error = "请下载当前板块的模板！";
                     return;
                 }
                 List<DictionaryVmodel> ListDV = new List<DictionaryVmodel>();
@@ -1124,7 +1125,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             }
             catch (Exception)
             {
-                error = "请确认上传的指标是否是本系统的指标!";
+                error = "请确认上传的指标是否是本板块的指标!";
                 return null;
             }
 
@@ -1740,18 +1741,19 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             }
             catch (Exception)
             {
-                error = "请确认上传的指标是否是本系统的指标!";
+                error = "请确认上传的指标是否是本板块的指标!";
                 return null;
             }
 
             //获取当年指标计划ID
-            Guid targetPlanID = Guid.Empty;
-            //List<A_TargetPlan> CurrentYearTargetPlan = LJTH.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetTargetplanList(SystemID, FinYear).ToList();
-            List<A_TargetPlan> CurrentYearTargetPlan = LJTH.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetDefaultTargetplanList(SystemID, FinYear).ToList();
-            if (CurrentYearTargetPlan.Count > 0)
-            {
-                targetPlanID = CurrentYearTargetPlan[0].ID;
-            }
+            //Guid targetPlanID = Guid.Empty;
+            ////List<A_TargetPlan> CurrentYearTargetPlan = LJTH.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetTargetplanList(SystemID, FinYear).ToList();
+            //List<A_TargetPlan> CurrentYearTargetPlan = LJTH.BusinessIndicators.BLL.A_TargetplanOperator.Instance.GetDefaultTargetplanList(SystemID, FinYear).ToList();
+            //if (CurrentYearTargetPlan.Count > 0)
+            //{
+            //    targetPlanID = CurrentYearTargetPlan[0].ID;
+            //}
+            Guid targetPlanID = CurrentRpt.TargetPlanID;
 
 
             //获取当前月的数据

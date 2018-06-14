@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMasterPage/MainMasterApprove.Master" AutoEventWireup="true" CodeBehind="ReportMonthApprove.aspx.cs" Inherits="Mobile.web.Report.ReportMonthApprove" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-        <script src="<%=ResolveUrl("~/Assets/scripts/Report/ReportMonthApprove.js?v=")+System.Guid.NewGuid() %>"></script>
+        <script src="<%=ResolveUrl("~/Assets/scripts/Report/ReportMonthApprove.js?v=") %>"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
         <section id="MonthApproveContent" v-cloak>
@@ -21,7 +21,7 @@
                                         <table class="from-table">
                                             <tbody>
                                                 <tr>
-                                                    <td width="35%">上报系统</td>
+                                                    <td width="35%">上报版块</td>
                                                     <td>{{head.SystemName}}</td>
                                                 </tr>
                                                 <tr>

@@ -229,14 +229,16 @@ namespace BPF.OAMQServices
             paramList.Add("workflowname", message.Flowtype);
             paramList.Add("nodename", message.Nodename);
             paramList.Add("pcurl", SSOToolkit.Instance.GetAuthOAUrlWithSSO(message.PtpUrl.Trim(), message.Userid, message.FlowID));
-            if (message.Nodename=="填报人")
+            if (message.Nodename == "填报人")
             {
                 paramList.Add("appurl", "");
             }
             else
             {
-                paramList.Add("appurl", SSOToolkit.Instance.GetAuthOAUrlWithSSO(message.MobileUrl.Trim(), message.Userid, message.FlowID));
+                var url = System.Configuration.ConfigurationManager.AppSettings["WebURL"];
+                paramList.Add("appurl", url + SSOToolkit.Instance.GetAuthOAUrlWithSSO(message.MobileUrl.Trim(), message.Userid, message.FlowID));
             }
+            //paramList.Add("appurl", SSOToolkit.Instance.GetAuthOAUrlWithSSO(message.MobileUrl.Trim(), message.Userid, message.FlowID));
             paramList.Add("creator", message.Creator);
             paramList.Add("isremark", message.Flowmess.ToString());
             //paramList.Add("viewtype", message.Viewtype.ToString());

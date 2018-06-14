@@ -95,7 +95,8 @@ namespace LJTH.BusinessIndicators.Engine
                 ModifierName = value.ModifierName,
                 ModifyTime = value.ModifyTime,
                 Status = value.Status,
-                SystemBatchID = value.SystemBatchID
+                SystemBatchID = value.SystemBatchID,
+                TargetPlanID=value.TargetPlanID
             };
             return result;
         }
@@ -114,9 +115,10 @@ namespace LJTH.BusinessIndicators.Engine
                 CreatorName = value.CreatorName,
                 ModifierName = value.ModifierName,
                 ModifyTime = value.ModifyTime,
-                Status =value.Status,
+                Status = value.Status,
                 WFStatus = value.WFStatus,
-                SystemBatchID = value.SystemBatchID
+                SystemBatchID = value.SystemBatchID,
+                TargetPlanID = value.TargetPlanID
                 
             };
             return result;

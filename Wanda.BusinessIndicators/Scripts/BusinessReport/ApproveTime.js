@@ -111,9 +111,9 @@ function ChangeTab(result) {
             NowMissList = result;
             //loadTmpl('#TargetReportBody').tmpl(result).appendTo('#TData1');//客户版本不支持tmpl
             AddView(result);
-            var obj = $("#TbH1");
-            var tab = $("#TData1");
-            FloatHeader(obj, tab);
+            //var obj = $("#TbH1");
+            //var tab = $("#TData1");
+            //FloatHeader(obj, tab);
             
         }
     });
@@ -157,6 +157,11 @@ function AddView(result) {
 
     }
     $("#TData1").html(detail);
+    var obj = $("#Tab_FloatReturn");
+    var head = $("#TbH1");
+    obj.find("thead").html(head.html());
+    var tab = $("#TData1");
+    FloatHeader(obj, tab);
 }
 var arrresult = [];
 var Companyid = "";
@@ -217,7 +222,7 @@ function change(CompanyID) {
             $("input[type='radio']:checked").val();
             $("#datetime").hide();
             $("#YearInt").show();
-            $("#rpt_info_CommitReason").attr("readonly", "readonly");
+            //$("#rpt_info_CommitReason").attr("readonly", "readonly");
             $("#rpt_info_CommitReason").css({ "backgroundColor": "#ececec" });
             $("#rpt_info_CommitReason").html(arr[0].CurrentMonthCommitReason);
         } else {
@@ -226,7 +231,7 @@ function change(CompanyID) {
             $("input[type='radio']:checked").val();
             $("#datetime").show();
             $("#YearInt").hide();
-            $("#rpt_info_CommitReason").attr("readonly", "readonly");
+            //$("#rpt_info_CommitReason").attr("readonly", "readonly");
             $("#rpt_info_CommitReason").css({ "backgroundColor": "#ececec" });
             $("#rpt_info_CommitReason").val("");
             $("#rpt_info_CommitReason").html("");
@@ -543,7 +548,7 @@ function MonthShow() {
         $("input[type='radio']:checked").val();
         $("#YearInt").hide();
         $("#datetime").show();
-        $("#rpt_info_CommitReason").attr("readonly", "readonly");
+        //$("#rpt_info_CommitReason").attr("readonly", "readonly");
         $("#rpt_info_CommitReason").css({ "backgroundColor": "#ececec" });
         $("#rpt_info_CommitReason").val("");
     } else {
@@ -554,7 +559,7 @@ function MonthShow() {
         $("#datetime").show();
         $("#monthshow").show();
         $("#redtext").hide();
-        $("#rpt_info_CommitReason").attr("readonly", "readonly");
+        //$("#rpt_info_CommitReason").attr("readonly", "readonly");
         $("#rpt_info_CommitReason").css({ "backgroundColor": "#ececec" });
         $("#rpt_info_CommitReason").val("");
     }
@@ -567,7 +572,7 @@ function DateShow() {
     $("#datetime").show();
     $("#dateshow").show();
     $("#redtext").show();
-    $("#rpt_info_CommitReason").attr("readonly", "readonly");
+   // $("#rpt_info_CommitReason").attr("readonly", "readonly");
     $("#rpt_info_CommitReason").css({ "backgroundColor": "#ececec" });
     $("#rpt_info_CommitReason").val("");
 }
@@ -578,7 +583,7 @@ function Yaershow() {
         $("input[type='radio']:checked").val();
         $("#datetime").hide();
         $("#YearInt").show();
-        $("#rpt_info_CommitReason").attr("readonly", "readonly");
+        //$("#rpt_info_CommitReason").attr("readonly", "readonly");
         $("#rpt_info_CommitReason").css({ "backgroundColor": "#ececec" });
         $("#rpt_info_CommitReason").val("预计年内无法补回必保全年完成【】万(指标" + AnnualTarget + "万，差额【】万)");
     } else {
@@ -589,7 +594,7 @@ function Yaershow() {
         $("#datetime").hide();
         $("#redtext").hide();
         $("#YearInt").show();
-        $("#rpt_info_CommitReason").attr("readonly", "readonly");
+        //$("#rpt_info_CommitReason").attr("readonly", "readonly");
         $("#rpt_info_CommitReason").css({ "backgroundColor": "#ececec" });
         $("#rpt_info_CommitReason").val("预计年内无法补回必保全年完成【】万(指标" + AnnualTarget + "万，差额【】万)");
 
@@ -619,7 +624,7 @@ function Returned() {
 
 function FormatTime(values) {
     if (values != null && values != "0001/1/1 0:00:00") {
-        var Y = new Date(values).getYear();
+        var Y = new Date(values).getFullYear();
         var X = new Date(values).getMonth() + 1;
         if (X < 10) {
             return Y + "-0" + X;

@@ -46,7 +46,7 @@ namespace LJTH.BusinessIndicators.Engine
             List<DictionaryVmodel> listDictionaryVModel = new List<DictionaryVmodel>();
             List<DictionaryVmodel> ItemCompanyPropertyViewModel = null;
             List<C_Target> listTempC_target = _Target;
-            string strHtmlTemplate=string.Empty;
+            string strHtmlTemplate = string.Empty;
             if (IncludeHaveDetail == false)
             {
                 listTempC_target = _Target.Where(p => p.HaveDetail == true).ToList();
@@ -56,10 +56,10 @@ namespace LJTH.BusinessIndicators.Engine
                 List<MonthlyReportDetail> listMRD = new List<MonthlyReportDetail>();
                 List<C_Target> listC_target = listTempC_target.Where(c => c.TargetName == vtarget.TargetName).ToList();
                 if (listC_target.Count > 0)
-                { 
-                    C_Target CurrentTarget=listC_target[0];
+                {
+                    C_Target CurrentTarget = listC_target[0];
                     ItemCompanyPropertyViewModel = new List<DictionaryVmodel>();
-                    List<MonthlyReportDetail> listm = ReportDetails.Where(p => p.TargetID == CurrentTarget.ID && (p.Display == true )).ToList();
+                    List<MonthlyReportDetail> listm = ReportDetails.Where(p => p.TargetID == CurrentTarget.ID && (p.Display == true)).ToList();
 
                     //判断是否是明细项数据
                     if (CurrentTarget.HaveDetail == true)
@@ -85,7 +85,7 @@ namespace LJTH.BusinessIndicators.Engine
                             if (SpliteCompanyPropertyXml("List", CurrentTarget.Configuration).Count > 0)
                             {
                                 lstVCompanyProperty = null;
-                        }
+                            }
                         }
                         else
                         {
@@ -169,7 +169,7 @@ namespace LJTH.BusinessIndicators.Engine
             //判断当前指标是否存在模板，如果存在使用指标模板，如果不存在使用当前系统的模板。
             if (CTarget.Configuration.Elements("ComplateTargetDetail").Elements("Target").ToList().Count > 0)
             {
-                listVCounter=SplitCompleteTargetDetailXml(CTarget.Configuration)[0].CounterList;
+                listVCounter = SplitCompleteTargetDetailXml(CTarget.Configuration)[0].CounterList;
             }
             else
             {
@@ -193,7 +193,7 @@ namespace LJTH.BusinessIndicators.Engine
                 //明细项数据排序
                 VCounterListMonthlyReportDetailViewModel = SequenceEngine.SequenceService.GetSequence(_System.ID, strMonthReportOrderType, VCounterListMonthlyReportDetailViewModel);
                 dv.Name = listVCounter.ToList()[i].Title;
-                
+
                 //判断是否隐藏Counter明细项中数据
                 if (listVCounter[i].Display.ToLower() == "true")
                 {
@@ -203,7 +203,7 @@ namespace LJTH.BusinessIndicators.Engine
                 }
                 else
                 {
-                   
+
                     dv.Mark = "DetailHide";
                 }
                 //判断Counter明细项中是否存在该数据。
@@ -217,17 +217,17 @@ namespace LJTH.BusinessIndicators.Engine
                     dv.Value = vcp.ItemCompanyPropertyName;
                     dv.RowSpanCount = 0;
                 }
-               
+
 
                 #region 计算明细项项合计和小计
-                
+
                 if (!listVCounter.ToList()[i].Title.Contains("小计") && !listVCounter.ToList()[i].Title.Contains("合计"))
                 {
-                    bmrd=SummaryData(VCounterListMonthlyReportDetailViewModel, bmrd, CTarget);
+                    bmrd = SummaryData(VCounterListMonthlyReportDetailViewModel, bmrd, CTarget);
                 }
                 else
                 {
-                    bmrd=SummaryData(listMRD, bmrd, CTarget);
+                    bmrd = SummaryData(listMRD, bmrd, CTarget);
                 }
                 #endregion
 
@@ -243,7 +243,7 @@ namespace LJTH.BusinessIndicators.Engine
                 lstDVM[0].RowSpanCount = rowSpanCount + listVCounter.ToList().Count;
             }
             #endregion
-            
+
             return lstDVM;
         }
         /// <summary>
@@ -412,7 +412,7 @@ namespace LJTH.BusinessIndicators.Engine
                     strValue += xt.GetAttributeValue("TableHeadTmplName", "") + ",";
                     strValue += xt.GetAttributeValue("TableDataTmplName", "") + ",";
                     strValue += xt.GetAttributeValue("RargetReportTableDataTmplName", "") + ",";
-                    strValue += xt.GetAttributeValue("TableExcelTemplateName", "")+",";
+                    strValue += xt.GetAttributeValue("TableExcelTemplateName", "") + ",";
                 }
                 if (element.Elements("ReportMonthlyDetail").Elements("TableTemplate").ToList().Count > 0)
                 {
@@ -426,19 +426,21 @@ namespace LJTH.BusinessIndicators.Engine
         /// 获取计划数
         /// </summary>
         /// <returns></returns>
-        public List<DictionaryVmodel> GetTagetPlanViewModel()
+        public List<DictionaryVmodel> GetTagetPlanViewModelForDefaultTargetID(Guid targetPlanID)
         {
             //获取当前月计划数据
-            //List<A_TargetPlanDetail> listTargetPlan = StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear, FinMonth);
-            List<A_TargetPlanDetail> listTargetPlan = StaticResource.Instance.GetDefaultTargetPlanList(_System.ID, FinYear, FinMonth);
+            List<A_TargetPlanDetail> listTargetPlan = StaticResource.Instance
+                .GetTargetPlanList(_System.ID, FinYear, FinMonth).Where(v => v.TargetPlanID == targetPlanID).ToList();
+            //List<A_TargetPlanDetail> listTargetPlan = StaticResource.Instance.GetDefaultTargetPlanList(_System.ID, FinYear, FinMonth);
 
             //获取当前月与之前月的计划数据
             //List<A_TargetPlanDetail> listTargetPlanToYear = StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear);
-            List<A_TargetPlanDetail> listTargetPlanToYear = StaticResource.Instance.GetDefaultTargetPlanList(_System.ID, FinYear);
+            List<A_TargetPlanDetail> listTargetPlanToYear = StaticResource.Instance
+                .GetTargetPlanList(_System.ID, FinYear, FinMonth).Where(v => v.TargetPlanID == targetPlanID).ToList();
 
             //得到当前系统的所有公司
             List<C_Company> listComPany = StaticResource.Instance.CompanyList[_System.ID];
-            if(AreaID!=Guid.Empty)
+            if (AreaID != Guid.Empty)
             {
                 var ids = StaticResource.Instance.GetCompanyIds(_SystemID, AreaID);
                 var t = from p in listComPany join q in ids on p.ID equals q select p;
@@ -451,7 +453,7 @@ namespace LJTH.BusinessIndicators.Engine
             List<C_Target> PlanTarget = new List<C_Target>();
 
             PlanTarget = _Target;
-          
+
 
             if (listTargetPlanToYear != null && listTargetPlanToYear.Count() > 0)
             {
@@ -460,7 +462,7 @@ namespace LJTH.BusinessIndicators.Engine
             }
             else
             {
-                PlanTarget = StaticResource.Instance.GetTargetList(_System.ID,DateTime.Now).ToList();
+                PlanTarget = StaticResource.Instance.GetTargetList(_System.ID, DateTime.Now).ToList();
             }
 
             foreach (C_Target Ctarget in PlanTarget.Where(p => p.NeedReport == true).OrderBy(p => p.Sequence))
@@ -478,10 +480,10 @@ namespace LJTH.BusinessIndicators.Engine
                         tpvm.ID = company.ID;
                         tpvm.CompanyName = company.CompanyName;
                         tpvm.NPlanAmmount = btp.Target;
-                        List<A_TargetPlanDetail> lst= listTargetPlanToYear.Where(p => p.CompanyID == company.ID
-                            && p.TargetID == Ctarget.ID && p.FinMonth <= FinMonth).ToList();
+                        List<A_TargetPlanDetail> lst = listTargetPlanToYear.Where(p => p.CompanyID == company.ID
+                             && p.TargetID == Ctarget.ID && p.FinMonth <= FinMonth).ToList();
 
-                        tpvm.NAccumulativePlanAmmount = lst.Sum(p=>p.Target);
+                        tpvm.NAccumulativePlanAmmount = lst.Sum(p => p.Target);
                         listTargetPlanViewModel.Add(tpvm);
                     }
                 }
@@ -501,7 +503,7 @@ namespace LJTH.BusinessIndicators.Engine
             //获取当前月计划数据
             List<A_TargetPlanDetail> listTargetPlan = A_TargetplandetailOperator.Instance.GetTargetplandetailListBySYNC(FinYear, FinMonth);
 
-                //StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear, FinMonth);
+            //StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear, FinMonth);
 
             //获取当前月与之前月的计划数据
             List<A_TargetPlanDetail> listTargetPlanToYear = StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear);

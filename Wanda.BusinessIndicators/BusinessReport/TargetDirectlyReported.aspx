@@ -11,8 +11,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../ProcessResource/css/wfStyle-201.88.css" rel="stylesheet" />
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
-    <script type="text/javascript" src="../Scripts/BusinessReport/TargetDirectlyReported.js?v=1"></script>
-    <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported1.js?v=1"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/TargetDirectlyReported.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/TargetReported1.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
     <script type="text/javascript" src="../Scripts/UpLoad/jquery.uploadify.min.js"></script>
 
     <uc1:wfCtrl runat="server" ID="wfCtrl" />
@@ -30,7 +30,7 @@
             <asp:HiddenField runat="server" ID="HideProcessCode" ClientIDMode="Static" />
             <asp:HiddenField runat="server" ID="hiddenDis" ClientIDMode="Static" />
             <br />
-            <span style="color: red">注：上传excel后，若页面没有出现相应数据，请稍等几分钟再次刷新页面（数据正在后台进行计算），即可恢复正常。请勿因此重复上传数据。</span>
+            <span style="color: #9d2328">注：上传excel后，若页面没有出现相应数据，请稍等几分钟再次刷新页面（数据正在后台进行计算），即可恢复正常。请勿因此重复上传数据。</span>
         </div>
         <!--导航栏 开始-->
         <targetReportUC:TargetReportUserControl runat="server" ID="UserControl" />
@@ -102,7 +102,7 @@
 
         <!--完成情况明细 start-->
         <div class="TClassHide" id="T2">
-            <ul class="tabs" id="Ul4" style="border-bottom-color: #FFF; margin-top: 5px; height: 20px; margin-bottom: 0px;">
+            <ul class="tabs" id="Ul4" style="border-bottom-color: #FFF; margin-top: 5px; height: 20px;">
             </ul>
             <table class="tab_005" id="importedDataTable2">
                 <thead id="CompleteDetailHead">
@@ -115,9 +115,13 @@
 
         <!--未完成说明 累计 开始-->
         <div class="TClassHide" id="T3">
-            <ul class="tabs" id="U2" style="border-bottom-color: #FFF; margin-top: 5px; height: 20px; margin-bottom: 0px;">
+            <ul class="tabs" id="U2" style="border-bottom-color: #FFF; margin-top: 5px; height: 20px;">
             </ul>
 
+            <table class="tab_005" id="Tab_MissFloatTarget" style="display:none;">
+                <thead>
+                </thead>
+            </table>
             <table class="tab_005" id="Tab_MissTarget">
                 <thead id="Tab_MissTargetHead">
                 </thead>
@@ -130,7 +134,7 @@
 
         <!--未完成说明（当月） 开始-->
         <div class="TClassHide" id="T3_1">
-            <ul class="tabs" id="U2_1" style="border-bottom-color: #FFF; margin-top: 5px; height: auto; margin-bottom: 0px;">
+            <ul class="tabs" id="U2_1" style="border-bottom-color: #FFF; margin-top: 5px; height: auto;">
             </ul>
 
             <table class="tab_005" id="Tab_CurrentMissTarget">
@@ -158,8 +162,8 @@
 
             <div style="width: 100%; position: relative; padding-bottom: 5px;"></div>
             <div style="padding: 0px;">
-                <textarea id="MonthGetDescription" rows="4" cols="5">
-                  </textarea>
+                <div id="MonthGetDescription">
+                  </div>
             </div>
 
         </div>
@@ -191,7 +195,7 @@
             <div class="">
                 <span style="font-size: 13px; height: 30px; line-height: 60px; display: block; top: -35px; right: 0; z-index: 100; padding-right: 0px;">提示：月报已上报，正在审批申请中，请勿重复上报。
                     <span>
-                        <a href="TargetApprove.aspx?BusinessID=<%=hideMonthReportID.Value %>" target="_blank" style="color: #337ab7">点击查看审批进度</a>
+                        <a href="DirectlyTargetApprove.aspx?BusinessID=<%=hideMonthReportID.Value %>" target="_blank" style="color: #337ab7">点击查看审批进度</a>
                     </span>
                 </span>
             </div>

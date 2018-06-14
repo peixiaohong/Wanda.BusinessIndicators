@@ -27,13 +27,13 @@
         <table class="tab_search">
             <tbody>
                 <tr>
-                    <th>查询系统</th>
+                    <th>板块</th>
                     <td>
                           <input type="text" id="TxtSystem" style="width: 210px;" onclick="showMenu();" />
                         <asp:DropDownList ID="ddlSystem" ClientIDMode="Static" runat="server" Style="width: 120px; display:none; "></asp:DropDownList>
 
                         &nbsp;</td>
-                    <th>查询年份</th>
+                    <th>年份</th>
                     <td>
                         <asp:DropDownList ID="ddlYear" ClientIDMode="Static" runat="server" Style="width: 120px;"></asp:DropDownList>
 

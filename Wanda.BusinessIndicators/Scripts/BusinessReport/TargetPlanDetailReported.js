@@ -98,17 +98,20 @@ function operateNav(sender) {
     $("#process").hide();
     switch (sender) {
         case "downLoadTemplate":
-            $("#DownLoadModel").show();
-            $("#UpLoadData,#Down1,#T2,#VersionName").hide();
-            if (isCheckPlan())
+            if (isCheckPlan()) {
+                $("#DownLoadModel").show();
+                $("#UpLoadData,#Down1,#T2,#VersionName").hide();
                 setStlye("dataUploadSpan");
+            }
             break;
         case "dataUpload":
             if (isCheckPlan()) {
-                if (TargetPlanDeailData != undefined&&TargetPlanDeailData[0].ObjValue[0].ObjValue.length != 0) {
+                if (TargetPlanDeailData != undefined && TargetPlanDeailData[0].ObjValue[0].ObjValue.length != 0) {
                     $("#Down1,#T2").show();
                     $("#DownLoadModel,#UpLoadData,#VersionName").hide();
-                    var obj = $("#TargetPlanDetailHead");
+                    var obj = $("#importedDataFloatTable2");
+                    var head = $("#TargetPlanDetailHead");
+                    obj.find("thead").html(head.html());
                     var tab = $("#rows");
                     FloatHeader(obj, tab);
                 } else {
@@ -157,7 +160,7 @@ $(function () {
         OnAfterExecute: afterAction,
         IsShowContextMenu: true,
         PageContextMenu: true,
-        EnableDebug: true,
+        EnableDebug: false,
         ShowNodeName: ShowProecessNodeName == true ? true : false,
         ButtonCssType: "middle",
         CustomerSceneSetting: {
@@ -179,7 +182,7 @@ function isCheckPlan() {
     $("#hideVersionName").val(VersionName);
     var ret = true;
     var businessID = bpf_wf_tool.getQueryString("BusinessID");
-    if (businessID == "") {
+    if (businessID == "" || TargetPlanID=="") {
         WebUtil.ajax({
             async: false,
             url: "/TargetController/isCheckPlan",
@@ -189,12 +192,13 @@ function isCheckPlan() {
 
                 if (!resultData.success) {
                     alert('当前版本已存在审批版本，请勿重复操作！');
-                    TargetPlanID = resultData.TargetPlanID;
                     //$("#txt_VersionName").val("");
                     ClickItems("monthReportReady");
                     GetTargetPlanDetail();
                     ret = false;
                 }
+                TargetPlanID = resultData.TargetPlanID;
+                $("#hideTargetPlanID").val(TargetPlanID);
             }
         });
     }
@@ -215,10 +219,12 @@ function GetProcess(key, instanceID) {
                 $.unblockUI();
             })
         }, function () {
+            var name = '(' + $("#txt_VersionName").val() + ')';
+            var title = $('select#ddlSystem').find('option:selected').text() + $("#HideFinYear").val() + "年计划指标" + name + "上报";
             bpf_wf_client.createProcess({
                 FlowCode: FlowCode,
                 BusinessID: instanceID,
-                ProcessTitl: $('select#ddlSystem').find('option:selected').text() + $("#HideFinYear").val() + "年计划指标上报",
+                ProcessTitle: title,
                 FormParams: { ProcessKey: FlowCode }
             });
             $.unblockUI();
@@ -253,7 +259,7 @@ function BusinessDataHandle(instanceID, args) {
         // 审批结束
         if (args.WorkflowContext.CurrentUserNodeID != null && args.WorkflowContext.CurrentUserNodeID != "") {
             var nodeInfo = args.WorkflowContext.NodeInstanceList[args.WorkflowContext.CurrentUserNodeID];
-            if (nodeInfo != null && (nodeInfo.NodeType == 1 || nodeInfo.NodeType == 2 || nodeInfo.NodeType == 7)) {
+            if (nodeInfo != null && (nodeInfo.NodeType == 0||nodeInfo.NodeType == 1 || nodeInfo.NodeType == 2 || nodeInfo.NodeType == 7)) {
                 strPrcessStatus = "Approved";
             } else {
                 strPrcessStatus = null;
@@ -340,11 +346,11 @@ function GetReportTime() {
 function GetTargetPlanDetail() {
     TargetPlanID = $("#hideTargetPlanID").val();
     if (TargetPlanID != "") {
-    WebUtil.ajax({
-        async: true,
-        url: "/TargetPlanDetailController/GetTargetPlanDetail",
-        args: { strSystemID: sysID, strFinYear: FinYear, strTargetPlanID: TargetPlanID, IsLatestVersion: true },
-        successReturn: SplitData
+        WebUtil.ajax({
+            async: true,
+            url: "/TargetPlanDetailController/GetTargetPlanDetail",
+            args: { strSystemID: sysID, strFinYear: FinYear, strTargetPlanID: TargetPlanID, IsLatestVersion: true },
+            successReturn: SplitData
         });
     }
 }
@@ -363,7 +369,7 @@ function SplitData(result) {
     });
 
 
-    if (TargetPlanDeailData != undefined &&TargetPlanDeailData[0] != null) {
+    if (TargetPlanDeailData != undefined && TargetPlanDeailData[0] != null) {
         if (TargetPlanDeailData[0].HtmlTemplate != undefined) {
             strTemplate = TargetPlanDeailData[0].HtmlTemplate.split(',');
         }
@@ -391,10 +397,8 @@ function SplitData(result) {
             }
             $("#Ul4 :first a").addClass("active_sub3");
 
-            var obj = $("#TargetPlanDetailHead");
-            var tab = $("#rows");
-            FloatHeader(obj, tab);
         }
+
     }
 
 
@@ -409,6 +413,11 @@ function LoadTargetPlanDetailData(sender) {
         } else {
             loadTmplTargetPlanDetail("#TargetPlanDetailReportTemplate").tmpl(sender).appendTo("#rows");
         }
+        var obj = $("#importedDataFloatTable2");
+        var head = $("#TargetPlanDetailHead");
+        obj.find("thead").html(head.html());
+        var tab = $("#rows");
+        FloatHeader(obj, tab);
     }
 }
 
@@ -448,9 +457,7 @@ function TargetPlanDetailLiaddCss(sender) {
     }
 
     LoadTargetPlanDetailData(TemplData)
-    var obj = $("#TargetPlanDetailHead");
-    var tab = $("#rows");
-    FloatHeader(obj, tab);
+
 }
 
 function AddSumHead(result) {
@@ -489,7 +496,7 @@ function fileUpload(name) {
         'fileSizeLimit': '10240',
         //swf文件路径
         'swf': '../Scripts/UpLoad/uploadify.swf',
-        'formData': { 'FileType': 'UpTargetPlanDetail', 'SysId': sysID, 'FinYear': FinYear, 'MonthReportID': TargetPlanID },
+        'formData': { 'FileType': 'UpTargetPlanDetail', 'SysId': sysID, 'FinYear': FinYear },
         //后台处理页面
         'uploader': '/AjaxHander/UpLoadMonthTargetDetail.ashx',
         'onUploadSuccess': function (file, data, response) {
@@ -513,7 +520,7 @@ function fileUpload(name) {
             alert("上传失败，请上传正确的文件！");
         }
         , 'onUploadStart': function (file, data, response) {
-            $("#" + name).uploadify("settings", "formData", { 'VersionName': $("#hideVersionName").val() });
+            $("#" + name).uploadify("settings", "formData", { 'VersionName': $("#hideVersionName").val(), 'MonthReportID': $("#hideTargetPlanID").val() });
         }
     });
 }
@@ -595,7 +602,7 @@ function BangDetail() {
             for (var j = 0; j < TargetList.length; j++) {
                 if (j < SumMonthTargetList[i].TargetDetailList.length) {
                     if (SumMonthTargetList[i].TargetDetailList[j].Target != null) {
-                        row += "<td class=\"Td_Right\"title=" + SumMonthTargetList[i].TargetDetailList[j].Target + ">" + MathTarget(SumMonthTargetList[i].TargetDetailList[j].Target) + "</td>";
+                        row += "<td class=\"Td_Right\"title=" + SumMonthTargetList[i].TargetDetailList[j].Target + ">" + MathTarget(SumMonthTargetList[i].TargetDetailList[j].Target).thousandize0OrEmpty(0) + "</td>";
                     }
                     else {
                         row += "<td class=\"Td_Right\">--</td>";
@@ -609,7 +616,7 @@ function BangDetail() {
             for (var j = 0; j < TargetList.length; j++) {
                 if (j < SumMonthTargetList[i].TargetDetailList.length) {
                     if (SumMonthTargetList[i].TargetDetailList[j].SumTarget != null) {
-                        row += "<td class=\"Td_Right\" title=" + SumMonthTargetList[i].TargetDetailList[j].SumTarget + ">" + MathTarget(SumMonthTargetList[i].TargetDetailList[j].SumTarget) + "</td>";
+                        row += "<td class=\"Td_Right\" title=" + SumMonthTargetList[i].TargetDetailList[j].SumTarget + ">" + MathTarget(SumMonthTargetList[i].TargetDetailList[j].SumTarget).thousandize0OrEmpty(0) + "</td>";
                     }
                     else {
                         row += "<td class=\"Td_Right\">--</td>";
@@ -627,7 +634,7 @@ function BangDetail() {
         for (var i = 0; i < TargetList.length; i++) {
             if (i < SumMonthTargetList[11].TargetDetailList.length) {
                 if (SumMonthTargetList[11].TargetDetailList[i].SumTarget != null) {
-                    row += "<th class=\"th_Sub2\" style=\"text-align:right\" title=" + SumMonthTargetList[11].TargetDetailList[i].SumTarget + ">" + MathTarget(SumMonthTargetList[11].TargetDetailList[i].SumTarget) + "</th>";
+                    row += "<th class=\"th_Sub2\" style=\"text-align:right\" title=" + SumMonthTargetList[11].TargetDetailList[i].SumTarget + ">" + MathTarget(SumMonthTargetList[11].TargetDetailList[i].SumTarget).thousandize0OrEmpty(0) + "</th>";
                 }
                 else {
                     row += "<td class=\"th_Sub2\" style=\"text-align:right\">--</td>";

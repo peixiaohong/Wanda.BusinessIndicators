@@ -23,19 +23,19 @@ function setArrow_nLeft(sender) {
         case "downLoadTemplate":
             $(".arrow_n").css("left", "80px");
             $("#PromptMessage").html("请下载填报模版。");
-            $("#PromptMessage").removeClass("Tishi");
+            //$("#PromptMessage").removeClass("Tishi");
             return true;
             break;
         case "dataUpload":
             $(".arrow_n").css("left", "250px");
             $("#PromptMessage").html("请使用系统提供的填报模板导入本月数据，如已导入，再次导入将覆盖当前数据。");
-            $("#PromptMessage").removeClass("Tishi");
+            //$("#PromptMessage").removeClass("Tishi");
             return true;
             break;
         case "missTargetReport":
             $(".arrow_n").css("left", "420px");
             $("#PromptMessage").html("请填补回情况，未完成原因及措施。");
-            $("#PromptMessage").removeClass("Tishi");
+            //$("#PromptMessage").removeClass("Tishi");
             return true;
             break;
 
@@ -51,23 +51,25 @@ function setArrow_nLeft(sender) {
             if (confirm("请您确认是否保存月度上报")) {
                 $(".arrow_n").css("left", "760px");
                 $("#PromptMessage").html("请保存数据，等待其它上报人员填报。");
-                $("#PromptMessage").removeClass("Tishi");
+                //$("#PromptMessage").removeClass("Tishi");
                 return true;
             } else {
                 return false;
             }
             break;
         case "monthReport":
-            $(".arrow_n").css("left", "930px");
+           // $(".arrow_n").css("left", "930px");
+            $(".arrow_n").css("left", "760px");
             $("#PromptMessage").html("请填写月报说明。");
-            $("#PromptMessage").removeClass("Tishi");
+            //$("#PromptMessage").removeClass("Tishi");
 
             return true;
             break;
 
         case "monthReportSubmit":
             if (confirm("请您确认是否提交月度上报")) {
-                $(".arrow_n").css("left", "1060");
+                //$(".arrow_n").css("left", "1060px");
+                $(".arrow_n").css("left", "930px");
                 $("#PromptMessage").html("请仔细选择加签，保证分管副总裁审批节点以前审批人完整。");
                 $("#PromptMessage").addClass("Tishi");
                 return true;

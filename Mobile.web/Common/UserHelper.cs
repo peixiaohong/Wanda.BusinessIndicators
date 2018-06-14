@@ -3,19 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using NLog;
 
 namespace Mobile.web.Common
 {
     public static class UserHelper
     {
+        static ILogger logger = LogManager.GetCurrentClassLogger();
         public static string GetUserName()
         {
             try
             {
-
                 var request = HttpContext.Current.Request;
                 var param1 = "";
-                if(string.IsNullOrEmpty(param1))
+
+                if (string.IsNullOrEmpty(param1))
+                {
+                    if (HttpContext.Current.Request.Cookies["user"] != null)
+                    {
+                        var t = HttpContext.Current.Request.Cookies["user"].Value;
+                        if (!string.IsNullOrEmpty(t) && t.Length > 11)
+                        {
+                            param1 = DecryptBase64(t.Substring(10));
+                        }
+                    }
+                }
+                if (string.IsNullOrEmpty(param1))
                 {
                     if (HttpContext.Current.User != null)
                         param1 = HttpContext.Current.User.Identity.Name;
@@ -23,17 +36,6 @@ namespace Mobile.web.Common
                 if(string.IsNullOrEmpty(param1))
                 {
                     param1 = HttpContext.Current.Request.Cookies["loginId"].ToString() ;
-                }
-                if(string.IsNullOrEmpty(param1))
-                {
-                    if (HttpContext.Current.Request.Cookies["user"] != null)
-                    {
-                        var t = HttpContext.Current.Request.Cookies["user"].Value;
-                        if (!string.IsNullOrEmpty(t) && t.Length < 11)
-                        {
-                            param1 = DecryptBase64(t.Substring(10));
-                        }
-                    }
                 }
 
                 //if (string.IsNullOrEmpty(param1) || param1.Length < 11)

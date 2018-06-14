@@ -62,7 +62,7 @@ CommonProvider.install = function (Vue, ops) {
         CommonAjaxDelete(Vue.http, opts);
     }
     Vue.ToThousands = function (num) {
-        return (parseInt(num) || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
+        return (Math.round(num) || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
     }
     Vue.Trim = function (str) {
         if (str.length) {

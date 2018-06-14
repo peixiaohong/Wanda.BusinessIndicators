@@ -1,6 +1,6 @@
 ﻿<Root>
   <ProcessCode ShowProcessNodeName="true">YY_ZBGK-SM</ProcessCode>
-	<ProcessCode ShowProcessNodeName="true">YY_ZBGK-SM-ZB</ProcessCode>
+  <ProcessCode ShowProcessNodeName="true">YY_ZBGK-SM-ZB</ProcessCode>
   <Interfaces>
     <ISequence TemplateType="MissTarget" InterfaceName="MissTargetSequence" />
     <ISequence TemplateType="Return" InterfaceName="ReturnSequence" />
@@ -54,11 +54,11 @@
       <Counter Title="四、本月补回公司【{本月(GetValue(&quot;经营收入.ReturnType&quot;)&gt;=6||GetValue(&quot;经营收入.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;经营利润.ReturnType&quot;)&gt;=6||GetValue(&quot;经营利润.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;经营利润.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;经营收入.ReturnType&quot;)&lt;&gt;0)}家】" Senquence="3" Expression="(GetValue(&quot;经营利润.ReturnType&quot;)&gt;=6||GetValue(&quot;经营利润.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;经营收入.ReturnType&quot;)&gt;=6||GetValue(&quot;经营收入.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;经营利润.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;经营收入.ReturnType&quot;)&lt;&gt;0)" TextExpression="Return" />
     </Group>
     <Group TargetName="统一收银额" Senquence="2" TargetValue="4DEDA86F-40F8-4791-A69E-4D980EC8654C">
-      <Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;统一收银额.IsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;统一收银额.IsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;统一收银额.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;统一收银额.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;统一收银额.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;统一收银额.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;统一收银额.IsMissTarget&quot;)==&quot;True&quot; " />
+      <Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;统一收银额.LastIsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;统一收银额.LastIsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;统一收银额.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;统一收银额.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;统一收银额.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;统一收银额.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;统一收银额.IsMissTarget&quot;)==&quot;True&quot; " />
     </Group>
   </Misstarget>
   <MisstargetReturn Name="补回情况">
-    <Group TargetName="经营收入+经营利润" Senquence="1" TargetValue="558CF58E-66CB-4379-9CFF-12051F7436F6,CC4AA1EC-D374-4F15-83C9-8B7E15F3A8CD,4DEDA86F-40F8-4791-A69E-4D980EC8654C">
+    <Group TargetName="经营收入+经营利润" Senquence="1" TargetValue="558CF58E-66CB-4379-9CFF-12051F7436F6,CC4AA1EC-D374-4F15-83C9-8B7E15F3A8CD">
       <Counter Title="一、到期未补回" Senquence="1" Expression="GetValue(&quot;经营利润.ReturnType&quot;)==2||GetValue(&quot;经营收入.ReturnType&quot;)==2" />
       <Counter Title="二、未到期" Senquence="2" Expression="(GetStringValue(&quot;经营利润.LastIsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;经营收入.LastIsMissTarget&quot;)==&quot;True&quot;)&amp;&amp;(GetStringValue(&quot;经营利润.IsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;经营收入.IsMissTarget&quot;)==&quot;True&quot;)">
         <Counter Title="1. 经营收入、经营利润均未完成" Senquence="1" Expression="GetStringValue(&quot;经营利润.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;经营收入.IsMissTarget&quot;)==&quot;True&quot;" />
@@ -75,12 +75,12 @@
   </MisstargetReturn>
   <Report>
     <Rgroup Name="商贸">
-		1-【当前月】月累计经营指标完成情况：
+      1-【当前月】月累计经营指标完成情况：
 
-		1、1-【当前月】月经营收入指标为【经营收入.累计计划总数】万元，实际完成【经营收入.累计实际总数】万元，差额【经营收入.累计亏损率】万元，累计完成【经营收入.累计累计完成率】
-		2、1-【当前月】月经营利润指标为【经营利润.累计计划总数】万元，实际完成【经营利润.累计实际总数】万元，差额【经营利润.累计亏损率】万元，累计完成【经营利润.累计累计完成率】
-		3、1-【当前月】月统一收银额指标为【统一收银额.累计计划总数】万元，实际完成【统一收银额.累计实际总数】万元，差额【统一收银额.累计亏损率】万元，累计完成【统一收银额.累计累计完成率】
+      1、1-【当前月】月经营收入指标为【经营收入.累计计划总数】万元，实际完成【经营收入.累计实际总数】万元，差额【经营收入.累计亏损率】万元，累计完成【经营收入.累计累计完成率】
+      2、1-【当前月】月经营利润指标为【经营利润.累计计划总数】万元，实际完成【经营利润.累计实际总数】万元，差额【经营利润.累计亏损率】万元，累计完成【经营利润.累计累计完成率】
+      3、1-【当前月】月统一收银额指标为【统一收银额.累计计划总数】万元，实际完成【统一收银额.累计实际总数】万元，差额【统一收银额.累计亏损率】万元，累计完成【统一收银额.累计累计完成率】
 
-	</Rgroup>
+    </Rgroup>
   </Report>
 </Root>

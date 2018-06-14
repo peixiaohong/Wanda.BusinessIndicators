@@ -20,6 +20,9 @@ $(function () {
 
     //页面事件加载
     EventLoad();
+
+    $(".TargetVersionType").hide();
+   
 });
 
 //页面效果配置
@@ -75,6 +78,13 @@ function EventLoad()
         var systemID = $("#systemInfo").find("option:selected").attr("data-id");
         var year = $("#selectYears").find("option:selected").attr("data-id");
         var month = $("#selectMonth").find("option:selected").attr("data-id");
+        if (systemID == "00000000-0000-0000-0000-000000000000") {
+            $(".TargetVersionType").hide();
+        }
+        else
+        {
+            $(".TargetVersionType").show();
+        }
         SelectTargetVersionTypeLoad(systemID, year, month)
     });
 }
@@ -126,6 +136,7 @@ function ShowReportDataLoad(systemID, year, month, targetPlanID) {
         url: "/TargetSimpleReportController/GetListData",
         args: { systemID: systemID, year: year, month: month, targetPlanID: targetPlanID },
         successReturn: function (resultData) {
+            $('#ShowReportData').empty();
             if (resultData.Success == 1) {
                 $('#ShowReportData').empty();
                 loadTmpl('#showReportData_Tmpl').tmpl(resultData).appendTo('#ShowReportData');

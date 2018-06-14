@@ -24,11 +24,17 @@ $(document).ready(function () {
 
 });
 
+function Search() {
+    PageNumber = 1;
+    UsersLoadPage();
+}
+
 // 用户加载
 function UsersLoadPage() {
     Load();
     var keyword = $("#UsersName").val();
     //console.log(keyword)
+
     var roleData = {
         "keyWord": keyword,
         "PageIndex": PageNumber,
@@ -68,14 +74,20 @@ function RegisterEvent() {
     //新增角色弹框页面确定按钮
     $(".InsertRoleData_OK").off('click').on('click', function () {
         $(".user-model").css("display", "block");
-        UsersLoadPage();
+        Search();
     });
     $(".QueryConditions_Button").off("click").on("click", function () {
         SetUsersRole();
     });
     //用户查询 
     $(".QueryUsers_Button").off('click').on('click', function () {
-        UsersLoadPage();
+        Search();
+    })
+    // 用户键盘Enter
+    $("#UsersName").keydown(function (e) {
+        if (e.keyCode == 13) {
+            Search();
+        }
     })
     // 设置角色确定
     $(".set_role_sumbit").off('click').on('click', function () {
@@ -132,7 +144,7 @@ function SaveRoleFun(data) {
             if (resultData.Success == 1) {
                 $(".user-model").css("display", "none");
                 $.MsgBox.Alert("提示", "添加成功");
-                LoadPage();
+                UsersLoadPage();
                 //console.log("添加成功" + resultData.Message);
             }
             else {
@@ -162,7 +174,7 @@ function SetUsersRole(el) {
     WebUtil.ajax({
         async: false,
         url: "/UserInfoManagerControll/GetUserRoles",
-        args: { "cnName": RoleName, "loginName": LoginName},
+        args: { "cnName": RoleName, "loginName": LoginName },
         successReturn: function (resultData) {
             if (resultData.Success == 1) {
                 //console.log(resultData)
@@ -186,7 +198,7 @@ function SetOrgs(el) {
     WebUtil.ajax({
         async: false,
         url: "/UserInfoManagerControll/GetUserOrgs",
-        args: { "loginName": loginName},
+        args: { "loginName": loginName },
         successReturn: function (resultData) {
             //console.log(resultData);
             if (resultData.Success == 1) {
@@ -249,11 +261,11 @@ function SaveOrgs(name) {
             SaveOrgsFun(nodes, name);
         })
     } else {
-        SaveOrgsFun(nodes,name)
+        SaveOrgsFun(nodes, name)
     }
-    
+
 }
-function SaveOrgsFun(nodes,name) {
+function SaveOrgsFun(nodes, name) {
     WebUtil.ajax({
         async: false,
         url: "/UserInfoManagerControll/SaveUser_org",
@@ -272,7 +284,7 @@ function SaveOrgsFun(nodes,name) {
         }
     });
 }
-function FilterChecked(data,name) {
+function FilterChecked(data, name) {
     var match = [];
     data.forEach(function (one) {
         if (one.check_Child_State == -1 && one.checked) {

@@ -459,3 +459,11 @@ table.form_table td.wr > select {
     width: 78%;
     vertical-align: middle;
 }
+.descNumber{
+    background-color:yellow;
+    font-weight:700;
+}
+.descNumber2 {
+    color: #9d2328;
+    font-weight: 700;
+}

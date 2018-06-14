@@ -46,9 +46,15 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     hideFinMonth.Value = bmonthReport.FinMonth.ToString();
                     hideProcessCode.Value = StaticResource.Instance[bmonthReport.SystemID, DateTime.Now].Configuration.Element("ProcessCode").Value;
                     C_System system = StaticResource.Instance.SystemList.Where(p => p.ID == bmonthReport.SystemID).FirstOrDefault();
+                    var areaName = "";
+                    if(bmonthReport.AreaID!=Guid.Empty)
+                    {
+                        var area = StaticResource.Instance.OrgList[system.ID].Where(x => x.ID == bmonthReport.AreaID).FirstOrDefault();
+                        areaName = "-" + area.CnName;
+                    }
                     if (system != null)
                     {
-                        lblName.Text = system.SystemName + bmonthReport.FinYear + "-" + bmonthReport.FinMonth + lblName.Text;
+                        lblName.Text = system.SystemName + areaName + bmonthReport.FinYear + "-" + bmonthReport.FinMonth + lblName.Text;
                     }
                 }
             }

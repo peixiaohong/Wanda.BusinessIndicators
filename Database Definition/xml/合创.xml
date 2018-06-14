@@ -14,9 +14,9 @@
   </SummaryMonthlyReport>
   <MisstargetReturn Name="补回情况">
     <Group TargetName="补回情况" Senquence="1" TargetValue="8505C798-21ED-47E1-80BF-C871E8D99F15,DB9BF0FB-8D9A-4B46-A08D-13A4F80E3D0E,DF6D6B6A-0DC2-45E2-B642-15D03BC2BF2C">
-      <Counter Title="一、到期未补回项目" Senquence="1" Expression="GetValue(&quot;营业收入.ReturnType&quot;)==2||GetValue(&quot;税后经营净利润.ReturnType&quot;)==2||GetValue(&quot;回款额.ReturnType&quot;)==2" />
-      <Counter Title="二、未到期项目" Senquence="2" Expression="(GetValue(&quot;营业收入.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;营业收入.ReturnType&quot;)&lt;&gt;0)||(GetValue(&quot;税后经营净利润.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;税后经营净利润.ReturnType&quot;)&lt;&gt;0)||(GetValue(&quot;回款额.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;回款额.ReturnType&quot;)&lt;&gt;0)" />
-      <Counter Title="三、已补回项目" Senquence="3" Expression="(GetValue(&quot;营业收入.ReturnType&quot;)&gt;=6||GetValue(&quot;营业收入.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;税后经营净利润.ReturnType&quot;)&gt;=6||GetValue(&quot;税后经营净利润.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;回款额.ReturnType&quot;)&gt;=6||GetValue(&quot;回款额.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;营业收入.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;税后经营净利润.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;回款额.ReturnType&quot;)&lt;&gt;0)" />
+      <Counter Title="一、到期未补回" Senquence="1" Expression="GetValue(&quot;营业收入.ReturnType&quot;)==2||GetValue(&quot;税后经营净利润.ReturnType&quot;)==2||GetValue(&quot;回款额.ReturnType&quot;)==2" />
+      <Counter Title="二、未到期" Senquence="2" Expression="(GetValue(&quot;营业收入.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;营业收入.ReturnType&quot;)&lt;&gt;0)||(GetValue(&quot;税后经营净利润.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;税后经营净利润.ReturnType&quot;)&lt;&gt;0)||(GetValue(&quot;回款额.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;回款额.ReturnType&quot;)&lt;&gt;0)" />
+      <Counter Title="三、已补回" Senquence="3" Expression="(GetValue(&quot;营业收入.ReturnType&quot;)&gt;=6||GetValue(&quot;营业收入.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;税后经营净利润.ReturnType&quot;)&gt;=6||GetValue(&quot;税后经营净利润.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;回款额.ReturnType&quot;)&gt;=6||GetValue(&quot;回款额.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;营业收入.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;税后经营净利润.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;回款额.ReturnType&quot;)&lt;&gt;0)" />
     </Group>
   </MisstargetReturn>
   <Misstarget Name="未完成">

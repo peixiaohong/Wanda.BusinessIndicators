@@ -26,6 +26,7 @@ $(document).ready(function () {
             onRemove: zTreeOnRemove,
             onClick: docTreeOnClick,
             beforeClick: docTreeBeforeClick,
+            beforeRename: BeforeRename,
             onRename: docTreeOnRename,
             beforeRemove: docTreeBeforeRemove
         },
@@ -65,7 +66,7 @@ $(document).ready(function () {
             GetDocAttachmentsList(zzNodes);
         }
     });
-   
+
 
 });
 
@@ -76,22 +77,24 @@ $(document).ready(function () {
 function GetDocAttachmentsList(TNodes) {
     var TNodesId;
 
-    if (TNodes.length > 1) {
-        TNodesId = TNodes[0].ID;
-        $("#hideTerrNodeId").val(TNodes[0].ID);
+    TNodesId = $("#hideTerrNodeId").val();
+    var zTree = $.fn.zTree.getZTreeObj("DocTree");
+    if (TNodesId == "" || TNodesId == undefined) {
+        var nodes = zTree.getNodes();
+        if (nodes[0].children)
+            TNodesId = nodes[0].children[0].ID; //获取第一个子节点
+        else
+            TNodesId = nodes[0].ID;
     }
-    else {
-        TNodesId = TNodes.ID;
-        $("#hideTerrNodeId").val(TNodes.ID);
-    }
-
+    var node = zTree.getNodeByParam("ID", TNodesId);
+    zTree.selectNode(node);
 
 
     //加载附件List
     WebUtil.ajax({
         async: true,
         url: "/DocumentManagerControll/GetDocAttachmentsList",
-        args: { TreeNodeID: TNodesId },
+        args: { TreeNodeID: TNodesId, SystemId: $("#ddlSystem").val(), Year: $("#FinsYear").val() },
         successReturn: function (ResultData) {
 
             ObjValue.DocManagerData = ResultData;
@@ -183,7 +186,7 @@ function docTreeBeforeRemove(treeId, treeNode) {
             WebUtil.ajax({
                 async: false,
                 url: "/DocumentManagerControll/GetDocAttachmentsList",
-                args: { TreeNodeID: treeNode.ID },
+                args: { TreeNodeID: treeNode.ID, SystemId: $("#ddlSystem").val() },
                 successReturn: function (ResultData) {
 
                     if (ResultData.length > 0)
@@ -231,7 +234,6 @@ function zTreeOnRemove(event, treeId, treeNode) {
 
 //修改Node名字
 function docTreeOnRename(event, treeId, treeNode, isCancel) {
-
     WebUtil.ajax({
         async: true,
         url: "/DocumentManagerControll/UpdateDocumentTreeNode",
@@ -240,6 +242,14 @@ function docTreeOnRename(event, treeId, treeNode, isCancel) {
 
         }
     });
+}
+//修改Node名字判断是否为空
+function BeforeRename(event, treeId, treeNode, isCancel) {
+    if (treeNode == "" || treeNode == null) {
+        alert("节点名称不能为空");
+        return false;
+    }
+    return true;
 }
 
 //点击Node节点之前

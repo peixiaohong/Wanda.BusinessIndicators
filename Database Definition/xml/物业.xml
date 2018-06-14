@@ -9,9 +9,6 @@
   <ReportMonthlyDetail>
     <TableTemplate />
   </ReportMonthlyDetail>
-  <SummaryMonthlyReport>
-    <TableTemplate TableHeadTmplName="MonthReportSummaryHeadTemplate_DZSW" TableDataTmplName="" TableExcelTemplateName="月度经营报告_大众电影V1.xlsx" />
-  </SummaryMonthlyReport>
   <ManageTargetDetail Name="经营报告明细">
     <BlendTargets IsBlendTarget="True" Senquence="1" TargetName="回款 +EBITDA" TargetValue="E89933D0-73C6-49DF-A7CB-830BED133CE7,4883BB0D-A950-4E06-9EED-35775754D4C1">
       <Target TargetName="回款 " Senquence="1" IsBlendTarget="True" TargetValue="E89933D0-73C6-49DF-A7CB-830BED133CE7" />
@@ -66,14 +63,14 @@
       <Counter Title="四、本月补回公司【{本月(GetValue(&quot;回款 .ReturnType&quot;)&gt;=6||GetValue(&quot;回款 .ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;EBITDA.ReturnType&quot;)&gt;=6||GetValue(&quot;EBITDA.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;EBITDA.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;回款 .ReturnType&quot;)&lt;&gt;0)}家】" Senquence="3" Expression="(GetValue(&quot;EBITDA.ReturnType&quot;)&gt;=6||GetValue(&quot;EBITDA.ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;回款 .ReturnType&quot;)&gt;=6||GetValue(&quot;回款 .ReturnType&quot;)==0)&amp;&amp;(GetValue(&quot;EBITDA.ReturnType&quot;)&lt;&gt;0||GetValue(&quot;回款 .ReturnType&quot;)&lt;&gt;0)" TextExpression="Return" />
     </Group>
     <Group TargetName="经营收入" Senquence="2" TargetValue="1E26FACC-3BE9-4F96-84BB-12F996BFE3F6">
-      <Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;经营收入.IsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;经营收入.IsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;经营收入.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;经营收入.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;经营收入.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;经营收入.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;经营收入.IsMissTarget&quot;)==&quot;True&quot; " />
+      <Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;经营收入.LastIsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;经营收入.LastIsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;经营收入.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;经营收入.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;经营收入.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;经营收入.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;经营收入.IsMissTarget&quot;)==&quot;True&quot; " />
     </Group>
     <Group TargetName="维修事项达成率" Senquence="3" TargetValue="2DA5BFF4-B1AD-4076-AB2F-ECA7C78C9252">
-      <Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;维修事项达成率.IsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;维修事项达成率.IsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;维修事项达成率.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;维修事项达成率.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;维修事项达成率.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;维修事项达成率.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;维修事项达成率.IsMissTarget&quot;)==&quot;True&quot; " />
+      <Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;维修事项达成率.LastIsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;维修事项达成率.LastIsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;维修事项达成率.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;维修事项达成率.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;维修事项达成率.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;维修事项达成率.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;维修事项达成率.IsMissTarget&quot;)==&quot;True&quot; " />
     </Group>
   </Misstarget>
   <MisstargetReturn Name="补回情况">
-    <Group TargetName="回款 +EBITDA" Senquence="1" TargetValue="E89933D0-73C6-49DF-A7CB-830BED133CE7,4883BB0D-A950-4E06-9EED-35775754D4C1,1E26FACC-3BE9-4F96-84BB-12F996BFE3F6">
+    <Group TargetName="回款 +EBITDA" Senquence="1" TargetValue="E89933D0-73C6-49DF-A7CB-830BED133CE7,4883BB0D-A950-4E06-9EED-35775754D4C1">
       <Counter Title="一、到期未补回" Senquence="1" Expression="GetValue(&quot;EBITDA.ReturnType&quot;)==2||GetValue(&quot;回款 .ReturnType&quot;)==2" />
       <Counter Title="二、未到期" Senquence="2" Expression="(GetStringValue(&quot;EBITDA.LastIsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;回款 .LastIsMissTarget&quot;)==&quot;True&quot;)&amp;&amp;(GetStringValue(&quot;EBITDA.IsMissTarget&quot;)==&quot;True&quot;||GetStringValue(&quot;回款 .IsMissTarget&quot;)==&quot;True&quot;)">
         <Counter Title="1. 回款 、EBITDA均未完成" Senquence="1" Expression="GetStringValue(&quot;EBITDA.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;回款 .IsMissTarget&quot;)==&quot;True&quot;" />

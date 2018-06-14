@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="../Scripts/BusinessReport/FloatTable.js"></script>
     <script type="text/javascript" src="../Scripts/jquery.tmpl.js"></script>
-    <script type="text/javascript" src="../Scripts/BusinessReport/ApproveTime.js"></script>
+    <script type="text/javascript" src="../Scripts/BusinessReport/ApproveTime.js?ver=<%=new Random(DateTime.Now.Millisecond).Next(0,10000)%>"></script>
     <script type="text/javascript" src="../Scripts/My97DatePicker/WdatePicker.js"></script>
     <script type="text/javascript" src="../Scripts/UpLoad/jquery.uploadify.min.js"></script>
 </asp:Content>
@@ -39,7 +39,7 @@
                                 <asp:DropDownList ID="ddlMonth" ClientIDMode="Static" runat="server" Style="width: 120px;"></asp:DropDownList>
                             </td>
                             <th>
-                                <a class="btn_search" id="ContentPlaceHolder1_LinkButton1" style="cursor: pointer" onclick="BangList()"><span>查询</span></a>
+                                <a class="btn_search" id="ContentPlaceHolder1_LinkButton1" style="cursor: pointer" onclick="BangList()"><span><i class="fa fa-search"></i>&nbsp;查询</span></a>
                             </th>
                         </tr>
                     </tbody>
@@ -67,7 +67,7 @@
                                     <label class="DownExcelLabel" id="LabelDownload">导出数据</label></span>
                             </div>
 
-                            <div style="width: 80px; float: right; display: inline; padding-right: 25px" id="UpLoadData">
+                            <div style="width: 80px; float: right; display: inline; padding-right: 25px;margin-right:40px;" id="UpLoadData">
                                 <span>
                                     <span>
                                         <input type="file" name="upload" id="file1" value="导入补回期限" />
@@ -88,7 +88,10 @@
 
 
 
-
+            <table class="tab_005" id="Tab_FloatReturn">
+                <thead>
+                </thead>
+            </table>
 
             <table class="tab_005" id="Tab_Return">
                 <thead id="TbH1">
@@ -137,7 +140,7 @@
                     <input type="radio" id="radio1" value="月" name="time" checked="checked" onclick="MonthShow();" />按月份
                     <input type="radio" id="radio2" value="日" name="time" onclick="DateShow();" />按日期
                     <input type="radio" id="radio3" value="补回" name="time" onclick="Yaershow()" />年内未补回
-                    <span style="color: red" id="redtext">选择日期后,此指标将被设置为完成状态</span>
+                    <span style="color: #9d2328" id="redtext">选择日期后,此指标将被设置为完成状态</span>
                 </td>
                 <td id="Yearselect" style="width: 60%; padding: 5px; padding-left: 20px; text-align: left;">
                     <input type="radio" id="radio4" value="月" name="time" onclick="MonthShow();" />按月份
@@ -159,7 +162,7 @@
                 <th style="width: 40%; padding: 5px; padding-right: 10px; text-align: right;">实际金额</th>
                 <td style="width: 25%; padding: 5px; padding-left: 20px; text-align: left;">
                     <div id="yearshow">
-                        <input type="text" id="rpt_info_CommitInt" runat="server" clientidmode="Static" style="width: 150px;" onblur="Returned()" value="" /><span style="color: red" id="tip"></span>
+                        <input type="text" id="rpt_info_CommitInt" runat="server" clientidmode="Static" style="width: 150px;" onblur="Returned()" value="" /><span style="color: #9d2328" id="tip"></span>
                     </div>
                 </td>
             </tr>

@@ -38,6 +38,12 @@ namespace LJTH.BusinessIndicators.Model
         [ORFieldMapping("GroupType")]
         public string GroupType { get; set; }
 
+        [ORFieldMapping("VersionStart")]
+        public DateTime VersionStart { get; set; }
+
+        [ORFieldMapping("VersionEnd")]
+        public DateTime VersionEnd { get; set; }
+
         #endregion
 
         [NoMapping]

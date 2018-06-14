@@ -921,7 +921,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             if (rpt._SystemID == Guid.Parse(_sysMovie))
                 listTargetPlanView = rpt.GetTagetPlanViewModel(Guid.Parse(_sysMovie));  //院线同步数据
             else
-                listTargetPlanView = rpt.GetTagetPlanViewModel();  // 其他系统
+                listTargetPlanView = rpt.GetTagetPlanViewModelForDefaultTargetID(rpt.TargetPlanID);  // 其他系统
 
 
 
@@ -1170,7 +1170,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             if (rpt._SystemID == Guid.Parse(_sysMovie))
                 listTargetPlanView = rpt.GetTagetPlanViewModel(Guid.Parse(_sysMovie));  //院线同步数据
             else
-                listTargetPlanView = rpt.GetTagetPlanViewModel();  // 其他系统
+                listTargetPlanView = rpt.GetTagetPlanViewModelForDefaultTargetID(rpt.TargetPlanID);  // 其他系统
 
 
             if (listTargetPlanView.Count > 0)
@@ -1530,7 +1530,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         public void DownExcelProCompanyReportDetail(HttpContext context)
         {
             string templeteName = "项目公司指标上报模版V2.xlsx";
-            string fileName = "指标上报";
+            string fileName = "月度经营报告上报";
 
             string templetePath = Path.Combine(ExcelTempletePath, templeteName);
 
@@ -1745,7 +1745,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         public void DownProTargetPlanExcel(HttpContext context)
         {
             string templeteName = "项目公司指标上报模版V2.xlsx";
-            string fileName = "指标上报";
+            string fileName = "月度经营报告上报";
 
             string templetePath = Path.Combine(ExcelTempletePath, templeteName);
 
@@ -1958,7 +1958,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         public void DownGroupTargetPlanExcel(HttpContext context, string FileType)
         {
             string templeteName = "指标上报模版_集团总部V1.xlsx";
-            string fileName = "指标上报";
+            string fileName = "月度经营报告上报";
 
             ReportInstance rpt = new ReportInstance(MonthReportID, true);
 
@@ -2301,7 +2301,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         {
             
             string templeteName = "指标上报模版V1.xlsx";
-            string fileName = "指标上报";
+            string fileName = "月度经营报告上报";
             ReportInstance rpt = null;
             if (MonthReportID != Guid.Empty)
             {

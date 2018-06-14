@@ -72,7 +72,7 @@ function SplitData(resultData) {
             }
 
             if (ReportInstance.ReportDetails.length > 0) {
-                setStlye('missTargetReportSpan,monthReportSpan,missCurrentTargetReportSpan,monthReportReadySpan');
+                setStlye('missTargetReportSpan,monthReportSpan,missCurrentTargetReportSpan,monthReportReadySpan,monthReportSubmitSpan');
             }
         }
         if (resultData[2] != null) {
@@ -82,7 +82,8 @@ function SplitData(resultData) {
         }
         if (resultData[3] != null) {
             Description = resultData[3].ObjValue;
-            $("#MonthGetDescription").val(Description);
+            Description = Description.replace(/\n/g, "<br/>").replace(/ /g, "&nbsp;").replace(/&quot;/g, '"').replace(/<span&nbsp;/g, '<span ');
+            $("#MonthGetDescription").html(Description);
         }
         if (resultData[4] != null) //当月数据
         {
@@ -112,9 +113,9 @@ $(function () {
         var monthRpt;
         if (ReportInstance.LastestMonthlyReport != undefined) {
             monthRpt = ReportInstance.LastestMonthlyReport;
-            monthRpt.Description = $("#MonthGetDescription").val();
+            monthRpt.Description = $("#MonthGetDescription").html();
         }
-        if (Description != $("#MonthGetDescription").val()) {
+        if (Description != $("#MonthGetDescription").html()) {
             // alert("入库");
             WebUtil.ajax({
                 async: true,
@@ -123,13 +124,26 @@ $(function () {
                 successReturn: function (result) {
                 }
             });
-            Description = $("#MonthGetDescription").val();
+            Description = $("#MonthGetDescription").html();
         } else {
         }
     });
     $("#MonthGetDescription").focus(function () {
         $("#MonthGetDescription").css("background-color", "#D6D6FF");
     });
+    // 所在位置
+    var pathname = "/BusinessReport/TargetDirectlyReported.aspx";
+    if (location.pathname == pathname && GetQueryString("SystemId") == "SystemId") {
+        $("#sitmap").html("您当前所在的位置：月度经营报告上报");
+        $("#jMenu").find("li").each(function () {
+            var text = $(this).find("span")[0];
+            $(this).removeClass("current first");
+            if (text && text.innerHTML == "月度经营报告上报") {
+                $(this).addClass("current first");
+            }
+        })
+    }
+
 })
 
 
@@ -147,7 +161,7 @@ function MissTagetExcelReport() {
         'height': 25,
         'successTimeout': 20,
         'fileTypeDesc': 'office file',
-        'fileTypeExts': '*.doc; *.docx; *.xls;*.xlsx',
+        'fileTypeExts': '*.xls;*.xlsx',
         'fileSizeLimit': '10240',
         'swf': '../Scripts/UpLoad/uploadify.swf',
         'uploader': '../AjaxHander/ExcelReport.ashx?FileType=' + MissType + '&SysId=' + sysID + '&MonthReportID=' + MonthReportID + "&FinYear=" + FinYear + "&FinMonth=" + FinMonth,
@@ -174,7 +188,8 @@ function GetMonthGetDescription() {
         url: "/TargetReportedControll/GetMonthTRptDescription",
         args: { rpts: WebUtil.jsonToString(ReportInstance) },
         successReturn: function (result) {
-            $("#MonthGetDescription").val(result);
+            
+            $("#MonthGetDescription").html(result);
             Description = result;
         }
     });
@@ -741,6 +756,8 @@ function SaveMissTargetRpt(obj) {
 
             } else
             {
+                info.MIssTargetReason = MisstargetInfo.MIssTargetReason;
+                info.MIssTargetDescription = MisstargetInfo.MIssTargetDescription;
                 info.CurrentMIssTargetReason = "\n" + $("#rpt_info_step").val();  //未完成原因
                 info.CurrentMIssTargetDescription = "\n" + $("#rpt_info_desc").val(); //采取措施
             }
@@ -809,9 +826,15 @@ function SaveMissTargetRpt(obj) {
     art.dialog({ id: 'divMissTargetRpt_Reason' }).close();
     art.dialog({ id: 'divMissTargetRpt_Retu' }).close();
 
-    var obj = $("#Tab_MissTargetHead");
+    //var obj = $("#Tab_MissTargetHead");
+    //var tab = $("#Tbody_MissTargetData");
+    //FloatHeader(obj, tab, false, "Reported");
+
+    var obj = $("#Tab_MissFloatTarget");
+    var head = $("#Tab_MissTargetHead");
+    obj.find("thead").html(head.html());
     var tab = $("#Tbody_MissTargetData");
-    FloatHeader(obj, tab, false, "Reported")
+    FloatHeader(obj, tab);
 
 }
 
@@ -822,6 +845,7 @@ function GetInfoByID(sender, tag) {
     if (tag == 'current') // 如果tag的标签是 ‘current’代表的是当前月，反之则是累计的
     {
         A(CurrentMissTargetData, sender);
+        C(MissTargetData, sender); 
     } else {
         A(MissTargetData, sender); //如果是累计的时候编辑，同时改变当前月的数据
         B(CurrentMissTargetData, sender);
@@ -868,6 +892,24 @@ function B(o, id) {
 }
 
 
+//用于修改当月未完成原因时不丢失累计的
+var MisstargetInfo = null;
+
+function C(o, id) {
+    for (var i = 0; i < o.length; i++) {
+        if (o[i].Mark != null) {
+            A(o[i].ObjValue, id);
+        }
+        else {
+            for (var j = 0; j < o[i].ObjValue.length; j++) {
+                if (o[i].ObjValue[j].ID == id) {
+                    MisstargetInfo = o[i].ObjValue[j];
+                    break;
+                }
+            }
+        }
+    }
+}
 
 var currentMissTarget = null;//在未完成编辑的时候，通过指标筛选时，停留在当前指标
 //单个指标筛选
@@ -1092,7 +1134,7 @@ $(function () {
         'width': 100,
         'height': 25,
         'fileTypeDesc': 'office file',
-        'fileTypeExts': '*.doc; *.docx; *.xls;*.xlsx;',
+        'fileTypeExts': '*.xls;*.xlsx;',
         'fileSizeLimit': '10240',
         //swf文件路径
         'swf': '../Scripts/UpLoad/uploadify.swf',
@@ -1103,8 +1145,9 @@ $(function () {
             if (data == "" || data == null) {
                 GetReportInstance();
                 if (ReportInstance != null) {
+                    $("#UpLoadData").hide();
                     $("#T2,#UpLoadDataDiv").show();
-                    setStlye('missTargetReportSpan,missCurrentTargetReportSpan,monthReportSpan,monthReportReadySpan');
+                    setStlye('missTargetReportSpan,missCurrentTargetReportSpan,monthReportSpan,monthReportReadySpan,monthReportSubmitSpan');
                 }
             } else {
                 alert(data);
@@ -1274,3 +1317,9 @@ function getGroupCount(obj, send) {
     } else { return 0; }
 }
 
+//用正则表达式获取URL参数
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[0].split("=")[0]); return null;
+}

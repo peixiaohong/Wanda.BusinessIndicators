@@ -29,7 +29,7 @@ function loadTmplhistory(selector) {
 
 $(document).ready(function () {
 
-   // InitSysTree()  //初始化树控件
+    // InitSysTree()  //初始化树控件
 
     GetSumList();
 
@@ -237,6 +237,8 @@ function IsDeleteA(id) {
             GetSumList();
             if (result == "true")
                 alert("禁用成功");
+            else if (result == "1")
+                alert("该板本已存在月报数据，不可禁用！");
             else
                 alert("操作失败,请联系管理员！");
             Fake();
@@ -299,7 +301,7 @@ function Change(adj, id) {
         $("#file_upload-button1").show();
         head = $("#Head").html();
         tab = $("#rows");
-       // $("#HistoryTable").hide();
+        // $("#HistoryTable").hide();
     }
     //else if (adj == "History") {
     //    document.getElementById('tabHistory').className = "active3 active_sub3";
@@ -317,7 +319,7 @@ function Change(adj, id) {
         BangSumTargetPlanList(id);
         $("#file_upload-button1").show();
         head = $("#Thead1").html();
-        tab = $("#TrTargetTable");
+        tab = $("#Thead1");
         //$("#HistoryTable").hide();
     }
     //Fake();
@@ -370,7 +372,7 @@ function BangHead(result) {
     $("#TrTarget").html("");
     for (var i = 0; i < 2; i++) {
         loadTmpl('#TrTarget').tmpl(result).appendTo('#TrTarget');
-        
+
     }
 
 }
@@ -398,7 +400,7 @@ function BangDetail(TID) {
             for (var j = 0; j < SumMonthTargetList[i].TargetDetailList.length; j++) {
 
                 if (SumMonthTargetList[i].TargetDetailList[j].Target != null) {
-                    row += "<td class=\"Td_Right\"title=" + SumMonthTargetList[i].TargetDetailList[j].Target + ">" + MathTarget(SumMonthTargetList[i].TargetDetailList[j].Target) + "</td>";
+                    row += "<td class=\"Td_Right\"title=" + SumMonthTargetList[i].TargetDetailList[j].Target + ">" + MathTarget(SumMonthTargetList[i].TargetDetailList[j].Target).thousandize0OrEmpty(0) + "</td>";
                 }
                 else {
                     row += "<td class=\"Td_Right\">--</td>";
@@ -411,7 +413,7 @@ function BangDetail(TID) {
             for (var j = 0; j < SumMonthTargetList[i].TargetDetailList.length; j++) {
 
                 if (SumMonthTargetList[i].TargetDetailList[j].SumTarget != null) {
-                    row += "<td class=\"Td_Right\" title=" + SumMonthTargetList[i].TargetDetailList[j].SumTarget + ">" + MathTarget(SumMonthTargetList[i].TargetDetailList[j].SumTarget) + "</td>";
+                    row += "<td class=\"Td_Right\" title=" + SumMonthTargetList[i].TargetDetailList[j].SumTarget + ">" + MathTarget(SumMonthTargetList[i].TargetDetailList[j].SumTarget).thousandize0OrEmpty(0) + "</td>";
                 }
                 else {
                     row += "<td class=\"Td_Right\">--</td>";
@@ -426,7 +428,7 @@ function BangDetail(TID) {
         for (var j = 0; j < SumMonthTargetList[11].TargetDetailList.length; j++) {
 
             if (SumMonthTargetList[11].TargetDetailList[j].SumTarget != null) {
-                row += "<th class=\"th_Sub2\" style=\"text-align:right\" title=" + SumMonthTargetList[11].TargetDetailList[j].SumTarget + ">" + MathTarget(SumMonthTargetList[11].TargetDetailList[j].SumTarget) + "</th>";
+                row += "<th class=\"th_Sub2\" style=\"text-align:right\" title=" + SumMonthTargetList[11].TargetDetailList[j].SumTarget + ">" + MathTarget(SumMonthTargetList[11].TargetDetailList[j].SumTarget).thousandize0OrEmpty(0) + "</th>";
             }
             else {
                 row += "<td class=\"th_Sub2\" style=\"text-align:right\">--</td>";

@@ -26,7 +26,7 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
             {
                  CreateSqlParameter("@RoleID",DbType.Guid,RoleID),
             };
-            return ExecuteQuery(sql,parameters).Select(o => o.LoginName).ToList<string>();
+            return ExecuteQuery(sql, parameters).Select(o => o.LoginName).ToList<string>();
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
                  CreateSqlParameter("@RoleID",DbType.Guid,roleID),
                  CreateSqlParameter("@LoginName",DbType.String,loginName)
             };
-            return ExecuteSql(sql,parameters);
+            return ExecuteSql(sql, parameters);
         }
 
         /// <summary>
@@ -58,7 +58,24 @@ namespace LJTH.BusinessIndicators.DAL.BizDal
             {
                  CreateSqlParameter("@LoginName",DbType.String,loginName)
             };
-            return ExecuteSql(sql,parameters);
+            return ExecuteSql(sql, parameters);
+        }
+
+        /// <summary>
+        /// 根据角色ID,登陆账号删除对应的权限
+        /// </summary>
+        /// <param name="roleID"></param>
+        /// <param name="loginName"></param>
+        /// <returns></returns>
+        public int DeleteDAtaByLoginNameAndRoleID(Guid roleID, string loginName)
+        {
+            string sql = "Delete [dbo].[S_Role_User] Where [RoleID]=@RoleID And [LoginName]=@LoginName";
+            DbParameter[] parameters = new DbParameter[]
+            {
+                 CreateSqlParameter("@RoleID",DbType.Guid,roleID),
+                 CreateSqlParameter("@LoginName",DbType.String,loginName)
+            };
+            return ExecuteSql(sql, parameters);
         }
     }
 }

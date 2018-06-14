@@ -3,7 +3,7 @@
         el: "#ReportTargetContent",
         data: {
             systemAndYearList: {},
-            systemID: "a00ad17d-57da-4f8b-9c60-807a5e83d7a7",
+            systemID: "",
             yearSelect: "",
             head: [],
             list: [],
@@ -26,8 +26,12 @@
                     success: function (res) {
                         if (res.IsSuccess && res.StatusCode == 200) {
                             self.systemAndYearList = res.Data;
-                            var date = new Date();
-                            self.yearSelect = date.getFullYear().toString();
+                            if (self.systemAndYearList.System.length > 0) {
+                                self.systemID = self.systemAndYearList.System[0].ID;
+                            }
+                            self.yearSelect = self.systemAndYearList.SelectYear;
+                            //var date = new Date();
+                            //self.yearSelect = date.getFullYear().toString();
                             self.InitVersion();
                         } else {
                             utils.alertMessage(res.StatusMessage)
@@ -51,12 +55,15 @@
                     },
                     success: function (res) {
                         if (res.IsSuccess && res.StatusCode == 200) {
+                            self.versions = res.Data;
                             if (res.Data.length) {
-                                self.versions = res.Data;
-                                self.versionSelect = self.versions[0].ID;                              
+                                self.versionSelect = self.versions[0].ID;
+                            } else {
+                                self.versionSelect = "";
                             }
                             self.LoadData();
                         } else {
+
                             utils.alertMessage(res.StatusMessage)
                         }
                     }
@@ -64,6 +71,11 @@
             },
             LoadData: function () {
                 var self = this;
+                if (!self.systemID || !self.yearSelect || !self.versionSelect) {
+                    self.head = [];
+                    self.list = [];
+                    return false;
+                }
                 var url = api_url + 'Report/GetTargetPlanList';
                 utils.ajax({
                     type: 'GET',
