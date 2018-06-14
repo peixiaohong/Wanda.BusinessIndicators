@@ -154,7 +154,8 @@ namespace LJTH.BusinessIndicators.Engine
                             }
                             else
                             {
-                                mrsvm.MeasureRate = Math.Round(StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear, MRDList[0].TargetPlanID).FindAll(P => P.TargetID == target.ID).Sum(P => P.Target), 7, MidpointRounding.AwayFromZero).ToString();
+                                var companyIdList = MRDList.Select(v => v.CompanyID).Distinct().ToList();
+                                mrsvm.MeasureRate = Math.Round(StaticResource.Instance.GetTargetPlanList(_System.ID, FinYear, MRDList[0].TargetPlanID).FindAll(P => P.TargetID == target.ID && companyIdList.Contains(P.CompanyID)).Sum(P => P.Target), 7, MidpointRounding.AwayFromZero).ToString();
                             }
 
 
