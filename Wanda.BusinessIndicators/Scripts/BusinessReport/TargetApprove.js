@@ -1526,20 +1526,21 @@ function ComplateDetailReplaceClick() {
         var companyName = $(this).text();
         var detailId = $(this).attr("data-detailId");
         var isblend = $(this).attr("data-isblend");
-        if (typeof isblend != 'undefined' && $.trim(isblend).toLocaleLowerCase() == 'true') {
-            td.html("<span>" + companyName + "</span > ");
-        }
-        else {
-            td.html("<span><a href=\"javascript:void(0);\" onclick=\"EditMonthReportDetail('" + detailId + "','single');\" > " + companyName + "</a ></span > ");
-        }
+        td.html("<span>" + companyName + "</span > ");
+        //if (typeof isblend != 'undefined' && $.trim(isblend).toLocaleLowerCase() == 'true') {
+        //    td.html("<span>" + companyName + "</span > ");
+        //}
+        //else {
+        //    td.html("<span><a href=\"javascript:void(0);\" onclick=\"EditMonthReportDetail('" + detailId + "','single');\" > " + companyName + "</a ></span > ");
+        //}
     });
 
     //实际完成数的单击事件
-    $('[data-update-nactualamount="true"]').each(function () {
-        var NPlanAmmount = $(this).text();
-        var detailId = $(this).attr("data-detailId");
-        $(this).html("<span><a href=\"javascript:void(0);\" onclick=\"EditMonthReportDetail('" + detailId + "','single');\" > " + NPlanAmmount + "</a ></span > ");
-    });
+    //$('[data-update-nactualamount="true"]').each(function () {
+    //    var NPlanAmmount = $(this).text();
+    //    var detailId = $(this).attr("data-detailId");
+    //    $(this).html("<span><a href=\"javascript:void(0);\" onclick=\"EditMonthReportDetail('" + detailId + "','single');\" > " + NPlanAmmount + "</a ></span > ");
+    //});
 }
 
 //获取单位
