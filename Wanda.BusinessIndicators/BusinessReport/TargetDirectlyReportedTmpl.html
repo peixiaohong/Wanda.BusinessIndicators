@@ -213,8 +213,8 @@
 <script id="MonthReportSummaryTemplate_0" type="text/x-jquery-tmpl">
     <tr>
         <td class="Td_Left" style="text-align:center!important">${ID}</td>
-        <td class="Td_Left" style="text-align:left !important;" >
-             <a href="javascript:void(0);" onclick="EditMonthReportDetail('${MonthlyDetailID}','single')"> ${TargetName}</a>
+        <td class="Td_Left" style="text-align:left !important;">
+            ${TargetName} <!--<a href="javascript:void(0);" onclick="EditMonthReportDetail('${MonthlyDetailID}','single')"> ${TargetName}</a>-->
         </td>
         <td class="Td_Left" title="${NPlanAmmount}">${(NPlanAmmount*1).thousandize0OrEmpty(0)}</td>
         <td class="Td_TopAndBottom" title="${NActualAmmount}">${(NActualAmmount*1).thousandize0OrEmpty(0)}</td>
