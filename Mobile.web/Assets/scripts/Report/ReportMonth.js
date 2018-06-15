@@ -98,7 +98,9 @@
                                 //console.log(res);
                                 self.versions = res.Data;
                                 self.versionSelect = self.versions[0].ID;
-                            }                           
+                            } else {
+                                self.versions = [];
+                            }
                             self.ChangeData();
                         } else {
                             utils.alertMessage(res.StatusMessage);

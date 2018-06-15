@@ -65,7 +65,7 @@ namespace WebApi.Controllers
             try
             {
                 MonthlyReportController tc = new MonthlyReportController();
-                List<A_TargetPlan> list = (List<A_TargetPlan>)tc.GetTargetVersionType(SystemID, int.Parse(Year), int.Parse(Month));
+                List<B_TargetPlan> list = (List<B_TargetPlan>)tc.GetTargetVersionType(SystemID, int.Parse(Year), int.Parse(Month));
 
                 return new ResultContext(list);
             }
