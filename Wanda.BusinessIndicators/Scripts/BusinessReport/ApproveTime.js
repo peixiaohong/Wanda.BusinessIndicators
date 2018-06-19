@@ -224,7 +224,7 @@ function change(CompanyID) {
             $("#YearInt").show();
             //$("#rpt_info_CommitReason").attr("readonly", "readonly");
             $("#rpt_info_CommitReason").css({ "backgroundColor": "#ececec" });
-            $("#rpt_info_CommitReason").html(arr[0].CurrentMonthCommitReason);
+            $("#rpt_info_CommitReason").val(arr[0].CurrentMonthCommitReason);
         } else {
             $("#radio4").attr("checked", "true");
             $("#radio5").removeAttr("checked");
@@ -234,12 +234,12 @@ function change(CompanyID) {
             //$("#rpt_info_CommitReason").attr("readonly", "readonly");
             $("#rpt_info_CommitReason").css({ "backgroundColor": "#ececec" });
             $("#rpt_info_CommitReason").val("");
-            $("#rpt_info_CommitReason").html("");
+            $("#rpt_info_CommitReason").val("");
         }
     } else {
         if (IsMonthDay == "12-31") {
             $("#radio3").attr("checked", "true");
-            $("#rpt_info_CommitReason").html(arr[0].CurrentMonthCommitReason);
+            $("#rpt_info_CommitReason").val(arr[0].CurrentMonthCommitReason);
             Yaershow();
         } else {
             if (arr[0].IsMissTarget == false) {
@@ -439,7 +439,7 @@ function SaveMonth() {
     GetMonthly();
     if (detail != null) {
         var dedate = $("#rpt_info_CommitMonth").val();//取所选择的时间
-        var CommitReasonInfo = $("#rpt_info_CommitReason").html();//取填写的信息
+        var CommitReasonInfo = $("#rpt_info_CommitReason").val();//取填写的信息
         if (dedate != "---" && dedate != "" && dedate != null) {
             var dearr = dedate.split("-");
             var daterr;
@@ -525,7 +525,7 @@ $(function () {
         //swf文件路径
         'swf': '../Scripts/UpLoad/uploadify.swf',
         //后台处理页面
-        'uploader': '/AjaxHander/UpLoadExcelCommitDate.ashx?SysId=' + SystemID + "&FinYear=" + Year + "&FinMonth=" + Month,
+        'uploader': '/AjaxHander/UpLoadExcelCommitDate.ashx',
         'onUploadSuccess': function (file, data, response) {
             error = data;
             if (data == "" || data == null) {
@@ -537,7 +537,11 @@ $(function () {
         },
         'onUploadError': function (file, data, response) {
             alert("上传失败，程序出错！");
-        }
+        },
+        'onUploadStart': function () {
+            alert(111);
+            $("#file1").uploadify('settings', 'formData', { "SysId": $("#ddlSystem").val(), "FinYear": $("#ddlYear").val(), "FinMonth": $("#ddlMonth").val() });
+        },
     })
 })
 
@@ -616,7 +620,7 @@ function Returned() {
         if ($txt) {
             $("#rpt_info_CommitReason").val("预计年内无法补回必保全年完成" + $txt + "万(指标" + AnnualTarget + "万，差额" + ($txt - AnnualTarget) + "万)");
         } else {
-            $("#rpt_info_CommitReason").html();
+            $("#rpt_info_CommitReason").val('');
         }
         $("#tip").html("");
     }

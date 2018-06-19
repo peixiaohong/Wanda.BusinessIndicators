@@ -238,22 +238,26 @@ WHERE   A_MonthlyReportDetail.SystemID = @SystemID
         }
         internal IList<MonthlyReportDetail> GetVMissDetail(Guid SystemID, int Year, int Month, Guid TargetID, bool IsSpecial)
         {
+            
             string sql = @"SELECT * FROM (
- SELECT A_MonthlyReportDetail.*,C_Company.CompanyName,C_Company.NeedEvaluation,C_Company.Sequence FROM dbo.A_MonthlyReportDetail	INNER JOIN dbo.C_Company ON 
-                dbo.A_MonthlyReportDetail.SystemID = dbo.C_Company.SystemID AND 
-                    dbo.A_MonthlyReportDetail.CompanyID = dbo.C_Company.ID ) aa 
+                SELECT a.*,c.CompanyName,c.NeedEvaluation,c.Sequence
+                FROM dbo.A_MonthlyReportDetail a
+                JOIN dbo.A_TargetPlan b ON a.TargetPlanID=b.ID
+                INNER JOIN dbo.C_Company c ON a.SystemID = c.SystemID AND a.CompanyID = c.ID 
+                WHERE b.VersionDefault=1 and a.SystemID=@SystemID and a.TargetID=@TargetID
+                ) aa 
 					WHERE  aa.SystemID=@SystemID AND aa.TargetID=@TargetID
 					AND aa.FinMonth=@Month AND aa.FinYear=@Year";
 
             if (IsSpecial == false)
             {
                 sql += " AND IsMissTarget=1";
-                sql += " ORDER BY Sequence DESC ";
+                sql += " ORDER BY Sequence ";
             }
             else
             {
                 sql += " AND NAccumulativeDifference<0 ";
-                sql += " ORDER BY Sequence DESC ";
+                sql += " ORDER BY Sequence ";
             }
             SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);
             SqlParameter pYear = CreateSqlParameter("@Year", System.Data.DbType.String, Year);
@@ -380,6 +384,7 @@ INNER JOIN dbo.C_Company ON
             string sql = ORMapping.GetSelectSql<A_MonthlyReportDetail>(TSqlBuilder.Instance);
 
             sql += "WHERE " + base.NotDeleted;
+            sql += " AND TargetPlanID=(SELECT TOP 1 ID FROM dbo.A_TargetPlan WHERE VersionDefault=1 AND SystemID=@SystemID AND FinYear=@Year) ";
             sql += " AND SystemID=@SystemID AND CompanyID=@CompanyID AND FinYear=@Year AND FinMonth=@Month and TargetID=@TargetID";
 
             SqlParameter pSystemID = CreateSqlParameter("@SystemID", System.Data.DbType.Guid, SystemID);

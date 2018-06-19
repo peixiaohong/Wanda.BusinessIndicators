@@ -162,6 +162,10 @@ function Attachment_Edit(Id) {
 
 //保存文档备注
 function SaveDocManage() {
+    if ($("#txtDocManageRemark").val().length > 50) {
+        $.MsgBox.Alert("提示","备注不能超过50个字");
+        return;
+    }
     if (objdata != null) {
         objdata.Remark = $("#txtDocManageRemark").val();
 

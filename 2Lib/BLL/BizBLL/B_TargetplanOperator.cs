@@ -180,7 +180,8 @@ namespace LJTH.BusinessIndicators.BLL
         }
         public IList<B_TargetPlan> GetTargetVersion(string systemID, int year, int month,string wfStatus)
         {
-            return _bTargetplanAdapter.GetTargetVersion(systemID, year, month,wfStatus);
+            var lis= _bTargetplanAdapter.GetTargetVersion(systemID, year, month,wfStatus);
+            return lis.OrderByDescending(x => x.VersionDefault).ToList();
         }
         public bool HasDefaultVersion(Guid systemID,int year)
         {

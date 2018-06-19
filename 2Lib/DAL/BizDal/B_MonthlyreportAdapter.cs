@@ -513,6 +513,15 @@ AND FinYear=2015 AND FinMonth=8 ORDER BY CreateTime DESC ";
             }
             return result;
         }
+        public int UpdateReportApprove(Guid id,string json)
+        {
+            string sql = "UPDATE B_MonthlyReport SET ReportApprove=@ReportApprove";
+
+            sql += " WHERE Id=@Id"; 
+
+            return ExecuteSql(sql,CreateSqlParameter("@Id",DbType.Guid,id),CreateSqlParameter("@ReportApprove", DbType.String,json));
+        }
     }
+
 }
 

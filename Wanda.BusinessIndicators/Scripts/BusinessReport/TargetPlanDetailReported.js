@@ -539,10 +539,10 @@ function FormatDate(obj, displayTime, local) {
         var hour = date.getHours();
         var minute = date.getMinutes();
         var second = date.getSeconds();
-
+        
         if (displayTime) {
 
-            if (obj == "1900/1/1 0:00:00" || obj == "1970/1/1 0:00:00" || obj == null || obj == "0001/1/1 0:00:00") {
+            if (obj == "0001-01-01T00:00:00" ||obj == "0001-01-01T00:00:00"||obj == "1900/1/1 0:00:00" || obj == "1970/1/1 0:00:00" || obj == null || obj == "0001/1/1 0:00:00") {
                 return "---";
             } else {
                 if (local == "CN") {
@@ -552,7 +552,7 @@ function FormatDate(obj, displayTime, local) {
                 }
             }
         } else {
-            if (obj == "1900/1/1 0:00:00" || obj == "1970/1/1 0:00:00" || obj == null || obj == "0001/1/1 0:00:00") {
+            if (obj == "0001-01-01T00:00:00" ||obj == "0001-01-01T00:00:00" ||obj == "1900/1/1 0:00:00" || obj == "1970/1/1 0:00:00" || obj == null || obj == "0001/1/1 0:00:00") {
                 return "---";
             } else {
                 if (local == "CN") { //如果是CN的显示中文年月

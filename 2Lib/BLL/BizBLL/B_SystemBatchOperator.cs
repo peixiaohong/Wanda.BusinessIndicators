@@ -25,9 +25,9 @@ namespace LJTH.BusinessIndicators.BLL
             return _bSystemBatchAdapter;
         }
 
-        public IList<B_SystemBatch> GetSystemBatchList()
+        public IList<B_SystemBatch> GetSystemBatchList(int minMonth)
         {
-            IList<B_SystemBatch> result = _bSystemBatchAdapter.GetSystemBatchList();
+            IList<B_SystemBatch> result = _bSystemBatchAdapter.GetSystemBatchList(minMonth);
             return result;
         }
 

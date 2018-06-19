@@ -164,6 +164,49 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         {
             if (!string.IsNullOrEmpty(this.ProType))//批次
             {
+                B_SystemBatch sysBatch = B_SystemBatchOperator.Instance.GetSystemBatch(BusinessID.ToGuid());
+                //获取批次
+                List<V_SubReport> BatchRptList = JsonConvert.DeserializeObject<List<V_SubReport>>(sysBatch.SubReport);
+
+                //批次更新
+                BatchRptList.ForEach(p =>
+                {
+                    List<NavigatActivity1> lstna = GetProcessIntance(p.ReportID.ToString(), new UserInfo { UserCode = this.CurrentUser });
+                    string Json = Newtonsoft.Json.JsonConvert.SerializeObject(lstna);
+                    B_MonthlyreportOperator.Instance.UpdateReportApprove(p.ReportID, Json);
+
+                    #region 子流程虚拟审批人提交,是流程走完。服务跑，页面不再执行
+                    //try
+                    //{
+                    //    WorkflowContext workflow = WFClientSDK.GetProcess(null, p.ReportID.ToString(), new UserInfo() { UserCode = "$VirtualUserCode$" + VirtualUser });
+                    //    if (workflow.ProcessInstance.Status != 3)
+                    //    {
+                    //        Dictionary<string, object> formParams = new Dictionary<string, object>();
+                    //        formParams.Add("ReportName", workflow.ProcessInstance.ProcessTitle);
+                    //        formParams.Add("ProcessKey", workflow.ProcessInstance.FlowCode);
+                    //        BizContext bizContext = new BizContext();
+                    //        bizContext.NodeInstanceList = workflow.NodeInstanceList;
+                    //        bizContext.ProcessRunningNodeID = workflow.ProcessInstance.RunningNodeID;
+                    //        bizContext.BusinessID = p.ReportID.ToString();
+                    //        bizContext.FlowCode = workflow.ProcessInstance.FlowCode;
+                    //        bizContext.ApprovalContent = "同意";
+                    //        bizContext.CurrentUser = new UserInfo() { UserCode = "$VirtualUserCode$" + VirtualUser };
+                    //        bizContext.ProcessURL = "/BusinessReport/TargetApprove.aspx";
+                    //        bizContext.FormParams = formParams;
+                    //        bizContext.ExtensionCommond = new Dictionary<string, string>();
+                    //        bizContext.ExtensionCommond.Add("RejectNode", Guid.Empty.ToString());
+                    //        WorkflowContext wfc = WFClientSDK.ExecuteMethod("SubmitProcess", bizContext);
+                    //    }
+
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    ExceptionHelper.TrueThrow(true, string.Format("{0}", ex));
+                    //}
+
+                    #endregion
+                });
+
                 A_SystemBatchOperator.Instance.InsertAllFromB(this.BusinessID.ToGuid());
             }
             else
@@ -226,7 +269,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     {
                         B_MonthlyReport ReportModelA = B_MonthlyreportOperator.Instance.GetMonthlyreport(BusinessID.ToGuid());
 
-                        List<NavigatActivity1> lstna = GetProcessIntance(ReportModelA.ID.ToString(), UserLonginID);
+                        List<NavigatActivity1> lstna = GetProcessIntance(ReportModelA.ID.ToString(),new UserInfo { UserLoginID = UserLonginID });
                         string Json = Newtonsoft.Json.JsonConvert.SerializeObject(lstna);
                         if (ReportModelA.WFStatus == "Draft" && OperatorType == 7)
                         {
@@ -242,7 +285,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     else
                     {
                         var BacthModel = B_SystemBatchOperator.Instance.GetSystemBatch(BusinessID.ToGuid());
-                        List<NavigatActivity1> lstna = GetProcessIntance(BacthModel.ID.ToString(), UserLonginID);
+                        List<NavigatActivity1> lstna = GetProcessIntance(BacthModel.ID.ToString(), new UserInfo { UserLoginID = UserLonginID });
                         string Json = Newtonsoft.Json.JsonConvert.SerializeObject(lstna);
                         BacthModel.ReportApprove = Json;
                         B_SystemBatchOperator.Instance.UpdateSystemBatch(BacthModel);
@@ -649,7 +692,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
             B_MonthlyreportOperator.Instance.UpdateMonthlyreport(rpt);
 
         }
-        public List<NavigatActivity1> GetProcessIntance(string BusinessID, string UserLonginID = null)
+        public List<NavigatActivity1> GetProcessIntance(string BusinessID, UserInfo UserLonginID)
         {
 
             var p = BPF.Workflow.Client.WFClientSDK.GetProcess(null, BusinessID, UserLonginID);

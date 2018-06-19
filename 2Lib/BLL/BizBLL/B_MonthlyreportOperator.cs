@@ -340,7 +340,10 @@ namespace LJTH.BusinessIndicators.BLL
             ExceptionHelper.TrueThrow<ArgumentNullException>(MonthlyReport == null ? true : false, "Argument MonthlyReport is Empty");
             return _bMonthlyreportAdapter.DeleteNoDefaultVersionMonthlyReport(MonthlyReport);
         }
-
+        public int UpdateReportApprove(Guid id,string json)
+        {
+            return _bMonthlyreportAdapter.UpdateReportApprove(id, json);
+        }
         //#endregion
     }
 }

@@ -11,13 +11,13 @@ namespace LJTH.BusinessIndicators.DAL
 {
     sealed class B_SystemBatchAdapter : AppBaseAdapterT<B_SystemBatch>
     {
-        public IList<B_SystemBatch> GetSystemBatchList()
+        public IList<B_SystemBatch> GetSystemBatchList(int minMonth)
         {
             string sql = ORMapping.GetSelectSql<B_SystemBatch>(TSqlBuilder.Instance);
 
             sql += "WHERE " + base.NotDeleted;
 
-            sql += " and WFBatchStatus='Approved'";
+            sql += " and WFBatchStatus='Approved' and FinMonth>="+ minMonth;
 
             return ExecuteQuery(sql);
         }

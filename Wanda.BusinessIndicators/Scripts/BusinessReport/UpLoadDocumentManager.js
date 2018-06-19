@@ -234,6 +234,10 @@ function zTreeOnRemove(event, treeId, treeNode) {
 
 //修改Node名字
 function docTreeOnRename(event, treeId, treeNode, isCancel) {
+    if (treeNode.TreeNodeName.length > 10) {
+        $.MsgBox.Alert("提示", "名称不能超过10个字");
+        return;
+    }
     WebUtil.ajax({
         async: true,
         url: "/DocumentManagerControll/UpdateDocumentTreeNode",
@@ -245,8 +249,12 @@ function docTreeOnRename(event, treeId, treeNode, isCancel) {
 }
 //修改Node名字判断是否为空
 function BeforeRename(event, treeId, treeNode, isCancel) {
-    if (treeNode == "" || treeNode == null) {
-        alert("节点名称不能为空");
+    if (treeNode == null || treeNode.replace(/\s+/g, "") == "") {
+        $.MsgBox.Alert("提示", "节点名称不能为空");
+        return false;
+    }
+    if (treeNode.length > 10) {
+        $.MsgBox.Alert("提示", "名称不能超过10个字");
         return false;
     }
     return true;
@@ -302,6 +310,10 @@ function Attachment_Edit(Id) {
 
 //保存文档备注
 function SaveDocManage() {
+    if ($("#txtDocManageRemark").val().length > 50) {
+        $.MsgBox.Alert("提示","备注不能超过50个字");
+        return;
+    }
     if (objdata != null) {
         objdata.Remark = $("#txtDocManageRemark").val();
 

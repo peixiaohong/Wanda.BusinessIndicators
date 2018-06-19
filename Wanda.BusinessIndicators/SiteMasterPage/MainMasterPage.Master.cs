@@ -81,8 +81,39 @@ namespace LJTH.BusinessIndicators.Web
                 CacheDependency fileDependency = new CacheDependency(Server.MapPath(WebHelper.AuthCacheDependencyFile));
                 HttpContext.Current.Cache.Insert(cacheKey, result, fileDependency);
             }
+            else
+            {
+                int n= HasPermisson(result);
+                if (n <= 0)
+                    SetDefaultPage(result);
+            }
 
             return result;
+        }
+
+        int HasPermisson(List<NavSiteMapNode> result)
+        {
+            foreach (var x in result)
+            {
+                foreach (var ii in x.Nodes)
+                {
+                    if (Request.Url.AbsoluteUri.Contains(ii.Url))
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        int n = HasPermisson(ii.Nodes);
+                        if (n == 1)
+                            return 1;
+                    }
+                }
+                if (Request.Url.AbsoluteUri.Contains(x.Url))
+                {
+                    return 1;
+                }
+            }
+            return 0;
         }
 
         /// <summary>
