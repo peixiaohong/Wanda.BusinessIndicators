@@ -1067,8 +1067,11 @@ function SaveMissTargetRpt(obj) {
 
             } else {
                 //代表的是当月
-                info.MIssTargetReason = MisstargetInfo.MIssTargetReason;
-                info.MIssTargetDescription = MisstargetInfo.MIssTargetDescription;
+                //代表的是当月
+                if (MisstargetInfo != null) {
+                    info.MIssTargetReason = MisstargetInfo.MIssTargetReason;
+                    info.MIssTargetDescription = MisstargetInfo.MIssTargetDescription;
+                }
                 info.CurrentMIssTargetReason = "\n" + $("#rpt_info_step").val();  //未完成原因
                 info.CurrentMIssTargetDescription = "\n" + $("#rpt_info_desc").val(); //采取措施
             }

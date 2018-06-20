@@ -180,6 +180,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             HidSystemID.Value = ddlSystem.SelectedValue;
             HidAreaID.Value = ddlAreaID.Visible ? ddlAreaID.SelectedValue : Guid.Empty.ToString();
 
+            hiddenDis.Value = "2";
             //如果存在审批中的数据，不让重复提交
             var bmrProgress = B_MonthlyreportOperator.Instance.GetMonthlyReportModel(Guid.Parse(ddlSystem.SelectedValue), Guid.Parse(HidAreaID.Value), FinYear, FinMonth, 1, "Progress");
             if (bmrProgress != null && bmrProgress.WFStatus == "Progress")
@@ -355,7 +356,6 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     }
                     //为当前月度经营报告（bmr），插入月度经营明细数据
                     AddBMRD(bmr);
-                    hideMonthReportID.Value = bmr.ID.ToString();
                 }
                 else
                 {
@@ -371,11 +371,13 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
 
                 if (bmr != null)
                 {
+                    hideMonthReportID.Value = bmr.ID.ToString();
                     MutipleUpload.LoadByBusinessID(bmr.ID.ToString());
                     UserControl.SetButtonSpanStyle(bmr.Status);
                 }
                 else
                 {
+                    hiddenDis.Value = "2";
                     UserControl.SetButtonSpanStyle(-1);
                 }
 
