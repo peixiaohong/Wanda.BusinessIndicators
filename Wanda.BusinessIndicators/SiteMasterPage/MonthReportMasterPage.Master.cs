@@ -77,9 +77,9 @@ namespace LJTH.BusinessIndicators.Web
             }
             else
             {
-                int n = HasPermisson(result);
-                if (n == 0)
-                    SetDefaultPage(result);
+                //int n = HasPermisson(result);
+                //if (n == 0)
+                //    SetDefaultPage(result);
             }
 
             return result;
