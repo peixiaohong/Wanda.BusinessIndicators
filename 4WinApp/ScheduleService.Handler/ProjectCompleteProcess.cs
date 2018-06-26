@@ -27,7 +27,8 @@ namespace ScheduleService.Handler
         {
             Common.ScheduleService.Log.Instance.Info("提交虚拟暂挂节点处理开始！");
             bool IsChildrenSubmit=false;
-            List<B_SystemBatch> listBSB= B_SystemBatchOperator.Instance.GetSystemBatchList().ToList();
+            int month = DateTime.Now.Month - 2;
+            List<B_SystemBatch> listBSB= B_SystemBatchOperator.Instance.GetSystemBatchList(month).ToList();
 
             foreach (B_SystemBatch Bsystembatch in listBSB)
             {
