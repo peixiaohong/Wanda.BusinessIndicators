@@ -326,33 +326,34 @@ namespace LJTH.BusinessIndicators.Engine
 
 
 
-            //这里只有项目系统需要单独处理，其它系统都是需要合并的
-            //if (_System.GroupType != "ProSystem")
-            if(_System.Category != 2)
-            {
-                //未完成说明的合并
-                for (int i = TargetIDs.Count; i <= ResultTempSum.Count; i = i + TargetIDs.Count)
-                {
-                    if (TargetIDs.Count > 1)
-                    {
-                        string StrDescription = ResultTempSum[i - TargetIDs.Count].CurrentMIssTargetDescription;
+            #region 这里只有项目系统需要单独处理，其它系统都是需要合并的
 
-                        string SrtReason = ResultTempSum[i - TargetIDs.Count].CurrentMIssTargetReason;
+            //if (_System.Category != 2)
+            //{
+            //    //未完成说明的合并
+            //    for (int i = TargetIDs.Count; i <= ResultTempSum.Count; i = i + TargetIDs.Count)
+            //    {
+            //        if (TargetIDs.Count > 1)
+            //        {
+            //            string StrDescription = ResultTempSum[i - TargetIDs.Count].CurrentMIssTargetDescription;
 
-                        for (int j = 1; j < TargetIDs.Count; j++)
-                        {
-                            StrDescription = StrDescription + ResultTempSum[i - j].CurrentMIssTargetDescription; ;
+            //            string SrtReason = ResultTempSum[i - TargetIDs.Count].CurrentMIssTargetReason;
 
-                            SrtReason = SrtReason + ResultTempSum[i - j].CurrentMIssTargetReason;
-                        }
+            //            for (int j = 1; j < TargetIDs.Count; j++)
+            //            {
+            //                StrDescription = StrDescription + ResultTempSum[i - j].CurrentMIssTargetDescription; ;
 
-                        ResultTempSum[i - TargetIDs.Count].CurrentMIssTargetDescription = StrDescription;
+            //                SrtReason = SrtReason + ResultTempSum[i - j].CurrentMIssTargetReason;
+            //            }
 
-                        ResultTempSum[i - TargetIDs.Count].CurrentMIssTargetReason = SrtReason;
-                    }
-                }
-            }
+            //            ResultTempSum[i - TargetIDs.Count].CurrentMIssTargetDescription = StrDescription;
 
+            //            ResultTempSum[i - TargetIDs.Count].CurrentMIssTargetReason = SrtReason;
+            //        }
+            //    }
+            //}
+
+            #endregion 
             return ResultTempSum;
         }
 

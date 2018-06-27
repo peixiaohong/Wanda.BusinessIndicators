@@ -533,23 +533,30 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
         public Guid UpdateTarget(string info, string ID)
         {
             C_Target result = C_TargetOperator.Instance.GetTarget(Guid.Parse(ID), DateTime.Now);
-
             DateTime time = result.VersionStart;
+            result.VersionEnd = DateTime.Now;
+            C_TargetOperator.Instance.UpdateTargetVerSion(result, time);
+
 
             C_Target Newresult = JsonHelper.Deserialize<C_Target>(info);
+            C_Target AddModel = result;
             if (Newresult.BaseLine.ToString() == "0001/1/1 0:00:00")
             {
                 Newresult.BaseLine = DateTime.MinValue;
             }
-            Newresult.VersionStart = DateTime.Now;
-            Newresult.VersionEnd = DateTime.Parse("9999-12-31 00:00:00.000");
+            AddModel.TargetName = Newresult.TargetName;
+            AddModel.HaveDetail = Newresult.HaveDetail;
+            AddModel.NeedEvaluation = Newresult.NeedEvaluation;
+            AddModel.NeedReport = Newresult.NeedReport;
+            AddModel.TargetType = Newresult.TargetType;
+            AddModel.BaseLine = Newresult.BaseLine;
+            AddModel.Unit = Newresult.Unit;
+            AddModel.Sequence = Newresult.Sequence;
 
-            Newresult.Configuration = result.Configuration;
-            result.VersionEnd = DateTime.Now;
+            AddModel.VersionStart = DateTime.Now;
+            AddModel.VersionEnd = DateTime.Parse("9999-12-31 00:00:00.000");
 
-            C_TargetOperator.Instance.UpdateTargetVerSion(result, time);
-
-            return C_TargetOperator.Instance.AddTarget(Newresult);
+            return C_TargetOperator.Instance.AddTarget(AddModel);
 
         }
         [LibAction]

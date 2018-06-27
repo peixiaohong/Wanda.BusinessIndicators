@@ -92,8 +92,8 @@ namespace LJTH.BusinessIndicators.BLL
                     CurrentDate = DateTime.Now;
                 if (SystemList != null && SystemList.Count > 0)
                 {
-                    var system= SystemList.ToList().Find(S => S.ID == Key);
-                    if (system.VersionStart > CurrentDate || system.VersionEnd < CurrentDate)
+                    var system = SystemList.ToList().Find(S => S.ID == Key);
+                    if (system != null && (system.VersionStart > CurrentDate || system.VersionEnd < CurrentDate))
                     {
                         return C_SystemOperator.Instance.GetSystemList(CurrentDate).ToList().Find(S => S.ID == Key);
                     }

@@ -175,6 +175,23 @@ function Change(ID) {
         id: 'divDetail',
         title: '<span>编辑指标</span>'
     });
+
+    if (typeof TargetModel === "object") {
+        BangEums(TargetModel.TargetType);
+        $("#addname").val(TargetModel.TargetName);
+        if (TargetModel.NeedReport == false) {
+            $("#IfReport").val("0");
+        }
+        if (TargetModel.NeedEvaluation == false) {
+            $("#IfEva").val("0");
+        }
+        if (TargetModel.HaveDetail == false) {
+            $("#IfDetail").val("0");
+        }
+        $("#rpt_info_BaseLine").val(SetTime(TargetModel.BaseLine, false));
+        $("#Unit").val(TargetModel.Unit);
+        $("#seq").val(TargetModel.Sequence);
+    }
 }
 function SaveTarget() {
     var BaseLine = $("#rpt_info_BaseLine").val();
@@ -207,6 +224,8 @@ function SaveTarget() {
         alert("排序值不能为空!");
     }
     else {
+        var targetID = TargetModel.ID;
+        TargetModel = {};
         TargetModel.TargetName = $("#addname").val();
         TargetModel.HaveDetail = Detail;
         TargetModel.NeedEvaluation = Eva;
@@ -217,7 +236,7 @@ function SaveTarget() {
         TargetModel.Sequence = $("#seq").val();
         WebUtil.ajax({
             async: false,
-            args: { info: WebUtil.jsonToString(TargetModel), ID: TargetModel.ID },
+            args: { info: WebUtil.jsonToString(TargetModel), ID: targetID },
             url: "/CompanyController/UpdateTarget",
             successReturn: function (result) {
                 reload();

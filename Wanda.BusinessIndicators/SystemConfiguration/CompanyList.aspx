@@ -61,7 +61,7 @@
                         <div style="width: 80px; float: right; display: inline; padding-right: 25px;margin-right:13px;" id="UpLoadData">
                             <span>
                                 <span>
-                                    <input type="file" name="upload" id="file1" value="导入数据" />
+                                    <input type="file" name="upload" id="file1" value="导入数据" style="width:65px;" />
                                 </span>
                             </span>
                         </div>

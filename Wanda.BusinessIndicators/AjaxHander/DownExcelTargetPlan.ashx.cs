@@ -932,6 +932,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
 
             }
             #endregion
+            designer.Workbook.Worksheets.ActiveSheetIndex = 0;
             MemoryStream stream = designer.Workbook.SaveToStream();
             fileStream.Close();
             fileStream.Dispose();

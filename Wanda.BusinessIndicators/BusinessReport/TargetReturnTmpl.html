@@ -2129,7 +2129,7 @@
             <!--本月累计差值-->
             <td class="Td_Right" {{if NAccumulativeDifference <0}} style="white-space: nowrap; color:red; " {{else}} style="white-space: nowrap;" {{/if}} title="${NAccumulativeDifference}">${(NAccumulativeDifference).thousandize0OrEmpty(0)}</td>
             {{if CurrentMIssTargetReason!="" && CurrentMIssTargetDescription!=""}}
-            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (CurrentMIssTargetReason +"<br /> <span style='font-weight:bold;'>采取措施：</span>"+ CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
+            <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (CurrentMIssTargetReason).replace(/\n/g, "<br/>")  +"<br /> <span style='font-weight:bold;'>采取措施：</span>"+ (CurrentMIssTargetDescription).replace(/\n/g, "<br/>") }}</td>
             {{else}}
             {{if CurrentMIssTargetReason !=""}}
             <td class="Td_Right" style="text-align: left !important;"><span style="font-weight:bold;">未完成原因：</span>{{html (CurrentMIssTargetReason).replace(/\n/g, "<br/>") +"<br /><span style='font-weight:bold;'>采取措施：</span>"+ CurrentMIssTargetDescription }}</td>

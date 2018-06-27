@@ -98,7 +98,7 @@ namespace LJTH.BusinessIndicators.Engine
 
                 //找到上个月的数据 , 上个月的数据只能在A表中
                 //List<A_MonthlyReportDetail> AList = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetailList(RptModel._System.ID, FinYear, lastFinMonth).ToList();
-                List<A_MonthlyReportDetail> AList = A_MonthlyreportdetailOperator.Instance.GetAMonthlyReportDetailListForTargetPlanID(RptModel._System.ID, FinYear, lastFinMonth,RptModel.TargetPlanID).ToList();
+                List<A_MonthlyReportDetail> AList = A_MonthlyreportdetailOperator.Instance.GetAMonthlyReportDetailListForTargetPlanID(RptModel._System.ID, FinYear, lastFinMonth, RptModel.TargetPlanID).ToList();
 
 
                 // 获取各个公司全年的总指标数据
@@ -334,31 +334,32 @@ namespace LJTH.BusinessIndicators.Engine
 
 
 
-            //这里只有项目系统需要单独处理，其它系统都是需要合并的
-            if (_System.GroupType != "ProSystem")
-            {
-                //未完成说明的合并
-                for (int i = TargetIDs.Count; i <= ResultTempSum.Count; i = i + TargetIDs.Count)
-                {
-                    if (TargetIDs.Count > 1)
-                    {
-                        string StrDescription = ResultTempSum[i - TargetIDs.Count].MIssTargetDescription;
+            #region  这里只有项目系统需要单独处理，其它系统都是需要合并的
+            //if (_System.GroupType != "ProSystem")
+            //{
+            //    //未完成说明的合并
+            //    for (int i = TargetIDs.Count; i <= ResultTempSum.Count; i = i + TargetIDs.Count)
+            //    {
+            //        if (TargetIDs.Count > 1)
+            //        {
+            //            string StrDescription = ResultTempSum[i - TargetIDs.Count].MIssTargetDescription;
 
-                        string SrtReason = ResultTempSum[i - TargetIDs.Count].MIssTargetReason;
+            //            string SrtReason = ResultTempSum[i - TargetIDs.Count].MIssTargetReason;
 
-                        for (int j = 1; j < TargetIDs.Count; j++)
-                        {
-                            StrDescription = StrDescription + ResultTempSum[i - j].MIssTargetDescription; ;
+            //            for (int j = 1; j < TargetIDs.Count; j++)
+            //            {
+            //                StrDescription = StrDescription + ResultTempSum[i - j].MIssTargetDescription; ;
 
-                            SrtReason = SrtReason + ResultTempSum[i - j].MIssTargetReason;
-                        }
+            //                SrtReason = SrtReason + ResultTempSum[i - j].MIssTargetReason;
+            //            }
 
-                        ResultTempSum[i - TargetIDs.Count].MIssTargetDescription = StrDescription;
+            //            ResultTempSum[i - TargetIDs.Count].MIssTargetDescription = StrDescription;
 
-                        ResultTempSum[i - TargetIDs.Count].MIssTargetReason = SrtReason;
-                    }
-                }
-            }
+            //            ResultTempSum[i - TargetIDs.Count].MIssTargetReason = SrtReason;
+            //        }
+            //    }
+            //}
+            # endregion
 
             return ResultTempSum;
         }
@@ -657,7 +658,7 @@ namespace LJTH.BusinessIndicators.Engine
             List<VGroup> lstVGroup = GetDirectlyMissTargetXml(_System.Configuration);
 
             //当月未完成A或B表指标
-            if (ReportDetails != null && ReportDetails.Count >0)
+            if (ReportDetails != null && ReportDetails.Count > 0)
             {
                 MissTargetList = ReportDetails; //当月的数据
                 int lastFinMonth = 0;
@@ -668,7 +669,7 @@ namespace LJTH.BusinessIndicators.Engine
 
                 //找到上个月的数据 , 上个月的数据只能在A表中
                 //List<A_MonthlyReportDetail> AList = A_MonthlyreportdetailOperator.Instance.GetAMonthlyreportdetailList(RptModel._System.ID, FinYear, lastFinMonth).ToList();
-                List<A_MonthlyReportDetail> AList = A_MonthlyreportdetailOperator.Instance.GetAMonthlyReportDetailListForTargetPlanID(RptModel._System.ID, FinYear, lastFinMonth,RptModel.TargetPlanID).ToList();
+                List<A_MonthlyReportDetail> AList = A_MonthlyreportdetailOperator.Instance.GetAMonthlyReportDetailListForTargetPlanID(RptModel._System.ID, FinYear, lastFinMonth, RptModel.TargetPlanID).ToList();
 
 
                 // 获取各个公司全年的总指标数据
@@ -677,7 +678,7 @@ namespace LJTH.BusinessIndicators.Engine
                 //上月的数据
                 LastMissTargetList = new List<MonthlyReportDetail>();
                 AList.ForEach(P => LastMissTargetList.Add(P.ToVModel()));
-                
+
                 foreach (MonthlyReportDetail item in MissTargetList)
                 {
 

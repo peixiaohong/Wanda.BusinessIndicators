@@ -147,6 +147,8 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     ddlSystem.SelectedIndex = ddlSystem.Items.IndexOf(ddlSystem.Items.FindByValue(bmr.SystemID.ToString()));
                     HidSystemID.Value = ddlSystem.SelectedValue;
 
+                    //加载区域
+                    LoadAreaData();
                     //ddlAreaID.SelectedValue = bmr.AreaID.ToString();
                     ddlAreaID.SelectedIndex = ddlAreaID.Items.IndexOf(ddlAreaID.Items.FindByValue(bmr.AreaID.ToString()));
                     HidAreaID.Value = ddlAreaID.SelectedValue;
@@ -154,7 +156,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     ddlSystem.Enabled = false;
                     ddlAreaID.Enabled = false;
                     //判断是否是是该类型下的板块
-                    ChangeSystem();
+                    //ChangeSystem();
                 }
 
                 HideProcessCode.Value = StaticResource.Instance[ddlSystem.SelectedValue.ToGuid(), DateTime.Now].Configuration.Element("ProcessCode").Value;

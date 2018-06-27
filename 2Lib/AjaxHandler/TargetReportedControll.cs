@@ -503,7 +503,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                     ListObj.Add(new DictionaryVmodel("MonthDetail", GetTargetDetailList(CurrentRpt, "Detail", true))); // 
                     ListObj.Add(new DictionaryVmodel("Misstarget", GetMissTargetList(CurrentRpt, MonthReportID.ToString(), true)));
                     ListObj.Add(new DictionaryVmodel("MonthReportDescription", GetMonthTRptDescription(CurrentRpt)));
-                    ListObj.Add(new DictionaryVmodel("CurrentMissTargetList", GetCurrentMissTargetList(CurrentRpt, MonthReportID.ToString(), true)));
+                    ListObj.Add(new DictionaryVmodel("CurrentMisstarget", GetCurrentMissTargetList(CurrentRpt, MonthReportID.ToString(), true)));
                 }
                 else
                 { //编辑数据
@@ -514,7 +514,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                         {
                             p.ObjValue = GetMissTargetList(CurrentRpt, MonthReportID.ToString(), true);
                         }
-                        if (p.Name == "CurrentMissTargetList")
+                        if (p.Name == "CurrentMisstarget")
                         {
                             p.ObjValue = GetCurrentMissTargetList(CurrentRpt, MonthReportID.ToString(), true);
                         }

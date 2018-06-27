@@ -725,6 +725,14 @@ function BangTargetCheck(companyid, ADJ) {
             }
             else {
                 loadTmpl('#CheckBoxTarget').tmpl(result).appendTo('#ThTar');
+                $("#EditName").val(arr[0].CompanyName);//将公司名称插入
+                $("#ThSeq").val(arr[0].Sequence);
+                if (arr[0].OpeningTime != '0001/1/1 0:00:00') {
+                    $("#Selecttime").val(SetTime(arr[0].OpeningTime));
+                }
+                else {
+                    $("#Selecttime").val("");
+                }
             }
 
         }
