@@ -194,7 +194,7 @@
 
                 </div>
             </div>
-            <div class="pop_operate">
+            <div class="pop_operate" style="padding:10px 2px 22px 0;">
                 <input type="button" class="pop_btn btn_gray" value="关闭" onclick="art.dialog({ id: 'divList' }).close();" />
             </div>
         </div>
