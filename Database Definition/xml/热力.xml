@@ -38,10 +38,18 @@
   <Report>
     <Rgroup Name="热力公司">
       <![CDATA[
-      		1. 1-【当前月】月经营性回款指标为<span class="descNumber2">【经营性回款.累计计划总数】</span>万元，实际完成<span class="descNumber2">【经营性回款.累计实际总数】</span>万元，差额<span class="descNumber2">【经营性回款.累计亏损率】</span>万元，累计完成<span class="descNumber2">【经营性回款.累计累计完成率】</span>
-		      2. 1-【当前月】月EBITDA指标为<span class="descNumber2">【EBITDA.累计计划总数】</span>万元，实际完成<span class="descNumber2">【EBITDA.累计实际总数】</span>万元，差额<span class="descNumber2">【EBITDA.累计亏损率】</span>万元，累计完成<span class="descNumber2">【EBITDA.累计累计完成率】</span>
-		      3. 1-【当前月】月经营收入指标为<span class="descNumber2">【经营收入.累计计划总数】</span>万元，实际完成<span class="descNumber2">【经营收入.累计实际总数】</span>万元，差额<span class="descNumber2">【经营收入.累计亏损率】</span>万元，累计完成<span class="descNumber2">【经营收入.累计累计完成率】</span>
-		      4. 1-【当前月】月经营收入指标为<span class="descNumber2">【2#热源厂节点达成率.累计计划总数】</span>万元，实际完成<span class="descNumber2">【2#热源厂节点达成率.累计实际总数】</span>万元，差额<span class="descNumber2">【2#热源厂节点达成率.累计亏损率】</span>万元，累计完成<span class="descNumber2">【2#热源厂节点达成率.累计累计完成率】</span>
+			<br />一、1-【当前月】月累计经营指标完成情况：
+			<br />1. 经营性回款：计划<span class="descNumber">【经营性回款.累计计划总数】</span>万元，实际完成 <span class="descNumber">【经营性回款.累计实际总数】</span>万元，累计完成率<span class="descNumber">【经营性回款.累计累计完成率】</span>，<span class="descNumber">【经营性回款.累计未完成公司数量】</span>家公司未完成累计经营性回款收入指标
+			<br />2. EBITDA：计划<span class="descNumber">【EBITDA.累计计划总数】</span>万元，实际完成<span class="descNumber">【EBITDA.累计实际总数】</span>万元，累计完成率<span class="descNumber">【EBITDA.累计累计完成率】</span>，<span class="descNumber">【EBITDA.累计未完成公司数量】</span>家公司未完成累计EBITDA收入指标
+			<br />3. 经营收入：计划<span class="descNumber">【经营收入.累计计划总数】</span>万元，实际完成<span class="descNumber">【经营收入.累计实际总数】</span>万元，累计完成率<span class="descNumber">【经营收入.累计累计完成率】</span>，<span class="descNumber">【经营收入.累计未完成公司数量】</span>家公司未完成累计经营收入收入指标
+			<br />4. 2#热源厂节点达成率：计划<span class="descNumber">【2#热源厂节点达成率.累计计划总数】</span>个，实际完成<span class="descNumber">【2#热源厂节点达成率.累计实际总数】</span>个，累计完成率<span class="descNumber">【2#热源厂节点达成率.累计累计完成率】</span>，<span class="descNumber">【2#热源厂节点达成率.累计未完成公司数量】</span>家公司未完成累计2#热源厂节点达成率收入指标
+      <br />
+			<br />二、【当前月】月当月经营指标完成情况：
+			<br />1. 经营性回款：计划<span class="descNumber2">【经营性回款.当月计划总数】</span>万元，实际完成 <span class="descNumber2">【经营性回款.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【经营性回款.当月累计完成率】</span>，<span class="descNumber2">【经营性回款.当月未完成公司数量】</span>家公司未完成当月经营性回款收入指标
+			<br />2. EBITDA：计划<span class="descNumber2">【EBITDA.当月计划总数】</span>万元，实际完成<span class="descNumber2">【EBITDA.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【EBITDA.当月累计完成率】</span>，<span class="descNumber2">【EBITDA.当月未完成公司数量】</span>家公司未完成当月EBITDA收入指标
+			<br />3. 经营收入：计划<span class="descNumber2">【经营收入.当月计划总数】</span>万元，实际完成<span class="descNumber2">【经营收入.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【经营收入.当月累计完成率】</span>，<span class="descNumber2">【经营收入.当月未完成公司数量】</span>家公司未完成当月经营收入收入指标
+			<br />4. 2#热源厂节点达成率：计划<span class="descNumber2">【2#热源厂节点达成率.当月计划总数】</span>个，实际完成<span class="descNumber2">【2#热源厂节点达成率.当月实际总数】</span>个，当月完成率<span class="descNumber2">【2#热源厂节点达成率.当月累计完成率】</span>，<span class="descNumber2">【2#热源厂节点达成率.当月未完成公司数量】</span>家公司未完成当月2#热源厂节点达成率收入指标
+
       ]]>
 	  </Rgroup>
   </Report>

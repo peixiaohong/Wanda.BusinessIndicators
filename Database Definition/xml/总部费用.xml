@@ -29,7 +29,9 @@
   </CurrentMisstarget>
   <Report>
     <Rgroup Name="总部费用">
-		1-【当前月】月费用预算指标为【置业（实业）费用额.累计计划总数】万元，1-【当前月】月实际发生【置业（实业）费用额.累计实际总数】万元，差额【置业（实业）费用额.累计亏损率】万元，占累计计划比【置业（实业）费用额.累计累计完成率】
+      <![CDATA[
+      		1-【当前月】月费用预算指标为<span class="descNumber">【置业（实业）费用额.累计计划总数】</span>万元，实际发生<span class="descNumber">【置业（实业）费用额.累计实际总数】</span>万元，差额<span class="descNumber">【置业（实业）费用额.累计亏损率】</span>万元，占累计计划比<span class="descNumber">【置业（实业）费用额.累计累计完成率】</span>
+      ]]>
 	</Rgroup>
   </Report>
 </Root>

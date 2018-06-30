@@ -35,9 +35,11 @@
   </CurrentMisstarget>
   <Report>
     <Rgroup Name="合创公司">
-			1、1-【当前月】月营业收入指标为【营业收入.累计计划总数】万元，实际完成【营业收入.累计实际总数】万元，差额【营业收入.累计亏损率】万元，累计完成【营业收入.累计累计完成率】
-			2、1-【当前月】月税后经营净利润指标为【税后经营净利润.累计计划总数】万元，实际完成【税后经营净利润.累计实际总数】万元，差额【税后经营净利润.累计亏损率】万元，累计完成【税后经营净利润.累计累计完成率】
-			3、1-【当前月】月回款额指标为【回款额.累计计划总数】万元，实际完成【回款额.累计实际总数】万元，差额【回款额.累计亏损率】万元，累计完成【回款额.累计累计完成率】
-		</Rgroup>
+      <![CDATA[
+      <br />1.1-【当前月】月营业收入指标为<span class="descNumber">【营业收入.累计计划总数】</span>万元，实际完成<span class="descNumber">【营业收入.累计实际总数】</span>万元，差额<span class="descNumber">【营业收入.累计亏损率】</span>万元，累计完成<span class="descNumber">【营业收入.累计累计完成率】</span>
+      <br />2.1-【当前月】月税后经营净利润指标为<span class="descNumber">【税后经营净利润.累计计划总数】</span>万元，实际完成<span class="descNumber">【税后经营净利润.累计实际总数】</span>万元，差额<span class="descNumber">【税后经营净利润.累计亏损率】</span>万元，累计完成<span class="descNumber">【税后经营净利润.累计累计完成率】</span>
+      <br />3.1-【当前月】月回款额指标为<span class="descNumber">【回款额.累计计划总数】</span>万元，实际完成<span class="descNumber">【回款额.累计实际总数】</span>万元，差额<span class="descNumber">【回款额.累计亏损率】</span>万元，累计完成<span class="descNumber">【回款额.累计累计完成率】</span>
+    ]]>
+    </Rgroup>
   </Report>
 </Root>

@@ -107,14 +107,24 @@
   </MisstargetReturn>
   <Report>
     <Rgroup Name="文旅">
-		1-【当前月】月累计经营指标完成情况：
+     <![CDATA[
+			<br />一、1-【当前月】月累计经营指标完成情况：
+			<br />一、1-【当前月】月累计经营指标完成情况：
+			<br />1. 经营收入：计划<span class="descNumber">【经营收入.累计计划总数】</span>万元，实际完成 <span class="descNumber">【经营收入.累计实际总数】</span>万元，累计完成率<span class="descNumber">【经营收入.累计累计完成率】</span>，<span class="descNumber">【经营收入.累计未完成公司数量】</span>家公司未完成累计经营收入收入指标
+			<br />2. EBITDA：计划<span class="descNumber">【EBITDA.累计计划总数】</span>万元，实际完成<span class="descNumber">【EBITDA.累计实际总数】</span>万元，累计完成率<span class="descNumber">【EBITDA.累计累计完成率】</span>，<span class="descNumber">【EBITDA.累计未完成公司数量】</span>家公司未完成累计EBITDA收入指标
+			<br />3. 土地收储（租地）：计划<span class="descNumber">【土地收储（租地）.累计计划总数】</span>万元，实际完成<span class="descNumber">【土地收储（租地）.累计实际总数】</span>万元，累计完成率<span class="descNumber">【土地收储（租地）.累计累计完成率】</span>，<span class="descNumber">【土地收储（租地）.累计未完成公司数量】</span>家公司未完成累计土地收储（租地）收入指标
+			<br />4. 土地收储（征地）：计划<span class="descNumber">【土地收储（征地）.累计计划总数】</span>个，实际完成<span class="descNumber">【土地收储（征地）.累计实际总数】</span>个，累计完成率<span class="descNumber">【土地收储（征地）.累计累计完成率】</span>，<span class="descNumber">【土地收储（征地）.累计未完成公司数量】</span>家公司未完成累计土地收储（征地）收入指标
+			<br />5. 重点事项达成率：计划<span class="descNumber">【重点事项达成率.累计计划总数】</span>个，实际完成<span class="descNumber">【重点事项达成率.累计实际总数】</span>个，累计完成率<span class="descNumber">【重点事项达成率.累计累计完成率】</span>，<span class="descNumber">【重点事项达成率.累计未完成公司数量】</span>家公司未完成累计重点事项达成率收入指标
+      <br />
+			<br />二、【当前月】月当月经营指标完成情况：
+			<br />1. 经营收入：计划<span class="descNumber2">【经营收入.当月计划总数】</span>万元，实际完成 <span class="descNumber2">【经营收入.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【经营收入.当月累计完成率】</span>，<span class="descNumber2">【经营收入.当月未完成公司数量】</span>家公司未完成当月经营收入收入指标
+			<br />2. EBITDA：计划<span class="descNumber2">【EBITDA.当月计划总数】</span>万元，实际完成<span class="descNumber2">【EBITDA.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【EBITDA.当月累计完成率】</span>，<span class="descNumber2">【EBITDA.当月未完成公司数量】</span>家公司未完成当月EBITDA收入指标
+			<br />3. 土地收储（租地）：计划<span class="descNumber2">【土地收储（租地）.当月计划总数】</span>万元，实际完成<span class="descNumber2">【土地收储（租地）.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【土地收储（租地）.当月累计完成率】</span>，<span class="descNumber2">【土地收储（租地）.当月未完成公司数量】</span>家公司未完成当月土地收储（租地）收入指标
+			<br />4. 土地收储（征地）：计划<span class="descNumber2">【土地收储（征地）.当月计划总数】</span>个，实际完成<span class="descNumber2">【土地收储（征地）.当月实际总数】</span>个，当月完成率<span class="descNumber2">【土地收储（征地）.当月累计完成率】</span>，<span class="descNumber2">【土地收储（征地）.当月未完成公司数量】</span>家公司未完成当月土地收储（征地）收入指标
+			<br />5. 重点事项达成率：计划<span class="descNumber2">【重点事项达成率.当月计划总数】</span>个，实际完成<span class="descNumber2">【重点事项达成率.当月实际总数】</span>个，当月完成率<span class="descNumber2">【重点事项达成率.当月累计完成率】</span>，<span class="descNumber2">【重点事项达成率.当月未完成公司数量】</span>家公司未完成当月重点事项达成率收入指标
 
-		1、1-【当前月】月经营收入指标为【经营收入.累计计划总数】万元，实际完成【经营收入.累计实际总数】万元，差额【经营收入.累计亏损率】万元，累计完成【经营收入.累计累计完成率】
-		2、1-【当前月】月EBITDA指标为【EBITDA.累计计划总数】万元，实际完成【EBITDA.累计实际总数】万元，差额【EBITDA.累计亏损率】万元，累计完成【EBITDA.累计累计完成率】
-		3、1-【当前月】月土地收储（租地）指标为【土地收储（租地）.累计计划总数】，实际完成【土地收储（租地）.累计实际总数】，差额【土地收储（租地）.累计亏损率】，累计完成【土地收储（租地）.累计累计完成率】
-		4、1-【当前月】月土地收储（征地）指标为【土地收储（征地）.累计计划总数】，实际完成【土地收储（征地）.累计实际总数】，差额【土地收储（征地）.累计亏损率】，累计完成【土地收储（征地）.累计累计完成率】
-		5、1-【当前月】月重点事项达成率指标为【重点事项达成率.累计计划总数】个，实际完成【重点事项达成率.累计实际总数】万元，差额【重点事项达成率.累计亏损率】个，累计完成【重点事项达成率.累计累计完成率】
-
+      ]]>
+		
 	</Rgroup>
   </Report>
 </Root>

@@ -31,7 +31,10 @@
   </CurrentMisstarget>
 	<Report>
 		<Rgroup Name="融资部">
-      1-【当前月】融资转款额指标为【融资转款额.累计计划总数】万元，1-【当前月】月实际发生【融资转款额.累计实际总数】万元，差额【融资转款额.累计亏损率】万元，占全年计划比【融资转款额.累计累计完成率】
+      <![CDATA[
+            1-【当前月】融资转款额指标为<span class="descNumber">【融资转款额.累计计划总数】</span>万元，实际发生<span class="descNumber">【融资转款额.累计实际总数】</span>万元，差额<span class="descNumber">【融资转款额.累计亏损率】</span>万元，占全年计划比<span class="descNumber">【融资转款额.累计累计完成率】</span>
+
+      ]]>
     </Rgroup>
 	</Report>
 </Root>

@@ -75,11 +75,17 @@
   </MisstargetReturn>
   <Report>
     <Rgroup Name="商贸">
-      1-【当前月】月累计经营指标完成情况：
-
-      1、1-【当前月】月经营收入指标为【经营收入.累计计划总数】万元，实际完成【经营收入.累计实际总数】万元，差额【经营收入.累计亏损率】万元，累计完成【经营收入.累计累计完成率】
-      2、1-【当前月】月经营利润指标为【经营利润.累计计划总数】万元，实际完成【经营利润.累计实际总数】万元，差额【经营利润.累计亏损率】万元，累计完成【经营利润.累计累计完成率】
-      3、1-【当前月】月统一收银额指标为【统一收银额.累计计划总数】万元，实际完成【统一收银额.累计实际总数】万元，差额【统一收银额.累计亏损率】万元，累计完成【统一收银额.累计累计完成率】
+      <![CDATA[
+      <br />一、1-【当前月】月累计经营指标完成情况：
+			<br />1. 经营收入： 计划<span class="descNumber">【经营收入.累计计划总数】</span>万元，实际完成 <span class="descNumber">【经营收入.累计实际总数】</span>万元，累计完成率<span class="descNumber">【经营收入.累计累计完成率】</span>，<span class="descNumber">【经营收入.累计未完成公司数量】</span>家门店未完成累计经营收入指标
+			<br />2. 经营利润： 计划<span class="descNumber">【经营利润.累计计划总数】</span>万元，实际完成 <span class="descNumber">【经营利润.累计实际总数】</span>万元，累计完成率<span class="descNumber">【经营利润.累计累计完成率】</span>，<span class="descNumber">【经营利润.累计未完成公司数量】</span>家门店未完成累计经营利润指标
+			<br />3. 统一收银额： 计划<span class="descNumber">【统一收银额.累计计划总数】</span>万元，实际完成 <span class="descNumber">【统一收银额.累计实际总数】</span>万元，累计完成率<span class="descNumber">【统一收银额.累计累计完成率】</span>，<span class="descNumber">【统一收银额.累计未完成公司数量】</span>家门店未完成累计统一收银额指标
+      <br />
+			<br />二、【当前月】月当月经营指标完成情况：
+			<br />1. 经营收入： 计划<span class="descNumber2">【经营收入.当月计划总数】</span>万元，实际完成 <span class="descNumber2">【经营收入.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【经营收入.当月累计完成率】</span>，<span class="descNumber2">【经营收入.当月未完成公司数量】</span>家门店未完成当月经营收入指标
+			<br />2. 经营利润： 计划<span class="descNumber2">【经营利润.当月计划总数】</span>万元，实际完成 <span class="descNumber2">【经营利润.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【经营利润.当月累计完成率】</span>，<span class="descNumber2">【经营利润.当月未完成公司数量】</span>家门店未完成当月经营利润指标
+			<br />3. 统一收银额： 计划<span class="descNumber2">【统一收银额.当月计划总数】</span>万元，实际完成 <span class="descNumber2">【统一收银额.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【统一收银额.当月累计完成率】</span>，<span class="descNumber2">【统一收银额.当月未完成公司数量】</span>家门店未完成当月统一收银额指标
+      ]]>
 
     </Rgroup>
   </Report>

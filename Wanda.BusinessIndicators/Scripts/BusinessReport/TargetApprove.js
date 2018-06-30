@@ -379,7 +379,7 @@ function SplitData(resultData) {
             ComplateDetailData = resultData[1].ObjValue;
             $("#txtDes").html("");
             var strTemp = resultData[1].ObjValue;
-            strTemp = strTemp.replace(/\n/g, "<br/>").replace(/ /g, "&nbsp;").replace(/&quot;/g, '"').replace(/<span&nbsp;/g, '<span ');
+            //strTemp = strTemp.replace(/\n/g, "<br/>").replace(/ /g, "&nbsp;").replace(/&quot;/g, '"').replace(/<span&nbsp;/g, '<span ');
             $("#txtDes").html(strTemp);
         }
         if (resultData[2] != null) {

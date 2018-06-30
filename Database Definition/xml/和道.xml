@@ -97,20 +97,21 @@
 	</CurrentMisstarget>
 	<Report>
 		<Rgroup Name="和道国际系统">
-			一、1-【当前月】月累计经营指标完成情况：
-			1、经营收入： 计划【经营收入.累计计划总数】万元，实际完成 【经营收入.累计实际总数】万元，累计完成率【经营收入.累计累计完成率】，【经营收入.累计未完成公司数量】家门店未完成累计经营收入指标
-			2、EBITDA： 计划【EBITDA.累计计划总数】万元，实际完成 【EBITDA.累计实际总数】万元，累计完成率【EBITDA.累计累计完成率】，【EBITDA.累计未完成公司数量】家门店未完成累计EBITDA指标
-			3、回款额： 计划【回款额.累计计划总数】万元，实际完成 【回款额.累计实际总数】万元，累计完成率【回款额.累计累计完成率】，【回款额.累计未完成公司数量】家门店未完成累计回款额指标
-			4、经营率： 计划【经营率.累计计划总数】万元，实际完成 【经营率.累计实际总数】万元，累计完成率【经营率.累计累计完成率】，【经营率.累计未完成公司数量】家门店未完成累计经营率指标
-			5、重点事项达成率： 计划【重点事项达成率.累计计划总数】万元，实际完成 【重点事项达成率.累计实际总数】万元，累计完成率【重点事项达成率.累计累计完成率】，【重点事项达成率.累计未完成公司数量】家门店未完成累计重点事项达成率指标
-
-			二、【当前月】月当月经营指标完成情况：
-			1、经营收入： 计划【经营收入.当月计划总数】万元，实际完成 【经营收入.当月实际总数】万元，当月完成率【经营收入.当月累计完成率】，【经营收入.当月未完成公司数量】家门店未完成当月经营收入指标
-			2、EBITDA： 计划【EBITDA.当月计划总数】万元，实际完成 【EBITDA.当月实际总数】万元，当月完成率【EBITDA.当月累计完成率】，【EBITDA.当月未完成公司数量】家门店未完成当月EBITDA指标
-			3、回款额： 计划【回款额.当月计划总数】万元，实际完成 【回款额.当月实际总数】万元，当月完成率【回款额.当月累计完成率】，【回款额.当月未完成公司数量】家门店未完成当月回款额指标
-			4、经营率： 计划【经营率.当月计划总数】万元，实际完成 【经营率.当月实际总数】万元，当月完成率【经营率.当月累计完成率】，【经营率.当月未完成公司数量】家门店未完成当月经营率指标
-			5、重点事项达成率： 计划【重点事项达成率.当月计划总数】万元，实际完成 【重点事项达成率.当月实际总数】万元，当月完成率【重点事项达成率.当月累计完成率】，【重点事项达成率.当月未完成公司数量】家门店未完成当月重点事项达成率指标
-
+      <![CDATA[
+      <br />一、1-【当前月】月累计经营指标完成情况：
+			<br />1. 经营收入： 计划<span class="descNumber">【经营收入.累计计划总数】</span>万元，实际完成 <span class="descNumber">【经营收入.累计实际总数】</span>万元，累计完成率<span class="descNumber">【经营收入.累计累计完成率】</span>，<span class="descNumber">【经营收入.累计未完成公司数量】</span>家门店未完成累计经营收入指标
+			<br />2. EBITDA： 计划<span class="descNumber">【EBITDA.累计计划总数】</span>万元，实际完成 <span class="descNumber">【EBITDA.累计实际总数】</span>万元，累计完成率<span class="descNumber">【EBITDA.累计累计完成率】</span>，<span class="descNumber">【EBITDA.累计未完成公司数量】</span>家门店未完成累计EBITDA指标
+			<br />3. 回款额： 计划<span class="descNumber">【回款额.累计计划总数】</span>万元，实际完成 <span class="descNumber">【回款额.累计实际总数】</span>万元，累计完成率<span class="descNumber">【回款额.累计累计完成率】</span>，<span class="descNumber">【回款额.累计未完成公司数量】</span>家门店未完成累计回款额指标
+			<br />4. 经营率： 计划<span class="descNumber">【经营率.累计计划总数】</span>万元，实际完成 <span class="descNumber">【经营率.累计实际总数】</span>万元，累计完成率<span class="descNumber">【经营率.累计累计完成率】</span>，<span class="descNumber">【经营率.累计未完成公司数量】</span>家门店未完成累计经营率指标
+			<br />5. 重点事项达成率： 计划<span class="descNumber">【重点事项达成率.累计计划总数】</span>万元，实际完成 <span class="descNumber">【重点事项达成率.累计实际总数】</span>万元，累计完成率<span class="descNumber">【重点事项达成率.累计累计完成率】</span>，<span class="descNumber">【重点事项达成率.累计未完成公司数量】</span>家门店未完成累计重点事项达成率指标
+      <br />
+			<br />二、【当前月】月当月经营指标完成情况：
+			<br />1. 经营收入： 计划<span class="descNumber2">【经营收入.当月计划总数】</span>万元，实际完成 <span class="descNumber2">【经营收入.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【经营收入.当月累计完成率】</span>，<span class="descNumber2">【经营收入.当月未完成公司数量】</span>家门店未完成当月经营收入指标
+			<br />2. EBITDA： 计划<span class="descNumber2">【EBITDA.当月计划总数】</span>万元，实际完成 <span class="descNumber2">【EBITDA.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【EBITDA.当月累计完成率】</span>，<span class="descNumber2">【EBITDA.当月未完成公司数量】</span>家门店未完成当月EBITDA指标
+			<br />3. 回款额： 计划<span class="descNumber2">【回款额.当月计划总数】</span>万元，实际完成 <span class="descNumber2">【回款额.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【回款额.当月累计完成率】</span>，<span class="descNumber2">【回款额.当月未完成公司数量】</span>家门店未完成当月回款额指标
+			<br />4. 经营率： 计划<span class="descNumber2">【经营率.当月计划总数】</span>万元，实际完成 <span class="descNumber2">【经营率.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【经营率.当月累计完成率】</span>，<span class="descNumber2">【经营率.当月未完成公司数量】</span>家门店未完成当月经营率指标
+			<br />5. 重点事项达成率： 计划<span class="descNumber2">【重点事项达成率.当月计划总数】</span>万元，实际完成 <span class="descNumber2">【重点事项达成率.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【重点事项达成率.当月累计完成率】</span>，<span class="descNumber2">【重点事项达成率.当月未完成公司数量】</span>家门店未完成当月重点事项达成率指标
+      ]]>
 		</Rgroup>
 	</Report>
 </Root>

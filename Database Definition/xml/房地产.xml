@@ -103,19 +103,19 @@
 	<Report>
 		<Rgroup Name="房地产事业部">
       <![CDATA[
-			一、1-【当前月】月累计经营指标完成情况：
-			1. 销售额收入：计划<span class="descNumber">【销售额.累计计划总数】</span>万元，实际完成 <span class="descNumber">【销售额.累计实际总数】</span>万元，累计完成率<span class="descNumber">【销售额.累计累计完成率】</span>，<span class="descNumber">【销售额.累计未完成公司数量】</span>家公司未完成累计销售额收入指标
-			2. 销售回款收入：计划<span class="descNumber">【销售回款.累计计划总数】</span>万元，实际完成<span class="descNumber">【销售回款.累计实际总数】</span>万元，累计完成率<span class="descNumber">【销售回款.累计累计完成率】</span>，<span class="descNumber">【销售回款.累计未完成公司数量】</span>家公司未完成累计销售回款收入指标
-			3. 利润额收入：计划<span class="descNumber">【利润额.累计计划总数】</span>万元，实际完成<span class="descNumber">【利润额.累计实际总数】</span>万元，累计完成率<span class="descNumber">【利润额.累计累计完成率】</span>，<span class="descNumber">【利润额.累计未完成公司数量】</span>家公司未完成累计利润额收入指标
-			4. 关键节点达成率收入：计划<span class="descNumber">【关键节点达成率.累计计划总数】</span>个，实际完成<span class="descNumber">【关键节点达成率.累计实际总数】</span>个，累计完成率<span class="descNumber">【关键节点达成率.累计累计完成率】</span>，<span class="descNumber">【关键节点达成率.累计未完成公司数量】</span>家公司未完成累计关键节点达成率收入指标
-			5. 维修事项达成率收入：计划<span class="descNumber">【维修事项达成率.累计计划总数】</span>个，实际完成<span class="descNumber">【维修事项达成率.累计实际总数】</span>个，累计完成率<span class="descNumber">【维修事项达成率.累计累计完成率】</span>，<span class="descNumber">【维修事项达成率.累计未完成公司数量】</span>家公司未完成累计维修事项达成率收入指标
-
-			二、【当前月】月当月经营指标完成情况：
-			1. 销售额收入：计划<span class="descNumber2">【销售额.当月计划总数】</span>万元，实际完成 <span class="descNumber2">【销售额.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【销售额.当月累计完成率】</span>，<span class="descNumber2">【销售额.当月未完成公司数量】</span>家公司未完成当月销售额收入指标
-			2. 销售回款收入：计划<span class="descNumber2">【销售回款.当月计划总数】</span>万元，实际完成<span class="descNumber2">【销售回款.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【销售回款.当月累计完成率】</span>，<span class="descNumber2">【销售回款.当月未完成公司数量】</span>家公司未完成当月销售回款收入指标
-			3. 利润额收入：计划<span class="descNumber2">【利润额.当月计划总数】</span>万元，实际完成<span class="descNumber2">【利润额.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【利润额.当月累计完成率】</span>，<span class="descNumber2">【利润额.当月未完成公司数量】</span>家公司未完成当月利润额收入指标
-			4. 关键节点达成率收入：计划<span class="descNumber2">【关键节点达成率.当月计划总数】</span>个，实际完成<span class="descNumber2">【关键节点达成率.当月实际总数】</span>个，当月完成率<span class="descNumber2">【关键节点达成率.当月累计完成率】</span>，<span class="descNumber2">【关键节点达成率.当月未完成公司数量】</span>家公司未完成当月关键节点达成率收入指标
-			5. 维修事项达成率收入：计划<span class="descNumber2">【维修事项达成率.当月计划总数】</span>个，实际完成<span class="descNumber2">【维修事项达成率.当月实际总数】</span>个，当月完成率<span class="descNumber2">【维修事项达成率.当月累计完成率】</span>，<span class="descNumber2">【维修事项达成率.当月未完成公司数量】</span>家公司未完成当月维修事项达成率收入指标
+			<br />一、1-【当前月】月累计经营指标完成情况：
+			<br />1. 销售额：计划<span class="descNumber">【销售额.累计计划总数】</span>万元，实际完成 <span class="descNumber">【销售额.累计实际总数】</span>万元，累计完成率<span class="descNumber">【销售额.累计累计完成率】</span>，<span class="descNumber">【销售额.累计未完成公司数量】</span>家公司未完成累计销售额收入指标
+			<br />2. 销售回款：计划<span class="descNumber">【销售回款.累计计划总数】</span>万元，实际完成<span class="descNumber">【销售回款.累计实际总数】</span>万元，累计完成率<span class="descNumber">【销售回款.累计累计完成率】</span>，<span class="descNumber">【销售回款.累计未完成公司数量】</span>家公司未完成累计销售回款收入指标
+			<br />3. 利润额：计划<span class="descNumber">【利润额.累计计划总数】</span>万元，实际完成<span class="descNumber">【利润额.累计实际总数】</span>万元，累计完成率<span class="descNumber">【利润额.累计累计完成率】</span>，<span class="descNumber">【利润额.累计未完成公司数量】</span>家公司未完成累计利润额收入指标
+			<br />4. 关键节点达成率：计划<span class="descNumber">【关键节点达成率.累计计划总数】</span>个，实际完成<span class="descNumber">【关键节点达成率.累计实际总数】</span>个，累计完成率<span class="descNumber">【关键节点达成率.累计累计完成率】</span>，<span class="descNumber">【关键节点达成率.累计未完成公司数量】</span>家公司未完成累计关键节点达成率收入指标
+			<br />5. 维修事项达成率：计划<span class="descNumber">【维修事项达成率.累计计划总数】</span>个，实际完成<span class="descNumber">【维修事项达成率.累计实际总数】</span>个，累计完成率<span class="descNumber">【维修事项达成率.累计累计完成率】</span>，<span class="descNumber">【维修事项达成率.累计未完成公司数量】</span>家公司未完成累计维修事项达成率收入指标
+      <br />
+			<br />二、【当前月】月当月经营指标完成情况：
+			<br />1. 销售额：计划<span class="descNumber2">【销售额.当月计划总数】</span>万元，实际完成 <span class="descNumber2">【销售额.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【销售额.当月累计完成率】</span>，<span class="descNumber2">【销售额.当月未完成公司数量】</span>家公司未完成当月销售额收入指标
+			<br />2. 销售回款：计划<span class="descNumber2">【销售回款.当月计划总数】</span>万元，实际完成<span class="descNumber2">【销售回款.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【销售回款.当月累计完成率】</span>，<span class="descNumber2">【销售回款.当月未完成公司数量】</span>家公司未完成当月销售回款收入指标
+			<br />3. 利润额：计划<span class="descNumber2">【利润额.当月计划总数】</span>万元，实际完成<span class="descNumber2">【利润额.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【利润额.当月累计完成率】</span>，<span class="descNumber2">【利润额.当月未完成公司数量】</span>家公司未完成当月利润额收入指标
+			<br />4. 关键节点达成率：计划<span class="descNumber2">【关键节点达成率.当月计划总数】</span>个，实际完成<span class="descNumber2">【关键节点达成率.当月实际总数】</span>个，当月完成率<span class="descNumber2">【关键节点达成率.当月累计完成率】</span>，<span class="descNumber2">【关键节点达成率.当月未完成公司数量】</span>家公司未完成当月关键节点达成率收入指标
+			<br />5. 维修事项达成率：计划<span class="descNumber2">【维修事项达成率.当月计划总数】</span>个，实际完成<span class="descNumber2">【维修事项达成率.当月实际总数】</span>个，当月完成率<span class="descNumber2">【维修事项达成率.当月累计完成率】</span>，<span class="descNumber2">【维修事项达成率.当月未完成公司数量】</span>家公司未完成当月维修事项达成率收入指标
 
       ]]>
 		</Rgroup>

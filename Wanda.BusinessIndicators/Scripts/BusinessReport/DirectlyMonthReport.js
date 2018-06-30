@@ -465,7 +465,7 @@ function SplitData(resultData) {
         if (resultData[1] != null) {
             $("#txtDes").html("");
             var strTemp = resultData[1].ObjValue;
-            strTemp = strTemp.replace(/\n/g, "<br/>").replace(/ /g, "&nbsp;");
+            //strTemp = strTemp.replace(/\n/g, "<br/>").replace(/ /g, "&nbsp;");
             $("#txtDes").html(strTemp);
         }
 
