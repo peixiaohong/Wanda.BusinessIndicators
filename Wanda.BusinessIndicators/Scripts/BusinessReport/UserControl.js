@@ -70,7 +70,7 @@ function setArrow_nLeft(sender) {
             if (confirm("请您确认是否提交月度上报")) {
                 //$(".arrow_n").css("left", "1060px");
                 $(".arrow_n").css("left", "930px");
-                $("#PromptMessage").html("请仔细选择加签，保证分管副总裁审批节点以前审批人完整。");
+                $("#PromptMessage").html("请仔细选择加签，保证审批人完整。");
                 $("#PromptMessage").addClass("Tishi");
                 return true;
             } else {

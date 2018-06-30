@@ -50,7 +50,7 @@ function setArrow_nLeft(sender) {
         //    break;
         case "monthReportSubmit":
             $(".arrow_n").css("left", "590px");
-            $("#PromptMessage").html("请仔细选择加签，保证分管副总裁审批节点以前审批人完整。");
+            $("#PromptMessage").html("请仔细选择加签，保证审批人完整。");
             $("#PromptMessage").addClass("Tishi");
             break;
         case "monthReportReady":
