@@ -35,7 +35,7 @@ function FloatHeaderWidth(obj, head) {
 }
 function FloatHeader(obj, tab) {
     var st, wt, oleft, otop;
-    oleft = getLeft(tab[0]);
+    oleft = getLeft(tab[0]) + 1;
     otop = getTop(tab[0]);
     obj.css({
         "display": "none",
