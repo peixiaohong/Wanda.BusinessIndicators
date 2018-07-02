@@ -1424,7 +1424,10 @@ function RtunLiaddCss(sender) {
     $(".TTR2").attr("colspan", 3);
     $(".Special_return").removeClass("Td_TopAndBottom").addClass("Td_Right"); //当出现完成率的时候，差值TD是没有右面的边线的
     $('#CurrentMonthBackDetilDiv').text("本月累计(万元) [+]");
-
+    var obj = $("#Tab_FloatReturn");
+    var head = $("#Tab_ReturnHead");
+    obj.find("thead").html(head.html());
+    FloatHeaderWidth(obj, head);
 }
 
 
@@ -1633,6 +1636,10 @@ function MissLiaddCss(sender) { //未完成指标筛选（代表：商管体统�
     $(".Special").removeClass("Td_TopAndBottom").addClass("Td_Right"); //当影藏完成率的时候，差值TD是有右面的边线的
 
     $('#CurrentMonthMissTergetDiv').text("本月累计(万元) [+]");
+    var obj = $("#Tab_MissFloatTarget");
+    var head = $("#Tab_MissTargetHead");
+    obj.find("thead").html(head.html());
+    FloatHeaderWidth(obj, head);
 }
 
 
@@ -1677,7 +1684,10 @@ function MissCurrentLiaddCss(sender) {
     $(".Curr_Special").removeClass("Td_TopAndBottom").addClass("Td_Right"); //当影藏完成率的时候，差值TD是有右面的边线的
     //$(".Curr_Level1TdSp1").attr("colspan", 11);
     $('#MonthMissTergetDiv_Current').text("本月发生(万元) [+]");
-
+    var obj = $("#Tab_CurrentMissFloatTarget");
+    var head = $("#Tab_CurrentMissTargetHead");
+    obj.find("thead").html(head.html());
+    FloatHeaderWidth(obj, head);
 }
 
 
