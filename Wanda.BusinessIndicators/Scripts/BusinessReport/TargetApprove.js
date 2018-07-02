@@ -1051,7 +1051,8 @@ function MissCurrentLiaddCss(sender) {
     } else {
 
         //混合组合指标（代表：旅业）
-        loadTmpl_1('#TmplCurrentMissTarget').tmpl(m).appendTo('#Tbody_MissTargetData');
+        //loadTmpl_1('#TmplCurrentMissTarget').tmpl(m).appendTo('#Tbody_MissTargetData');
+        loadTmpl_1('#TmplCurrentMissTarget').tmpl(m).appendTo('#Tbody_CurrentMissTargetData');
 
         $(".newdiff_CurrenMiss").show(); //混合 （这里：混合组合：旅业）
         $(".Curr_Level1TdSp1").attr("colspan", 11);
