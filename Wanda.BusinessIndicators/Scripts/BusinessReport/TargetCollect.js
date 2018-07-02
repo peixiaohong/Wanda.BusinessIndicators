@@ -198,6 +198,7 @@ function GetList(id) {
             var head = $("#Head").html();
             var tab = $("#SumTable");
             obj.find("thead").html(head);
+            FloatHeaderWidth(obj, head);
             FloatHeader(obj, tab);
             Fake();
 
@@ -324,6 +325,7 @@ function Change(adj, id) {
     }
     //Fake();
     obj.find("thead").html(head);
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
 }
 function BangSumTargetPlanList(id) {

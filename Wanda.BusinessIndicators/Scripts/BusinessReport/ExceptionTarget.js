@@ -29,6 +29,7 @@ $(document).ready(
         var head = $("#head");
         obj.find("thead").html(head.html());
         var tab = $("#Tbody1");
+        FloatHeaderWidth(obj, head);
         FloatHeader(obj, tab);
         //SystemID = "15EE2C18-5C7A-402E-92B8-277CFF78E210";
         var pathname = "/SystemConfiguration/ExceptionTarget.aspx";

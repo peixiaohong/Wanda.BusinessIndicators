@@ -585,6 +585,7 @@ function SetComplateTargetDetailData(sender, Type) {
     var head = $('#CompleteDetailHead');
     var tab = $("#CompleteDetailHead");
     obj.find("thead").html(head.html());
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
     //tmpl模板名称
     if (strComplateMonthReportDetilHtmlTemplate[1] != "" && strComplateMonthReportDetilHtmlTemplate[1] != undefined) {
@@ -735,6 +736,7 @@ function getMonthReportReturnData() {
             var head = $("#Tab_ReturnHead");
             obj.find("thead").html(head.html());
             var tab = $("#Tbody_Data");
+            FloatHeaderWidth(obj, head);
             FloatHeader(obj, tab);
 
         }
@@ -793,6 +795,7 @@ function RtunLiaddCss(sender) {
     var head = $("#Tab_ReturnHead");
     obj.find("thead").html(head.html());
     var tab = $("#Tbody_Data");
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
 
     //显示影藏
@@ -810,6 +813,7 @@ function RtunLiaddCss(sender) {
     console.log(head.html());
     obj.find("thead").html(head.html());
     var tab = $("#Tbody_Data");
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
 
 }
@@ -883,6 +887,7 @@ function getMonthReportMissTargetData() {
             var head = $("#Tab_MissTargetHead");
             obj.find("thead").html(head.html());
             var tab = $("#Tbody_MissTargetData");
+            FloatHeaderWidth(obj, head);
             FloatHeader(obj, tab);
 
         }
@@ -958,6 +963,7 @@ function getCurrentMonthReportMissTargetData() {
             var head = $("#Tab_CurrentMissTargetHead");
             obj.find("thead").html(head.html());
             var tab = $("#Tbody_CurrentMissTargetData");
+            FloatHeaderWidth(obj, head);
             FloatHeader(obj, tab);
 
         }
@@ -1079,6 +1085,7 @@ function ShouSuo(sender) {
         var head = $("#Tab_MissTargetHead");
         obj.find("thead").html(head.html());
         var tab = $("#Tbody_MissTargetData");
+        FloatHeaderWidth(obj, head);
         FloatHeader(obj, tab);
 
     } else if (sender == 'XS') {
@@ -1123,6 +1130,7 @@ function ShouSuo(sender) {
                 $('#CurrentMonthMissTergetDiv').text("本月累计(万元)  [+]");
             }
         }
+        FloatHeaderWidth(obj, head);
         FloatHeader(obj, tab);
         //FloatHeader(obj, tab, true, "Approve"); //浮动表头
 
@@ -1190,6 +1198,7 @@ function ShouSuo(sender) {
         }
 
         //FloatHeader(obj, tab, true, "Approve");
+        FloatHeaderWidth(obj, head);
         FloatHeader(obj, tab);
     }
 
@@ -1472,6 +1481,7 @@ function unfoldTitle() {
     var head = $("#CompleteDetailHead");
     obj.find("thead").html(head.html());
     var tab = $("#tab2_rows");
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
     //SetComplateTargetDetailData(TemplData, 2);
     ComplateDetailReplaceClick();
@@ -1512,6 +1522,7 @@ function shrinkageTitle() {
     var head = $("#CompleteDetailHead");
     obj.find("thead").html(head.html());
     var tab = $("#tab2_rows");
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
     //SetComplateTargetDetailData(TemplData, 2);
     ComplateDetailReplaceClick();

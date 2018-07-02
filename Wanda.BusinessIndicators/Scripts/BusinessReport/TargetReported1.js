@@ -22,6 +22,7 @@ function operateNav(sender) {
                     var head = $("#CompleteDetailHead");
                     obj.find("thead").html(head.html());
                     var tab = $("#tab2_rows");
+                    FloatHeaderWidth(obj, head);
                     FloatHeader(obj, tab);
 
                 } else {
@@ -43,6 +44,7 @@ function operateNav(sender) {
             var head = $("#Tab_MissTargetHead");
             obj.find("thead").html(head.html());
             var tab = $("#Tbody_MissTargetData");
+            FloatHeaderWidth(obj, head);
             FloatHeader(obj, tab);
 
             DownLoadTag = "missTargetReport"; // 判断下载的模版

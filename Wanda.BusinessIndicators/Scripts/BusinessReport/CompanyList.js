@@ -347,6 +347,7 @@ function BangTable(alljson, SystemJson, id) {
         var head = $("#CompanyHead");
         obj.find("thead").html(head.html());
         var tab = $("#CompanyRows");
+        FloatHeaderWidth(obj, head);
         FloatHeader(obj, tab);
     }
 }

@@ -957,6 +957,7 @@ function SetComplateTargetDetailData(sender, Type) {
     var head = $('#CompleteDetailHead');
     var tab = $("#tab2_rows");
     obj.find("thead").html(head.html());
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
     AddBackGroundColor();
 }
@@ -1135,6 +1136,7 @@ function SetManageMonthReprotDetailData(sender, Type) {
     var head = $('#CompleteDetailHead_1');
     var tab = $("#tab2_rows_1");
     obj.find("thead").html(head.html());
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
     AddBackGroundColor();
 }
@@ -1367,6 +1369,7 @@ function getMonthReportReturnData() {
             var head = $("#Tab_ReturnHead");
             obj.find("thead").html(head.html());
             var tab = $("#Tbody_Data");
+            FloatHeaderWidth(obj, head);
             FloatHeader(obj, tab);
             $("#U1 :first a").addClass("active_sub3");
             $(".shangyueleiji").hide();
@@ -1498,6 +1501,7 @@ function getMonthReportMissTargetData() {
             var head = $("#Tab_MissTargetHead");
             obj.find("thead").html(head.html());
             var tab = $("#Tbody_MissTargetData");
+            FloatHeaderWidth(obj, head);
             FloatHeader(obj, tab);
 
             $(".shangyue").hide();
@@ -1578,6 +1582,7 @@ function getCurrentMonthReportMissTargetData() {
             var head = $("#Tab_CurrentMissTargetHead");
             obj.find("thead").html(head.html());
             var tab = $("#Tbody_CurrentMissTargetData");
+            FloatHeaderWidth(obj, head);
             FloatHeader(obj, tab);
 
             $(".leiji").hide();
@@ -1699,6 +1704,7 @@ function ShouSuo(sender) {
         var head = $("#Tab_MissTargetHead");
         obj.find("thead").html(head.html());
         var tab = $("#Tbody_MissTargetData");
+        FloatHeaderWidth(obj, head);
         FloatHeader(obj, tab);
 
     } else if (sender == 'XS') {
@@ -1750,7 +1756,7 @@ function ShouSuo(sender) {
 
             }
         }
-
+        FloatHeaderWidth(obj, head);
         //FloatHeader(obj, tab, false, "MonthRpt");
         FloatHeader(obj, tab);
 
@@ -1827,6 +1833,7 @@ function ShouSuo(sender) {
         }
 
         //FloatHeader(obj, tab, false, "MonthRpt");
+        FloatHeaderWidth(obj, head);
         FloatHeader(obj, tab);
     }
 
@@ -2735,6 +2742,7 @@ function unfoldTitle() {
         var head = $("#CompleteDetailHead_1");
         obj.find("thead").html(head.html());
         var tab = $("#tab2_rows_1");
+        FloatHeaderWidth(obj, head);
         FloatHeader(obj, tab);
         //var obj = $("#CompleteDetailHead_1");
         //var tab = $("#tab2_rows_1");
@@ -2768,6 +2776,7 @@ function unfoldTitle() {
         var head = $("#CompleteDetailHead");
         obj.find("thead").html(head.html());
         var tab = $("#tab2_rows");
+        FloatHeaderWidth(obj, head);
         FloatHeader(obj, tab);
         //var obj = $("#CompleteDetailHead");
         //var tab = $("#tab2_rows");
@@ -2812,6 +2821,7 @@ function shrinkageTitle() {
         var head = $('#CompleteDetailHead_1');
         var tab = $("#tab2_rows_1");
         obj.find("thead").html(head.html());
+        FloatHeaderWidth(obj, head);
         FloatHeader(obj, tab);
         AddBackGroundColor();
     }
@@ -2844,6 +2854,7 @@ function shrinkageTitle() {
         var head = $('#CompleteDetailHead');
         var tab = $("#tab2_rows");
         obj.find("thead").html(head.html());
+        FloatHeaderWidth(obj, head);
         FloatHeader(obj, tab);
         AddBackGroundColor();
     }

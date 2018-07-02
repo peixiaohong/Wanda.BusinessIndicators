@@ -283,6 +283,7 @@ function TmplMissTargetData(MissTargetObj, isUL) { //MissTargetObj :未完成数
     var head = $("#Tab_MissTargetHead");
     obj.find("thead").html(head.html());
     var tab = $("#Tbody_MissTargetData");
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
 
 }
@@ -381,6 +382,7 @@ function TmplCurrentMissTargetData(MissTargetObj, IsCUL) { //MissTargetObj :未�
     var head = $("#Tab_CurrentMissTargetHead");
     obj.find("thead").html(head.html());
     var tab = $("#Tbody_CurrentMissTargetData");
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
 
 }
@@ -540,6 +542,7 @@ function SetComplateTargetDetailData(sender, Type) {
     var head = $("#CompleteDetailHead");
     obj.find("thead").html(head.html());
     var tab = $("#tab2_rows");
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
     //tmpl模板名称
     //if (strComplateMonthReportDetilHtmlTemplate[2] != "" && strComplateMonthReportDetilHtmlTemplate[2] != undefined) {
@@ -1543,7 +1546,7 @@ function SaveMonthReportDetail() {
 
 
     //FloatHeader(obj, tab, false, "Reported")
-    
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
 }
 
@@ -1798,6 +1801,7 @@ function unfoldTitle() {
     obj.find("thead").html(head.html());
     var tab = $("#tab2_rows");
     FloatHeader(obj, tab);
+    FloatHeaderWidth(obj, head);
     //SetComplateTargetDetailData(TemplData, 2);
     ComplateDetailReplaceClick();
 }
@@ -1837,6 +1841,7 @@ function shrinkageTitle() {
     var head = $("#CompleteDetailHead");
     obj.find("thead").html(head.html());
     var tab = $("#tab2_rows");
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
     //SetComplateTargetDetailData(TemplData, 2);
     ComplateDetailReplaceClick();

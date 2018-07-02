@@ -113,6 +113,7 @@ function operateNav(sender) {
                     var head = $("#TargetPlanDetailHead");
                     obj.find("thead").html(head.html());
                     var tab = $("#rows");
+                    FloatHeaderWidth(obj, head);
                     FloatHeader(obj, tab);
                 } else {
                     $("#UpLoadData").show();
@@ -417,6 +418,7 @@ function LoadTargetPlanDetailData(sender) {
         var head = $("#TargetPlanDetailHead");
         obj.find("thead").html(head.html());
         var tab = $("#rows");
+        FloatHeaderWidth(obj, head);
         FloatHeader(obj, tab);
     }
 }
