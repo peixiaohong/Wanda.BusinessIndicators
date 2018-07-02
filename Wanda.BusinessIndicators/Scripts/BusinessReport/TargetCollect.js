@@ -195,9 +195,9 @@ function GetList(id) {
             $("#SumTable").show();
             $("#TargetTable").hide();
             var obj = $("#TargetFloatTable");
-            var head = $("#Head").html();
+            var head = $("#Head");
             var tab = $("#SumTable");
-            obj.find("thead").html(head);
+            obj.find("thead").html(head.html());
             FloatHeaderWidth(obj, head);
             FloatHeader(obj, tab);
             Fake();
@@ -300,7 +300,7 @@ function Change(adj, id) {
         $("#SumTable").show();
         $("#TargetTable").hide();
         $("#file_upload-button1").show();
-        head = $("#Head").html();
+        head = $("#Head");
         tab = $("#rows");
         // $("#HistoryTable").hide();
     }
@@ -319,12 +319,12 @@ function Change(adj, id) {
         $("#TargetTable").show();
         BangSumTargetPlanList(id);
         $("#file_upload-button1").show();
-        head = $("#Thead1").html();
+        head = $("#Thead1");
         tab = $("#Thead1");
         //$("#HistoryTable").hide();
     }
     //Fake();
-    obj.find("thead").html(head);
+    obj.find("thead").html(head.html());
     FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
 }
@@ -476,6 +476,10 @@ function ClickChange(adj) {
         $(".sum").show();
         $(".dan").hide();
     }
+    var obj = $("#TargetFloatTable");
+    var head = $("#Thead1");
+    obj.find("thead").html(head.html());
+    FloatHeaderWidth(obj, head);
 }
 
 function MathTarget(num) {
