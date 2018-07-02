@@ -327,7 +327,10 @@ function MissLiaddCss(sender) {
     $(".Special").removeClass("Td_TopAndBottom").addClass("Td_Right"); //当影藏完成率的时候，差值TD是有右面的边线的
     //$(".Level1TdSp1").attr("colspan", 10);
     $('#CurrentMonthMissTergetDiv').text("本月累计(万元) [+]");
-
+    var obj = $("#Tab_MissFloatTarget");
+    var head = $("#Tab_MissTargetHead");
+    obj.find("thead").html(head.html());
+    FloatHeaderWidth(obj, head);
 }
 
 var IsCUL = false;
