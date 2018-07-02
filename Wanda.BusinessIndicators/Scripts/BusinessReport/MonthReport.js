@@ -1777,6 +1777,7 @@ function ShouSuo(sender) {
         var head = $("#Tab_ReturnHead");
         obj.find("thead").html(head.html());
         var tab = $("#Tbody_Data");
+        FloatHeaderWidth(obj, head);
         FloatHeader(obj, tab);
 
     } else if (sender == 'XSSY') {
@@ -2086,6 +2087,10 @@ function TrLv1Show(obj) {
             $(this).hide();
         });
     }
+    var obj1 = $(obj).parents("table").prev("table");
+    var head = $(obj).parents("tbody").prev("thead");
+    obj1.find("thead").html(head.html());
+    FloatHeaderWidth(obj1, head);
 }
 
 function TrLv2Show(obj) {
