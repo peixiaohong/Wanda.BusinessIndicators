@@ -27,7 +27,7 @@ function FloatHeaderWidth(obj, head) {
         //console.log(thHead);
         for (var j = 0; j < thHead.length; j++) {
             var thWidth = thHead.eq(j).outerWidth() + "px";
-            console.log(thWidth);
+            //console.log(thWidth);
             trObj.eq(i).find("th").eq(j).css("width", thWidth)
         }
     }
@@ -35,7 +35,7 @@ function FloatHeaderWidth(obj, head) {
 }
 function FloatHeader(obj, tab) {
     var st, wt, oleft, otop;
-    oleft = getLeft(tab[0]);
+    oleft = getLeft(tab[0]) + 0.5;
     otop = getTop(tab[0]);
     obj.css({
         "display": "none",

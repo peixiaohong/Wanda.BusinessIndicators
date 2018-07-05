@@ -624,6 +624,7 @@ function getMonthReportReturnData() {
             var head = $("#Tab_ReturnHead");
             obj.find("thead").html(head.html());
             var tab = $("#Tbody_Data");
+            FloatHeaderWidth(obj, head);
             FloatHeader(obj, tab);
 
             //$("#Tab_Return").attr({ style: "table-layout: fixed" });
@@ -720,6 +721,7 @@ function getMonthReportMissTargetData() {
             var head = $("#Tab_MissTargetHead");
             obj.find("thead").html(head.html());
             var tab = $("#Tbody_MissTargetData");
+            FloatHeaderWidth(obj, head);
             FloatHeader(obj, tab);
 
             $(".shangyue").hide();
@@ -884,6 +886,7 @@ function getCurrentMonthReportMissTargetData() {
             var head = $("#Tab_CurrentMissTargetHead");
             obj.find("thead").html(head.html());
             var tab = $("#Tbody_CurrentMissTargetData");
+            FloatHeaderWidth(obj, head);
             FloatHeader(obj, tab);
 
             $(".leiji").hide();

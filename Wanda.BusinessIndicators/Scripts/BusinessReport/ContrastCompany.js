@@ -25,6 +25,7 @@ $(document).ready(
         var head = $("#Tabhead");
         obj.find("thead").html(head.html());
         var tab = $("#Tab2");
+        FloatHeaderWidth(obj, head);
         FloatHeader(obj, tab);
 
         var pathname = "/SystemConfiguration/IfContrastCompany.aspx";

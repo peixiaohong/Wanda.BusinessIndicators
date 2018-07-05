@@ -283,6 +283,7 @@ function TmplMissTargetData(MissTargetObj, isUL) { //MissTargetObj :未完成数
     var head = $("#Tab_MissTargetHead");
     obj.find("thead").html(head.html());
     var tab = $("#Tbody_MissTargetData");
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
 
 }
@@ -326,7 +327,10 @@ function MissLiaddCss(sender) {
     $(".Special").removeClass("Td_TopAndBottom").addClass("Td_Right"); //当影藏完成率的时候，差值TD是有右面的边线的
     //$(".Level1TdSp1").attr("colspan", 10);
     $('#CurrentMonthMissTergetDiv').text("本月累计(万元) [+]");
-
+    var obj = $("#Tab_MissFloatTarget");
+    var head = $("#Tab_MissTargetHead");
+    obj.find("thead").html(head.html());
+    FloatHeaderWidth(obj, head);
 }
 
 var IsCUL = false;
@@ -381,6 +385,7 @@ function TmplCurrentMissTargetData(MissTargetObj, IsCUL) { //MissTargetObj :未�
     var head = $("#Tab_CurrentMissTargetHead");
     obj.find("thead").html(head.html());
     var tab = $("#Tbody_CurrentMissTargetData");
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
 
 }
@@ -540,6 +545,7 @@ function SetComplateTargetDetailData(sender, Type) {
     var head = $("#CompleteDetailHead");
     obj.find("thead").html(head.html());
     var tab = $("#tab2_rows");
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
     //tmpl模板名称
     //if (strComplateMonthReportDetilHtmlTemplate[2] != "" && strComplateMonthReportDetilHtmlTemplate[2] != undefined) {
@@ -1543,7 +1549,7 @@ function SaveMonthReportDetail() {
 
 
     //FloatHeader(obj, tab, false, "Reported")
-    
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
 }
 
@@ -1798,6 +1804,7 @@ function unfoldTitle() {
     obj.find("thead").html(head.html());
     var tab = $("#tab2_rows");
     FloatHeader(obj, tab);
+    FloatHeaderWidth(obj, head);
     //SetComplateTargetDetailData(TemplData, 2);
     ComplateDetailReplaceClick();
 }
@@ -1837,6 +1844,7 @@ function shrinkageTitle() {
     var head = $("#CompleteDetailHead");
     obj.find("thead").html(head.html());
     var tab = $("#tab2_rows");
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
     //SetComplateTargetDetailData(TemplData, 2);
     ComplateDetailReplaceClick();

@@ -161,6 +161,7 @@ function AddView(result) {
     var head = $("#TbH1");
     obj.find("thead").html(head.html());
     var tab = $("#TData1");
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
 }
 var arrresult = [];

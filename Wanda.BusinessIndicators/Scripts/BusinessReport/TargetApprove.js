@@ -585,6 +585,7 @@ function SetComplateTargetDetailData(sender, Type) {
     var head = $('#CompleteDetailHead');
     var tab = $("#CompleteDetailHead");
     obj.find("thead").html(head.html());
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
     //tmpl模板名称
     if (strComplateMonthReportDetilHtmlTemplate[1] != "" && strComplateMonthReportDetilHtmlTemplate[1] != undefined) {
@@ -735,6 +736,7 @@ function getMonthReportReturnData() {
             var head = $("#Tab_ReturnHead");
             obj.find("thead").html(head.html());
             var tab = $("#Tbody_Data");
+            FloatHeaderWidth(obj, head);
             FloatHeader(obj, tab);
 
         }
@@ -793,6 +795,7 @@ function RtunLiaddCss(sender) {
     var head = $("#Tab_ReturnHead");
     obj.find("thead").html(head.html());
     var tab = $("#Tbody_Data");
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
 
     //显示影藏
@@ -810,6 +813,7 @@ function RtunLiaddCss(sender) {
     console.log(head.html());
     obj.find("thead").html(head.html());
     var tab = $("#Tbody_Data");
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
 
 }
@@ -883,6 +887,7 @@ function getMonthReportMissTargetData() {
             var head = $("#Tab_MissTargetHead");
             obj.find("thead").html(head.html());
             var tab = $("#Tbody_MissTargetData");
+            FloatHeaderWidth(obj, head);
             FloatHeader(obj, tab);
 
         }
@@ -958,6 +963,7 @@ function getCurrentMonthReportMissTargetData() {
             var head = $("#Tab_CurrentMissTargetHead");
             obj.find("thead").html(head.html());
             var tab = $("#Tbody_CurrentMissTargetData");
+            FloatHeaderWidth(obj, head);
             FloatHeader(obj, tab);
 
         }
@@ -1010,6 +1016,10 @@ function MissLiaddCss(sender) {
     $(".TT2").attr("colspan", 3);
     $(".Special").removeClass("Td_TopAndBottom").addClass("Td_Right"); //当影藏完成率的时候，差值TD是有右面的边线的
     $('#CurrentMonthMissTergetDiv').text("本月累计(万元) [+]");
+    var obj = $("#Tab_MissFloatTarget");
+    var head = $("#Tab_MissTargetHead");
+    obj.find("thead").html(head.html());
+    FloatHeaderWidth(obj, head);
 }
 
 
@@ -1041,7 +1051,8 @@ function MissCurrentLiaddCss(sender) {
     } else {
 
         //混合组合指标（代表：旅业）
-        loadTmpl_1('#TmplCurrentMissTarget').tmpl(m).appendTo('#Tbody_MissTargetData');
+        //loadTmpl_1('#TmplCurrentMissTarget').tmpl(m).appendTo('#Tbody_MissTargetData');
+        loadTmpl_1('#TmplCurrentMissTarget').tmpl(m).appendTo('#Tbody_CurrentMissTargetData');
 
         $(".newdiff_CurrenMiss").show(); //混合 （这里：混合组合：旅业）
         $(".Curr_Level1TdSp1").attr("colspan", 11);
@@ -1054,7 +1065,10 @@ function MissCurrentLiaddCss(sender) {
     $(".Curr_Special").removeClass("Td_TopAndBottom").addClass("Td_Right"); //当影藏完成率的时候，差值TD是有右面的边线的
     //$(".Curr_Level1TdSp1").attr("colspan", 11);
     $('#MonthMissTergetDiv_Current').text("本月发生(万元) [+]");
-
+    var obj = $("#Tab_CurrentMissFloatTarget");
+    var head = $("#Tab_CurrentMissTargetHead");
+    obj.find("thead").html(head.html());
+    FloatHeaderWidth(obj, head);
 }
 
 
@@ -1079,6 +1093,7 @@ function ShouSuo(sender) {
         var head = $("#Tab_MissTargetHead");
         obj.find("thead").html(head.html());
         var tab = $("#Tbody_MissTargetData");
+        FloatHeaderWidth(obj, head);
         FloatHeader(obj, tab);
 
     } else if (sender == 'XS') {
@@ -1123,6 +1138,7 @@ function ShouSuo(sender) {
                 $('#CurrentMonthMissTergetDiv').text("本月累计(万元)  [+]");
             }
         }
+        FloatHeaderWidth(obj, head);
         FloatHeader(obj, tab);
         //FloatHeader(obj, tab, true, "Approve"); //浮动表头
 
@@ -1190,6 +1206,7 @@ function ShouSuo(sender) {
         }
 
         //FloatHeader(obj, tab, true, "Approve");
+        FloatHeaderWidth(obj, head);
         FloatHeader(obj, tab);
     }
 
@@ -1472,6 +1489,7 @@ function unfoldTitle() {
     var head = $("#CompleteDetailHead");
     obj.find("thead").html(head.html());
     var tab = $("#tab2_rows");
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
     //SetComplateTargetDetailData(TemplData, 2);
     ComplateDetailReplaceClick();
@@ -1512,6 +1530,7 @@ function shrinkageTitle() {
     var head = $("#CompleteDetailHead");
     obj.find("thead").html(head.html());
     var tab = $("#tab2_rows");
+    FloatHeaderWidth(obj, head);
     FloatHeader(obj, tab);
     //SetComplateTargetDetailData(TemplData, 2);
     ComplateDetailReplaceClick();

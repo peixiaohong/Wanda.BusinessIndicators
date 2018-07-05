@@ -66,7 +66,7 @@ function GetSumList() {
             var obj = $("#importedDataFloatTable2");
             var head = $("#Head");
             obj.find("thead").html(head.html());
-            //FloatHeaderWidth(obj, head);
+            FloatHeaderWidth(obj, head);
             var tab = $("#Head");
             FloatHeader(obj, tab);
 
@@ -114,7 +114,7 @@ function Change(adj, id) {
         var obj = $("#importedDataFloatTable2");
         var head = $("#Head");
         obj.find("thead").html(head.html());
-        //FloatHeaderWidth(obj, head);
+        FloatHeaderWidth(obj, head);
         var tab = $("#Head");
         FloatHeader(obj, tab);
     }
@@ -160,7 +160,7 @@ function BangSumTargetPlanList(id) {
     var obj = $("#importedDataFloatTable2");
     var head = $("#Thead1");
     obj.find("thead").html(head.html());
-    //FloatHeaderWidth(obj, head);
+    FloatHeaderWidth(obj, head);
     var tab = $("#Thead1");
     FloatHeader(obj, tab);
 }
@@ -265,7 +265,7 @@ function LoadTargetPlanDetailData(sender) {
         var obj = $("#importedDataFloatTable2");
         var head = $("#TargetPlanDetailHead");
         obj.find("thead").html(head.html());
-        //FloatHeaderWidth(obj, head);
+        FloatHeaderWidth(obj, head);
         var tab = $("#TargetPlanDetailHead");
         FloatHeader(obj, tab);
     }
