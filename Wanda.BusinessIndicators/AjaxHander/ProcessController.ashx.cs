@@ -171,7 +171,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                 //批次更新
                 BatchRptList.ForEach(p =>
                 {
-                    List<NavigatActivity1> lstna = GetProcessIntance(p.ReportID.ToString(), new UserInfo { UserCode = this.CurrentUser });
+                    List<NavigatActivity1> lstna = GetProcessIntance(p.ReportID.ToString(), new UserInfo { UserCode = "$VirtualUserCode$" + VirtualUser });
                     string Json = Newtonsoft.Json.JsonConvert.SerializeObject(lstna);
                     B_MonthlyreportOperator.Instance.UpdateReportApprove(p.ReportID, Json);
 
@@ -982,7 +982,8 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
         {
             get
             {
-                return PermissionHelper.GetCurrentUser;
+                return WebHelper.GetCurrentLoginUser();
+                //return PermissionHelper.GetCurrentUser;
             }
         }
 
