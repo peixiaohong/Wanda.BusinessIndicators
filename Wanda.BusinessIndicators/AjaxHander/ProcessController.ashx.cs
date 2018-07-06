@@ -226,7 +226,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     {
                         B_MonthlyReport ReportModelA = B_MonthlyreportOperator.Instance.GetMonthlyreport(BusinessID.ToGuid());
 
-                        List<NavigatActivity1> lstna = GetProcessIntance(ReportModelA.ID.ToString(),new UserInfo { UserLoginID = UserLonginID });
+                        List<NavigatActivity1> lstna = GetProcessIntance(ReportModelA.ID.ToString(),new UserInfo { UserLoginID = this.CurrentUser });
                         string Json = Newtonsoft.Json.JsonConvert.SerializeObject(lstna);
                         if (ReportModelA.WFStatus == "Draft" && OperatorType == 7)
                         {
@@ -242,7 +242,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     else
                     {
                         var BacthModel = B_SystemBatchOperator.Instance.GetSystemBatch(BusinessID.ToGuid());
-                        List<NavigatActivity1> lstna = GetProcessIntance(BacthModel.ID.ToString(), new UserInfo { UserLoginID = UserLonginID });
+                        List<NavigatActivity1> lstna = GetProcessIntance(BacthModel.ID.ToString(), new UserInfo { UserLoginID = this.CurrentUser });
                         string Json = Newtonsoft.Json.JsonConvert.SerializeObject(lstna);
                         BacthModel.ReportApprove = Json;
                         B_SystemBatchOperator.Instance.UpdateSystemBatch(BacthModel);
