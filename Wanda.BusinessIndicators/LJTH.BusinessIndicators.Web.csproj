@@ -109,6 +109,7 @@
     <Content Include="Images\ljth\67-991-611-01.png" />
     <Content Include="Images\ljth\lg_login_sbmt_hover_wev8.png" />
     <Content Include="Images\ljth\lg_login_sbmt_wev8.png" />
+    <Content Include="Images\logo0.png" />
     <Content Include="Public\Bridge.aspx" />
     <Content Include="Public\Login.aspx" />
     <Content Include="Public\Logout.aspx" />
