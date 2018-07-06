@@ -321,6 +321,11 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                             }
                         }
                     }
+                    else
+                    {
+                        //没有数据，直接执行下一个循环
+                        continue;
+                    }
                     try
                     {
                         ListDV.AddRange(FormatTargetDetailNew(out error, listMrd, SysId, FinYear, FinMonth, workSheet.Name, CurrentRpt));
@@ -690,7 +695,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     DataTable dt = cells.ExportDataTable(4, 1, cells.MaxDataRow - 3, cells.MaxDataColumn);
 
                     List<MonthlyReportDetail> InsertMonthReportDetail = new List<MonthlyReportDetail>();
-                   // List<MonthlyReportDetail> UpdateMonthReportDetail = new List<MonthlyReportDetail>();
+                    // List<MonthlyReportDetail> UpdateMonthReportDetail = new List<MonthlyReportDetail>();
                     MonthlyReportDetail mrd = null;
                     List<MonthlyReportDetail> listMrd = new List<MonthlyReportDetail>();
 
@@ -718,19 +723,19 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                             //}
                             //else
                             //{
-                                mrd = new MonthlyReportDetail();
-                                mrd.SystemID = CurrentRpt._System.ID;
-                                mrd.TargetID = CurrentTarget.ID;
-                                mrd.TargetName = CurrentTarget.TargetName;
-                                mrd.CompanyID = StaticResource.Instance.CompanyList[CurrentRpt._System.ID].Find(p => p.CompanyName.Trim() == "总部").ID;
-                                mrd.MonthlyReportID = MonthReportID;
-                                mrd.FinMonth = FinMonth;
-                                mrd.FinYear = FinYear;
-                                mrd.TargetPlanID = targetPlanID;
-                                mrd.MIssTargetDescription = "";
-                                mrd.MIssTargetReason = "";
-                                mrd.CreateTime = DateTime.Now;
-                                mrd.CommitReason = "";
+                            mrd = new MonthlyReportDetail();
+                            mrd.SystemID = CurrentRpt._System.ID;
+                            mrd.TargetID = CurrentTarget.ID;
+                            mrd.TargetName = CurrentTarget.TargetName;
+                            mrd.CompanyID = StaticResource.Instance.CompanyList[CurrentRpt._System.ID].Find(p => p.CompanyName.Trim() == "总部").ID;
+                            mrd.MonthlyReportID = MonthReportID;
+                            mrd.FinMonth = FinMonth;
+                            mrd.FinYear = FinYear;
+                            mrd.TargetPlanID = targetPlanID;
+                            mrd.MIssTargetDescription = "";
+                            mrd.MIssTargetReason = "";
+                            mrd.CreateTime = DateTime.Now;
+                            mrd.CommitReason = "";
                             //}
                             #endregion
                             try
@@ -770,7 +775,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                             //}
                             //else
                             //{
-                                InsertMonthReportDetail.Add(mrd);
+                            InsertMonthReportDetail.Add(mrd);
                             //}
                         }
                     }
@@ -778,7 +783,7 @@ namespace LJTH.BusinessIndicators.Web.AjaxHander
                     {
 
                         ListDV.Add(new DictionaryVmodel("Insert", InsertMonthReportDetail));
-                       // ListDV.Add(new DictionaryVmodel("Update", UpdateMonthReportDetail));
+                        // ListDV.Add(new DictionaryVmodel("Update", UpdateMonthReportDetail));
                     }
                     catch (ExcelException)
                     {

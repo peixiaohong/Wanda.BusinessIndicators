@@ -1,10 +1,10 @@
 ﻿<Root>
   <ProcessCode ShowProcessNodeName="true">YY_ZBGK-CYFZ</ProcessCode>
   <ProcessCode ShowProcessNodeName="true">YY_ZBGK-CYFZ-ZB</ProcessCode>
-	<Interfaces>
-		<ISequence TemplateType="MissTarget" InterfaceName="MissTargetSequence" />
-		<ISequence TemplateType="Return" InterfaceName="ReturnSequence" />
-	</Interfaces>
+  <Interfaces>
+    <ISequence TemplateType="MissTarget" InterfaceName="MissTargetSequence" />
+    <ISequence TemplateType="Return" InterfaceName="ReturnSequence" />
+  </Interfaces>
   <ReportMonthlyDetail>
     <TableTemplate />
   </ReportMonthlyDetail>
@@ -18,7 +18,8 @@
     </BlendTargets>
     <Target TargetName="经营净利润" Senquence="3" IsBlendTarget="False" TargetValue="2DDC3E68-3655-437B-A1DE-73BB177BF885" />
     <Target TargetName="大机构招商" Senquence="4" IsBlendTarget="False" TargetValue="0D29321E-C43B-4039-A5D1-AFE008DB8F86" />
-    <Target TargetName="工业用地拓展" Senquence="5" IsBlendTarget="False" TargetValue="F1774BC4-FB64-4E26-82AF-EE78C06CD0B5" />
+	  <Target TargetName="工业用地拓展" Senquence="5" IsBlendTarget="False" TargetValue="F1774BC4-FB64-4E26-82AF-EE78C06CD0B5" />
+	  <Target TargetName="总部管理费用" Senquence="6" IsBlendTarget="False" TargetValue="222278BD-F081-42C4-AB74-3D0E1F59249B" />
   </ManageTargetDetail>
   <ComplateTargetDetail Name="完成情况明细">
     <BlendTargets IsBlendTarget="True" Senquence="1" TargetName="招商额+回款额" TargetValue="79A7B776-1F52-4664-BCD6-D4C602AEFB12,01C34924-F1A0-423E-ACAA-66112F89620C">
@@ -48,6 +49,11 @@
       <Counter Title="完成部分" Senquence="2" Display="false" DetailMonthlyExpression="GetStringValue(&quot;工业用地拓展.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;工业用地拓展.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;工业用地拓展.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;工业用地拓展.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
       <Counter Title="未完成部分" Senquence="3" Display="true" DetailMonthlyExpression="GetStringValue(&quot;工业用地拓展.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;工业用地拓展.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;工业用地拓展.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;工业用地拓展.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
     </Target>
+	  <Target TargetName="总部管理费用" Senquence="6" IsBlendTarget="False" TargetValue="222278BD-F081-42C4-AB74-3D0E1F59249B">
+		  <Counter Title="总部" Senquence="1" Display="false" HaveDetail="false" DetailMonthlyExpression="GetStringValue(&quot;总部管理费用.CompanyName&quot;)==&quot;总部&quot;" DetailExpression="GetStringValue(&quot;总部管理费用.CompanyName&quot;)==&quot;总部&quot;" />
+		  <Counter Title="完成部分" Senquence="2" Display="false" DetailMonthlyExpression="GetStringValue(&quot;总部管理费用.IsMissTargetCurrent&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;总部管理费用.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;总部管理费用.IsMissTarget&quot;)==&quot;False&quot;&amp;&amp;GetStringValue(&quot;总部管理费用.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+		  <Counter Title="未完成部分" Senquence="3" Display="true" DetailMonthlyExpression="GetStringValue(&quot;总部管理费用.IsMissTargetCurrent&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;总部管理费用.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" DetailExpression="GetStringValue(&quot;总部管理费用.IsMissTarget&quot;)==&quot;True&quot;&amp;&amp;GetStringValue(&quot;总部管理费用.CompanyName&quot;)&lt;&gt;&quot;总部&quot;" />
+	  </Target>
     <TableTemplate TableHeadTmplName="TmplCompleteDetail_Head" TableDataTmplName="TmplCompleteDetail_Data" TableExcelTemplateName="" />
   </ComplateTargetDetail>
   <CurrentMisstarget Name="当月未完成">
@@ -65,6 +71,9 @@
     <Group TargetName="工业用地拓展" Senquence="4" TargetValue="F1774BC4-FB64-4E26-82AF-EE78C06CD0B5">
       <Counter Title="工业用地拓展未完成公司【当月未完成{本月GetStringValue(&quot;工业用地拓展.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;工业用地拓展.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;工业用地拓展.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
     </Group>
+	<Group TargetName="总部管理费用" Senquence="5" TargetValue="222278BD-F081-42C4-AB74-3D0E1F59249B">
+		<Counter Title="总部管理费用未完成公司【当月未完成{本月GetStringValue(&quot;总部管理费用.IsMissTargetCurrent&quot;)==&quot;True&quot;}家，其中累计未完成{本月GetStringValue(&quot;总部管理费用.IsMissTarget&quot;)==&quot;True&quot;}家】" Senquence="3" Expression="GetStringValue(&quot;总部管理费用.IsMissTargetCurrent&quot;)==&quot;True&quot;" />
+	</Group>
   </CurrentMisstarget>
   <Misstarget Name="累计未完成">
     <Group TargetName="招商额+回款额" Senquence="1" TargetValue="79A7B776-1F52-4664-BCD6-D4C602AEFB12,01C34924-F1A0-423E-ACAA-66112F89620C">
@@ -82,6 +91,9 @@
     <Group TargetName="工业用地拓展" Senquence="4" TargetValue="F1774BC4-FB64-4E26-82AF-EE78C06CD0B5">
       <Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;工业用地拓展.LastIsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;工业用地拓展.LastIsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;工业用地拓展.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;工业用地拓展.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;工业用地拓展.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;工业用地拓展.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;工业用地拓展.IsMissTarget&quot;)==&quot;True&quot; " />
     </Group>
+	<Group TargetName="总部管理费用" Senquence="5" TargetValue="222278BD-F081-42C4-AB74-3D0E1F59249B">
+		<Counter Title="说明：上月累计未完成{上单GetStringValue(&quot;总部管理费用.LastIsMissTarget&quot;)==&quot;True&quot;}家（要求本月补回{上单GetValue(&quot;总部管理费用.LastIsCommitDate&quot;)==1&amp;&amp;GetStringValue(&quot;总部管理费用.IsMissTarget&quot;)==&quot;True&quot;}家，实际补回{本月GetValue(&quot;总部管理费用.ReturnType&quot;)&gt;=6}家）；本月新增{本月GetValue(&quot;总部管理费用.ReturnType&quot;)==5}家，累计未完成{本月GetStringValue(&quot;总部管理费用.IsMissTarget&quot;)==&quot;True&quot;}家" Senquence="1" Expression="GetStringValue(&quot;总部管理费用.IsMissTarget&quot;)==&quot;True&quot; " />
+	</Group>
   </Misstarget>
   <MisstargetReturn Name="补回情况">
     <Group TargetName="招商额+回款额" Senquence="1" TargetValue="79A7B776-1F52-4664-BCD6-D4C602AEFB12,01C34924-F1A0-423E-ACAA-66112F89620C">
@@ -108,25 +120,32 @@
       <Counter Title="二、未到期公司" Senquence="2" Expression="GetValue(&quot;工业用地拓展.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;工业用地拓展.LastNAccumulativeDifference&quot;)&lt;0" />
       <Counter Title="三、已补回公司" Senquence="3" Expression="GetValue(&quot;工业用地拓展.ReturnType&quot;)&gt;=6" />
     </Group>
+	  <Group TargetName="总部管理费用" Senquence="5" TargetValue="222278BD-F081-42C4-AB74-3D0E1F59249B">
+		  <Counter Title="一、到期未补回公司" Senquence="1" Expression="GetValue(&quot;总部管理费用.ReturnType&quot;)==2&amp;&amp;GetValue(&quot;总部管理费用.LastNAccumulativeDifference&quot;)&lt;0" />
+		  <Counter Title="二、未到期公司" Senquence="2" Expression="GetValue(&quot;总部管理费用.ReturnType&quot;)&lt;=5&amp;&amp;GetValue(&quot;总部管理费用.LastNAccumulativeDifference&quot;)&lt;0" />
+		  <Counter Title="三、已补回公司" Senquence="3" Expression="GetValue(&quot;总部管理费用.ReturnType&quot;)&gt;=6" />
+	  </Group>
   </MisstargetReturn>
   <Report>
     <Rgroup Name="产业发展">
-      <![CDATA[
-      <br />一、1-【当前月】月累计经营指标完成情况：
-			<br />1. 经营净利润： 计划<span class="descNumber">【经营净利润.累计计划总数】</span>万元，实际完成 <span class="descNumber">【经营净利润.累计实际总数】</span>万元，累计完成率<span class="descNumber">【经营净利润.累计累计完成率】</span>，<span class="descNumber">【经营净利润.累计未完成公司数量】</span>家门店未完成累计经营净利润指标
-			<br />2. 招商额： 计划<span class="descNumber">【招商额.累计计划总数】</span>万元，实际完成 <span class="descNumber">【招商额.累计实际总数】</span>万元，累计完成率<span class="descNumber">【招商额.累计累计完成率】</span>，<span class="descNumber">【招商额.累计未完成公司数量】</span>家门店未完成累计招商额指标
-			<br />3. 回款额： 计划<span class="descNumber">【回款额.累计计划总数】</span>万元，实际完成 <span class="descNumber">【回款额.累计实际总数】</span>万元，累计完成率<span class="descNumber">【回款额.累计累计完成率】</span>，<span class="descNumber">【回款额.累计未完成公司数量】</span>家门店未完成累计回款额指标
-			<br />4. 大机构招商： 计划<span class="descNumber">【大机构招商.累计计划总数】</span>万元，实际完成 <span class="descNumber">【大机构招商.累计实际总数】</span>万元，累计完成率<span class="descNumber">【大机构招商.累计累计完成率】</span>，<span class="descNumber">【大机构招商.累计未完成公司数量】</span>家门店未完成累计大机构招商指标
-			<br />5. 工业用地拓展： 计划<span class="descNumber">【工业用地拓展.累计计划总数】</span>万元，实际完成 <span class="descNumber">【工业用地拓展.累计实际总数】</span>万元，累计完成率<span class="descNumber">【工业用地拓展.累计累计完成率】</span>，<span class="descNumber">【工业用地拓展.累计未完成公司数量】</span>家门店未完成累计工业用地拓展指标
-      <br />
-			<br />二、【当前月】月当月经营指标完成情况：
-			<br />1. 经营净利润： 计划<span class="descNumber2">【经营净利润.当月计划总数】</span>万元，实际完成 <span class="descNumber2">【经营净利润.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【经营净利润.当月累计完成率】</span>，<span class="descNumber2">【经营净利润.当月未完成公司数量】</span>家门店未完成当月经营净利润指标
-			<br />2. 招商额： 计划<span class="descNumber2">【招商额.当月计划总数】</span>万元，实际完成 <span class="descNumber2">【招商额.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【招商额.当月累计完成率】</span>，<span class="descNumber2">【招商额.当月未完成公司数量】</span>家门店未完成当月招商额指标
-			<br />3. 回款额： 计划<span class="descNumber2">【回款额.当月计划总数】</span>万元，实际完成 <span class="descNumber2">【回款额.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【回款额.当月累计完成率】</span>，<span class="descNumber2">【回款额.当月未完成公司数量】</span>家门店未完成当月回款额指标
-			<br />4. 大机构招商： 计划<span class="descNumber2">【大机构招商.当月计划总数】</span>万元，实际完成 <span class="descNumber2">【大机构招商.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【大机构招商.当月累计完成率】</span>，<span class="descNumber2">【大机构招商.当月未完成公司数量】</span>家门店未完成当月大机构招商指标
-			<br />5. 工业用地拓展： 计划<span class="descNumber2">【工业用地拓展.当月计划总数】</span>万元，实际完成 <span class="descNumber2">【工业用地拓展.当月实际总数】</span>万元，当月完成率<span class="descNumber2">【工业用地拓展.当月累计完成率】</span>，<span class="descNumber2">【工业用地拓展.当月未完成公司数量】</span>家门店未完成当月工业用地拓展指标
-      ]]>
+      
+      &lt;br /&gt;一、1-【当前月】月累计经营指标完成情况：
+			&lt;br /&gt;1. 经营净利润： 计划&lt;span class="descNumber"&gt;【经营净利润.累计计划总数】&lt;/span&gt;万元，实际完成 &lt;span class="descNumber"&gt;【经营净利润.累计实际总数】&lt;/span&gt;万元，累计完成率&lt;span class="descNumber"&gt;【经营净利润.累计累计完成率】&lt;/span&gt;，&lt;span class="descNumber"&gt;【经营净利润.累计未完成公司数量】&lt;/span&gt;家门店未完成累计经营净利润指标
+			&lt;br /&gt;2. 招商额： 计划&lt;span class="descNumber"&gt;【招商额.累计计划总数】&lt;/span&gt;万元，实际完成 &lt;span class="descNumber"&gt;【招商额.累计实际总数】&lt;/span&gt;万元，累计完成率&lt;span class="descNumber"&gt;【招商额.累计累计完成率】&lt;/span&gt;，&lt;span class="descNumber"&gt;【招商额.累计未完成公司数量】&lt;/span&gt;家门店未完成累计招商额指标
+			&lt;br /&gt;3. 回款额： 计划&lt;span class="descNumber"&gt;【回款额.累计计划总数】&lt;/span&gt;万元，实际完成 &lt;span class="descNumber"&gt;【回款额.累计实际总数】&lt;/span&gt;万元，累计完成率&lt;span class="descNumber"&gt;【回款额.累计累计完成率】&lt;/span&gt;，&lt;span class="descNumber"&gt;【回款额.累计未完成公司数量】&lt;/span&gt;家门店未完成累计回款额指标
+			&lt;br /&gt;4. 大机构招商： 计划&lt;span class="descNumber"&gt;【大机构招商.累计计划总数】&lt;/span&gt;万元，实际完成 &lt;span class="descNumber"&gt;【大机构招商.累计实际总数】&lt;/span&gt;万元，累计完成率&lt;span class="descNumber"&gt;【大机构招商.累计累计完成率】&lt;/span&gt;，&lt;span class="descNumber"&gt;【大机构招商.累计未完成公司数量】&lt;/span&gt;家门店未完成累计大机构招商指标
+			&lt;br /&gt;5. 工业用地拓展： 计划&lt;span class="descNumber"&gt;【工业用地拓展.累计计划总数】&lt;/span&gt;万元，实际完成 &lt;span class="descNumber"&gt;【工业用地拓展.累计实际总数】&lt;/span&gt;万元，累计完成率&lt;span class="descNumber"&gt;【工业用地拓展.累计累计完成率】&lt;/span&gt;，&lt;span class="descNumber"&gt;【工业用地拓展.累计未完成公司数量】&lt;/span&gt;家门店未完成累计工业用地拓展指标
+			&lt;br /&gt;6. 总部管理费用： 计划&lt;span class="descNumber"&gt;【总部管理费用.累计计划总数】&lt;/span&gt;万元，实际完成 &lt;span class="descNumber"&gt;【总部管理费用.累计实际总数】&lt;/span&gt;万元，累计完成率&lt;span class="descNumber"&gt;【总部管理费用.累计累计完成率】&lt;/span&gt;，&lt;span class="descNumber"&gt;【总部管理费用.累计未完成公司数量】&lt;/span&gt;家门店未完成累计总部管理费用指标
+			&lt;br /&gt;
+			&lt;br /&gt;二、【当前月】月当月经营指标完成情况：
+			&lt;br /&gt;1. 经营净利润： 计划&lt;span class="descNumber2"&gt;【经营净利润.当月计划总数】&lt;/span&gt;万元，实际完成 &lt;span class="descNumber2"&gt;【经营净利润.当月实际总数】&lt;/span&gt;万元，当月完成率&lt;span class="descNumber2"&gt;【经营净利润.当月累计完成率】&lt;/span&gt;，&lt;span class="descNumber2"&gt;【经营净利润.当月未完成公司数量】&lt;/span&gt;家门店未完成当月经营净利润指标
+			&lt;br /&gt;2. 招商额： 计划&lt;span class="descNumber2"&gt;【招商额.当月计划总数】&lt;/span&gt;万元，实际完成 &lt;span class="descNumber2"&gt;【招商额.当月实际总数】&lt;/span&gt;万元，当月完成率&lt;span class="descNumber2"&gt;【招商额.当月累计完成率】&lt;/span&gt;，&lt;span class="descNumber2"&gt;【招商额.当月未完成公司数量】&lt;/span&gt;家门店未完成当月招商额指标
+			&lt;br /&gt;3. 回款额： 计划&lt;span class="descNumber2"&gt;【回款额.当月计划总数】&lt;/span&gt;万元，实际完成 &lt;span class="descNumber2"&gt;【回款额.当月实际总数】&lt;/span&gt;万元，当月完成率&lt;span class="descNumber2"&gt;【回款额.当月累计完成率】&lt;/span&gt;，&lt;span class="descNumber2"&gt;【回款额.当月未完成公司数量】&lt;/span&gt;家门店未完成当月回款额指标
+			&lt;br /&gt;4. 大机构招商： 计划&lt;span class="descNumber2"&gt;【大机构招商.当月计划总数】&lt;/span&gt;万元，实际完成 &lt;span class="descNumber2"&gt;【大机构招商.当月实际总数】&lt;/span&gt;万元，当月完成率&lt;span class="descNumber2"&gt;【大机构招商.当月累计完成率】&lt;/span&gt;，&lt;span class="descNumber2"&gt;【大机构招商.当月未完成公司数量】&lt;/span&gt;家门店未完成当月大机构招商指标
+			&lt;br /&gt;5. 工业用地拓展： 计划&lt;span class="descNumber2"&gt;【工业用地拓展.当月计划总数】&lt;/span&gt;万元，实际完成 &lt;span class="descNumber2"&gt;【工业用地拓展.当月实际总数】&lt;/span&gt;万元，当月完成率&lt;span class="descNumber2"&gt;【工业用地拓展.当月累计完成率】&lt;/span&gt;，&lt;span class="descNumber2"&gt;【工业用地拓展.当月未完成公司数量】&lt;/span&gt;家门店未完成当月工业用地拓展指标
+			&lt;br /&gt;6. 总部管理费用： 计划&lt;span class="descNumber2"&gt;【总部管理费用.当月计划总数】&lt;/span&gt;万元，实际完成 &lt;span class="descNumber2"&gt;【总部管理费用.当月实际总数】&lt;/span&gt;万元，当月完成率&lt;span class="descNumber2"&gt;【总部管理费用.当月累计完成率】&lt;/span&gt;，&lt;span class="descNumber2"&gt;【总部管理费用.当月未完成公司数量】&lt;/span&gt;家门店未完成当月总部管理费用指标
 
-    </Rgroup>
+
+	</Rgroup>
   </Report>
 </Root>

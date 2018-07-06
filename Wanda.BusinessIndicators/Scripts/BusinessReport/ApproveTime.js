@@ -540,7 +540,6 @@ $(function () {
             alert("上传失败，程序出错！");
         },
         'onUploadStart': function () {
-            alert(111);
             $("#file1").uploadify('settings', 'formData', { "SysId": $("#ddlSystem").val(), "FinYear": $("#ddlYear").val(), "FinMonth": $("#ddlMonth").val() });
         },
     })
