@@ -41,7 +41,7 @@
         </div>
     </div>
     <%--<div style="height: 24px;"></div>--%>
-
+    <div class="help-head" style="background: rgb(232, 235, 239); height: 20px;line-height: 20px;padding: 0 0.5%; text-align: right;color: #999;font-size: 12px;">如需IT帮助，请联系和讯【IT支持】或致电【0312-5591888-6000】</div>
     <div class="Pagebox">
         <div class="header_target" style="height: auto">
             <div class="logo_target">
