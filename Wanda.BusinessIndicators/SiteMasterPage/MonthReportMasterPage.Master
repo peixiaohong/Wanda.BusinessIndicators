@@ -41,7 +41,10 @@
         </div>
     </div>
     <%--<div style="height: 24px;"></div>--%>
-    <div class="help-head" style="background: rgb(232, 235, 239); height: 20px;line-height: 20px;padding: 0 0.5%; text-align: right;color: #999;font-size: 12px;">如需IT帮助，请联系和讯【IT支持】或致电【0312-5591888-6000】</div>
+    <div class="help-head" style="background: rgb(232, 235, 239); height: 25px;line-height: 25px;padding: 0 0.5%; text-align: right;">
+        <span style="color: #999;font-size: 12px;float:left;">如需IT帮助，请联系和讯【IT支持】或致电【0312-5591888-6000】</span>
+         欢迎您：<%=LJTH.BusinessIndicators.Common.WebHelper.GetCurrentUser().CNName %>（<%=LJTH.BusinessIndicators.Common.WebHelper.GetCurrentUser().ActualUnitName %>）&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Public/Logout.aspx">退出</a>
+    </div>
     <div class="Pagebox">
         <div class="header_target" style="height: auto">
             <div class="logo_target">
@@ -49,7 +52,7 @@
                 <span>经营指标管控系统</span>
                 <div class="map_target">
 <%--                    <span>欢迎您，<%=HttpContext.Current.User.Identity.Name %> </span>--%>
-                    欢迎您：<%=LJTH.BusinessIndicators.Common.WebHelper.GetCurrentUser().CNName %>（<%=LJTH.BusinessIndicators.Common.WebHelper.GetCurrentUser().ActualUnitName %>）&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Public/Logout.aspx">退出</a>
+                   
 
                 </div>
             </div>
