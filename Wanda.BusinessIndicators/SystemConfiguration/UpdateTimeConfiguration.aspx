@@ -53,7 +53,7 @@
                             <th >&nbsp;</th>
                             <th style="width: 85%; text-align: left; padding:10px; ">
                                 <input type="radio" name="btu" id="opentadio" value="2" onclick="ClickChange(this)"  title="请选择日期!" />立即开放
-                                <input type="text" id="OpenDate" style="width: 150px; margin-left: 20px"  class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM', minDate: '%y-%M'})" />
+                                <input type="text" id="OpenDate" style="width: 150px; margin-left: 20px"  class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM'})" />
                                 <a  id="closeTips2" style="color: #9d2328; text-decoration: none">上报月为：日期控件选择的月份!</a>
                                 </th>
                         </tr>

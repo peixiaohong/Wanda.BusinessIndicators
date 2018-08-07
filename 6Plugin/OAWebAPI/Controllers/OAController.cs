@@ -14,6 +14,7 @@ namespace OAWebAPI.Controllers
         [HttpGet]
         public string test()
         {
+            //throw new Exception("异常测试");
             return "Success!";
             
         }

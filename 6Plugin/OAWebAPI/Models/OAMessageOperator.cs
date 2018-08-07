@@ -29,13 +29,13 @@ namespace Plugin.OAMessage
             switch (requestType)
             {
                 case RequestType.Done:
-                    return "WORKFLOW_DAIBAN";
+                    return "request_daiban";
                 //case RequestType.ToDo:
                 case RequestType.Over:
-                    return "WORKFLOW_YIBAN";
+                    return "request_yiban";
                 //return "WORKFLOW_BANJIE";
                 case RequestType.DirectOver:
-                    return "WORKFLOW_DAIBAN";
+                    return "request_daiban";
             }
             return "";
         }

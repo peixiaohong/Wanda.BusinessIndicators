@@ -73,9 +73,13 @@ namespace Plugin.OAMessage
         /// </summary>
         public string SYSSHORTNAME { get; set; }
         /// <summary>
-        /// PC端连接地址
+        /// pc端连接地址
         /// </summary>
-        public string URL { get; set; }
+        public string PCURL { get; set; }
+        /// <summary>
+        /// 手机端连接地址
+        /// </summary>
+        public string APPURL { get; set; }
         /// <summary>
         /// flowId
         /// </summary>

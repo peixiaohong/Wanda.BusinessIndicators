@@ -49,7 +49,9 @@ namespace LJTH.BusinessIndicators.Web.AjaxHandler
                 model.WantTime = null;
             }
             model.OpenStatus = status;
-            return C_ReportTimeOperator.Instance.UpdateReportTime(model);
+            var guid= C_ReportTimeOperator.Instance.UpdateReportTime(model);
+            StaticResource.Instance.Reload();
+            return guid;
         }
 
         /// <summary>

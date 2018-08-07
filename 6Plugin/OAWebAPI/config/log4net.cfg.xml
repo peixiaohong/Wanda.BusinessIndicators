@@ -31,7 +31,7 @@
       </filter>
     </appender>
     <root>
-      <level value="WARN"/>
+      <level value="ALL"/>
       <appender-ref ref="RollingLogFileAppender"/>
       <appender-ref ref="ErrorFileAppender"></appender-ref>
     </root>

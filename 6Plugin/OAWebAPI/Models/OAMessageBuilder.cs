@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using OAWebAPI.OAMessage.WebServices;
+using Newtonsoft.Json;
 
 namespace Plugin.OAMessage
 {
     public static class OAMessageBuilder
     {
+        private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
 
         /// <summary>
         /// 接收待办
@@ -40,8 +43,8 @@ namespace Plugin.OAMessage
             {
                 throw new OAMessageException("当前待办未找到(flowid+nodename+receiver)无法设置为已办状态");
             }
-            string appUrl = null;
-            string pcUrl = null;
+            string appUrl = finder.APPURL;
+            string pcUrl = finder.PCURL;
             DateTime dt = DateTime.Now;
             DateTime.TryParse(finder.CREATETIME, out dt);
             //return CommonReceive(syscode, finder.FlowID, finder.FlowTitle, finder.WorkflowName, finder.NodeName, finder.PCUrl, finder.AppUrl, finder.CreateFlowUser, finder.ReceiverFlowUser, 2, 0, finder.CreateFlowTime);
@@ -63,8 +66,8 @@ namespace Plugin.OAMessage
             {
                 throw new OAMessageException("当前待办未找到(flowid+nodename+receiver)无法设置为办结状态");
             }
-            string appUrl = null;
-            string pcUrl = null;
+            string appUrl = finder.APPURL;
+            string pcUrl = finder.PCURL;
             DateTime dt = DateTime.Now;
             DateTime.TryParse(finder.CREATETIME, out dt);
             //return CommonReceive(syscode, finder.FlowID, finder.FlowTitle, finder.WorkflowName, finder.NodeName, finder.PCUrl, finder.AppUrl, finder.CreateFlowUser, finder.ReceiverFlowUser, 4, 0, finder.CreateFlowTime);
@@ -86,8 +89,8 @@ namespace Plugin.OAMessage
             {
                 throw new OAMessageException("当前待办未找到(flowid+nodename+receiver)无法设置为办结状态");
             }
-            string appUrl = null;
-            string pcUrl = null;
+            string appUrl = finder.APPURL;
+            string pcUrl = finder.PCURL;
             DateTime dt = DateTime.Now;
             DateTime.TryParse(finder.CREATETIME, out dt);
             //return CommonReceive(syscode, finder.FlowID, finder.FlowTitle, finder.WorkflowName, finder.NodeName, finder.PCUrl, finder.AppUrl, finder.CreateFlowUser, finder.ReceiverFlowUser, 4, 0, finder.CreateFlowTime);
@@ -152,8 +155,10 @@ namespace Plugin.OAMessage
                         key = x.Key,
                         value = x.Value
                     }).ToArray();
+
                     var result = service.receiveRequestInfoByMap(array);
                     string ResultData = string.Join(",", result.ToList().Select(x => string.Format("{0}:{1}", x.key, x.value)));
+                    logger.Info("【参数】" + JsonConvert.SerializeObject(array) + "【OA返回值】" + ResultData);
                     return ResultData;
                 }
             }

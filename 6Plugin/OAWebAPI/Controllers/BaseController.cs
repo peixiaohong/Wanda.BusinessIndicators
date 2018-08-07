@@ -9,6 +9,7 @@ using Plugin.Filters;
 namespace OAWebAPI.Controllers
 {
     [WebApiExceptionFilter]
+    [WebApiActionFilter]
     public class BaseController : ApiController
     {
     }
