@@ -46,10 +46,10 @@
 </head>
 <body>
 
-    <div>
+    <%--<div>
         <div class="w1240 mauto pr" style="z-index: 99999; width: 100%; position: absolute; height: 20px;" id="wd-fm">
         </div>
-    </div>
+    </div>--%>
     <%--<div style="height: 24px;"></div>--%>
     <div class="help-head" style="background: rgb(232, 235, 239); height: 25px;line-height: 25px;padding: 0 1%; text-align: right;">
         <span style="color: #999;font-size: 12px;float:left;">如需IT帮助，请联系和讯【IT支持】或致电【0312-5591888-6000】</span>
