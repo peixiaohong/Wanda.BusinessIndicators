@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>隆万世基业 兴百年泰和</title>
     <link href="<%=ResolveUrl("~/Styles/ljth/login.css") %>" rel="stylesheet" />
+    <link rel="shortcut icon" href="/Images/images1/favicon.ico" type="image/x-icon" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>

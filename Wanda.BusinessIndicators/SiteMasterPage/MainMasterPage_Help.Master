@@ -38,10 +38,10 @@
     <link href="../Styles/css/main.css" rel="stylesheet" />
 </head>
 <body>
-    <div>
+ <%--   <div>
         <div class="w1240 mauto pr" style="z-index: 99999; width: 100%; position: absolute; height: 20px;" id="wd-fm">
         </div>
-    </div>
+    </div>--%>
     <div style="height: 24px;"></div>
 
     <div class="Pagebox">
