@@ -30,10 +30,15 @@ function loadTmpl_1(selector) {
 function GetReportInstance() {
     $('.tip').removeClass('hide');
     $('#weiwancheng1').removeClass('hide');
+    alert($("#hiddenDis").val());
     if ($("#hiddenDis").val() == "1") {
         $("#ReportedDone").removeClass("hide");
         $('.tip').addClass('hide');
         $('#weiwancheng1').addClass('hide');
+        return;
+    }
+    if ($("#hiddenDis").val() == "2") {
+        $('#ReportedDone').html('未查询到有效的分解指标，暂时无法上报');
         return;
     }
 

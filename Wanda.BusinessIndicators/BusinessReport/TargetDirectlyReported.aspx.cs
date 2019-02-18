@@ -164,6 +164,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
         /// </summary>
         public void AddMonthlyReport()
         {
+            hiddenDis.Value = "0";
             //如果存在审批中的数据，不让重复提交
             var bmrProgress = B_MonthlyreportOperator.Instance.GetMonthlyReportModel(Guid.Parse(ddlSystem.SelectedValue), Guid.Empty, FinYear, FinMonth, 1, "Progress");
             if (bmrProgress != null && bmrProgress.WFStatus == "Progress")
@@ -195,8 +196,16 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                     }
                 }
                 //为当前月度经营报告（bmr），插入月度经营明细数据
-                AddBMRD(bmr);
-                hideMonthReportID.Value = bmr.ID.ToString();
+                if (bmr == null)
+                {
+                    hiddenDis.Value = "2";
+                    UserControl.SetButtonSpanStyle(-1);
+                }
+                else
+                {
+                    AddBMRD(bmr);
+                    hideMonthReportID.Value = bmr.ID.ToString();
+                }
             }
             else
             {
@@ -216,6 +225,7 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
             }
             else
             {
+                hiddenDis.Value = "2";
                 UserControl.SetButtonSpanStyle(-1);
             }
         }
