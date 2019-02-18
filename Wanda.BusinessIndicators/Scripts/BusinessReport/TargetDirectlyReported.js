@@ -30,7 +30,6 @@ function loadTmpl_1(selector) {
 function GetReportInstance() {
     $('.tip').removeClass('hide');
     $('#weiwancheng1').removeClass('hide');
-    alert($("#hiddenDis").val());
     if ($("#hiddenDis").val() == "1") {
         $("#ReportedDone").removeClass("hide");
         $('.tip').addClass('hide');
