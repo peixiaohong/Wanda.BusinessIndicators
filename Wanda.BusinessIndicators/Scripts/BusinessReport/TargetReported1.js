@@ -1,4 +1,4 @@
-﻿var DownLoadTag = ""; // 这个变量给 经营的模版系统用
+﻿//var DownLoadTag = ""; // 这个变量给 经营的模版系统用
 //var ZG_DownLoadTag = "";// 这个变量给 直管模版的系统用
 //var Pro_DownLoadTag = ""; // 这个变量给 项目模版的系统用
 
@@ -114,7 +114,8 @@ $(function () {
         IsShowContextMenu: true,
         PageContextMenu: true,
         EnableDebug: true,
-        ShowNodeName: ShowProecessNodeName,
+        //ShowNodeName: ShowProecessNodeName,
+        ShowNodeName: true,
         ButtonCssType: "middle",
         CustomerSceneSetting: {
             ShowCc: false,//是否显示抄送

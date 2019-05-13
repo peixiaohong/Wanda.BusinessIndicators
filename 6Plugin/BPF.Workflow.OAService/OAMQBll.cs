@@ -241,7 +241,7 @@ namespace BPF.OAMQServices
             //paramList.Add("appurl", SSOToolkit.Instance.GetAuthOAUrlWithSSO(message.MobileUrl.Trim(), message.Userid, message.FlowID));
             paramList.Add("creator", message.Creator);
             paramList.Add("isremark", message.Flowmess.ToString());
-            //paramList.Add("viewtype", message.Viewtype.ToString());
+            paramList.Add("viewtype", "0");
             paramList.Add("createdatetime", message.Createtime.ToString("yyyy-MM-dd HH:mm:ss"));
             paramList.Add("receiver", message.Userid);
             paramList.Add("receivedatetime", receiveTime.ToString("yyyy-MM-dd HH:mm:ss"));

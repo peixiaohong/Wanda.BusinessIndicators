@@ -113,7 +113,8 @@ $(function () {
         IsShowContextMenu: true,
         PageContextMenu: true,
         EnableDebug: true,
-        ShowNodeName: ShowProecessNodeName == true ? true : false,
+        //ShowNodeName: ShowProecessNodeName == true ? true : false,
+        ShowNodeName: true,
         ButtonCssType: "middle",
         OnAfterExecute: afterAction,
         CustomerSceneSetting: {

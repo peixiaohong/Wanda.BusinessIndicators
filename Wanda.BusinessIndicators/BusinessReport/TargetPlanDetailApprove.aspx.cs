@@ -38,14 +38,16 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 {
                     if (!string.IsNullOrEmpty(Request.QueryString["BusinessID"].ToString()))
                     {
-                        if (ConfigurationManager.AppSettings["HideProcessCode"] != null)
-                        {
-                            HideProcessCode.Value = ConfigurationManager.AppSettings["HideProcessCode"];
-                        }
+                        //if (ConfigurationManager.AppSettings["HideProcessCode"] != null)
+                        //{
+                        //    HideProcessCode.Value = ConfigurationManager.AppSettings["HideProcessCode"];
+                        //}
                         hideTargetPlanID.Value = Request.QueryString["BusinessID"].ToString();
                         B_TargetPlan _BTargetPlan = B_TargetplanOperator.Instance.GetTargetPlanByID(Guid.Parse(hideTargetPlanID.Value));
                         if (_BTargetPlan != null)
                         {
+                            HideProcessCode.Value = StaticResource.Instance[_BTargetPlan.SystemID, DateTime.Now].Configuration.Element("ProcessCode").Value;
+
                             hideSystemID.Value = _BTargetPlan.SystemID.ToString();
                             hideFinYear.Value = _BTargetPlan.FinYear.ToString();
 

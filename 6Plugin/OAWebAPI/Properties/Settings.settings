@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="OAWebAPI_OAMessage_WebServices_OfsTodoDataWebService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://192.168.50.118//services/OfsTodoDataWebService</Value>
+      <Value Profile="(Default)">http://192.168.50.11//services/OfsTodoDataWebService</Value>
     </Setting>
   </Settings>
 </SettingsFile>

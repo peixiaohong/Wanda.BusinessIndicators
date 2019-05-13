@@ -235,7 +235,9 @@ namespace LJTH.BusinessIndicators.Web.BusinessReport
                 bmr.TargetPlanID = targetPlanDetail.TargetPlanID;
             else
             {
-                return null;
+                hiddenDis.Value = "2";
+                return new B_MonthlyReport();
+                //return null;
             }
             bmr.ID = B_MonthlyreportOperator.Instance.AddMonthlyreport(bmr);
             return bmr;

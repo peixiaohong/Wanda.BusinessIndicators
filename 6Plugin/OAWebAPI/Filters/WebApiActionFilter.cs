@@ -30,7 +30,7 @@ namespace Plugin.Filters
                 string request = HttpUtility.UrlDecode(reader.ReadToEnd());
                 //StreamReader reader2 = new StreamReader(HttpContext.Current.Response.OutputStream);
                 string response = GetResponseValues(actionExecutedContext);
-                logger.Info("【ActionFilter】【输入】" + request + "【输出】" + response);
+                logger.Info("【ActionFilter】【方法】"+actionExecutedContext.Request.RequestUri.ToString()+"【输入】" + request + "【输出】" + response);
                 base.OnActionExecuted(actionExecutedContext);
             }
             else
@@ -49,7 +49,7 @@ namespace Plugin.Filters
                 StreamReader reader = new StreamReader(HttpContext.Current.Request.InputStream);
                 string request = HttpUtility.UrlDecode(reader.ReadToEnd());
                 var ex = Newtonsoft.Json.JsonConvert.SerializeObject(actionExecutedContext.Exception);
-                logger.Error("【ActionFilter】【输入】" + request + "【异常】" + ex);
+                logger.Error("【ActionFilter】【方法】" + actionExecutedContext.Request.RequestUri.ToString() +"【输入】" + request + "【异常】" + ex);
             }
         }
         public override void OnActionExecuting(HttpActionContext actionContext)

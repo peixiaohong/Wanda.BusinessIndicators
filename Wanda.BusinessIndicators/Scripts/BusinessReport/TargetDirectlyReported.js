@@ -36,7 +36,12 @@ function GetReportInstance() {
         $('#weiwancheng1').addClass('hide');
         return;
     }
-
+    if ($("#hiddenDis").val() == "2") {
+        $('#PromptMessage').html('未查询到有效的分解指标，暂时无法上报');
+        $('#DownLoadModel').addClass('hide');
+        $('#ReportedDone').addClass('hide');
+        return;
+    }
     WebUtil.ajax({
         async: true,
         url: "/TargetReportedControll/GetReportInstance",

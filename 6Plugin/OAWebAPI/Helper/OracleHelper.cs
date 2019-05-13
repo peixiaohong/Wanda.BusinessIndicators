@@ -17,6 +17,9 @@ namespace Plugin.Helper
             OracleCommand cmd = new OracleCommand(sql, conn);
             OracleDataAdapter adapter = new OracleDataAdapter(cmd);
             adapter.Fill(result);
+            adapter.Dispose();
+            cmd.Dispose();
+            conn.Dispose();
             return result;
         }
         public static List<T> ToList<T>(this DataTable dt)

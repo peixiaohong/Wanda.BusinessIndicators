@@ -69,8 +69,8 @@ namespace LJTH.BusinessIndicators.Web
                     {
                         Response.Redirect("~/NoPermission.aspx");
                     }
-                    if (result.Count > 0 && !isPageExist)
-                        SetDefaultPage(result);
+                    //if (result.Count > 0 && !isPageExist)
+                        //SetDefaultPage(result);
                 }
                 CacheDependency fileDependency = new CacheDependency(Server.MapPath(WebHelper.AuthCacheDependencyFile));
                 HttpContext.Current.Cache.Insert(cacheKey, result, fileDependency);

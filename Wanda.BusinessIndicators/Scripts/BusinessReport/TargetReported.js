@@ -24,6 +24,7 @@ var unit = "";  //单位
 var unfoldTitleList = []; //折叠完成情况明细与经营报告明细三级表头
 var shrinkageTitleList = [];//展开完成情况明细与经营报告明细三级表头
 var showMonthReprot = undefined; 
+var DownLoadTag = "";
 
 //加载模版项
 function loadTmpl(selector) {
@@ -47,6 +48,7 @@ function GetReportInstance() {
     if ($("#hiddenDis").val() == "2") {
         $('#PromptMessage').html('未查询到有效的分解指标，暂时无法上报');
         $('#DownLoadModel').addClass('hide');
+        $('#ReportedDone').addClass('hide');
         return;
     }
     WebUtil.ajax({

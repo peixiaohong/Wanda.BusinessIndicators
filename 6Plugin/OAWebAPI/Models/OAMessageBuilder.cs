@@ -157,13 +157,14 @@ namespace Plugin.OAMessage
                     }).ToArray();
 
                     var result = service.receiveRequestInfoByMap(array);
+                    logger.Info("【参数】" + JsonConvert.SerializeObject(array) + "【OA返回值】" + JsonConvert.SerializeObject(result));
                     string ResultData = string.Join(",", result.ToList().Select(x => string.Format("{0}:{1}", x.key, x.value)));
-                    logger.Info("【参数】" + JsonConvert.SerializeObject(array) + "【OA返回值】" + ResultData);
                     return ResultData;
                 }
             }
             catch (Exception ex)
             {
+                logger.Info("【调用OA接口出现异常】flowID=" + flowid + "【异常】" + JsonConvert.SerializeObject(ex));
                 throw new OAMessageException("调用OA接口出现异常", ex);
             }
         }
