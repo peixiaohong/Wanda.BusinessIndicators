@@ -1,4 +1,5 @@
-﻿using Plugin.SSO;
+﻿
+using LJTH.SDK.SSO;
 using System;
 using System.Collections.Generic;
 using System.Linq;

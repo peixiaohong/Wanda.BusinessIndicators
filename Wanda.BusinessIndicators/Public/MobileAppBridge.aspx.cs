@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LJTH.SDK.SSO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,7 +13,7 @@ namespace LJTH.BusinessIndicators.Web.Public
         protected void Page_Load(object sender, EventArgs e)
         {
             string errorMsg = "";
-            var result = Plugin.SSO.SSOToolkit.Instance.ValidationWithMobileAppMainSSO(out errorMsg);
+            var result = SSOToolkit.Instance.ValidationWithMobileAppMainSSO(out errorMsg);
             if (!result)
             {
                 Response.Write(errorMsg);

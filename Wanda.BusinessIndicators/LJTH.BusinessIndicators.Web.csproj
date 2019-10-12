@@ -59,14 +59,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DllReference\BPF.UserSelect.Client.dll</HintPath>
     </Reference>
+    <Reference Include="LJTH.SDK.SSO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DllReference\LJTH.SDK.SSO.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Azure.Documents.Client, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Azure.DocumentDB.1.1.0\lib\net40\Microsoft.Azure.Documents.Client.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.JScript" />
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DllReference\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.5.4\lib\net45\NLog.dll</HintPath>
@@ -99,6 +103,7 @@
     <Content Include="BusinessReport\WandaBusinessRpt.aspx" />
     <Content Include="BusinessReport\WandaCultureRpt.aspx" />
     <Content Include="DepartmentStoreReport\PlayVideo.aspx" />
+    <Content Include="DllReference\LJTH.SDK.SSO.dll" />
     <Content Include="Images\action-icon.png" />
     <Content Include="Images\close-icon.png" />
     <Content Include="Images\defaultLeaf.gif" />
@@ -113,6 +118,7 @@
     <Content Include="Public\Bridge.aspx" />
     <Content Include="Public\Login.aspx" />
     <Content Include="Public\Logout.aspx" />
+    <Content Include="Public\LogoutSSO.aspx" />
     <Content Include="Public\MobileAppBridge.aspx" />
     <Content Include="Public\OABridge.aspx" />
     <Content Include="Scripts\BusinessReport\ComprehensiveReportForms.js" />
@@ -1177,6 +1183,13 @@
     <Compile Include="Public\Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Public\LogoutSSO.aspx.cs">
+      <DependentUpon>LogoutSSO.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\LogoutSSO.aspx.designer.cs">
+      <DependentUpon>LogoutSSO.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Public\MobileAppBridge.aspx.cs">
       <DependentUpon>MobileAppBridge.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1940,10 +1953,6 @@
     <ProjectReference Include="..\2Lib\ViewModel\4ViewModel.csproj">
       <Project>{ab142c57-a632-4958-9814-4f7c3ea9083a}</Project>
       <Name>4ViewModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\6Plugin\04.SSO\04.SSO.csproj">
-      <Project>{3bc18b77-1027-45b1-bae9-396b6e14de38}</Project>
-      <Name>04.SSO</Name>
     </ProjectReference>
     <ProjectReference Include="..\6Plugin\BPF.Workflow.Client\BPF.Workflow.Client.csproj">
       <Project>{5bd5cc30-3bd6-4b83-af1a-cf62e7f67297}</Project>

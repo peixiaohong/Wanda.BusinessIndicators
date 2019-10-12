@@ -33,18 +33,22 @@
     <link href="/Styles/css/Styles.css" rel="stylesheet" />
     <link href="/Styles/css/layout.css" rel="stylesheet" />
     <link href="../Styles/css/main.css" rel="stylesheet" />
+    <!-- 导航栏-->
+    <link href="http://192.168.60.18/MCSWebApp/ResponsivePassportService/Toolbar/floatingToolbar.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="http://192.168.60.18/MCSWebApp/ResponsivePassportService/Toolbar/floatingToolbar.ashx"></script>
+
 
 </head>
 <body>
-    <%--<div>
+    <div>
         <div class="w1240 mauto pr" style="z-index: 99999; width: 100%; position: absolute; height: 20px;" id="wd-fm">
         </div>
-    </div>--%>
-    <%--<div style="height: 24px;"></div>--%>
-    <div class="help-head" style="background: rgb(232, 235, 239); height: 25px;line-height: 25px;padding: 0 1%; text-align: right;">
+    </div>
+    <div style="height: 24px;"></div>
+   <%-- <div class="help-head" style="background: rgb(232, 235, 239); height: 25px;line-height: 25px;padding: 0 1%; text-align: right;">
         <span style="color: #999;font-size: 12px;float:left;">如需IT帮助，请联系和讯【IT支持】或致电【0312-5591888-6000】，7*24小时紧急联系电话： 13651198443</span>
          欢迎您：<%=LJTH.BusinessIndicators.Common.WebHelper.GetCurrentUser().CNName %>（<%=LJTH.BusinessIndicators.Common.WebHelper.GetCurrentUser().ActualUnitName %>）&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Public/Logout.aspx">退出</a>
-    </div>
+    </div>--%>
     <div class="Pagebox">
         <div class="header_target" style="height: auto">
             <div class="logo_target">
